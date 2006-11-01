@@ -1,20 +1,26 @@
 <%= error_messages_for 'user' %>
+
 <div class="login">
-<% form_tag :action => 'create' do %>
-<fieldset>
-<legend>Register</legend>
-<table cellspacing="0">
-	<tr><td><label for="login">Username</label></td>
-	<td><%= text_field 'user', 'login', :size => "20" %></td></tr>
-	<tr><td><label for="email">Email</label></td>
-	<td><%= text_field 'user', 'email', :size => "20" %></td></tr>
-	<tr><td><label for="password_hash">Password</label></td>
-	<td><%= password_field 'user', 'password_hash', :size => "20" %>
-	<tr><td>&nbsp;</td><td><%= submit_tag "Register" %></td></tr>
-	</table>
-</fieldset>
-<% end %>
-<p><a href="#">Already have an account?</a></p>
+	
+	<% form_tag :action => 'create' do %>
+
+		<fieldset>
+		<legend>Register</legend>
+		<table cellspacing="0">
+			<tr><td><label for="login">Username</label></td>
+			<td><%= text_field 'user', 'login', :size => "20" %></td></tr>
+			<tr><td><label for="email">Email</label></td>
+			<td><%= text_field 'user', 'email', :size => "20" %></td></tr>
+			<tr><td><label for="password_hash">Password</label></td>
+			<td><%= password_field 'user', 'password_hash', :size => "20" %></td>
+			<tr><td>&nbsp;</td><td><%= submit_tag "Register" %></td></tr>
+			</table>
+		</fieldset>
+
+	<% end %>
+
+	<p><a href="#">Already have an account?</a></p>
+
 </div>
 
 <%= javascript_tag "$('login').focus();"%>
