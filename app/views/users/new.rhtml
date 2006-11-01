@@ -6,15 +6,14 @@
 <table cellspacing="0">
 	<tr><td><label for="login">Login</label></td>
 	<td><%= text_field_tag :login, params[:login] %></td></tr>
-	<tr><td colspan="2" class="login-text">Your Login must be at least 2 characters.</td></tr>
+	<tr><td colspan="2" class="login-text">Please choose a Login / Username</td></tr>
 	<tr><td><label for="login">Email Address</label></td>
 	<td><%= text_field_tag :email, params[:email] %></td></tr>
-	<tr><td colspan="2" class="login-text">Your Password must be at least 5 characters.</td></tr>
-	<tr><td><label for="password">Password</label></td>
-	<td><%= password_field_tag :password, params[:password] %></td></tr>
-	<tr><td><label for="password">Password (again)</label></td>
-	<td><%= password_field_tag :password_confirmation, params[:password_confirmation] %></td></tr>
-	<tr><td colspan="2"><%= submit_tag "Create Account" %></td></tr>
+	<tr><td colspan="2" class="login-text">Please provide a real Email Address</td></tr>
+	<tr><td><label for="password">Password (twice)</label></td>
+	<td><%= password_field_tag :password, params[:password], :size => '10' %> 
+	<%= password_field_tag :password_confirmation, params[:password_confirmation], :size => '10' %></td></tr>
+	<tr><td>&nbsp;</td><td><%= submit_tag "Create Account" %></td></tr>
 	</table>
  <%= end_form_tag %>
 </fieldset>
