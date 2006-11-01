@@ -1,0 +1,24 @@
+<%= error_messages_for 'user' %>
+<div class="login">
+<fieldset>
+<legend>Register</legend>
+<%= start_form_tag :action => 'create' %>
+<table cellspacing="0">
+	<tr><td><label for="login">Login</label></td>
+	<td><%= text_field_tag :login, params[:login] %></td></tr>
+	<tr><td colspan="2" class="login-text">Your Login must be at least 2 characters.</td></tr>
+	<tr><td><label for="login">Email Address</label></td>
+	<td><%= text_field_tag :email, params[:email] %></td></tr>
+	<tr><td colspan="2" class="login-text">Your Password must be at least 5 characters.</td></tr>
+	<tr><td><label for="password">Password</label></td>
+	<td><%= password_field_tag :password, params[:password] %></td></tr>
+	<tr><td><label for="password">Password (again)</label></td>
+	<td><%= password_field_tag :password_confirmation, params[:password_confirmation] %></td></tr>
+	<tr><td colspan="2"><%= submit_tag "Create Account" %></td></tr>
+	</table>
+ <%= end_form_tag %>
+</fieldset>
+<p><a href="#">Already have an account?</a></p>
+</div>
+
+<%= javascript_tag "$('login').focus();"%>

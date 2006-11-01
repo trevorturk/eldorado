@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title><%=h page_title %></title>
+	
+	<%= javascript_include_tag :defaults %>
+			
+	<%= stylesheet_link_tag 'styles' %>
+	<style type="text/css"> .header { background: url(/images/headers/pantheon.jpg); } </style>
+	
+</head>
+
+<body>
+		
+	<div class="wrapper">
+		
+		<div class="header">
+			<h1><%= link_to ( page_title, :controller => 'forum', :action => 'index' ) %></h1>			
+		</div>
+
+			<div class="content">
+						
+			<div class="nav">
+				<p class="nav-1">
+				<% if logged_in? %>
+				<%= link_to ( 'Forum', :controller => 'forum', :action => 'index' ) %> &nbsp; 
+				<%= link_to ( 'Users', :controller => 'users', :action => 'index' ) %> &nbsp; 
+				<%= link_to ( 'Start a New Topic &raquo;', :controller => 'forum', :action => 'index' ) %> &nbsp; 
+				<% else %>
+				<%= nav_link( 'Register', :controller => 'users', :action => 'new') %> &nbsp; 
+				<%= nav_link( 'Login &raquo;', :controller => 'users', :action => 'login') %>
+				<% end %>
+				</p>
+				<p class="nav-2">
+				<% if logged_in? %>
+				<% if @current_user_profile %><%= nav_link( 'My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id] ) %> &nbsp; 
+				<% else %><%= link_to( 'My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id] ) %> &nbsp; 
+				<% end %>
+				<%= nav_link( 'Logout', :controller => 'users', :action => 'logout') %>    
+				<% end %>
+				</p>
+				
+			</div>
+			
+			<div style="clear:both"> </div>
+			
+			<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
+			<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
+			
+			<%= yield %>
+			
+		</div>
+		
+		<p class="footer">&nbsp;</p>
+											
+	</div>
+</body>
+</html>

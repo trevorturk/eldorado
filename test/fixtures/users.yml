@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+Administrator:
+  id: 1
+  login: Administrator
+  email: valid@email.com
+  password_hash: 589807749e4bf9d7db0fe09353604533d202b334 # testpass
+  created_at: <%= 5.days.ago.to_s :db %>
+  last_login_at: <%= 5.hours.ago.to_s :db %>
+  admin: true
+  posts_count: 2
+  signature: hello
+  avatar: admin_eye.gif
+Trevor:
+  id: 2
+  login: Trevor
+  email: trevor@email.com
+  password_hash: 589807749e4bf9d7db0fe09353604533d202b334 # testpass
+  created_at: <%= 5.days.ago.to_s :db %>
+  last_login_at: <%= 5.hours.ago.to_s :db %>
+  admin: false
+  posts_count: 4
+  signature: trevor is the best
+  avatar: trevor_nascar.gif

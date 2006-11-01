@@ -1,0 +1,31 @@
+<%= error_messages_for 'user' %>
+
+<!--[form:user]-->
+<p><label for="user_login">Login</label><br/>
+<%= text_field 'user', 'login'  %></p>
+
+<p><label for="user_email">Email</label><br/>
+<%= text_field 'user', 'email'  %></p>
+
+<p><label for="user_password_hash">Password hash</label><br/>
+<%= password_field 'user', 'password_hash'  %></p>
+
+<p><label for="user_created_at">Created at</label><br/>
+<%= datetime_select 'user', 'created_at'  %></p>
+
+<p><label for="user_last_login_at">Last login at</label><br/>
+<%= datetime_select 'user', 'last_login_at'  %></p>
+
+<p><label for="user_admin">Admin</label><br/>
+<select id="user_admin" name="user[admin]"><option value="false">False</option><option value="true">True</option></select></p>
+
+<p><label for="user_bio">Bio (BBCode)</label><br/>
+<%= text_area 'user', 'bio'  %></p>
+
+<p><label for="user_signature">Signature (BBCode)</label><br/>
+<%= text_field 'user', 'signature'  %></p>
+
+<p><label for="user_avatar">Avatar</label><br/>
+<%= text_field 'user', 'avatar'  %></p>
+<!--[eoform:user]-->
+

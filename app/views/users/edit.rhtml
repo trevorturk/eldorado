@@ -1,0 +1,7 @@
+<%= start_form_tag :action => 'update', :id => @user %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<p><%= link_to '&laquo; Cancel', :action => 'show', :id => @user %></p>
+<p><%= button_to 'Delete Account', { :action => 'destroy', :id => @user }, :confirm => "Are you sure you want to delete this account?", :post => true %></p>

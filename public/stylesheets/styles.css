@@ -1,0 +1,329 @@
+* { margin: 0; padding: 0; }
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin: 1em 0; }
+li, dd { margin-left: 5%; }
+fieldset { padding: .5em; }
+
+body {
+	background-color: #fff;
+	color: #333;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: justify;
+	background: #ddd;
+}
+
+.wrapper {
+	width: 922px;
+	margin: 0px auto;
+}
+
+.header {
+	height: 100px;
+	width: 920px;
+	border-left: 1px solid #333;
+	border-right: 1px solid #333;
+}
+
+.content {
+	border: 1px solid #333;
+	background: #fff;
+	padding: 0px 20px;
+	clear: both;
+}
+
+.footer, .footer a:link, .footer a:visited {
+	text-align: right;
+	color: #999;
+}
+
+a:link, a:visited {
+	color: #24c;
+	text-decoration: none;
+}
+
+a:active, a:hover {
+	color: #24c;
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 20px;
+	float: left;
+	margin-top: 40px;
+	margin-left: 20px;
+}
+
+h1 a:link, h1 a:visited {
+	color: #fff;
+}
+
+p.img {
+	text-align: center;
+}
+
+p.img-text {
+	text-align: center;
+}
+
+.wrapper img {
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+.img-table {
+	width: 100%;
+}
+
+.img-table td {
+	width: 50%;
+}
+
+.nav-1, .nav-3 {
+	float: left;
+}
+
+.nav-2, .nav-4 {
+	float: right;
+}
+
+.nav a:link, .nav a:visited, .nav a:hover, .nav a:active {
+	color: #333;
+}
+
+table {
+	width: 100%;
+	font-size: 11px;
+}
+
+td {
+	border: 1px solid #ccc;
+	border-top: none;
+	padding: 4px 6px;
+	vertical-align: top;
+}
+
+.tr-alt {
+	background: #f9f9f9;
+}
+
+table a:link, table a:visited, table a:hover, table a:active {
+	color: #333;
+	font-size: 12px;
+}
+
+.new-link, .new-link a:link {
+	color: #999;
+	font-size: 11px;
+}
+
+thead .tcl, thead .tc2, thead .tc3, thead .tc4, thead .tc5 {
+	background: #444;
+	color: #eee;
+	text-align: left;
+	border: 1px solid #333;
+	font-weight: normal;
+	padding: 4px 6px;
+	font-size: 12px;
+}
+
+.tc3, .tc4 {
+	text-align: center;
+	background: #f3f3f3;
+}
+
+thead .tc3, thead .tc4 {
+	text-align: center;
+}
+
+.tc2, .tc3, .tc4, thead .tc2, thead .tc3, thead .tc4 {
+	border-left: none;
+}
+
+.tc4, thead .tc4 {
+	border-right: none;
+}
+
+.box-links a:link, .box-links a:visited, .box-links a:active, .box-links a:hover {
+	margin: 2px;
+	padding: 4px 6px;
+	border: 1px solid #ccc;
+	color: #333;
+}
+
+.box-links a:hover, .box-links a:active {
+	background: #444;
+	border: 1px solid #333;
+	color: #eee;
+	text-decoration: none;
+}
+
+.new-post a:link, .new-post a:visited, .new-post a:active, .new-post a:hover, 
+.old-post a:link, .old-post a:visited, .old-post a:active, .old-post a:hover, 
+.primary a:link, .primary a:visited, .primary a:active, .primary a:hover {
+	color: #24c;
+}
+
+.new-post a, .primary a {
+	font-weight: bold;
+}
+
+.highlight:link, .highlight:visited {
+	background-color: #FBFBB1;
+	color: #000;
+}
+
+.login fieldset {
+	width: 300px;
+	background: #eee;
+	border: 1px solid #999;
+}
+
+.login legend {
+	padding: 2px 6px;
+	background: #444;
+	color: #eee;
+	border: 1px solid #333;
+}
+
+.login table td {
+	border: none;
+	font-size: 12px;
+}
+
+.login p {
+	width: 315px;
+	text-align: right;
+}
+
+.login p a:link, .login p a:visited {
+	color: #999;
+}
+
+.login .login-text {
+	color: #999;
+	font-size: 11px;
+}
+
+.profile {
+	font-size: 12px;
+	padding: 5px 15px;
+}
+
+.profile-left {
+	width: 665px;
+}
+
+.profile-login {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid #ccc;
+	margin: 10px 0 0 0;
+	padding: 0 0 10px 0;
+	width: 663px;
+}
+
+.profile-avatar {
+	float: right;
+	width: 170px;
+	margin-top: 6px;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.profile-avatar img {
+	border: none;
+}
+
+.profile-box {
+	float: right;
+	margin-top: 0;
+}
+
+.profile-info p {
+	margin-right: 20px;
+	float: left;
+}
+
+.profile-bbcode a:link, .profile-bbcode a:visited {
+	color: #24c;
+}
+
+.friend-list p {
+	float: left;
+	margin: 6px auto;
+}
+
+#notice {
+	background: #FBFBB1;
+	text-align: center;
+	border: 1px solid #333;
+	font-weight: normal;
+	padding: 4px 6px;
+	margin-bottom: 10px;
+}
+
+#error {
+	background: #c00;
+	color: #eee;
+	text-align: center;
+	border: 1px solid #333;
+	font-weight: normal;
+	padding: 4px 6px;
+	margin-bottom: 10px;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: #c00;
+  display: table;
+}
+
+#errorExplanation {
+  border: 1px solid #333;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+	padding: 4px 15px;
+	margin: 0;
+  border-bottom: 1px solid #333;
+  font-size: 12px;
+  background-color: #c00;
+	color: #eee;
+}
+
+#errorExplanation p {
+	display: none;
+}
+
+#errorExplanation ul {
+	padding: 4px 10px;
+	margin: 0;
+	list-style-type: none;
+}
+
+#errorExplanation ul li {
+	padding: 5px;
+	margin: 0;
+}
+
+div.uploadStatus {
+  margin: 5px;
+}
+
+div.progressBar {
+  margin: 5px;
+}
+
+div.progressBar div.border {
+  background-color: #fff;
+  border: 1px solid grey;
+  width: 100%;
+}
+
+div.progressBar div.background {
+  background-color: #333;
+  height: 18px;
+  width: 0%;
+}

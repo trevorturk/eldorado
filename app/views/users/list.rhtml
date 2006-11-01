@@ -1,0 +1,29 @@
+<table cellspacing="0">
+<thead>
+	<tr>
+		<th class="tcl">User</th>
+		<th class="tc2">Total Posts</th>
+		<th class="tc2">Last Login</th>
+		<th class="tc2">Account Created</th>
+	</tr>
+</thead>
+
+	<% for user in @users %>
+	<tr>
+		<td class="tcl">
+			<span class="primary"><%= link_to h(user.login), :action => 'show', :id => user %></span>
+		</td>
+		<td class="tc2"><%=h user.posts_count %></td>
+		<td class="tc2"><%=h time_ago_in_words(user.last_login_at) %> ago</td>
+		<td class="tc2"><%=h user.created_at.strftime("%B %d, %Y") %></td>
+	</tr>
+	<% end %>
+</table>
+
+<p class="nav-3"><%= link_to 'New User &raquo;', :action => 'new' %></p>
+<p class="nav-4">
+	<%= link_to 'Previous page', { :page => @user_pages.current.previous } if @user_pages.current.previous %>
+	<%= link_to 'Next page', { :page => @user_pages.current.next } if @user_pages.current.next %> 
+</p>
+												
+<div style="clear:both;"> </div>
