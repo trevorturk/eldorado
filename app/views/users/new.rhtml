@@ -1,22 +1,19 @@
 <%= error_messages_for 'user' %>
 <div class="login">
+<% form_tag :action => 'create' do %>
 <fieldset>
 <legend>Register</legend>
-<%= start_form_tag :action => 'create' %>
 <table cellspacing="0">
-	<tr><td><label for="login">Login</label></td>
-	<td><%= text_field_tag :login, params[:login] %></td></tr>
-	<tr><td colspan="2" class="login-text">Please choose a Login / Username</td></tr>
-	<tr><td><label for="login">Email Address</label></td>
-	<td><%= text_field_tag :email, params[:email] %></td></tr>
-	<tr><td colspan="2" class="login-text">Please provide a real Email Address</td></tr>
-	<tr><td><label for="password">Password (twice)</label></td>
-	<td><%= password_field_tag :password, params[:password], :size => '10' %> 
-	<%= password_field_tag :password_confirmation, params[:password_confirmation], :size => '10' %></td></tr>
-	<tr><td>&nbsp;</td><td><%= submit_tag "Create Account" %></td></tr>
+	<tr><td><label for="login">Username</label></td>
+	<td><%= text_field 'user', 'login', :size => "20" %></td></tr>
+	<tr><td><label for="email">Email</label></td>
+	<td><%= text_field 'user', 'email', :size => "20" %></td></tr>
+	<tr><td><label for="password_hash">Password</label></td>
+	<td><%= password_field 'user', 'password_hash', :size => "20" %>
+	<tr><td>&nbsp;</td><td><%= submit_tag "Register" %></td></tr>
 	</table>
- <%= end_form_tag %>
 </fieldset>
+<% end %>
 <p><a href="#">Already have an account?</a></p>
 </div>
 

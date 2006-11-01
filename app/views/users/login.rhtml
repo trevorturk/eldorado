@@ -1,14 +1,14 @@
 <div class="login">
 <fieldset>
-<legend>Log In</legend>
+<legend>Login</legend>
 <%= start_form_tag :action => 'login' %>
 <table cellspacing="0">
-	<tr><td><label for="login">Login</label></td>
+	<tr><td><label for="login">Username</label></td>
 	<td><%= text_field_tag :login, params[:login] %></td></tr>
 	<tr><td><label for="password">Password</label></td>
 	<td><%= password_field_tag :password, params[:password] %></td></tr>
 	<tr><td>&nbsp;</td>
-	<td><%= submit_tag "Submit" %></td></tr>
+	<td><%= submit_tag "Login" %></td></tr>
 	</table>
  <%= end_form_tag %>
 </fieldset>

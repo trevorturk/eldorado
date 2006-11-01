@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 class UsersController < ApplicationController
 
   before_filter :force_login, :only => [ :edit, :update, :detroy ]
@@ -31,6 +29,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.password_hash = User.encrypt(@user.password_hash) unless params[:user][:password_hash].blank?
+    @user.last_login_at = Time.now
+    @user.admin = false
+    @user.posts_count = false
     if @user.save
       redirect_to_home("User was successfully created.")
     else
