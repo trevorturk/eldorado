@@ -15,8 +15,8 @@
 			<% end %>
 		</div>
 		<p class="profile-login"><%=h @user.login %></p>
-		<p class="profile-bbcode"><b>Bio</b>: <%= bb(@user.bio) %></p>
-		<p class="profile-bbcode"><b>Signature</b>: <%= bb(@user.signature) %></p>
+		<p class="profile-bbcode"><b>Bio</b>: <%= @user.bio %></p>
+		<p class="profile-bbcode"><b>Signature</b>: <%= @user.signature %></p>
 		<div class="profile-info">
 			<p><b>Total Posts</b>: <%=h @user.posts_count %></p>
 			<p><b>Last Login</b>: <%=h time_ago_in_words(@user.last_login_at) %> ago</p>

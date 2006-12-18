@@ -22,9 +22,5 @@ module ApplicationHelper
         link_to(name,options)
       end
   end
-  
-  def bb(text)
-      white_list(auto_link(bbcodeize(h(text))))
-    end
-     
+       
 end
