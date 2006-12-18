@@ -2,18 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 5) do
-
-  create_table "logged_exceptions", :force => true do |t|
-    t.column "exception_class", :string
-    t.column "controller_name", :string
-    t.column "action_name",     :string
-    t.column "message",         :string
-    t.column "backtrace",       :text
-    t.column "environment",     :text
-    t.column "request",         :text
-    t.column "created_at",      :datetime
-  end
+ActiveRecord::Schema.define(:version => 6) do
 
   create_table "sessions", :force => true do |t|
     t.column "session_id", :string
