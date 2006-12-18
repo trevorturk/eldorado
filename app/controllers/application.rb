@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-
-  include ExceptionLoggable
   
   helper_method :current_user, :logged_in?
     
