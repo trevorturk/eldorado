@@ -19,7 +19,7 @@
 	<div class="wrapper">
 		
 		<div class="header">
-			<h1><%= link_to ( page_title, :controller => 'forum', :action => 'index' ) %></h1>			
+			<h1><%= link_to(page_title, :controller => 'forum', :action => 'index') %></h1>			
 		</div>
 
 			<div class="content">
@@ -27,20 +27,20 @@
 			<div class="nav">
 				<p class="nav-1">
 				<% if logged_in? %>
-				<%= link_to ( 'Forum', :controller => 'forum', :action => 'index' ) %> &nbsp; 
-				<%= link_to ( 'Users', :controller => 'users', :action => 'index' ) %> &nbsp; 
-				<%= link_to ( 'Start a New Topic &raquo;', :controller => 'forum', :action => 'index' ) %> &nbsp; 
+				<%= link_to('Forum', :controller => 'forum', :action => 'index') %> &nbsp; 
+				<%= link_to('Users', :controller => 'users', :action => 'index') %> &nbsp; 
+				<%= link_to('Start a New Topic &raquo;', :controller => 'forum', :action => 'index') %> &nbsp; 
 				<% else %>
-				<%= nav_link( 'Register', :controller => 'users', :action => 'new') %> &nbsp; 
-				<%= nav_link( 'Login &raquo;', :controller => 'users', :action => 'login') %>
+				<%= nav_link('Register', :controller => 'users', :action => 'new') %> &nbsp; 
+				<%= nav_link('Login &raquo;', :controller => 'users', :action => 'login') %>
 				<% end %>
 				</p>
 				<p class="nav-2">
 				<% if logged_in? %>
-				<% if @current_user_profile %><%= nav_link( 'My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id] ) %> &nbsp; 
-				<% else %><%= link_to( 'My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id] ) %> &nbsp; 
+				<% if @current_user_profile %><%= nav_link( 'My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id]) %> &nbsp; 
+				<% else %><%= link_to('My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id]) %> &nbsp; 
 				<% end %>
-				<%= nav_link( 'Logout', :controller => 'users', :action => 'logout') %>    
+				<%= nav_link('Logout', :controller => 'users', :action => 'logout') %>    
 				<% end %>
 				</p>
 				
