@@ -13,6 +13,22 @@ ActiveRecord::Schema.define(:version => 6) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
+  create_table "topics", :force => true do |t|
+    t.column "user_id",             :integer
+    t.column "user_name",           :string
+    t.column "title",               :string
+    t.column "created_at",          :datetime
+    t.column "updated_at",          :datetime
+    t.column "views",               :integer,  :default => 0
+    t.column "replies",             :integer,  :default => 0
+    t.column "last_post_id",        :integer
+    t.column "last_post_at",        :datetime
+    t.column "last_post_user_id",   :integer
+    t.column "last_post_user_name", :string
+    t.column "private",             :boolean,  :default => false
+    t.column "closed",              :boolean,  :default => false
+  end
+
   create_table "users", :force => true do |t|
     t.column "login",         :string
     t.column "email",         :string

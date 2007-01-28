@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :topics
+
   # The priority is based upon order of creation: first created -> highest priority.
   
   # Sample of regular route:
@@ -12,7 +14,11 @@ ActionController::Routing::Routes.draw do |map|
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
   map.home '', :controller => 'forum', :action => 'index'
-
+    
+  map.login     '/login',     :controller => 'users', :action => 'login'
+  map.register  '/register',  :controller => 'users', :action => 'new'
+  map.logout    '/logout',    :controller => 'users', :action => 'logout'
+  
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
   map.connect ':controller/service.wsdl', :action => 'wsdl'

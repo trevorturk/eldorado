@@ -6,7 +6,7 @@
 	<% form_tag :action => 'login' do %>
 	
 		<table cellspacing="0">
-			<tr><td><label for="login">Username</label></td>
+			<tr><td><label for="login">Login</label></td>
 			<td><%= text_field_tag :login, params[:login] %></td></tr>
 			<tr><td><label for="password">Password</label></td>
 			<td><%= password_field_tag :password, params[:password] %></td></tr>
@@ -21,4 +21,4 @@
 	
 </div>
 
-<%= javascript_tag "$('login').focus();"%>
+<%= javascript_tag "login.focus();" %>

@@ -1,0 +1,13 @@
+<%= error_messages_for :topic %>
+	
+<% form_for(:topic, :url => topics_path) do |f| %>
+  <p> 
+	<label for="title">Title:</label> 
+	<%= f.text_field :title, :size => 40 %> 
+  </p>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', topics_path %>
