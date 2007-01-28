@@ -1,11 +1,15 @@
 class ApplicationController < ActionController::Base
   
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :force_login
     
   session :session_key => '_eldorado_session_id'
   
   protected
-    
+  
+  def force_login
+    redirect_to_home("Please log in.") unless User.find_by_id(session[:user_id])
+  end
+  
   def current_user
     @current_user ||= ((session[:user_id] && User.find_by_id(session[:user_id])) || 0)
   end

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  before_filter :force_login, :only => [ :edit, :update, :detroy ]
   before_filter :authorize_and_initiate_sensitive_actions, :only => [ :edit, :update, :destroy ]
   
   def index
@@ -77,14 +76,10 @@ class UsersController < ApplicationController
   end
 
   protected
-
-  def force_login
-    redirect_to_home("Please log in.") unless User.find_by_id(session[:user_id])
-  end
       
   def authorize_and_initiate_sensitive_actions
     @user = User.find(params[:id])
-    redirect_to_home("Sorry, there was an error.") and return unless @user[:id] == current_user.id
+    redirect_to_home("Please log in.") and return unless @user[:id] == current_user.id
   end
   
 end

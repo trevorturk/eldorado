@@ -1,4 +1,7 @@
 class TopicsController < ApplicationController
+  
+  before_filter :force_login, :except => [ :index, :show ]
+  
   # GET /topics
   # GET /topics.xml
   def index
