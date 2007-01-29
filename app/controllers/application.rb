@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
           
   def redirect_to_home(message)
     flash[:notice] = message if message
-    redirect_to :controller => :forum, :action => :index
+    redirect_to home_url
   end
   
 end
