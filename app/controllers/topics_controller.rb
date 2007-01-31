@@ -86,4 +86,9 @@ class TopicsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def unknown_request
+    redirect_to_home('Sorry, the page you requested could not be found.')
+  end
+  
 end

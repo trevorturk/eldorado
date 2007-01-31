@@ -3,8 +3,7 @@ class UsersController < ApplicationController
   before_filter :authorize_and_initiate_sensitive_actions, :only => [ :edit, :update, :destroy ]
   
   def index
-    list
-    render :action => 'list'
+    @user_pages, @users = paginate :users, :per_page => 10
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -12,7 +11,6 @@ class UsersController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @user_pages, @users = paginate :users, :per_page => 10
   end
 
   def show

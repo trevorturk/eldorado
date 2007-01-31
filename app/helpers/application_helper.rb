@@ -14,13 +14,5 @@ module ApplicationHelper
   def page_title
     @page_title || "El Dorado"
   end
-  
-  def nav_link(name,options)
-      if options[:controller] == @current_controller
-        link_to(name, options, :class => 'current-page')
-      else
-        link_to(name,options)
-      end
-  end
-       
+         
 end

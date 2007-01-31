@@ -17,7 +17,7 @@
 	<div class="wrapper">
 		
 		<div class="header">
-			<h1><%= link_to(page_title, :controller => 'forum', :action => 'index') %></h1>			
+			<h1><%= link_to(page_title, home_path) %></h1>			
 		</div>
 
 			<div class="content">
@@ -25,22 +25,21 @@
 			<div class="nav">
 				<p class="nav-1">
 					<% if logged_in? %>
-						<%= link_to('Home', :controller => 'topics') %> &nbsp; 
-						<%= link_to('Users', :controller => 'users', :action => 'index') %> &nbsp; 
-						<%= link_to 'New Topic &raquo;', new_topic_path %>
+						Logged in as <b><%= link_to( h(current_user.login), :controller => 'users', :action => 'show', :id => session[:user_id]) %></b> |  
+						Last visit <%= time_ago_in_words(current_user.last_login_at) %> ago 
 					<% else %>
-						<%= nav_link('Register', :controller => 'users', :action => 'new') %> &nbsp; 
-						<%= nav_link('Login &raquo;', :controller => 'users', :action => 'login') %>
+						You are not logged in
 					<% end %>
 				</p>
 				<p class="nav-2">
 					<% if logged_in? %>
-						<% if @current_user_profile %>
-							<%= nav_link( 'My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id]) %> &nbsp; 
-						<% else %>
-							<%= link_to('My Profile ('+h(current_user.login)+')', :controller => 'users', :action => 'show', :id => session[:user_id]) %> &nbsp; 
-						<% end %>
-						<%= nav_link('Logout', :controller => 'users', :action => 'logout') %>    
+						<%= link_to('Start a New Topic', new_topic_path) %> &nbsp; 
+						<%= link_to('Home', home_path) %> &nbsp; 
+						<%= link_to('Users', users_path) %> &nbsp; 
+						<%= link_to('Logout', logout_path) %>
+					<% else %>
+						<%= link_to('Register', register_path) %> &nbsp; 
+						<%= link_to('Login', login_path) %> 
 					<% end %>
 				</p>
 				
