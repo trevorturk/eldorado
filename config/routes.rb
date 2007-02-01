@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
     topic.resources :posts 
   end
   
+  map.resources :users
+  
   map.home '',                :controller => 'topics',  :action => 'index'
   map.users '/users',         :controller => 'users',   :action => 'index'
     

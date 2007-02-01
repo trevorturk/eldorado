@@ -1,18 +1,9 @@
 class AddExceptionTable < ActiveRecord::Migration
   def self.up
-    create_table "logged_exceptions", :force => true do |t|
-      t.column :exception_class, :string
-      t.column :controller_name, :string
-      t.column :action_name,     :string
-      t.column :message,         :string
-      t.column :backtrace,       :text
-      t.column :environment,     :text
-      t.column :request,         :text
-      t.column :created_at,      :datetime
-    end
+    # nothing to see here
   end
 
   def self.down
-    drop_table "logged_exceptions"
+    # nothing to see here
   end
 end

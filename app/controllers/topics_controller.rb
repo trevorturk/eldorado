@@ -5,8 +5,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.find(:all, :order => 'last_post_at desc')
-
+    @topics = Topic.find(:all, :order => 'last_post_id desc')
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @topics.to_xml }
@@ -18,7 +17,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.find(:all)
-    @topic.view!
+    @topic.hit!
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @topic.to_xml }
@@ -41,10 +40,6 @@ class TopicsController < ApplicationController
     @topic = Topic.new(params[:topic])
     if @topic
       @topic.user_id = current_user.id
-      @topic.user_name = current_user.login
-      @topic.last_post_user_id = current_user.id
-      @topic.last_post_user_name = current_user.login
-      @topic.last_post_at = Time.now
       @topic.posts_count = -1
       @post = @topic.posts.build(params[:topic])
       @post.user_id = current_user.id
