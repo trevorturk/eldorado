@@ -2,7 +2,16 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 6) do
+ActiveRecord::Schema.define(:version => 9) do
+
+  create_table "posts", :force => true do |t|
+    t.column "user_id",    :integer
+    t.column "topic_id",   :integer
+    t.column "body",       :text
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+    t.column "updated_by", :integer
+  end
 
   create_table "sessions", :force => true do |t|
     t.column "session_id", :string
@@ -14,19 +23,17 @@ ActiveRecord::Schema.define(:version => 6) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "topics", :force => true do |t|
-    t.column "user_id",             :integer
-    t.column "user_name",           :string
-    t.column "title",               :string
-    t.column "created_at",          :datetime
-    t.column "updated_at",          :datetime
-    t.column "views",               :integer,  :default => 0
-    t.column "replies",             :integer,  :default => 0
-    t.column "last_post_id",        :integer
-    t.column "last_post_at",        :datetime
-    t.column "last_post_user_id",   :integer
-    t.column "last_post_user_name", :string
-    t.column "private",             :boolean,  :default => false
-    t.column "closed",              :boolean,  :default => false
+    t.column "user_id",      :integer
+    t.column "title",        :string
+    t.column "created_at",   :datetime
+    t.column "updated_at",   :datetime
+    t.column "views",        :integer,  :default => 0
+    t.column "posts_count",  :integer
+    t.column "last_post_id", :integer
+    t.column "last_post_at", :datetime
+    t.column "last_post_by", :integer
+    t.column "private",      :boolean,  :default => false
+    t.column "closed",       :boolean,  :default => false
   end
 
   create_table "users", :force => true do |t|

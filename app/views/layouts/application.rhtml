@@ -4,16 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title><%=h page_title %></title>
-				
+	<title><%=h page_title %></title>				
 	<%= stylesheet_link_tag 'styles' %>
-	<style type="text/css"> .header { background: url(/images/headers/pantheon.jpg); } </style>
-	
 </head>
 
 <body>
-		
+	
 	<div class="wrapper">
 		
 		<div class="header">
@@ -27,13 +23,10 @@
 					<% if logged_in? %>
 						Logged in as <b><%= link_to( h(current_user.login), :controller => 'users', :action => 'show', :id => session[:user_id]) %></b> |  
 						Last visit <%= time_ago_in_words(current_user.last_login_at) %> ago 
-					<% else %>
-						You are not logged in
 					<% end %>
 				</p>
 				<p class="nav-2">
 					<% if logged_in? %>
-						<%= link_to('Start a New Topic', new_topic_path) %> &nbsp; 
 						<%= link_to('Home', home_path) %> &nbsp; 
 						<%= link_to('Users', users_path) %> &nbsp; 
 						<%= link_to('Logout', logout_path) %>
@@ -51,6 +44,8 @@
 			<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
 			
 			<%= yield %>
+			
+			<p><% if logged_in? %><%= link_to('Start a New Topic &raquo;', new_topic_path) %><% end %></p>
 			
 		</div>
 		

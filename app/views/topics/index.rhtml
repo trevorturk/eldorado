@@ -14,15 +14,14 @@
 				<td class="tcl">
 					<span class="new-post">
 						<a href="<%= topic_path(topic.id) %>"><%=h topic.title %></a>
-						by <%=h topic.user_name %>
+						by <%=h topic.user_id %>
 					</span>
 				</td>
-				<td class="tc3"><%=h topic.replies %></td>
+				<td class="tc3"><%=h topic.posts_count %></td>
 				<td class="tc4"><%=h topic.views %></td>
-				<td class="tc5"><%=h topic.last_post_user_name %>, <%=h time_ago_in_words(topic.last_post_at) %> ago</td>
+				<td class="tc5"><%=h topic.last_post_by %>, <%=h time_ago_in_words(topic.last_post_at) %> ago</td>
 			</tr>
 		<% end %>
 	</tbody>
 
 </table>
-<br />

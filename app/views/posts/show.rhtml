@@ -1,0 +1,33 @@
+<p>
+  <b> user:</b>
+  <%=h @post. user_id %>
+</p>
+
+<p>
+  <b>Topic:</b>
+  <%=h @post.topic_id %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @post.body %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%=h @post.created_at %>
+</p>
+
+<p>
+  <b>Updated at:</b>
+  <%=h @post.updated_at %>
+</p>
+
+<p>
+  <b>Updated by:</b>
+  <%=h @post.updated_by %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

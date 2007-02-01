@@ -1,5 +1,17 @@
-<h2><%=h @topic.title %></h2>
+<h3><%=h @topic.title %></h3>
 
-<%= link_to 'Edit', edit_topic_path %> | 
+<table>
+	<% for post in @posts do %>
+		<tr><td><%= post.user_id %></td><td><%=h post.body %></td></tr>
+	<% end %>
+</table>
+
+<% form_for :post, :url => posts_path(:topic_id => @topic) do |f| -%>
+	<p><label for="title">Reply:</label></td><td></td></tr></p>
+	<%= f.text_area :body, :rows => '6' %>
+	<p><%= submit_tag "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
+<% end %>
+
+<p><%= link_to 'Edit', edit_topic_path %> | 
 <%= link_to 'Destroy', topic_path, :confirm => 'Are you sure?', :method => :delete %> | 
-<%= link_to 'Back', topics_path %>
+<%= link_to 'Back', topics_path %></p>

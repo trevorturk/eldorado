@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.find(:all)
+    @topics = Topic.find(:all, :order => 'last_post_at desc')
 
     respond_to do |format|
       format.html # index.rhtml
@@ -17,7 +17,8 @@ class TopicsController < ApplicationController
   # GET /topics/1.xml
   def show
     @topic = Topic.find(params[:id])
-
+    @posts = @topic.posts.find(:all)
+    @topic.view!
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @topic.to_xml }
@@ -44,10 +45,13 @@ class TopicsController < ApplicationController
       @topic.last_post_user_id = current_user.id
       @topic.last_post_user_name = current_user.login
       @topic.last_post_at = Time.now
+      @topic.posts_count = -1
+      @post = @topic.posts.build(params[:topic])
+      @post.user_id = current_user.id
     end
 
     respond_to do |format|
-      if @topic.save
+      if @topic.save && @post.save
         flash[:notice] = 'Topic was successfully created.'
         format.html { redirect_to topic_url(@topic) }
         format.xml  { head :created, :location => topic_url(@topic) }

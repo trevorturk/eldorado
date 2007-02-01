@@ -6,23 +6,24 @@ fieldset { padding: .5em; }
 body {
 	background-color: #fff;
 	color: #333;
-	font-family: verdana, arial, helvetica, sans-serif;
-	font-size: 12px;
+	font-family: verdana, sans-serif;
+	font-size: 11px;
 	line-height: 18px;
 	text-align: justify;
 	background: #ddd;
 }
 
 .wrapper {
-	width: 922px;
+	width: 780px;
 	margin: 0px auto;
 }
 
 .header {
 	height: 100px;
-	width: 920px;
+	width: 778px;
 	border-left: 1px solid #333;
 	border-right: 1px solid #333;
+	background: url(/images/headers/pantheon.jpg);
 }
 
 .content {
@@ -56,6 +57,13 @@ h1 {
 
 h1 a:link, h1 a:visited {
 	color: #fff;
+}
+
+h2 {
+}
+
+h3 {
+	font-size: 15px;
 }
 
 p.img {
@@ -93,13 +101,12 @@ p.img-text {
 
 table {
 	width: 100%;
-	font-size: 11px;
 }
 
 td {
 	border: 1px solid #ccc;
 	border-top: none;
-	padding: 4px 6px;
+	padding: 3px 6px;
 	vertical-align: top;
 }
 
@@ -109,12 +116,6 @@ td {
 
 table a:link, table a:visited, table a:hover, table a:active {
 	color: #333;
-	font-size: 12px;
-}
-
-.new-link, .new-link a:link {
-	color: #999;
-	font-size: 11px;
 }
 
 thead .tcl, thead .tc2, thead .tc3, thead .tc4, thead .tc5 {
@@ -123,8 +124,7 @@ thead .tcl, thead .tc2, thead .tc3, thead .tc4, thead .tc5 {
 	text-align: left;
 	border: 1px solid #333;
 	font-weight: normal;
-	padding: 4px 6px;
-	font-size: 12px;
+	padding: 3px 6px;
 }
 
 .tc3, .tc4 {
@@ -188,7 +188,6 @@ thead .tc3, thead .tc4 {
 
 .login table td {
 	border: none;
-	font-size: 12px;
 }
 
 .login p {
@@ -205,7 +204,6 @@ thead .tc3, thead .tc4 {
 }
 
 .profile {
-	font-size: 12px;
 	padding: 5px 15px;
 }
 
@@ -258,7 +256,7 @@ thead .tc3, thead .tc4 {
 	text-align: center;
 	border: 1px solid #333;
 	font-weight: normal;
-	padding: 4px 6px;
+	padding: 3px 6px;
 	margin-bottom: 10px;
 }
 
@@ -268,7 +266,7 @@ thead .tc3, thead .tc4 {
 	text-align: center;
 	border: 1px solid #333;
 	font-weight: normal;
-	padding: 4px 6px;
+	padding: 3px 6px;
 	margin-bottom: 10px;
 }
 
@@ -305,24 +303,4 @@ thead .tc3, thead .tc4 {
 #errorExplanation ul li {
 	padding: 5px;
 	margin: 0;
-}
-
-div.uploadStatus {
-  margin: 5px;
-}
-
-div.progressBar {
-  margin: 5px;
-}
-
-div.progressBar div.border {
-  background-color: #fff;
-  border: 1px solid grey;
-  width: 100%;
-}
-
-div.progressBar div.background {
-  background-color: #333;
-  height: 18px;
-  width: 0%;
 }
