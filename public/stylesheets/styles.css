@@ -14,49 +14,64 @@ body {
 }
 
 .wrapper {
-	width: 780px;
-	margin: 0px auto;
+	width: 760px;
+	margin: 20px auto 0 auto;
+	padding: 10px;
+	border: 1px solid #bbb;
+	background: #fff;
 }
-
+	
 .header {
-	height: 100px;
-	width: 778px;
-	border-left: 1px solid #333;
-	border-right: 1px solid #333;
-	background: url(/images/headers/pantheon.jpg);
+	height: 200px;
+	background: #000;
+	background: url(/images/headers/tds3.jpg);
 }
 
 .content {
-	border: 1px solid #333;
-	background: #fff;
-	padding: 0px 20px;
 	clear: both;
 }
 
 .footer, .footer a:link, .footer a:visited {
-	text-align: right;
-	color: #999;
+	font-size: 10px;
+	margin-top: 10px;
+	color: #ccc;
 }
 
 a:link, a:visited {
 	color: #24c;
+	color: #638137;
 	text-decoration: none;
 }
 
 a:active, a:hover {
 	color: #24c;
+	color: #8EB653;
 	text-decoration: underline;
 }
 
-h1 {
-	font-size: 20px;
-	float: left;
-	margin-top: 40px;
-	margin-left: 20px;
-}
+h1 { 
+	font-family: 'Trebuchet MS', Verdana, Sans-Serif;
+	font-size: 30px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	margin: 0;
+	padding: 83px 0 0 40px;
+	}
 
-h1 a:link, h1 a:visited {
+h1, h1 a:link, h1 a:visited, h1 a:hover, h1 a:active {
+	text-decoration: none;
 	color: #fff;
+	}
+
+h1 a:hover, h1 a:active {
+	text-decoration: underline;
+	}
+	
+.tagline {
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	font-size: 10px;
+	color: #fff;
+	margin: 6px 40px;
 }
 
 h2 {
@@ -66,82 +81,113 @@ h3 {
 	font-size: 15px;
 }
 
-p.img {
-	text-align: center;
+li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
 }
 
-p.img-text {
-	text-align: center;
-}
-
-.wrapper img {
-	padding: 10px;
-	border: 1px solid #ccc;
-}
-
-.img-table {
-	width: 100%;
-}
-
-.img-table td {
-	width: 50%;
+.nav {
+	margin: 10px 0;
+	width: 758px;
+	height: 26px;
+	border: 1px solid #999;
+	background: #eee;
 }
 
 .nav-1, .nav-3 {
 	float: left;
+	margin: 4px 0 0 5px;
 }
 
 .nav-2, .nav-4 {
 	float: right;
-}
-
-.nav a:link, .nav a:visited, .nav a:hover, .nav a:active {
-	color: #333;
+	margin: 4px 5px 0 0;
 }
 
 table {
 	width: 100%;
+	border: 1px solid #35604D;
 }
 
-td {
-	border: 1px solid #ccc;
-	border-top: none;
-	padding: 3px 6px;
-	vertical-align: top;
-}
-
-.tr-alt {
-	background: #f9f9f9;
-}
-
-table a:link, table a:visited, table a:hover, table a:active {
-	color: #333;
-}
-
-thead .tcl, thead .tc2, thead .tc3, thead .tc4, thead .tc5 {
-	background: #444;
+thead th {
+	background: #35604d;
 	color: #eee;
 	text-align: left;
-	border: 1px solid #333;
 	font-weight: normal;
-	padding: 3px 6px;
+	padding: 3px 5px;
 }
 
-.tc3, .tc4 {
-	text-align: center;
-	background: #f3f3f3;
-}
-
-thead .tc3, thead .tc4 {
+thead .tcm {
 	text-align: center;
 }
 
-.tc2, .tc3, .tc4, thead .tc2, thead .tc3, thead .tc4 {
-	border-left: none;
+tbody {
+	background: #f1f1f1;
 }
 
-.tc4, thead .tc4 {
-	border-right: none;
+tbody td {
+	padding: 3px 5px;
+	vertical-align: top;
+	border-top: 1px solid #cedeb9;
+	border-right: 1px solid #cedeb9;
+}
+
+tbody .tcm {
+	text-align: center;
+	background: #dedfdf;
+}
+
+tbody .tcr {
+	border-right: 0;
+}
+
+tbody .tds {
+	padding: 10px 15px;
+}
+
+.tbp .tcl {
+	width: 180px;
+}
+
+.tbp .tcr {
+	background: #dedfdf;
+}
+
+.tbp {
+	margin-bottom: 5px;
+}
+
+.tbp .u {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.tbp .thr {
+	text-align: right;
+}
+
+.ttl {
+	float: left;
+	margin: 0 0 0 190px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.ttr {
+	float: right;
+	margin-bottom: 2px;
+}
+
+.nopost {
+	width: 752px;
+	height: 22px;
+	border: 1px solid #999;
+	background: #eee;
+	margin: 0 0 40px 0;
+	padding: 4px 6px 0 0;
+	text-align: right;
 }
 
 .box-links a:link, .box-links a:visited, .box-links a:active, .box-links a:hover {
@@ -156,51 +202,6 @@ thead .tc3, thead .tc4 {
 	border: 1px solid #333;
 	color: #eee;
 	text-decoration: none;
-}
-
-.new-post a:link, .new-post a:visited, .new-post a:active, .new-post a:hover, 
-.old-post a:link, .old-post a:visited, .old-post a:active, .old-post a:hover, 
-.primary a:link, .primary a:visited, .primary a:active, .primary a:hover {
-	color: #24c;
-}
-
-.new-post a, .primary a {
-	font-weight: bold;
-}
-
-.highlight:link, .highlight:visited {
-	background-color: #FBFBB1;
-	color: #000;
-}
-
-.login fieldset {
-	width: 300px;
-	background: #eee;
-	border: 1px solid #999;
-}
-
-.login legend {
-	padding: 2px 6px;
-	background: #444;
-	color: #eee;
-	border: 1px solid #333;
-}
-
-.login table td {
-	border: none;
-}
-
-.login p {
-	width: 315px;
-	text-align: right;
-}
-
-.login p a:link, .login p a:visited {
-	color: #999;
-}
-
-.login .login-text {
-	color: #999;
 }
 
 .profile {
@@ -226,10 +227,6 @@ thead .tc3, thead .tc4 {
 	margin-top: 6px;
 	border: 1px solid #ccc;
 	text-align: center;
-}
-
-.profile-avatar img {
-	border: none;
 }
 
 .profile-box {
@@ -279,6 +276,7 @@ thead .tc3, thead .tc4 {
 #errorExplanation {
   border: 1px solid #333;
   background-color: #f0f0f0;
+	margin-bottom: 10px;
 }
 
 #errorExplanation h2 {
@@ -303,4 +301,44 @@ thead .tc3, thead .tc4 {
 #errorExplanation ul li {
 	padding: 5px;
 	margin: 0;
+}
+
+.globalnav .menu { 
+	position: relative;
+	margin: -24px 0 0 23px;
+	width: 710px;
+	font: 1em Verdana, Helvetica, Arial, Sans-Serif;
+	padding: 5px 15px 6px 12px;
+}
+	
+.globalnav .menu li {
+	display: inline;
+	margin: 0 4px;
+}
+	
+.globalnav .menu li a {
+	font-size: 10px;
+	padding: 5px 13px 6px 13px;
+}
+
+.globalnav .menu li a:link, .globalnav .menu li a:visited {
+	color: #fff !important;
+	text-decoration: none;
+}
+
+.globalnav .menu li a:hover, .globalnav .menu li a:active {
+	background: #333;
+	color: #eee !important;
+	text-decoration: none;
+}
+
+.globalnav .menu li.current_page_item a:link, .globalnav .menu li.current_page_item a:visited,
+.globalnav .menu li.current_page_item a:hover, .globalnav .menu li.current_page_item a:active {
+	background: #fff;
+	color: #333 !important;
+	text-decoration: none;
+}
+
+.globalnav .menu li ul { /* hides subpages */
+	display: none;
 }

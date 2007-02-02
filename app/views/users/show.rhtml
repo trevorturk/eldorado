@@ -5,125 +5,21 @@
 	</tr>
 </thead>
 <tr><td class="profile">
-	<p class="profile-avatar"><%= image_tag('avatars/'+h(@user.avatar)) %></p>
 	<div class="profile-left">
 		<div class="box-links">
 			<% if @current_user_profile %>
 			<p class="profile-box"><%= link_to 'Edit Profile', :action => 'edit', :id => @user %></p>
-			<% else %>
-			<p class="profile-box"><%= link_to 'Add to Friends', :action => 'show', :id => @user %></p>
 			<% end %>
 		</div>
 		<p class="profile-login"><%=h @user.login %></p>
-		<p class="profile-bbcode"><b>Bio</b>: <%= @user.bio %></p>
-		<p class="profile-bbcode"><b>Signature</b>: <%= @user.signature %></p>
+		<p class="profile-bbcode"><b>Bio</b>: <%=h @user.bio %></p>
+		<p class="profile-bbcode"><b>Signature</b>: <%=h @user.signature %></p>
 		<div class="profile-info">
-			<p><b>Total Posts</b>: <%=h @user.posts_count %></p>
-			<p><b>Last Login</b>: <%=h time_ago_in_words(@user.last_login_at) %> ago</p>
-			<p><b>Account Created</b>: <%=h @user.created_at.strftime("%B %d, %Y") %></p>
+			<p><b>Last Login</b>: <%= time_ago_in_words(@user.last_login_at) %> ago</p>
+			<p><b>Topics</b>: <%= @user.topics_count %></p>
+			<p><b>Posts</b>: <%= @user.posts_count %></p>
+			<p><b>Registered</b>: <%= @user.created_at.strftime("%B %d, %Y") %></p>
 		</div>
 	</div>
 </td></tr>
 </table>
-
-<br />
-
-<table cellspacing="0">
-<thead>
-	<tr>
-		<th class="tcl" scope="col">Friends</th>
-	</tr>
-</thead>
-	<tr>
-		<td class="tcl box-links friend-list">
-					<p><a href="#">Timothy</a></p>
-					<p><a href="#">mattbrent</a></p>
-					<p><a href="#">Colin</a></p>
-					<p><a href="#">wuk</a></p>
-					<p><a href="#">Pete</a></p>
-					<p><a href="#">Artie</a></p>
-					<p><a href="#">Don B.</a></p>
-					<p><a href="#">TradeMark</a></p>
-					<p><a href="#">Frazzles</a></p>
-					<p><a href="#">He who was like what</a></p>
-					<p><a href="#">@r+</a></p>
-					<p><a href="#">I'm clownin', baby</a></p>
-					<p><a href="#">blindboy</a></p>
-					<p><a href="#">DrBold</a></p>
-					<p><a href="#">Loser McSuckerstein</a></p>
-					<p><a href="#">mnajera</a></p>
-					<p><a href="#">pavman</a></p>
-					<p><a href="#">Professor</a></p>
-					<p><a href="#">Timothy</a></p>
-					<p><a href="#">mattbrent</a></p>
-					<p><a href="#">Colin</a></p>
-					<p><a href="#">wuk</a></p>
-					<p><a href="#">Pete</a></p>
-					<p><a href="#">Artie</a></p>
-					<p><a href="#">Don B.</a></p>
-					<p><a href="#">TradeMark</a></p>
-					<p><a href="#">Frazzles</a></p>
-					<p><a href="#">He who was like what</a></p>
-					<p><a href="#">@r+</a></p>
-					<p><a href="#">I'm clownin', baby</a></p>
-					<p><a href="#">blindboy</a></p>
-					<p><a href="#">DrBold</a></p>
-					<p><a href="#">Loser McSuckerstein</a></p>
-					<p><a href="#">mnajera</a></p>
-		</td>
-	</tr>
-</table>
-
-<br />
-
-	
-<table class="forum" cellspacing="0">
-<thead>
-	<tr>
-		<th class="tcl">Topics</th>
-		<th class="tc3">Replies</th>
-		<th class="tc4">Views</th>
-		<th class="tc5">Activity</th>
-	</tr>
-</thead>
-	
-	<tr>
-		<td class="tcl"><span class="new-post"><a href="#">Google buys YouTube for $1.65 billion</a></span> by Trademark <span class="new-link">[<a href="#">New</a>]</span></td>
-		<td class="tc3">18</td>
-		<td class="tc4">140</td>
-		<td class="tc5">Timothy, 2 minutes ago</td>
-	</tr>
-	
-	<tr class="tr-alt">
-		<td class="tcl"><span class="new-post"><a href="#">What do you guys know about torrents?</a></span> by Timothy <span class="new-link">[<a href="#">New</a>]</span></td>
-		<td class="tc3">48</td>
-		<td class="tc4">15</td>
-		<td class="tc5">mattbrent, 2 hours ago</td>
-	</tr>
-
-	<tr>
-		<td class="tcl"><span class="old-post"><a href="#">How to Get a Job in Computers</a></span> by Artie</td>
-		<td class="tc3">6</td>
-		<td class="tc4">237</td>
-		<td class="tc5">frazzles, 1 week ago</td>
-	</tr>
-	
-	<tr class="tr-alt">
-		<td class="tcl"><span class="old-post"><a href="#">Shit What Got Forwarded To Me Today</a></span> by Trevor</td>
-		<td class="tc3">5</td>
-		<td class="tc4">80</td>
-		<td class="tc5">Professor, 6 hours ago</td>
-	</tr>
-	
-	<tr>
-		<td class="tcl"><span class="old-post"><a href="#">Best of Craigslist</a></span> by Colin</td>
-		<td class="tc3">9</td>
-		<td class="tc4">11</td>
-		<td class="tc5">Don B., 2 months ago</td>
-	</tr>
-						
-</table>
-
-<p class="nav-4">View More: <a href="#">Next Page &raquo;</a></p>
-												
-<div style="clear:both;"> </div>

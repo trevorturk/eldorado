@@ -1,17 +1,43 @@
-<h3><%=h @topic.title %></h3>
-
-<table>
-	<% for post in @posts do %>
-		<tr><td><%= post.user_id %></td><td><%=h post.body %></td></tr>
+<div class="ttl"><%=h @topic.title %></div>
+<div class="ttr">
+	<% if can_edit? %>
+		<%= link_to 'Edit', edit_topic_path %> &nbsp; 
+		<%= link_to 'Delete', topic_path, :confirm => 'Are you sure?', :method => :delete %>
 	<% end %>
-</table>
+</div>
+<div style="clear:both;"> </div>
 
-<% form_for :post, :url => posts_path(:topic_id => @topic) do |f| -%>
-	<p><label for="title">Reply:</label></td><td></td></tr></p>
-	<%= f.text_area :body, :rows => '6' %>
-	<p><%= submit_tag "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
+<% for post in @posts do %>
+	<table class="tbp" cellspacing="0">
+		<thead><tr><th><%= time_ago_in_words(post.created_at) %> ago</th><th class="thr">#<%= post.id %></th></tr></thead>
+		<tbody><tr>
+			<td class="tcl">
+				<li class="u"><%= link_to h(post.user.login), user_path(post.user.id) %></li>
+				<% if !post.user.avatar.blank? %><li><img src="/images/avatars/<%= post.user.avatar %>" /></li><% end %>
+				<li>Registered</b>: <%= post.user.created_at.strftime("%b, %Y") %></li>
+				<li>Last Login</b>: <%= time_ago_in_words(post.user.last_login_at) %> ago</li>
+				<li>Topics</b>: <%= post.user.topics_count %></li>
+				<li>Posts</b>: <%= post.user.posts_count %></li>
+				<p>&nbsp;</p><p>&nbsp;</p>
+				<p>&nbsp;</p><p>&nbsp;</p>
+			</td>
+			<td class="tcr">
+				<%=h post.body %>
+			</td>
+		</tr></tbody>
+	</table>
 <% end %>
 
-<p><%= link_to 'Edit', edit_topic_path %> | 
-<%= link_to 'Destroy', topic_path, :confirm => 'Are you sure?', :method => :delete %> | 
-<%= link_to 'Back', topics_path %></p>
+<% if logged_in? %>
+	<% form_for :post, :url => posts_path(:topic_id => @topic) do |f| -%>
+		<table cellspacing="0">
+			<thead><tr><th>Post a Reply</th></tr></thead>
+			<tbody><tr><td class="tds">
+				<%= f.text_area :body, :rows => '6', :style => "width:66%;" %>			
+				<p><%= submit_tag "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
+			</td></tr></tbody>
+		</table>
+	<% end %>
+<% else %>
+	<p class="nopost"><%= link_to('Login', login_path) %> or <%= link_to('Register', register_path) %> to post a reply</p>
+<% end %>

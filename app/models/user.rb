@@ -1,7 +1,10 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-
+  
+  has_many :posts, :dependent => :destroy
+  has_many :topics, :dependent => :destroy
+  
   validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   validates_length_of       :login, :minimum => 2

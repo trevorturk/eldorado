@@ -1,12 +1,18 @@
 <%= error_messages_for :topic %>
 	
 <% form_for(:topic, :url => topics_path) do |f| %>
-
-	<table>
-		<tr><td><label for="title">Title:</label></td><td><%= f.text_field :title %></td></tr>
-		<tr><td><label for="title">Body:</label></td><td><%= f.text_area :body %></td></tr>
-	</table>
-
-	<p><%= submit_tag "Create Topic" %> or <%= link_to 'Cancel', topics_path %></p>
-
+<table cellspacing="0">
+	<thead>
+		<tr><th>New Topic</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>
+			<b><label for="title">Title</label></b><br />
+			<%= f.text_field :title, :style => 'width:66%;' %><br /><br />
+			<b><label for="body">Body</label></b><br />
+			<%= f.text_area :body, :rows => '15', :style => 'width:66%;' %>
+			<p><%= submit_tag "Create Topic" %> or <%= link_to 'Cancel', topics_path %></p>
+		</td></tr>
+	</tbody>
+</table>
 <% end %>

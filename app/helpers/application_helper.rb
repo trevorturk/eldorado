@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def page_title
-    @page_title || "El Dorado"
+    @page_title || "El Dorado.org"
   end
          
 end

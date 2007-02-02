@@ -1,11 +1,12 @@
 class TopicsController < ApplicationController
   
-  before_filter :force_login, :except => [ :index, :show ]
+  before_filter :force_login, :except => [:index, :show]
+  before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
   
   # GET /topics
   # GET /topics.xml
   def index
-    @topics = Topic.find(:all, :order => 'last_post_id desc')
+    @topic_pages, @topics = paginate(:topics, :per_page => 25, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @topics.to_xml }
@@ -39,15 +40,12 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(params[:topic])
     if @topic
-      @topic.user_id = current_user.id
-      @topic.posts_count = -1
+      @topic.user_id = current_user.id   
       @post = @topic.posts.build(params[:topic])
       @post.user_id = current_user.id
     end
-
     respond_to do |format|
       if @topic.save && @post.save
-        flash[:notice] = 'Topic was successfully created.'
         format.html { redirect_to topic_url(@topic) }
         format.xml  { head :created, :location => topic_url(@topic) }
       else
@@ -61,10 +59,8 @@ class TopicsController < ApplicationController
   # PUT /topics/1.xml
   def update
     @topic = Topic.find(params[:id])
-
     respond_to do |format|
       if @topic.update_attributes(params[:topic])
-        flash[:notice] = 'Topic was successfully updated.'
         format.html { redirect_to topic_url(@topic) }
         format.xml  { head :ok }
       else
@@ -79,7 +75,6 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-
     respond_to do |format|
       format.html { redirect_to topics_url }
       format.xml  { head :ok }
@@ -87,7 +82,12 @@ class TopicsController < ApplicationController
   end
   
   def unknown_request
-    redirect_to_home('Sorry, the page you requested could not be found.')
+    redirect_to home_path
   end
   
+  def can_edit_topic
+    @topic = Topic.find(params[:id])
+    redirect_to topic_path(@topic) and return false unless current_user.id == @topic.user_id
+  end
+    
 end

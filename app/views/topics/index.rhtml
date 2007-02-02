@@ -2,26 +2,27 @@
 	<thead>
 		<tr>
 			<th class="tcl">Topics</th>
-			<th class="tc3">Replies</th>
-			<th class="tc4">Views</th>
-			<th class="tc5">Activity</th>
+			<th class="tcm">Replies</th>
+			<th class="tcm">Views</th>
+			<th class="tcr">Activity</th>
 		</tr>
 	</thead>
 	<tbody>
-  
 		<% for topic in @topics %>
 			<tr>
-				<td class="tcl">
-					<span class="new-post">
-						<a href="<%= topic_path(topic.id) %>"><%=h topic.title %></a>
-						by <%=h topic.user.login %>
-					</span>
-				</td>
-				<td class="tc3"><%=h topic.posts_count %></td>
-				<td class="tc4"><%=h topic.views %></td>
-				<td class="tc5"><%=h topic.posts.last.user.login %>, <%=h time_ago_in_words(topic.posts.last.created_at) %> ago</td>
+				<td class="tcl"><a href="<%= topic_path(topic.id) %>"><%=h topic.title %></a> by <%=h topic.user.login %></td>
+				<td class="tcm"><%=h topic.posts_count-1 %></td>
+				<td class="tcm"><%=h topic.views %></td>
+				<td class="tcr"><%=h time_ago_in_words(topic.last_post_at) %> ago by <%=h topic.last_poster.login %></td>
 			</tr>
 		<% end %>
 	</tbody>
-
 </table>
+
+<p class="nav-3"></p>
+<p class="nav-4">
+	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %> &nbsp; <% end %>
+	<%= pagination_links(@topic_pages) %>
+	<% if @topic_pages and @topic_pages.current.next %> &nbsp; <%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %><% end %>
+</p>
+<div style="clear:both;"> </div>

@@ -1,24 +1,18 @@
-<div class="login">
+<% form_tag :action => 'login' do %>
+<table cellspacing="0">
+	<thead>
+		<tr><th>Login</th></tr>
+	</thead>
+	<tbody>
+		<tr><td class="tds">
+			<b><label for="title">Username</label></b><br />
+			<%= text_field_tag :login, params[:login] %><br /><br />
+			<b><label for="password">Password</label></b><br />
+			<%= password_field_tag :password, params[:password] %>
+			<p><%= submit_tag "Login" %> or <%= link_to 'Cancel', home_path %></p>
+		</td></tr>
+	</tbody>
+</table>
+<% end %>
 	
-	<fieldset>
-	<legend>Login</legend>
-	
-	<% form_tag :action => 'login' do %>
-	
-		<table cellspacing="0">
-			<tr><td><label for="login">Login</label></td>
-			<td><%= text_field_tag :login, params[:login] %></td></tr>
-			<tr><td><label for="password">Password</label></td>
-			<td><%= password_field_tag :password, params[:password] %></td></tr>
-			<tr><td>&nbsp;</td>
-			<td><%= submit_tag "Login" %></td></tr>
-		</table>
-		</fieldset>
-		
-	<% end %>
-	
-	<p><a href="#">Forgot your password?</a></p>
-	
-</div>
-
 <%= javascript_tag "login.focus();" %>

@@ -13,22 +13,29 @@
 	<div class="wrapper">
 		
 		<div class="header">
-			<h1><%= link_to(page_title, home_path) %></h1>			
+			<h1><%= link_to(page_title, home_path) %></h1>
+			<div class="tagline">All an elaborate, unapproachable, unprofitable, retributive joke</div>		
 		</div>
-
+		
+		<div class="globalnav"><ul class="menu">
+			<li class="page_item current_page_item"><a href="<%= home_path %>">Home</a></li>
+			<li class="page_item"><a href="<%= users_path %>">Users</a></li>
+		</ul></div>
+		
 			<div class="content">
 						
 			<div class="nav">
 				<p class="nav-1">
 					<% if logged_in? %>
-						Logged in as <b><%= link_to( h(current_user.login), :controller => 'users', :action => 'show', :id => session[:user_id]) %></b> |  
-						Last visit <%= time_ago_in_words(current_user.last_login_at) %> ago 
+						Logged in as <b><%= link_to h(current_user.login), user_path(current_user.id) %></b> | 
+						Last visit <%= time_ago_in_words(current_user.last_login_at) %> ago
+					<% else %>
+						You are not logged in
 					<% end %>
 				</p>
 				<p class="nav-2">
 					<% if logged_in? %>
-						<%= link_to('Home', home_path) %> &nbsp; 
-						<%= link_to('Users', users_path) %> &nbsp; 
+						<%= link_to('Start a New Topic', new_topic_path) %> &nbsp; 
 						<%= link_to('Logout', logout_path) %>
 					<% else %>
 						<%= link_to('Register', register_path) %> &nbsp; 
@@ -44,13 +51,18 @@
 			<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
 			
 			<%= yield %>
-			
-			<p><% if logged_in? %><%= link_to('Start a New Topic &raquo;', new_topic_path) %><% end %></p>
-			
+						
 		</div>
 		
-		<p class="footer">&nbsp;</p>
-											
+		<div class="footer">
+			<div style="float:left;"><a href="http://www.almosteffortless.com">&aelig;</a> + <a href="http://www.tyrannybelle.com">tb</a> = kthxbye</div>
+			<div style="float:right;">Copyright &copy; 2004-<%= Time.now.strftime("%Y") %> <a href="http://www.newathens.org">NewAthens.org</a></div>
+			<div style="clear:both;"> </div>
+		</div>
+							
 	</div>
+	
+	<p>&nbsp;</p>
+	
 </body>
 </html>
