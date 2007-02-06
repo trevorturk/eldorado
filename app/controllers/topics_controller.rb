@@ -87,7 +87,7 @@ class TopicsController < ApplicationController
   
   def can_edit_topic
     @topic = Topic.find(params[:id])
-    redirect_to topic_path(@topic) and return false unless current_user.id == @topic.user_id
+    redirect_to topic_path(@topic) and return false unless current_user == @topic.user
   end
     
 end

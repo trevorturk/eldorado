@@ -1,8 +1,7 @@
 <div class="ttl"><%=h @topic.title %></div>
 <div class="ttr">
 	<% if can_edit? %>
-		<%= link_to 'Edit', edit_topic_path %> &nbsp; 
-		<%= link_to 'Delete', topic_path, :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to 'Edit Topic', edit_topic_path %>
 	<% end %>
 </div>
 <div style="clear:both;"> </div>
@@ -34,7 +33,7 @@
 			<thead><tr><th>Post a Reply</th></tr></thead>
 			<tbody><tr><td class="tds">
 				<%= f.text_area :body, :rows => '6', :style => "width:66%;" %>			
-				<p><%= submit_tag "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
+				<p><%= submit_tag "Post Reply", :disable_with => "Posting Reply..." %> or <%= link_to 'Cancel', topics_path %></p>
 			</td></tr></tbody>
 		</table>
 	<% end %>

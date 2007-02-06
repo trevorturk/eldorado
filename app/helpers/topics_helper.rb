@@ -1,7 +1,7 @@
 module TopicsHelper
 
   def can_edit?
-    current_user.id == @topic.user_id
+    current_user == @topic.user
   end
 
 end

@@ -8,5 +8,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<%= link_to 'View Thread', topic_path(@topic) %> | 
+<%= link_to 'Delete Thread', topic_path, :confirm => 'Are you sure?', :method => :delete %>

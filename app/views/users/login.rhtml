@@ -9,7 +9,7 @@
 			<%= text_field_tag :login, params[:login] %><br /><br />
 			<b><label for="password">Password</label></b><br />
 			<%= password_field_tag :password, params[:password] %>
-			<p><%= submit_tag "Login" %> or <%= link_to 'Cancel', home_path %></p>
+			<p><%= submit_tag "Login", :disable_with => "Login" %> or <%= link_to 'Cancel', home_path %></p>
 		</td></tr>
 	</tbody>
 </table>
