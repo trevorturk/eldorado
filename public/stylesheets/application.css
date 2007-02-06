@@ -341,8 +341,8 @@ div.progressBar div.background {
 	text-decoration: none;
 }
 
-.globalnav .menu li.current_page_item a:link, .globalnav .menu li.current_page_item a:visited,
-.globalnav .menu li.current_page_item a:hover, .globalnav .menu li.current_page_item a:active {
+.globalnav .menu li.current_tab a:link, .globalnav .menu li.current_tab a:visited,
+.globalnav .menu li.current_tab a:hover, .globalnav .menu li.current_tab a:active {
 	background: #fff;
 	color: #333 !important;
 	text-decoration: none;
