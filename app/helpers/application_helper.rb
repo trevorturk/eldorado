@@ -14,5 +14,11 @@ module ApplicationHelper
   def page_title
     @page_title || "El Dorado.org"
   end
-         
+  
+  def current_page(name)
+    if name == request.path_parameters['controller']
+      'current_page_item'
+    end
+  end
+  
 end
