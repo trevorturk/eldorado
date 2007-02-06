@@ -174,9 +174,8 @@ tbody .tds {
 	font-weight: bold;
 }
 
-.ttr, .ttr a:link, .ttr a:visited {
+.ttr {
 	float: right;
-	color: #999;
 }
 
 .nopost {
@@ -285,6 +284,32 @@ tbody .tds {
 #errorExplanation ul {
 	padding: 4px 10px;
 	margin: 0;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+div.uploadStatus {
+  margin: 5px;
+}
+
+div.progressBar {
+  margin: 5px;
+}
+
+div.progressBar div.border {
+  background-color: #fff;
+  border: 1px solid grey;
+  width: 100%;
+}
+
+div.progressBar div.background {
+  background-color: #333;
+  height: 18px;
+  width: 0%;
 }
 
 .globalnav .menu { 

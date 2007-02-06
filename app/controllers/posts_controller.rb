@@ -3,10 +3,6 @@ class PostsController < ApplicationController
   before_filter :find_topic 
   before_filter :force_login 
 
-  def new 
-    @post = Post.new 
-  end 
-
   def edit 
     @post = @topic.posts.find(params[:id]) 
   end 
