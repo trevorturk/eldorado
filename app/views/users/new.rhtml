@@ -11,7 +11,7 @@
 			<%= text_field 'user', 'email', :size => "20" %><br /><br />
 			<b><label for="password_hash">Password</label></b><br />
 			<%= password_field 'user', 'password_hash', :size => "20" %>
-			<p><%= submit_tag "Register" %> or <%= link_to 'Cancel', home_path %></p>
+			<p><%= submit_tag "Register", :disable_with => "Register" %> or <%= link_to 'Cancel', home_path %></p>
 		</td></tr>
 	</tbody>
 </table>

@@ -1,12 +1,19 @@
-<h1>Editing topic</h1>
-
 <%= error_messages_for :topic %>
 
 <% form_for(:topic, :url => topic_path(@topic), :html => { :method => :put }) do |f| %>
-  <p>
-    <%= submit_tag "Update" %>
-  </p>
+<table cellspacing="0">
+	<thead>
+		<tr><th>Edit Topic</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>
+			<p class="pnon"><b><label for="title">Title</label></b></p>
+			<%= f.text_field :title, :style => 'width:66%;' %>
+		  	<p>
+		    	<%= submit_tag "Edit Topic" %> or <%= link_to 'Cancel', topic_path(@topic) %> or 
+					<%= link_to 'Delete Thread', topic_path, :confirm => 'Are you sure?', :method => :delete %>
+		  	</p>
+		</td></tr>
+	</tbody>
+</table>
 <% end %>
-
-<%= link_to 'View Thread', topic_path(@topic) %> | 
-<%= link_to 'Delete Thread', topic_path, :confirm => 'Are you sure?', :method => :delete %>

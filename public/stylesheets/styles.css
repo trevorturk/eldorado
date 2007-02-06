@@ -189,6 +189,11 @@ tbody .tds {
 	text-align: right;
 }
 
+.pnon {
+	margin: 0;
+	padding: 0;
+}
+
 .box-links a:link, .box-links a:visited, .box-links a:active, .box-links a:hover {
 	margin: 2px;
 	padding: 4px 6px;
@@ -251,6 +256,12 @@ tbody .tds {
 	border: 1px solid #999;
 	background: #eee;
 	margin-bottom: 10px;
+}
+
+#notice {
+	background-color: #FBFBB1;
+  text-align: center;
+	padding: 3px 0;
 }
 
 #errorExplanation {
