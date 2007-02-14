@@ -9,11 +9,11 @@
 </head>
 
 <body>
-	
+
 	<div class="wrapper">
 		
 		<div class="header">
-			<h1><%= link_to(page_title, home_path) %></h1>
+			<h1><%= link_to(SITE_TITLE, home_path) %></h1>
 			<div class="tagline">All an elaborate, unapproachable, unprofitable, retributive joke</div>		
 		</div>
 		
@@ -35,8 +35,12 @@
 				</p>
 				<p class="nav-2">
 					<% if logged_in? %>
-						<%= link_to('Start a New Topic', new_topic_path) %> &nbsp; 
-						<%= link_to('Logout', logout_path) %>
+						<% if current_controller == "topics" %>
+							<%= link_to('Start a New Topic', new_topic_path) %>
+						<% elsif current_controller == "users" %>
+							<%= link_to('Register a New User', new_user_path) %>
+						<% end %>
+						&nbsp; <%= link_to('Logout', logout_path) %>
 					<% else %>
 						<%= link_to('Register', register_path) %> &nbsp; 
 						<%= link_to('Login', login_path) %> 

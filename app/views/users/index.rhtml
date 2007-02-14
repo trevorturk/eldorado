@@ -1,23 +1,24 @@
-<table cellspacing="0">
-<thead>
-	<tr>
-		<th class="tcl">User</th>
-		<th class="tcl">Last Login</th>
-		<th class="tcm">Topics</th>
-		<th class="tcm">Posts</th>
-		<th class="tcr">Registered</th>
-	</tr>
-</thead>
-
-	<% for user in @users %>
-	<tr>
-		<td class="tcl">
-			<span class="primary"><%= link_to h(user.login), :action => 'show', :id => user %></span>
-		</td>
-		<td class="tcl"><%= time_ago_in_words(user.last_login_at) %> ago</td>
-		<td class="tcm"><%= user.topics_count %></td>
-		<td class="tcm"><%= user.posts_count %></td>
-		<td class="tcr"><%= user.created_at.strftime("%B %d, %Y") %></td>
-	</tr>
-	<% end %>
+<table cellspacing="0" class="ulist">
+	<thead>
+		<tr>
+			<th class="tcl">User</th>
+			<th class="tcl">Last Visit</th>
+			<th class="tcl">Profile Updated</th>
+			<th class="tcm">Topics</th>
+			<th class="tcm">Posts</th>
+			<th class="tcr">Registered</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for user in @users %>
+			<tr>
+				<td class="tcl"><%= link_to h(user.login), user_path(user.id) %></td>
+				<td class="tcl"><%= time_ago_in_words(user.last_login_at) %> ago</td>
+				<td class="tcl"><%= time_ago_in_words(user.updated_at) %> ago</td>
+				<td class="tcm"><%= user.topics_count %></td>
+				<td class="tcm"><%= user.posts_count %></td>
+				<td class="tcr"><%= user.created_at.strftime("%b %d, %Y") %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>

@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; }
 h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin: 1em 0; }
-li, dd { margin-left: 5%; }
 fieldset { padding: .5em; }
+li { margin: 0; padding: 0; list-style-type: none; }
 
 body {
 	background-color: #fff;
@@ -23,8 +23,7 @@ body {
 	
 .header {
 	height: 200px;
-	background: #000;
-	background: url(/images/headers/tds3.jpg);
+	background: #333 url('/images/headers/tds3.jpg');
 }
 
 .content {
@@ -71,7 +70,7 @@ h1 a:hover, h1 a:active {
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
 	font-size: 10px;
 	color: #fff;
-	margin: 6px 40px;
+	margin: 4px 40px;
 }
 
 h2 {
@@ -79,12 +78,6 @@ h2 {
 
 h3 {
 	font-size: 15px;
-}
-
-li {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
 }
 
 .nav {
@@ -115,7 +108,7 @@ thead th {
 	color: #fff;
 	text-align: left;
 	font-weight: normal;
-	padding: 3px 5px;
+	padding: 2px 5px;
 }
 
 thead .tcm {
@@ -146,21 +139,47 @@ tbody .tds {
 	padding: 10px 15px;
 }
 
+.tbp td {
+	border: 0;
+}
+
 .tbp .tcl {
-	width: 180px;
+	width: 188px;
+}
+
+.tbp dl {
+	margin: 0;
+}
+
+.tbp dt {
+	font-size: 12px;
+	font-weight: bold;
+	margin-bottom: -4px;
+}
+
+.tbp dd {
+	margin-bottom: -4px;
+}
+
+.tbp dd.rank {
+	font-weight: bold;
+}
+
+.tbp dd.avatar {
+	margin: 8px 0 4px 0;
 }
 
 .tbp .tcr {
 	background: #dedfdf;
 }
 
-.tbp {
-	margin-bottom: 5px;
+.edr {
+	border: 0;
+	text-align: right;
 }
 
-.tbp .u {
-	font-size: 12px;
-	font-weight: bold;
+.tbp {
+	margin-bottom: 5px;
 }
 
 .tbp .thr {
@@ -169,7 +188,7 @@ tbody .tds {
 
 .ttl {
 	float: left;
-	margin: 0 0 0 190px;
+	margin: 0 0 0 200px;
 	font-size: 12px;
 	font-weight: bold;
 }
@@ -188,9 +207,19 @@ tbody .tds {
 	text-align: right;
 }
 
-.pnon {
+.p1, .pn {
 	margin: 0;
 	padding: 0;
+	font-weight: bold;
+}
+
+.pn {
+	margin-top: 10px;
+}
+
+.sig {
+	margin-top: 15px;
+	border-top: 1px solid #aaa;
 }
 
 .box-links a:link, .box-links a:visited, .box-links a:active, .box-links a:hover {
@@ -198,12 +227,13 @@ tbody .tds {
 	padding: 4px 6px;
 	border: 1px solid #ccc;
 	color: #333;
+	background: #f1f1f1;
 }
 
 .box-links a:hover, .box-links a:active {
 	background: #444;
-	border: 1px solid #333;
-	color: #eee;
+	border: 1px solid #111;
+	color: #dedfdf;
 	text-decoration: none;
 }
 
@@ -212,24 +242,22 @@ tbody .tds {
 }
 
 .profile-left {
-	width: 665px;
+	width: 540px;
 }
 
 .profile-login {
 	font-size: 20px;
 	font-weight: bold;
 	border-bottom: 1px solid #ccc;
-	margin: 10px 0 0 0;
+	margin: 10px 2px 0 0;
 	padding: 0 0 10px 0;
-	width: 663px;
 }
 
 .profile-avatar {
 	float: right;
 	width: 170px;
-	margin-top: 6px;
-	border: 1px solid #ccc;
 	text-align: center;
+	background: #f1f1f1;
 }
 
 .profile-box {
@@ -240,10 +268,6 @@ tbody .tds {
 .profile-info p {
 	margin-right: 20px;
 	float: left;
-}
-
-.profile-bbcode a:link, .profile-bbcode a:visited {
-	color: #24c;
 }
 
 .friend-list p {
@@ -341,8 +365,8 @@ div.progressBar div.background {
 	text-decoration: none;
 }
 
-.globalnav .menu li.current_tab a:link, .globalnav .menu li.current_tab a:visited,
-.globalnav .menu li.current_tab a:hover, .globalnav .menu li.current_tab a:active {
+.globalnav .menu li.tab a:link, .globalnav .menu li.tab a:visited,
+.globalnav .menu li.tab a:hover, .globalnav .menu li.tab a:active {
 	background: #fff;
 	color: #333 !important;
 	text-decoration: none;

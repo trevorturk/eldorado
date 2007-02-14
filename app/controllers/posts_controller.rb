@@ -2,8 +2,9 @@ class PostsController < ApplicationController
 
   before_filter :find_topic 
   before_filter :force_login 
+  before_filter :can_edit, :only => [:edit, :update, :destroy]
 
-  def edit 
+  def edit     
     @post = @topic.posts.find(params[:id]) 
   end 
 
@@ -13,7 +14,8 @@ class PostsController < ApplicationController
     if (@topic.posts << @post) 
       redirect_to topic_url(@topic) 
     else 
-      render :action => :new 
+      flash[:notice] = "Posts cannot be blank."
+      redirect_to topic_url(@topic) 
     end 
   end 
 
@@ -39,5 +41,10 @@ class PostsController < ApplicationController
     redirect_to topics_url unless @topic_id 
     @topic = Topic.find(@topic_id) 
   end 
+  
+  def can_edit
+    @post = Post.find(params[:id])
+    redirect_to topic_path(@post.topic) and return false unless current_user == @post.user
+  end
   
 end

@@ -1,20 +1,15 @@
+<%= error_messages_for :user %>
+
 <% form_tag :action => 'create' do %>
-<table cellspacing="0">
-	<thead>
-		<tr><th>Register</th></tr>
-	</thead>
-	<tbody>
-		<tr><td class="tds">
-			<b><label for="title">Username</label></b><br />
-			<%= text_field 'user', 'login', :size => "20" %><br /><br />
-			<b><label for="email">Email</label></b><br />
-			<%= text_field 'user', 'email', :size => "20" %><br /><br />
-			<b><label for="password_hash">Password</label></b><br />
-			<%= password_field 'user', 'password_hash', :size => "20" %>
+	<table cellspacing="0">
+		<thead><tr><th>Register</th></tr></thead>
+		<tbody><tr><td class="tds">
+			<p class="p1">Username</p><%= text_field 'user', 'login' %>
+			<p class="pn">Email</p><%= text_field 'user', 'email' %>
+			<p class="pn">Password</p><%= password_field 'user', 'password' %>
 			<p><%= submit_tag "Register", :disable_with => "Register" %> or <%= link_to 'Cancel', home_path %></p>
-		</td></tr>
-	</tbody>
-</table>
+		</td></tr></tbody>
+	</table>
 <% end %>
-	
+
 <%= javascript_tag "login.focus();" %>

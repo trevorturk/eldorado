@@ -19,11 +19,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.password_hash = User.encrypt(@user.password_hash) unless params[:user][:password_hash].blank?
-    @user.last_login_at = Time.now 
+    @user.last_login_at = Time.now.utc
     if @user.save
       flash[:notice] = "Your account has been created. Please log in."
-      render :action => 'login'
+      redirect_to login_path
     else
       render :action => 'new'
     end
@@ -41,16 +40,15 @@ class UsersController < ApplicationController
   end
   
   def login
+    reset_session
     if @current_user_id
-      reset_session
       redirect_to login_path
     end
-    reset_session
     if request.post?
       user = User.authenticate(params[:login], params[:password])
       if user
         session[:user_id] = user.id
-        user.last_login_at = Time.now
+        user.last_login_at = Time.now.utc
         user.save!
         redirect_to home_path
       else

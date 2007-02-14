@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   
   before_filter :force_login, :except => [:index, :show]
-  before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
+  before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   # GET /topics
   # GET /topics.xml
@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.find(:all)
     @topic.hit!
+    @page_title = @topic.title
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @topic.to_xml }
@@ -40,7 +41,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(params[:topic])
     if @topic
-      @topic.user_id = current_user.id   
+      @topic.user_id = current_user.id
       @post = @topic.posts.build(params[:topic])
       @post.user_id = current_user.id
     end
@@ -85,7 +86,7 @@ class TopicsController < ApplicationController
     redirect_to home_path
   end
   
-  def can_edit_topic
+  def can_edit
     @topic = Topic.find(params[:id])
     redirect_to topic_path(@topic) and return false unless current_user == @topic.user
   end

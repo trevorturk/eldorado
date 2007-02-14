@@ -1,16 +1,19 @@
 <% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| -%>
 	<table cellspacing="0">
 		<thead><tr><th>Edit Profile</th></tr></thead>
-		<tbody><tr><td class="tds">
-			<b><label for="avatar">Avatar</label></b><br />
-			<%= f.text_field :avatar, :style => 'width:66%;' %><br /><br />		
-			<p><%= submit_tag "Update Profile" %> or <%= link_to 'Cancel', user_path(current_user.id) %></p>
-		</td></tr></tbody>
+		<tbody>
+			<tr><td class="tds">
+				<p class="p1"><b><label for="bio">Bio</label></b></p>
+				<%= f.text_area :bio, :rows => '5', :style => 'width:66%;' %>
+				<p class="pn"><b><label for="avatar">Avatar</label></b></p>
+				<%= f.text_field :avatar, :style => 'width:66%;' %>
+				<p class="pn"><b><label for="signature">Signature</label></b></p>
+				<%= f.text_area :signature, :rows => '5', :style => 'width:66%;' %><br /><br />
+	    	<%= submit_tag "Edit Profile", :disable_with => "Edit Profile" %> or <%= link_to 'Cancel', user_path(@user) %>
+			</td></tr>
+			<tr><td class="edr">
+				<%= link_to 'Delete', user_path, :confirm => 'Are you sure? This will permanently delete this user, all of their posts, and any threads that they have started.', :method => :delete %>
+			</td></tr>
+		</tbody>
 	</table>
 <% end %>
-
-<p><%= link_to '&laquo; Cancel', :action => 'show', :id => @user %></p>
-<p><%= button_to 'Delete Account', { :action => 'destroy', :id => @user }, :confirm => "Are you sure you want to delete this account?", :post => true %></p>
-
-
-

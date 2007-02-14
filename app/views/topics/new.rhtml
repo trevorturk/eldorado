@@ -1,18 +1,19 @@
-<%= error_messages_for :topic %>
-	
+<%= error_messages_for :topic %>	
+
 <% form_for(:topic, :url => topics_path) do |f| %>
-<table cellspacing="0">
-	<thead>
-		<tr><th>New Topic</th></tr>
-	</thead>
-	<tbody>
-		<tr><td>
-			<p class="pnon"><b><label for="title">Title</label></b></p>
-			<%= f.text_field :title, :style => 'width:66%;' %>
-			<p class="pnon" style="margin-top:10px;"><b><label for="body">Body</label></b></p>
-			<%= f.text_area :body, :rows => '15', :style => 'width:66%;' %>
-			<p><%= submit_tag "Create Topic", :disable_with => "Create Topic" %> or <%= link_to 'Cancel', topics_path %></p>
-		</td></tr>
-	</tbody>
-</table>
+	<table cellspacing="0">
+		<thead>
+			<tr><th>New Topic</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>
+				<p class="pn1"><b><label for="title">Title</label></b></p>
+				<%= f.text_field :title, :style => 'width:66%;' %>
+				<p class="pn"><b><label for="body">Body</label></b></p>
+				<%= f.text_area :body, :rows => '10', :style => 'width:66%;' %>
+				<p><%= submit_tag "Create Topic", :disable_with => "Create Topic" %> or 
+				<%= link_to 'Cancel', topics_path %></p>
+			</td></tr>
+		</tbody>
+	</table>
 <% end %>

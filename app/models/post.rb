@@ -9,4 +9,8 @@ class Post < ActiveRecord::Base
   
   attr_accessor :title
   
+  def can_edit_post?(current_user)
+    current_user.id == user_id
+  end
+  
 end

@@ -1,29 +1,52 @@
-<div class="ttl"><%=h @topic.title %></div>
+<div class="ttl">
+	<%=h @topic.title %>
+</div>
+
 <div class="ttr">
-	<% if can_edit? %>
-		<%= link_to 'Edit Topic', edit_topic_path %>
+	<% if can_edit_topic? %>
+		<%= link_to 'Edit', edit_topic_path %>
 	<% end %>
 </div>
+
 <div style="clear:both;"> </div>
 
 <% for post in @posts do %>
 	<table class="tbp" cellspacing="0">
-		<thead><tr><th><%= time_ago_in_words(post.created_at) %> ago</th><th class="thr">#<%= post.id %></th></tr></thead>
-		<tbody><tr>
-			<td class="tcl">
-				<li class="u"><%= link_to h(post.user.login), user_path(post.user.id) %></li>
-				<% if !post.user.avatar.blank? %><li><img src="/images/avatars/<%= post.user.avatar %>" /></li><% end %>
-				<li>Registered</b>: <%= post.user.created_at.strftime("%b, %Y") %></li>
-				<li>Last Login</b>: <%= time_ago_in_words(post.user.last_login_at) %> ago</li>
-				<li>Topics</b>: <%= post.user.topics_count %></li>
-				<li>Posts</b>: <%= post.user.posts_count %></li>
-				<p>&nbsp;</p><p>&nbsp;</p>
-				<p>&nbsp;</p><p>&nbsp;</p>
-			</td>
-			<td class="tcr">
-				<%=h post.body %>
-			</td>
-		</tr></tbody>
+		<thead>
+			<tr>
+				<th><%= time_ago_in_words(post.created_at) %> ago</th>
+				<th class="thr">#<%= post.id %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="tcl">
+					<dl>
+						<dt><%= link_to h(post.user.login), user_path(post.user.id) %></dt>
+						<dd class="rank">Princeps Senatus</dd>
+						<% if !post.user.avatar.blank? %><dd class="avatar"><img src="/images/avatars/<%= post.user.avatar %>" /></dd><% end %>
+						<dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
+						<dd>Last visit: <%= time_ago_in_words(post.user.last_login_at) %> ago</dd>
+						<dd>Topics: <%= post.user.topics_count %></dd>
+						<dd>Posts: <%= post.user.posts_count %></dd>
+					</dl>
+				</td>
+				<td class="tcr">
+					<%=h post.body %>
+					<% if !post.user.signature.blank? %><div class="sig"><%= post.user.signature %></div><% end %>
+				</td>
+			</tr>
+			<tr>
+				<td class="tcl">
+					<b>Online</b>
+				</td>
+				<td class="tcr edr">
+					<% if logged_in? && post.can_edit_post?(current_user) %>
+						<%= link_to 'Edit', edit_post_path(:topic_id => @topic, :id => post) %>
+					<% end %>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 <% end %>
 
@@ -32,7 +55,7 @@
 		<table cellspacing="0">
 			<thead><tr><th>Post a Reply</th></tr></thead>
 			<tbody><tr><td class="tds">
-				<%= f.text_area :body, :rows => '6', :style => "width:66%;" %>			
+				<%= f.text_area :body, :rows => '10', :style => "width:66%;" %>			
 				<p><%= submit_tag "Post Reply", :disable_with => "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
 			</td></tr></tbody>
 		</table>
