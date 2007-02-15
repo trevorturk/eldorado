@@ -24,5 +24,9 @@ class User < ActiveRecord::Base
   def self.encrypt(password)
     Digest::SHA1.hexdigest(password + PASSWORD_SALT)
   end
-    
+  
+  def self.users_online
+    User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes])
+  end
+  
 end

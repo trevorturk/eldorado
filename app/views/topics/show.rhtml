@@ -10,12 +10,12 @@
 
 <div style="clear:both;"> </div>
 
-<% for post in @posts do %>
+<% @posts.each_with_index do |post, index| index+=1 %>
 	<table class="tbp" cellspacing="0" id="<%= post.id %>">
 		<thead>
 			<tr>
 				<th><%= link_to time_ago_in_words(post.created_at)+" ago", topic_path(:anchor => post.id) %></th>
-				<th class="thr"><%= link_to "#"+post.id.to_s, topic_path(:anchor => post.id) %></a></th>
+				<th class="thr"><%= link_to "#"+index.to_s, topic_path(:anchor => post.id) %></a></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -62,12 +62,13 @@
 			<thead><tr><th>Post a Reply</th></tr></thead>
 			<tbody><tr><td class="tds">
 				<%= f.text_area :body, :rows => '10', :style => "width:66%;" %>			
-				<p><%= submit_tag "Post Reply", :disable_with => "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
+				<p><%= submit_tag "Post Reply", :disable_with => "Post Reply" %> or <%= link_to 'Return to Home Page', topics_path %></p>
 			</td></tr></tbody>
 		</table>
 	<% end %>
 <% else %>
 	<div class="nav navn">
+		<p class="nav-1"><%= link_to('Return to Home Page', home_path) %></p>
 		<p class="nav-2"><%= link_to('Login', login_path) %> or <%= link_to('Register', register_path) %> to post a reply</p>
 	</div>
 <% end %>

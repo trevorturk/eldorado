@@ -29,7 +29,10 @@
 
 <div class="nav navf">
 	<p class="nav-1">
-		Online: 
+		<% users_online = User.users_online -%>
+		<% unless users_online.empty? %>
+			Online: <%= users_online.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %>
+		<% end %>
 	</p>
 	<p class="nav-2">
 		<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | n00b: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>

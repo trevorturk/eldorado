@@ -13,6 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.register  '/register',  :controller => 'users', :action => 'new'
   map.logout    '/logout',    :controller => 'users', :action => 'logout'
   
+  map.admin    '/admin',      :controller => 'admin', :action => 'index'
+  
   map.catch_all "*anything", :controller => "topics", :action => "unknown_request"
   
   map.connect ':controller/service.wsdl', :action => 'wsdl'

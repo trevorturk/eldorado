@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   
-  helper_method :current_user, :logged_in?, :force_login
+  helper_method :current_user, :logged_in?, :force_login, :reset_online_at
+  before_filter :update_online_at
     
   session :session_key => '_eldorado_session_id'
   
@@ -16,6 +17,17 @@ class ApplicationController < ActionController::Base
   
   def force_login
     redirect_to login_path and return false unless logged_in?
+  end
+  
+  def update_online_at
+    return unless logged_in?
+    User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id] 
+    current_user.online_at = Time.now.utc
+  end
+  
+  def reset_online_at
+    User.update_all ['online_at = ?', Time.now.utc-5.minutes], ['id = ?', current_user.id] 
+    current_user.online_at = Time.now.utc
   end
     
 end

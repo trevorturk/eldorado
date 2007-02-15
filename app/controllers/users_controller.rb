@@ -54,10 +54,11 @@ class UsersController < ApplicationController
   end
   
   def logout
+    reset_online_at
     reset_session
     redirect_to home_path
   end
-  
+    
   def find_user
     @user = params[:id] ? User.find_by_id(params[:id]) : current_user
   end
