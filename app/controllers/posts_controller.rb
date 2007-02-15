@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
   before_filter :find_topic 
   before_filter :force_login 
-  before_filter :can_edit, :only => [:edit, :update, :destroy]
+  before_filter :can_edit_post, :only => [:edit, :update, :destroy]
 
   def edit     
     @post = @topic.posts.find(params[:id]) 
@@ -15,12 +15,13 @@ class PostsController < ApplicationController
       redirect_to topic_url(@topic) 
     else 
       flash[:notice] = "Posts cannot be blank."
-      redirect_to topic_url(@topic) 
+      redirect_to topic_path(:id => @topic, :anchor => "post")
     end 
   end 
 
   def update 
     @post = @topic.posts.find(params[:id]) 
+    @post.updated_by = current_user.id
     if @post.update_attributes(params[:post]) 
       redirect_to topic_url(@topic) 
     else 
@@ -42,9 +43,9 @@ class PostsController < ApplicationController
     @topic = Topic.find(@topic_id) 
   end 
   
-  def can_edit
+  def can_edit_post
     @post = Post.find(params[:id])
-    redirect_to topic_path(@post.topic) and return false unless current_user == @post.user
+    redirect_to topic_path(@post.topic) and return false unless (current_user == @post.user) || (current_user == @topic.user) || (current_user.admin == true)
   end
   
 end

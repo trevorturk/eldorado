@@ -4,13 +4,10 @@ fieldset { padding: .5em; }
 li { margin: 0; padding: 0; list-style-type: none; }
 
 body {
-	background-color: #fff;
+	background: #ddd;
 	color: #333;
 	font-family: verdana, sans-serif;
 	font-size: 11px;
-	line-height: 18px;
-	text-align: justify;
-	background: #ddd;
 }
 
 .wrapper {
@@ -55,25 +52,22 @@ h1 {
 	letter-spacing: -1px;
 	margin: 0;
 	padding: 83px 0 0 40px;
-	}
+}
 
 h1, h1 a:link, h1 a:visited, h1 a:hover, h1 a:active {
 	text-decoration: none;
 	color: #fff;
-	}
+}
 
 h1 a:hover, h1 a:active {
 	text-decoration: underline;
-	}
+}
 	
 .tagline {
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
 	font-size: 10px;
 	color: #fff;
 	margin: 4px 40px;
-}
-
-h2 {
 }
 
 h3 {
@@ -90,12 +84,22 @@ h3 {
 
 .nav-1, .nav-3 {
 	float: left;
-	margin: 4px 0 0 5px;
+	margin: 6px 0 0 5px;
 }
 
 .nav-2, .nav-4 {
 	float: right;
-	margin: 4px 5px 0 0;
+	margin: 6px 5px 0 0;
+}
+
+.navf .nav-1, .navf .nav-2 {
+	color: #999;
+	font-size: 10px;
+	margin-top: 7px;
+}
+
+.navn {
+	margin: 0;
 }
 
 table {
@@ -108,7 +112,11 @@ thead th {
 	color: #fff;
 	text-align: left;
 	font-weight: normal;
-	padding: 2px 5px;
+	padding: 5px;
+}
+
+thead a:link, thead a:visited {
+	color: #fff;
 }
 
 thead .tcm {
@@ -120,7 +128,7 @@ tbody {
 }
 
 tbody td {
-	padding: 3px 5px;
+	padding: 5px;
 	vertical-align: top;
 	border-top: 1px solid #cedeb9;
 	border-right: 1px solid #cedeb9;
@@ -147,6 +155,11 @@ tbody .tds {
 	width: 188px;
 }
 
+.tbp .tcr {
+	padding-top: 4px;
+	line-height: 1.4em;
+}
+
 .tbp dl {
 	margin: 0;
 }
@@ -154,11 +167,6 @@ tbody .tds {
 .tbp dt {
 	font-size: 12px;
 	font-weight: bold;
-	margin-bottom: -4px;
-}
-
-.tbp dd {
-	margin-bottom: -4px;
 }
 
 .tbp dd.rank {
@@ -174,7 +182,6 @@ tbody .tds {
 }
 
 .edr {
-	border: 0;
 	text-align: right;
 }
 
@@ -197,16 +204,6 @@ tbody .tds {
 	float: right;
 }
 
-.nopost {
-	width: 752px;
-	height: 22px;
-	border: 1px solid #999;
-	background: #eee;
-	margin: 0;
-	padding: 4px 6px 0 0;
-	text-align: right;
-}
-
 .p1, .pn {
 	margin: 0;
 	padding: 0;
@@ -218,8 +215,14 @@ tbody .tds {
 }
 
 .sig {
-	margin-top: 15px;
-	border-top: 1px solid #aaa;
+	margin-top: 20px;
+	width: 200px;
+	color: #ccc;
+}
+
+.edit {
+	margin-top: 20px;
+	font-style: italic;
 }
 
 .box-links a:link, .box-links a:visited, .box-links a:active, .box-links a:hover {
@@ -334,6 +337,14 @@ div.progressBar div.background {
   background-color: #333;
   height: 18px;
   width: 0%;
+}
+
+blockquote {
+	background: #f1f1f1 !important;
+	border: 1px solid #f1f1f1;
+	border-color: #ACA899 #FFF #FFF #ACA899;
+	margin: 10px !important;
+	padding: 5px 10px;
 }
 
 .globalnav .menu { 

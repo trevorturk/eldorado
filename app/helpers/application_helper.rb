@@ -36,5 +36,5 @@ module ApplicationHelper
   def current_action
     request.path_parameters['action']
   end
-  
+    
 end

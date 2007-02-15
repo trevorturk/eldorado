@@ -26,3 +26,12 @@
 	<% if @topic_pages and @topic_pages.current.next %> &nbsp; <%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %><% end %>
 </p>
 <div style="clear:both;"> </div>
+
+<div class="nav navf">
+	<p class="nav-1">
+		Online: 
+	</p>
+	<p class="nav-2">
+		<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | Newest User: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
+	</p>
+</div>

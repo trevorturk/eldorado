@@ -1,12 +1,16 @@
 class TopicsController < ApplicationController
   
   before_filter :force_login, :except => [:index, :show]
-  before_filter :can_edit, :only => [:edit, :update, :destroy]
+  before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
   
   # GET /topics
   # GET /topics.xml
   def index
     @topic_pages, @topics = paginate(:topics, :per_page => 25, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
+    @user_count = User.count
+    @topics_count = Topic.count
+    @posts_count = Post.count
+    @newest_user = User.find(:first, :order => "created_at desc")
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @topics.to_xml }
@@ -86,9 +90,9 @@ class TopicsController < ApplicationController
     redirect_to home_path
   end
   
-  def can_edit
+  def can_edit_topic
     @topic = Topic.find(params[:id])
-    redirect_to topic_path(@topic) and return false unless current_user == @topic.user
+    redirect_to topic_path(@topic) and return false unless (current_user == @topic.user) || (current_user.admin == true)
   end
     
 end

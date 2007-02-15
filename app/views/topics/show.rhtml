@@ -3,7 +3,7 @@
 </div>
 
 <div class="ttr">
-	<% if can_edit_topic? %>
+	<% if logged_in? && @topic.can_edit_topic?(current_user) %>
 		<%= link_to 'Edit', edit_topic_path %>
 	<% end %>
 </div>
@@ -11,11 +11,11 @@
 <div style="clear:both;"> </div>
 
 <% for post in @posts do %>
-	<table class="tbp" cellspacing="0">
+	<table class="tbp" cellspacing="0" id="<%= post.id %>">
 		<thead>
 			<tr>
-				<th><%= time_ago_in_words(post.created_at) %> ago</th>
-				<th class="thr">#<%= post.id %></th>
+				<th><%= link_to time_ago_in_words(post.created_at)+" ago", topic_path(:anchor => post.id) %></th>
+				<th class="thr"><%= link_to "#"+post.id.to_s, topic_path(:anchor => post.id) %></a></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,7 +33,12 @@
 				</td>
 				<td class="tcr">
 					<%=h post.body %>
-					<% if !post.user.signature.blank? %><div class="sig"><%= post.user.signature %></div><% end %>
+					<% if !post.updated_by.blank? %>
+						<p class="edit">Last edited by <%=h post.editor.login %> <%= time_ago_in_words(post.updated_at) %> ago.</p>
+					<% end %>
+					<% if !post.user.signature.blank? %>
+						<hr class="sig"><%= post.user.signature %>
+					<% end %>
 				</td>
 			</tr>
 			<tr>
@@ -51,8 +56,9 @@
 <% end %>
 
 <% if logged_in? %>
+	<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
 	<% form_for :post, :url => posts_path(:topic_id => @topic) do |f| -%>
-		<table cellspacing="0">
+		<table cellspacing="0" id="post">
 			<thead><tr><th>Post a Reply</th></tr></thead>
 			<tbody><tr><td class="tds">
 				<%= f.text_area :body, :rows => '10', :style => "width:66%;" %>			
@@ -61,5 +67,7 @@
 		</table>
 	<% end %>
 <% else %>
-	<p class="nopost"><%= link_to('Login', login_path) %> or <%= link_to('Register', register_path) %> to post a reply</p>
+	<div class="nav navn">
+		<p class="nav-2"><%= link_to('Login', login_path) %> or <%= link_to('Register', register_path) %> to post a reply</p>
+	</div>
 <% end %>

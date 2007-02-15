@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.last_login_at = Time.now.utc
+    @user.last_login_at = @user.profile_updated_at = Time.now.utc
     if @user.save
       flash[:notice] = "Your account has been created. Please log in."
       redirect_to login_path
@@ -32,21 +32,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user])
-      redirect_to user_path(@user)
-    else
-      redirect_to user_path(@user)
-    end
+    @user.profile_updated_at = Time.now.utc
+    @user.update_attributes(params[:user])
+    redirect_to user_path(@user)
   end
   
   def login
-    reset_session
-    if @current_user_id
-      redirect_to login_path
-    end
+    redirect_to home_path if logged_in?
     if request.post?
       user = User.authenticate(params[:login], params[:password])
       if user
+        reset_session
         session[:user_id] = user.id
         user.last_login_at = Time.now.utc
         user.save!
