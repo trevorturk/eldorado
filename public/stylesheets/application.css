@@ -144,6 +144,7 @@ tbody .tcr {
 }
 
 tbody .tds {
+	border: 0;
 	padding: 10px 15px;
 }
 
@@ -182,6 +183,7 @@ tbody .tds {
 }
 
 .edr {
+	border: 0;
 	text-align: right;
 }
 
