@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_filter :find_topic 
   before_filter :force_login 
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
+  before_filter :check_privacy, :only => [:create]
 
   def edit     
     @post = @topic.posts.find(params[:id]) 
@@ -45,7 +46,12 @@ class PostsController < ApplicationController
   
   def can_edit_post
     @post = Post.find(params[:id])
-    redirect_to topic_path(@post.topic) and return false unless (current_user == @post.user) || (current_user == @topic.user) || (current_user.admin == true)
+    redirect_to topic_path(@post.topic) and return false unless admin? || (current_user == @post.user) || (current_user == @topic.user)
+  end
+  
+  def check_privacy
+    @topic_id = params[:topic_id] 
+    redirect_to topic_path(@topic) and return false if @topic.private
   end
   
 end

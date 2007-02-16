@@ -1,23 +1,19 @@
 <%= error_messages_for :topic %>
 
 <% form_for(:topic, :url => topic_path(@topic), :html => { :method => :put }) do |f| %>
-<table cellspacing="0">
-	<thead>
-		<tr><th>Edit Topic</th></tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td class="tds">
-				<p class="pn"><b><label for="title">Title</label></b></p>
-				<%= f.text_field :title, :style => 'width:66%;' %><br /><br />
-		  	<%= submit_tag "Edit Topic", :disable_with => "Edit Topic" %> or <%= link_to 'Cancel', topic_path(@topic) %>
-			</td>
-		</tr>
-		<tr>
-			<td class="edr">
-				<%= link_to 'Delete', topic_path, :confirm => 'Are you sure? This will permanently delete the entire thread, including all of its posts.', :method => :delete %>
-			</td>
-		</tr>
-	</tbody>
-</table>
+	<table cellspacing="0">
+		<thead>
+			<tr><th>Edit Topic</th></tr>
+		</thead>
+		<tbody>
+			<tr><td class="tds">
+				<p class="p1"><b><label for="title">Title</label></b></p>
+				<%= f.text_field :title, :style => 'width:66%;' %>&nbsp;
+				<%= f.check_box(:private) %> Private&nbsp;
+				<%= f.check_box(:closed) %> Closed
+		  	<p><%= submit_tag "Edit Topic", :disable_with => "Edit Topic" %> or <%= link_to 'Cancel', topic_path(@topic) %></p>
+				<span class="eds"><%= link_to 'Delete Topic', topic_path, :confirm => 'Are you sure? This will permanently delete the entire thread, including all of its posts.', :method => :delete %></span>
+			</td></tr>
+		</tbody>
+	</table>
 <% end %>

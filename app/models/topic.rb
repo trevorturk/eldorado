@@ -12,8 +12,12 @@ class Topic < ActiveRecord::Base
     self.class.increment_counter :views, id
   end
   
-  def can_edit_topic?(current_user)
-    (current_user.id == user_id) || (current_user.admin == true)
+  def can_edit_topic?(user)
+    user.admin? || (user.id == user_id)
+  end
+  
+  def posters
+    posts.map { |p| p.user_id }.uniq.size
   end
   
 end

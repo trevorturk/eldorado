@@ -10,8 +10,8 @@ class Post < ActiveRecord::Base
   
   attr_accessor :title
   
-  def can_edit_post?(current_user)
-    (current_user.id == user_id) || (current_user.id == topic.user_id) || (current_user.admin == true)
+  def can_edit_post?(user)
+    user.admin? || (user.id == user_id) || (user.id == topic.user_id)
   end
   
 end

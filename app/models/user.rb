@@ -28,5 +28,5 @@ class User < ActiveRecord::Base
   def self.users_online
     User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes])
   end
-  
+    
 end

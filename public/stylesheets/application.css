@@ -145,7 +145,7 @@ tbody .tcr {
 
 tbody .tds {
 	border: 0;
-	padding: 10px 15px;
+	padding: 10px 0 0 10px;
 }
 
 .tbp td {
@@ -187,6 +187,11 @@ tbody .tds {
 	text-align: right;
 }
 
+.eds {
+	float: right;
+	margin: -20px 5px 0 0;
+}
+
 .tbp {
 	margin-bottom: 5px;
 }
@@ -197,13 +202,30 @@ tbody .tds {
 
 .ttl {
 	float: left;
-	margin: 0 0 0 200px;
-	font-size: 12px;
-	font-weight: bold;
+	margin: 0 0 10px 0;
+	padding-left: 5px;
+	border-left: 1px solid #f1f1f1;
 }
 
 .ttr {
 	float: right;
+	margin: 2px 0 10px 0;
+	padding-right: 5px;
+	border-right: 1px solid #f1f1f1;
+}
+
+.ttf {
+	margin: 5px 0 10px 0;
+}
+
+.tt {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.tp, .tp a:link, .tp a:visited {
+	font: 11px normal;
+	color: #999;
 }
 
 .p1, .pn {
@@ -299,7 +321,7 @@ tbody .tds {
 }
 
 #errorExplanation h2 {
-	padding: 2px 5px;
+	padding: 4px 5px;
 	margin: 0;
   border-bottom: 1px solid #333;
   font-size: 11px;
@@ -311,8 +333,12 @@ tbody .tds {
 }
 
 #errorExplanation ul {
-	padding: 4px 10px;
+	padding: 6px 10px;
 	margin: 0;
+}
+
+#errorExplanation ul li {
+	padding: 2px 0;
 }
 
 pre {

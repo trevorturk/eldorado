@@ -5,9 +5,9 @@
 		</thead>
 		<tbody>
 			<tr><td class="tds">
-				<b><label for="title">Username</label></b><br />
-				<%= text_field_tag :login, params[:login] %><br /><br />
-				<b><label for="password">Password</label></b><br />
+				<p class="p1"><b><label for="username">Username</label></b></p>
+				<%= text_field_tag :login, params[:login] %>
+				<p class="pn"><b><label for="password">Password</label></b></p>
 				<%= password_field_tag :password %>
 				<p><%= submit_tag "Login", :disable_with => "Login" %> or <%= link_to 'Cancel', home_path %></p>
 			</td></tr>

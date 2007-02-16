@@ -6,7 +6,7 @@ class AdminController < ApplicationController
   end
   
   def check_admin
-    redirect_to home_path and return false unless logged_in? && (current_user.admin == true)
+    redirect_to home_path and return false unless admin?
   end
   
 end

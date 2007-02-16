@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  helper_method :current_user, :logged_in?, :force_login, :reset_online_at
+  helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?
   before_filter :update_online_at
     
   session :session_key => '_eldorado_session_id'
@@ -28,6 +28,14 @@ class ApplicationController < ActionController::Base
   def reset_online_at
     User.update_all ['online_at = ?', Time.now.utc-5.minutes], ['id = ?', current_user.id] 
     current_user.online_at = Time.now.utc
+  end
+  
+  def is_online?(user)
+    User.find(:first, :conditions => ["id = ? and online_at > ?", user.id, Time.now.utc-5.minutes])
+  end
+  
+  def admin?()
+    logged_in? && (current_user.admin == true)
   end
     
 end

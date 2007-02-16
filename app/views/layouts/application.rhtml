@@ -58,7 +58,7 @@
 		</div>
 		
 		<div class="footer">
-			<div style="float:left;"><a href="http://www.almosteffortless.com">&aelig;</a> + <a href="http://www.tyrannybelle.com">tb</a> = kthxbye</div>
+			<div style="float:left;"><a href="http://www.almosteffortless.com">&aelig;</a> + <a href="http://www.tyrannybelle.com">tb</a> = kthxbye <% if admin? %> | <%= link_to('Admin', admin_path) %><% end %></div>
 			<div style="float:right;">Copyright &copy; 2004-<%= Time.now.strftime("%Y") %> <a href="http://www.newathens.org">NewAthens.org</a></div>
 			<div style="clear:both;"> </div>
 		</div>

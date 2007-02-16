@@ -14,7 +14,7 @@
 			</div>
 			<div class="profile-left">
 				<div class="box-links">
-					<% if @current_user_profile %>
+					<% if @user == current_user %>
 						<p class="profile-box"><%= link_to 'Edit Profile', :action => 'edit', :id => @user %></p>
 					<% end %>
 				</div>

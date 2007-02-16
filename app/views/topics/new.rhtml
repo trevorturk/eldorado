@@ -6,12 +6,13 @@
 			<tr><th>New Topic</th></tr>
 		</thead>
 		<tbody>
-			<tr><td>
-				<p class="pn1"><b><label for="title">Title</label></b></p>
-				<%= f.text_field :title, :style => 'width:66%;' %>
+			<tr><td class="tds">
+				<p class="p1"><b><label for="title">Title</label></b></p>
+				<%= f.text_field :title, :style => 'width:66%;' %>&nbsp;
+				<%= f.check_box(:private) %> Private
 				<p class="pn"><b><label for="body">Body</label></b></p>
 				<%= f.text_area :body, :rows => '10', :style => 'width:66%;' %>
-				<p><%= submit_tag "Create Topic", :disable_with => "Create Topic" %> or 
+				<p><%= submit_tag "Post Topic", :disable_with => "Post Topic" %> or 
 				<%= link_to 'Cancel', topics_path %></p>
 			</td></tr>
 		</tbody>

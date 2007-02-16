@@ -2,11 +2,16 @@ class TopicsController < ApplicationController
   
   before_filter :force_login, :except => [:index, :show]
   before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
+  before_filter :check_privacy, :only => [:show]
   
   # GET /topics
   # GET /topics.xml
   def index
-    @topic_pages, @topics = paginate(:topics, :per_page => 25, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
+    if logged_in?
+      @topic_pages, @topics = paginate(:topics, :per_page => 25, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
+    else
+      @topic_pages, @topics = paginate(:topics, :per_page => 25, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => 'topics.private != 1')
+    end
     @user_count = User.count
     @topics_count = Topic.count
     @posts_count = Post.count
@@ -24,6 +29,7 @@ class TopicsController < ApplicationController
     @posts = @topic.posts.find(:all)
     @topic.hit!
     @page_title = @topic.title
+    @posters = @posts.map(&:user) ; @posters.uniq!
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @topic.to_xml }
@@ -86,13 +92,23 @@ class TopicsController < ApplicationController
     end
   end
   
-  def unknown_request
-    redirect_to home_path
+def unknown_request
+  if request.request_uri.include?('viewtopic.php')
+    if @topic = Topic.find_by_id(params[:id])
+      redirect_to topic_path(@topic) and return
+    end
   end
+  redirect_to home_path
+end
   
   def can_edit_topic
     @topic = Topic.find(params[:id])
-    redirect_to topic_path(@topic) and return false unless (current_user == @topic.user) || (current_user.admin == true)
+    redirect_to topic_path(@topic) and return false unless admin? || (current_user == @topic.user)
+  end
+  
+  def check_privacy
+    @topic = Topic.find(params[:id])
+    redirect_to login_path and return false if !logged_in? && @topic.private
   end
     
 end

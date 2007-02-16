@@ -15,4 +15,8 @@ class AdminControllerTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_only_admins_can_use_admin_controller
+  end
+  
 end
