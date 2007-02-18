@@ -218,14 +218,19 @@ tbody .tds {
 	margin: 5px 0 10px 0;
 }
 
+.ttf p {
+	margin: 0;
+}
+
 .tt {
 	font-size: 12px;
 	font-weight: bold;
 }
 
-.tp, .tp a:link, .tp a:visited {
+.tp {
 	font: 11px normal;
 	color: #999;
+	margin-left: 2px;
 }
 
 .p1, .pn {
@@ -377,7 +382,7 @@ blockquote {
 
 .globalnav .menu { 
 	position: relative;
-	margin: -24px 0 0 23px;
+	margin: -24px 0 0 24px;
 	width: 710px;
 	font: 1em Verdana, Helvetica, Arial, Sans-Serif;
 	padding: 5px 15px 6px 12px;

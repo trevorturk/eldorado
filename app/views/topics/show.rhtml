@@ -1,5 +1,5 @@
 <div class="ttl">
-	<span class="tt"><%=h @topic.title %></span> 
+	<span class="tt"><%=h @topic.title %></span>
 	<span class="tp"><%= @posters.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %></span>
 </div>
 
@@ -68,12 +68,12 @@
 <% end %>
 
 <div class="ttl ttf">
-	<%= link_to 'Home', home_path %> &raquo; <%=h @topic.title %>
+	<p><%= link_to 'Home', home_path %> &raquo; <%=h @topic.title %></p>
 </div>
 
 <div class="ttr ttf">
 	<% if logged_in? && @topic.can_edit_topic?(current_user) %>
-		<%= link_to 'Edit Topic', edit_topic_path %>
+		<p><%= link_to 'Edit Topic', edit_topic_path %></p>
 	<% end %>
 </div>
 
