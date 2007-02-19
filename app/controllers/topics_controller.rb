@@ -8,9 +8,9 @@ class TopicsController < ApplicationController
   # GET /topics.xml
   def index
     if logged_in?
-      @topic_pages, @topics = paginate(:topics, :per_page => 25, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
+      @topic_pages, @topics = paginate(:topics, :per_page => 2, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
     else
-      @topic_pages, @topics = paginate(:topics, :per_page => 25, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => 'topics.private != 1')
+      @topic_pages, @topics = paginate(:topics, :per_page => 2, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => 'topics.private != 1')
     end
     @user_count = User.count
     @topics_count = Topic.count

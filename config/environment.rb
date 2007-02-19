@@ -14,7 +14,7 @@ Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
   
   # Skip frameworks you're not going to use (only works if using vendor/rails)
-  # config.frameworks -= [ :action_web_service, :action_mailer ]
+  config.frameworks -= [ :action_web_service, :action_mailer ]
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
@@ -51,8 +51,16 @@ end
 # end
 
 # Include your application configuration below
+
 PASSWORD_SALT = 'a0cfa6e4890663c6b64a95a5076f94addee20218' unless Object.const_defined?(:PASSWORD_SALT) # abazaba
-SITE_TITLE = "El Dorado.org"
-SITE_TAGLINE = "All an elaborate, unapproachable, unprofitable, retributive joke"
+
+AVATARS_PATH    = '/images/avatars/'
+HEADERS_PATH    = ''
+FILES_PATH      = ''
+
+SITE_TITLE =    'El Dorado.org'
+SITE_TAGLINE =  'All an elaborate, unapproachable, unprofitable, retributive joke'
 SITE_FOOTER_1 = '<a href="http://www.almosteffortless.com">&aelig;</a> + <a href="http://www.tyrannybelle.com">tb</a> = kthxbye'
 SITE_FOOTER_2 = 'Copyright &copy; 2004-' + Time.now.strftime("%Y") + ' <a href="http://www.newathens.org">NewAthens.org</a>'
+
+INVITATION_ONLY = true

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   
   attr_reader :password
   
+  attr_protected :admin, :posts_count, :login, :created_at, :updated_at, :last_login_at, :topics_count, :profile_updated_at, :online_at
+   
   def password=(value)
     return if value.blank?
     write_attribute :password_hash, User.encrypt(value)
@@ -28,5 +30,5 @@ class User < ActiveRecord::Base
   def self.users_online
     User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes])
   end
-    
+  
 end

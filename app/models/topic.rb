@@ -8,6 +8,10 @@ class Topic < ActiveRecord::Base
   
   attr_accessor :body
   
+  attr_protected :user_id, :created_at, :updated_at, :views, :posts_count, :last_post_id, :last_post_at, :last_post_by
+    
+  private
+  
   def hit!
     self.class.increment_counter :views, id
   end

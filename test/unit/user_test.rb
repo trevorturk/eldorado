@@ -7,5 +7,11 @@ class UserTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def cannot_edit_user_unless_self_or_admin
+  end
+  
+  def cannot_edit_admin_unless_also_admin
+  end
                 
 end

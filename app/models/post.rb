@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   
   attr_accessor :title
   
+  attr_protected :user_id, :topic_id, :created_at, :updated_at, :updated_by
+    
   def can_edit_post?(user)
     user.admin? || (user.id == user_id) || (user.id == topic.user_id)
   end

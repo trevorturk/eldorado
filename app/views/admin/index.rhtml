@@ -1,1 +1,21 @@
-Administrative Interface
+<table cellspacing="0">
+	<thead>
+		<tr><th>Newbie Terms</th></tr>
+	</thead>
+	<tbody>
+		<tr><td class="tds">
+			<% form_for :admin, :url => { :action => :delete_newbies } do |f| %>
+				<% for newbie in @newbies %>
+					<input type="checkbox" name="newbie[<%= newbie.id %>]"> <%= newbie.term %>&nbsp;
+					<% end %>
+				<%= submit_tag 'Delete Terms', :disable_with => 'Delete Terms' %> or 
+				<%= link_to 'Cancel', admin_path %>
+			<% end %>
+			<% form_for :admin, :url => { :action => :create_newbie } do |f| %> <br />
+				<%= f.text_field :term %>&nbsp;
+				<%= submit_tag 'Create Term', :disable_with => 'Create Term' %> or 
+				<%= link_to 'Cancel', admin_path %>
+			<% end %>
+		</td></tr>
+	</tbody>
+</table>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :find_user, :only => [:edit, :update, :destroy]
+  before_filter :can_edit_user, :only => [:edit, :update_destroy]
   
   def index
     @users = User.find(:all, :order => 'last_login_at desc')
@@ -8,9 +9,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if @user.id == current_user.id
-      @current_user_profile = true
-    end
   end
 
   def new
@@ -59,8 +57,15 @@ class UsersController < ApplicationController
     redirect_to home_path
   end
     
+  protected
+    
   def find_user
     @user = params[:id] ? User.find_by_id(params[:id]) : current_user
   end
   
+  def can_edit_user
+    @user = Topic.find(params[:id])
+    redirect_to user_path(@user) and return false unless admin? || (current_user == @user)
+  end
+    
 end

@@ -102,6 +102,12 @@ h3 {
 	margin: 0;
 }
 
+.navp {
+	margin-top: 8px;
+	text-align: right;
+	color: #ccc;
+}
+
 table {
 	width: 100%;
 	border: 1px solid #35604D;
@@ -145,7 +151,7 @@ tbody .tcr {
 
 tbody .tds {
 	border: 0;
-	padding: 10px 0 0 10px;
+	padding: 10px;
 }
 
 .tbp td {
@@ -209,28 +215,25 @@ tbody .tds {
 
 .ttr {
 	float: right;
-	margin: 2px 0 10px 0;
+	margin: 1px 0 10px 0;
 	padding-right: 5px;
 	border-right: 1px solid #f1f1f1;
-}
-
-.ttf {
-	margin: 5px 0 10px 0;
-}
-
-.ttf p {
-	margin: 0;
 }
 
 .tt {
 	font-size: 12px;
 	font-weight: bold;
+	letter-spacing: -1px;
 }
 
 .tp {
-	font: 11px normal;
 	color: #999;
 	margin-left: 2px;
+	letter-spacing: -1px;
+}
+
+.ttf {
+	margin: 5px 0 10px 0;
 }
 
 .p1, .pn {
@@ -254,57 +257,27 @@ tbody .tds {
 	font-style: italic;
 }
 
-.box-links a:link, .box-links a:visited, .box-links a:active, .box-links a:hover {
-	margin: 2px;
-	padding: 4px 6px;
-	border: 1px solid #ccc;
-	color: #333;
+.pa {
+	float: right;
+	text-align: right;
 	background: #f1f1f1;
 }
 
-.box-links a:hover, .box-links a:active {
-	background: #444;
-	border: 1px solid #111;
-	color: #dedfdf;
-	text-decoration: none;
-}
-
-.profile {
-	padding: 5px 15px;
-}
-
-.profile-left {
-	width: 540px;
-}
-
-.profile-login {
+.pt span {
 	font-size: 20px;
 	font-weight: bold;
-	border-bottom: 1px solid #ccc;
-	margin: 10px 2px 0 0;
-	padding: 0 0 10px 0;
+	letter-spacing: -1px;
+	margin-right: 2px;
 }
 
-.profile-avatar {
-	float: right;
-	width: 170px;
-	text-align: center;
-	background: #f1f1f1;
-}
-
-.profile-box {
-	float: right;
-	margin-top: 0;
-}
-
-.profile-info p {
+.pi p {
 	margin-right: 20px;
 	float: left;
 }
 
-.friend-list p {
-	float: left;
-	margin: 6px auto;
+.pgn {
+	margin: 10px 0;
+	color: #ccc;
 }
 
 #notice, #error {
@@ -316,7 +289,7 @@ tbody .tds {
 #notice {
 	background-color: #FBFBB1;
   text-align: center;
-	padding: 3px 0;
+	padding: 5px 0;
 }
 
 #errorExplanation {

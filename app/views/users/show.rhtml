@@ -1,34 +1,27 @@
 <table cellspacing="0">
 	<thead>
-		<tr>
-			<th class="tcl">Profile</th>
-		</tr>
+		<tr><th class="tcl">Profile</th></tr>
 	</thead>
 	<tbody>
-	<tr>
-		<td class="profile">
-			<div class="profile-avatar">
-				<% if !@user.avatar.blank? %>
-					<p class=""><img src="/images/avatars/<%= @user.avatar %>" /></p>
-				<% end %>
+	<tr><td class="tds">
+			<div class="pa">
+				<%= avatar_img(@user) %>
 			</div>
-			<div class="profile-left">
-				<div class="box-links">
-					<% if @user == current_user %>
-						<p class="profile-box"><%= link_to 'Edit Profile', :action => 'edit', :id => @user %></p>
-					<% end %>
-				</div>
-				<p class="profile-login"><%=h @user.login %></p>
-				<p><b>Bio</b>: <%=h @user.bio %></p>
-				<p><b>Signature</b>: <%=h @user.signature %></p>
-				<div class="profile-info">
-					<p><b>Last visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago</p>
-					<p><b>Topics</b>: <%= @user.topics_count %></p>
-					<p><b>Posts</b>: <%= @user.posts_count %></p>
-					<p><b>Registered</b>: <%= @user.created_at.strftime("%b %d, %Y") %></p>
-				</div>
+			<div class="pt">
+				<span><%=h @user.login %></span>
+				
 			</div>
-		</td>
-	</tr>
+			<p><b>Bio</b>: <%=h @user.bio %></p>
+			<p><b>Signature</b>: <%=h @user.signature %></p>
+			<div class="pi">
+				<p><b>Last visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago</p>
+				<p><b>Topics</b>: <%= @user.topics_count %></p>
+				<p><b>Posts</b>: <%= @user.posts_count %></p>
+				<p><b>Registered</b>: <%= @user.created_at.strftime("%b %d, %Y") %></p>
+			</div>
+		</td></tr>
+		<tr><td class="edr">
+			<% if @user == current_user %><%= link_to 'Edit Profile', edit_user_path(@user) %><% end %>
+		</td></tr>
 	</tbody>
 </table>

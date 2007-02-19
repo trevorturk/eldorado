@@ -1,4 +1,4 @@
-<table class="forum" cellspacing="0">
+<table cellspacing="0">
 	<thead>
 		<tr>
 			<th class="tcl">Topics</th>
@@ -19,13 +19,13 @@
 	</tbody>
 </table>
 
-<p class="nav-3"></p>
-<p class="nav-4">
-	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %> &nbsp; <% end %>
+<div class="navp">
+	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
+	<% else %>&laquo; Previous<% end %>
 	<%= pagination_links(@topic_pages) %>
-	<% if @topic_pages and @topic_pages.current.next %> &nbsp; <%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %><% end %>
-</p>
-<div style="clear:both;"> </div>
+	<% if @topic_pages and @topic_pages.current.next %><%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %>
+	<% else %>Next &raquo;<% end %>
+</div>
 
 <div class="nav navf">
 	<p class="nav-1">
@@ -35,6 +35,6 @@
 		<% end %>
 	</p>
 	<p class="nav-2">
-		<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | n00b: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
+		<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= newbie.term %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
 	</p>
 </div>
