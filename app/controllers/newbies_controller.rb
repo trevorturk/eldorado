@@ -12,7 +12,7 @@ class NewbiesController < ApplicationController
     end
   end
   
-  def destroy
+  def destroy    
     params[:newbies].each do |n|
       @newbie = Newbie.find_by_id(n)
       @newbie.destroy

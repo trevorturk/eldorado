@@ -9,7 +9,7 @@
 			</div>
 			<div class="pt">
 				<span><%=h @user.login %></span>
-				
+				<%=h rank_for(@user.posts_count) %>
 			</div>
 			<p><b>Bio</b>: <%=h @user.bio %></p>
 			<p><b>Signature</b>: <%=h @user.signature %></p>

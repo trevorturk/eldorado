@@ -15,4 +15,11 @@ class NewbiesControllerTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def only_admin_can_create_newbie
+  end
+  
+  def only_admin_can_destroy_newbie
+  end
+    
 end

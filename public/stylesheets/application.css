@@ -263,7 +263,12 @@ tbody .tds {
 	background: #f1f1f1;
 }
 
+.pt {
+	color: #999;
+}
+
 .pt span {
+	color: #333;
 	font-size: 20px;
 	font-weight: bold;
 	letter-spacing: -1px;

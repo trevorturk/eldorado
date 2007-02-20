@@ -22,11 +22,19 @@ module ApplicationHelper
   end
   
   def newbie
-    Newbie.find(:first, :order => "RAND()")
+    @newbie = Newbie.find(:first, :order => "RAND()")
+    return "Newest User" if @newbie.nil?
+    return @newbie.term
   end
   
   def avatar_img(user)
     image_tag AVATARS_PATH + h(user.avatar) unless user.avatar.blank?
+  end
+  
+  def rank_for(posts_count)
+    @rank = Ranks.find(:first, :conditions => "#{posts_count} >= min_posts", :order => "min_posts desc")
+    return "Member" if @rank.nil?
+    return @rank.title
   end
   
   def tab(name)

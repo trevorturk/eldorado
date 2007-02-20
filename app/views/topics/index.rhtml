@@ -35,6 +35,6 @@
 		<% end %>
 	</p>
 	<p class="nav-2">
-		<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= newbie.term %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
+		<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= newbie %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
 	</p>
 </div>
