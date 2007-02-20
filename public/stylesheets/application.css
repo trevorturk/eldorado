@@ -280,6 +280,11 @@ tbody .tds {
 	color: #ccc;
 }
 
+.chk {
+	float: left;
+	margin: 0 6px 10px 0;
+}
+
 #notice, #error {
 	border: 1px solid #999;
 	background: #eee;

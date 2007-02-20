@@ -9,19 +9,19 @@ class Topic < ActiveRecord::Base
   attr_accessor :body
   
   attr_protected :user_id, :created_at, :updated_at, :views, :posts_count, :last_post_id, :last_post_at, :last_post_by
-    
-  private
-  
+      
   def hit!
     self.class.increment_counter :views, id
   end
   
-  def can_edit_topic?(user)
-    user.admin? || (user.id == user_id)
-  end
-  
   def posters
     posts.map { |p| p.user_id }.uniq.size
+  end
+  
+  private
+
+  def can_edit_topic?(user)
+    user.admin? || (user.id == user_id)
   end
   
 end

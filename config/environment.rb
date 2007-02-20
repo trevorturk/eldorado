@@ -64,3 +64,4 @@ SITE_FOOTER_1 = '<a href="http://www.almosteffortless.com">&aelig;</a> + <a href
 SITE_FOOTER_2 = 'Copyright &copy; 2004-' + Time.now.strftime("%Y") + ' <a href="http://www.newathens.org">NewAthens.org</a>'
 
 INVITATION_ONLY = true
+PRIVATE_SITE = false

@@ -26,7 +26,7 @@ module ApplicationHelper
   end
   
   def avatar_img(user)
-    image_tag AVATARS_PATH + user.avatar unless user.avatar.blank?
+    image_tag AVATARS_PATH + h(user.avatar) unless user.avatar.blank?
   end
   
   def tab(name)

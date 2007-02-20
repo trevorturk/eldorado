@@ -12,8 +12,8 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'new'
   map.logout '/logout', :controller => 'users', :action => 'logout'
   map.admin '/admin', :controller => 'admin', :action => 'index'
-  map.create_newbie '/admin/create_newbie', :controller => 'admin', :action => 'create_newbie'
-  map.create_newbie '/admin/delete_newbies', :controller => 'admin', :action => 'delete_newbies'
+  map.create_newbies '/newbies/create', :controller => 'newbies', :action => 'create'
+  map.destroy_newbies '/newbies/destroy', :controller => 'newbies', :action => 'destroy'
   
   map.catch_all "*path", :controller => "topics", :action => "unknown_request"
   

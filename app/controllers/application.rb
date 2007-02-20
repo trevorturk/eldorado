@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?
+  helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin
   before_filter :update_online_at
     
   session :session_key => '_eldorado_session_id'
@@ -36,6 +36,10 @@ class ApplicationController < ActionController::Base
   
   def admin?()
     logged_in? && (current_user.admin == true)
+  end
+  
+  def check_admin
+    redirect_to home_path and return false unless admin?
   end
     
 end

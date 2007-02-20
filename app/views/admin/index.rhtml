@@ -4,17 +4,16 @@
 	</thead>
 	<tbody>
 		<tr><td class="tds">
-			<% form_for :admin, :url => { :action => :delete_newbies } do |f| %>
-				<% for newbie in @newbies %>
-					<input type="checkbox" name="newbie[<%= newbie.id %>]"> <%= newbie.term %>&nbsp;
-					<% end %>
-				<%= submit_tag 'Delete Terms', :disable_with => 'Delete Terms' %> or 
-				<%= link_to 'Cancel', admin_path %>
-			<% end %>
-			<% form_for :admin, :url => { :action => :create_newbie } do |f| %> <br />
+			<% form_for :newbie, :url => { :controller => 'newbies', :action => :create } do |f| %>
 				<%= f.text_field :term %>&nbsp;
-				<%= submit_tag 'Create Term', :disable_with => 'Create Term' %> or 
-				<%= link_to 'Cancel', admin_path %>
+				<%= submit_tag 'Create New Term', :disable_with => 'Create New Term' %> or 
+				<%= link_to 'Cancel', admin_path %><br /><br />
+			<% end %>
+			<% form_for :newbie, :url => { :controller => 'newbies', :action => :destroy } do |f| %>
+				<% for newbie in @newbies %>
+					<div class="chk"><input type="checkbox" name="newbies[<%= newbie.id %>]"> <%= newbie.term %></div>
+				<% end %>
+				&nbsp;<%= submit_tag 'Delete Checked Terms', :disable_with => 'Delete Checked Terms' %>
 			<% end %>
 		</td></tr>
 	</tbody>
