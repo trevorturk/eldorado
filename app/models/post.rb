@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   after_create  { |r| Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', r.id, r.created_at, r.user_id], ['id = ?', r.topic_id]) }
   
   attr_accessor :title
+  attr_accessor :private
   
   attr_protected :user_id, :topic_id, :created_at, :updated_at, :updated_by
     
