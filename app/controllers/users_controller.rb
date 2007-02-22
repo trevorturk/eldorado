@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.last_login_at = @user.profile_updated_at = Time.now.utc
     if @user.save
       flash[:notice] = "Your account has been created. Please log in."
       redirect_to login_path
@@ -42,11 +41,13 @@ class UsersController < ApplicationController
       if user
         reset_session
         session[:user_id] = user.id
+        session[:last_login_at] = user.last_login_at
         user.last_login_at = Time.now.utc
         user.save!
         redirect_to home_path
       else
         flash[:notice] = "Invalid user/password combination"
+        render :action => 'login'
       end
     end
   end

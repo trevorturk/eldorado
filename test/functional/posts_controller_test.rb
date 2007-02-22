@@ -5,6 +5,8 @@ require 'posts_controller'
 class PostsController; def rescue_action(e) raise e end; end
 
 class PostsControllerTest < Test::Unit::TestCase
+  all_fixtures
+  
   def setup
     @controller = PostsController.new
     @request    = ActionController::TestRequest.new
@@ -15,4 +17,8 @@ class PostsControllerTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_posts_cannot_be_made_unless_logged_in
+  end
+  
 end

@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   
-  before_filter :force_login, :except => [:index, :show]
+  before_filter :force_login, :except => [:index, :show, :unknown_request]
   before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
   before_filter :check_privacy, :only => [:show]
   
@@ -92,14 +92,11 @@ class TopicsController < ApplicationController
     end
   end
   
-def unknown_request
-  if request.request_uri.include?('viewtopic.php')
-    if @topic = Topic.find_by_id(params[:id])
-      redirect_to topic_path(@topic) and return
+  def unknown_request
+    if request.request_uri.include?('viewtopic.php')
+      redirect_to topic_path(:id => params[:id])
     end
   end
-  redirect_to home_path
-end
   
   def can_edit_topic
     @topic = Topic.find(params[:id])
@@ -108,7 +105,7 @@ end
   
   def check_privacy
     @topic = Topic.find(params[:id])
-    redirect_to login_path and return false if !logged_in? && @topic.private
+    redirect_to login_path if (!logged_in? && @topic.private)
   end
-    
+  
 end

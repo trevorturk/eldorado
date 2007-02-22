@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
   
+  before_create { |u| u.last_login_at = u.profile_updated_at = Time.now.utc }
+  
   attr_reader :password
   
-  attr_protected :admin, :posts_count, :login, :created_at, :updated_at, :last_login_at, :topics_count, :profile_updated_at, :online_at
+  attr_protected :admin, :posts_count, :created_at, :updated_at, :last_login_at, :topics_count, :profile_updated_at, :online_at
    
   def password=(value)
     return if value.blank?

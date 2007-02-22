@@ -4,8 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title><%=h page_title %></title>				
+	<title><%= page_title %></title>
 	<%= stylesheet_link_tag 'application' %>
+	<%= random_header_css %>
 </head>
 
 <body>
@@ -29,7 +30,7 @@
 				<p class="nav-1">
 					<% if logged_in? %>
 						Logged in as <b><%= link_to h(current_user.login), user_path(current_user.id) %></b> | 
-						Last visit <%= time_ago_in_words(current_user.last_login_at) %> ago
+						Last visit <%= time_ago_in_words(session[:last_login_at]) %> ago
 					<% else %>
 						You are not logged in
 					<% end %>
@@ -60,7 +61,7 @@
 		
 		<div class="footer">
 			<div style="float:left;"><%= SITE_FOOTER_1 %></div>
-			<div style="float:right;"><%=SITE_FOOTER_2 %></div>
+			<div style="float:right;"><%= SITE_FOOTER_2 %></div>
 			<div style="clear:both;"> </div>
 		</div>
 							

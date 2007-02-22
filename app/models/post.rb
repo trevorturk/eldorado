@@ -5,8 +5,8 @@ class Post < ActiveRecord::Base
   belongs_to :editor, :foreign_key => "updated_by", :class_name => "User"
   
   validates_presence_of :user_id, :body
-
-  after_create  { |r| Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', r.id, r.created_at, r.user_id], ['id = ?', r.topic_id]) }
+    
+  after_create  { |t| Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', t.id, t.created_at, t.user_id], ['id = ?', t.topic_id]) }
   
   attr_accessor :title
   attr_accessor :private

@@ -22,12 +22,10 @@ class ApplicationController < ActionController::Base
   def update_online_at
     return unless logged_in?
     User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id] 
-    current_user.online_at = Time.now.utc
   end
   
   def reset_online_at
     User.update_all ['online_at = ?', Time.now.utc-5.minutes], ['id = ?', current_user.id] 
-    current_user.online_at = Time.now.utc
   end
   
   def is_online?(user)

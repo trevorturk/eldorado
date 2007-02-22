@@ -5,7 +5,7 @@ class Topic < ActiveRecord::Base
   belongs_to :last_poster, :foreign_key => "last_post_by", :class_name => "User"
   
   validates_presence_of :user_id, :title
-  
+    
   attr_accessor :body
   
   attr_protected :user_id, :created_at, :updated_at, :views, :posts_count, :last_post_id, :last_post_at, :last_post_by

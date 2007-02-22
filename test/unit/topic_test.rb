@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class TopicTest < Test::Unit::TestCase
-  fixtures :topics
-
+  all_fixtures
+  
   # Replace this with your real tests.
   def test_truth
     assert true

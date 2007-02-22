@@ -5,6 +5,8 @@ require 'home_controller'
 class HomeController; def rescue_action(e) raise e end; end
 
 class HomeControllerTest < Test::Unit::TestCase
+  all_fixtures
+  
   def setup
     @controller = HomeController.new
     @request    = ActionController::TestRequest.new

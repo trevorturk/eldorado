@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class RanksTest < Test::Unit::TestCase
-  fixtures :ranks
-
+  all_fixtures
+  
   # Replace this with your real tests.
   def test_truth
     assert true
@@ -12,5 +12,6 @@ class RanksTest < Test::Unit::TestCase
   end
   
   def must_have_at_least_one_rank
+  end
   
 end

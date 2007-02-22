@@ -20,7 +20,7 @@ body {
 	
 .header {
 	height: 200px;
-	background: #333 url('/images/headers/tds3.jpg');
+	background-color: #333;
 }
 
 .content {
@@ -174,6 +174,7 @@ tbody .tds {
 .tbp dt {
 	font-size: 12px;
 	font-weight: bold;
+	letter-spacing: -1px;
 }
 
 .tbp dd.rank {

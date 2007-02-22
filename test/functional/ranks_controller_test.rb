@@ -5,6 +5,8 @@ require 'ranks_controller'
 class RanksController; def rescue_action(e) raise e end; end
 
 class RanksControllerTest < Test::Unit::TestCase
+  all_fixtures
+  
   def setup
     @controller = RanksController.new
     @request    = ActionController::TestRequest.new

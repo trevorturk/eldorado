@@ -5,6 +5,8 @@ require 'newbies_controller'
 class NewbiesController; def rescue_action(e) raise e end; end
 
 class NewbiesControllerTest < Test::Unit::TestCase
+  all_fixtures
+  
   def setup
     @controller = NewbiesController.new
     @request    = ActionController::TestRequest.new
