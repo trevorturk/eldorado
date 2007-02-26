@@ -18,10 +18,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "Your account has been created. Please log in."
-      redirect_to login_path
+      flash[:notice] = "Your account has been created"
+      do_login(@user)
     else
-      render :action => 'new'
+      render :action => :new
     end
   end
 
@@ -37,17 +37,12 @@ class UsersController < ApplicationController
   def login
     redirect_to home_path if logged_in?
     if request.post?
-      user = User.authenticate(params[:login], params[:password])
-      if user
-        reset_session
-        session[:user_id] = user.id
-        session[:last_login_at] = user.last_login_at
-        user.last_login_at = Time.now.utc
-        user.save!
-        redirect_to home_path
+      @user = User.authenticate(params[:user][:login], params[:user][:password]) 
+      if @user
+        do_login(@user)
       else
         flash[:notice] = "Invalid user/password combination"
-        render :action => 'login'
+        render :action => :login
       end
     end
   end
@@ -68,5 +63,13 @@ class UsersController < ApplicationController
     @user = Topic.find(params[:id])
     redirect_to user_path(@user) and return false unless admin? || (current_user == @user)
   end
-    
+  
+  def do_login(user)
+    session[:user_id] = user.id
+    session[:last_login_at] = user.last_login_at
+    user.last_login_at = Time.now.utc
+    user.save!
+    redirect_to home_path
+  end
+  
 end

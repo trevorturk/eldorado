@@ -1,18 +1,12 @@
-<% form_tag :action => 'login' do %>
+<%= error_messages_for :user %>
+<% form_for(:user, :url => login_path) do |f| %>
 	<table cellspacing="0">
-		<thead>
-			<tr><th>Login</th></tr>
-		</thead>
-		<tbody>
-			<tr><td class="tds">
-				<p class="p1"><b><label for="username">Username</label></b></p>
-				<%= text_field_tag :login, params[:login] %>
-				<p class="pn"><b><label for="password">Password</label></b></p>
-				<%= password_field_tag :password %>
-				<p><%= submit_tag "Login", :disable_with => "Login" %> or <%= link_to 'Cancel', home_path %></p>
-			</td></tr>
-		</tbody>
+		<thead><tr><th>Login</th></tr></thead>
+		<tbody><tr><td class="tds">
+			<p class="p1">Username</p><%= f.text_field :login %>
+			<p class="pn">Password</p><%= f.password_field :password %>
+			<p><%= submit_tag "Login", :disable_with => "Login" %> or <%= link_to 'Cancel', home_path %></p>
+		</td></tr></tbody>
 	</table>
 <% end %>
-	
-<%= javascript_tag "login.focus();" %>
+<%= javascript_tag "user_login.focus();" %>

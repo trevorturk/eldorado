@@ -33,18 +33,19 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_create
     num_users = User.count
     post :create, :user => {:login => 'skdj', :email => 'trevor@aol.com', :password => 'dfj'}
-    assert_redirected_to login_path
+    assert_equal "Your account has been created", flash[:notice]
+    assert_redirected_to home_path
     assert_equal num_users + 1, User.count
   end
   
   def test_bad_login_fails
-    post :login, :login => 'skdj', :password => 'dfj'
+    post :login, :user => {:login => 'skdj', :password => 'dfj'}
     assert_template "login" 
     assert_equal "Invalid user/password combination", flash[:notice]
   end
   
   def test_good_login_works
-    post :login, :login => "trevor", :password => "test" 
+    post :login, :user => {:login => 'trevor', :password => 'test'}
     assert_equal 4, session[:user_id]
     assert_redirected_to home_path
   end

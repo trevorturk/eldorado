@@ -11,12 +11,12 @@
 
 <div style="clear:both;"> </div>
 
-<% @posts.each_with_index do |post, index| %>
-	<table class="tbp" cellspacing="0" id="<%= post.id %>">
+<% @posts.each_with_index do |post, index| index+=1 %>
+	<table class="tbp" cellspacing="0" id="<%= index %>">
 		<thead>
 			<tr>
-				<th><%= link_to time_ago_in_words(post.created_at)+" ago", topic_path(:anchor => post.id) %></th>
-				<th class="thr"><%= link_to "#"+(index+=1).to_s, topic_path(:anchor => post.id) %></a></th>
+				<th><%= time_ago_in_words(post.created_at)+" ago" %></th>
+				<th class="thr"><%= link_to "#"+(index).to_s, topic_path(:anchor => index) %></a></th>
 			</tr>
 		</thead>
 		<tbody>

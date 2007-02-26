@@ -10,7 +10,7 @@ class TopicsController < ApplicationController
     if logged_in?
       @topic_pages, @topics = paginate(:topics, :per_page => 2, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
     else
-      @topic_pages, @topics = paginate(:topics, :per_page => 2, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => 'topics.private != 1')
+      @topic_pages, @topics = paginate(:topics, :per_page => 2, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => ["topics.private != ?", true])
     end
     @user_count = User.count
     @topics_count = Topic.count
@@ -95,6 +95,8 @@ class TopicsController < ApplicationController
   def unknown_request
     if request.request_uri.include?('viewtopic.php')
       redirect_to topic_path(:id => params[:id])
+    else
+      redirect_to topics_path
     end
   end
   

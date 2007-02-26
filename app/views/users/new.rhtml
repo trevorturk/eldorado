@@ -1,13 +1,14 @@
 <%= error_messages_for :user %>
-
-<% form_tag :action => 'create' do %>
+<% form_for(:user, :url => users_path) do |f| %>
 	<table cellspacing="0">
 		<thead><tr><th>Register</th></tr></thead>
 		<tbody><tr><td class="tds">
-			<p class="p1">Username</p><%= text_field 'user', 'login' %>
-			<p class="pn">Email</p><%= text_field 'user', 'email' %>
-			<p class="pn">Password</p><%= password_field 'user', 'password' %>
+			<p class="p1">Username</p><%= f.text_field :login %>
+			<p class="pn">Email</p><%= f.text_field :email %>
+			<p class="pn">Password</p><%= f.password_field :password %>
+			<p class="pn">Confirm Password</p><%= f.password_field :password_confirmation %>
 			<p><%= submit_tag "Register", :disable_with => "Register" %> or <%= link_to 'Cancel', home_path %></p>
 		</td></tr></tbody>
 	</table>
 <% end %>
+<%= javascript_tag "user_login.focus();" %>
