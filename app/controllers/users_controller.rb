@@ -17,12 +17,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
-      flash[:notice] = "Your account has been created"
-      do_login(@user)
-    else
-      render :action => :new
-    end
+    render :action => :new and return unless @user.save
+    flash[:notice] = "Your account has been created"
+    do_login(@user)
   end
 
   def edit
@@ -60,7 +57,7 @@ class UsersController < ApplicationController
   end
   
   def can_edit_user
-    @user = Topic.find(params[:id])
+    @user = User.find(params[:id])
     redirect_to user_path(@user) and return false unless admin? || (current_user == @user)
   end
   

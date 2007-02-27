@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   session :session_key => '_eldorado_session_id'
   
   protected
-
+    
   def current_user
     @current_user ||= ((session[:user_id] && User.find_by_id(session[:user_id])) || 0)
   end

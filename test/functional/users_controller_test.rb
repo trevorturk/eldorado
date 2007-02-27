@@ -21,6 +21,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_show
     get :show, :id => 1
     assert_response :success
+    assert_not_nil assigns(:user)
   end
 
   def test_new
@@ -29,13 +30,56 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_template 'new'
     assert_not_nil assigns(:user)
   end
+  
+  def test_should_not_be_able_to_edit_wrong_user
+    login_as :trevor
+    get :edit, :id => 2
+    assert_redirected_to user_path(:id => 2)
+  end
+  
+  def test_should_be_able_to_edit_self
+    login_as :trevor
+    get :edit, :id => 4
+    assert_response :success
+    assert_template 'edit'
+    assert_not_nil assigns(:user)
+  end
+    
+  def test_should_be_able_to_edit_any_user_if_admin
+    login_as :Administrator
+    get :edit, :id => 3
+    assert_response :success
+    assert_template 'edit'
+    assert_not_nil assigns(:user)
+  end
 
   def test_create
     num_users = User.count
-    post :create, :user => {:login => 'skdj', :email => 'trevor@aol.com', :password => 'dfj'}
+    post :create, :user => {:login => 'skdj', :email => 'test@test.com', :password => 'dfj', :password_confirmation => 'dfj'}
     assert_equal "Your account has been created", flash[:notice]
     assert_redirected_to home_path
     assert_equal num_users + 1, User.count
+  end
+
+  def test_should_not_create_user_without_login
+    num_users = User.count
+    post :create, :user => {:login => '', :email => 'test@test.com', :password => 'test'}
+    assert_template "new" 
+    assert_equal num_users, User.count
+  end
+  
+  def test_should_not_create_user_without_email
+    num_users = User.count
+    post :create, :user => {:login => 'test', :email => '', :password => 'test'}
+    assert_template "new" 
+    assert_equal num_users, User.count
+  end
+
+  def test_should_not_create_user_without_password_confirmation
+    num_users = User.count
+    post :create, :user => {:login => 'skdj', :email => 'test@test.com', :password => 'dfj', :password_confirmation => ''}
+    assert_template "new" 
+    assert_equal num_users, User.count
   end
   
   def test_bad_login_fails

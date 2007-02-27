@@ -19,7 +19,7 @@
 	</tbody>
 </table>
 
-<div class="navp">
+<div class="nav-pages">
 	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
 	<% else %>&laquo; Previous<% end %>
 	<%= pagination_links(@topic_pages) %>
@@ -27,7 +27,7 @@
 	<% else %>Next &raquo;<% end %>
 </div>
 
-<div class="nav navf">
+<div class="nav nav-footer">
 	<p class="nav-1">
 		<% users_online = User.users_online -%>
 		<% unless users_online.empty? %>

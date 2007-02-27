@@ -92,20 +92,38 @@ h3 {
 	margin: 6px 5px 0 0;
 }
 
-.navf .nav-1, .navf .nav-2 {
+.nav-footer .nav-1, .nav-footer .nav-2 {
 	color: #999;
 	font-size: 10px;
 	margin-top: 7px;
 }
 
-.navn {
+.nav-post {
 	margin: 0;
 }
 
-.navp {
+.nav-pages {
 	margin-top: 8px;
 	text-align: right;
 	color: #ccc;
+}
+
+.box {
+	border: 1px solid #35604D;
+	padding: 10px 10px 0 10px;
+	background: #f1f1f1;
+}
+
+.box .top {
+	background: #35604d;
+	color: #fff;
+	padding: 5px;
+	margin: -10px -10px 10px -10px;
+}
+
+.box .label {
+	font-weight: bold;
+	margin-bottom: -10px;
 }
 
 table {
@@ -121,7 +139,7 @@ thead th {
 	padding: 5px;
 }
 
-thead a:link, thead a:visited {
+thead th a:link, thead th a:visited {
 	color: #fff;
 }
 
@@ -281,11 +299,6 @@ tbody .tds {
 	float: left;
 }
 
-.pgn {
-	margin: 10px 0;
-	color: #ccc;
-}
-
 .chk {
 	float: left;
 	margin: 0 6px 10px 0;
@@ -330,32 +343,6 @@ tbody .tds {
 	padding: 2px 0;
 }
 
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-div.uploadStatus {
-  margin: 5px;
-}
-
-div.progressBar {
-  margin: 5px;
-}
-
-div.progressBar div.border {
-  background-color: #fff;
-  border: 1px solid grey;
-  width: 100%;
-}
-
-div.progressBar div.background {
-  background-color: #333;
-  height: 18px;
-  width: 0%;
-}
-
 blockquote {
 	background: #f1f1f1 !important;
 	border: 1px solid #f1f1f1;
@@ -398,8 +385,4 @@ blockquote {
 	background: #fff;
 	color: #333 !important;
 	text-decoration: none;
-}
-
-.globalnav .menu li ul { /* hides subpages */
-	display: none;
 }
