@@ -304,6 +304,42 @@ tbody .tds {
 	margin: 0 6px 10px 0;
 }
 
+.dayName th {
+	background: #d1d1d1;
+	color: #333;
+	width: 14%;
+}
+
+.otherMonth {
+	color: #ccc;
+}
+
+.day, .otherMonth, .specialDay {
+	text-align: right;
+}
+
+.specialDay p {
+	margin: 2px 0;
+	text-align: left;
+}
+
+.events-alert {
+	background: #35604d;
+	color: #fff;
+	text-align: center;
+	padding: 4px;
+	margin-bottom: 10px;
+}
+
+.events-alert a {
+	color: #fff;
+}
+
+.wrapper-footer {
+	text-align: center;
+	color: #999;
+}
+
 #notice, #error {
 	border: 1px solid #999;
 	background: #eee;

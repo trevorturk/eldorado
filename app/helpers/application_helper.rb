@@ -42,7 +42,7 @@ module ApplicationHelper
       'tab'
     end
   end
-  
+    
   def current_controller
     request.path_parameters['controller']
   end

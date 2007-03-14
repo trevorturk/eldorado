@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin
-  before_filter :update_online_at
+  before_filter :update_online_at, :events_today
     
   session :session_key => '_eldorado_session_id'
   
@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
   
   def check_admin
     redirect_to home_path and return false unless admin?
+  end
+  
+  def events_today
+    @events_today = Event.find(:all, :order => 'date asc', :conditions => ["? = DATE(date)", Date.today])
   end
       
 end

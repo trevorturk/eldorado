@@ -13,13 +13,19 @@
 
 	<div class="wrapper">
 		
+		<% for event in @events_today %>
+			<div class="events-alert"><%= link_to h(event.title), event_path(event) %></div>
+		<% end %>
+		
 		<div class="header">
 			<h1><%= link_to(SITE_TITLE, home_path) %></h1>
 			<div class="tagline">All an elaborate, unapproachable, unprofitable, retributive joke</div>		
 		</div>
 		
 		<div class="globalnav"><ul class="menu">
-			<li class="<%= tab('topics') %>"><%= link_to('Home', home_path) %></li>
+			<li class="<%= tab('home') %>"><%= link_to('Home', home_path) %></li>
+			<li class="<%= tab('topics') %>"><%= link_to('Topics', topics_path) %></li>
+			<li class="<%= tab('events') %>"><%= link_to('Events', events_path) %></li>
 			<li class="<%= tab('users') %>"><%= link_to('Users', users_path) %></li>
 			<% if admin? %><li class="<%= tab('admin') %>"><%= link_to('Admin', admin_path) %></li><% end %>
 		</ul></div>
@@ -39,6 +45,8 @@
 					<% if logged_in? %>
 						<% if current_controller == "topics" %>
 							<%= link_to('Start a New Topic', new_topic_path) %>
+						<% elsif current_controller == "events" %>
+							<%= link_to('Add an Event', new_event_path) %>
 						<% elsif current_controller == "users" %>
 							<%= link_to('Register a New User', new_user_path) %>
 						<% end %>
@@ -67,7 +75,7 @@
 							
 	</div>
 	
-	<p>&nbsp;</p>
+	<p class="wrapper-footer">Local Time: <%= Time.now %> | UTC Time: <%= Time.now.utc %></p>
 	
 </body>
 </html>

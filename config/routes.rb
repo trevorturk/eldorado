@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :events
+
     
   map.resources :topics do |topic| 
     topic.resources :posts 

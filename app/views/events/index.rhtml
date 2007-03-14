@@ -1,0 +1,41 @@
+<%=
+calendar({:year => @year, :month => @month}) do |d|
+  cell_text = "#{d.mday}" 
+	if (d.to_date == Date.today)
+	  cell_text = "<b>Today #{d.mday}</b>" 
+	end
+  cell_attrs = {:class => 'day'}
+  @events.each do |e|
+    if e.date.to_date == d
+      cell_text << "<p>#{ link_to h(e.title), event_path(e) }</p>"
+      cell_attrs[:class] = 'specialDay'
+    end
+  end
+  [cell_text, cell_attrs]
+end
+%>
+
+<div class="nav-pages">
+	<p>
+	<%= link_to "&laquo; Previous", events_path(:params => {:month => @prev_month, :year => @prev_year}) %> &nbsp; 
+	<%= link_to "Today", events_path(:params => {:month => Time.now.month.to_i, :year => Time.now.year.to_i}) %> &nbsp; 
+	<%= link_to "Next &raquo;", events_path(:params => {:month => @next_month, :year => @next_year}) %>
+	</p>
+</div>
+
+<table cellspacing="0">
+	<thead>
+		<tr>
+			<th class="tcl">Events</th>
+			<th class="tcr">Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for event in @events %>
+			<tr>
+				<td class="tcl"><%= link_to h(event.title), event_path(event) %></td>
+				<td class="tcr"><%= event.date %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

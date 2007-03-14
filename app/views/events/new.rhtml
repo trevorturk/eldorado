@@ -1,0 +1,21 @@
+<%= error_messages_for :event %>	
+
+<% form_for(:event, :url => events_path) do |f| %>
+	<table cellspacing="0" class="events-new">
+		<thead>
+			<tr><th>New Event</th></tr>
+		</thead>
+		<tbody>
+			<tr><td class="tds">
+				<p class="p1"><b><label for="title">Title</label></b></p>
+				<%= f.text_field :title, :style => 'width:66%;' %>&nbsp;
+				<p class="pn"><b><label for="description">Description</label></b></p>
+				<%= f.text_area :description, :rows => '4', :style => 'width:66%;' %>
+				<p class="pn"><b><label for="date">Date</label></b></p>
+				<%= f.datetime_select :date %>&nbsp;
+				<p><%= submit_tag "Post Event", :disable_with => "Post Event" %> or 
+				<%= link_to 'Cancel', events_path %></p>
+			</td></tr>
+		</tbody>
+	</table>
+<% end %>
