@@ -1,11 +1,17 @@
 class EventsController < ApplicationController
   
   before_filter :load_vars
+  before_filter :force_login, :except => [:index, :show]
+  before_filter :check_privacy, :only => [:show]
   
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.find(:all, :order => 'date desc')
+    if logged_in?
+      @events = Event.find(:all, :order => 'date desc')
+    else
+      @events = Event.find(:all, :order => 'date desc', :conditions => ["private = ?", false])
+    end
 
     respond_to do |format|
       format.html # index.rhtml
@@ -78,9 +84,12 @@ class EventsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+    
+  def check_privacy
+    @event = Event.find(params[:id])
+    redirect_to login_path if (!logged_in? && @event.private)
+  end
   
-private
-
   def load_vars
     @month = (params[:month] || Time.now.month).to_i
     @year = (params[:year] || Time.now.year).to_i

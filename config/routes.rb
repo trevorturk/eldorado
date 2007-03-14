@@ -1,6 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :events
-
     
   map.resources :topics do |topic| 
     topic.resources :posts 
@@ -8,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :users
   
-  map.home  '', :controller => 'topics', :action => 'index'  
+  map.home  '', :controller => 'home', :action => 'index'  
   map.users '/users', :controller => 'users', :action => 'index'
   map.login '/login', :controller => 'users', :action => 'login'
   map.register '/register', :controller => 'users', :action => 'new'

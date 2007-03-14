@@ -8,14 +8,10 @@ class TopicsController < ApplicationController
   # GET /topics.xml
   def index
     if logged_in?
-      @topic_pages, @topics = paginate(:topics, :per_page => 2, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
+      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
     else
-      @topic_pages, @topics = paginate(:topics, :per_page => 2, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => ["topics.private != ?", true])
+      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => ["topics.private = ?", false])
     end
-    @user_count = User.count
-    @topics_count = Topic.count
-    @posts_count = Post.count
-    @newest_user = User.find(:first, :order => "created_at desc")
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @topics.to_xml }

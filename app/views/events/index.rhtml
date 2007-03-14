@@ -18,7 +18,7 @@ end
 <div class="nav-pages">
 	<p>
 	<%= link_to "&laquo; Previous", events_path(:params => {:month => @prev_month, :year => @prev_year}) %> &nbsp; 
-	<%= link_to "Today", events_path(:params => {:month => Time.now.month.to_i, :year => Time.now.year.to_i}) %> &nbsp; 
+	<%= link_to "Today", events_path %> &nbsp; 
 	<%= link_to "Next &raquo;", events_path(:params => {:month => @next_month, :year => @next_year}) %>
 	</p>
 </div>

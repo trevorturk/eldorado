@@ -2,12 +2,14 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 18) do
+ActiveRecord::Schema.define(:version => 19) do
 
   create_table "events", :force => true do |t|
     t.column "title",       :string
     t.column "description", :text
     t.column "date",        :datetime
+    t.column "private",     :boolean,  :default => false
+    t.column "alert",       :boolean,  :default => false
   end
 
   create_table "newbies", :force => true do |t|

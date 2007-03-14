@@ -41,7 +41,11 @@ class ApplicationController < ActionController::Base
   end
   
   def events_today
-    @events_today = Event.find(:all, :order => 'date asc', :conditions => ["? = DATE(date)", Date.today])
+    if logged_in?
+      @events_today = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and alert = ?", Date.today, true])
+    else
+      @events_today = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and alert = ? and private = ?", Date.today, true, false])
+    end
   end
       
 end
