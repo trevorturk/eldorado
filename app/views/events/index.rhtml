@@ -15,13 +15,11 @@ calendar({:year => @year, :month => @month}) do |d|
 end
 %>
 
-<div class="nav-pages">
-	<p>
+<p style="text-align:right;">
 	<%= link_to "&laquo; Previous", events_path(:params => {:month => @prev_month, :year => @prev_year}) %> &nbsp; 
 	<%= link_to "Today", events_path %> &nbsp; 
 	<%= link_to "Next &raquo;", events_path(:params => {:month => @next_month, :year => @next_year}) %>
-	</p>
-</div>
+</p>
 
 <table cellspacing="0">
 	<thead>

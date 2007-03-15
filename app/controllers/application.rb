@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin
-  before_filter :update_online_at, :events_today
+  before_filter :update_online_at, :get_reminders
     
   session :session_key => '_eldorado_session_id'
   
@@ -40,11 +40,11 @@ class ApplicationController < ActionController::Base
     redirect_to home_path and return false unless admin?
   end
   
-  def events_today
+  def get_reminders
     if logged_in?
-      @events_today = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and alert = ?", Date.today, true])
+      @reminders = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and reminder = ?", Date.today, true])
     else
-      @events_today = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and alert = ? and private = ?", Date.today, true, false])
+      @reminders = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and reminder = ? and private = ?", Date.today, true, false])
     end
   end
       

@@ -10,7 +10,7 @@
 	<tbody>
 		<% for topic in @topics %>
 			<tr>
-				<td class="tcl"><a href="<%= topic_path(topic.id) %>"><%=h topic.title %></a> by <%=h topic.user.login %></td>
+				<td class="tcl"><%= link_to h(topic.title), topic_path(topic.id) %> by <%=h topic.user.login %></td>
 				<td class="tcm"><%=h topic.posts_count-1 %></td>
 				<td class="tcm"><%=h topic.views %></td>
 				<td class="tcr"><%=h time_ago_in_words(topic.last_post_at) %> ago by <%=h topic.last_poster.login %></td>
@@ -19,10 +19,10 @@
 	</tbody>
 </table>
 
-<div class="nav-pages">
+<p style="text-align:right;">
 	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
-	<% else %>&laquo; Previous<% end %>
-	<%= pagination_links(@topic_pages) %>
+	<% else %><span class="disabled">&laquo; Previous</span><% end %>
+	&nbsp;<%= pagination_links(@topic_pages) %>&nbsp;
 	<% if @topic_pages and @topic_pages.current.next %><%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %>
-	<% else %>Next &raquo;<% end %>
-</div>
+	<% else %><span class="disabled">Next &raquo;</span><% end %>
+</p>

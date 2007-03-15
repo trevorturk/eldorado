@@ -6,11 +6,8 @@
 		<div class="top">New Event</div>
 		
 		<p class="label"><label for="title">Title</label></p>
-		<p><%= f.text_field :title, :style => 'width:66%;' %></p>
+		<p><%= f.text_field :title, :style => 'width:66%;' %> &nbsp; <%= f.check_box(:private) %><label for="private"> Private</label> &nbsp; <%= f.check_box(:reminder) %><label for="reminder"> Reminder</label></p>
 
-		<p><%= f.check_box(:private) %><label for="private"> Private</label> (must be logged in to view) &nbsp; 
-		<%= f.check_box(:alert) %><label for="alert"> Alert</label> (display message on day of event)</p>
-		
 		<p class="label"><label for="description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
 

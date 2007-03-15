@@ -1,20 +1,18 @@
 <%= error_messages_for :topic %>	
 
 <% form_for(:topic, :url => topics_path) do |f| %>
-	<table cellspacing="0">
-		<thead>
-			<tr><th>New Topic</th></tr>
-		</thead>
-		<tbody>
-			<tr><td class="tds">
-				<p class="p1"><b><label for="title">Title</label></b></p>
-				<%= f.text_field :title, :style => 'width:66%;' %>&nbsp;
-				<%= f.check_box(:private) %> Private
-				<p class="pn"><b><label for="body">Body</label></b></p>
-				<%= f.text_area :body, :rows => '10', :style => 'width:66%;' %>
-				<p><%= submit_tag "Post Topic", :disable_with => "Post Topic" %> or 
-				<%= link_to 'Cancel', topics_path %></p>
-			</td></tr>
-		</tbody>
-	</table>
+	<div class="box">
+		<div class="top">New Topic</div>
+		
+		<p class="label"><label for="title">Title</label></p>
+		<p><%= f.text_field :title, :style => "width:66%" %> &nbsp; <%= f.check_box(:private) %><label for="private"> Private</label></p>
+
+		<p class="label"><label for="body">Body</label></p>
+		<p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
+
+		<p><%= submit_tag "Post Topic", :disable_with => "Post Topic" %><span> or <%= link_to 'Cancel', topics_path %></p>
+
+	</div>
 <% end %>
+
+<%= javascript_tag "topic_title.focus();" %>

@@ -1,18 +1,16 @@
-<div class="ttl">
-	<span class="tt"><%=h @topic.title %></span>
-	<span class="tp"><%= @posters.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %></span>
+<div class="info-left">
+	<span class="title"><%=h @topic.title %></span>
+	<span class="detail"><%= @posters.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %></span>
 </div>
-
-<div class="ttr">
-	<span class="tp">
+<div class="info-right">
+	<span class="detail">
 		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
 	</span>
 </div>
-
 <div style="clear:both;"> </div>
 
 <% @posts.each_with_index do |post, index| index+=1 %>
-	<table class="tbp" cellspacing="0" id="<%= index %>">
+	<table class="thread" cellspacing="0" id="<%= index %>">
 		<thead>
 			<tr>
 				<th><%= time_ago_in_words(post.created_at)+" ago" %></th>
@@ -21,7 +19,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="tcl">
+				<td>
 					<dl>
 						<dt><%= link_to h(post.user.login), user_path(post.user.id) %></dt>
 						<dd class="rank"><%= rank_for(post.user.posts_count) %></dd>
@@ -32,10 +30,10 @@
 						<dd>Posts: <%= post.user.posts_count %></dd>
 					</dl>
 				</td>
-				<td class="tcr">
+				<td class="body">
 					<%=h post.body %>
 					<% if !post.updated_by.blank? %>
-						<p class="edit">Last edited by 
+						<p class="edited">Last edited by 
 							<% if post.updated_by != post.user_id %>
 								<b><%=h post.editor.login %></b>
 							<% else %>
@@ -50,14 +48,14 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tcl">
+				<td>
 					<% if is_online?(post.user) %>
 						<b>Online</b>
 					<% else %>
 						Offline
 					<% end %>
 				</td>
-				<td class="tcr edr">
+				<td class="body links">
 					<% if logged_in? && post.can_edit_post?(current_user) %>
 						<%= link_to 'Edit', edit_post_path(:topic_id => @topic, :id => post) %>
 					<% end %>
@@ -67,35 +65,31 @@
 	</table>
 <% end %>
 
-<div class="ttl ttf">
+<div class="info-left">
 	<%= link_to 'Home', home_path %> &raquo; <%=h @topic.title %>
 </div>
-
-<div class="ttr ttf">
+<div class="info-right">
 	<% if logged_in? && @topic.can_edit_topic?(current_user) %>
 		<%= link_to 'Edit Topic', edit_topic_path %>
 	<% end %>
 </div>
-
 <div style="clear:both;"> </div>
 
 <% if logged_in? && !@topic.closed %>
 	<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
 	<% form_for :post, :url => posts_path(:topic_id => @topic) do |f| -%>
-		<table cellspacing="0" id="post">
-			<thead><tr><th>Post a Reply</th></tr></thead>
-			<tbody><tr><td class="tds">
+		<div class="box">
+			<div class="top">Post a Reply</div>
 				<%= f.text_area :body, :rows => '10', :style => "width:66%;" %>			
 				<p><%= submit_tag "Post Reply", :disable_with => "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
-			</td></tr></tbody>
-		</table>
+			</div>
 	<% end %>
 <% elsif logged_in? && @topic.closed %>
-	<div class="nav nav-post">
-		<p class="nav-2">This Topic is Closed</p>
+	<div class="nav nav-footer">
+		<p class="nav-left">This Topic is Closed</p>
 	</div>
 <% else %>
-	<div class="nav navn">
-		<p class="nav-2"><%= link_to('Login', login_path) %> or <%= link_to('Register', register_path) %> to post a reply</p>
+	<div class="nav nav-footer">
+		<p class="nav-right"><%= link_to('Login', login_path) %> or <%= link_to('Register', register_path) %> to post a reply</p>
 	</div>
 <% end %>

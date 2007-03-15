@@ -13,8 +13,8 @@
 
 	<div class="wrapper">
 		
-		<% for event in @events_today %>
-			<div class="events-alert"><%= link_to h(event.title), event_path(event) %></div>
+		<% for event in @reminders %>
+			<div class="reminders"><%= link_to h(event.title), event_path(event) %></div>
 		<% end %>
 		
 		<div class="header">
@@ -22,18 +22,18 @@
 			<div class="tagline">All an elaborate, unapproachable, unprofitable, retributive joke</div>		
 		</div>
 		
-		<div class="globalnav"><ul class="menu">
+		<ul class="tabs">
 			<li class="<%= tab('home') %>"><%= link_to('Home', home_path) %></li>
 			<li class="<%= tab('topics') %>"><%= link_to('Topics', topics_path) %></li>
 			<li class="<%= tab('events') %>"><%= link_to('Events', events_path) %></li>
 			<li class="<%= tab('users') %>"><%= link_to('Users', users_path) %></li>
 			<% if admin? %><li class="<%= tab('admin') %>"><%= link_to('Admin', admin_path) %></li><% end %>
-		</ul></div>
+		</ul>
 		
 			<div class="content">
 						
 			<div class="nav">
-				<p class="nav-1">
+				<p class="nav-left">
 					<% if logged_in? %>
 						Logged in as <b><%= link_to h(current_user.login), user_path(current_user.id) %></b> | 
 						Last visit <%= time_ago_in_words(session[:last_login_at]) %> ago
@@ -41,7 +41,7 @@
 						You are not logged in
 					<% end %>
 				</p>
-				<p class="nav-2">
+				<p class="nav-right">
 					<% if logged_in? %>
 						<% if current_controller == "topics" %>
 							<%= link_to('Start a New Topic', new_topic_path) %>
@@ -72,7 +72,7 @@
 			<div style="float:right;"><%= SITE_FOOTER_2 %></div>
 			<div style="clear:both;"> </div>
 		</div>
-							
+		
 	</div>
 	
 	<p class="wrapper-footer">Local Time: <%= Time.now %> | UTC Time: <%= Time.now.utc %></p>

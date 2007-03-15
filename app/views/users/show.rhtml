@@ -1,27 +1,24 @@
-<table cellspacing="0">
-	<thead>
-		<tr><th class="tcl">Profile</th></tr>
-	</thead>
-	<tbody>
-	<tr><td class="tds">
-			<div class="pa">
-				<%= avatar_img(@user) %>
-			</div>
-			<div class="pt">
-				<span><%=h @user.login %></span>
-				<%=h rank_for(@user.posts_count) %>
-			</div>
-			<p><b>Bio</b>: <%=h @user.bio %></p>
-			<p><b>Signature</b>: <%=h @user.signature %></p>
-			<div class="pi">
-				<p><b>Last visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago</p>
-				<p><b>Topics</b>: <%= @user.topics_count %></p>
-				<p><b>Posts</b>: <%= @user.posts_count %></p>
-				<p><b>Registered</b>: <%= @user.created_at.strftime("%b %d, %Y") %></p>
-			</div>
-		</td></tr>
-		<tr><td class="edr">
-			<% if @user == current_user %><%= link_to 'Edit Profile', edit_user_path(@user) %><% end %>
-		</td></tr>
-	</tbody>
-</table>
+<div class="box">
+	<div class="top">Profile</div>
+	
+	<div class="profile-avatar"><%= avatar_img(@user) %></div>
+
+	<span class="profile-title"><%=h @user.login %></span>&nbsp;
+	<span class="profile-rank"><%=h rank_for(@user.posts_count) %></span>
+
+	<p><b>Bio</b>: <%=h @user.bio %></p>
+	<p><b>Signature</b>: <%=h @user.signature %></p>
+	
+	<div class="profile-info">
+		<p><b>Last visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago</p>
+		<p><b>Topics</b>: <%= @user.topics_count %></p>
+		<p><b>Posts</b>: <%= @user.posts_count %></p>
+		<p><b>Registered</b>: <%= @user.created_at.strftime("%b %d, %Y") %></p>
+	</div>
+	<div style="clear:both;"> </div>
+
+	<% if @user == current_user %>
+		<p style="text-align:right;"><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
+	<% end %>
+
+</div>
