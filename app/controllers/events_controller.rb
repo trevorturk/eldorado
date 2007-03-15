@@ -46,7 +46,6 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        flash[:notice] = 'Event was successfully created.'
         format.html { redirect_to events_url }
         format.xml  { head :created, :location => event_url(@event) }
       else
@@ -63,7 +62,6 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        flash[:notice] = 'Event was successfully updated.'
         format.html { redirect_to events_url }
         format.xml  { head :ok }
       else
