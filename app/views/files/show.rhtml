@@ -1,0 +1,38 @@
+<p>
+  <b>Parent:</b>
+  <%=h @files.parent_id %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%=h @files.content_type %>
+</p>
+
+<p>
+  <b>Filename:</b>
+  <%=h @files.filename %>
+</p>
+
+<p>
+  <b>Thumbnail:</b>
+  <%=h @files.thumbnail %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%=h @files.size %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%=h @files.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%=h @files.height %>
+</p>
+
+
+<%= link_to 'Edit', edit_files_path(@files) %> |
+<%= link_to 'Back', :controller => 'files' %>

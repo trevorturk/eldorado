@@ -1,9 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  
+    
   map.resources :users
   map.resources :topics
   map.resources :posts
   map.resources :events
+  map.resources :files
   
   map.home  '', :controller => 'home', :action => 'index'  
 
@@ -15,7 +16,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.create_newbies '/newbies/create', :controller => 'newbies', :action => 'create'
   map.destroy_newbies '/newbies/destroy', :controller => 'newbies', :action => 'destroy'
-    
+  
+  map.files_home '/files', :controller => 'files', :action => 'index'
+  
   map.catch_all "*path", :controller => "topics", :action => "unknown_request"
   
   map.connect ':controller/service.wsdl', :action => 'wsdl'

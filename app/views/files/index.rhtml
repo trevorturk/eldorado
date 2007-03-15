@@ -1,0 +1,33 @@
+<h1>Listing files</h1>
+
+<table>
+  <tr>
+    <th>Parent</th>
+    <th>Content type</th>
+    <th>Filename</th>
+    <th>Thumbnail</th>
+    <th>Size</th>
+    <th>Width</th>
+    <th>Height</th>
+  </tr>
+  
+<% for files in @files %>
+  <tr>
+    <td><%=h files.parent_id %></td>
+    <td><%=h files.content_type %></td>
+    <td><%=h files.filename %></td>
+    <td><%=h files.thumbnail %></td>
+    <td><%=h files.size %></td>
+    <td><%=h files.width %></td>
+    <td><%=h files.height %></td>
+    <td><%= link_to 'Download', files.public_filename %></td>
+    <td><%= link_to 'Show', files_path(files) %></td>
+    <td><%= link_to 'Edit', edit_files_path(files) %></td>
+    <td><%= link_to 'Destroy', files_path(files), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New files', new_files_path %>
