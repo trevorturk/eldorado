@@ -1,10 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :events
   map.resources :users
-  
-  map.resources :topics do |topic| 
-    topic.resources :posts 
-  end
+  map.resources :topics
+  map.resources :posts
+  map.resources :events
   
   map.home  '', :controller => 'home', :action => 'index'  
   map.users '/users', :controller => 'users', :action => 'index'

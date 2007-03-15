@@ -1,26 +1,37 @@
 class PostsController < ApplicationController 
 
-  before_filter :find_topic 
+  before_filter :find_topic_and_post, :except => [:index, :new, :create]
   before_filter :force_login 
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
+  
+  def index
+    redirect_to home_path
+  end
+  
+  def show
+    redirect_to topic_path(@topic)
+  end
 
+  def new
+    redirect_to home_path
+  end
+  
   def edit
-    @post = @topic.posts.find(params[:id]) 
   end 
-
+    
   def create 
-    @post = Post.new(params[:post]) 
+    @post = Post.new(params[:post])
     @post.user_id = current_user.id
+    @topic = Topic.find(params[:topic_id])
     if (@topic.posts << @post) 
-      redirect_to topic_url(@topic) 
+      redirect_to topic_path(@topic) 
     else 
       flash[:notice] = "Posts cannot be blank"
-      redirect_to topic_path(:id => @topic, :anchor => "post")
+      redirect_to topic_path(@topic)
     end 
   end 
 
   def update 
-    @post = @topic.posts.find(params[:id]) 
     @post.updated_by = current_user.id
     if @post.update_attributes(params[:post]) 
       redirect_to topic_url(@topic) 
@@ -30,22 +41,20 @@ class PostsController < ApplicationController
   end 
 
   def destroy 
-    post = @topic.posts.find(params[:id].to_i) 
-    @topic.posts.delete(post) 
+    @post.destroy
     redirect_to topic_url(@topic) 
   end 
   
   private
   
-  def find_topic 
-    @topic_id = params[:topic_id] 
-    redirect_to topics_url unless @topic_id 
-    @topic = Topic.find(@topic_id) 
+  def find_topic_and_post
+    @post = Post.find(params[:id])
+    @topic = Topic.find(@post.topic.id)
+    redirect_to topics_url unless @topic
   end 
   
   def can_edit_post
-    @post = Post.find(params[:id])
-    redirect_to topic_path(@post.topic) and return false unless admin? || (current_user == @post.user) || (current_user == @topic.user)
+    redirect_to topic_path(@topic) and return false unless admin? || (current_user == @post.user)
   end
   
 end

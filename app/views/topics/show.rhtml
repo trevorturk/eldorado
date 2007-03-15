@@ -57,7 +57,7 @@
 				</td>
 				<td class="body links">
 					<% if logged_in? && post.can_edit_post?(current_user) %>
-						<%= link_to 'Edit', edit_post_path(:topic_id => @topic, :id => post) %>
+						<%= link_to 'Edit', edit_post_path(post) %>
 					<% end %>
 				</td>
 			</tr>
