@@ -25,7 +25,7 @@
 		<ul class="tabs">
 			<li class="<%= tab('home') %>"><%= link_to('Home', home_path) %></li>
 			<li class="<%= tab('events') %>"><%= link_to('Events', events_path) %></li>
-			<li class="<%= tab('files') %>"><%= link_to('Files', files_path) %></li>
+			<li class="<%= tab('files') %>"><%= link_to('Files', :controller => 'files') %></li>
 			<li class="<%= tab('topics') %>"><%= link_to('Topics', topics_path) %></li>
 			<li class="<%= tab('users') %>"><%= link_to('Users', users_path) %></li>
 			<% if admin? %><li class="<%= tab('admin') %>"><%= link_to('Admin', admin_path) %></li><% end %>
