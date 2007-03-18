@@ -47,6 +47,21 @@ class FilesController < ApplicationController
       end
     end
   end
+  
+  def upload
+    flash[:notice] = "no"
+    @files = Files.new(params[:files])
+    respond_to do |format|
+      if @files.save
+        flash[:notice] = "yes"
+        format.html { redirect_to files_url(@files) }
+        format.xml  { head :created, :location => files_url(@files) }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @files.errors.to_xml }
+      end
+    end
+  end
 
   # PUT /files/1
   # PUT /files/1.xml

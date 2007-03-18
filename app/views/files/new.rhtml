@@ -1,6 +1,6 @@
 <%= error_messages_for :files %>
 
-<% form_for(:files, :url => { :action => 'create' }, :html => { :multipart => true }) do |f| -%>
+<% form_for(:files, :url => { :action => 'upload' }, :html => { :multipart => true }) do |f| -%>
   <p>
     <label for="files">File:</label>
     <%= f.file_field :uploaded_data %>
