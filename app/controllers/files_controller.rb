@@ -38,7 +38,6 @@ class FilesController < ApplicationController
 
     respond_to do |format|
       if @files.save
-        flash[:notice] = 'Files was successfully created.'
         format.html { redirect_to files_url(@files) }
         format.xml  { head :created, :location => files_url(@files) }
       else
@@ -55,7 +54,6 @@ class FilesController < ApplicationController
 
     respond_to do |format|
       if @files.update_attributes(params[:files])
-        flash[:notice] = 'Files was successfully updated.'
         format.html { redirect_to files_url(@files) }
         format.xml  { head :ok }
       else

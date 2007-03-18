@@ -24,9 +24,10 @@
 		
 		<ul class="tabs">
 			<li class="<%= tab('home') %>"><%= link_to('Home', home_path) %></li>
-			<li class="<%= tab('users') %>"><%= link_to('Users', users_path) %></li>
-			<li class="<%= tab('topics') %>"><%= link_to('Topics', topics_path) %></li>
 			<li class="<%= tab('events') %>"><%= link_to('Events', events_path) %></li>
+			<li class="<%= tab('files') %>"><%= link_to('Files', files_path) %></li>
+			<li class="<%= tab('topics') %>"><%= link_to('Topics', topics_path) %></li>
+			<li class="<%= tab('users') %>"><%= link_to('Users', users_path) %></li>
 			<% if admin? %><li class="<%= tab('admin') %>"><%= link_to('Admin', admin_path) %></li><% end %>
 		</ul>
 		
@@ -49,6 +50,8 @@
 							<%= link_to('Add a New Event', new_event_path) %>
 						<% elsif current_controller == "users" %>
 							<%= link_to('Register a New User', new_user_path) %>
+							<% elsif current_controller == "files" %>
+								<%= link_to('Upload a New File', new_files_path) %>
 						<% end %>
 						&nbsp; <%= link_to('Logout', logout_path) %>
 					<% else %>

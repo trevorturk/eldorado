@@ -35,4 +35,5 @@
 
 
 <%= link_to 'Edit', edit_files_path(@files) %> |
+<%= link_to 'Destroy', files_path(@files), :confirm => 'Are you sure?', :method => :delete %> | 
 <%= link_to 'Back', :controller => 'files' %>
