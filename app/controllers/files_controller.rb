@@ -35,7 +35,7 @@ class FilesController < ApplicationController
   # POST /files.xml
   def create
     @files = Files.new(params[:files])
-
+    flash[:notice] = "no"
     respond_to do |format|
       if @files.save
         flash[:notice] = "yes"
