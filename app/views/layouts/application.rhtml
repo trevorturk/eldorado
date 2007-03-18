@@ -51,7 +51,7 @@
 						<% elsif current_controller == "users" %>
 							<%= link_to('Register a New User', new_user_path) %>
 							<% elsif current_controller == "files" %>
-								<%= link_to('Upload a New File', new_files_path) %>
+								<%= link_to('Upload a New File', :controller => 'files') %>
 						<% end %>
 						&nbsp; <%= link_to('Logout', logout_path) %>
 					<% else %>
