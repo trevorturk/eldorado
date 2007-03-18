@@ -3,7 +3,7 @@ class FilesController < ApplicationController
   # GET /files.xml
   def index
     @files = Files.find(:all)
-
+    flash[:notice] = "why?"
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @files.to_xml }
@@ -34,8 +34,8 @@ class FilesController < ApplicationController
   # POST /files
   # POST /files.xml
   def create
-    @files = Files.new(params[:files])
     flash[:notice] = "no"
+    @files = Files.new(params[:files])
     respond_to do |format|
       if @files.save
         flash[:notice] = "yes"
