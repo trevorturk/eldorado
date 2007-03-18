@@ -38,6 +38,7 @@ class FilesController < ApplicationController
 
     respond_to do |format|
       if @files.save
+        flash[:notice] = "yes"
         format.html { redirect_to files_url(@files) }
         format.xml  { head :created, :location => files_url(@files) }
       else
