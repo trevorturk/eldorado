@@ -26,7 +26,16 @@ class HeadersController < ApplicationController
   end
 
   def create
-    # use upload action instead
+    @header = Header.new(params[:header])
+    respond_to do |format|
+      if @header.save
+        format.html { redirect_to header_url(@header) }
+        format.xml  { head :created, :location => header_url(@header) }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @header.errors.to_xml }
+      end
+    end
   end
   
   def upload
