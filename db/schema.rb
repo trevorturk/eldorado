@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 26) do
+ActiveRecord::Schema.define(:version => 27) do
 
   create_table "events", :force => true do |t|
     t.column "title",       :string
@@ -13,16 +13,6 @@ ActiveRecord::Schema.define(:version => 26) do
     t.column "user_id",     :integer
     t.column "created_at",  :datetime
     t.column "updated_at",  :datetime
-  end
-
-  create_table "files", :force => true do |t|
-    t.column "parent_id",    :integer
-    t.column "content_type", :string
-    t.column "filename",     :string
-    t.column "thumbnail",    :string
-    t.column "size",         :integer
-    t.column "width",        :integer
-    t.column "height",       :integer
   end
 
   create_table "headers", :force => true do |t|
@@ -80,6 +70,19 @@ ActiveRecord::Schema.define(:version => 26) do
     t.column "closed",       :boolean,  :default => false
   end
 
+  create_table "uploads", :force => true do |t|
+    t.column "parent_id",    :integer
+    t.column "content_type", :string
+    t.column "filename",     :string
+    t.column "thumbnail",    :string
+    t.column "size",         :integer
+    t.column "width",        :integer
+    t.column "height",       :integer
+    t.column "user_id",      :integer
+    t.column "created_at",   :datetime
+    t.column "updated_at",   :datetime
+  end
+
   create_table "users", :force => true do |t|
     t.column "login",              :string
     t.column "email",              :string
@@ -97,6 +100,7 @@ ActiveRecord::Schema.define(:version => 26) do
     t.column "online_at",          :datetime
     t.column "headers_count",      :integer,  :default => 0
     t.column "events_count",       :integer,  :default => 0
+    t.column "uploads_count",      :integer,  :default => 0
   end
 
 end

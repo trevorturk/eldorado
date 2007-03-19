@@ -1,6 +1,8 @@
-<%= error_messages_for :files %>
+<h1>Editing upload</h1>
 
-<% form_for(:files, :url => files_path(@files), :html => { :method => :put }) do |f| %>
+<%= error_messages_for :upload %>
+
+<% form_for(:upload, :url => upload_path(@upload), :html => { :method => :put }) do |f| %>
   <p>
     <b>Parent</b><br />
     <%= f.text_field :parent_id %>
@@ -37,9 +39,25 @@
   </p>
 
   <p>
+    <b>User</b><br />
+    <%= f.text_field :user_id %>
+  </p>
+
+  <p>
+    <b>Created at</b><br />
+    <%= f.datetime_select :created_at %>
+  </p>
+
+  <p>
+    <b>Updated at</b><br />
+    <%= f.datetime_select :updated_at %>
+  </p>
+
+  <p>
     <%= submit_tag "Update" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', files_path(@files) %> |
-<%= link_to 'Back', files_path %>
+<%= link_to 'Show', upload_path(@upload) %> | 
+<%= link_to 'Destroy', upload_path(@upload), :confirm => 'Are you sure?', :method => :delete %>
+<%= link_to 'Back', uploads_path %>

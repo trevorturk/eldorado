@@ -1,0 +1,18 @@
+<% if !@uploads.blank? %>
+	<table cellspacing="0">
+		<thead>
+			<tr>
+				<th class="tcl">Files</th>
+				<th class="tcr">Created at</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for upload in @uploads %>
+				<tr>
+					<td class="tcl"><%= link_to h(upload.filename), upload.public_filename %> (<%= link_to 'detail', upload_path(upload) %>) by <%=h upload.user.login %></td>
+					<td class="tcr"><%=h upload.created_at %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
