@@ -8,7 +8,7 @@
 		<tbody>
 			<% for files in @files %>
 				<tr>
-					<td class="tcl"><%=h files.filename %></td>
+					<td class="tcl"><%= link_to h(files.filename), files.public_filename %> (<%= link_to 'detail', files_path(files) %>)</td>
 				</tr>
 			<% end %>
 		</tbody>
