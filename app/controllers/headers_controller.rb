@@ -26,6 +26,9 @@ class HeadersController < ApplicationController
   end
 
   def create
+  end
+  
+  def upload
     @header = Header.new(params[:header])
     respond_to do |format|
       if @header.save
