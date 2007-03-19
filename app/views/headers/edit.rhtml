@@ -1,11 +1,17 @@
 <%= error_messages_for :header %>
 
+<div class="info-left">
+	<span class="title"><%=h @header.filename %></span>
+	<span class="detail">by user</span>
+</div>
+<div style="clear:both;"> </div>
+
 <% form_for(:header, :url => header_path(@header), :html => { :method => :put }) do |f| -%>
 	<div class="box">
 		
 		<div class="top">Edit Header</div>
 		
-		<p class="label"><label for="description">Description</label> (optional)</p>
+		<p class="label"><label for="description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
 			
 		<p><%= submit_tag "Edit Header", :disable_with => "Edit Header" %><span> or <%= link_to 'Delete', header_path(@header), :confirm => 'Are you sure?', :method => :delete %> or <%= link_to 'Cancel', headers_path %></p>

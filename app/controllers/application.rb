@@ -47,5 +47,5 @@ class ApplicationController < ActionController::Base
       @reminders = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and reminder = ? and private = ?", Date.today, true, false])
     end
   end
-      
+        
 end

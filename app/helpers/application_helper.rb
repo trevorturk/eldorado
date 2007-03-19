@@ -4,7 +4,11 @@ module ApplicationHelper
   protected
   
   def random_header_css
-    @header = Header.find(:first, :order => "RAND()")
+    if (current_controller == 'headers' and (current_action == 'edit' or current_action == 'show'))
+      @header = Header.find(params[:id])
+    else
+      @header = Header.find(:first, :order => "RAND()")
+    end
     if @header
       return '<style type="text/css">.header { background-image: url("'+@header.public_filename+'"); }</style>'
     end

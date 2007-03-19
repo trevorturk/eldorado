@@ -1,21 +1,21 @@
 <div class="info-left">
 	<span class="title"><%=h @header.filename %></span>
-	<span class="detail">by user</span>
+	<span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
+</div>
+<div class="info-right">
+	<% if logged_in? && @header.can_edit_header?(current_user) %>
+		<%= link_to 'Edit Header', edit_header_path %>
+	<% end %>
 </div>
 <div style="clear:both;"> </div>
 
-<p><%= image_tag(@header.public_filename) %></p>
-
 <% if !@header.description.blank? %>
-	<p><b>Description</b>: <%=h @header.description %></p>
+	<blockquote><%=h @header.description %></blockquote>
 <% end %>
+
+<br />
 
 <div class="info-left">
 	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Headers', headers_path %> &raquo; <%=h @header.filename %>
-</div>
-<div class="info-right">
-	<% if logged_in? %>
-		<%= link_to 'Edit Header', edit_header_path %>
-	<% end %>
 </div>
 <div style="clear:both;"> </div>

@@ -1,5 +1,8 @@
 class HeadersController < ApplicationController
-
+  
+  before_filter :force_login, :except => [:index, :show]
+  before_filter :can_edit_header, :only => [:edit, :update, :destroy]
+  
   def index
     @headers = Header.find(:all, :order => 'created_at desc')
     @headers_count = Header.count
@@ -31,6 +34,7 @@ class HeadersController < ApplicationController
   
   def upload
     @header = Header.new(params[:header])
+    @header.user_id = current_user.id
     respond_to do |format|
       if @header.save
         format.html { redirect_to header_url(@header) }
@@ -63,4 +67,10 @@ class HeadersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def can_edit_header
+    @header = Header.find(params[:id])
+    redirect_to header_path(@header) and return false unless admin? || (current_user == @header.user)
+  end
+  
 end

@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 23) do
+ActiveRecord::Schema.define(:version => 24) do
 
   create_table "events", :force => true do |t|
     t.column "title",       :string
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 23) do
     t.column "updated_at",         :datetime
     t.column "profile_updated_at", :datetime
     t.column "online_at",          :datetime
+    t.column "headers_count",      :integer,  :default => 0
   end
 
 end

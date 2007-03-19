@@ -8,7 +8,7 @@
 		
 		<p>Headers must be images under 50kb, and should be sized 760x200px.</p>
 		
-		<p class="label"><label for="description">Description</label> (optional)</p>
+		<p class="label"><label for="description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
 			
 		<p><%= submit_tag "Upload", :disable_with => "Upload" %><span> or <%= link_to 'Cancel', headers_path %></p>
