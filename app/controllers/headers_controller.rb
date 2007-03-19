@@ -1,7 +1,7 @@
 class HeadersController < ApplicationController
 
   def index
-    @headers = Header.find(:all, :order => 'id desc')
+    @headers = Header.find(:all, :order => 'created_at desc')
     @headers_count = Header.count
     respond_to do |format|
       format.html # index.rhtml

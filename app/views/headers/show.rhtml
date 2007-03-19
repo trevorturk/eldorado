@@ -1,39 +1,21 @@
-<p>
-  <b>Parent:</b>
-  <%=h @header.parent_id %>
-</p>
+<div class="info-left">
+	<span class="title"><%=h @header.filename %></span>
+	<span class="detail">by user</span>
+</div>
+<div style="clear:both;"> </div>
 
-<p>
-  <b>Content type:</b>
-  <%=h @header.content_type %>
-</p>
+<p><%= image_tag(@header.public_filename) %></p>
 
-<p>
-  <b>Filename:</b>
-  <%=h @header.filename %>
-</p>
+<% if !@header.description.blank? %>
+	<p><b>Description</b>: <%=h @header.description %></p>
+<% end %>
 
-<p>
-  <b>Thumbnail:</b>
-  <%=h @header.thumbnail %>
-</p>
-
-<p>
-  <b>Size:</b>
-  <%=h @header.size %>
-</p>
-
-<p>
-  <b>Width:</b>
-  <%=h @header.width %>
-</p>
-
-<p>
-  <b>Height:</b>
-  <%=h @header.height %>
-</p>
-
-
-<%= link_to 'Edit', edit_header_path(@header) %> |
-<%= link_to 'Destroy', header_path(@header), :confirm => 'Are you sure?', :method => :delete %> | 
-<%= link_to 'Back', headers_path %>
+<div class="info-left">
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Headers', headers_path %> &raquo; <%=h @header.filename %>
+</div>
+<div class="info-right">
+	<% if logged_in? %>
+		<%= link_to 'Edit Header', edit_header_path %>
+	<% end %>
+</div>
+<div style="clear:both;"> </div>

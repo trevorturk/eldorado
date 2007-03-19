@@ -41,5 +41,6 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', header_path(@header) %> |
+<%= link_to 'Show', header_path(@header) %> | 
+<%= link_to 'Destroy', header_path(@header), :confirm => 'Are you sure?', :method => :delete %> | 
 <%= link_to 'Back', headers_path %>
