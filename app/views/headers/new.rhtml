@@ -1,8 +1,8 @@
 <%= error_messages_for :header %>
 
-<% form_for(:header, :url => { :action => 'upload' }, :html => { :multipart => true }) do |f| -%>
+<% form_for(:header, :url => upload_new_header_path, :html => { :multipart => true }) do |f| -%>
   <p>
-    <label for="header">Upload:</label>
+    <label for="header">Upload (700x200px):</label>
     <%= f.file_field :uploaded_data %>
   </p>
   <p>

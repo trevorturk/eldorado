@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :headers
-  map.resources :files
+  map.resources :headers, :new => { :upload => :post }
+  map.resources :files, :new => { :upload => :post }
   map.resources :events
   map.resources :posts
   map.resources :topics
@@ -16,10 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.create_newbies '/newbies/create', :controller => 'newbies', :action => 'create'
   map.destroy_newbies '/newbies/destroy', :controller => 'newbies', :action => 'destroy'
-  
-  map.files_upload '/files/upload', :controller => 'files', :action => 'upload'
-  map.header_upload '/headers/upload', :controller => 'headers', :action => 'upload'
-      
+        
   map.catch_all "*path", :controller => "topics", :action => "unknown_request"
   
   map.connect ':controller/service.wsdl', :action => 'wsdl'

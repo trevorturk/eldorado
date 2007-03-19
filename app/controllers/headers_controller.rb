@@ -26,6 +26,7 @@ class HeadersController < ApplicationController
   end
 
   def create
+    # use upload action instead
   end
   
   def upload
