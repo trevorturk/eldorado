@@ -4,9 +4,8 @@ module ApplicationHelper
   protected
   
   def random_header_css
-    image_files = %w( .jpg .gif .png )
-    files = Dir.entries("#{HEADERS_FULL_PATH}").delete_if { |x| !image_files.index(x[-4,4]) }
-    return '<style type="text/css">.header { background-image: url("'+HEADERS_PATH+files[rand(files.length)]+'"); }</style>'
+    @header = Header.find(:first, :order => "RAND()")
+    return '<style type="text/css">.header { background-image: url("'+@header.public_filename+'"); }</style>'
   end
 
   def page_title

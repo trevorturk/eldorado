@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-    
-  map.resources :users
-  map.resources :topics
-  map.resources :posts
-  map.resources :events
+  map.resources :headers
   map.resources :files
+  map.resources :events
+  map.resources :posts
+  map.resources :topics
+  map.resources :users
   
   map.home  '', :controller => 'home', :action => 'index'  
 
@@ -23,5 +23,4 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect ':controller/service.wsdl', :action => 'wsdl'
   # map.connect ':controller/:action/:id'
-      
 end

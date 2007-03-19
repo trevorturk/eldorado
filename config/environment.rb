@@ -56,15 +56,11 @@ end
 PASSWORD_SALT = 'a0cfa6e4890663c6b64a95a5076f94addee20218' unless Object.const_defined?(:PASSWORD_SALT) # abazaba
 
 AVATARS_PATH    = '/images/avatars/'
-HEADERS_PATH    = '/images/headers/'
-FILES_PATH      = ''
-
-HEADERS_FULL_PATH = RAILS_ROOT + '/public/' + HEADERS_PATH
 
 SITE_TITLE =    'El Dorado.org'
 SITE_TAGLINE =  'All an elaborate, unapproachable, unprofitable, retributive joke'
 SITE_FOOTER_1 = '<a href="http://www.almosteffortless.com">&aelig;</a> + <a href="http://www.tyrannybelle.com">tb</a> = kthxbye'
 SITE_FOOTER_2 = 'Copyright &copy; 2004-' + Time.now.strftime("%Y") + ' <a href="http://www.newathens.org">NewAthens.org</a>'
 
-INVITATION_ONLY = true
+INVITATION_ONLY = false
 PRIVATE_SITE = false

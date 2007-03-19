@@ -1,0 +1,11 @@
+<%= error_messages_for :header %>
+
+<% form_for(:header, :url => headers_path, :html => { :multipart => true }) do |f| -%>
+  <p>
+    <label for="header">Upload:</label>
+    <%= f.file_field :uploaded_data %>
+  </p>
+  <p>
+    <%= submit_tag 'Upload' %>
+  </p>
+<% end -%>
