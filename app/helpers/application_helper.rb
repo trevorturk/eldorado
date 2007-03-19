@@ -5,7 +5,9 @@ module ApplicationHelper
   
   def random_header_css
     @header = Header.find(:first, :order => "RAND()")
-    return '<style type="text/css">.header { background-image: url("'+@header.public_filename+'"); }</style>'
+    if @header
+      return '<style type="text/css">.header { background-image: url("'+@header.public_filename+'"); }</style>'
+    end
   end
 
   def page_title
