@@ -77,7 +77,7 @@ h3 {
 
 .tabs { 
 	position: relative;
-	margin: -24px 0 0 24px;
+	margin: -24px 0 0 13px;
 	width: 710px;
 	font: 1em Verdana, Helvetica, Arial, Sans-Serif;
 	padding: 5px 15px 6px 12px;
@@ -90,7 +90,7 @@ h3 {
 	
 .tabs li a {
 	font-size: 10px;
-	padding: 5px 13px 6px 13px;
+	padding: 5px 11px 6px 11px;
 }
 
 .tabs li a:link, .tabs li a:visited {

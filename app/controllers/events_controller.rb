@@ -2,48 +2,39 @@ class EventsController < ApplicationController
   
   before_filter :load_vars
   before_filter :force_login, :except => [:index, :show]
+  before_filter :can_edit_event, :only => [:edit, :update, :destroy]
   before_filter :check_privacy, :only => [:show]
   
-  # GET /events
-  # GET /events.xml
   def index
     if logged_in?
-      @events = Event.find(:all, :order => 'date desc')
+      @events = Event.find(:all, :order => 'updated_at desc')
     else
-      @events = Event.find(:all, :order => 'date desc', :conditions => ["private = ?", false])
+      @events = Event.find(:all, :order => 'updated_at desc', :conditions => ["private = ?", false])
     end
-
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @events.to_xml }
     end
   end
 
-  # GET /events/1
-  # GET /events/1.xml
   def show
     @event = Event.find(params[:id])
-
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @event.to_xml }
     end
   end
 
-  # GET /events/new
   def new
   end
 
-  # GET /events/1;edit
   def edit
     @event = Event.find(params[:id])
   end
 
-  # POST /events
-  # POST /events.xml
   def create
     @event = Event.new(params[:event])
-
+    @event.user_id = current_user.id
     respond_to do |format|
       if @event.save
         format.html { redirect_to events_url }
@@ -55,11 +46,8 @@ class EventsController < ApplicationController
     end
   end
 
-  # PUT /events/1
-  # PUT /events/1.xml
   def update
     @event = Event.find(params[:id])
-
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to events_url }
@@ -71,12 +59,9 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.xml
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-
     respond_to do |format|
       format.html { redirect_to events_url }
       format.xml  { head :ok }
@@ -103,6 +88,11 @@ class EventsController < ApplicationController
       @next_month = 1
       @next_year = @year + 1
     end
+  end
+  
+  def can_edit_event
+    @event = Event.find(params[:id])
+    redirect_to event_path(@event) and return false unless admin? || (current_user == @event.user)
   end
   
 end

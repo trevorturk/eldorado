@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :posts, :dependent => :destroy
   has_many :topics, :dependent => :destroy
   has_many :headers, :dependent => :destroy
+  has_many :events, :dependent => :destroy
   
   validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false
@@ -15,7 +16,7 @@ class User < ActiveRecord::Base
   
   attr_reader :password
   
-  attr_protected :admin, :posts_count, :topics_count, :headers_count, :created_at, :updated_at, :last_login_at, :profile_updated_at, :online_at
+  attr_protected :admin, :posts_count, :topics_count, :headers_count, :events_count, :created_at, :updated_at, :last_login_at, :profile_updated_at, :online_at
    
   def password=(value)
     return if value.blank?

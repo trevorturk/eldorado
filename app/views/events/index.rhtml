@@ -32,7 +32,7 @@ end
 		<tbody>
 			<% for event in @events %>
 				<tr>
-					<td class="tcl"><%= link_to h(event.title), event_path(event) %></td>
+					<td class="tcl"><%= link_to h(event.title), event_path(event) %> by <%=h event.user.login %></td>
 					<td class="tcr"><%= event.date %></td>
 				</tr>
 			<% end %>
