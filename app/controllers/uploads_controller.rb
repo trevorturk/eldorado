@@ -29,6 +29,18 @@ class UploadsController < ApplicationController
 
   def create
     # HACK: use upload action instead... create isn't working for some reason
+    @upload = Upload.new(params[:upload])
+    @upload.user_id = current_user.id
+    respond_to do |format|
+      if @upload.save
+        flash[:notice] = 'Upload was successfully created.'
+        format.html { redirect_to upload_url(@upload) }
+        format.xml  { head :created, :location => upload_url(@upload) }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @upload.errors.to_xml }
+      end
+    end
   end
   
   def upload
