@@ -28,10 +28,10 @@ body {
 	clear: both;
 }
 
-.footer, .footer a:link, .footer a:visited {
+.footer {
 	font-size: 10px;
 	margin-top: 10px;
-	color: #ccc;
+	color: #999;
 }
 
 a:link, a:visited {
@@ -114,8 +114,8 @@ h3 {
 	margin: 10px 0;
 	width: 758px;
 	height: 26px;
-	border: 1px solid #999;
-	background: #eee;
+	border: 1px solid #ccc;
+	background: #f1f1f1;
 }
 
 .nav-left {
@@ -130,6 +130,24 @@ h3 {
 
 .nav-footer {
 	margin: 0;
+}
+
+.nav-stats {
+	border-color: #ccc;
+	color: #999;
+	background: #fff;
+	border-left: 0;
+	border-right: 0;
+}
+
+.nav-stats p.nav-left {
+	margin-left: 0;
+	padding-left: 6px;
+}
+
+.nav-stats p.nav-right {
+	margin-right: 0;
+	padding-right: 6px;
 }
 
 .box {
@@ -240,6 +258,11 @@ tbody .tds {
 	text-align: right;
 }
 
+.forum-list th {
+	background: #d1d1d1;
+	color: #333;
+}
+
 .forum-name {
 	font-weight: bold;
 	font-size: 12px;
@@ -247,11 +270,6 @@ tbody .tds {
 
 .forum-name a {
 	text-decoration: underline;
-}
-
-.forum-list th {
-	background: #d1d1d1;
-	color: #333;
 }
 
 .info-left {
