@@ -7,6 +7,7 @@
 	<title><%= page_title %></title>
 	<%= stylesheet_link_tag 'application' %>
 	<%= random_header_css %>
+	<!-- Powered by El Dorado (http://almosteffortless.com) -->
 </head>
 
 <body>
@@ -26,8 +27,8 @@
 			<li class="<%= tab('home') %>"><%= link_to('Home', home_path) %></li>
 			<li class="<%= tab('events') %>"><%= link_to('Events', events_path) %></li>
 			<li class="<%= tab('uploads') %>"><%= link_to('Files', files_home_path) %></li>
+			<li class="<%= tab('forums') %>"><%= link_to('Forum', forum_home_path) %></li>
 			<li class="<%= tab('headers') %>"><%= link_to('Headers', headers_path) %></li>
-			<li class="<%= tab('topics') %>"><%= link_to('Topics', topics_path) %></li>
 			<li class="<%= tab('users') %>"><%= link_to('Users', users_path) %></li>
 			<% if admin? %><li class="<%= tab('admin') %>"><%= link_to('Admin', admin_path) %></li><% end %>
 		</ul>
@@ -49,6 +50,7 @@
 						<% elsif current_controller == "events" %><%= link_to('Add a New Event', new_event_path) %>
 						<% elsif current_controller == "users" %><%= link_to('Register a New User', new_user_path) %>
 						<% elsif current_controller == "uploads" %><%= link_to('Upload a New File', new_upload_path) %>
+						<% elsif current_controller == "forums" %><%= link_to('Create a New Forum', new_forum_path) %>
 						<% elsif current_controller == "headers" %><%= link_to('Upload a New Header', new_header_path) %>
 						<% end %>
 						&nbsp; <%= link_to('Logout', logout_path) %>
@@ -65,7 +67,19 @@
 			<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
 			
 			<%= yield %>
-						
+			
+			<div class="nav">
+				<p class="nav-left">
+					<% users_online = User.users_online -%>
+					<% unless users_online.empty? %>
+						Online: <%= users_online.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %>
+					<% end %>
+				</p>
+				<p class="nav-right">
+					<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= newbie %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
+				</p>
+			</div>
+				
 		</div>
 		
 		<div class="footer">

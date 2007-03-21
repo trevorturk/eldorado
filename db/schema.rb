@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 27) do
+ActiveRecord::Schema.define(:version => 29) do
 
   create_table "events", :force => true do |t|
     t.column "title",       :string
@@ -13,6 +13,20 @@ ActiveRecord::Schema.define(:version => 27) do
     t.column "user_id",     :integer
     t.column "created_at",  :datetime
     t.column "updated_at",  :datetime
+  end
+
+  create_table "forums", :force => true do |t|
+    t.column "category_id",  :integer
+    t.column "name",         :string
+    t.column "description",  :text
+    t.column "topics_count", :integer,  :default => 0
+    t.column "posts_count",  :integer,  :default => 0
+    t.column "position",     :integer,  :default => 0
+    t.column "last_post_id", :integer
+    t.column "last_post_at", :integer
+    t.column "last_post_by", :integer
+    t.column "created_at",   :datetime
+    t.column "updated_at",   :datetime
   end
 
   create_table "headers", :force => true do |t|
@@ -68,6 +82,8 @@ ActiveRecord::Schema.define(:version => 27) do
     t.column "last_post_by", :integer
     t.column "private",      :boolean,  :default => false
     t.column "closed",       :boolean,  :default => false
+    t.column "sticky",       :boolean,  :default => false
+    t.column "forum_id",     :integer
   end
 
   create_table "uploads", :force => true do |t|
@@ -89,7 +105,7 @@ ActiveRecord::Schema.define(:version => 27) do
     t.column "password_hash",      :string
     t.column "created_at",         :datetime
     t.column "last_login_at",      :datetime
-    t.column "admin",              :boolean
+    t.column "admin",              :boolean,  :default => false
     t.column "posts_count",        :integer,  :default => 0
     t.column "signature",          :string
     t.column "avatar",             :string

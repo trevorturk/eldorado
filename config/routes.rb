@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :uploads, :new => { :upload => :post }
-  map.resources :headers, :new => { :upload => :post }
+  map.resources :forums
+  map.resources :uploads
+  map.resources :headers
   map.resources :events
   map.resources :posts
   map.resources :topics
@@ -15,6 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.admin '/admin', :controller => 'admin', :action => 'index'
   
   map.files_home '/files', :controller => 'uploads', :action => 'index'
+  map.forum_home '/forum', :controller => 'forums', :action => 'index'
   
   map.create_newbies '/newbies/create', :controller => 'newbies', :action => 'create'
   map.destroy_newbies '/newbies/destroy', :controller => 'newbies', :action => 'destroy'

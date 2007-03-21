@@ -29,10 +29,6 @@ class HeadersController < ApplicationController
   end
 
   def create
-    # HACK: use upload action instead... create isn't working for some reason
-  end
-  
-  def upload
     @header = Header.new(params[:header])
     @header.user_id = current_user.id
     respond_to do |format|
@@ -45,7 +41,7 @@ class HeadersController < ApplicationController
       end
     end
   end
-
+  
   def update
     @header = Header.find(params[:id])
     respond_to do |format|

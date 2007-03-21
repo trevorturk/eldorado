@@ -1,0 +1,29 @@
+<table cellspacing="0">
+	<thead>
+		<tr>
+			<th colspan="4">Category</th>
+		</tr>
+		<tr class="forum-list">
+			<th class="tcl">Forums</th>
+			<th class="tcm">Topics</th>
+			<th class="tcm">Posts</th>
+			<th class="tcr">Activity</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for forum in @forums %>
+			<tr>
+				<td class="tcl">
+					<span class="forum-name"><%= link_to h(forum.name), forum_path(forum) %></span>
+					<br />
+					<%=h forum.description %>
+				</td>
+				<td class="tcm"><%=h forum.topics_count %></td>
+				<td class="tcm"><%=h forum.posts_count %></td>
+				<td class="tcr"><%=h forum.last_post_id %>, <%=h forum.last_post_at %>, <%=h forum.last_post_by %></td>
+			</tr>
+		<% end %>
+	</tbody>	
+</table>
+
+<p style="text-align:right"><%= link_to('View All Topics &raquo;', topics_path) %></p>

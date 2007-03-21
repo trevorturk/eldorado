@@ -187,6 +187,7 @@ tbody td {
 
 tbody .tcm {
 	text-align: center;
+	vertical-align: middle;
 	background: #dedfdf;
 }
 
@@ -237,6 +238,20 @@ tbody .tds {
 
 .thread .links {
 	text-align: right;
+}
+
+.forum-name {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.forum-name a {
+	text-decoration: underline;
+}
+
+.forum-list th {
+	background: #d1d1d1;
+	color: #333;
 }
 
 .info-left {

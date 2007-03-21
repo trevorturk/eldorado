@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin
-  before_filter :update_online_at, :get_reminders
+  before_filter :update_online_at, :get_reminders, :get_stats
     
   session :session_key => '_eldorado_session_id'
   
@@ -46,6 +46,13 @@ class ApplicationController < ActionController::Base
     else
       @reminders = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and reminder = ? and private = ?", Date.today, true, false])
     end
+  end
+  
+  def get_stats
+    @user_count = User.count
+    @topics_count = Topic.count
+    @posts_count = Post.count
+    @newest_user = User.find(:first, :order => "created_at desc")
   end
         
 end

@@ -3,16 +3,27 @@
 		<thead>
 			<tr>
 				<th class="tcl">Files</th>
-				<th class="tcr">Created at</th>
+				<th class="tcl">Type</th>
+				<th class="tcm">Size</th>
+				<th class="tcr">Uploaded</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% for upload in @uploads %>
 				<tr>
-					<td class="tcl"><%= link_to h(upload.filename), upload.public_filename %> (<%= link_to 'detail', upload_path(upload) %>) by <%=h upload.user.login %></td>
-					<td class="tcr"><%=h upload.created_at %></td>
+					<td class="tcl">
+						<%= link_to upload.filename, upload.public_filename %> by <%=h upload.user.login %>
+						<% if logged_in? && upload.can_edit_upload?(current_user) %>
+							(<%= link_to 'x', upload_path(upload), :confirm => 'Are you sure you want to delete this file?', :method => :delete %>)
+						<% end %>
+					</td>
+					<td class="tcl"><%= upload.content_type %></td>
+					<td class="tcm"><%= (upload.size/1000) %>k</td>
+					<td class="tcr"><%= time_ago_in_words(upload.created_at) %> ago</td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 <% end %>
+
+<p style="text-align:right"><%= link_to('View All Files &raquo;', files_home_path) %></p>

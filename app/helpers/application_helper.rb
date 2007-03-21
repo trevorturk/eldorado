@@ -43,7 +43,7 @@ module ApplicationHelper
   def tab(name)
     if name == current_controller
       'tab'
-    elsif name == "topics" && (current_controller == "posts")
+    elsif name == "forums" && ((current_controller == "topics") || (current_controller == "post"))
       'tab'
     end
   end

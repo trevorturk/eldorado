@@ -13,7 +13,7 @@ class Upload < ActiveRecord::Base
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
   end
   
-  def can_edit_file?(user)
+  def can_edit_upload?(user)
     user.admin? || (user.id == user_id)
   end
   
