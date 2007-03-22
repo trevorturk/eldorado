@@ -15,11 +15,12 @@ calendar({:year => @year, :month => @month}) do |d|
 end
 %>
 
-<p style="text-align:right;">
+<div class="info-right">
 	<%= link_to "&laquo; Previous", events_path(:params => {:month => @prev_month, :year => @prev_year}) %> &nbsp; 
 	<%= link_to "Today", events_path %> &nbsp; 
 	<%= link_to "Next &raquo;", events_path(:params => {:month => @next_month, :year => @next_year}) %>
-</p>
+</div>
+<div style="clear:both;"> </div>
 
 <% if !@events.blank? %>
 	<table cellspacing="0">
@@ -40,4 +41,7 @@ end
 	</table>
 <% end %>
 
-<p style="text-align:right"><%= link_to('View All Events &raquo;', events_path) %></p>
+<div class="info-right">
+	<%= link_to('View All Events &raquo;', events_path) %>
+</div>
+<div style="clear:both;"> </div>

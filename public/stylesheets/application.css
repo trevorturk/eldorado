@@ -31,6 +31,7 @@ body {
 .footer {
 	font-size: 10px;
 	margin-top: 10px;
+	padding: 0px 5px;
 	color: #999;
 }
 
@@ -142,17 +143,18 @@ h3 {
 
 .nav-stats p.nav-left {
 	margin-left: 0;
-	padding-left: 6px;
+	padding-left: 5px;
 }
 
 .nav-stats p.nav-right {
 	margin-right: 0;
-	padding-right: 6px;
+	padding-right: 5px;
 }
 
 .box {
 	border: 1px solid #35604D;
 	padding: 10px 10px 0 10px;
+	margin-bottom: 10px;
 	background: #f1f1f1;
 }
 
@@ -174,6 +176,7 @@ h3 {
 table {
 	width: 100%;
 	border: 1px solid #35604D;
+	margin-bottom: 10px;
 }
 
 thead th {
@@ -219,7 +222,7 @@ tbody .tds {
 }
 
 .thread {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .thread td {
@@ -303,7 +306,11 @@ blockquote {
 	border: 1px solid #f1f1f1;
 	border-color: #ACA899 #FFF #FFF #ACA899;
 	margin: 10px !important;
-	padding: 5px 10px;
+	padding: 10px;
+}
+
+blockquote p {
+	margin-top: 0;
 }
 
 .sig {

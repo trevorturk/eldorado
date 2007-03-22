@@ -1,18 +1,22 @@
-<p>
-  <b> title:</b>
-  <%=h @event.title %>
-</p>
+<div class="info-left">
+	<span class="title"><%=h @event.title %></span>
+	<span class="detail">by <%= link_to h(@event.user.login), user_path(@event.user) %></span>
+</div>
+<div style="clear:both;"> </div>
 
-<p>
-  <b>Description:</b>
-  <%=h @event.description %>
-</p>
+<% if !@event.description.blank? %>
+	<blockquote>
+		<p><b><%=h @event.date.strftime("%A, %B %d at %I:%M %p (%Z)") %></b></p>
+		<%=h @event.description %>
+	</blockquote>
+<% end %>
 
-<p>
-  <b>Date:</b>
-  <%=h @event.date %>
-</p>
-
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<div class="info-left">
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Events', events_path %> &raquo; <%=h @event.title %>
+</div>
+<div class="info-right">
+	<% if logged_in? && @event.can_edit_event?(current_user) %>
+		<%= link_to 'Edit Event', edit_event_path %>
+	<% end %>
+</div>
+<div style="clear:both;"> </div>

@@ -2,4 +2,7 @@
 	<p><%= link_to image_tag(header.public_filename), header_path(header) %></p>
 <% end %>
 
-<p style="text-align:right"><%= link_to('View All Headers &raquo;', headers_path) %></p>
+<div class="info-right">
+	<%= link_to('View All Headers &raquo;', headers_path) %>
+</div>
+<div style="clear:both;"> </div>

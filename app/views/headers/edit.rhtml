@@ -2,7 +2,7 @@
 
 <div class="info-left">
 	<span class="title"><%=h @header.filename %></span>
-	<span class="detail">by user</span>
+	<span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
 </div>
 <div style="clear:both;"> </div>
 
@@ -14,9 +14,14 @@
 		<p class="label"><label for="description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
 			
-		<p><%= submit_tag "Edit Header", :disable_with => "Edit Header" %><span> or <%= link_to 'Delete', header_path(@header), :confirm => 'Are you sure?', :method => :delete %> or <%= link_to 'Cancel', headers_path %></p>
+		<p><%= submit_tag "Edit Header", :disable_with => "Edit Header" %><span> or <%= link_to 'Delete', header_path(@header), :confirm => 'Are you sure?', :method => :delete %> or <%= link_to 'Cancel', header_path(@header) %></p>
 
 	</div>
 <% end %>
+
+<div class="info-left">
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Headers', headers_path %> &raquo; <%= link_to @header.filename, header_path(@header) %> &raquo; Editing Header
+</div>
+<div style="clear:both;"> </div>
 
 <%= javascript_tag "header_description.focus();" %>

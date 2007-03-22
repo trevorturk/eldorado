@@ -19,10 +19,11 @@
 	</tbody>
 </table>
 
-<p style="text-align:right;">
+<div class="info-right">
 	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
 	<% else %><span class="disabled">&laquo; Previous</span><% end %>
 	&nbsp;<%= pagination_links(@topic_pages) %>&nbsp;
 	<% if @topic_pages and @topic_pages.current.next %><%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %>
 	<% else %><span class="disabled">Next &raquo;</span><% end %>
-</p>
+</div>
+<div style="clear:both;"> </div>

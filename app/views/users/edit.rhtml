@@ -13,3 +13,8 @@
 		<p><%= submit_tag "Save Changes", :disable_with => "Save Changes" %><span> or <%= link_to 'Delete', user_path, :confirm => 'Are you sure? This will permanently delete this user, all of their posts, and any threads that they have started.', :method => :delete %> or <%= link_to 'Cancel', user_path(@user) %></p>
 	</div>
 <% end %>
+
+<div class="info-left">
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Users', users_path %> &raquo; <%= link_to h(@user.login), user_path(@user) %> &raquo; Editing User
+</div>
+<div style="clear:both;"> </div>
