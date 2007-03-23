@@ -16,11 +16,11 @@ module ApplicationHelper
 
   def page_title
     if @topic && (current_action != "new")
-      h(@topic.title) + " (" + h(SITE_TITLE) + ")"
+      h(@topic.title) + " (" + h(@options.site_title) + ")"
     elsif @user && (current_action != "new") && logged_in?
-      h(@user.login) + " (" + h(SITE_TITLE) + ")"
+      h(@user.login) + " (" + h(@options.site_title) + ")"
     else
-      h(SITE_TITLE)
+      h(@options.site_title)
     end
   end
   
@@ -31,11 +31,12 @@ module ApplicationHelper
   end
   
   def avatar_img(user)
-    image_tag AVATARS_PATH + h(user.avatar) unless user.avatar.blank?
+    image_tag @options.avatars_path + h(user.avatar) unless user.avatar.blank?
   end
   
-  def rank_for(posts_count)
+  def rank_for(posts_count, admin)
     @rank = Ranks.find(:first, :order => "min_posts desc", :conditions => ["? >= min_posts", posts_count])
+    return @options.admin_rank if admin == true
     return "Member" if @rank.nil?
     return h(@rank.title)
   end

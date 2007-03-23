@@ -19,13 +19,13 @@
 		<% end %>
 		
 		<div class="header">
-			<h1><%= link_to(SITE_TITLE, home_path) %></h1>
-			<div class="tagline">All an elaborate, unapproachable, unprofitable, retributive joke</div>		
+			<h1><%= link_to h(@options.site_title), home_path %></h1>
+			<div class="tagline"><%=h @options.site_tagline %></div>		
 		</div>
 		
 		<ul class="tabs">
 			<li class="<%= tab('home') %>"><%= link_to('Home', home_path) %></li>
-			<li class="<%= tab('events') %>"><%= link_to('Events', events_path) %></li>
+			<li class="<%= tab('events') %>"><%= link_to('Calendar', calendar_home_path) %></li>
 			<li class="<%= tab('uploads') %>"><%= link_to('Files', files_home_path) %></li>
 			<li class="<%= tab('forums') %>"><%= link_to('Forum', forum_home_path) %></li>
 			<li class="<%= tab('headers') %>"><%= link_to('Headers', headers_path) %></li>
@@ -83,14 +83,14 @@
 		</div>
 		
 		<div class="footer">
-			<div style="float:left;"><%= SITE_FOOTER_1 %></div>
-			<div style="float:right;"><%= SITE_FOOTER_2 %></div>
+			<div style="float:left;"><%= @options.footer_left %></div>
+			<div style="float:right;"><%= @options.footer_right %></div>
 			<div style="clear:both;"> </div>
 		</div>
 		
 	</div>
 	
-	<p class="wrapper-footer">Local Time: <%= Time.now %> | UTC Time: <%= Time.now.utc %></p>
+	<p class="wrapper-footer"><b>UTC</b>: <%= Time.now.utc %> | <b>Server</b>: <%= Time.now %> | <b>User</b>: <%= Time.now %></p>
 	
 </body>
 </html>

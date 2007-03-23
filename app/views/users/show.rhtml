@@ -4,7 +4,7 @@
 	<div class="profile-avatar"><%= avatar_img(@user) %></div>
 
 	<span class="profile-title"><%=h @user.login %></span>&nbsp;
-	<span class="profile-rank"><%=h rank_for(@user.posts_count) %></span>
+	<span class="profile-rank"><%=h rank_for(@user.posts_count, @user.admin) %></span>
 
 	<p><b>Bio</b>: <%=h @user.bio %></p>
 	<p><b>Signature</b>: <%=h @user.signature %></p>
