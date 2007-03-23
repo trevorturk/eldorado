@@ -86,12 +86,12 @@ h3 {
 	
 .tabs li {
 	display: inline;
-	margin: 0 4px;
+	margin: 0 2px;
 }
 	
 .tabs li a {
 	font-size: 10px;
-	padding: 5px 11px 6px 11px;
+	padding: 6px 12px;
 }
 
 .tabs li a:link, .tabs li a:visited {
@@ -261,6 +261,18 @@ tbody .tds {
 	text-align: right;
 }
 
+.forum-index {
+	margin-bottom: 5px;
+}
+
+.forum-index .tcl {
+	width: 55%;
+}
+
+.forum-index .tcm {
+	width: 8%;
+}
+
 .forum-list th {
 	background: #d1d1d1;
 	color: #333;
@@ -269,10 +281,6 @@ tbody .tds {
 .forum-name {
 	font-weight: bold;
 	font-size: 12px;
-}
-
-.forum-name a {
-	text-decoration: underline;
 }
 
 .info-left {
@@ -287,6 +295,10 @@ tbody .tds {
 	margin: 1px 0 10px 0;
 	padding-right: 5px;
 	border-right: 1px solid #f1f1f1;
+}
+
+.info-footer {
+	margin-top: 5px;
 }
 
 .title {

@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.calendar_home '/calendar', :controller => 'events', :action => 'index'
   map.files_home '/files', :controller => 'uploads', :action => 'index'
-  map.forum_home '/forum', :controller => 'forums', :action => 'index'
+  map.forum_home '/forum', :controller => 'categories', :action => 'index'
   
   map.create_newbies '/newbies/create', :controller => 'newbies', :action => 'create'
   map.destroy_newbies '/newbies/destroy', :controller => 'newbies', :action => 'destroy'

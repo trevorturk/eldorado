@@ -46,11 +46,13 @@
 				</p>
 				<p class="nav-right">
 					<% if logged_in? %>
-						<% if current_controller == "topics" %><%= link_to('Start a New Topic', new_topic_path) %>
+						<% if current_controller == 'categories' %><%= link_to('Start a New Topic', new_topic_path) %>
+						<% elsif current_controller == 'forums' %><%= link_to('Start a New Topic', new_topic_path) %>
+						<% elsif current_controller == 'topics' %><%= link_to('Start a New Topic', new_topic_path) %>
+						<% elsif current_controller == 'posts' %><%= link_to('Start a New Topic', new_topic_path) %>
 						<% elsif current_controller == "events" %><%= link_to('Add a New Event', new_event_path) %>
 						<% elsif current_controller == "users" %><%= link_to('Register a New User', new_user_path) %>
 						<% elsif current_controller == "uploads" %><%= link_to('Upload a New File', new_upload_path) %>
-						<% elsif current_controller == "forums" %><%= link_to('Create a New Forum', new_forum_path) %>
 						<% elsif current_controller == "headers" %><%= link_to('Upload a New Header', new_header_path) %>
 						<% end %>
 						&nbsp; <%= link_to('Logout', logout_path) %>

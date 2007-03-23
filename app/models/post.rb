@@ -6,8 +6,6 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :user_id, :body
     
-  after_create  { |t| Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', t.id, t.created_at, t.user_id], ['id = ?', t.topic_id]) }
-  
   attr_accessor :title
   attr_accessor :private
   

@@ -65,12 +65,10 @@
 	</table>
 <% end %>
 
-<div style="margin-top:10px;"> </div>
-
-<div class="info-left">
+<div class="info-left info-footer">
 	<%= link_to 'Home', home_path %> &raquo; <%=h @topic.title %>
 </div>
-<div class="info-right">
+<div class="info-right info-footer">
 	<% if logged_in? && @topic.can_edit_topic?(current_user) %>
 		<%= link_to 'Edit Topic', edit_topic_path %>
 	<% end %>
@@ -79,9 +77,10 @@
 
 <% if logged_in? && !@topic.closed %>
 	<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
-	<% form_for :post, :url => posts_path(:topic_id => @topic) do |f| -%>
+	<% form_for :post, :url => posts_path do |f| -%>
 		<div class="box">
 			<div class="top">Post a Reply</div>
+				<%= f.hidden_field :topic_id, :value => @topic.id %>
 				<%= f.text_area :body, :rows => '10', :style => "width:66%;" %>			
 				<p><%= submit_tag "Post Reply", :disable_with => "Post Reply" %> or <%= link_to 'Cancel', topics_path %></p>
 			</div>

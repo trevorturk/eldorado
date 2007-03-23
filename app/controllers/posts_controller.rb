@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
   
   def show
-    redirect_to topic_path(@topic)
+    redirect_to home_path
   end
 
   def new
@@ -22,8 +22,10 @@ class PostsController < ApplicationController
   def create 
     @post = Post.new(params[:post])
     @post.user_id = current_user.id
-    @topic = Topic.find(params[:topic_id])
+    @topic = Topic.find(params[:post][:topic_id])
     if (@topic.posts << @post) 
+      Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', @post.id, @post.created_at, @post.user_id], ['id = ?', @topic.id])
+      Forum.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', @post.id, @post.created_at, @post.user_id], ['id = ?', @topic.forum_id])
       redirect_to topic_path(@topic) 
     else 
       flash[:notice] = "Posts cannot be blank"
