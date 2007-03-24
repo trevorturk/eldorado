@@ -6,9 +6,9 @@
 		<div class="top">New Header</div>
 		<p><%= f.file_field :uploaded_data %></p>
 		
-		<p>Headers must be images under 50kb, and should be sized 760x200px.</p>
+		<p>Headers must be images smaller than 50kb, and should be sized 760x200px.</p>
 		
-		<p class="label"><label for="description">Description</label></p>
+		<p class="label"><label for="description">Description (required)</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
 			
 		<p><%= submit_tag "Upload", :disable_with => "Upload" %><span> or <%= link_to 'Cancel', headers_path %></p>

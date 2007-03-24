@@ -7,6 +7,7 @@
 	<title><%= page_title %></title>
 	<%= stylesheet_link_tag 'application' %>
 	<%= random_header_css %>
+	<%= login_background_css %>
 	<!-- Powered by El Dorado (http://almosteffortless.com) -->
 </head>
 
@@ -46,7 +47,8 @@
 				</p>
 				<p class="nav-right">
 					<% if logged_in? %>
-						<% if current_controller == 'categories' %><%= link_to('Start a New Topic', new_topic_path) %>
+						<% if current_controller == 'home' %><%= link_to('Start a New Topic', new_topic_path) %>
+						<% elsif current_controller == 'categories' %><%= link_to('Start a New Topic', new_topic_path) %>
 						<% elsif current_controller == 'forums' %><%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %>
 						<% elsif current_controller == 'topics' %><%= link_to('Start a New Topic', new_topic_path) %>
 						<% elsif current_controller == 'posts' %><%= link_to('Start a New Topic', new_topic_path) %>

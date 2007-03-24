@@ -1,18 +1,16 @@
 <%= error_messages_for :user %>
 
 <% form_for(:user, :url => login_path) do |f| %>
-	<div class="box">
+	<div class="box login">
 		<div class="top">Login</div>
+			<p class="label"><label for="login">Username</label></p>
+			<p><%= f.text_field :login, :style => "width:30%" %></p>
 		
-		<p class="label"><label for="login">Username</label></p>
-		<p><%= f.text_field :login, :style => "width:30%" %></p>
+			<p class="label"><label for="password">Password</label></p>
+			<p><%= f.password_field :password, :style => "width:30%" %></p>
 		
-		<p class="label"><label for="password">Password</label></p>
-		<p><%= f.password_field :password, :style => "width:30%" %></p>
-		
-		<p><%= submit_tag "Login", :disable_with => "Login" %><span> or <%= link_to 'Cancel', home_path %></p>
-
-	</div>
+			<p><%= submit_tag "Login", :disable_with => "Login" %><span> or <%= link_to 'Cancel', home_path %></p>
+		</div>
 <% end %>
 
 <%= javascript_tag "user_login.focus();" %>

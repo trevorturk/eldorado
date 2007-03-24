@@ -56,5 +56,9 @@ module ApplicationHelper
   def current_action
     request.path_parameters['action']
   end
+  
+  def login_background_css
+    return '<style type="text/css">.login { background: url("/images/ascii-girl.jpg") bottom right; }</style>'
+  end
     
 end
