@@ -66,7 +66,7 @@
 <% end %>
 
 <div class="info-left info-footer">
-	<%= link_to 'Home', home_path %> &raquo; <%=h @topic.title %>
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %>/<%= link_to 'Topics', topics_path %> &raquo; <%= link_to @category.name, category_path(@category) %> &raquo; <%= link_to @forum.name, forum_path(@forum) %> &raquo; <%=h @topic.title %>
 </div>
 <div class="info-right info-footer">
 	<% if logged_in? && @topic.can_edit_topic?(current_user) %>

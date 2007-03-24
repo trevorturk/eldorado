@@ -24,8 +24,6 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     @topic = Topic.find(params[:post][:topic_id])
     if (@topic.posts << @post) 
-      Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', @post.id, @post.created_at, @post.user_id], ['id = ?', @topic.id])
-      Forum.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', @post.id, @post.created_at, @post.user_id], ['id = ?', @topic.forum_id])
       redirect_to topic_path(@topic) 
     else 
       flash[:notice] = "Posts cannot be blank"
@@ -58,5 +56,5 @@ class PostsController < ApplicationController
   def can_edit_post
     redirect_to topic_path(@topic) and return false unless admin? || (current_user == @post.user)
   end
-  
+    
 end

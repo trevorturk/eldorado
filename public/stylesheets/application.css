@@ -273,6 +273,10 @@ tbody .tds {
 	width: 8%;
 }
 
+.forum-index .tcr {
+	vertical-align: middle;
+}
+
 .forum-list th {
 	background: #d1d1d1;
 	color: #333;

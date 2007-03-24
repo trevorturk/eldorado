@@ -6,7 +6,14 @@
 		
 		<p class="label"><label for="title">Title</label></p>
 		<p><%= f.text_field :title, :style => "width:66%" %> &nbsp; <%= f.check_box(:private) %><label for="private"> Private</label></p>
+		
+		<p class="label"><label for="forum">Forum</label></p>
+		<p><%= 
+			@forums = Forum.find(:all, :order => "name") 
+			f.collection_select(:forum_id, @forums, :id, :name) 
+		%></p>
 
+		
 		<p class="label"><label for="body">Body</label></p>
 		<p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
 

@@ -155,4 +155,13 @@ class TopicsControllerTest < Test::Unit::TestCase
     # assert_redirected_to topic_path(:id => "2")
   end
   
+  def test_should_set_last_post_info_in_forum_and_topic_on_new_topic
+  end
+  
+  def test_should_set_last_post_info_in_forum_and_topic_on_new_post_in_existing_topic
+  end
+  
+  def test_should_set_last_post_info_in_forum_and_topic_if_most_recent_post_is_deleted
+  end
+  
 end

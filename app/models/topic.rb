@@ -2,9 +2,10 @@ class Topic < ActiveRecord::Base
     
   has_many :posts, :order => 'posts.created_at', :dependent => :destroy 
   belongs_to :user, :counter_cache => true
+  belongs_to :forum, :counter_cache => true
   belongs_to :last_poster, :foreign_key => "last_post_by", :class_name => "User"
   
-  validates_presence_of :user_id, :title
+  validates_presence_of :user_id, :title, :forum_id
     
   attr_accessor :body
   

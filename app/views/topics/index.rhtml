@@ -1,3 +1,11 @@
+<% if current_controller == 'forums' %>
+	<div class="info-left">
+		<span class="title"><%=h @forum.name %></span>
+		<span class="detail"><%=h @forum.description %></span>
+	</div>
+	<div style="clear:both;"> </div>
+<% end %>
+
 <table cellspacing="0">
 	<thead>
 		<tr>
@@ -13,12 +21,19 @@
 				<td class="tcl"><%= link_to h(topic.title), topic_path(topic.id) %> by <%=h topic.user.login %></td>
 				<td class="tcm"><%=h topic.posts_count-1 %></td>
 				<td class="tcm"><%=h topic.views %></td>
-				<td class="tcr"><%=h time_ago_in_words(topic.last_post_at) %> ago by <%=h topic.last_poster.login %></td>
+				<td class="tcr"><% if !topic.last_post_at.blank? %><%=h time_ago_in_words(topic.last_post_at) %> ago by <%=h topic.last_poster.login %><% end %></td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
 
+<div class="info-left">
+<% if current_controller == 'forums' %>
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= link_to @category.name, category_path(@category) %> &raquo; <%= @forum.name %>
+<% else %>
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= link_to 'Topics', topics_path %>
+<% end %>
+</div>
 <div class="info-right">
 	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
 	<% else %><span class="disabled">&laquo; Previous</span><% end %>

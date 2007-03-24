@@ -24,6 +24,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.find(:all)
     @forum = Forum.find_by_id(@topic.forum_id)
+    @category = Category.find(@forum.category_id)
     @topic.hit!
     @page_title = @topic.title
     @posters = @posts.map(&:user) ; @posters.uniq!
