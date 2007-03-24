@@ -8,9 +8,9 @@ class TopicsController < ApplicationController
   # GET /topics.xml
   def index
     if logged_in?
-      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'topics.last_post_at desc')
+      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
-      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => ["topics.private = ?", false])
+      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
     respond_to do |format|
       format.html # index.rhtml
@@ -37,6 +37,7 @@ class TopicsController < ApplicationController
   # GET /topics/new
   def new
     @topic = Topic.new
+    @topic.forum_id = params[:forum_id] 
   end
 
   # GET /topics/1;edit

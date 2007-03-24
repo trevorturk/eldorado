@@ -3,7 +3,7 @@
 		<table cellspacing="0" class="forum-index">
 			<thead>
 				<tr>
-					<th colspan="4"><%=h category.name %></th>
+					<th colspan="4"><%= link_to h(category.name), category_path(category) %></th>
 				</tr>
 				<tr class="forum-list">
 					<th class="tcl">Forums</th>

@@ -1,3 +1,10 @@
+<% if current_controller == 'categories' %>
+	<div class="info-left">
+		<span class="title"><%=h @category.name %></span>
+		<span class="detail"><%= @forums.map { |f| link_to "#{h f.name}", forum_path(f) } * ", " %></span>
+	</div>
+	<div style="clear:both;"> </div>
+<% end %>
 <% if current_controller == 'forums' %>
 	<div class="info-left">
 		<span class="title"><%=h @forum.name %></span>
@@ -28,10 +35,12 @@
 </table>
 
 <div class="info-left">
-<% if current_controller == 'forums' %>
+<% if current_controller == 'categories' %>
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
+<% elsif current_controller == 'forums' %>
 	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= link_to @category.name, category_path(@category) %> &raquo; <%= @forum.name %>
 <% else %>
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= link_to 'Topics', topics_path %>
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; Viewing All Topics
 <% end %>
 </div>
 <div class="info-right">

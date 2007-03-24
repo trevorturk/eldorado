@@ -12,9 +12,9 @@ class ForumsController < ApplicationController
     @forum = Forum.find(params[:id])
     @category = Category.find(@forum.category_id)
     if logged_in?
-      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => ["forum_id = ?", @forum.id])
+      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ?", @forum.id])
     else
-      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'topics.last_post_at desc', :conditions => ["forum_id = ?, topics.private = ?", @forum.id, false])
+      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ?, private = ?", @forum.id, false])
     end
     respond_to do |format|
       format.html { render(:template => "topics/index") }
