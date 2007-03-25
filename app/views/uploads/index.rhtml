@@ -17,22 +17,21 @@
 	<span id="filter-link"><%= link_to_function 'Filter List', "$('filters').toggle();$('filter-link').toggle()" %></span>
 	<div id="filters" style="display:none;">
 		<% form_for(:upload, :url => files_home_path) do |f| -%>
+			Filter by 
 			<select id="upload_user_id" name="upload[user_id]" onchange="this.form.submit()">
-				<option>Filter by User</option>
+				<option>User</option>
 				<% for filter_user in @filter_users %>
 					<option value="<%=h filter_user.user.id %>"><%=h filter_user.user.login %></option>
 				<% end %>
-			</select>
-		<% end %><br />
-		<% form_for(:upload, :url => files_home_path) do |f| -%>
+			</select> or 
 			<select id="upload_content_type" name="upload[content_type]" onchange="this.form.submit()">
-				<option>Filter by Type</option>
+				<option>Type</option>
 				<% for filter_type in @filter_types %>
 					<option value="<%=h filter_type.content_type %>"><%=h filter_type.content_type %></option>
 				<% end %>
-			</select>
+			</select> or 
+			<%= link_to_function 'Cancel', "$('filters').toggle();$('filter-link').toggle()" %>
 		<% end %>
-		<br /><%= link_to_function 'Cancel', "$('filters').toggle();$('filter-link').toggle()" %>
 	</div>
 </div>
 <div style="clear:both;"> </div>
