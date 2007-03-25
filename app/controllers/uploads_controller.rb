@@ -4,7 +4,20 @@ class UploadsController < ApplicationController
   before_filter :can_edit_upload, :only => [:destroy]
   
   def index
-    @uploads = Upload.find(:all, :order => 'updated_at desc')
+    if request.post?
+      @filter_type = params[:upload][:content_type]
+      @filter_user = params[:upload][:user_id]
+      if @filter_type
+        @uploads = Upload.find(:all, :order => 'updated_at desc', :conditions => ["content_type = ?", @filter_type])
+      elsif @filter_user
+        @uploads = Upload.find(:all, :order => 'updated_at desc', :conditions => ["user_id = ?", @filter_user])
+        @filter_user = User.find(@filter_user)
+      end
+    else
+      @uploads = Upload.find(:all, :order => 'updated_at desc')
+    end
+    @filter_users = Upload.find(:all, :group => 'user_id', :include => [:user])
+    @filter_types = Upload.find(:all, :group => 'content_type')
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @uploads.to_xml }
@@ -17,6 +30,7 @@ class UploadsController < ApplicationController
 
   def new
     @upload = Upload.new
+    render :template => "uploads/_new"
   end
 
   def edit

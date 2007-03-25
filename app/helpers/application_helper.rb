@@ -10,7 +10,7 @@ module ApplicationHelper
       @header = Header.find(:first, :order => "RAND()", :conditions => ["votes >= ?", 0])
     end
     if @header
-      return '<style type="text/css">.header { background: url("'+@header.public_filename+'"); }</style>'
+      return '<style type="text/css">.header { background: #333 url("'+@header.public_filename+'"); }</style>'
     end
   end
   

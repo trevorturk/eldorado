@@ -4,13 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
 	<title><%= page_title %></title>
+	<!-- Powered by El Dorado (http://almosteffortless.com) -->
+	
 	<%= stylesheet_link_tag 'application' %>
 	<%= random_header_css %>
 	<%= login_image_css %>
-	<!-- Powered by El Dorado (http://almosteffortless.com) -->
+	<%= javascript_include_tag 'prototype' %>
 </head>
-
 <body>
 
 	<div class="wrapper">
@@ -54,7 +56,7 @@
 						<% elsif current_controller == 'posts' %><%= link_to('Start a New Topic', new_topic_path) %>
 						<% elsif current_controller == "events" %><%= link_to('Add a New Event', new_event_path) %>
 						<% elsif current_controller == "users" %><%= link_to('Register a New User', new_user_path) %>
-						<% elsif current_controller == "uploads" %><%= link_to('Upload a New File', new_upload_path) %>
+						<% elsif current_controller == "uploads" %><%= link_to_function 'Upload a New File', "$('action').toggle()", :href => new_upload_path %>
 						<% elsif current_controller == "headers" %><%= link_to('Upload a New Header', new_header_path) %>
 						<% end %>
 						&nbsp; <%= link_to('Logout', logout_path) %>

@@ -139,6 +139,7 @@ h3 {
 	background: #fff;
 	border-left: 0;
 	border-right: 0;
+	margin-top: 0;
 }
 
 .nav-stats p.nav-left {
@@ -302,7 +303,7 @@ tbody .tds {
 }
 
 .info-footer {
-	margin-top: 5px;
+	
 }
 
 .title {
@@ -315,6 +316,12 @@ tbody .tds {
 	color: #999;
 	margin-left: 2px;
 	letter-spacing: -1px;
+}
+
+#filters {
+	margin: 2px;
+	padding: 4px;
+	text-align: right;
 }
 
 blockquote {

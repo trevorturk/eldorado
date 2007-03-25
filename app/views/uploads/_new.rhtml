@@ -1,0 +1,29 @@
+<%= error_messages_for :upload %>
+
+<% if current_action == 'index' %>
+	<div id="action" style="display:none;">
+<% end %>
+
+<div class="box">
+	<% form_for(:upload, :url => uploads_path, :html => { :multipart => true }) do |f| -%>
+	
+	<div class="top">New File</div>
+	<p><%= f.file_field :uploaded_data %></p>
+	
+	<p>Files must be under 15mb.</p>
+		
+	<p><%= submit_tag "Upload", :disable_with => "Upload" %><span> or <%= link_to 'Cancel', files_home_path %></p>
+	
+	<% end %>
+</div>
+
+<% if current_action == 'index'%>
+	</div>
+<% end %>
+
+<% if current_action != 'index'%>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Files', files_home_path %> &raquo; New File
+	</div>
+	<div style="clear:both;"> </div>
+<% end %>

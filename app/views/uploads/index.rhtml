@@ -1,4 +1,42 @@
+<%= render :partial => 'uploads/new' %>
+
 <% if !@uploads.blank? %>
+<div class="info-left">
+	<span class="title">Files</span>
+	<span class="detail">
+		<% if @filter_type %>
+			<%= @filter_type %>&nbsp;(<%= link_to 'clear filter', files_home_path %>)
+		<% elsif @filter_user %>
+			<%= @filter_user.login %>&nbsp;(<%= link_to 'clear filter', files_home_path %>)
+		<% else %>
+			All Files
+		<% end %>
+	</span>
+</div>
+<div class="info-right">
+	<span id="filter-link"><%= link_to_function 'Filter List', "$('filters').toggle();$('filter-link').toggle()" %></span>
+	<div id="filters" style="display:none;">
+		<% form_for(:upload, :url => files_home_path) do |f| -%>
+			<select id="upload_user_id" name="upload[user_id]" onchange="this.form.submit()">
+				<option>Filter by User</option>
+				<% for filter_user in @filter_users %>
+					<option value="<%=h filter_user.user.id %>"><%=h filter_user.user.login %></option>
+				<% end %>
+			</select>
+		<% end %><br />
+		<% form_for(:upload, :url => files_home_path) do |f| -%>
+			<select id="upload_content_type" name="upload[content_type]" onchange="this.form.submit()">
+				<option>Filter by Type</option>
+				<% for filter_type in @filter_types %>
+					<option value="<%=h filter_type.content_type %>"><%=h filter_type.content_type %></option>
+				<% end %>
+			</select>
+		<% end %>
+		<br /><%= link_to_function 'Cancel', "$('filters').toggle();$('filter-link').toggle()" %>
+	</div>
+</div>
+<div style="clear:both;"> </div>
+
 	<table cellspacing="0">
 		<thead>
 			<tr>
@@ -24,9 +62,10 @@
 			<% end %>
 		</tbody>
 	</table>
-<% end %>
 
-<div class="info-right">
+<div class="info-right info-footer">
 	<%= link_to('View All Files &raquo;', files_home_path) %>
 </div>
 <div style="clear:both;"> </div>
+
+<% end %>
