@@ -1,10 +1,10 @@
 class ForumsController < ApplicationController
 
   def index
-    @forums = Forum.find(:all)
+    @categories = Category.find(:all, :order => 'position asc')
     respond_to do |format|
       format.html # index.rhtml
-      format.xml  { render :xml => @forums.to_xml }
+      format.xml  { render :xml => @categories.to_xml }
     end
   end
 
@@ -14,7 +14,7 @@ class ForumsController < ApplicationController
     if logged_in?
       @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ?", @forum.id])
     else
-      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ?, private = ?", @forum.id, false])
+      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ? and private = ?", @forum.id, false])
     end
     respond_to do |format|
       format.html { render(:template => "topics/index") }

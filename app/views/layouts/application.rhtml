@@ -7,7 +7,7 @@
 	<title><%= page_title %></title>
 	<%= stylesheet_link_tag 'application' %>
 	<%= random_header_css %>
-	<%= login_background_css %>
+	<%= login_image_css %>
 	<!-- Powered by El Dorado (http://almosteffortless.com) -->
 </head>
 
@@ -80,7 +80,7 @@
 					<% end %>
 				</p>
 				<p class="nav-right">
-					<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= newbie %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
+					<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= @options.newest_user %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
 				</p>
 			</div>
 				

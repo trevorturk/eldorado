@@ -64,6 +64,18 @@ class HeadersController < ApplicationController
     end
   end
   
+  def vote_up
+    @header = Header.find(params[:id])
+    @header.update_attributes(:votes => @header.votes+1)
+    redirect_to header_path(@header)
+  end
+  
+  def vote_down
+    @header = Header.find(params[:id])
+    @header.update_attributes(:votes => @header.votes-1)
+    redirect_to header_path(@header)
+  end
+  
   def can_edit_header
     @header = Header.find(params[:id])
     redirect_to header_path(@header) and return false unless admin? || (current_user == @header.user)

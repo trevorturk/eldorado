@@ -10,8 +10,12 @@ module ApplicationHelper
       @header = Header.find(:first, :order => "RAND()")
     end
     if @header
-      return '<style type="text/css">.header { background-image: url("'+@header.public_filename+'"); }</style>'
+      return '<style type="text/css">.header { background: url("'+@header.public_filename+'"); }</style>'
     end
+  end
+  
+  def login_image_css
+    return '<style type="text/css">.login { background: #f1f1f1 url("/files/'+@options.login_image+'") bottom right; }</style>'
   end
 
   def page_title
@@ -22,12 +26,6 @@ module ApplicationHelper
     else
       h(@options.site_title)
     end
-  end
-  
-  def newbie
-    @newbie = Newbie.find(:first, :order => "RAND()")
-    return "Newest User" if @newbie.nil?
-    return h(@newbie.term)
   end
   
   def avatar_img(user)
@@ -56,9 +54,5 @@ module ApplicationHelper
   def current_action
     request.path_parameters['action']
   end
-  
-  def login_background_css
-    return '<style type="text/css">.login { background: url("/images/ascii-girl.jpg") bottom right; }</style>'
-  end
-    
+      
 end

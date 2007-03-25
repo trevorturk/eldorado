@@ -26,6 +26,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    redirect_to home_path
   end
 
   def edit
