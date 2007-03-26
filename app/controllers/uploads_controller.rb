@@ -7,9 +7,9 @@ class UploadsController < ApplicationController
     if request.post?
       @filter_type = params[:upload][:content_type]
       @filter_user = params[:upload][:user_id]
-      if @filter_type
+      if @filter_type != '0'
         @uploads = Upload.find(:all, :order => 'updated_at desc', :conditions => ["content_type = ?", @filter_type])
-      elsif @filter_user
+      elsif @filter_user != '0'
         @uploads = Upload.find(:all, :order => 'updated_at desc', :conditions => ["user_id = ?", @filter_user])
         @filter_user = User.find(@filter_user)
       end
