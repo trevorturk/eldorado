@@ -17,7 +17,14 @@
 		<p class="label"><label for="body">Body</label></p>
 		<p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
 
-		<p><%= submit_tag "Post Topic", :disable_with => "Post Topic" %><span> or <%= link_to 'Cancel', topics_path %></p>
+		<p>
+			<%= submit_tag "Post Topic", :disable_with => "Post Topic" %> or 
+			<% if @topic.forum_id %>
+			<%= link_to 'Cancel', forum_path(@topic.forum_id) %>
+			<% else %>
+			<%= link_to 'Cancel', forum_home_path %>
+			<% end %>
+		</p>
 
 	</div>
 <% end %>

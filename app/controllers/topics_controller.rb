@@ -4,8 +4,6 @@ class TopicsController < ApplicationController
   before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
   before_filter :check_privacy, :only => [:show]
   
-  # GET /topics
-  # GET /topics.xml
   def index
     if logged_in?
       @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc')
@@ -18,8 +16,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # GET /topics/1
-  # GET /topics/1.xml
   def show
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.find(:all)
@@ -34,19 +30,15 @@ class TopicsController < ApplicationController
     end
   end
 
-  # GET /topics/new
   def new
     @topic = Topic.new
     @topic.forum_id = params[:forum_id] 
   end
 
-  # GET /topics/1;edit
   def edit
     @topic = Topic.find(params[:id])
   end
 
-  # POST /topics
-  # POST /topics.xml
   def create
     @topic = Topic.new(params[:topic])
     if @topic
@@ -65,8 +57,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # PUT /topics/1
-  # PUT /topics/1.xml
   def update
     @topic = Topic.find(params[:id])
     respond_to do |format|
@@ -80,8 +70,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # DELETE /topics/1
-  # DELETE /topics/1.xml
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy

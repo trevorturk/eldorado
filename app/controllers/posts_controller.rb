@@ -19,12 +19,11 @@ class PostsController < ApplicationController
   def edit
   end 
     
-  def create 
-    @post = Post.new(params[:post])
-    @post.user_id = current_user.id
+  def create
+    @post = current_user.posts.build params[:post]
     @topic = Topic.find(params[:post][:topic_id])
     if (@topic.posts << @post) 
-      redirect_to topic_path(@topic) 
+      redirect_to topic_path(@topic)
     else 
       flash[:notice] = "Posts cannot be blank"
       redirect_to topic_path(@topic)

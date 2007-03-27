@@ -51,7 +51,7 @@
 					<% if logged_in? %>
 						<% if current_controller == 'home' %><%= link_to('Start a New Topic', new_topic_path) %>
 						<% elsif current_controller == 'categories' %><%= link_to('Start a New Topic', new_topic_path) %>
-						<% elsif current_controller == 'forums' %><%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %>
+						<% elsif current_controller == 'forums' %><% if @forum %><%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %><% else %><%= link_to('Start a New Topic', new_topic_path) %><% end %>
 						<% elsif current_controller == 'topics' %><%= link_to('Start a New Topic', new_topic_path) %>
 						<% elsif current_controller == 'posts' %><%= link_to('Start a New Topic', new_topic_path) %>
 						<% elsif current_controller == "events" %><%= link_to('Add a New Event', new_event_path) %>
