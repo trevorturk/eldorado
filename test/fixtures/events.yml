@@ -4,8 +4,10 @@ one:
   title: MyString
   description: MyText
   date: 2007-03-14 09:19:14
+  user_id: 1
 two:
   id: 2
   title: MyString
   description: MyText
   date: 2007-03-14 09:19:14
+  user_id: 1

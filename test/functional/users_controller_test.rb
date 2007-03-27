@@ -44,6 +44,27 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_template 'edit'
     assert_not_nil assigns(:user)
   end
+  
+  def test_should_update_user_if_admin
+    login_as :Administrator
+    put :update, :id => 4, :user => { :bio => "ok!" }
+    assert_redirected_to user_path(assigns(:user))
+    assert_equal "ok!", users(:trevor).bio
+  end
+  
+  def test_should_update_user_if_self
+    login_as :trevor
+    put :update, :id => 4, :user => { :bio => "ok!" }
+    assert_redirected_to user_path(assigns(:user))
+    assert_equal "ok!", users(:trevor).bio
+  end
+  
+  def test_should_not_update_user_if_not_authorized
+    login_as :trevor
+    put :update, :id => 2, :user => { :bio => "ok!" }
+    assert_redirected_to user_path(assigns(:user))
+    assert_equal "admin", users(:Administrator).bio
+  end
     
   def test_should_be_able_to_edit_any_user_if_admin
     login_as :Administrator
@@ -92,6 +113,12 @@ class UsersControllerTest < Test::Unit::TestCase
     post :login, :user => {:login => 'trevor', :password => 'test'}
     assert_equal 4, session[:user_id]
     assert_redirected_to home_path
+  end
+  
+  def test_should_not_allow_banned_user_to_login
+    post :login, :user => {:login => 'banned', :password => 'test'}
+    assert_nil session[:user_id]
+    assert_redirected_to login_path
   end
   
 end

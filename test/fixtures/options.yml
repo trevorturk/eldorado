@@ -1,5 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-two:
-  id: 2
+  site_title: 'El Dorado.org'
+  site_tagline: 'tagline'
+  footer_left: 'left'
+  footer_right: 'right'
+  admin_rank: 'Administrator'
+  avatars_path: '/images/avatars/'
+  newest_user: 'Newest User'

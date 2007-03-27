@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :find_user, :only => [:edit, :update, :destroy]
-  before_filter :can_edit_user, :only => [:edit, :update_destroy]
+  before_filter :can_edit_user, :only => [:edit, :update, :destroy]
   
   def index
     @users = User.find(:all, :order => 'last_login_at desc')
@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.profile_updated_at = Time.now.utc
     @user.update_attributes(params[:user])
     redirect_to user_path(@user)
   end
@@ -62,6 +61,10 @@ class UsersController < ApplicationController
   end
   
   def do_login(user)
+    if (!user.banned_until.blank?) && (user.banned_until > Time.now.utc.to_date)
+      flash[:notice] = user.login+" is banned until "+user.banned_until.to_s(:long)+" with the message: "+user.ban_message
+      redirect_to login_path and return false
+    end
     session[:user_id] = user.id
     session[:last_login_at] = user.last_login_at
     user.last_login_at = Time.now.utc

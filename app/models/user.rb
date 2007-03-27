@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :headers, :dependent => :destroy
   has_many :events, :dependent => :destroy
+  has_many :uploads, :dependent => :destroy
   
   validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false
@@ -13,10 +14,11 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :on => :create
   
   before_create { |u| u.last_login_at = u.profile_updated_at = Time.now.utc }
-  
+  before_update { |u| u.profile_updated_at = Time.now.utc }
+    
   attr_reader :password
   
-  attr_protected :admin, :posts_count, :topics_count, :headers_count, :events_count, :created_at, :updated_at, :last_login_at, :profile_updated_at, :online_at
+  attr_protected :admin, :posts_count, :topics_count, :headers_count, :events_count, :created_at, :updated_at, :last_login_at, :profile_updated_at, :online_at, :banned_until, :ban_message
    
   def password=(value)
     return if value.blank?

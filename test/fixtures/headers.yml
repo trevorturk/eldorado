@@ -8,6 +8,7 @@ one:
   size: 1
   width: 1
   height: 1
+  user_id: 1
 two:
   id: 2
   parent_id: 1
@@ -17,3 +18,4 @@ two:
   size: 1
   width: 1
   height: 1
+  user_id: 1

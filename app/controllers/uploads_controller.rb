@@ -1,7 +1,6 @@
 class UploadsController < ApplicationController
   
   before_filter :force_login, :except => [:index, :show]
-  before_filter :can_edit_upload, :only => [:destroy]
   
   def index
     if request.post?
@@ -25,7 +24,7 @@ class UploadsController < ApplicationController
   end
 
   def show
-    redirect_to uploads_path
+    redirect_to files_home_path
   end
 
   def new
@@ -34,7 +33,7 @@ class UploadsController < ApplicationController
   end
 
   def edit
-    redirect_to uploads_path
+    redirect_to files_home_path
   end
 
   def create
@@ -53,21 +52,17 @@ class UploadsController < ApplicationController
   end
   
   def update
-    redirect_to uploads_path
+    redirect_to files_home_path
   end
 
   def destroy
     @upload = Upload.find(params[:id])
+    redirect_to files_home_path and return false unless admin? || (current_user == @upload.user)
     @upload.destroy
     respond_to do |format|
       format.html { redirect_to files_home_path }
       format.xml  { head :ok }
     end
-  end
-  
-  def can_edit_upload
-    @upload = Upload.find(params[:id])
-    redirect_to upload_path(@upload) and return false unless admin? || (current_user == @upload.user)
   end
   
 end

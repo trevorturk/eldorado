@@ -15,7 +15,7 @@ module ApplicationHelper
   end
   
   def login_image_css
-    return '<style type="text/css">.login { background: #f1f1f1 url("/files/'+@options.login_image+'") bottom right; }</style>'
+    return '<style type="text/css">.login { background: #f1f1f1 url("/files/'+@options.login_image+'") bottom right; }</style>' unless @options.login_image.nil?
   end
 
   def page_title

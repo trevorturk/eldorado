@@ -16,6 +16,7 @@ Administrator:
   created_at: <%= 5.days.ago.to_s :db %>
   last_login_at: <%= 5.hours.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
+  bio: 'admin'
 Timothy:
   id: 3
   login: Timothy
@@ -36,3 +37,16 @@ trevor:
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   posts_count: 2211
   topics_count: 130
+  bio: 'my bio'
+banned:
+  id: 5
+  login: banned
+  email: banned@test.com
+  password_hash: <%= User.encrypt('test') %>
+  created_at: <%= 5.days.ago.to_s :db %>
+  last_login_at: <%= 5.hours.ago.to_s :db %>
+  profile_updated_at: <%= 5.hours.ago.to_s :db %>
+  posts_count: 2211
+  topics_count: 130
+  banned_until: 3007-02-26 04:04:21
+  ban_message: 'get banned.'

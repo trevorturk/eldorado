@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :bans
-
   map.resources :categories
   map.resources :forums
   map.resources :uploads

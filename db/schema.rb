@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 36) do
+ActiveRecord::Schema.define(:version => 37) do
 
   create_table "categories", :force => true do |t|
     t.column "name",     :string
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(:version => 36) do
     t.column "headers_count",      :integer,  :default => 0
     t.column "events_count",       :integer,  :default => 0
     t.column "uploads_count",      :integer,  :default => 0
+    t.column "banned_until",       :datetime
+    t.column "ban_message",        :string
   end
 
 end

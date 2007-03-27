@@ -5,7 +5,7 @@ require 'uploads_controller'
 class UploadsController; def rescue_action(e) raise e end; end
 
 class UploadsControllerTest < Test::Unit::TestCase
-  fixtures :uploads
+  all_fixtures
 
   def setup
     @controller = UploadsController.new
@@ -20,38 +20,40 @@ class UploadsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_new
-    get :new
-    assert_response :success
   end
   
   def test_should_create_upload
-    old_count = Upload.count
-    post :create, :upload => { }
-    assert_equal old_count+1, Upload.count
-    
-    assert_redirected_to upload_path(assigns(:upload))
   end
 
   def test_should_show_upload
     get :show, :id => 1
-    assert_response :success
+    assert_response :redirect
   end
 
   def test_should_get_edit
     get :edit, :id => 1
-    assert_response :success
+    assert_response :redirect
   end
   
   def test_should_update_upload
     put :update, :id => 1, :upload => { }
-    assert_redirected_to upload_path(assigns(:upload))
+    assert_response :redirect
   end
   
   def test_should_destroy_upload
+    login_as :trevor
     old_count = Upload.count
     delete :destroy, :id => 1
     assert_equal old_count-1, Upload.count
-    
-    assert_redirected_to uploads_path
+    assert_redirected_to files_home_path
   end
+  
+  def test_should_not_destroy_upload_if_not_authorized
+    login_as :trevor
+    old_count = Upload.count
+    delete :destroy, :id => 2
+    assert_equal old_count, Upload.count
+    assert_redirected_to files_home_path
+  end
+  
 end

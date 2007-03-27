@@ -28,38 +28,38 @@
 		</tbody>
 	</table>
 
-<div class="info-left info-footer">
-	<span id="filter-link"><%= link_to_function 'Filter', "$('filters').toggle();$('filter-link').toggle();$('filter-current').toggle()" %></span>
-	<div id="filters" style="display:none;">
-		<% form_for(:upload, :url => files_home_path) do |f| -%>
-			Filter by 
-			<select id="upload_user_id" name="upload[user_id]" onchange="this.form.submit()">
-				<option value="0">User</option>
-				<% for filter_user in @filter_users %>
-					<option value="<%=h filter_user.user.id %>"><%=h filter_user.user.login %></option>
-				<% end %>
-			</select> or 
-			<select id="upload_content_type" name="upload[content_type]" onchange="this.form.submit()">
-				<option value="0">Type</option>
-				<% for filter_type in @filter_types %>
-					<option value="<%=h filter_type.content_type %>"><%=h filter_type.content_type %></option>
-				<% end %>
-			</select> or 
-			<%= link_to_function 'Cancel', "$('filters').toggle();$('filter-link').toggle();$('filter-current').toggle()" %>
-		<% end %>
+	<div class="info-left info-footer">
+		<span id="filter-link"><%= link_to_function 'Filter', "$('filters').toggle();$('filter-link').toggle();$('filter-current').toggle()" %></span>
+		<div id="filters" style="display:none;">
+			<% form_for(:upload, :url => files_home_path) do |f| -%>
+				Filter by 
+				<select id="upload_user_id" name="upload[user_id]" onchange="this.form.submit()">
+					<option value="0">User</option>
+					<% for filter_user in @filter_users %>
+						<option value="<%=h filter_user.user.id %>"><%=h filter_user.user.login %></option>
+					<% end %>
+				</select> or 
+				<select id="upload_content_type" name="upload[content_type]" onchange="this.form.submit()">
+					<option value="0">Type</option>
+					<% for filter_type in @filter_types %>
+						<option value="<%=h filter_type.content_type %>"><%=h filter_type.content_type %></option>
+					<% end %>
+				</select> or 
+				<%= link_to_function 'Cancel', "$('filters').toggle();$('filter-link').toggle();$('filter-current').toggle()" %>
+			<% end %>
+		</div>
+		<span id="filter-current">
+			<% if @filter_type && @filter_type != '0' %>
+				<b><%= @filter_type %></b>&nbsp;(<%= link_to 'x', files_home_path %>)
+			<% elsif @filter_user && @filter_user != '0' %>
+				<b><%= @filter_user.login %></b>&nbsp;(<%= link_to 'x', files_home_path %>)
+			<% end %>
+		</span>
 	</div>
-	<span id="filter-current">
-		<% if @filter_type && @filter_type != '0' %>
-			<b><%= @filter_type %></b>&nbsp;(<%= link_to 'x', files_home_path %>)
-		<% elsif @filter_user && @filter_user != '0' %>
-			<b><%= @filter_user.login %></b>&nbsp;(<%= link_to 'x', files_home_path %>)
-		<% end %>
-	</span>
-</div>
-<div class="info-right info-footer">
-	<span class="disabled">&laquo; Previous</span> &nbsp; 
-	<span class="disabled">Next &raquo;</span>
-</div>
-<div style="clear:both;"> </div>
+	<div class="info-right info-footer">
+		<span class="disabled">&laquo; Previous</span> &nbsp; 
+		<span class="disabled">Next &raquo;</span>
+	</div>
+	<div style="clear:both;"> </div>
 
 <% end %>

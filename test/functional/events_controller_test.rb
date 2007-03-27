@@ -20,9 +20,6 @@ class EventsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_new
-    login_as :trevor
-    get :new
-    assert_response :success
   end
   
   def test_should_create_event
@@ -40,23 +37,22 @@ class EventsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_edit
-    login_as :trevor
+    login_as :Administrator
     get :edit, :id => 1
     assert_response :success
   end
   
   def test_should_update_event
-    login_as :trevor
+    login_as :Administrator
     put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now}
-    assert_redirected_to events_path
+    assert_redirected_to event_path(assigns(:event))
   end
   
-  def test_should_destroy_event
-    login_as :trevor
+  def test_should_destroy_event_if_authorized
+    login_as :Administrator
     old_count = Event.count
     delete :destroy, :id => 1
     assert_equal old_count-1, Event.count
-    
     assert_redirected_to events_path
   end
   

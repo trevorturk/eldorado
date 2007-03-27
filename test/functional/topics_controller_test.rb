@@ -23,7 +23,7 @@ class TopicsControllerTest < Test::Unit::TestCase
     login_as :trevor
     old_topic_count = Topic.count
     old_post_count = Post.count
-    post :create, :topic => { :title => "test", :body => "this is a test" }  
+    post :create, :topic => { :title => "test", :body => "this is a test", :forum_id => "1" }  
     assert assigns(:topic)
     assert assigns(:post)
     assert_equal old_topic_count+1, Topic.count

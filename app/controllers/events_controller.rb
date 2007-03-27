@@ -51,7 +51,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to events_url }
+        format.html { redirect_to event_url(@event) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
