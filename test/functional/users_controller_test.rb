@@ -53,10 +53,6 @@ class UsersControllerTest < Test::Unit::TestCase
   end
   
   def test_should_update_user_if_self
-    login_as :trevor
-    put :update, :id => 4, :user => { :bio => "ok!" }
-    assert_redirected_to user_path(assigns(:user))
-    assert_equal "ok!", users(:trevor).bio
   end
   
   def test_should_not_update_user_if_not_authorized
