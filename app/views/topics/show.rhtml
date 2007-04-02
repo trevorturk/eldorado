@@ -23,7 +23,7 @@
 					<dl>
 						<dt><%= link_to h(post.user.login), user_path(post.user.id) %></dt>
 						<dd class="rank"><%= rank_for(post.user.posts_count, post.user.admin) %></dd>
-						<dd class="avatar"><%= link_to avatar_img(post.user), user_path(post.user.id) unless post.user.avatar.blank? %></dd>
+						<dd class="avatar"><%= link_to avatar_img(post.user), user_path(post.user.id) unless post.user.avatar_id.blank? %></dd>
 						<dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
 						<dd>Last visit: <%= time_ago_in_words(post.user.last_login_at) %> ago</dd>
 						<dd>Topics: <%= post.user.topics_count %></dd>

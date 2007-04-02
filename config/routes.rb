@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  
+  map.resources :avatars, :member => { :select => :post }
   map.resources :categories
   map.resources :forums
   map.resources :uploads
@@ -24,4 +26,5 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect ':controller/service.wsdl', :action => 'wsdl'
   # map.connect ':controller/:action/:id'
+  
 end

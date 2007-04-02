@@ -372,6 +372,19 @@ blockquote p {
 	float: left;
 }
 
+.avatar-list {
+	text-align: center;
+}
+
+.avatar-list .avatar {
+	float: left;
+	margin: 20px;
+}
+
+.avatar-show {
+	text-align: center;
+}
+
 .chk {
 	float: left;
 	margin: 0 6px 10px 0;

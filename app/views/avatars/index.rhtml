@@ -1,0 +1,14 @@
+<div class="avatar-list">
+	<% for avatar in @avatars %>
+		<div class="avatar">
+			<%= link_to image_tag(avatar.public_filename), avatar_path(avatar) %>
+		</div>
+	<% end %>
+</div>
+<div style="clear:both;"> </div>
+
+<div class="info-right info-footer">
+	<span class="disabled">&laquo; Previous</span> &nbsp; 
+	<span class="disabled">Next &raquo;</span>
+</div>
+<div style="clear:both;"> </div>

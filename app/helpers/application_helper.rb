@@ -29,7 +29,10 @@ module ApplicationHelper
   end
   
   def avatar_img(user)
-    image_tag @options.avatars_path + h(user.avatar) unless user.avatar.blank?
+    if !user.avatar_id.blank?
+      @avatar = Avatar.find(user.avatar_id)
+      image_tag @avatar.public_filename
+    end
   end
   
   def rank_for(posts_count, admin)
@@ -43,6 +46,8 @@ module ApplicationHelper
     if name == current_controller
       'tab'
     elsif name == "forums" && ((current_controller == "categories") || (current_controller == "topics") || (current_controller == "posts"))
+      'tab'
+    elsif name == "users" && ((current_controller == "avatars"))
       'tab'
     end
   end

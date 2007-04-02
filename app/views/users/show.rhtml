@@ -18,7 +18,7 @@
 	<div style="clear:both;"> </div>
 
 	<% if @user == current_user %>
-		<p style="text-align:right;"><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
+		<p style="text-align:right;"><%= link_to 'Change Avatar', avatars_path %> &nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %></p>
 	<% end %>
 
 </div>
