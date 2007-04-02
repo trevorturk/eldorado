@@ -29,10 +29,10 @@ class HeadersController < ApplicationController
   end
 
   def create
-    @header = Header.new(params[:header])
-    @header.user_id = current_user.id
+    @header = current_user.headers.build params[:header]
     respond_to do |format|
       if @header.save
+        flash[:notice] = "Header uploaded successfully"
         format.html { redirect_to header_url(@header) }
         format.xml  { head :created, :location => header_url(@header) }
       else

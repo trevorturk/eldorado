@@ -37,8 +37,7 @@ class UploadsController < ApplicationController
   end
 
   def create
-    @upload = Upload.new(params[:upload])
-    @upload.user_id = current_user.id
+    @upload = current_user.uploads.build params[:upload]
     respond_to do |format|
       if @upload.save
         flash[:notice] = "File uploaded successfully"
