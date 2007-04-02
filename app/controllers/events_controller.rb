@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    redirect_to home_path
+    @event = Event.new
   end
 
   def edit

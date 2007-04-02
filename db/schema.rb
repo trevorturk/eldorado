@@ -2,11 +2,11 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 37) do
+ActiveRecord::Schema.define(:version => 38) do
 
   create_table "categories", :force => true do |t|
     t.column "name",     :string
-    t.column "position", :string
+    t.column "position", :integer, :default => 0
   end
 
   create_table "events", :force => true do |t|
