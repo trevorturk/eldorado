@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_filter :find_user, :only => [:edit, :update, :destroy]
   before_filter :can_edit_user, :only => [:edit, :update, :destroy]
   
+  filter_parameter_logging "password"
+  
   def index
     @users = User.find(:all, :order => 'last_login_at desc')
   end
