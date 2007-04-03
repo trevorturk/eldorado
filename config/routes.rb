@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :categories
   map.resources :forums
   map.resources :uploads
-  map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
+  map.resources :headers
   map.resources :events
   map.resources :posts
   map.resources :topics
