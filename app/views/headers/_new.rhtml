@@ -1,26 +1,12 @@
 <%= error_messages_for :header %>
 
-<div class="box" id="action"<% if current_action == 'index' %> style="display:none;"<% end %>>
-	<% form_for(:header, :url => headers_path, :html => { :multipart => true }) do |f| -%>
-
-	<div class="top">New Header</div>
-	<p><%= f.file_field :uploaded_data %></p>
-
-	<p>Headers should be sized 760x200px.</p>
-	
-	<p>
-		<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
-		<% if current_action == 'index' %>
-			<%= link_to_function 'Cancel', "$('action').toggle()" %>
-		<% else %>
-			<%= link_to 'Cancel', headers_path %>
-		<% end %>
-	</p>
-
-	<% end %>
-</div>
-
-<div class="info-left"<% if current_action == 'index' %> style="display:none;"<% end %>>
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Headers', headers_path %> &raquo; New Header
-</div>
-<div style="clear:both;"> </div>
+<% form_for(:header, :url => headers_path, 
+                      :html => { :multipart => true }) do |f| -%>
+  <p>
+    <label for="mugshot">Upload a New Header:</label>
+    <%= f.file_field :uploaded_data %>
+  </p>
+  <p>
+    <%= submit_tag 'Create' %>
+  </p>
+<% end -%>
