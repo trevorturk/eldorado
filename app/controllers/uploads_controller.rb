@@ -4,6 +4,7 @@ class UploadsController < ApplicationController
   
   def index
     if request.post?
+      flash[:notice] = "Filtering"
       @filter_type = params[:upload][:content_type]
       @filter_user = params[:upload][:user_id]
       if @filter_type != '0'
@@ -13,6 +14,7 @@ class UploadsController < ApplicationController
         @filter_user = User.find(@filter_user)
       end
     else
+      flash[:notice] = "Not Filtering"
       @uploads = Upload.find(:all, :order => 'updated_at desc')
     end
     @filter_users = Upload.find(:all, :group => 'user_id', :include => [:user])
