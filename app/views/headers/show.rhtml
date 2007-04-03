@@ -3,9 +3,7 @@
 	<span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
 </div>
 <div class="info-right">
-	Votes (<%= @header.votes %>)
-	<%= link_to '+', vote_up_header_path(@header), :method => :post %>
-	<%= link_to '&ndash;', vote_down_header_path(@header), :method => :post %>
+
 </div>
 <div style="clear:both;"> </div>
 
