@@ -41,8 +41,8 @@ class UploadsController < ApplicationController
     respond_to do |format|
       if @upload.save
         flash[:notice] = "File uploaded successfully"
-        format.html { redirect_to uploads_url }
-        format.xml  { head :created, :location => uploads_url }
+        format.html { redirect_to files_home_path }
+        format.xml  { head :created, :location => files_home_path }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @upload.errors.to_xml }
