@@ -1,4 +1,4 @@
-<%= render :partial => 'uploads/_new' %>
+<%= render :partial => 'headers/new' %>
 
 <% for header in @headers %>
 	<p><%= link_to image_tag(header.public_filename), header_path(header) %></p>
