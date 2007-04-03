@@ -22,6 +22,7 @@ class HeadersController < ApplicationController
 
   def new
     @header = Header.new
+    render :template => "headers/_new"
   end
 
   def edit
