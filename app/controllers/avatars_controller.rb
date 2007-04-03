@@ -26,7 +26,7 @@ class AvatarsController < ApplicationController
     @avatar = current_user.avatars.build params[:avatar]
     respond_to do |format|
       if @avatar.save
-        flash[:notice] = 'Avatar was successfully created.'
+        flash[:notice] = "Avatar uploaded successfully"
         format.html { redirect_to avatars_path }
         format.xml  { head :created, :location => avatars_path }
       else
