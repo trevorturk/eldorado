@@ -1,7 +1,7 @@
 class HeadersController < ApplicationController
   
   before_filter :force_login, :except => [:index, :show]
-  before_filter :can_edit_header, :only => [:edit, :update, :destroy]
+  # before_filter :can_edit_header, :only => [:edit, :update, :destroy]
   
   def index
     @headers = Header.find(:all, :order => 'created_at desc')
@@ -36,7 +36,6 @@ class HeadersController < ApplicationController
         format.html { redirect_to header_url(@header) }
         format.xml  { head :created, :location => header_url(@header) }
       else
-        flash[:notice] = "Header upload failed"
         format.html { render :action => "new" }
         format.xml  { render :xml => @header.errors.to_xml }
       end
