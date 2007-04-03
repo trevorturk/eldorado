@@ -36,6 +36,7 @@ class HeadersController < ApplicationController
         format.html { redirect_to header_url(@header) }
         format.xml  { head :created, :location => header_url(@header) }
       else
+        flash[:notice] = "Header upload failed"
         format.html { render :action => "new" }
         format.xml  { render :xml => @header.errors.to_xml }
       end
