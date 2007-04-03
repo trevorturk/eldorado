@@ -4,20 +4,6 @@ class HeadersController < ApplicationController
   # before_filter :can_edit_header, :only => [:edit, :update, :destroy]
   
   def index
-    @header = current_user.headers.build params[:header]
-    respond_to do |format|
-      if @header.save
-        flash[:notice] = "Header uploaded successfully"
-        format.html { redirect_to header_url(@header) }
-        format.xml  { head :created, :location => header_url(@header) }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @header.errors.to_xml }
-      end
-    end
-  end
-  
-  def index_bak
     @headers = Header.find(:all, :order => 'created_at desc')
     @headers_count = Header.count
     respond_to do |format|
