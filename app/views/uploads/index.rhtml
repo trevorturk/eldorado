@@ -28,7 +28,7 @@
 		</tbody>
 	</table>
 
-	<div class="info-left info-footer">
+	<div class="info-left">
 		<span id="filter-link"><%= link_to_function 'Filter', "$('filters').toggle();$('filter-link').toggle();$('filter-current').toggle()" %></span>
 		<div id="filters" style="display:none;">
 			<% form_for(:upload, :url => files_home_path) do |f| -%>
@@ -56,7 +56,7 @@
 			<% end %>
 		</span>
 	</div>
-	<div class="info-right info-footer">
+	<div class="info-right">
 		<span class="disabled">&laquo; Previous</span> &nbsp; 
 		<span class="disabled">Next &raquo;</span>
 	</div>
