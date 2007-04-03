@@ -1,7 +1,7 @@
 <%= error_messages_for :header %>
 
 <div class="box" id="action"<% if current_action == 'index' %> style="display:none;"<% end %>>
-	<% form_for(:header, :url => headers_path, :html => { :multipart => true }) do |f| -%>
+	<% form_for(:header, :url => headers_path) do |f| -%>
 
 	<div class="top">New Header</div>
 	<p><%= f.file_field :uploaded_data %></p>
