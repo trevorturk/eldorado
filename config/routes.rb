@@ -2,12 +2,12 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :avatars, :member => { :select => :post }
   map.resources :categories
-  map.resources :forums
-  map.resources :uploads
-  map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
   map.resources :events
+  map.resources :forums
+  map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
   map.resources :posts
   map.resources :topics
+  map.resources :uploads
   map.resources :users
 
   map.home  '', :controller => 'home', :action => 'index'  
