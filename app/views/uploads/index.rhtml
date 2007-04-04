@@ -33,18 +33,19 @@
 		<div id="filters" style="display:none;">
 			<% form_for(:upload, :url => files_home_path) do |f| -%>
 				Filter by 
-				<select id="upload_user_id" name="upload[user_id]" onchange="this.form.submit()">
+				<select id="upload_user_id" name="upload[user_id]">
 					<option value="0">User</option>
 					<% for filter_user in @filter_users %>
 						<option value="<%=h filter_user.user.id %>"><%=h filter_user.user.login %></option>
 					<% end %>
 				</select> or 
-				<select id="upload_content_type" name="upload[content_type]" onchange="this.form.submit()">
+				<select id="upload_content_type" name="upload[content_type]">
 					<option value="0">Type</option>
 					<% for filter_type in @filter_types %>
 						<option value="<%=h filter_type.content_type %>"><%=h filter_type.content_type %></option>
 					<% end %>
-				</select> or 
+				</select> 
+				<%= submit_tag "Filter", :disable_with => "Filter" %> or 
 				<%= link_to_function 'Cancel', "$('filters').toggle();$('filter-link').toggle();$('filter-current').toggle()" %>
 			<% end %>
 		</div>
@@ -62,14 +63,4 @@
 	</div>
 	<div style="clear:both;"> </div>
 	
-	<p>click "filter" above. also, two more tests below. clicking the link or button should redirect to new upload page, not the index</p>
-	
-	<p><%= link_to 'post request link', uploads_path, :method => :post %></p>
-	
-	<p>
-		<form action="/uploads" method="post">
-			<%= submit_tag "test" %>
-		</form>
-	</p>
-
 <% end %>
