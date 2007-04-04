@@ -5,25 +5,42 @@
 
 	<span class="profile-title"><%=h @user.login %></span>&nbsp;
 	<span class="profile-rank"><%=h rank_for(@user.posts_count, @user.admin) %></span>
-
-	<p><b>Bio</b>: <%=h @user.bio %></p>
-	<p><b>Signature</b>: <%=h @user.signature %></p>
 	
-	<div class="profile-info">
-		<p><b>Last visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago</p>
-		<p><b>Topics</b>: <%= @user.topics_count %></p>
-		<p><b>Posts</b>: <%= @user.posts_count %></p>
-		<p><b>Registered</b>: <%= @user.created_at.strftime("%b %d, %Y") %></p>
+	<div class="profile-bio">
+		<p><%=h @user.bio %></p>
 	</div>
-	<div style="clear:both;"> </div>
-
-	<% if @user == current_user %>
-		<p style="text-align:right;"><%= link_to 'Change Avatar', avatars_path %> &nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %></p>
-	<% end %>
-
+	
+	<% if !@user.signature.blank? %>
+		<hr class="sig"><%= @user.signature %>
+	<% end %>	
+	
+	<p style="margin-top:20px">
+		<b>Registered</b>: <%= @user.created_at.strftime("%b %d, %Y") %> &nbsp;
+		<b>Profile Updated</b>: <%= time_ago_in_words(@user.profile_updated_at) %> ago &nbsp;
+		<b>Last visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago
+	</p>
+	<p>
+		<b>Avatars</b>: <%= @user.avatars_count %> &nbsp;
+		<b>Events</b>: <%= @user.events_count %> &nbsp;
+		<b>Files</b>: <%= @user.uploads_count %> &nbsp;
+		<b>Headers</b>: <%= @user.headers_count %> &nbsp;
+		<b>Posts</b>: <%= @user.posts_count %> &nbsp;
+		<b>Topics</b>: <%= @user.topics_count %> &nbsp;
+	</p>
+	
 </div>
 
 <div class="info-left">
 	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
+</div>
+<div class="info-right">
+	<% if @user.avatar_id %>
+		<%= link_to 'Change Avatar', avatars_path %>
+	<% else %>
+		<%= link_to 'Get an Avatar', avatars_path %>
+	<% end %>
+	<% if @user == current_user %>
+		&nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
+	<% end %>
 </div>
 <div style="clear:both;"> </div>

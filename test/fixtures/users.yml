@@ -38,6 +38,7 @@ trevor:
   posts_count: 2211
   topics_count: 130
   bio: 'my bio'
+  avatar_id: 1
 banned:
   id: 5
   login: banned

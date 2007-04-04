@@ -1,12 +1,26 @@
 <div class="avatar-list">
 	<% for avatar in @avatars %>
 		<div class="avatar">
-			<%= link_to image_tag(avatar.public_filename), avatar_path(avatar) %>
+			<%= image_tag(avatar.public_filename) %>
+			<br />by <%= link_to h(avatar.user.login), user_path(avatar.user) %>
+			<% if logged_in? && avatar.can_edit_avatar?(current_user) %>
+				(<%= link_to 'x', avatar_path(avatar), :confirm => 'Are you sure?', :method => :delete %>)
+			<% end %>
+			<% if !avatar.current_user_id.blank? %>
+				<br />used by <%= link_to h(avatar.current_avatar_user.login), user_path(avatar.current_avatar_user.id) %>
+			<% else %>
+				<% if logged_in? %>
+					<br />(<%= link_to 'select', select_avatar_path(avatar), :method => :post %>)
+				<% end %>
+			<% end %>
 		</div>
 	<% end %>
 </div>
 <div style="clear:both;"> </div>
 
+<div class="info-left info-footer">
+	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Users', users_path %> &raquo; Viewing Avatars
+</div>
 <div class="info-right info-footer">
 	<span class="disabled">&laquo; Previous</span> &nbsp; 
 	<span class="disabled">Next &raquo;</span>

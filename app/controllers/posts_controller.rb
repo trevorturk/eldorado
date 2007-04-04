@@ -1,22 +1,13 @@
 class PostsController < ApplicationController 
-
-  before_filter :find_topic_and_post, :except => [:index, :new, :create]
-  before_filter :force_login 
+  
+  before_filter :redirect_to_home, :only => [:index, :show, :new]
+  before_filter :force_login
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
+  before_filter :find_topic_and_post, :except => [:index, :new, :create]
   
-  def index
-    redirect_to home_path
-  end
-  
-  def show
-    redirect_to home_path
-  end
-
-  def new
-    redirect_to home_path
-  end
-  
+    
   def edit
+    @posts = Post.find(params[:id])
   end 
     
   def create
@@ -43,9 +34,7 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to topic_url(@topic) 
   end 
-  
-  private
-  
+    
   def find_topic_and_post
     @post = Post.find(params[:id])
     @topic = Topic.find(@post.topic.id)

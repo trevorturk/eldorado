@@ -5,19 +5,10 @@ class HeadersController < ApplicationController
   
   def index
     @headers = Header.find(:all, :order => 'created_at desc')
-    @headers_count = Header.count
-    respond_to do |format|
-      format.html # index.rhtml
-      format.xml  { render :xml => @headers.to_xml }
-    end
   end
 
   def show
     @header = Header.find(params[:id])
-    respond_to do |format|
-      format.html # show.rhtml
-      format.xml  { render :xml => @header.to_xml }
-    end
   end
 
   def new
@@ -31,39 +22,26 @@ class HeadersController < ApplicationController
 
   def create
     @header = current_user.headers.build params[:header]
-    respond_to do |format|
-      if @header.save
-        flash[:notice] = "Header uploaded successfully"
-        format.html { redirect_to header_url(@header) }
-        format.xml  { head :created, :location => header_url(@header) }
-      else
-        flash[:notice] = "Header failed to upload"
-        format.html { render :action => "_new" }
-        format.xml  { render :xml => @header.errors.to_xml }
-      end
+    if @header.save
+      redirect_to header_url(@header)
+    else
+      render :action => "_new"
     end
   end
   
   def update
     @header = Header.find(params[:id])
-    respond_to do |format|
-      if @header.update_attributes(params[:header])
-        format.html { redirect_to header_url(@header) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @header.errors.to_xml }
-      end
+    if @header.update_attributes(params[:header])
+      redirect_to header_url(@header)
+    else
+      render :action => "edit"
     end
   end
 
   def destroy
     @header = Header.find(params[:id])
     @header.destroy
-    respond_to do |format|
-      format.html { redirect_to headers_url }
-      format.xml  { head :ok }
-    end
+    redirect_to headers_url
   end
   
   def vote_up

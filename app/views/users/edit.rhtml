@@ -14,11 +14,11 @@
 		<p><%= f.password_field :password, :style => "width:15%" %> &nbsp;<%= f.password_field :password_confirmation, :style => "width:15%" %></p>
 		
 		<p class="label"><label for="bio">Bio</label></p>
-		<p><%= f.text_area :bio, :rows => "5", :style => "width:50%;" %></p>
+		<p><%= f.text_area :bio, :rows => "3", :style => "width:50%;" %></p>
 		
 		<p class="label"><label for="signature">Signature</label></p>
-		<p><%= f.text_area :signature, :rows => "3", :style => "width:50%;" %></p>
-		
+		<p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
+				
 		<p><%= submit_tag "Save Changes", :disable_with => "Save Changes" %><span> or <%= link_to 'Delete', user_path, :confirm => 'Are you sure? This will permanently delete this user, all of their posts, and any threads that they have started.', :method => :delete %> or <%= link_to 'Cancel', user_path(@user) %></p>
 	</div>
 <% end %>

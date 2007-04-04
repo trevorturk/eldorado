@@ -353,7 +353,6 @@ blockquote p {
 
 .profile-avatar {
 	float: right;
-	margin: 4px 4px 14px 4px;
 }
 
 .profile-title {
@@ -367,9 +366,12 @@ blockquote p {
 	color: #999;
 }
 
-.profile-info p {
-	margin-right: 20px;
-	float: left;
+.profile-info {
+	margin-top: 20px;
+}
+
+.profile-bio {
+	width: 500px;
 }
 
 .avatar-list {
@@ -378,7 +380,7 @@ blockquote p {
 
 .avatar-list .avatar {
 	float: left;
-	margin: 22px;
+	margin: 18px;
 }
 
 .avatar-show {

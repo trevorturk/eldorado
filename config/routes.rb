@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :avatars
-  # map.resources :avatars, :member => { :select => :post }
+  map.resources :avatars, :member => { :select => :post }
   map.resources :categories
   map.resources :events
   map.resources :forums
@@ -26,6 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   map.catch_all "*path", :controller => "topics", :action => "unknown_request"
   
   map.connect ':controller/service.wsdl', :action => 'wsdl'
-  # map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action/:id'  
   
 end

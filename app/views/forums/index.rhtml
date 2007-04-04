@@ -1,5 +1,4 @@
 <% for category in @categories %>
-	<% @forums = Forum.find(:all, :order => 'position', :conditions => ["category_id = ?", category.id]) %>
 		<table cellspacing="0" class="forum-index">
 			<thead>
 				<tr>
@@ -13,7 +12,7 @@
 				</tr>
 			</thead>
 			<tbody>
-					<% for forum in @forums %>
+					<% for forum in category.forums %>
 					<tr>
 						<td class="tcl">
 							<span class="forum-name"><%= link_to h(forum.name), forum_path(forum) %></span>

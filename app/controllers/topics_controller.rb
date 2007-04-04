@@ -10,10 +10,6 @@ class TopicsController < ApplicationController
     else
       @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
-    respond_to do |format|
-      format.html # index.rhtml
-      format.xml  { render :xml => @topics.to_xml }
-    end
   end
 
   def show
@@ -24,10 +20,6 @@ class TopicsController < ApplicationController
     @topic.hit!
     @page_title = @topic.title
     @posters = @posts.map(&:user) ; @posters.uniq!
-    respond_to do |format|
-      format.html # show.rhtml
-      format.xml  { render :xml => @topic.to_xml }
-    end
   end
 
   def new
@@ -46,37 +38,26 @@ class TopicsController < ApplicationController
       @post = @topic.posts.build(params[:topic])
       @post.user_id = current_user.id
     end
-    respond_to do |format|
-      if @topic.save && @post.save
-        format.html { redirect_to topic_url(@topic) }
-        format.xml  { head :created, :location => topic_url(@topic) }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @topic.errors.to_xml }
-      end
+    if @topic.save && @post.save
+      redirect_to topic_url(@topic)
+    else
+      render :action => "new"
     end
   end
 
   def update
     @topic = Topic.find(params[:id])
-    respond_to do |format|
-      if @topic.update_attributes(params[:topic])
-        format.html { redirect_to topic_url(@topic) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @topic.errors.to_xml }
-      end
+    if @topic.update_attributes(params[:topic])
+      redirect_to topic_url(@topic)
+    else
+      render :action => "edit"
     end
   end
 
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-    respond_to do |format|
-      format.html { redirect_to topics_url }
-      format.xml  { head :ok }
-    end
+    redirect_to topics_url
   end
   
   def unknown_request
