@@ -25,7 +25,7 @@ class UploadsController < ApplicationController
       flash[:notice] = "File uploaded successfully"
       redirect_to files_home_path
     else
-      render :action => "new"
+      render :template => "uploads/_new"
     end
   end
 

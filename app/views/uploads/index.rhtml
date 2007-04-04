@@ -61,5 +61,15 @@
 		<span class="disabled">Next &raquo;</span>
 	</div>
 	<div style="clear:both;"> </div>
+	
+	<p>click "filter" above. also, two more tests below. clicking the link or button should redirect to new upload page, not the index</p>
+	
+	<p><%= link_to 'post request link', uploads_path, :method => :post %></p>
+	
+	<p>
+		<form action="/uploads" method="post">
+			<%= submit_tag "test" %>
+		</form>
+	</p>
 
 <% end %>
