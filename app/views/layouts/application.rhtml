@@ -7,19 +7,21 @@
 
 	<title><%= page_title %></title>
 	<!-- Powered by El Dorado (http://almosteffortless.com) -->
-	
+
 	<%= stylesheet_link_tag 'application' %>
 	<%= random_header_css %>
 	<%= login_image_css %>
 	<%= theme_css %>
+
   <%= javascript_include_tag "prototype", "effects" %>
+
 </head>
 <body>
 
 	<div class="wrapper">
 		
-		<% for event in @reminders %>
-			<div class="reminders"><%= link_to h(event.title), event_path(event) %></div>
+		<% for reminder in @reminders %>
+			<div class="reminders"><%= link_to h(reminder.title), event_path(reminder) %></div>
 		<% end %>
 		
 		<div class="header">
@@ -27,66 +29,18 @@
 			<div class="tagline"><%=h @options.site_tagline %></div>		
 		</div>
 		
-		<ul class="tabs">
-			<li class="<%= tab('home') %>"><%= link_to('Home', home_path) %></li>
-			<li class="<%= tab('events') %>"><%= link_to('Calendar', calendar_home_path) %></li>
-			<li class="<%= tab('uploads') %>"><%= link_to('Files', files_home_path) %></li>
-			<li class="<%= tab('forums') %>"><%= link_to('Forum', forum_home_path) %></li>
-			<li class="<%= tab('headers') %>"><%= link_to('Headers', headers_path) %></li>
-			<li class="<%= tab('users') %>"><%= link_to('Users', users_path) %></li>
-			<% if admin? %><li class="<%= tab('admin') %>"><%= link_to('Admin', admin_path) %></li><% end %>
-		</ul>
+			<%= render :partial => 'layouts/tabs' %>
 		
 			<div class="content">
 			
-			<div class="nav">
-				<p class="nav-left">
-					<% if logged_in? %>
-						Logged in as <b><%= link_to h(current_user.login), user_path(current_user.id) %></b> | 
-						Last visit <%= time_ago_in_words(session[:last_login_at]) %> ago
-					<% else %>
-						You are not logged in
-					<% end %>
-				</p>
-				<p class="nav-right">
-					<% if logged_in? %>
-						<% if current_controller == 'home' %><%= link_to('Start a New Topic', new_topic_path) %>
-						<% elsif current_controller == 'avatars' %><%= link_to('Upload a New Avatar', new_avatar_path) %>
-						<% elsif current_controller == 'categories' %><%= link_to('Start a New Topic', new_topic_path) %>
-						<% elsif current_controller == "events" %><%= link_to('Add a New Event', new_event_path) %>
-						<% elsif current_controller == 'forums' %><% if @forum %><%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %><% else %><%= link_to('Start a New Topic', new_topic_path) %><% end %>
-						<% elsif current_controller == 'headers' %><%= link_to_function 'Upload a New Header', "$('action').toggle()" %>
-						<% elsif current_controller == 'posts' %><%= link_to('Start a New Topic', new_topic_path) %>
-						<% elsif current_controller == 'topics' %><%= link_to('Start a New Topic', new_topic_path) %>
-						<% elsif current_controller == "uploads" %><%= link_to_function 'Upload a New File', "$('action').toggle()" %>
-						<% elsif current_controller == "users" %><%= link_to('Register a New User', new_user_path) %>
-						<% end %>
-						&nbsp; <%= link_to('Logout', logout_path) %>
-					<% else %>
-						<%= link_to('Register', register_path) %> &nbsp; 
-						<%= link_to('Login', login_path) %> 
-					<% end %>
-				</p>
-			</div>
-			
-			<div style="clear:both"> </div>
-			
+			<%= render :partial => 'layouts/nav' %>
+						
 			<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
 			<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
 			
 			<%= yield %>
 			
-			<div class="nav nav-stats">
-				<p class="nav-left">
-					<% users_online = User.users_online -%>
-					<% unless users_online.empty? %>
-						Online: <%= users_online.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %>
-					<% end %>
-				</p>
-				<p class="nav-right">
-					<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= @options.newest_user %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
-				</p>
-			</div>
+			<%= render :partial => 'layouts/stats' %>
 				
 		</div>
 		

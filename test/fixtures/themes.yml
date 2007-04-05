@@ -1,11 +1,25 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
+  parent_id: 
+  content_type: text/css
   filename: test.css
+  thumbnail: 
+  size: 1
+  width: 
+  height: 
   user_id: 4
-  active: true
+  created_at: 2007-03-19 20:03:23
+  updated_at: 2007-03-19 20:03:23
 two:
   id: 2
-  filename: test2.css
+  parent_id: 
+  content_type: text/css
+  filename: test.css
+  thumbnail: 
+  size: 1
+  width: 
+  height: 
   user_id: 1
-  active: false
+  created_at: 2007-03-19 20:03:23
+  updated_at: 2007-03-19 20:03:23

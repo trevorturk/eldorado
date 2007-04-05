@@ -5,7 +5,7 @@ require 'themes_controller'
 class ThemesController; def rescue_action(e) raise e end; end
 
 class ThemesControllerTest < Test::Unit::TestCase
-  fixtures :themes
+  all_fixtures
 
   def setup
     @controller = ThemesController.new

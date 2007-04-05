@@ -3,7 +3,11 @@ class AdminController < ApplicationController
   before_filter :check_admin 
   
   def index
-    @newbies = Newbie.find(:all, :order => 'term')
+  end
+  
+  def themes
+    @themes = Theme.find(:all)
+    render :template => 'themes/index'
   end
     
 end

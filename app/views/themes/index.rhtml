@@ -1,9 +1,12 @@
-<% for theme in @themes %>
-	<p>
-		<%=h theme.filename %> by <%=h theme.user.login %> 
-		(<%= link_to 'select', select_theme_path(theme), :method => :post %>)
-		<% if can_edit?(theme) %>
-			(<%= link_to 'x', theme_path(theme), :confirm => 'Are you sure?', :method => :delete %>)
-		<% end %>
-	</p>
-<% end %>
+<div class="box">
+	<div class="top">Themes</div>	
+	<% for theme in @themes %>
+		<p>
+			<%= link_to theme.filename, theme.public_filename %> by <%= link_to h(theme.user.login), user_path(theme.user) %> 
+			(<%= link_to 'select', select_theme_path(theme), :method => :post %>)
+			<% if can_edit?(theme) %>
+				(<%= link_to 'x', theme_path(theme), :confirm => 'Are you sure?', :method => :delete %>)
+			<% end %>
+		</p>
+	<% end %>
+</div>

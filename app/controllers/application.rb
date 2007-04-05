@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin, :redirect_to_home
+  helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
   before_filter :update_online_at, :get_reminders, :get_stats, :get_options
     
   session :session_key => '_eldorado_session_id'
@@ -42,6 +42,11 @@ class ApplicationController < ActionController::Base
   
   def redirect_to_home
     redirect_to home_path and return false
+  end
+  
+  def can_edit?(current_item)
+    return false unless logged_in?
+    current_user.admin? || (current_user.id == current_item.user_id)
   end
   
   def get_reminders

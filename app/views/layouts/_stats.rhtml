@@ -1,0 +1,11 @@
+<div class="nav nav-stats">
+	<p class="nav-left">
+		<% users_online = User.users_online -%>
+		<% unless users_online.empty? %>
+			Online: <%= users_online.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %>
+		<% end %>
+	</p>
+	<p class="nav-right">
+		<%= @user_count %> Users, <%= @topics_count %> Topics, <%= @posts_count %> Posts | <%= @options.newest_user %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
+	</p>
+</div>

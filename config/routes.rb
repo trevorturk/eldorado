@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'new'
 
   map.admin '/admin', :controller => 'admin', :action => 'index'
+  map.admin '/admin/themes', :controller => 'admin', :action => 'themes'
   
   map.calendar_home '/calendar', :controller => 'events', :action => 'index'
   map.files_home '/files', :controller => 'uploads', :action => 'index'

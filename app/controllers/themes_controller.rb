@@ -24,6 +24,7 @@ class ThemesController < ApplicationController
   def destroy
     @theme = Theme.find(params[:id])
     redirect_to themes_path and return false unless can_edit?(@theme)
+    @options.update_attributes(:theme_id => nil) if @options.theme_id == @theme.id
     @theme.destroy
     redirect_to themes_path
   end

@@ -6,9 +6,9 @@ class TopicsController < ApplicationController
   
   def index
     if logged_in?
-      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc')
+      @topic_pages, @topics = paginate(:topics, :per_page => 10, :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
-      @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
+      @topic_pages, @topics = paginate(:topics, :per_page => 10, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
   end
 
