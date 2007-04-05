@@ -1,11 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  
+
   map.resources :avatars, :member => { :select => :post }
   map.resources :categories
   map.resources :events
   map.resources :forums
   map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
   map.resources :posts
+  map.resources :themes, :member => { :select => :post }
   map.resources :topics
   map.resources :uploads
   map.resources :users

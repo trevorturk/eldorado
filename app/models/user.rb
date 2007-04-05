@@ -3,10 +3,11 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   
   has_many :avatars, :dependent => :destroy
-  has_many :posts, :dependent => :destroy
-  has_many :topics, :dependent => :destroy
-  has_many :headers, :dependent => :destroy
   has_many :events, :dependent => :destroy
+  has_many :headers, :dependent => :destroy
+  has_many :posts, :dependent => :destroy
+  has_many :themes, :dependent => :destroy
+  has_many :topics, :dependent => :destroy
   has_many :uploads, :dependent => :destroy
   
   validates_presence_of     :login, :email, :password_hash

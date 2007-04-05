@@ -15,7 +15,12 @@ module ApplicationHelper
   end
   
   def login_image_css
-    return '<style type="text/css">.login { background: #f1f1f1 url("/files/'+@options.login_image+'") bottom right; }</style>' unless @options.login_image.nil?
+    return '<style type="text/css">.login { background: #f1f1f1 url("/files/'+@options.login_image+'") bottom right no-repeat; }</style>' unless @options.login_image.nil?
+  end
+  
+  def theme_css
+    @theme = Theme.find(@options.theme_id)    
+    return '<style type="text/css">@import "'+@theme.public_filename+'";</style>' unless @options.theme_id.nil?
   end
 
   def page_title
@@ -51,7 +56,12 @@ module ApplicationHelper
       'tab'
     end
   end
-    
+  
+  def can_edit?(current_item)
+    return false unless logged_in?
+    current_user.admin? || (current_user.id == current_item.user_id)
+  end
+  
   def current_controller
     request.path_parameters['controller']
   end

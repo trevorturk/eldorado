@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  filename: test.css
+  user_id: 4
+  active: true
+two:
+  id: 2
+  filename: test2.css
+  user_id: 1
+  active: false

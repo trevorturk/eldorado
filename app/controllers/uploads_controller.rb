@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
   
   before_filter :redirect_to_home, :only => [:show, :edit, :update]
-  before_filter :force_login, :except => [:index, :show]
+  before_filter :force_login, :except => [:index]
   
   def index
     if request.post?

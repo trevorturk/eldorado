@@ -16,7 +16,7 @@
 				<tr>
 					<td class="tcl">
 						<%= link_to upload.filename, upload.public_filename %> by <%=h upload.user.login %>
-						<% if logged_in? && upload.can_edit_upload?(current_user) %>
+						<% if can_edit?(upload) %>
 							(<%= link_to 'x', upload_path(upload), :confirm => 'Are you sure you want to delete this file?', :method => :delete %>)
 						<% end %>
 					</td>

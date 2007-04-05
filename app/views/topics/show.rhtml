@@ -32,15 +32,8 @@
 				</td>
 				<td class="body">
 					<%=h post.body %>
-					<% if !post.updated_by.blank? %>
-						<p class="edited">Last edited by 
-							<% if post.updated_by != post.user_id %>
-								<b><%=h post.editor.login %></b>
-							<% else %>
-								<%=h post.editor.login %>
-							<% end %>
-							 <%= time_ago_in_words(post.updated_at) %> ago.
-						</p>
+					<% if post.updated_at > post.created_at %>
+						<p class="edited">Last edited by <%= time_ago_in_words(post.updated_at) %> ago.</p>
 					<% end %>
 					<% if !post.user.signature.blank? %>
 						<hr class="sig"><%= post.user.signature %>
@@ -56,7 +49,7 @@
 					<% end %>
 				</td>
 				<td class="body links">
-					<% if logged_in? && post.can_edit_post?(current_user) %>
+					<% if can_edit?(post) %>
 						<%= link_to 'Edit', edit_post_path(post) %>
 					<% end %>
 				</td>
@@ -69,7 +62,7 @@
 	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= link_to @category.name, category_path(@category) %> &raquo; <%= link_to @forum.name, forum_path(@forum) %> &raquo; <%=h @topic.title %>
 </div>
 <div class="info-right info-footer">
-	<% if logged_in? && @topic.can_edit_topic?(current_user) %>
+	<% if can_edit?(@topic) %>
 		<%= link_to 'Edit Topic', edit_topic_path %>
 	<% end %>
 </div>

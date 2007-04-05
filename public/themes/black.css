@@ -1,0 +1,42 @@
+body {
+	background: black;
+}
+
+.wrapper {
+	width: 960px;
+	margin: 20px auto 0 auto;
+	padding: 10px;
+	border: 1px solid #bbb;
+	background: #fff;
+}
+
+.header {
+	background: #000;
+}
+
+a:link, a:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+a:active, a:hover {
+	color: #333;
+	text-decoration: underline;
+}
+
+table {
+	border: 1px solid #000;
+}
+
+thead th {
+	background: #000;
+	color: #fff;
+}
+
+.box {
+	border: 1px solid #000;
+}
+
+.box .top {
+	background: #000;
+}

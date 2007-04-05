@@ -1,8 +1,8 @@
-class Header < ActiveRecord::Base
+class Theme < ActiveRecord::Base
   
-  belongs_to :user, :counter_cache => true
+  belongs_to :user
   
-  has_attachment :storage => :file_system, :path_prefix => 'public/headers', :max_size => 15.megabytes
+  has_attachment :storage => :file_system, :path_prefix => 'public/themes', :max_size => 50.kilobytes
   
   validates_as_attachment
   validates_uniqueness_of :filename
@@ -12,5 +12,5 @@ class Header < ActiveRecord::Base
     file_system_path = (thumbnail ? thumbnail_class : self).attachment_options[:path_prefix].to_s
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
   end
-  
+    
 end

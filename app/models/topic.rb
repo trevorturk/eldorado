@@ -18,9 +18,5 @@ class Topic < ActiveRecord::Base
   def posters
     posts.map { |p| p.user_id }.uniq.size
   end
-  
-  def can_edit_topic?(user)
-    user.admin? || (user.id == user_id)
-  end
-  
+    
 end
