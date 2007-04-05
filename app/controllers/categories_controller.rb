@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
     
   def show
     @category = Category.find(params[:id], :include => :forums)
+    @forums = @category.forums
     if logged_in?
       @topic_pages, @topics = paginate(:topics, :per_page => 20, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id in (?)", @forums.collect(&:id)])
     else
