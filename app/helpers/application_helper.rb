@@ -19,7 +19,7 @@ module ApplicationHelper
   end
   
   def theme_css
-    @theme = Theme.find(@options.theme_id)    
+    @theme = Theme.find(@options.theme_id) unless @options.theme_id.nil?
     return '<style type="text/css">@import "'+@theme.public_filename+'";</style>' unless @options.theme_id.nil?
   end
 
