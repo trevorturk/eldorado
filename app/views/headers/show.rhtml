@@ -17,7 +17,7 @@
 	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Headers', headers_path %> &raquo; <%= @header.filename %>
 </div>
 <div class="info-right">
-	<% if logged_in? && can_edit?(@header) %>
+	<% if can_edit?(@header) %>
 		<%= link_to 'Edit Header', edit_header_path %>
 	<% end %>
 </div>

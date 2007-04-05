@@ -15,7 +15,7 @@
 	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Calendar', calendar_home_path %> &raquo; <%=h @event.title %>
 </div>
 <div class="info-right">
-	<% if logged_in? && can_edit?(@event) %>
+	<% if can_edit?(@event) %>
 		<%= link_to 'Edit Event', edit_event_path %>
 	<% end %>
 </div>
