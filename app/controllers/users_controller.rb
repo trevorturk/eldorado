@@ -30,6 +30,8 @@ class UsersController < ApplicationController
 
   def update
     @user.update_attributes(params[:user])
+    @user.profile_updated_at = Time.now.utc
+    @user.save!
     redirect_to user_path(@user)
   end
   

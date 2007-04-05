@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :on => :create
   
   before_create { |u| u.last_login_at = u.profile_updated_at = Time.now.utc }
-  before_update { |u| u.profile_updated_at = Time.now.utc }
     
   attr_reader :password
   
