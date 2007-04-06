@@ -4,8 +4,7 @@
 		<span class="detail"><%= @forums.map { |f| link_to "#{h f.name}", forum_path(f) } * ", " %></span>
 	</div>
 	<div style="clear:both;"> </div>
-<% end %>
-<% if current_controller == 'forums' %>
+<% elsif current_controller == 'forums' %>
 	<div class="info-left">
 		<span class="title"><%=h @forum.name %></span>
 		<span class="detail"><%=h @forum.description %></span>
@@ -17,6 +16,7 @@
 	<thead>
 		<tr>
 			<th class="tcl">Topics</th>
+			<% if current_controller != 'forums' %><th class="tcl">Forum</th><% end %>
 			<th class="tcm">Replies</th>
 			<th class="tcm">Views</th>
 			<th class="tcr">Activity</th>
@@ -25,7 +25,8 @@
 	<tbody>
 		<% for topic in @topics %>
 			<tr>
-				<td class="tcl"><%= link_to h(topic.title), topic_path(topic.id) %> by <%=h topic.user.login %></td>
+				<td class="tcl"><%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %></td>
+				<% if current_controller != 'forums' %><td class="tcl"><%= link_to h(topic.forum.name), forum_path(topic.forum) %></td><% end %>
 				<td class="tcm"><%=h topic.posts_count-1 %></td>
 				<td class="tcm"><%=h topic.views %></td>
 				<td class="tcr"><% if !topic.last_post_at.blank? %><%=h time_ago_in_words(topic.last_post_at) %> ago by <%=h topic.last_poster.login %><% end %></td>

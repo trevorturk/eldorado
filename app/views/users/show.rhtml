@@ -34,12 +34,12 @@
 	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
 </div>
 <div class="info-right">
-	<% if @user.avatar_id %>
+	<% if can_edit?(@user) && @user.avatar_id %>
 		<%= link_to 'Change Avatar', avatars_path %>
-	<% else %>
+	<% elsif can_edit?(@user) && @user.avatar_id.nil? %>
 		<%= link_to 'Get an Avatar', avatars_path %>
 	<% end %>
-	<% if @user == current_user %>
+	<% if can_edit?(@user) %>
 		&nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
 	<% end %>
 </div>

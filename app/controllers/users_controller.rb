@@ -35,6 +35,11 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
   
+  def destroy
+    @user.destroy
+    redirect_to users_path
+  end
+  
   def login
     redirect_to home_path if logged_in?
     if request.post?
