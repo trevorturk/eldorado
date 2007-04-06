@@ -1,3 +1,5 @@
+<%= render :partial => 'events/new' %>
+
 <div class="info-left">
 	<span class="title"><%=h @event.title %></span>
 	<span class="detail">by <%= link_to h(@event.user.login), user_path(@event.user) %></span>

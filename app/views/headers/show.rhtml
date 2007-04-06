@@ -1,3 +1,5 @@
+<%= render :partial => 'headers/new' %>
+
 <div class="info-left">
 	<span class="title"><%=h @header.filename %></span>
 	<span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>

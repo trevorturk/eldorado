@@ -1,3 +1,5 @@
+<%= render :partial => 'events/new' %>
+
 <%= error_messages_for :event %>
 <% form_for(:event, :url => event_path(@event), :html => { :method => :put }) do |f| %>
 	<div class="box">
