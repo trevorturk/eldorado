@@ -10,7 +10,7 @@ class ThemesController < ApplicationController
 
   def new
     @theme = Theme.new
-    render :template => "themes/new"
+    render :template => "themes/_new"
   end
 
   def create
@@ -18,7 +18,7 @@ class ThemesController < ApplicationController
     if @theme.save
       redirect_to themes_path
     else
-      render :template => "themes/new"
+      render :action => "_new"
     end
   end
 

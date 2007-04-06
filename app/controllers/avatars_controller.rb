@@ -9,15 +9,15 @@ class AvatarsController < ApplicationController
 
   def new
     @avatar = Avatar.new
+    render :template => "avatars/_new"
   end
 
   def create
     @avatar = current_user.avatars.build params[:avatar]
     if @avatar.save
-      flash[:notice] = "Avatar uploaded successfully"
       redirect_to avatars_path
     else
-      render :action => "new"
+      render :action => "_new"
     end
   end
 

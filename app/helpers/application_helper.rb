@@ -52,7 +52,7 @@ module ApplicationHelper
       'tab'
     elsif name == "forums" && ((current_controller == "categories") || (current_controller == "topics") || (current_controller == "posts"))
       'tab'
-    elsif name == "users" && ((current_controller == "avatars"))
+    elsif name == "users" && ((current_controller == "avatars") || (current_controller == "themes"))
       'tab'
     end
   end

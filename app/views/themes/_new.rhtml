@@ -1,15 +1,15 @@
-<%= error_messages_for :header %>
-<% form_for(:header, :url => headers_path, :html => { :multipart => true }) do |f| -%>
+<%= error_messages_for :theme %>
+<% form_for(:theme, :url => themes_path, :html => { :multipart => true }) do |f| -%>
 	<div class="box" id="action"<% if current_action == 'index' %> style="display:none;"<% end %>>
-		<div class="top">New Header</div>
+		<div class="top">New Theme</div>
 		<p><%= f.file_field :uploaded_data %></p>
-		<p>Headers should be sized 760x200px.</p>
+		<p>Themes must be smaller than 50k.</p>
 		<p>
 			<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
 			<% if current_action == 'index' %>
 				<%= link_to_function 'Cancel', "$('action').toggle()" %>
 			<% else %>
-				<%= link_to 'Cancel', headers_path %>
+				<%= link_to 'Cancel', themes_path %>
 			<% end %>
 		</p>
 	</div>
@@ -17,6 +17,7 @@
 
 <div class="info-left"<% if current_action == 'index' %> style="display:none;"<% end %>>
 	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Headers', headers_path %> &raquo; New Header
+	<%= link_to 'Users', users_path %> &raquo; 
+	<%= link_to 'Themes', themes_path %> &raquo; New Theme
 </div>
 <div style="clear:both;"> </div>

@@ -12,7 +12,7 @@
 			<% if current_controller == 'home' %>
 				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == 'avatars' %>
-				<%= link_to('Upload a New Avatar', new_avatar_path) %>
+				<%= link_to_function 'Upload a New Avatar', "$('action').toggle()" %>
 			<% elsif current_controller == 'categories' %>
 				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == "events" %>
@@ -28,7 +28,7 @@
 			<% elsif current_controller == 'posts' %>
 				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == "themes" %>
-				<%= link_to('Upload a New Theme', new_theme_path) %>
+				<%= link_to_function 'Upload a New Theme', "$('action').toggle()" %>
 			<% elsif current_controller == 'topics' %>
 				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == "uploads" %>
