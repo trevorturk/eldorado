@@ -16,7 +16,7 @@
 			<% elsif current_controller == 'categories' %>
 				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == "events" %>
-				<%= link_to('Add a New Event', new_event_path) %>
+				<%= link_to_function 'Add a New Event', "$('action').toggle()" %>
 			<% elsif current_controller == 'forums' %>
 				<% if @forum %>
 					<%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %>

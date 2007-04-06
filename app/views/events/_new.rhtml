@@ -1,6 +1,6 @@
 <%= error_messages_for :event %>
-<% form_for(:event, :url => events_path) do |f| %>
-	<div class="box">
+<div class="box" id="action"<% if current_action == 'index' %> style="display:none;"<% end %>>
+	<% form_for(:event, :url => events_path) do |f| %>
 		<div class="top">New Event</div>
 		<p class="label"><label for="title">Title</label></p>
 		<p>
@@ -14,13 +14,17 @@
 		<p><%= f.datetime_select :date %>&nbsp;Today is <%= Date.today.to_s(:long) %></p>
 		<p>
 			<%= submit_tag "Add Event", :disable_with => "Add Event" %><span> or 
-			<%= link_to 'Cancel', events_path %>
+			<% if current_action == 'index' %>
+				<%= link_to_function 'Cancel', "$('action').toggle()" %>
+			<% else %>
+				<%= link_to 'Cancel', calendar_home_path %>
+			<% end %>
 		</p>
+	<% end %>
+</div>
 
-	</div>
-<% end %>
 
-<div class="info-left">
+<div class="info-left"<% if current_action == 'index' %> style="display:none;"<% end %>>
 	<%= link_to 'Home', home_path %> &raquo; 
 	<%= link_to 'Calendar', calendar_home_path %> &raquo; New Event
 </div>

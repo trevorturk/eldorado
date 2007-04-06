@@ -1,3 +1,5 @@
+<%= render :partial => 'events/new' %>
+
 <%=
 calendar({:year => @year, :month => @month}) do |d|
   cell_text = "#{d.mday}" 
