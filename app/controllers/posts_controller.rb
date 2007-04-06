@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   
   before_filter :redirect_to_home, :only => [:index, :show, :new]
   before_filter :force_login
-  before_filter :can_edit_post, :only => [:edit, :update, :destroy]
   before_filter :find_topic_and_post, :except => [:index, :new, :create]
+  before_filter :can_edit_post, :only => [:edit, :update, :destroy]
   
     
   def edit
