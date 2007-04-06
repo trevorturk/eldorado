@@ -1,26 +1,28 @@
 <%= error_messages_for :event %>
-
 <% form_for(:event, :url => events_path) do |f| %>
 	<div class="box">
-		
 		<div class="top">New Event</div>
-		
 		<p class="label"><label for="title">Title</label></p>
-		<p><%= f.text_field :title, :style => 'width:66%;' %> &nbsp; <%= f.check_box(:private) %><label for="private"> Private</label> &nbsp; <%= f.check_box(:reminder) %><label for="reminder"> Reminder</label></p>
-		
+		<p>
+			<%= f.text_field :title, :style => 'width:66%;' %> &nbsp; 
+			<%= f.check_box(:private) %><label for="private"> Private</label> &nbsp; 
+			<%= f.check_box(:reminder) %><label for="reminder"> Reminder</label>
+		</p>
 		<p class="label"><label for="description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
-
 		<p class="label"><label for="date">Date</label></p>
 		<p><%= f.datetime_select :date %>&nbsp;Today is <%= Date.today.to_s(:long) %></p>
-		
-		<p><%= submit_tag "Add Event", :disable_with => "Add Event" %><span> or <%= link_to 'Cancel', events_path %></p>
+		<p>
+			<%= submit_tag "Add Event", :disable_with => "Add Event" %><span> or 
+			<%= link_to 'Cancel', events_path %>
+		</p>
 
 	</div>
 <% end %>
 
 <div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Calendar', calendar_home_path %> &raquo; New Event
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Calendar', calendar_home_path %> &raquo; New Event
 </div>
 <div style="clear:both;"> </div>
 

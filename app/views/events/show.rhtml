@@ -12,7 +12,8 @@
 <% end %>
 
 <div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Calendar', calendar_home_path %> &raquo; <%=h @event.title %>
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Calendar', calendar_home_path %> &raquo; <%=h @event.title %>
 </div>
 <div class="info-right">
 	<% if can_edit?(@event) %>

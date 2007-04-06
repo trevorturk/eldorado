@@ -33,15 +33,12 @@ end
 		<tbody>
 			<% for event in @events %>
 				<tr>
-					<td class="tcl"><%= link_to h(event.title), event_path(event) %> by <%=h event.user.login %></td>
+					<td class="tcl">
+						<%= link_to h(event.title), event_path(event) %> by <%=h event.user.login %>
+					</td>
 					<td class="tcr"><%= event.date %></td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 <% end %>
-
-<div class="info-right">
-	<%= link_to('View All Events &raquo;', events_path) %>
-</div>
-<div style="clear:both;"> </div>

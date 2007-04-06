@@ -25,11 +25,21 @@
 	<tbody>
 		<% for topic in @topics %>
 			<tr>
-				<td class="tcl"><%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %></td>
-				<% if current_controller != 'forums' %><td class="tcl"><%= link_to h(topic.forum.name), forum_path(topic.forum) %></td><% end %>
+				<td class="tcl">
+					<%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
+				</td>
+				<% if current_controller != 'forums' %>
+					<td class="tcl">
+						<%= link_to h(topic.forum.name), forum_path(topic.forum) %>
+					</td>
+				<% end %>
 				<td class="tcm"><%=h topic.posts_count-1 %></td>
 				<td class="tcm"><%=h topic.views %></td>
-				<td class="tcr"><% if !topic.last_post_at.blank? %><%=h time_ago_in_words(topic.last_post_at) %> ago by <%=h topic.last_poster.login %><% end %></td>
+				<td class="tcr">
+					<% if !topic.last_post_at.blank? %>
+						<%=h time_ago_in_words(topic.last_post_at) %> ago by 
+						<%=h topic.last_poster.login %><% end %>
+					</td>
 			</tr>
 		<% end %>
 	</tbody>
@@ -37,18 +47,27 @@
 
 <div class="info-left">
 <% if current_controller == 'categories' %>
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
 <% elsif current_controller == 'forums' %>
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; <%= link_to @category.name, category_path(@category) %> &raquo; <%= @forum.name %>
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Forum', forum_home_path %> &raquo; 
+	<%= link_to @category.name, category_path(@category) %> &raquo; <%= @forum.name %>
 <% else %>
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Forum', forum_home_path %> &raquo; Viewing All Topics
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Forum', forum_home_path %> &raquo; All Topics
 <% end %>
 </div>
 <div class="info-right">
-	<% if @topic_pages and @topic_pages.current.previous %><%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
-	<% else %><span class="disabled">&laquo; Previous</span><% end %>
+	<% if @topic_pages and @topic_pages.current.previous %>
+		<%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
+	<% else %>
+		<span class="disabled">&laquo; Previous</span><% end %>
 	&nbsp;<%= pagination_links(@topic_pages) %>&nbsp;
-	<% if @topic_pages and @topic_pages.current.next %><%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %>
-	<% else %><span class="disabled">Next &raquo;</span><% end %>
+	<% if @topic_pages and @topic_pages.current.next %>
+		<%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %>
+	<% else %>
+		<span class="disabled">Next &raquo;</span>
+	<% end %>
 </div>
 <div style="clear:both;"> </div>

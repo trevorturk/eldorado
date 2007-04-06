@@ -1,5 +1,18 @@
 <%= error_messages_for :avatar %>
-<% form_for(:avatar, :url => avatars_path, :html => { :multipart => true }) do |f| %>
-	<p><%= f.file_field :uploaded_data %></p>
-	<p><%= submit_tag "Upload" %>
+<% form_for(:avatar, :url => avatars_path) do |f| %>
+	<div class="box">
+		<div class="top">New Avatar</div>
+		<p><%= f.file_field :uploaded_data %></p>
+		<p>Avatars must be under 50k.</p>
+		<p>
+			<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
+			<%= link_to 'Cancel', avatars_path %>
+		</p>
+	</div>
 <% end %>
+
+<div class="info-left">
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Calendar', calendar_home_path %> &raquo; New Avatar
+</div>
+<div style="clear:both;"> </div>

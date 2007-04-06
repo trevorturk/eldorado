@@ -31,7 +31,8 @@
 </div>
 
 <div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
 </div>
 <div class="info-right">
 	<% if can_edit?(@user) && @user.avatar_id %>

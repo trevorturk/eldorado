@@ -14,7 +14,8 @@
 <% end %>
 
 <div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; <%= link_to 'Headers', headers_path %> &raquo; <%= @header.filename %>
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Headers', headers_path %> &raquo; <%= @header.filename %>
 </div>
 <div class="info-right">
 	<% if can_edit?(@header) %>

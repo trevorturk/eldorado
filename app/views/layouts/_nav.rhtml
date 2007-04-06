@@ -9,16 +9,32 @@
 	</p>
 	<p class="nav-right">
 		<% if logged_in? %>
-			<% if current_controller == 'home' %><%= link_to('Start a New Topic', new_topic_path) %>
-			<% elsif current_controller == 'avatars' %><%= link_to('Upload a New Avatar', new_avatar_path) %>
-			<% elsif current_controller == 'categories' %><%= link_to('Start a New Topic', new_topic_path) %>
-			<% elsif current_controller == "events" %><%= link_to('Add a New Event', new_event_path) %>
-			<% elsif current_controller == 'forums' %><% if @forum %><%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %><% else %><%= link_to('Start a New Topic', new_topic_path) %><% end %>
-			<% elsif current_controller == 'headers' %><%= link_to_function 'Upload a New Header', "$('action').toggle()" %>
-			<% elsif current_controller == 'posts' %><%= link_to('Start a New Topic', new_topic_path) %>
-			<% elsif current_controller == 'topics' %><%= link_to('Start a New Topic', new_topic_path) %>
-			<% elsif current_controller == "uploads" %><%= link_to_function 'Upload a New File', "$('action').toggle()" %>
-			<% elsif current_controller == "users" %><%= link_to('Register a New User', new_user_path) %>
+			<% if current_controller == 'home' %>
+				<%= link_to('Start a New Topic', new_topic_path) %>
+			<% elsif current_controller == 'avatars' %>
+				<%= link_to('Upload a New Avatar', new_avatar_path) %>
+			<% elsif current_controller == 'categories' %>
+				<%= link_to('Start a New Topic', new_topic_path) %>
+			<% elsif current_controller == "events" %>
+				<%= link_to('Add a New Event', new_event_path) %>
+			<% elsif current_controller == 'forums' %>
+				<% if @forum %>
+					<%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %>
+				<% else %>
+					<%= link_to('Start a New Topic', new_topic_path) %>
+				<% end %>
+			<% elsif current_controller == 'headers' %>
+				<%= link_to_function 'Upload a New Header', "$('action').toggle()" %>
+			<% elsif current_controller == 'posts' %>
+				<%= link_to('Start a New Topic', new_topic_path) %>
+			<% elsif current_controller == "themes" %>
+				<%= link_to('Upload a New Theme', new_theme_path) %>
+			<% elsif current_controller == 'topics' %>
+				<%= link_to('Start a New Topic', new_topic_path) %>
+			<% elsif current_controller == "uploads" %>
+				<%= link_to_function 'Upload a New File', "$('action').toggle()" %>
+			<% elsif current_controller == "users" %>
+				<%= link_to('Register a New User', new_user_path) %>
 			<% end %>
 			<% if admin? %>&nbsp; <%= link_to('Admin', admin_path) %><% end %>
 			&nbsp; <%= link_to('Logout', logout_path) %>

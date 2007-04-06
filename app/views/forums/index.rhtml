@@ -21,7 +21,12 @@
 						</td>
 						<td class="tcm"><%=h forum.topics_count %></td>
 						<td class="tcm"><%=h forum.posts_count %></td>
-						<td class="tcr"><% if !forum.last_post_at.blank? %><%=h time_ago_in_words(forum.last_post_at) %> ago <br /> by <%=h forum.last_poster.login %><% end %></td>
+						<td class="tcr">
+							<% if !forum.last_post_at.blank? %>
+								<%=h time_ago_in_words(forum.last_post_at) %> ago <br /> by 
+								<%=h forum.last_poster.login %>
+							<% end %>
+						</td>
 					</tr>
 				<% end %>
 			</tbody>	
