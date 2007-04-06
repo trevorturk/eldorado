@@ -46,28 +46,21 @@
 </table>
 
 <div class="info-left">
-<% if current_controller == 'categories' %>
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
-<% elsif current_controller == 'forums' %>
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Forum', forum_home_path %> &raquo; 
-	<%= link_to @category.name, category_path(@category) %> &raquo; <%= @forum.name %>
-<% else %>
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Forum', forum_home_path %> &raquo; All Topics
-<% end %>
+	<% if current_controller == 'categories' %>
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
+	<% elsif current_controller == 'forums' %>
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; 
+		<%= link_to @category.name, category_path(@category) %> &raquo; <%= @forum.name %>
+	<% elsif current_controller == 'topics' %>
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; All Topics
+	<% end %>
 </div>
 <div class="info-right">
-	<% if @topic_pages and @topic_pages.current.previous %>
-		<%= link_to "&laquo; Previous", { :page => @topic_pages.current.previous }.merge(params.reject{|k,v| k=="page"}) %>
-	<% else %>
-		<span class="disabled">&laquo; Previous</span><% end %>
-	&nbsp;<%= pagination_links(@topic_pages) %>&nbsp;
-	<% if @topic_pages and @topic_pages.current.next %>
-		<%= link_to "Next &raquo;", { :page => @topic_pages.current.next }.merge(params.reject{|k,v| k=="page"}) %>
-	<% else %>
-		<span class="disabled">Next &raquo;</span>
+	<% if current_controller == 'home' %>
+		<%= link_to 'View All Topics &raquo;', topics_path %>
 	<% end %>
 </div>
 <div style="clear:both;"> </div>
