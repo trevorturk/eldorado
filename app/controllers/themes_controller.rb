@@ -5,6 +5,7 @@ class ThemesController < ApplicationController
   
   def index
     @themes = Theme.find(:all)
+    @current_theme = Theme.find(@options.theme_id) unless @options.theme_id.nil?
   end
 
   def new
@@ -32,6 +33,11 @@ class ThemesController < ApplicationController
   def select
     @theme = Theme.find(params[:id])
     @options.update_attributes(:theme_id => @theme.id)
+    redirect_to themes_path
+  end
+  
+  def deselect
+    @options.update_attributes(:theme_id => nil)
     redirect_to themes_path
   end
   

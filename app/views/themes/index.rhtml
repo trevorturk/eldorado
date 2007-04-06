@@ -4,10 +4,20 @@
 		<p>
 			<%= link_to theme.filename, theme.public_filename %> by 
 			<%= link_to h(theme.user.login), user_path(theme.user) %> 
-			(<%= link_to 'select', select_theme_path(theme), :method => :post %>)
+			<% if @current_theme == theme %>
+				(<%= link_to 'deselect', deselect_theme_path(theme), :method => :post %>)
+			<% else %>
+				(<%= link_to 'select', select_theme_path(theme), :method => :post %>)
+			<% end %>
 			<% if can_edit?(theme) %>
 				(<%= link_to 'x', theme_path(theme), :confirm => 'Are you sure?', :method => :delete %>)
 			<% end %>
 		</p>
 	<% end %>
 </div>
+
+<div class="info-left info-footer">
+	<%= link_to 'Home', home_path %> &raquo; 
+	<%= link_to 'Users', users_path %> &raquo; Themes
+</div>
+<div style="clear:both;"> </div>
