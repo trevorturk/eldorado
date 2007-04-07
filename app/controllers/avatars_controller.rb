@@ -44,4 +44,11 @@ class AvatarsController < ApplicationController
     redirect_to user_path(current_user)
   end
   
+  def deselect
+    @avatar = Avatar.find(current_user.avatar_id)
+    @avatar.update_attributes(:current_user_id => nil)
+    current_user.update_attributes(:avatar_id => nil)
+    redirect_to user_path(current_user)
+  end
+  
 end

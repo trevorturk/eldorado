@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :avatars, :member => { :select => :post }
+  map.resources :avatars, :member => { :select => :post, :deselect => :post }
   map.resources :categories
   map.resources :events
   map.resources :forums

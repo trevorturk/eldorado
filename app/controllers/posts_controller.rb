@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   end 
 
   def destroy 
-    @post.destroy
+    @post.destroy if @topic.posts_count > 1
     redirect_to topic_url(@topic) 
   end 
     

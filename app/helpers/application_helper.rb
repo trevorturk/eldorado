@@ -59,7 +59,12 @@ module ApplicationHelper
   
   def can_edit?(current_item)
     return false unless logged_in?
-    current_user.admin? || (current_user.id == current_item.user_id)
+    return current_user.admin? || (current_user.id == current_item.id) 
+  end
+  
+  def can_edit_user?(user)
+    return false unless logged_in?
+    return current_user.admin? || (current_user.id == user.id) 
   end
   
   def current_controller

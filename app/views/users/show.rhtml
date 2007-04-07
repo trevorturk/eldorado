@@ -35,12 +35,13 @@
 	<%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
 </div>
 <div class="info-right">
-	<% if can_edit?(@user) && @user.avatar_id %>
-		<%= link_to 'Change Avatar', avatars_path %>
-	<% elsif can_edit?(@user) && @user.avatar_id.nil? %>
+	<% if can_edit_user?(@user) && @user.avatar_id %>
+		<%= link_to 'Change Avatar', avatars_path %> 
+		(<%= link_to 'x', deselect_avatar_path, :method => :post %>)
+	<% elsif can_edit_user?(@user) && @user.avatar_id.nil? %>
 		<%= link_to 'Get an Avatar', avatars_path %>
 	<% end %>
-	<% if can_edit?(@user) %>
+	<% if can_edit_user?(@user) %>
 		&nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
 	<% end %>
 </div>
