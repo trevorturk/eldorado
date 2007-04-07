@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 40) do
+ActiveRecord::Schema.define(:version => 41) do
 
   create_table "avatars", :force => true do |t|
     t.column "parent_id",       :integer
@@ -165,6 +165,8 @@ ActiveRecord::Schema.define(:version => 40) do
     t.column "ban_message",        :string
     t.column "avatars_count",      :integer,  :default => 0
     t.column "avatar_id",          :integer
+    t.column "themes_count",       :integer,  :default => 0
+    t.column "theme_id",           :integer
   end
 
 end
