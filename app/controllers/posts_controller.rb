@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_filter :force_login
   before_filter :find_topic_and_post, :except => [:index, :new, :create]
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
-  
     
   def edit
     @posts = Post.find(params[:id])

@@ -1,6 +1,6 @@
 class Forum < ActiveRecord::Base
   
-  has_many :topics, :order => 'last_post_at'
+  has_many :topics, :order => 'last_post_at', :dependent => :destroy
   belongs_to :category
   
   belongs_to :last_poster, :foreign_key => "last_post_by", :class_name => "User"

@@ -59,7 +59,7 @@ class TopicsController < ApplicationController
     @topic.destroy
     redirect_to topics_url
   end
-  
+    
   def unknown_request
     if request.request_uri.include?('viewtopic.php')
       redirect_to topic_path(:id => params[:id])
