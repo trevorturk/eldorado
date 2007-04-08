@@ -32,6 +32,7 @@
 		<% for topic in @topics %>
 			<tr>
 				<td class="tcl">
+					<div class="icon"> </div>
 					<%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
 				</td>
 				<% if current_controller != 'forums' %>

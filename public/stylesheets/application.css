@@ -427,6 +427,18 @@ blockquote p {
 	color: #999;
 }
 
+.icon {
+	float: left;
+	margin: 0 6px 0 2px;
+	border-width: 6px;
+	border-style: solid;
+	border-color: #E6E6E6 #DEDEDE #DADADA #E2E2E2;
+}
+
+.inew {
+	border-color: #8BB453 #7A9E48 #709142 #799C47;
+}
+
 #notice, #error {
 	border: 1px solid #999;
 	background: #eee;

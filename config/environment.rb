@@ -48,9 +48,6 @@ Inflector.inflections do |inflect|
 #   inflect.singular /^(ox)en/i, '\1'
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )
-    inflect.uncountable %w( files )
 end
 
 # Include your application configuration below
-
-PASSWORD_SALT = 'a0cfa6e4890663c6b64a95a5076f94addee20218' unless Object.const_defined?(:PASSWORD_SALT) # abazaba

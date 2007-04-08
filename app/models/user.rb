@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
   
   def self.encrypt(password)
-    Digest::SHA1.hexdigest(password + PASSWORD_SALT)
+    Digest::SHA1.hexdigest(password)
   end
   
   def self.users_online
