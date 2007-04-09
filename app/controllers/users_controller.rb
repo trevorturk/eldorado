@@ -76,7 +76,7 @@ class UsersController < ApplicationController
       redirect_to login_path and return false
     end
     session[:user_id] = user.id
-    session[:last_login_at] = user.last_login_at
+    session[:last_session_at] = user.last_login_at
     user.last_login_at = Time.now.utc
     user.save!
     redirect_to home_path

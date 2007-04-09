@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 41) do
+ActiveRecord::Schema.define(:version => 42) do
 
   create_table "avatars", :force => true do |t|
     t.column "parent_id",       :integer
@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(:version => 41) do
     t.column "updated_at",   :datetime
   end
 
+  add_index "forums", ["category_id"], :name => "index_forums_on_category_id"
+  add_index "forums", ["category_id", "last_post_at"], :name => "index_forums_on_last_post_at"
+
   create_table "headers", :force => true do |t|
     t.column "parent_id",    :integer
     t.column "content_type", :string
@@ -87,6 +90,8 @@ ActiveRecord::Schema.define(:version => 41) do
     t.column "updated_at", :datetime
     t.column "updated_by", :integer
   end
+
+  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
 
   create_table "ranks", :force => true do |t|
     t.column "title",     :string
@@ -131,6 +136,9 @@ ActiveRecord::Schema.define(:version => 41) do
     t.column "forum_id",     :integer
   end
 
+  add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
+  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_last_post_at"
+
   create_table "uploads", :force => true do |t|
     t.column "parent_id",    :integer
     t.column "content_type", :string
@@ -168,5 +176,7 @@ ActiveRecord::Schema.define(:version => 41) do
     t.column "themes_count",       :integer,  :default => 0
     t.column "theme_id",           :integer
   end
+
+  add_index "users", ["online_at"], :name => "index_users_on_online_at"
 
 end

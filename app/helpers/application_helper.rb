@@ -72,9 +72,9 @@ module ApplicationHelper
   
   def icon_for(current_item)
     return '' unless logged_in?
-    if (current_controller == "users" and session[:last_login_at] < current_item.profile_updated_at)
+    if (current_controller == "users" and session[:last_session_at] < current_item.profile_updated_at)
       return '<div class="icon inew"></div>'
-    elsif ((current_controller == "topics" or current_controller == "forums" or current_controller == "categories" or current_controller == "home") and (session[:last_login_at] < current_item.last_post_at))
+    elsif ((current_controller == "topics" or current_controller == "forums" or current_controller == "categories" or current_controller == "home") and (session[:last_session_at] < current_item.last_post_at))
       return '<div class="icon inew"></div>'
     else
       return '<div class="icon"> </div>'
