@@ -2,10 +2,10 @@
 		<table cellspacing="0" class="forum-index">
 			<thead>
 				<tr>
-					<th colspan="4"><%= link_to h(category.name), category_path(category) %></th>
+					<th colspan="5"><%= link_to h(category.name), category_path(category) %></th>
 				</tr>
 				<tr class="forum-list">
-					<th class="tcl">Forums</th>
+					<th class="tcl" colspan="2">Forums</th>
 					<th class="tcm">Topics</th>
 					<th class="tcm">Posts</th>
 					<th class="tcr">Activity</th>
@@ -14,15 +14,15 @@
 			<tbody>
 					<% for forum in category.forums %>
 					<tr>
+						<td class="tci"><%= icon_for(forum) %></td>
 						<td class="tcl">
 							<span class="forum-name"><%= link_to h(forum.name), forum_path(forum) %></span>
-							<br />
-							<%=h forum.description %>
+							<br /><%=h forum.description %>
 						</td>
 						<td class="tcm"><%=h forum.topics_count %></td>
 						<td class="tcm"><%=h forum.posts_count %></td>
 						<td class="tcr">
-							<% if !forum.last_post_at.blank? %>
+							<% if !forum.last_post_id.blank? %>
 								<%=h time_ago_in_words(forum.last_post_at) %> ago <br /> by 
 								<%=h forum.last_poster.login %>
 							<% end %>

@@ -21,7 +21,7 @@
 <table cellspacing="0">
 	<thead>
 		<tr>
-			<th class="tcl">Topics</th>
+			<th class="tcl" colspan="2">Topics</th>
 			<% if current_controller != 'forums' %><th class="tcl">Forum</th><% end %>
 			<th class="tcm">Replies</th>
 			<th class="tcm">Views</th>
@@ -31,8 +31,8 @@
 	<tbody>
 		<% for topic in @topics %>
 			<tr>
+				<td class="tci"><%= icon_for(topic) %></td>
 				<td class="tcl">
-					<div class="icon"> </div>
 					<%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
 				</td>
 				<% if current_controller != 'forums' %>

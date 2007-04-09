@@ -63,14 +63,24 @@ module ApplicationHelper
   
   def can_edit?(current_item)
     return false unless logged_in?
-    return current_user.admin? || (current_user.id == current_item.id) 
+    if current_controller == "users"
+      return current_user.admin? || (current_user.id == current_item.id) 
+    else
+      return current_user.admin? || (current_user.id == current_item.user_id) 
+    end
   end
   
-  def can_edit_user?(user)
-    return false unless logged_in?
-    return current_user.admin? || (current_user.id == user.id) 
+  def icon_for(current_item)
+    return '' unless logged_in?
+    if (current_controller == "users" and session[:last_login_at] < current_item.profile_updated_at)
+      return '<div class="icon inew"></div>'
+    elsif ((current_controller == "topics" or current_controller == "forums" or current_controller == "categories" or current_controller == "home") and (session[:last_login_at] < current_item.last_post_at))
+      return '<div class="icon inew"></div>'
+    else
+      return '<div class="icon"> </div>'
+    end
   end
-  
+    
   def current_controller
     request.path_parameters['controller']
   end

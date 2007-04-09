@@ -1,7 +1,7 @@
 <table cellspacing="0">
 	<thead>
 		<tr>
-			<th class="tcl">User</th>
+			<th class="tcl" colspan="2">Users</th>
 			<th class="tcl">Last Visit</th>
 			<th class="tcl">Profile Updated</th>
 			<th class="tcm">Topics</th>
@@ -12,6 +12,7 @@
 	<tbody>
 		<% for user in @users %>
 			<tr>
+				<td class="tci"><%= icon_for(user) %></td>
 				<td class="tcl"><%= link_to h(user.login), user_path(user.id) %></td>
 				<td class="tcl"><%= time_ago_in_words(user.last_login_at) %> ago</td>
 				<td class="tcl"><%= time_ago_in_words(user.profile_updated_at) %> ago</td>

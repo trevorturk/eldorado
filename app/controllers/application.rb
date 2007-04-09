@@ -46,7 +46,11 @@ class ApplicationController < ActionController::Base
   
   def can_edit?(current_item)
     return false unless logged_in?
-    current_user.admin? || (current_user.id == current_item.user_id)
+    if request.path_parameters['controller'] == "users"
+      return current_user.admin? || (current_user.id == current_item.id) 
+    else
+      return current_user.admin? || (current_user.id == current_item.user_id) 
+    end
   end
   
   def get_reminders

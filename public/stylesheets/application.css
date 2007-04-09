@@ -206,6 +206,11 @@ tbody td {
 	border-right: 1px solid #cedeb9;
 }
 
+tbody .tci {
+	width: 10px !important;
+	border-right: 0;
+}
+
 tbody .tcm {
 	text-align: center;
 	vertical-align: middle;
@@ -266,7 +271,7 @@ tbody .tds {
 }
 
 .forum-index .tcl {
-	width: 55%;
+	width: 61%;
 }
 
 .forum-index .tcm {
@@ -274,6 +279,7 @@ tbody .tds {
 }
 
 .forum-index .tcr {
+	width: 31%;
 	vertical-align: middle;
 }
 
@@ -428,8 +434,7 @@ blockquote p {
 }
 
 .icon {
-	float: left;
-	margin: 0 6px 0 2px;
+	margin: 0 -3px 0 2px;
 	border-width: 6px;
 	border-style: solid;
 	border-color: #E6E6E6 #DEDEDE #DADADA #E2E2E2;

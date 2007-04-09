@@ -59,6 +59,12 @@ class TopicsController < ApplicationController
     @topic.destroy
     redirect_to topics_url
   end
+  
+  def show_new
+    redirect_to login_path unless logged_in?
+    @topics = Topic.find(:all, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["last_post_at > ?", current_user.last_login_at])
+    render(:template => "topics/index")
+  end
     
   def unknown_request
     if request.request_uri.include?('viewtopic.php')
