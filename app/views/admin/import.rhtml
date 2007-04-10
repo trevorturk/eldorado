@@ -1,0 +1,13 @@
+<div class="box">
+<div class="top">Import</div>
+<p style="width:500px;text-align:justify;">
+This will import a PunBB database into the El Dorado structure. 
+Before doing anything else this will <b>completely destroy</b> your existing El Dorado database. 
+It will most likely take a REALLY long time, too, so be patient. 
+This whole shebang is only tested with <b>PunBB 1.2.14</b>. 
+The importing do-hickey assumes that you have your PunBB database tables in the same database as El Dorado, 
+and that the PunBB tables are all prefixed with <b>pun_</b>, i.e. pun_users, pun_posts, etc and so forth.
+Good night, and good luck...
+</p>
+<p><%= button_to 'Import', admin_import_path, :method => :post, :confirm => 'Are you TOTALLY sure!??!' %></p>
+</div>
