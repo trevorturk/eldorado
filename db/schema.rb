@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 42) do
     t.column "updated_at",  :datetime
   end
 
+  add_index "events", ["date"], :name => "index_events_on_date"
+
   create_table "forums", :force => true do |t|
     t.column "category_id",  :integer
     t.column "name",         :string
@@ -91,6 +93,7 @@ ActiveRecord::Schema.define(:version => 42) do
     t.column "updated_by", :integer
   end
 
+  add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
 
   create_table "ranks", :force => true do |t|
