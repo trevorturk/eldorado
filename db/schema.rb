@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 42) do
+ActiveRecord::Schema.define(:version => 44) do
 
   create_table "avatars", :force => true do |t|
     t.column "parent_id",       :integer
@@ -46,8 +46,6 @@ ActiveRecord::Schema.define(:version => 42) do
     t.column "last_post_id", :integer
     t.column "last_post_at", :datetime
     t.column "last_post_by", :integer
-    t.column "created_at",   :datetime
-    t.column "updated_at",   :datetime
   end
 
   add_index "forums", ["category_id"], :name => "index_forums_on_category_id"
@@ -95,6 +93,116 @@ ActiveRecord::Schema.define(:version => 42) do
 
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
+
+  create_table "pun_bans", :force => true do |t|
+    t.column "username", :string,  :limit => 200
+    t.column "ip",       :string
+    t.column "email",    :string,  :limit => 50
+    t.column "message",  :string
+    t.column "expire",   :integer, :limit => 10
+  end
+
+  create_table "pun_categories", :force => true do |t|
+    t.column "cat_name",      :string,  :limit => 80, :default => "New Category", :null => false
+    t.column "disp_position", :integer, :limit => 10, :default => 0,              :null => false
+  end
+
+  create_table "pun_forums", :force => true do |t|
+    t.column "forum_name",    :string,  :limit => 80,  :default => "New forum", :null => false
+    t.column "forum_desc",    :text
+    t.column "redirect_url",  :string,  :limit => 100
+    t.column "moderators",    :text
+    t.column "num_topics",    :integer, :limit => 8,   :default => 0,           :null => false
+    t.column "num_posts",     :integer, :limit => 8,   :default => 0,           :null => false
+    t.column "last_post",     :integer, :limit => 10
+    t.column "last_post_id",  :integer, :limit => 10
+    t.column "last_poster",   :string,  :limit => 200
+    t.column "sort_by",       :boolean,                :default => false,       :null => false
+    t.column "disp_position", :integer, :limit => 10,  :default => 0,           :null => false
+    t.column "cat_id",        :integer, :limit => 10,  :default => 0,           :null => false
+  end
+
+  create_table "pun_posts", :force => true do |t|
+    t.column "poster",       :string,  :limit => 200, :default => "",    :null => false
+    t.column "poster_id",    :integer, :limit => 10,  :default => 1,     :null => false
+    t.column "poster_ip",    :string,  :limit => 15
+    t.column "poster_email", :string,  :limit => 50
+    t.column "message",      :text,                   :default => "",    :null => false
+    t.column "hide_smilies", :boolean,                :default => false, :null => false
+    t.column "posted",       :integer, :limit => 10,  :default => 0,     :null => false
+    t.column "edited",       :integer, :limit => 10
+    t.column "edited_by",    :string,  :limit => 200
+    t.column "topic_id",     :integer, :limit => 10,  :default => 0,     :null => false
+  end
+
+  add_index "pun_posts", ["topic_id"], :name => "posts_topic_id_idx"
+  add_index "pun_posts", ["poster_id", "topic_id"], :name => "posts_multi_idx"
+
+  create_table "pun_ranks", :force => true do |t|
+    t.column "rank",      :string,  :limit => 50, :default => "", :null => false
+    t.column "min_posts", :integer, :limit => 8,  :default => 0,  :null => false
+  end
+
+  create_table "pun_topics", :force => true do |t|
+    t.column "poster",       :string,  :limit => 200, :default => "",    :null => false
+    t.column "subject",      :string,                 :default => "",    :null => false
+    t.column "posted",       :integer, :limit => 10,  :default => 0,     :null => false
+    t.column "last_post",    :integer, :limit => 10,  :default => 0,     :null => false
+    t.column "last_post_id", :integer, :limit => 10,  :default => 0,     :null => false
+    t.column "last_poster",  :string,  :limit => 200
+    t.column "num_views",    :integer, :limit => 8,   :default => 0,     :null => false
+    t.column "num_replies",  :integer, :limit => 8,   :default => 0,     :null => false
+    t.column "closed",       :boolean,                :default => false, :null => false
+    t.column "sticky",       :boolean,                :default => false, :null => false
+    t.column "moved_to",     :integer, :limit => 10
+    t.column "forum_id",     :integer, :limit => 10,  :default => 0,     :null => false
+  end
+
+  add_index "pun_topics", ["forum_id"], :name => "topics_forum_id_idx"
+  add_index "pun_topics", ["moved_to"], :name => "topics_moved_to_idx"
+
+  create_table "pun_users", :force => true do |t|
+    t.column "group_id",         :integer, :limit => 10,  :default => 4,         :null => false
+    t.column "username",         :string,  :limit => 200, :default => "",        :null => false
+    t.column "password",         :string,  :limit => 40,  :default => "",        :null => false
+    t.column "email",            :string,  :limit => 50,  :default => "",        :null => false
+    t.column "title",            :string,  :limit => 50
+    t.column "realname",         :string,  :limit => 40
+    t.column "url",              :string,  :limit => 100
+    t.column "jabber",           :string,  :limit => 75
+    t.column "icq",              :string,  :limit => 12
+    t.column "msn",              :string,  :limit => 50
+    t.column "aim",              :string,  :limit => 30
+    t.column "yahoo",            :string,  :limit => 30
+    t.column "location",         :string,  :limit => 30
+    t.column "use_avatar",       :boolean,                :default => false,     :null => false
+    t.column "signature",        :text
+    t.column "disp_topics",      :integer, :limit => 3
+    t.column "disp_posts",       :integer, :limit => 3
+    t.column "email_setting",    :boolean,                :default => true,      :null => false
+    t.column "save_pass",        :boolean,                :default => true,      :null => false
+    t.column "notify_with_post", :boolean,                :default => false,     :null => false
+    t.column "show_smilies",     :boolean,                :default => true,      :null => false
+    t.column "show_img",         :boolean,                :default => true,      :null => false
+    t.column "show_img_sig",     :boolean,                :default => true,      :null => false
+    t.column "show_avatars",     :boolean,                :default => true,      :null => false
+    t.column "show_sig",         :boolean,                :default => true,      :null => false
+    t.column "timezone",         :float,                  :default => 0.0,       :null => false
+    t.column "language",         :string,  :limit => 25,  :default => "English", :null => false
+    t.column "style",            :string,  :limit => 25,  :default => "Oxygen",  :null => false
+    t.column "num_posts",        :integer, :limit => 10,  :default => 0,         :null => false
+    t.column "last_post",        :integer, :limit => 10
+    t.column "registered",       :integer, :limit => 10,  :default => 0,         :null => false
+    t.column "registration_ip",  :string,  :limit => 15,  :default => "0.0.0.0", :null => false
+    t.column "last_visit",       :integer, :limit => 10,  :default => 0,         :null => false
+    t.column "admin_note",       :string,  :limit => 30
+    t.column "activate_string",  :string,  :limit => 50
+    t.column "activate_key",     :string,  :limit => 8
+    t.column "birthday",         :string,  :limit => 10,  :default => "0-0-0",   :null => false
+  end
+
+  add_index "pun_users", ["registered"], :name => "users_registered_idx"
+  add_index "pun_users", ["username"], :name => "users_username_idx"
 
   create_table "ranks", :force => true do |t|
     t.column "title",     :string
@@ -165,18 +273,11 @@ ActiveRecord::Schema.define(:version => 42) do
     t.column "posts_count",        :integer,  :default => 0
     t.column "signature",          :string
     t.column "bio",                :text
-    t.column "topics_count",       :integer,  :default => 0
-    t.column "updated_at",         :datetime
     t.column "profile_updated_at", :datetime
     t.column "online_at",          :datetime
-    t.column "headers_count",      :integer,  :default => 0
-    t.column "events_count",       :integer,  :default => 0
-    t.column "uploads_count",      :integer,  :default => 0
     t.column "banned_until",       :datetime
     t.column "ban_message",        :string
-    t.column "avatars_count",      :integer,  :default => 0
     t.column "avatar_id",          :integer
-    t.column "themes_count",       :integer,  :default => 0
     t.column "theme_id",           :integer
   end
 

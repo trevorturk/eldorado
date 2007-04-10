@@ -28,7 +28,6 @@
 						</dd>
 						<dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
 						<dd>Last visit: <%= time_ago_in_words(post.user.last_login_at) %> ago</dd>
-						<dd>Topics: <%= post.user.topics_count %></dd>
 						<dd>Posts: <%= post.user.posts_count %></dd>
 					</dl>
 				</td>
@@ -38,7 +37,7 @@
 						<p class="edited">Last edited <%= time_ago_in_words(post.updated_at) %> ago.</p>
 					<% end %>
 					<% if !post.user.signature.blank? %>
-						<hr class="sig"><%= post.user.signature %>
+						<hr class="sig"><%=h post.user.signature %>
 					<% end %>
 				</td>
 			</tr>

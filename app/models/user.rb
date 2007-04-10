@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     
   attr_reader :password
   
-  attr_protected :admin, :posts_count, :topics_count, :headers_count, :events_count, :created_at, :updated_at, :last_login_at, :profile_updated_at, :online_at, :banned_until, :ban_message
+  attr_protected :admin, :posts_count, :created_at, :last_login_at, :profile_updated_at, :online_at, :banned_until, :ban_message
    
   def password=(value)
     return if value.blank?

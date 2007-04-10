@@ -1,6 +1,6 @@
 class Header < ActiveRecord::Base
   
-  belongs_to :user, :counter_cache => true
+  belongs_to :user
   
   has_attachment :storage => :file_system, :path_prefix => 'public/headers', :max_size => 15.megabytes
   

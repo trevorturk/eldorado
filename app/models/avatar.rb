@@ -1,6 +1,6 @@
 class Avatar < ActiveRecord::Base
 
-  belongs_to :user, :counter_cache => true
+  belongs_to :user
   belongs_to :current_avatar_user, :foreign_key => "current_user_id", :class_name => "User"
 
   has_attachment :content_type => :image, :storage => :file_system, :max_size => 20.kilobytes

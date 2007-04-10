@@ -1,8 +1,6 @@
 <div class="box">
 	<div class="top">Profile</div>
-	
 	<div class="profile-avatar"><%= avatar_img(@user) %></div>
-
 	<span class="profile-title"><%=h @user.login %></span>&nbsp;
 	<span class="profile-rank"><%=h rank_for(@user.posts_count, @user.admin) %></span>
 	
@@ -11,23 +9,15 @@
 	</div>
 	
 	<% if !@user.signature.blank? %>
-		<hr class="sig"><%= @user.signature %>
+		<hr class="sig"><%=h @user.signature %>
 	<% end %>	
 	
 	<p style="margin-top:20px">
 		<b>Registered</b>: <%= @user.created_at.strftime("%b %d, %Y") %> &nbsp;
-		<b>Profile Updated</b>: <%= time_ago_in_words(@user.profile_updated_at) %> ago &nbsp;
-		<b>Last visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago
-	</p>
-	<p>
-		<b>Avatars</b>: <%= @user.avatars_count %> &nbsp;
-		<b>Events</b>: <%= @user.events_count %> &nbsp;
-		<b>Files</b>: <%= @user.uploads_count %> &nbsp;
-		<b>Headers</b>: <%= @user.headers_count %> &nbsp;
 		<b>Posts</b>: <%= @user.posts_count %> &nbsp;
-		<b>Topics</b>: <%= @user.topics_count %> &nbsp;
-	</p>
-	
+		<b>Profile Updated</b>: <%= time_ago_in_words(@user.profile_updated_at) %> ago &nbsp;
+		<b>Last Visit</b>: <%= time_ago_in_words(@user.last_login_at) %> ago
+	</p>	
 </div>
 
 <div class="info-left">

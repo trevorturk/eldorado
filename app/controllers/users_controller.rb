@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   filter_parameter_logging "password"
   
   def index
-    @users = User.find(:all, :order => 'last_login_at desc')
+    @users = User.find(:all, :order => 'profile_updated_at desc, last_login_at desc')
   end
 
   def show
