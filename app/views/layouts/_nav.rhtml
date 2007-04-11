@@ -10,27 +10,23 @@
 	<p class="nav-right">
 		<% if logged_in? %>
 			<% if current_controller == 'home' %>
-				<%= link_to('Start a New Topic', new_topic_path) %>
+				<%= link_to_function 'Start a New Topic', "$('action').toggle();topic_title.focus()" %>
+			<% elsif current_controller == 'categories' %>
+				<%= link_to_function 'Start a New Topic', "$('action').toggle();topic_title.focus()" %>
+			<% elsif current_controller == 'topics' %>
+				<%= link_to_function 'Start a New Topic', "$('action').toggle();topic_title.focus()" %>
+			<% elsif current_controller == 'posts' %>
+				<%= link_to_function 'Start a New Topic', "$('action').toggle();topic_title.focus()" %>
+			<% elsif current_controller == 'forums' %>
+				<%= link_to_function 'Start a New Topic', "$('action').toggle();topic_title.focus()" %>
 			<% elsif current_controller == 'avatars' %>
 				<%= link_to_function 'Upload a New Avatar', "$('action').toggle()" %>
-			<% elsif current_controller == 'categories' %>
-				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == "events" %>
-				<%= link_to_function 'Add a New Event', "$('action').toggle()" %>
-			<% elsif current_controller == 'forums' %>
-				<% if @forum %>
-					<%= link_to('Start a New Topic', new_topic_path(:forum_id => @forum.id)) %>
-				<% else %>
-					<%= link_to('Start a New Topic', new_topic_path) %>
-				<% end %>
+				<%= link_to_function 'Add a New Event', "$('action').toggle();event_title.focus()" %>
 			<% elsif current_controller == 'headers' %>
 				<%= link_to_function 'Upload a New Header', "$('action').toggle()" %>
-			<% elsif current_controller == 'posts' %>
-				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == "themes" %>
 				<%= link_to_function 'Upload a New Theme', "$('action').toggle()" %>
-			<% elsif current_controller == 'topics' %>
-				<%= link_to('Start a New Topic', new_topic_path) %>
 			<% elsif current_controller == "uploads" %>
 				<%= link_to_function 'Upload a New File', "$('action').toggle()" %>
 			<% elsif current_controller == "users" %>

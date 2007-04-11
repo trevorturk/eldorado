@@ -71,7 +71,7 @@ class UsersController < ApplicationController
   end
   
   def do_login(user)
-    if (!user.banned_until.blank?) && (user.banned_until > Time.now.utc.to_date)
+    if (!user.banned_until.blank?) && (user.banned_until > Time.now.utc)
       flash[:notice] = user.login+" is banned until "+user.banned_until.to_s(:long)+" with the message: "+user.ban_message
       redirect_to login_path and return false
     end

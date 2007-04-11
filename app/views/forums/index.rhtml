@@ -1,3 +1,5 @@
+<%= render :partial => 'topics/new' %>
+
 <% for category in @categories %>
 		<table cellspacing="0" class="forum-index">
 			<thead>
@@ -12,7 +14,7 @@
 				</tr>
 			</thead>
 			<tbody>
-					<% for forum in category.forums %>
+				<% for forum in category.forums %>
 					<tr>
 						<td class="tci"><%= icon_for(forum) %></td>
 						<td class="tcl">

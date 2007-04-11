@@ -30,18 +30,6 @@ class AdminController < ApplicationController
     # Caveats:
     # times may not be 100% accurate due to time-zone issues, but they'll be close
     #
-    # CATEGORIES
-    #
-    @items = ActiveRecord::Base.connection.execute('SELECT id, cat_name, disp_position FROM pun_categories')
-    ActiveRecord::Base.connection.execute('TRUNCATE table categories')
-    for i in @items
-      @item = Category.new
-      @item.id = i[0] # id 
-      @item.name = i[1] # cat_name
-      @item.position = i[2] # disp_position
-      @item.save!
-    end
-    #
     # USERS
     #
     # ignoring the following fields from PunBB: 
@@ -58,7 +46,7 @@ class AdminController < ApplicationController
     # set the Guest user password as something random so people won't log in as Guest
     #
     @items = ActiveRecord::Base.connection.execute('SELECT id, username, password, email, signature, num_posts, registered, last_visit FROM pun_users')
-    ActiveRecord::Base.connection.execute('TRUNCATE table users')
+    User.destroy_all
     for i in @items
       @item = User.new
       @item.id = i[0] # id
@@ -87,12 +75,36 @@ class AdminController < ApplicationController
       @item.save!
     end
     #
+    # RANKS
+    #
+    @items = ActiveRecord::Base.connection.execute('SELECT id, rank, min_posts FROM pun_ranks')
+    Rank.destroy_all
+    for i in @items
+      @item = Rank.new
+      @item.id = i[0] # id 
+      @item.title = i[1] # rank
+      @item.min_posts = i[2] # min_posts
+      @item.save!
+    end
+    #
+    # CATEGORIES
+    #
+    @items = ActiveRecord::Base.connection.execute('SELECT id, cat_name, disp_position FROM pun_categories')
+    Category.destroy_all
+    for i in @items
+      @item = Category.new
+      @item.id = i[0] # id 
+      @item.name = i[1] # cat_name
+      @item.position = i[2] # disp_position
+      @item.save!
+    end
+    #
     # FORUMS
     #
     # ignoring: redirect_url, moderators, sort_by    
     #    
     @items = ActiveRecord::Base.connection.execute('SELECT id, forum_name, forum_desc, num_topics, num_posts, last_post, last_post_id, last_poster, disp_position, cat_id FROM pun_forums')
-    ActiveRecord::Base.connection.execute('TRUNCATE table forums')
+    Forum.destroy_all
     for i in @items
       @item = Forum.new
       @item.id = i[0] # id 
@@ -109,17 +121,10 @@ class AdminController < ApplicationController
       @item.save!
     end
     #
-    # RANKS
+    # TOPICS
     #
-    @items = ActiveRecord::Base.connection.execute('SELECT id, rank, min_posts FROM pun_ranks')
-    ActiveRecord::Base.connection.execute('TRUNCATE table ranks')
-    for i in @items
-      @item = Rank.new
-      @item.id = i[0] # id 
-      @item.title = i[1] # rank
-      @item.min_posts = i[2] # min_posts
-      @item.save!
-    end
+    # POSTS
+    #
     # DONE
   end
     

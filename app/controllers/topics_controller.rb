@@ -5,6 +5,7 @@ class TopicsController < ApplicationController
   before_filter :check_privacy, :only => [:show]
   
   def index
+    @topic = Topic.new
     if logged_in?
       @topics = Topic.find(:all, :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
@@ -25,6 +26,7 @@ class TopicsController < ApplicationController
   def new
     @topic = Topic.new
     @topic.forum_id = params[:forum_id] 
+    render :template => "topics/_new"
   end
 
   def edit
@@ -41,7 +43,7 @@ class TopicsController < ApplicationController
     if @topic.save && @post.save
       redirect_to topic_url(@topic)
     else
-      render :action => "new"
+      render :action => "_new"
     end
   end
 

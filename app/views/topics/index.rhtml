@@ -1,3 +1,5 @@
+<%= render :partial => 'topics/new' %>
+
 <% if current_controller == 'categories' %>
 	<div class="info-left">
 		<span class="title"><%=h @category.name %></span>
@@ -18,39 +20,56 @@
 	<div style="clear:both;"> </div>
 <% end %>
 
-<table cellspacing="0">
-	<thead>
-		<tr>
-			<th class="tcl" colspan="2">Topics</th>
-			<% if current_controller != 'forums' %><th class="tcl">Forum</th><% end %>
-			<th class="tcm">Replies</th>
-			<th class="tcm">Views</th>
-			<th class="tcr">Activity</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% for topic in @topics %>
+<% if !@topics.blank? %>
+	<table cellspacing="0">
+		<thead>
 			<tr>
-				<td class="tci"><%= icon_for(topic) %></td>
-				<td class="tcl">
-					<%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
-				</td>
-				<% if current_controller != 'forums' %>
-					<td class="tcl">
-						<%= link_to h(topic.forum.name), forum_path(topic.forum) %>
-					</td>
-				<% end %>
-				<td class="tcm"><%=h topic.posts_count-1 %></td>
-				<td class="tcm"><%=h topic.views %></td>
-				<td class="tcr">
-					<% if !topic.last_post_at.blank? %>
-						<%=h time_ago_in_words(topic.last_post_at) %> ago by 
-						<%=h topic.last_poster.login %><% end %>
-					</td>
+				<th class="tcl" colspan="2">Topics</th>
+				<% if current_controller != 'forums' %><th class="tcl">Forum</th><% end %>
+				<th class="tcm">Replies</th>
+				<th class="tcm">Views</th>
+				<th class="tcr">Activity</th>
 			</tr>
-		<% end %>
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			<% for topic in @topics %>
+				<tr>
+					<td class="tci"><%= icon_for(topic) %></td>
+					<td class="tcl">
+						<%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
+					</td>
+					<% if current_controller != 'forums' %>
+						<td class="tcl">
+							<%= link_to h(topic.forum.name), forum_path(topic.forum) %>
+						</td>
+					<% end %>
+					<td class="tcm"><%=h topic.posts_count-1 %></td>
+					<td class="tcm"><%=h topic.views %></td>
+					<td class="tcr">
+						<% if !topic.last_post_at.blank? %>
+							<%=h time_ago_in_words(topic.last_post_at) %> ago by 
+							<%=h topic.last_poster.login %><% end %>
+						</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<% if logged_in? %>
+		<div class="box">
+			<p class="small">
+			<%= link_to('Start a New Topic &raquo;', new_topic_path) %>
+			</p>
+		</div>
+	<% else %>
+		<div class="box">
+			<p class="small">
+				<%= link_to('Login', login_path) %> or 
+				<%= link_to('Register', register_path) %> to start a new topic
+				</p>
+		</div>
+	<% end %>
+<% end %>
 
 <div class="info-left">
 	<% if current_controller == 'categories' %>
@@ -59,7 +78,7 @@
 	<% elsif current_controller == 'forums' %>
 		<%= link_to 'Home', home_path %> &raquo; 
 		<%= link_to 'Forum', forum_home_path %> &raquo; 
-		<%= link_to @category.name, category_path(@category) %> &raquo; <%= @forum.name %>
+		<%= link_to @forum.category.name, category_path(@forum.category) %> &raquo; <%= @forum.name %>
 	<% elsif current_controller == 'topics' %>
 		<%= link_to 'Home', home_path %> &raquo; 
 		<%= link_to 'Forum', forum_home_path %> &raquo; All Topics

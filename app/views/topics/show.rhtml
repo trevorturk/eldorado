@@ -1,3 +1,5 @@
+<%= render :partial => 'topics/new' %>
+
 <div class="info-left">
 	<span class="title"><%=h @topic.title %></span>
 	<span class="detail"><%= @posters.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %></span>
@@ -33,7 +35,7 @@
 				</td>
 				<td class="body">
 					<%=h post.body %>
-					<% if post.updated_at > post.created_at %>
+					<% if post.updated_at > post.created_at+5.minutes %>
 						<p class="edited">Last edited <%= time_ago_in_words(post.updated_at) %> ago.</p>
 					<% end %>
 					<% if !post.user.signature.blank? %>

@@ -1,5 +1,5 @@
 <%= error_messages_for :upload %>
-<div class="box" id="action"<% if current_action != 'new' %> style="display:none;"<% end %>>
+<div class="box" id="action" <%= hide_div? %>>
 	<% form_for(:upload, :url => uploads_path, :html => { :multipart => true }) do |f| -%>
 	<div class="top">New File</div>
 	<p><%= f.file_field :uploaded_data %></p>
@@ -15,7 +15,7 @@
 	<% end %>
 </div>
 
-<div class="info-left"<% if current_action != 'new' %> style="display:none;"<% end %>>
+<div class="info-left" <%= hide_div? %>>
 	<%= link_to 'Home', home_path %> &raquo; 
 	<%= link_to 'Files', files_home_path %> &raquo; New File
 </div>

@@ -80,6 +80,10 @@ module ApplicationHelper
       return '<div class="icon"> </div>'
     end
   end
+  
+  def hide_div?
+    return 'style="display:none;"' unless current_action == 'new' or current_action == 'create'
+  end
     
   def current_controller
     request.path_parameters['controller']
