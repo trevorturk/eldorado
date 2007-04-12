@@ -4,7 +4,7 @@ module ApplicationHelper
   protected
   
   def random_header_css
-    if (current_controller == 'headers' and current_action == ('edit' or 'show'))
+    if current_controller == 'headers' and (current_action == 'edit' or current_action == 'show')
       @header = Header.find(params[:id])
     else
       @header = Header.find(:first, :order => "RAND()", :conditions => ["votes >= ?", 0])
