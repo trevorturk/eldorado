@@ -13,4 +13,8 @@ class Header < ActiveRecord::Base
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
   end
   
+  def last_updated_at
+    updated_at
+  end
+  
 end

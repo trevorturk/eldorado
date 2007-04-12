@@ -18,5 +18,9 @@ class Topic < ActiveRecord::Base
   def posters
     posts.map { |p| p.user_id }.uniq.size
   end
+  
+  def last_updated_at
+    last_post_at
+  end
     
 end

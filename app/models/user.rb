@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     @password = value
   end
   
+  def last_updated_at
+    profile_updated_at
+  end
+  
   def self.authenticate(login, password)
     find_by_login_and_password_hash(login, encrypt(password))
   end

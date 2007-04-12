@@ -14,7 +14,7 @@ class UsersControllerTest < Test::Unit::TestCase
   end
 
   def test_index
-    get :index
+    get :index 
     assert_response :success
   end
 
