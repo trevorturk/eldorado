@@ -49,5 +49,5 @@ banned:
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   posts_count: 2211
   topics_count: 130
-  banned_until: 3007-02-26 04:04:21
+  banned_until: <%= Time.now.utc+5.days %>
   ban_message: 'get banned.'
