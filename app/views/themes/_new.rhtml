@@ -1,5 +1,5 @@
 <%= error_messages_for :theme %>
-<% form_for(:theme, :url => themes_path, :html => { :multipart => true }) do |f| -%>
+<% form_for(:theme, :url => '/themes/', :html => { :multipart => true }) do |f| -%>
 	<div class="box" id="action" <%= hide_div? %>>
 		<div class="top">New Theme</div>
 		<p><%= f.file_field :uploaded_data %></p>
