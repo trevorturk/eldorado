@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :uploads
   map.resources :users
 
-  map.home  '', :controller => 'home', :action => 'index'  
+  map.home  '', :controller => 'home', :action => 'index' 
 
   map.login '/login', :controller => 'users', :action => 'login'
   map.logout '/logout', :controller => 'users', :action => 'logout'

@@ -1,6 +1,6 @@
 <%= error_messages_for :upload %>
 <div class="box" id="action" <%= hide_div? %>>
-	<% form_for(:upload, :url => '/uploads/', :html => { :multipart => true }) do |f| -%>
+	<% form_for(:upload, :url => uploads_path, :html => { :multipart => true }) do |f| -%>
 	<div class="top">New File</div>
 	<p><%= f.file_field :uploaded_data %></p>
 	<p>Files must be under 15mb.</p>
