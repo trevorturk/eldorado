@@ -362,6 +362,7 @@ blockquote p {
 
 .profile-avatar {
 	float: right;
+	margin-bottom: 10px;
 }
 
 .profile-title {
