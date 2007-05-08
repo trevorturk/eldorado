@@ -5,7 +5,7 @@ li { margin: 0; padding: 0; list-style-type: none; }
 a img { border: 0; }
 
 body {
-	background: #EDEDED;
+	background: #ededed;
 	color: #333;
 	font-family: verdana, sans-serif;
 	font-size: 11px;
@@ -66,7 +66,8 @@ h1 a:hover, h1 a:active {
 }
 
 h3 {
-	font-size: 15px;
+	font-size: 14px;
+	font-weight: normal;
 }
 	
 .tagline {
@@ -101,8 +102,6 @@ h3 {
 
 .tabs li a:hover, .tabs li a:active {
 	background: #333;
-	color: #eee !important;
-	text-decoration: none;
 }
 
 .tabs li.tab a:link, .tabs li.tab a:visited, .tabs li.tab a:hover, .tabs li.tab a:active {
@@ -153,16 +152,17 @@ h3 {
 
 .box {
 	border: 1px solid #35604D;
-	padding: 10px 10px 0 10px;
+	padding: 0 10px;
 	margin-bottom: 10px;
 	background: #f1f1f1;
 }
 
 .box .top {
+	display: block;
 	background: #35604d;
 	color: #fff;
 	padding: 5px;
-	margin: -10px -10px 10px -10px;
+	margin: 0 -10px;
 }
 
 .box .label {
@@ -238,6 +238,10 @@ tbody .tds {
 	border: 0;
 }
 
+.thread .profile {
+	width: 24%;
+}
+
 .thread .body {
 	width: 74%;
 	line-height: 1.4em;
@@ -270,24 +274,24 @@ tbody .tds {
 	text-align: right;
 }
 
-.forum-index {
+.forums-index {
 	margin-bottom: 5px;
 }
 
-.forum-index .tcl {
+.forums-index .tcl {
 	width: 61%;
 }
 
-.forum-index .tcm {
+.forums-index .tcm {
 	width: 8%;
 }
 
-.forum-index .tcr {
+.forums-index .tcr {
 	width: 31%;
 	vertical-align: middle;
 }
 
-.forum-list th {
+.forums-list th {
 	background: #d1d1d1;
 	color: #333;
 }
@@ -295,6 +299,18 @@ tbody .tds {
 .forum-name {
 	font-weight: bold;
 	font-size: 12px;
+}
+
+.topics-index .tcm {
+	width: 7%;
+}
+
+.topics-index .tcr {
+	width: 26%;
+}
+
+.topics-index .tcf {
+		width: 14%;
 }
 
 .info-left {
@@ -311,10 +327,6 @@ tbody .tds {
 	border-right: 1px solid #f1f1f1;
 }
 
-.info-footer {
-	margin-top: 5px;
-}
-
 .title {
 	font-size: 12px;
 	font-weight: bold;
@@ -323,8 +335,12 @@ tbody .tds {
 
 .detail {
 	color: #999;
-	margin-left: 2px;
 	letter-spacing: -1px;
+}
+
+.posters {
+	text-align: justify;
+	margin: 0;
 }
 
 #filters {
@@ -362,7 +378,7 @@ blockquote p {
 
 .profile-avatar {
 	float: right;
-	margin-bottom: 10px;
+	margin: 10px 0;
 }
 
 .profile-title {
@@ -400,6 +416,13 @@ blockquote p {
 .chk {
 	float: left;
 	margin: 0 6px 10px 0;
+}
+
+.inline {
+	float: right;
+	width: 32%;
+	height: 130px;
+	border: 1px solid #ccc;
 }
 
 .dayName th {

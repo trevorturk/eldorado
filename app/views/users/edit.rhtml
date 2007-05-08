@@ -1,7 +1,7 @@
 <%= error_messages_for :user %>
 <% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| -%>
 	<div class="box">
-		<div class="top">Edit User</div>
+		<span class="top">Edit User</span>
 		<p class="label"><label for="username">Username</label></p>
 		<p><%= f.text_field :login, :style => "width:31%" %></p>
 		<p class="label"><label for="email">Email</label></p>
@@ -22,10 +22,3 @@
 		</p>
 	</div>
 <% end %>
-
-<div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Users', users_path %> &raquo; 
-	<%= link_to h(@user.login), user_path(@user) %> &raquo; Editing Profile
-</div>
-<div style="clear:both;"> </div>

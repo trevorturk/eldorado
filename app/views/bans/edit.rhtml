@@ -1,0 +1,37 @@
+<h1>Editing ban</h1>
+
+<%= error_messages_for :ban %>
+
+<% form_for(:ban, :url => ban_path(@ban), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>User</b><br />
+    <%= f.text_field :user_id %>
+  </p>
+
+  <p>
+    <b>Ip</b><br />
+    <%= f.text_field :ip %>
+  </p>
+
+  <p>
+    <b>Email</b><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Message</b><br />
+    <%= f.text_field :message %>
+  </p>
+
+  <p>
+    <b>Expires at</b><br />
+    <%= f.datetime_select :expires_at %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', ban_path(@ban) %> |
+<%= link_to 'Back', bans_path %>

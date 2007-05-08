@@ -1,32 +1,51 @@
-<%= render :partial => 'topics/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'topics/new' %>
+</div>
 
 <div class="info-left">
 	<span class="title"><%=h @topic.title %></span>
-	<span class="detail"><%= @posters.map { |u| link_to "#{h u.login}", user_path(u) } * ", " %></span>
+	<span class="detail">
+		&laquo; <%= link_to @topic.forum.name, forum_path(@topic.forum) %>
+		&laquo; <%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %>
+	</span>
 </div>
 <div class="info-right">
 	<span class="detail">
+		<% if logged_in? && !@topic.closed %>
+			<%= link_to 'Post a Reply', '#reply' %>&nbsp; |&nbsp;
+		<% end %>
 		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
+		<span id="info-link">
+			<%= link_to_function '(?)', "$('info').toggle(), $('info-link').toggle()" %>
+		<span>
 	</span>
 </div>
 <div style="clear:both;"> </div>
 
+<div class="info-left" id="info" style="display:none;">
+	<p class="detail posters">
+		<%= @posters.map { |u| "#{h u.login}" } * ", " %>
+		<%= link_to_function '(x)', "$('info-link').toggle();$('info').toggle()" %>
+	</p>
+</div>
+<div style="clear:both;"> </div>
+
 <% @posts.each_with_index do |post, index| index+=1 %>
-	<table class="thread" cellspacing="0" id="<%= index %>">
+	<table class="thread" cellspacing="0" id="<%= post.id %>">
 		<thead>
 			<tr>
 				<th><%= time_ago_in_words(post.created_at)+" ago" %></th>
-				<th class="thr"><%= link_to "#"+(index).to_s, topic_path(:anchor => index) %></a></th>
+				<th class="thr"><%= link_to "#"+(index).to_s, topic_path(:anchor => post.id) %></a></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>
+				<td class="profile">
 					<dl>
 						<dt><%= link_to h(post.user.login), user_path(post.user.id) %></dt>
 						<dd class="rank"><%= rank_for(post.user.posts_count, post.user.admin) %></dd>
 						<dd class="avatar">
-							<%= link_to avatar_img(post.user), user_path(post.user.id) unless post.user.avatar_id.blank? %>
+							<%= link_to avatar_for(post.user), user_path(post.user.id) unless post.user.avatar_id.blank? %>
 						</dd>
 						<dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
 						<dd>Last visit: <%= time_ago_in_words(post.user.last_login_at) %> ago</dd>
@@ -36,7 +55,9 @@
 				<td class="body">
 					<%=h post.body %>
 					<% if post.updated_at > post.created_at+5.minutes %>
-						<p class="edited">Last edited <%= time_ago_in_words(post.updated_at) %> ago.</p>
+						<p class="edited">
+							Last edited <%= time_ago_in_words(post.updated_at) %> ago by <%= post.updated_by %>
+						</p>
 					<% end %>
 					<% if !post.user.signature.blank? %>
 						<hr class="sig"><%=h post.user.signature %>
@@ -61,32 +82,8 @@
 	</table>
 <% end %>
 
-<div class="info-left info-footer">
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Forum', forum_home_path %> &raquo; 
-	<%= link_to @category.name, category_path(@category) %> &raquo; 
-	<%= link_to @forum.name, forum_path(@forum) %> &raquo; 
-	<%=h @topic.title %>
-</div>
-<div class="info-right info-footer">
-	<% if can_edit?(@topic) %>
-		<%= link_to 'Edit Topic', edit_topic_path %>
-	<% end %>
-</div>
-<div style="clear:both;"> </div>
-
 <% if logged_in? && !@topic.closed %>
-	<% form_for :post, :url => posts_path do |f| -%>
-		<div class="box">
-			<div class="top">Post a Reply</div>
-				<%= f.hidden_field :topic_id, :value => @topic.id %>
-				<%= f.text_area :body, :rows => '10', :style => "width:66%;" %>			
-				<p>
-					<%= submit_tag "Post Reply", :disable_with => "Post Reply" %> or 
-					<%= link_to 'Cancel', topics_path %>
-				</p>
-			</div>
-	<% end %>
+	<%= render :partial => 'posts/new' %>
 <% elsif logged_in? && @topic.closed %>
 	<div class="nav nav-footer">
 		<p class="nav-left">This Topic is Closed</p>

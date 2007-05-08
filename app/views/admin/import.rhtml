@@ -1,13 +1,29 @@
 <div class="box">
-<div class="top">Import</div>
-<p style="width:500px;text-align:justify;">
+<span class="top">Import</span>
+<p style="text-align:justify;">
 This will import a PunBB database into the El Dorado structure. 
 Before doing anything else this will <b>completely destroy</b> your existing El Dorado database. 
-It will most likely take a REALLY long time, too, so be patient. 
+It will most likely take a REALLY long time, too, so importing to/from a remote database is not
+recommended. Also, having a terminal window open to monitor the progress is probably a good idea. 
 This whole shebang is only tested with <b>PunBB 1.2.14</b>. 
-The importing do-hickey assumes that you have your PunBB database tables in the same database as El Dorado, 
-and that the PunBB tables are all prefixed with <b>pun_</b>, i.e. pun_users, pun_posts, etc and so forth.
-Good night, and good luck...
+The user with id 2 (the "guest" user is 1) will be set as the only "admin" user to begin with.
+Any topics, posts, etc made by a user that no longer exists will be assigned to the "guest" user.
 </p>
-<p><%= button_to 'Import', admin_import_path, :method => :post, :confirm => 'Are you TOTALLY sure!??!' %></p>
+
+<h3>PunBB Database Settings:</h3>
+
+<% form_tag '/admin/import' do %>
+	<table cellspacing="0">
+		<tbody>
+			<tr><td>Adapter</td><td><%= text_field_tag 'punbb[adapter]', 'mysql' %></td></tr>
+			<tr><td>Host</td><td><%= text_field_tag 'punbb[host]', 'localhost' %></td></tr>
+			<tr><td>Username</td><td><%= text_field_tag 'punbb[username]', 'myuser' %></td></tr>
+			<tr><td>Password</td><td><%= text_field_tag 'punbb[password]', 'mypass' %></td></tr>
+			<tr><td>Database</td><td><%= text_field_tag 'punbb[database]', 'somedatabase' %></td></tr>
+			<tr><td>Prefix</td><td><%= text_field_tag 'prefix', 'pun_' %></td></tr>
+			<tr><td colspan="2"><%= submit_tag 'Import', :confirm => 'Are you sure?' %></td></tr>
+		</tbody>
+	</table>
+<% end %>
+
 </div>

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :bans
+
 
   map.resources :avatars, :member => { :select => :post, :deselect => :post }
   map.resources :categories

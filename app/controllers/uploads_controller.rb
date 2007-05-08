@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
   before_filter :force_login, :except => [:index]
   
   def index
-    @uploads = Upload.find(:all, :order => 'updated_at desc')
+    @uploads = Upload.find(:all, :limit => 50, :order => 'updated_at desc')
   end
 
   def new
@@ -15,6 +15,7 @@ class UploadsController < ApplicationController
   def create
     @upload = current_user.uploads.build params[:upload]
     if @upload.save
+      flash[:notice] = "File uploaded: http://#{request.env['HTTP_HOST']+@upload.public_filename}"
       redirect_to files_home_path
     else
       render :template => "uploads/_new"
@@ -27,5 +28,5 @@ class UploadsController < ApplicationController
     @upload.destroy
     redirect_to files_home_path
   end
-  
+    
 end

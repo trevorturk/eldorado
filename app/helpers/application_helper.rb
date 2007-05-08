@@ -8,10 +8,8 @@ module ApplicationHelper
       @header = Header.find(params[:id])
     else
       @header = Header.find(:first, :order => "RAND()", :conditions => ["votes >= ?", 0])
-    end
-    if @header
-      return '<style type="text/css">.header { background: #333 url("'+@header.public_filename+'"); }</style>'
-    end
+    end    
+    return '<style type="text/css">.header { background: #333 url("'+@header.public_filename+'"); }</style>' if @header
   end
   
   def login_image_css
@@ -28,16 +26,11 @@ module ApplicationHelper
   end
 
   def page_title
-    if @topic && (current_action != "new")
-      h(@topic.title) + " (" + h(@options.site_title) + ")"
-    elsif @user && (current_action != "new") && logged_in?
-      h(@user.login) + " (" + h(@options.site_title) + ")"
-    else
-      h(@options.site_title)
-    end
+    # if (current_action != "new") ; h(item.name) + " (" + h(@options.site_title) + ")"
+    h(@options.site_title)
   end
   
-  def avatar_img(user)
+  def avatar_for(user)
     if !user.avatar_id.blank?
       @avatar = Avatar.find(user.avatar_id)
       image_tag @avatar.public_filename
@@ -45,9 +38,12 @@ module ApplicationHelper
   end
   
   def rank_for(posts_count, admin)
-    @rank = Rank.find(:first, :order => "min_posts desc", :conditions => ["? >= min_posts", posts_count])
     return @options.admin_rank if admin == true
-    return "Member" if @rank.nil?
+    @ranks ||=  Rank.find(:all, :order => "min_posts")
+    return "Member" if @ranks.nil?
+    for rank in @ranks
+		  @rank = rank if posts_count >= rank.min_posts
+    end
     return h(@rank.title)
   end
   
@@ -71,16 +67,12 @@ module ApplicationHelper
   end
   
   def icon_for(current_item)
-    return '<div class="icon"> </div>' unless logged_in?
-    return '<div class="icon"> </div>' if current_item.last_updated_at.nil?
-    return '<div class="icon inew"> </div>' if session[:last_session_at] < current_item.last_updated_at
-    return '<div class="icon"> </div>'
+    return '<div class="icon"><!-- --></div>' unless logged_in?
+    return '<div class="icon"><!-- --></div>' if current_item.updated_at.nil?
+    return '<div class="icon inew"><!-- --></div>' if session[:last_session_at] < current_item.updated_at
+    return '<div class="icon"><!-- --></div>'
   end
-  
-  def hide_div?
-    return 'style="display:none;"' unless current_action == 'new' or current_action == 'create'
-  end
-    
+        
   def current_controller
     request.path_parameters['controller']
   end

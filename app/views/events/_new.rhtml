@@ -1,7 +1,7 @@
 <%= error_messages_for :event %>
-<div class="box" id="action" <%= hide_div? %>>
-	<% form_for(:event, :url => events_path) do |f| %>
-		<div class="top">New Event</div>
+<% form_for(:event, :url => events_path) do |f| %>
+<div class="box">
+		<span class="top">New Event</span>
 		<p class="label"><label for="title">Title</label></p>
 		<p>
 			<%= f.text_field :title, :style => 'width:66%;' %> &nbsp; 
@@ -22,12 +22,5 @@
 		</p>
 	<% end %>
 </div>
-
-
-<div class="info-left" <%= hide_div? %>>
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Calendar', calendar_home_path %> &raquo; New Event
-</div>
-<div style="clear:both;"> </div>
 
 <%= javascript_tag "event_title.focus();" %>

@@ -1,7 +1,7 @@
 <%= error_messages_for :avatar %>
 <% form_for(:avatar, :url => avatars_path, :html => { :multipart => true }) do |f| -%>
-	<div class="box" id="action" <%= hide_div? %>>
-		<div class="top">New Avatar</div>
+	<div class="box">
+		<span class="top">New Avatar</span>
 		<p><%= f.file_field :uploaded_data %></p>
 		<p>Avatars must be smaller than 50k.</p>
 		<p>
@@ -14,10 +14,3 @@
 		</p>
 	</div>
 <% end %>
-
-<div class="info-left" <%= hide_div? %>>
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Users', users_path %> &raquo; 
-	<%= link_to 'Avatars', avatars_path %> &raquo; New Avatar
-</div>
-<div style="clear:both;"> </div>

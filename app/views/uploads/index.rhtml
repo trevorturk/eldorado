@@ -1,4 +1,6 @@
-<%= render :partial => 'uploads/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'uploads/new' %>
+</div>
 
 <% if !@uploads.blank? %>
 	<table cellspacing="0">
@@ -16,7 +18,7 @@
 					<td class="tcl">
 						<%= link_to upload.filename, upload.public_filename %> by <%=h upload.user.login %>
 						<% if can_edit?(upload) %>
-							(<%= link_to 'x', upload_path(upload), :confirm => 'Are you sure?', :method => :delete %>)
+							<%= link_to '(x)', upload_path(upload), :confirm => 'Are you sure?', :method => :delete %>
 						<% end %>
 					</td>
 					<td class="tcl"><%= upload.content_type %></td>

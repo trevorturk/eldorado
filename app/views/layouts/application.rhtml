@@ -32,33 +32,27 @@
 		
 			<div class="content">
 			
-			<%= render :partial => 'layouts/nav' %>
+				<%= render :partial => 'layouts/nav' %>
 						
-			<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
-			<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
+				<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
+				<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
 			
-			<%= yield %>
+				<%= yield %>
 			
-			<%= render :partial => 'layouts/stats' %>
+				<%= render :partial => 'layouts/nav2' %>
 				
-		</div>
+				<%= render :partial => 'layouts/stats' %>
+						
+			</div>
 		
-		<div class="footer">
-			<div style="float:left;"><%= @options.footer_left %></div>
-			<div style="float:right;"><%= @options.footer_right %></div>
-			<div style="clear:both;"> </div>
-		</div>
+			<div class="footer">
+				<div style="float:left;"><%= @options.footer_left %></div>
+				<div style="float:right;"><%= @options.footer_right %></div>
+				<div style="clear:both;"> </div>
+			</div>
 		
 	</div>
-	
-	<p class="wrapper-footer" style="display:none;"><%= session[:last_session_at] %></p>
-	
-	<p class="wrapper-footer" style="display:none;">
-		<b>UTC</b>: <%= Time.now.utc %> | 
-		<b>Server</b>: <%= Time.now %> | 
-		<b>User</b>: <%= Time.now %>
-	</p>
-	
+				
 	<div style="margin:20px"> </div>
 	
 </body>

@@ -1,0 +1,174 @@
+<% if current_controller == 'avatars' and current_action == 'new' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Users', users_path %> &raquo; 
+		<%= link_to 'Avatars', avatars_path %> &raquo; New Avatar
+	</div>
+<% end %>
+
+<% if current_controller == 'avatars' and current_action == 'index' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Users', users_path %> &raquo; Avatars
+	</div>
+<% end %>
+
+<% if current_controller == 'events' and current_action == 'new' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Calendar', calendar_home_path %> &raquo; New Event
+	</div>
+<% end %>
+
+<% if current_controller == 'events' and current_action == 'edit' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Calendar', calendar_home_path %> &raquo; 
+		<%= link_to h(@event.title), event_path(@event) %> &raquo; Editing Event
+	</div>
+<% end %>
+
+<% if current_controller == 'events' and current_action == 'show' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Calendar', calendar_home_path %> &raquo; <%=h @event.title %>
+	</div>
+	<div class="info-right">
+		<% if can_edit?(@event) %>
+			<%= link_to 'Edit Event', edit_event_path %>
+		<% end %>
+	</div>
+<% end %>
+
+<% if current_controller == 'headers' and current_action == 'new' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Headers', headers_path %> &raquo; New Header
+	</div>
+<% end %>
+
+<% if current_controller == 'headers' and current_action == 'edit' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Headers', headers_path %> &raquo; 
+		<%= link_to @header.filename, header_path(@header) %> &raquo; Editing Header
+	</div>
+<% end %>
+
+<% if current_controller == 'headers' and current_action == 'show' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Headers', headers_path %> &raquo; <%= @header.filename %>
+	</div>
+	<div class="info-right">
+		<% if can_edit?(@header) %>
+			<%= link_to 'Edit Header', edit_header_path %>
+		<% end %>
+	</div>
+<% end %>
+
+<% if current_controller == 'themes' and current_action == 'new' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Users', users_path %> &raquo; 
+		<%= link_to 'Themes', themes_path %> &raquo; New Theme
+	</div>
+<% end %>
+
+<% if current_controller == 'themes' and current_action == 'index' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Users', users_path %> &raquo; Themes
+	</div>
+<% end %>
+
+<% if current_controller == 'topics' and current_action == 'new' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; New Topic
+	</div>
+<% end %>
+
+<% if current_controller == 'topics' and current_action == 'edit' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to @topic.title, topic_path(@topic) %> &raquo; Editing Topic
+	</div>
+<% end %>
+
+<% if current_controller == 'topics' and current_action == 'index' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; All Topics
+	</div>
+	<div class="info-right">
+		<% if current_controller == 'home' %>
+			<%= link_to 'View All Topics &raquo;', topics_path %>
+		<% end %>
+	</div>
+<% end %>
+
+<% if current_controller == 'topics' and current_action == 'show' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; 
+		<%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %> &raquo; 
+		<%= link_to @topic.forum.name, forum_path(@topic.forum) %> &raquo; 
+		<%=h @topic.title %>
+	</div>
+	<div class="info-right">
+		<% if can_edit?(@topic) %>
+			<%= link_to 'Edit Topic', edit_topic_path %>
+		<% end %>
+	</div>
+<% end %>
+
+<% if current_controller == 'categories' and current_action == 'show' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
+	</div>
+<% end %>
+
+<% if current_controller == 'forums' and current_action == 'show' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; 
+		<%= link_to @forum.category.name, category_path(@forum.category) %> &raquo; <%= @forum.name %>
+	</div>
+<% end %>
+
+<% if current_controller == 'uploads' and current_action == 'new' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Files', files_home_path %> &raquo; New File
+	</div>
+<% end %>
+
+<% if current_controller == 'users' and current_action == 'edit' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Users', users_path %> &raquo; 
+		<%= link_to h(@user.login), user_path(@user) %> &raquo; Editing Profile
+	</div>
+<% end %>
+
+<% if current_controller == 'users' and current_action == 'show' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
+	</div>
+	<div class="info-right">
+		<% if can_edit?(@user) && @user.avatar_id %>
+			<%= link_to 'Change Avatar', avatars_path %> 
+			<%= link_to '(x)', deselect_avatar_path, :method => :post %>
+		<% elsif can_edit?(@user) && @user.avatar_id.nil? %>
+			<%= link_to 'Get an Avatar', avatars_path %>
+		<% end %>
+		<% if can_edit?(@user) %>
+			&nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
+		<% end %>
+	</div>
+<% end %>
+
+<div style="clear:both;"> </div>

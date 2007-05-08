@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   before_filter :find_user, :only => [:edit, :update, :destroy]
   before_filter :can_edit_user, :only => [:edit, :update, :destroy]
+  before_filter :force_login, :only => [:new, :create]
   
   filter_parameter_logging "password"
   
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])   
+    @user = User.find(params[:id])
   end
 
   def new
@@ -20,8 +21,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     render :action => :new and return unless @user.save
-    flash[:notice] = "Your account has been created"
-    do_login(@user)
+    flash[:notice] = "The new user has been created. If you've created this account for someone else, please let them know."
+    redirect_to users_path
+    # flash[:notice] = "Your account has been created"
+    # do_login(@user)
   end
 
   def edit
@@ -54,8 +57,10 @@ class UsersController < ApplicationController
   end
   
   def logout
+    @flash = flash[:notice]
     reset_online_at
     reset_session
+    flash[:notice] = @flash
     redirect_to home_path
   end
     
@@ -71,10 +76,6 @@ class UsersController < ApplicationController
   end
   
   def do_login(user)
-    if (!user.banned_until.blank?) && (user.banned_until > Time.now.utc)
-      flash[:notice] = user.login+" is banned until "+user.banned_until.to_s(:long)+" with the message: "+user.ban_message
-      redirect_to login_path and return false
-    end
     session[:user_id] = user.id
     session[:last_session_at] = user.last_login_at
     user.last_login_at = Time.now.utc

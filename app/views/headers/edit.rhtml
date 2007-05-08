@@ -1,4 +1,6 @@
-<%= render :partial => 'headers/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'headers/new' %>
+</div>
 
 <%= error_messages_for :header %>
 
@@ -10,7 +12,7 @@
 
 <% form_for(:header, :url => header_path(@header), :html => { :method => :put }) do |f| -%>
 	<div class="box">
-		<div class="top">Edit Header</div>
+		<span class="top">Edit Header</span>
 		<p class="label"><label for="description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
 		<p>
@@ -20,12 +22,5 @@
 		</p>
 	</div>
 <% end %>
-
-<div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Headers', headers_path %> &raquo; 
-	<%= link_to @header.filename, header_path(@header) %> &raquo; Editing Header
-</div>
-<div style="clear:both;"> </div>
 
 <%= javascript_tag "header_description.focus();" %>

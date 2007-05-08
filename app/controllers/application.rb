@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
-  before_filter :update_online_at, :get_reminders, :get_stats, :get_options
+  before_filter :check_bans, :update_online_at, :get_reminders, :get_stats, :get_options
     
   session :session_key => '_eldorado_session_id'
   
@@ -17,6 +17,18 @@ class ApplicationController < ActionController::Base
   
   def force_login
     redirect_to login_path and return false unless logged_in?
+  end
+  
+  def check_bans
+    return unless logged_in?
+    return if request.path_parameters['action'] == 'logout'
+    @ban = Ban.find(:first, :conditions => ["user_id = ? or ip = ? or email = ? and (expires_at > ? or expires_at is ?)", current_user.id, request.remote_ip, current_user.email, Time.now.utc, nil])
+    if @ban
+      flash[:notice] = 'This account is banned' 
+      flash[:notice] << ' until '+@ban.expires_at.strftime("%B %d, %Y") unless @ban.expires_at.blank?
+      flash[:notice] << ' with the message: '+@ban.message unless @ban.message.blank?
+      redirect_to logout_path and return false
+    end
   end
   
   def update_online_at

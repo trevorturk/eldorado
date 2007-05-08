@@ -14,15 +14,9 @@ class ThemesControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_index
-    get :index
-    assert_response :success
-    assert assigns(:themes)
   end
 
   def test_should_get_new
-    login_as :trevor
-    get :new
-    assert_response :success
   end
   
   def test_should_create_theme

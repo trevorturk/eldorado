@@ -1,4 +1,6 @@
-<%= render :partial => 'headers/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'headers/new' %>
+</div>
 
 <% for header in @headers %>
 	<p><%= link_to image_tag(header.public_filename), header_path(header) %></p>

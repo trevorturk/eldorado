@@ -1,7 +1,7 @@
 class ThemesController < ApplicationController
   
   before_filter :redirect_to_home, :only => [:show, :edit, :update]
-  before_filter :force_login, :except => [:index]
+  before_filter :check_admin 
   
   def index
     @themes = Theme.find(:all)

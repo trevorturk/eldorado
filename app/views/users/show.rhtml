@@ -1,8 +1,10 @@
 <div class="box">
-	<div class="top">Profile</div>
-	<div class="profile-avatar"><%= avatar_img(@user) %></div>
-	<span class="profile-title"><%=h @user.login %></span>&nbsp;
-	<span class="profile-rank"><%=h rank_for(@user.posts_count, @user.admin) %>, <%= @user.posts_count %> posts</span>
+	<span class="top">Profile</span>
+	<span class="profile-avatar"><%= avatar_for(@user) %></span>
+	<div style="margin-top:10px;">
+		<span class="profile-title"><%=h @user.login %></span>&nbsp;
+		<span class="profile-rank"><%=h rank_for(@user.posts_count, @user.admin) %>, <%= @user.posts_count %> posts</span>
+	</div>
 	
 	<div class="profile-bio">
 		<p><%=h @user.bio %></p>
@@ -19,20 +21,3 @@
 	</p>
 	<div style="clear:both;"> </div>	
 </div>
-
-<div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
-</div>
-<div class="info-right">
-	<% if can_edit?(@user) && @user.avatar_id %>
-		<%= link_to 'Change Avatar', avatars_path %> 
-		(<%= link_to 'x', deselect_avatar_path, :method => :post %>)
-	<% elsif can_edit?(@user) && @user.avatar_id.nil? %>
-		<%= link_to 'Get an Avatar', avatars_path %>
-	<% end %>
-	<% if can_edit?(@user) %>
-		&nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
-	<% end %>
-</div>
-<div style="clear:both;"> </div>

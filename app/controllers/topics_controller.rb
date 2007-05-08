@@ -7,20 +7,17 @@ class TopicsController < ApplicationController
   def index
     @topic = Topic.new
     if logged_in?
-      @topics = Topic.find(:all, :include => [:user, :last_poster], :order => 'last_post_at desc')
+      @topics = Topic.find(:all, :include => [:user, :last_poster], :limit => 50, :order => 'last_post_at desc')
     else
-      @topics = Topic.find(:all, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
+      @topics = Topic.find(:all, :include => [:user, :last_poster], :limit => 50, :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
   end
 
   def show
-    @topic = Topic.find(params[:id])
-    @posts = @topic.posts.find(:all)
-    @forum = Forum.find_by_id(@topic.forum_id)
-    @category = Category.find(@forum.category_id)
-    @topic.hit!
-    @page_title = @topic.title
+    @topic = Topic.find(params[:id], :include => :forum)
+    @posts = @topic.posts.find(:all, :include => :user)
     @posters = @posts.map(&:user) ; @posters.uniq!
+    @topic.hit!
   end
 
   def new
@@ -71,6 +68,8 @@ class TopicsController < ApplicationController
   def unknown_request
     if request.request_uri.include?('viewtopic.php')
       redirect_to topic_path(:id => params[:id])
+    elsif request.request_uri.include?('show_new')
+      redirect_to topics_path
     else
       redirect_to topics_path
     end

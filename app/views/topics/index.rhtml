@@ -1,15 +1,20 @@
-<%= render :partial => 'topics/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'topics/new' %>
+</div>
 
 <% if current_controller == 'categories' %>
 	<div class="info-left">
 		<span class="title"><%=h @category.name %></span>
-		<span class="detail"><%= @forums.map { |f| link_to "#{h f.name}", forum_path(f) } * ", " %></span>
+		<span class="detail"> &laquo; <%= @forums.map { |f| link_to "#{h f.name}", forum_path(f) } * ", " %></span>
 	</div>
 	<div style="clear:both;"> </div>
 <% elsif current_controller == 'forums' %>
 	<div class="info-left">
 		<span class="title"><%=h @forum.name %></span>
-		<span class="detail"><%=h @forum.description %></span>
+		<span class="detail">
+			&laquo; <%= link_to h(@forum.category.name), category_path(@forum.category) %>
+		</span>
+		<span class="detail">&nbsp;| &nbsp;<%=h @forum.description %></span>
 	</div>
 	<div style="clear:both;"> </div>
 <% elsif current_controller == 'search' %>
@@ -21,11 +26,13 @@
 <% end %>
 
 <% if !@topics.blank? %>
-	<table cellspacing="0">
+	<table cellspacing="0" class="topics-index">
 		<thead>
 			<tr>
 				<th class="tcl" colspan="2">Topics</th>
-				<% if current_controller != 'forums' %><th class="tcl">Forum</th><% end %>
+				<% if current_controller != 'forums' %>
+					<th class="tcl tcf">Forum</th>
+				<% end %>
 				<th class="tcm">Replies</th>
 				<th class="tcm">Views</th>
 				<th class="tcr">Activity</th>
@@ -54,39 +61,4 @@
 			<% end %>
 		</tbody>
 	</table>
-<% else %>
-	<% if logged_in? %>
-		<div class="box">
-			<p class="small">
-			<%= link_to('Start a New Topic &raquo;', new_topic_path) %>
-			</p>
-		</div>
-	<% else %>
-		<div class="box">
-			<p class="small">
-				<%= link_to('Login', login_path) %> or 
-				<%= link_to('Register', register_path) %> to start a new topic
-				</p>
-		</div>
-	<% end %>
 <% end %>
-
-<div class="info-left">
-	<% if current_controller == 'categories' %>
-		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
-	<% elsif current_controller == 'forums' %>
-		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Forum', forum_home_path %> &raquo; 
-		<%= link_to @forum.category.name, category_path(@forum.category) %> &raquo; <%= @forum.name %>
-	<% elsif current_controller == 'topics' %>
-		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Forum', forum_home_path %> &raquo; All Topics
-	<% end %>
-</div>
-<div class="info-right">
-	<% if current_controller == 'home' %>
-		<%= link_to 'View All Topics &raquo;', topics_path %>
-	<% end %>
-</div>
-<div style="clear:both;"> </div>

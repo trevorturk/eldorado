@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :themes, :dependent => :destroy
   has_many :topics, :dependent => :destroy
   has_many :uploads, :dependent => :destroy
-  
+      
   validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     
   attr_reader :password
   
-  attr_protected :admin, :posts_count, :created_at, :last_login_at, :profile_updated_at, :online_at, :banned_until, :ban_message
+  attr_protected :admin, :posts_count, :created_at, :last_login_at, :profile_updated_at, :online_at
    
   def password=(value)
     return if value.blank?
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
     @password = value
   end
   
-  def last_updated_at
+  def updated_at
     profile_updated_at
   end
   
@@ -42,5 +42,5 @@ class User < ActiveRecord::Base
   def self.users_online
     User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes])
   end
-  
+    
 end

@@ -164,4 +164,10 @@ class TopicsControllerTest < Test::Unit::TestCase
   def test_should_set_last_post_info_in_forum_and_topic_if_most_recent_post_is_deleted
   end
   
+  def test_should_send_banned_user_to_logout
+    login_as :banned
+    get :index
+    assert_redirected_to logout_path
+  end
+  
 end

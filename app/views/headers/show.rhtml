@@ -1,27 +1,20 @@
-<%= render :partial => 'headers/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'new' %>
+</div>
 
 <div class="info-left">
 	<span class="title"><%=h @header.filename %></span>
 	<span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
 </div>
 <div class="info-right">
-	Votes (<%= @header.votes %>)
-	<%= link_to '+', vote_up_header_path(@header), :method => :post %>
-	<%= link_to '&ndash;', vote_down_header_path(@header), :method => :post %>
+	Votes (<span id="remote"><%= render :partial => 'votes' %></span>)
+	<% if logged_in? %>
+		<%= link_to_remote "+", :url => {:action => 'vote_up'}, :update => 'remote' %>
+		<%= link_to_remote "&ndash;", :url => {:action => 'vote_down'}, :update => 'remote' %>
+	<% end %>
 </div>
 <div style="clear:both;"> </div>
 
 <% if !@header.description.blank? %>
 	<blockquote><%=h @header.description %></blockquote>
 <% end %>
-
-<div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Headers', headers_path %> &raquo; <%= @header.filename %>
-</div>
-<div class="info-right">
-	<% if can_edit?(@header) %>
-		<%= link_to 'Edit Header', edit_header_path %>
-	<% end %>
-</div>
-<div style="clear:both;"> </div>

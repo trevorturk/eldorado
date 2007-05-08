@@ -1,7 +1,7 @@
 <%= error_messages_for :topic %>	
 <% form_for(:topic, :url => topics_path) do |f| %>
-	<div class="box" id="action" <%= hide_div? %>>
-		<div class="top">New Topic</div>
+	<div class="box">
+		<span class="top">New Topic</span>
 		<p class="label"><label for="title">Title</label></p>
 		<p>
 			<% if current_controller == 'topics' and current_action != 'create' %>
@@ -27,14 +27,7 @@
 			<% else %>
 				<%= link_to 'Cancel', forum_home_path %>
 			<% end %>
+			or <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %>
 		</p>
 	</div>
 <% end %>
-
-<div class="info-left" <%= hide_div? %>>
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Forum', forum_home_path %> &raquo; New Topic
-</div>
-<div style="clear:both;"> </div>
-
-<%= javascript_tag "topic_title.focus();" %>

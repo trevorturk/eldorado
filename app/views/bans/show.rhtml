@@ -1,0 +1,28 @@
+<p>
+  <b>User:</b>
+  <%=h @ban.user_id %>
+</p>
+
+<p>
+  <b>Ip:</b>
+  <%=h @ban.ip %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @ban.email %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @ban.message %>
+</p>
+
+<p>
+  <b>Expires at:</b>
+  <%=h @ban.expires_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_ban_path(@ban) %> |
+<%= link_to 'Back', bans_path %>

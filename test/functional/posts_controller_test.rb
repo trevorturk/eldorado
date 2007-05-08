@@ -27,7 +27,6 @@ class PostsControllerTest < Test::Unit::TestCase
     assert assigns(:topic)
     assert assigns(:post)
     assert_equal old_post_count+1, Post.count
-    assert_redirected_to topic_path(assigns(:topic))
   end
   
   def test_posts_count_increments_when_post_created

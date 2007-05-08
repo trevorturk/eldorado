@@ -1,9 +1,11 @@
-<%= render :partial => 'events/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'events/new' %>
+<div>
 
 <%= error_messages_for :event %>
 <% form_for(:event, :url => event_path(@event), :html => { :method => :put }) do |f| %>
 	<div class="box">
-		<div class="top">Edit Event</div>
+		<span class="top">Edit Event</span>
 		<p class="label"><label for="title">Title</label></p>
 		<p>
 			<%= f.text_field :title, :style => 'width:66%;' %> &nbsp; 
@@ -21,12 +23,5 @@
 		</p>
 	</div>
 <% end %>
-
-<div class="info-left">
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Calendar', calendar_home_path %> &raquo; 
-	<%= link_to h(@event.title), event_path(@event) %> &raquo; Editing Event
-</div>
-<div style="clear:both;"> </div>
 
 <%= javascript_tag "event_title.focus();" %>

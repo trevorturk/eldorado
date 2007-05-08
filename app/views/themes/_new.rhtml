@@ -1,7 +1,7 @@
 <%= error_messages_for :theme %>
 <% form_for(:theme, :url => themes_path, :html => { :multipart => true }) do |f| -%>
-	<div class="box" id="action" <%= hide_div? %>>
-		<div class="top">New Theme</div>
+	<div class="box">
+		<span class="top">New Theme</span>
 		<p><%= f.file_field :uploaded_data %></p>
 		<p>Themes must be smaller than 50k.</p>
 		<p>
@@ -14,10 +14,3 @@
 		</p>
 	</div>
 <% end %>
-
-<div class="info-left" <%= hide_div? %>>
-	<%= link_to 'Home', home_path %> &raquo; 
-	<%= link_to 'Users', users_path %> &raquo; 
-	<%= link_to 'Themes', themes_path %> &raquo; New Theme
-</div>
-<div style="clear:both;"> </div>

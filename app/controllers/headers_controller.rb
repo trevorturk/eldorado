@@ -47,13 +47,13 @@ class HeadersController < ApplicationController
   def vote_up
     @header = Header.find(params[:id])
     @header.update_attributes(:votes => @header.votes+1)
-    redirect_to header_path(@header)
+    render :partial => 'votes'
   end
   
   def vote_down
     @header = Header.find(params[:id])
     @header.update_attributes(:votes => @header.votes-1)
-    redirect_to header_path(@header)
+    render :partial => 'votes'
   end
   
   def can_edit_header

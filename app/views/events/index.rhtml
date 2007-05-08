@@ -1,4 +1,6 @@
-<%= render :partial => 'events/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'events/new' %>
+</div>
 
 <%=
 calendar({:year => @year, :month => @month}) do |d|

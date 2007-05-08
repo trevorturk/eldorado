@@ -1,12 +1,14 @@
-<%= render :partial => 'topics/new' %>
+<div id="action" style="display:none;">
+	<%= render :partial => 'topics/new' %>
+</div>
 
 <% for category in @categories %>
-		<table cellspacing="0" class="forum-index">
+		<table cellspacing="0" class="forums-index">
 			<thead>
 				<tr>
 					<th colspan="5"><%= link_to h(category.name), category_path(category) %></th>
 				</tr>
-				<tr class="forum-list">
+				<tr class="forums-list">
 					<th class="tcl" colspan="2">Forums</th>
 					<th class="tcm">Topics</th>
 					<th class="tcm">Posts</th>
@@ -35,7 +37,7 @@
 		</table>
 <% end %>
 
-<div class="info-right info-footer">
+<div class="info-right" style="margin-top:5px">
 	<%= link_to('View All Topics &raquo;', topics_path) %>
 </div>
 <div style="clear:both;"> </div>
