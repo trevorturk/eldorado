@@ -16,7 +16,7 @@
 		<% end %>
 		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
 		<span id="info-link">
-			<%= link_to_function '(?)', "$('info').toggle(), $('info-link').toggle()" %>
+			<%= link_to_function '(&raquo;)', "$('info').toggle(), $('info-link').toggle()" %>
 		<span>
 	</span>
 </div>
@@ -53,14 +53,14 @@
 					</dl>
 				</td>
 				<td class="body">
-					<%=h post.body %>
+					<%= bb(post.body) %>
 					<% if post.updated_at > post.created_at+5.minutes %>
 						<p class="edited">
 							Last edited <%= time_ago_in_words(post.updated_at) %> ago by <%= post.updated_by %>
 						</p>
 					<% end %>
 					<% if !post.user.signature.blank? %>
-						<hr class="sig"><%=h post.user.signature %>
+						<hr class="sig"><%= bb(post.user.signature) %>
 					<% end %>
 				</td>
 			</tr>

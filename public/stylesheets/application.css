@@ -248,6 +248,10 @@ tbody .tds {
 	background: #dedfdf;
 }
 
+.thread .body p {
+	margin-top: 0;
+}
+
 .thread dl {
 	margin: 0;
 }
@@ -357,8 +361,9 @@ blockquote {
 	padding: 6px;
 }
 
-blockquote p {
-	margin-top: 0;
+cite {
+	font-weight: bold;
+	font-style: normal;
 }
 
 .sig {

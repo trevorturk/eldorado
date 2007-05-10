@@ -72,7 +72,11 @@ module ApplicationHelper
     return '<div class="icon inew"><!-- --></div>' if session[:last_session_at] < current_item.updated_at
     return '<div class="icon"><!-- --></div>'
   end
-        
+  
+  def bb(text)
+      white_list(simple_format(auto_link(bbcodeize(h(text)))))
+    end
+  
   def current_controller
     request.path_parameters['controller']
   end
