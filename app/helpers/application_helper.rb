@@ -74,7 +74,7 @@ module ApplicationHelper
   end
   
   def bb(text)
-      white_list(simple_format(auto_link(bbcodeize(h(text)))))
+      simple_format(auto_link(bbcodeize(white_list(h(text)))))
     end
   
   def current_controller

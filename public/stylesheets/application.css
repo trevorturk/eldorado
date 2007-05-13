@@ -250,7 +250,6 @@ tbody .tds {
 
 .thread .body p {
 	margin-top: 0;
-	margin-bottom: 15px;
 }
 
 .thread dl {
@@ -284,7 +283,7 @@ tbody .tds {
 }
 
 .forums-index .tcl {
-	width: 61%;
+	width: 58%;
 }
 
 .forums-index .tcm {
@@ -292,7 +291,7 @@ tbody .tds {
 }
 
 .forums-index .tcr {
-	width: 31%;
+	width: 34%;
 	vertical-align: middle;
 }
 

@@ -3,12 +3,12 @@ module BBCodeizer
 
     #:nodoc:
     Tags = {
-      :start_code            => [ /\[code\]/i,                           '<pre>' ],
-      :end_code              => [ /\[\/code\]/i,                         '</pre>' ],
-      :start_quote           => [ /\[quote(?:=.*?)?\]/i,               nil ],
-      :start_quote_with_cite => [ /\[quote=(.*?)\]/i,                  '<blockquote><p><cite>\1 wrote:</cite></p>' ],
-      :start_quote_sans_cite => [ /\[quote\]/i,                          '<blockquote>' ],
-      :end_quote             => [ /\[\/quote\]/i,                        '</blockquote>' ],
+      :start_code            => [ /\[code\]/i, '<pre>' ],
+      :end_code              => [ /\[\/code\]/i, '</pre>' ],
+      :start_quote           => [ /\[quote(?:=.*?)?\]/i, nil ],
+      :start_quote_with_cite => [ /\[quote=(.*?)\]/i, '<blockquote><p><cite>\1 wrote:</cite></p>' ],
+      :start_quote_sans_cite => [ /\[quote\]/i, '<blockquote>' ],
+      :end_quote             => [ /\[\/quote\]/i, '</blockquote>' ],
       :bold                  => [ /\[b\](.+?)\[\/b\]/i,                  '<strong>\1</strong>' ],
       :italic                => [ /\[i\](.+?)\[\/i\]/i,                  '<em>\1</em>' ],
       :underline             => [ /\[u\](.+?)\[\/u\]/i,                  '<u>\1</u>' ],
@@ -19,18 +19,19 @@ module BBCodeizer
       :image                 => [ /\[img\](.+?)\[\/img\]/i,              '<img src="\1" />' ],
       :size                  => [ /\[size=(\d{1,2})\](.+?)\[\/size\]/i,  '<span style="font-size: \1px">\2</span>' ],
       :color                 => [ /\[color=([^;]+?)\](.+?)\[\/color\]/i, '<span style="color: \1">\2</span>' ],
-      :youtube               => [ /\[youtube\]http:\/\/www.youtube.com\/watch\?v=(.+?)\[\/youtube\]/i, '<object width="425" height="350"><param name="movie" value="http://www.youtube.com/v/\1"></param><embed src="http://www.youtube.com/v/\1" type="application/x-shockwave-flash" width="425" height="350"></embed></object>' ],
-      :googlevid             => [ /\[googlevid\]http:\/\/video.google.com\/videoplay\?docid=(.*?)\[\/googlevid\]/i, '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\1&amp;hl=en"></embed>' ],
-      :flash                 => [ /\[flash\](.+?)\[\/flash\]/i, '<object width="100%" height="100%"><param name="movie" value="\1"></param><embed src="\1" type="application/x-shockwave-flash" width="100%" height="100%"></embed></object>' ]
+      :youtube               => [ /\[youtube\](.+?)youtube.com\/watch\?v=(.+?)\[\/youtube\]/i, '<object width="425" height="350"><param name="movie" value="http://www.youtube.com/v/\2"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" width="425" height="350"></embed></object>' ],
+      :googlevid             => [ /\[googlevid\](.+?)video.google.com\/videoplay\?docid=(.*?)\[\/googlevid\]/i, '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2&amp;hl=en"></embed>' ],
+      :flash                 => [ /\[flash\](.+?)\[\/flash\]/i, '<object width="100%" height="100%"><param name="movie" value="\1"></param><embed src="\1" type="application/x-shockwave-flash" width="100%" height="100%"></embed></object>' ],
+      :spoiler               => [ /\[spoiler\](.+?)\[\/spoiler\]/i, "<a href=\"#\" onclick=\"$('spoiler#{spoiler = nil; spoiler = rand(999999)}').toggle(); return false;\">Show Spoiler</a><div id=\"spoiler#{spoiler}\" style=\"display:none;\">\1</div>" ]
     }
     
-    # removed quotes from cites, added youtube, googlevid, and flash (needed to not use white_list on embeded objects)
+    # removed quotes from cites, added youtube, googlevid, spoiler
 
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
     # These names correspond to either names above or methods in this module.
     TagList = [ :bold, :italic, :underline, :email_with_name, :email_sans_name, 
                 :url_with_title, :url_sans_title, :image, :size, :color,
-                :code, :quote, :youtube, :googlevid, :flash ]
+                :code, :quote, :youtube, :googlevid, :flash, :spoiler ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)

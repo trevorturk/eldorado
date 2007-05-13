@@ -7,17 +7,15 @@
 	<span class="detail">
 		&laquo; <%= link_to @topic.forum.name, forum_path(@topic.forum) %>
 		&laquo; <%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %>
+		&nbsp;|&nbsp; <%= link_to_function "#{pluralize(@posts.length, 'Post')} by #{pluralize(@posters.length, 'User')}", "$('info').toggle()" %>
 	</span>
 </div>
 <div class="info-right">
 	<span class="detail">
-		<% if logged_in? && !@topic.closed %>
-			<%= link_to 'Post a Reply', '#reply' %>&nbsp; |&nbsp;
-		<% end %>
 		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
-		<span id="info-link">
-			<%= link_to_function '(&raquo;)', "$('info').toggle(), $('info-link').toggle()" %>
-		<span>
+		<% if logged_in? && !@topic.closed %>
+			&nbsp;|&nbsp; <%= link_to 'Post a Reply', '#reply' %>
+		<% end %>
 	</span>
 </div>
 <div style="clear:both;"> </div>
@@ -25,7 +23,7 @@
 <div class="info-left" id="info" style="display:none;">
 	<p class="detail posters">
 		<%= @posters.map { |u| "#{h u.login}" } * ", " %>
-		<%= link_to_function '(x)', "$('info-link').toggle();$('info').toggle()" %>
+		<%= link_to_function '(x)', "$('info').toggle()" %>
 	</p>
 </div>
 <div style="clear:both;"> </div>
@@ -56,7 +54,7 @@
 					<%= bb(post.body) %>
 					<% if post.updated_at > post.created_at+5.minutes %>
 						<p class="edited">
-							Last edited <%= time_ago_in_words(post.updated_at) %> ago by <%= post.updated_by %>
+							Last edited <%= time_ago_in_words(post.updated_at) %> ago by <%= post.editor.login %>
 						</p>
 					<% end %>
 					<% if !post.user.signature.blank? %>
