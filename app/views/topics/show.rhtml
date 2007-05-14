@@ -14,7 +14,7 @@
 	<span class="detail">
 		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
 		<% if logged_in? && !@topic.closed %>
-			&nbsp;|&nbsp; <%= link_to 'Post a Reply', '#reply' %>
+			&nbsp;|&nbsp; <%= link_to 'Reply', '#reply' %>
 		<% end %>
 	</span>
 </div>
@@ -29,11 +29,11 @@
 <div style="clear:both;"> </div>
 
 <% @posts.each_with_index do |post, index| index+=1 %>
-	<table class="thread" cellspacing="0" id="<%= post.id %>">
+	<table class="thread" cellspacing="0" id="p<%= post.id %>">
 		<thead>
 			<tr>
 				<th><%= time_ago_in_words(post.created_at)+" ago" %></th>
-				<th class="thr"><%= link_to "#"+(index).to_s, topic_path(:anchor => post.id) %></a></th>
+				<th class="thr"><%= link_to "#"+(index).to_s, topic_path(:anchor => 'p'+post.id.to_s) %></a></th>
 			</tr>
 		</thead>
 		<tbody>
