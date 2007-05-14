@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   
   before_filter :find_user, :only => [:edit, :update, :destroy]
   before_filter :can_edit_user, :only => [:edit, :update, :destroy]
-  before_filter :force_login, :only => [:new, :create]
   
   filter_parameter_logging "password"
   
@@ -22,9 +21,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     render :action => :new and return unless @user.save
     flash[:notice] = "The new user has been created. If you've created this account for someone else, please let them know."
-    redirect_to users_path
-    # flash[:notice] = "Your account has been created"
-    # do_login(@user)
+    flash[:notice] = "Your account has been created"
+    do_login(@user)
   end
 
   def edit
