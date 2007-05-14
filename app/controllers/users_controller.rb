@@ -21,7 +21,6 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     render :action => :new and return unless @user.save
     flash[:notice] = "The new user has been created. If you've created this account for someone else, please let them know."
-    flash[:notice] = "Your account has been created"
     do_login(@user)
   end
 
