@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     profile_updated_at
   end
   
+  def is_online?
+    return true if online_at > Time.now.utc-5.minutes
+  end
+  
   def self.authenticate(login, password)
     find_by_login_and_password_hash(login, encrypt(password))
   end

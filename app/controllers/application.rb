@@ -39,11 +39,7 @@ class ApplicationController < ActionController::Base
   def reset_online_at
     User.update_all ['online_at = ?', Time.now.utc-5.minutes], ['id = ?', current_user.id] 
   end
-  
-  def is_online?(user)
-    User.find(:first, :conditions => ["id = ? and online_at > ?", user.id, Time.now.utc-5.minutes])
-  end
-  
+    
   def admin?()
     logged_in? && (current_user.admin == true)
   end

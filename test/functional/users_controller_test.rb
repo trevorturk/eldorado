@@ -117,4 +117,7 @@ class UsersControllerTest < Test::Unit::TestCase
     # assert_nil session[:user_id]
   end
   
+  def test_should_show_user_as_online_if_online_at_within_last_5_minutes
+  end
+  
 end

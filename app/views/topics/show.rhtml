@@ -64,7 +64,7 @@
 			</tr>
 			<tr>
 				<td>
-					<% if is_online?(post.user) %>
+					<% if post.user.is_online? %>
 						<b>Online</b>
 					<% else %>
 						Offline
