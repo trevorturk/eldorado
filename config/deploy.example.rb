@@ -9,7 +9,7 @@ set :password,     "password"
 
 ssh_options[:username] = 'serveradmin%app.com'
 
-set :repository, "svn+ssh://#{user}@#{domain}/home/#{site}/data/svn/#{application}/trunk"
+set :repository, "http://eldorado.googlecode.com/svn/trunk/"
 set :deploy_to,  "/home/#{site}/containers/rails/#{application}"
 
 set :checkout, "export"
