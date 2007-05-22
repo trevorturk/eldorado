@@ -111,7 +111,7 @@
 <% if current_controller == 'topics' and current_action == 'show' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Forum', forum_home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> <%= link_to 'Topics', topics_path %> &raquo; 
 		<%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %> &raquo; 
 		<%= link_to @topic.forum.name, forum_path(@topic.forum) %> &raquo; 
 		<%=h @topic.title %>

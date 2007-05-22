@@ -19,7 +19,7 @@
 			%>
 		</p>
 		<p class="label"><label for="body">Body</label></p>
-		<p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
+		<p><%= f.text_area :body, :rows => '8', :style => 'width:66%;' %></p>
 		<p>
 			<%= submit_tag "Post Topic", :disable_with => "Post Topic" %> or 
 			<% if current_action != 'new' %>
