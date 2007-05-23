@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   filter_parameter_logging "password"
   
   def index
-    @users = User.find(:all, :order => 'profile_updated_at desc', :conditions => 'id != 1')
+    @users = User.find(:all, :order => 'profile_updated_at desc', :conditions => 'id != 1') # hide guest user
   end
 
   def show
