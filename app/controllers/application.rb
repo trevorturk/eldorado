@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   
   def get_stats
     @newest_user = User.find(:first, :order => "created_at desc")
-    @user_count = User.count
+    @user_count = User.count-1 # subtract one so "guest" user doesn't count
     @posts_count = Forum.sum('posts_count')
   end
   
