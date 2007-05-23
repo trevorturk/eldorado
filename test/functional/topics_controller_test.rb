@@ -134,7 +134,7 @@ class TopicsControllerTest < Test::Unit::TestCase
   end
   
   def test_should_redirect_to_topic_with_viewtopic_php_style_url
-    get :unknown_request, :path => "viewtopic.php", :id => "1"
+    get :unknown_request, :path => "viewtopic.php", :pid => "1"
     assert_redirected_to topic_path(:id => "1")
   end
   

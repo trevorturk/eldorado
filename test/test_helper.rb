@@ -27,7 +27,7 @@ class Test::Unit::TestCase
   # Add more helper methods to be used by all tests here...
 
   def self.all_fixtures
-    fixtures :avatars, :bans, :categories, :events, :forums, :headers, :options, :posts, :ranks, :topics, :uploads, :users
+    fixtures :avatars, :bans, :categories, :events, :forums, :headers, :options, :posts, :ranks, :subscriptions, :themes, :topics, :uploads, :users
   end
   
   def login_as(user)

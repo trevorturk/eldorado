@@ -1,13 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :bans
-
-
   map.resources :avatars, :member => { :select => :post, :deselect => :post }
+  map.resources :bans
   map.resources :categories
   map.resources :events
   map.resources :forums
   map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
   map.resources :posts
+  map.resources :subscriptions
   map.resources :themes, :member => { :select => :post, :deselect => :post }
   map.resources :topics, :collection => { :show_new => :get }
   map.resources :uploads
@@ -24,7 +23,6 @@ ActionController::Routing::Routes.draw do |map|
   map.admin_import '/admin/import', :controller => 'admin', :action => 'import'
 
   map.search '/search', :controller => 'search', :action => 'index'  
-  map.calendar_home '/calendar', :controller => 'events', :action => 'index'
   map.files_home '/files', :controller => 'uploads', :action => 'index'
   map.forum_home '/forum', :controller => 'forums', :action => 'index'
     

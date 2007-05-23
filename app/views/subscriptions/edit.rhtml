@@ -1,0 +1,22 @@
+<h1>Editing subscription</h1>
+
+<%= error_messages_for :subscription %>
+
+<% form_for(:subscription, :url => subscription_path(@subscription), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>User</b><br />
+    <%= f.text_field :user_id %>
+  </p>
+
+  <p>
+    <b>Topic</b><br />
+    <%= f.text_field :topic_id %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>

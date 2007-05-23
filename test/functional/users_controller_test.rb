@@ -73,7 +73,6 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_create
     num_users = User.count
     post :create, :user => {:login => 'skdj', :email => 'test@test.com', :password => 'dfj', :password_confirmation => 'dfj'}
-    assert_equal "Your account has been created", flash[:notice]
     assert_redirected_to home_path
     assert_equal num_users + 1, User.count
   end

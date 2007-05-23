@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   def force_login
     redirect_to login_path and return false unless logged_in?
   end
-  
+      
   def check_bans
     return unless logged_in?
     return if request.path_parameters['action'] == 'logout'
@@ -78,5 +78,5 @@ class ApplicationController < ActionController::Base
   def get_options
     @options = Option.find(:first)
   end
-        
+          
 end

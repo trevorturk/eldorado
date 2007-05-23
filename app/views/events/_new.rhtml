@@ -17,7 +17,7 @@
 			<% if current_action != 'new' %>
 				<%= link_to_function 'Cancel', "$('action').toggle()" %>
 			<% else %>
-				<%= link_to 'Cancel', calendar_home_path %>
+				<%= link_to 'Cancel', events_path %>
 			<% end %>
 		</p>
 	<% end %>

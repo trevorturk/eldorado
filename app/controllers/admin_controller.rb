@@ -40,6 +40,13 @@ class AdminController < ApplicationController
     #
     # DESTROY EXISTING ELDORADO DATABASE
     #
+    Avatar.destroy_all
+    Event.destroy_all
+    Header.destroy_all
+    Option.destroy_all
+    Theme.destroy_all
+    Upload.destroy_all
+    #
     User.destroy_all
     Ban.destroy_all
     Rank.destroy_all
@@ -47,6 +54,7 @@ class AdminController < ApplicationController
     Forum.destroy_all
     Topic.destroy_all
     Post.destroy_all
+    Subscription.destroy_all
     #
     # USERS
     #
@@ -207,11 +215,17 @@ class AdminController < ApplicationController
     #
     # SUBSCRIPTIONS
     #
-    # sdf
-    #
-    # 
+    ActiveRecord::Base.establish_connection(params[:punbb])
+    @items = ActiveRecord::Base.connection.execute("SELECT user_id, topic_id FROM #{params[:prefix]}subscriptions")
+    ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
+    for i in @items
+      @item = Subscription.new
+      @item.user_id = i[0] # user_id 
+      @item.topic_id = i[1] # topic_id 
+      @item.save!
     #
     # DONE
+    #
   end
     
 end

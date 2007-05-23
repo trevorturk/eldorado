@@ -16,14 +16,14 @@
 <% if current_controller == 'events' and current_action == 'new' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Calendar', calendar_home_path %> &raquo; New Event
+		<%= link_to 'Events', events_path %> &raquo; New Event
 	</div>
 <% end %>
 
 <% if current_controller == 'events' and current_action == 'edit' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Calendar', calendar_home_path %> &raquo; 
+		<%= link_to 'Calendar', events_path %> &raquo; 
 		<%= link_to h(@event.title), event_path(@event) %> &raquo; Editing Event
 	</div>
 <% end %>
@@ -31,7 +31,7 @@
 <% if current_controller == 'events' and current_action == 'show' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Calendar', calendar_home_path %> &raquo; <%=h @event.title %>
+		<%= link_to 'Calendar', events_path %> &raquo; <%=h @event.title %>
 	</div>
 	<div class="info-right">
 		<% if can_edit?(@event) %>

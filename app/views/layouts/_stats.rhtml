@@ -6,7 +6,7 @@
 		<% end %>
 	</p>
 	<p class="nav-right">
-		<%= @posts_count %> Posts, 
+		<%= @posts_count || 0 %> Posts, 
 		<%= @user_count %> Users | 	
 		<%= @options.newest_user %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>
 	</p>
