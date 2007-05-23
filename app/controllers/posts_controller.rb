@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end 
     
   def create
-    @post = current_user.posts.build params[:post]
+    @post = current_user.posts.build(params[:post])
     @topic = Topic.find(params[:post][:topic_id])
     if (@topic.posts << @post) 
       redirect_to topic_path(:id => @topic.id, :anchor => 'p' + @post.id.to_s)
