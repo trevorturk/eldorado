@@ -1,10 +1,13 @@
 class PostsController < ApplicationController 
   
-  before_filter :redirect_to_home, :only => [:index, :show, :new]
+  before_filter :redirect_to_home, :only => [:index, :show]
   before_filter :force_login
   before_filter :find_topic_and_post, :except => [:index, :new, :create]
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
-    
+  
+  def new
+  end
+  
   def edit
     @posts = Post.find(params[:id])
   end 
@@ -33,6 +36,13 @@ class PostsController < ApplicationController
     @post.destroy if @topic.posts_count > 1
     redirect_to topic_url(@topic) 
   end 
+  
+  def quote
+    @post = Post.new
+    @post.topic_id = @topic.id
+    @quote = "test"
+    render :template => "posts/_new"
+  end
     
   def find_topic_and_post
     @post = Post.find(params[:id])

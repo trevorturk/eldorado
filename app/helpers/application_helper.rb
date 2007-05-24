@@ -11,11 +11,7 @@ module ApplicationHelper
     end    
     return '<style type="text/css">.header { background: #333 url("'+@header.public_filename+'"); }</style>' if @header
   end
-  
-  def login_image_css
-    return '<style type="text/css">.login { background: #f1f1f1 url("/files/'+@options.login_image+'") bottom right no-repeat; }</style>' unless @options.login_image.nil?
-  end
-  
+    
   def theme_css
     if @options.theme_id.nil?
       return '<style type="text/css">@import "/stylesheets/application.css";</style>'

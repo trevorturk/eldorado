@@ -72,8 +72,12 @@
 				</td>
 				<td class="body links">
 					<% if can_edit?(post) %>
-						<%= link_to 'Edit', edit_post_path(post) %>
+						<%= link_to 'Edit', edit_post_path(post) %> | 
 					<% end %>
+					<% if logged_in? && !@topic.closed %>
+						<%= link_to 'Quote', quote_post_path(post) %>
+					<% end %>
+
 				</td>
 			</tr>
 		</tbody>

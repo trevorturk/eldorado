@@ -67,7 +67,7 @@ class TopicsController < ApplicationController
     
   def unknown_request
     if request.request_uri.include?('viewtopic.php')
-      redirect_to topic_path(:id => params[:pid], :anchor => params[:anchor])
+      redirect_to topic_path(:id => params[:id], :anchor => params[:anchor])
     else
       redirect_to topics_path
     end
