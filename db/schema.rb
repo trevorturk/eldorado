@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 48) do
+ActiveRecord::Schema.define(:version => 49) do
 
   create_table "avatars", :force => true do |t|
     t.column "parent_id",       :integer
@@ -75,19 +75,13 @@ ActiveRecord::Schema.define(:version => 48) do
   end
 
   create_table "options", :force => true do |t|
-    t.column "site_title",      :string
-    t.column "site_tagline",    :string
-    t.column "footer_left",     :text
-    t.column "footer_right",    :text
-    t.column "invitation_only", :boolean, :default => false
-    t.column "private_site",    :boolean, :default => false
-    t.column "admin_rank",      :string
-    t.column "avatars_path",    :string
-    t.column "login_image",     :string
-    t.column "announcement",    :text
-    t.column "advertisement",   :text
-    t.column "newest_user",     :string
-    t.column "theme_id",        :integer
+    t.column "site_title",   :string
+    t.column "site_tagline", :string
+    t.column "footer_left",  :text
+    t.column "footer_right", :text
+    t.column "admin_rank",   :string
+    t.column "newest_user",  :string
+    t.column "theme_id",     :integer
   end
 
   create_table "posts", :force => true do |t|

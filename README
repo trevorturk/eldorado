@@ -1,4 +1,35 @@
-El Dorado
+Welcome to El Dorado!
 
-Run "rake db:setup" to get database migrated to latest version and set up default options and users
+# Installation #
 
+Remove the "example" part of these filenames:
+config/database.example.yml
+config/deploy.example.rb
+
+... and put in the stuff for your setup.
+
+The Capistrano recipe is an example that works well for Media Temple.
+
+# Setup # 
+
+If you're not importing anything (starting a new site), run this command:
+rake db:setup 
+
+If you're importing from a PunBB site (only tested with version 1.2.15) then 
+fill in the "import" section of the config/database.yml file and run this command:
+rake db:import
+
+# Upgrading #
+
+Home Page: http://almosteffortless.com
+Subversion: http://eldorado.googlecode.com/svn/ and http://code.google.com/p/eldorado/
+
+Use "rake db:migrate" to upgrade your database from an older version
+Use "cap deploy_with_migrations" to upgrade your database and app at the same time using Capistrano 
+
+# License #
+
+Released under the MIT License, Copyright 2006 Trevor Turk (see LICENSE file for details)
+
+- Trevor Turk
+http://almosteffortless.com
