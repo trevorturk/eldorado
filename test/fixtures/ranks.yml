@@ -1,5 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
+  title: no_posts
+  min_posts: 0
 two:
   id: 2
+  title: one_post
+  min_posts: 1

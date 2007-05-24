@@ -7,11 +7,5 @@ class RanksTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
-  
-  def user_rank_exists
-  end
-  
-  def must_have_at_least_one_rank
-  end
-  
+    
 end
