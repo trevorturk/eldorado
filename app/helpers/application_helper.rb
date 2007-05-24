@@ -34,11 +34,11 @@ module ApplicationHelper
   end
   
   def rank_for(posts_count, admin)
-    return @options.admin_rank if admin?
+    return @options.admin_rank if admin
     @ranks ||=  Rank.find(:all, :order => "min_posts")
     return "Member" if @ranks.nil?
-    for rank in @ranks
-		  @rank = rank if posts_count >= rank.min_posts
+    for r in @ranks
+		  @rank = r if posts_count >= r.min_posts
     end
     return h(@rank.title)
   end

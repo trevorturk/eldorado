@@ -138,6 +138,9 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_redirected_to topic_path(:id => "1")
   end
   
+  def test_should_redirect_to_topic_with_viewtopic_php_style_url_second_version
+  end
+  
   def test_should_redirect_to_home_path_if_viewtopic_id_not_found
     # get :unknown_request, :path => "viewtopic.php", :id => "23823"
     # assert_redirected_to topic_path(:id => "23823")

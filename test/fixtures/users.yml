@@ -4,7 +4,6 @@ Guest:
   login: Guest
   email: guest@test.com
   password_hash: <%= User.encrypt('testy') %>
-  admin: false
   posts_count: 2
   created_at: <%= 5.days.ago.to_s :db %>
   last_login_at: <%= 5.hours.ago.to_s :db %>
@@ -14,7 +13,7 @@ Administrator:
   login: Administrator
   email: admin@test.com
   password_hash: <%= User.encrypt('test') %>
-  admin: true
+  admin: 1
   posts_count: 0
   created_at: <%= 5.days.ago.to_s :db %>
   last_login_at: <%= 5.hours.ago.to_s :db %>
@@ -24,7 +23,6 @@ Timothy:
   id: 3
   login: Timothy
   email: tim@test.com
-  admin: false
   posts_count: 3450
   password_hash: <%= User.encrypt('test') %>
   created_at: <%= 5.days.ago.to_s :db %>
@@ -34,7 +32,6 @@ trevor:
   id: 4
   login: trevor
   email: trevor@test.com
-  admin: false
   posts_count: 1000
   password_hash: <%= User.encrypt('test') %>
   created_at: <%= 5.days.ago.to_s :db %>
@@ -46,7 +43,6 @@ banned:
   id: 5
   login: banned
   email: banned@test.com
-  admin: false
   posts_count: 0
   password_hash: <%= User.encrypt('test') %>
   created_at: <%= 5.days.ago.to_s :db %>

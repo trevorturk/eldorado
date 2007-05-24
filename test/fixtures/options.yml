@@ -6,5 +6,4 @@ one:
   footer_left: 'left'
   footer_right: 'right'
   admin_rank: 'Administrator'
-  avatars_path: '/images/avatars/'
   newest_user: 'Newest User'

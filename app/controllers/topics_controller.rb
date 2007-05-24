@@ -66,7 +66,11 @@ class TopicsController < ApplicationController
   end
     
   def unknown_request
-    if request.request_uri.include?('viewtopic.php')
+    if request.request_uri.include?('viewtopic.php') # catch punbb-style urls
+      if params[:id].blank? # punbb can show a topic based on the post_id being passed as "pid"
+        @post = Post.find(params[:pid]) # if this is the case, get the post info
+        params[:id] = @post.topic_id # set the regular topic_id value as id with this post's topic_id
+      end
       redirect_to topic_path(:id => params[:id], :anchor => params[:anchor])
     else
       redirect_to topics_path
