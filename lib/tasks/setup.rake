@@ -7,28 +7,24 @@ namespace :db do
       puts 'Error: Setup can only be performed on an empty database.'
       exit
     end
-    @option = Option.new
-      @option.site_title = 'El Dorado.org'
-      @option.site_tagline = 'All an elaborate, unapproachable, unprofitable, retributive joke'
-      @option.footer_left = ''
-      @option.footer_right = 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>'
-      @option.newest_user = 'Newest User'
-      @option.admin_rank = 'Administrator'
-      @option.save!
-    @user = User.new
-      @user.login = 'Guest'
-      @user.email = 'example@example.com'
-      @user.password_hash = User.encrypt(rand.to_s) 
-      @user.save!
+    @option = Option.new(:site_title => 'El Dorado.org', :site_tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :footer_left => '', :footer_right => 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>', :newest_user => 'Newest User', :admin_rank => 'Administrator')
+    @option.save!
+    @category = Category.new(:name => 'Test Category')
+    @category.save!
+    @forum = @category.forums.build(:name => 'Test Forum', :description => "This is just a test forum")
+    @forum.save!
+    @user = User.new(:login => 'Guest', :email => 'example@example.com', :password => rand.to_s) 
+    @user.save!
     sleep 1
-    @user = User.new
-      @user.login = 'Administrator'
-      @user.email = 'example@example.com'
-      @user.password = 'admin'
-        chars = ("a".."z").to_a + ("1".."9").to_a 
-        pass = Array.new(6, '').collect{chars[rand(chars.size)]}.join
-      @user.password_hash = User.encrypt(pass) 
-      @user.save!
+    char = ("a".."z").to_a + ("1".."9").to_a 
+    pass = Array.new(6, '').collect{char[rand(char.size)]}.join
+    @user = User.new(:login => 'Administrator', :email => 'example@example.com', :password => pass) 
+    @user.save!
+    @topic = @user.topics.build(:title => 'Test post', :forum_id => 1)
+    @topic.save!
+    @post = @user.posts.build(:body => 'This is just a test post')
+    @post.topic_id = 1
+    @post.save!
     puts 'Setup completed successfully'
     puts 'You can now log in with the following information:'
     puts 'Username: Administrator'
