@@ -54,8 +54,8 @@
 					<td class="tcm"><%=h topic.views %></td>
 					<td class="tcr">
 						<% if !topic.last_post_at.blank? %>
-							<%=h time_ago_in_words(topic.last_post_at) %> ago by 
-							<%=h topic.last_poster.login %><% end %>
+							<%=h time_ago_in_words(topic.last_post_at) %> by <%=h topic.last_poster.login %>
+						<% end %>
 						</td>
 				</tr>
 			<% end %>

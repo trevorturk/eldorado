@@ -13,8 +13,8 @@
 			<tr>
 				<td class="tci"><%= icon_for(user) %></td>
 				<td class="tcl"><%= link_to h(user.login), user_path(user.id) %></td>
-				<td class="tcl"><%= time_ago_in_words(user.profile_updated_at) %> ago</td>
-				<td class="tcl"><%= time_ago_in_words(user.last_login_at) %> ago</td>
+				<td class="tcl"><%= time_ago_in_words(user.profile_updated_at) %></td>
+				<td class="tcl"><%= time_ago_in_words(user.last_login_at) %></td>
 				<td class="tcm"><%= user.posts_count %></td>
 				<td class="tcr"><%= user.created_at.strftime("%b %d, %Y") %></td>
 			</tr>
