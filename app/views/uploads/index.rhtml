@@ -6,7 +6,7 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
-				<th class="tcl">Files</th>
+				<th class="tcl" colspan="2">Files</th>
 				<th class="tcl">Type</th>
 				<th class="tcm">Size</th>
 				<th class="tcr">Uploaded</th>
@@ -15,6 +15,7 @@
 		<tbody>
 			<% for upload in @uploads %>
 				<tr>
+					<td class="tci"><%= icon_for(upload) %></td>
 					<td class="tcl">
 						<%= link_to upload.filename, upload.public_filename %> by <%=h upload.user.login %>
 						<% if can_edit?(upload) %>
@@ -22,7 +23,7 @@
 						<% end %>
 					</td>
 					<td class="tcl"><%= upload.content_type %></td>
-					<td class="tcm"><%= number_to_human_size(upload.size) %></td>
+					<td class="tcm"><%= human_size(upload.size) %></td>
 					<td class="tcr"><%= time_ago_in_words(upload.created_at) %></td>
 				</tr>
 			<% end %>

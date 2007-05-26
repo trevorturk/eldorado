@@ -52,9 +52,10 @@
 				</td>
 				<td class="body">
 					<%= bb(post.body) %>
-					<% if post.updated_at > post.created_at+5.minutes %>
+					<% if (post.updated_at > post.created_at+5.minutes) %>
 						<p class="edited">
-							Last edited <%= time_ago_in_words(post.updated_at) %> by <%= post.editor.login %>
+							Last edited <%= time_ago_in_words(post.updated_at) %>
+							<%= 'by' + post.editor.login unless post.editor.nil? %>
 						</p>
 					<% end %>
 					<% if !post.user.signature.blank? %>
