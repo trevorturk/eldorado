@@ -38,9 +38,7 @@ class PostsController < ApplicationController
   end 
   
   def quote
-    @post = Post.new
-    @post.topic_id = @topic.id
-    @quote = "test"
+    @post.body = "[quote=#{@post.user.login}]#{@post.body}[/quote]"
     render :template => "posts/_new"
   end
     
