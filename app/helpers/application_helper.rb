@@ -1,6 +1,11 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper  
   
+  def random_string
+    char = ("a".."z").to_a + ("1".."9").to_a 
+    Array.new(6, '').collect{char[rand(char.size)]}.join
+  end
+    
   protected
   
   def random_header_css
@@ -75,8 +80,8 @@ module ApplicationHelper
   
   def bb(text)
       simple_format(auto_link(bbcodeize(white_list(h(text)))))
-    end
-  
+  end
+    
   def current_controller
     request.path_parameters['controller']
   end

@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     
   attr_reader :password
   
-  attr_protected :id, :created_at, :last_login_at, :admin, :posts_count, :profile_updated_at, :online_at, :avatar_id
+  attr_protected :id, :created_at, :last_login_at, :admin, :posts_count, :avatar_id
    
   def password=(value)
     return if value.blank?
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   end
   
   def is_online?
-    return true if online_at > Time.now.utc-5.minutes
+    return true if online_at > Time.now.utc-5.minutes unless online_at.nil?
   end
   
   def self.authenticate(login, password)
