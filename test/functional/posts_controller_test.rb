@@ -40,4 +40,7 @@ class PostsControllerTest < Test::Unit::TestCase
   def test_posts_count_decrements_when_post_destroyed
   end
   
+  def test_quoting_a_post_should_work
+  end
+  
 end

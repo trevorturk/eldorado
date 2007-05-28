@@ -22,8 +22,12 @@ module ApplicationHelper
   end
 
   def page_title
-    # if (current_action != "new") ; h(item.name) + " (" + h(@options.site_title) + ")"
-    h(@options.site_title)
+    page_title = h(@options.site_title)
+    page_title << ': ' + @topic.title unless @topic.nil? or @topic.title.nil?
+    page_title << ': ' + @user.login unless @user.nil? or @user.login.nil?
+    page_title << ': ' + @event.title unless @event.nil? or @event.title.nil?
+    page_title << ': ' + @header.filename unless @header.nil? or @header.filename.nil?
+    return page_title
   end
   
   def avatar_for(user)
