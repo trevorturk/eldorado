@@ -29,7 +29,7 @@ class Topic < ActiveRecord::Base
     
   attr_accessor :body
   
-  attr_protected :user_id, :created_at, :views, :posts_count, :last_post_id, :last_post_at, :last_post_by
+  attr_accessible :title, :private, :closed, :sticky, :forum_id
       
   def hit!
     self.class.increment_counter :views, id

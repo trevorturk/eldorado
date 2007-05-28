@@ -34,6 +34,6 @@ class Post < ActiveRecord::Base
   
   attr_accessor :title, :private, :forum_id
   
-  attr_protected :user_id, :topic_id, :created_at, :updated_at, :updated_by
+  attr_accessible :body
         
 end

@@ -19,5 +19,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   
   validates_presence_of :title, :description, :date
-      
+  
+  attr_protected :id, :user_id, :created_at, :updated_at 
+  
 end

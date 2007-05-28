@@ -46,13 +46,13 @@ class HeadersController < ApplicationController
   
   def vote_up
     @header = Header.find(params[:id])
-    @header.update_attributes(:votes => @header.votes+1)
+    @header.vote_up
     render :partial => 'votes'
   end
   
   def vote_down
     @header = Header.find(params[:id])
-    @header.update_attributes(:votes => @header.votes-1)
+    @header.vote_down
     render :partial => 'votes'
   end
   
