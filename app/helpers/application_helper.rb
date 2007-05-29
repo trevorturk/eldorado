@@ -79,7 +79,10 @@ module ApplicationHelper
   end
   
   def bb(text)
-      simple_format(auto_link(bbcodeize(white_list(h(text)))))
+    text = simple_format(bbcodeize(white_list(h(text))))
+    auto_link(text) do |t|
+      truncate(t, 30)
+    end
   end
     
   def current_controller

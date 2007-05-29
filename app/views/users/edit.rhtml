@@ -17,8 +17,9 @@
 		<p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
 		<p>
 			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %><span> or 
-			<%= link_to 'Delete', user_path, :confirm => 'Are you sure?', :method => :delete %> or 
+			<%= link_to 'Delete', confirm_delete_user_path %> or 
 			<%= link_to 'Cancel', user_path(@user) %>
 		</p>
 	</div>
 <% end %>
+

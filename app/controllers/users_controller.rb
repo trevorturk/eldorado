@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :find_user, :only => [:edit, :update, :destroy]
-  before_filter :can_edit_user, :only => [:edit, :update, :destroy]
+  before_filter :can_edit_user, :only => [:edit, :update, :destroy, :confirm_delete]
   
   filter_parameter_logging "password"
   
@@ -20,7 +19,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     render :action => :new and return unless @user.save
-    flash[:notice] = "The new user has been created. If you've created this account for someone else, please let them know."
+    flash[:notice] = "The new user has been created."
     do_login(@user)
   end
 
@@ -29,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
     @user.update_attributes(params[:user])
     @user.profile_updated_at = Time.now.utc
     @user.save!
@@ -36,8 +36,17 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy
-    redirect_to users_path
+    @user = User.find(params[:id])
+    if params[:confirm] != "1"
+      flash[:notice] = "You must check the confirmation box"
+      redirect_to confirm_delete_user_path(@user)
+    else
+      @user.destroy
+      redirect_to users_path
+    end
+  end
+  
+  def confirm_delete
   end
   
   def login
@@ -62,10 +71,6 @@ class UsersController < ApplicationController
   end
     
   protected
-    
-  def find_user
-    @user = params[:id] ? User.find_by_id(params[:id]) : current_user
-  end
   
   def can_edit_user
     @user = User.find(params[:id])
