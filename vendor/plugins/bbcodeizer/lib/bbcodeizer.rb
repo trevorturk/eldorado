@@ -23,7 +23,7 @@ module BBCodeizer
       :googlevid             => [ /\[googlevid\](.+?)video.google.com\/videoplay\?docid=(.*?)\[\/googlevid\]/i, '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2&amp;hl=en"></embed>' ],
       :flash                 => [ /\[flash\](.+?)\[\/flash\]/i, '<object width="100%" height="100%"><param name="movie" value="\1"></param><embed src="\1" type="application/x-shockwave-flash" width="100%" height="100%"></embed></object>' ],
       :spoiler               => [ /\[spoiler\](.+?)\[\/spoiler\]/i, '<a href="#" onclick="$(\'_SPOILER\').toggle(); return false;">Show Spoiler</a><div id="_SPOILER" style="display:none;">\1</div>' ],
-      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="audioplayer1" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=1&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ]
+      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_MP3" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_MP3&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ]
     }
     
     # removed quotes from cites, added youtube, googlevid, spoiler
@@ -43,6 +43,14 @@ module BBCodeizer
         else
           self.send(tag, text)
         end
+        char = ("a".."z").to_a + ("1".."9").to_a 
+        random_string = Array.new(6, '').collect{char[rand(char.size)]}.join
+        text = text.sub('_SPOILER', random_string)
+        text = text.sub('_SPOILER', random_string)
+        char = ("a".."z").to_a + ("1".."9").to_a 
+        random_string = Array.new(6, '').collect{char[rand(char.size)]}.join
+        text = text.sub('_MP3', random_string)
+        text = text.sub('_MP3', random_string)
       end
       text
     end
@@ -78,9 +86,6 @@ module BBCodeizer
       tags.each do |tag|
         while_true { string.sub!(*Tags[tag]) }
       end
-      char = ("a".."z").to_a + ("1".."9").to_a 
-      random_string = Array.new(6, '').collect{char[rand(char.size)]}.join
-      string = string.gsub!('_SPOILER', random_string)
     end
     alias_method :apply_tag, :apply_tags
 
