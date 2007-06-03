@@ -105,8 +105,8 @@ module ApplicationHelper
       when 90..1440       then "#{(distance_in_minutes.to_f / 60.0).round} hours ago"
       when 1440..2160     then '1 day ago' # 1 day to 1.5 days
       when 2160..2880     then "#{(distance_in_minutes.to_f / 1440.0).round} days ago" # 1.5 days to 2 days
-      when 2880..10080    then from_time.strftime("%a, %d %b") # up to 1 week
-      else from_time.strftime("%d %b, %Y")
+      # when 2880..10080    then from_time.strftime("%a, %d %b") # up to 1 week
+      else from_time.strftime("%a, %d %b %Y")
     end
   end
       
