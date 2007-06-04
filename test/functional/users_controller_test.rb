@@ -110,6 +110,9 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_redirected_to home_path
   end
   
+  def test_current_user_stays_the_same_when_new_user_created
+  end
+  
   def test_should_not_allow_banned_user_to_login
     # post :login, :user => {:login => 'banned', :password => 'test'}
     # assert_redirected_to logout_path

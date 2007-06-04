@@ -20,7 +20,11 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     render :action => :new and return unless @user.save
     flash[:notice] = "The new user has been created."
-    do_login(@user)
+    if logged_in?
+      redirect_to users_path and return
+    else
+      do_login(@user)
+    end
   end
 
   def edit
