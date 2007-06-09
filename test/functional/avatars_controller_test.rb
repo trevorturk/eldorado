@@ -62,4 +62,11 @@ class AvatarsControllerTest < Test::Unit::TestCase
   def test_should_set_clear_users_using_avatar_if_avatar_destroyed
   end
   
+  def test_should_select_avatar
+    login_as :Timothy
+    post :select, :id => avatars(:calvin).id
+    users(:Timothy).reload
+    assert_equal users(:Timothy).avatar_id, 1
+  end
+  
 end

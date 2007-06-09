@@ -18,7 +18,7 @@
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
+calvin:
   id: 1
   parent_id: 
   content_type: MyString
@@ -28,7 +28,7 @@ one:
   width: 
   height: 
   user_id: 4
-  current_user_id: 4
+  current_user_id: 
   created_at: 2007-04-02 17:46:11
   updated_at: 2007-04-02 17:46:11
 two:
