@@ -42,5 +42,9 @@ class Topic < ActiveRecord::Base
   def updated_at
     last_post_at
   end
+  
+  def replies 
+    self.posts_count - 1
+  end
     
 end

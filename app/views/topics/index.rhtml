@@ -50,7 +50,7 @@
 							<%= link_to h(topic.forum.name), forum_path(topic.forum) %>
 						</td>
 					<% end %>
-					<td class="tcm"><%=h topic.posts_count-1 %></td>
+					<td class="tcm"><%=h topic.replies %></td>
 					<td class="tcm"><%=h topic.views %></td>
 					<td class="tcr">
 						<% if !topic.last_post_at.blank? %>
