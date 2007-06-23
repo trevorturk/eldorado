@@ -4,7 +4,7 @@ class AvatarsController < ApplicationController
   before_filter :force_login, :except => [:index]
   
   def index
-    @avatars = Avatar.find(:all, :order => 'updated_at desc')
+    @avatars = Avatar.paginate(:page => params[:page], :order => 'updated_at desc')
   end
 
   def new

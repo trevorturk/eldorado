@@ -4,7 +4,7 @@ class ThemesController < ApplicationController
   before_filter :check_admin 
   
   def index
-    @themes = Theme.find(:all)
+    @themes = Theme.paginate(:page => params[:page])
     @current_theme = Theme.find(@options.theme_id) unless @options.theme_id.nil?
   end
 

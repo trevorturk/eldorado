@@ -6,16 +6,16 @@ class TopicsController < ApplicationController
   
   def index
     @topic = Topic.new
-    if logged_in?
-      @topics = Topic.find(:all, :include => [:user, :last_poster], :limit => 50, :order => 'last_post_at desc')
+    if logged_in?      
+      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
-      @topics = Topic.find(:all, :include => [:user, :last_poster], :limit => 50, :order => 'last_post_at desc', :conditions => ["private = ?", false])
+      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
   end
 
   def show
     @topic = Topic.find(params[:id], :include => :forum)
-    @posts = @topic.posts.find(:all, :include => :user)
+    @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
     @posters = @posts.map(&:user) ; @posters.uniq!
     @topic.hit!
   end

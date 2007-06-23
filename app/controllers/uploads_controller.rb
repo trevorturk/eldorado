@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
   before_filter :force_login, :except => [:index]
   
   def index
-    @uploads = Upload.find(:all, :limit => 50, :order => 'updated_at desc')
+    @uploads = Upload.paginate(:page => params[:page], :order => 'updated_at desc')
   end
 
   def new

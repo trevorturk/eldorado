@@ -4,7 +4,7 @@ class HeadersController < ApplicationController
   before_filter :can_edit_header, :only => [:edit, :update, :destroy]
   
   def index
-    @headers = Header.find(:all, :order => 'created_at desc')
+    @headers = Header.paginate(:page => params[:page], :order => 'created_at desc')
   end
 
   def show
