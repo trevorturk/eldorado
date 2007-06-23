@@ -7,9 +7,9 @@ class EventsController < ApplicationController
   
   def index
     if logged_in?
-      @events = Event.find(:all, :order => 'updated_at desc')
+      @events = Event.paginate(:page => params[:page], :order => 'updated_at desc')
     else
-      @events = Event.find(:all, :order => 'updated_at desc', :conditions => ["private = ?", false])
+      @events = Event.paginate(:page => params[:page], :order => 'updated_at desc', :conditions => ["private = ?", false])
     end
   end
 
