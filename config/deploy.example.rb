@@ -1,5 +1,7 @@
 require 'mt-capistrano'
 
+# This Capistrano recipe is an example that works well for Media Temple.
+
 set :site,         "0000"
 set :application,  "appname"
 set :webpath,      "app.com"

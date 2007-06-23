@@ -1,7 +1,7 @@
 namespace :db do
   desc "Imports PunBB content"
   task :import => :environment do
-    system "rake db:migrate"
+    system "rake db:schema:load"
     ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[RAILS_ENV])
     if (User.count != 0) or (Option.count != 0)
       puts 'Error: Setup can only be performed on an empty database.'

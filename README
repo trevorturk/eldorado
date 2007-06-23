@@ -2,27 +2,25 @@ Welcome to El Dorado!
 
 # Installation #
 
-Remove the "example" part of these filenames:
+Remove the "example" part of the following filenames and put in the details for your setup:
 config/database.example.yml
 config/deploy.example.rb
-
-... and put in the stuff for your setup.
-
-The Capistrano recipe is an example that works well for Media Temple.
 
 # Setup # 
 
 If you're not importing anything (starting a new site), run this command:
-rake db:setup 
+rake db:schema:load
 
-If you're importing from a PunBB site (only tested with version 1.2.15) then 
-fill in the "import" section of the config/database.yml file and run this command:
+Use this command if you're trying to set things up on your host:
+rake db:schema:load RAILS_ENV=production
+
+If you're importing from a PunBB site (only tested with version 1.2.15)  
+fill in the "import" section of config/database.yml and run the command:
 rake db:import
 
 # Upgrading #
 
-Home Page: http://almosteffortless.com
-Subversion: http://eldorado.googlecode.com/svn/ and http://code.google.com/p/eldorado/
+http://almosteffortless.com | http://eldorado.googlecode.com/svn
 
 Use "rake db:migrate" to upgrade your database from an older version
 Use "cap deploy_with_migrations" to upgrade your database and app at the same time using Capistrano 
@@ -30,6 +28,10 @@ Use "cap deploy_with_migrations" to upgrade your database and app at the same ti
 # License #
 
 Released under the MIT License, Copyright 2006 Trevor Turk (see LICENSE file for details)
+
+# Credits #
+
+Many thanks to the fine people of NewAthens, Rick Olson (Beast), and Rickard Andersson (PunBB).
 
 - Trevor Turk
 http://almosteffortless.com

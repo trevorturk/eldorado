@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   
   helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
-  before_filter :check_bans, :update_online_at, :get_reminders, :get_stats, :get_options
-    
+  before_filter :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
+  
   session :session_key => '_eldorado_session_id'
   
   protected
@@ -71,12 +71,32 @@ class ApplicationController < ActionController::Base
   
   def get_stats
     @newest_user = User.find(:first, :order => "created_at desc")
-    @user_count = User.count-1 # subtract one so "guest" user doesn't count
+    @user_count = User.count
     @posts_count = Forum.sum('posts_count')
   end
   
   def get_options
     @options = Option.find(:first)
+    if @options.blank? # set default options
+      return if (Category.count != 0) || (Forum.count != 0) || (Option.count != 0) || (Post.count != 0) || (Topic.count != 0) || (User.count != 0)
+      @option = Option.new(:site_title => 'El Dorado.org', :site_tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :footer_left => '', :footer_right => 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>', :newest_user => 'Newest User', :admin_rank => 'Administrator')
+      @option.save!
+      @category = Category.new(:name => 'Test Category')
+      @category.save!
+      @forum = @category.forums.build(:name => 'Test Forum', :description => "This is just a test forum")
+      @forum.save!
+      char = ("a".."z").to_a + ("1".."9").to_a; pass = Array.new(6, '').collect{char[rand(char.size)]}.join
+      @user = User.new(:login => 'Administrator', :email => 'example@example.com', :password => pass) 
+      @user.admin = true
+      @user.save!
+      @topic = @user.topics.build(:title => 'Test post', :forum_id => 1)
+      @topic.save!
+      @post = @user.posts.build(:body => 'This is just a test post')
+      @post.topic_id = 1
+      @post.save!
+      flash[:notice] = "Setup complete. You can now log in as 'Administrator' with the password '#{pass}'"
+      @options = Option.find(:first)
+    end
   end
-          
+            
 end

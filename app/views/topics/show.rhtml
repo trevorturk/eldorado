@@ -21,10 +21,7 @@
 <div style="clear:both;"> </div>
 
 <div class="info-left" id="info" style="display:none;">
-	<p class="detail posters">
-		<%= @posters.map { |u| "#{h u.login}" } * ", " %>
-		<%= link_to_function '(x)', "$('info').toggle()" %>
-	</p>
+	<p class="detail posters"><%= @posters.map { |u| "#{h u.login}" } * ", " %></p>
 </div>
 <div style="clear:both;"> </div>
 
