@@ -79,7 +79,7 @@ module CalendarHelper
     end
 
     cal = %(<table class="#{options[:table_class]}" border="0" cellspacing="0" cellpadding="0">) 
-    cal << %(<thead><tr class="#{options[:month_name_class]}"><th colspan="7">#{Date::MONTHNAMES[options[:month]]} #{options[:year]}</th></tr><tr class="#{options[:day_name_class]}">)
+    cal << %(<thead><tr class="#{options[:month_name_class]}"><th colspan="7">#{Date::MONTHNAMES[options[:month]]} #{options[:year]} #{render :partial => 'nav'}</th></tr><tr class="#{options[:day_name_class]}">)
     day_names.each {|d| cal << "<th>#{d[options[:abbrev]]}</th>"}
     cal << "</tr></thead><tbody><tr>"
     beginning_of_week(first, first_weekday).upto(first - 1) do |d|

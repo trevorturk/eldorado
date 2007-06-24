@@ -1,3 +1,13 @@
+<% if current_controller == 'avatars' and current_action == 'index' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Users', users_path %> &raquo; Avatars
+	</div>
+	<div class="info-right">
+		<%= will_paginate @avatars %>
+	</div>
+<% end %>
+
 <% if current_controller == 'avatars' and current_action == 'new' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
@@ -6,10 +16,27 @@
 	</div>
 <% end %>
 
-<% if current_controller == 'avatars' and current_action == 'index' %>
+<% if current_controller == 'categories' and current_action == 'show' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Users', users_path %> &raquo; Avatars
+		<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
+	</div>
+<% end %>
+
+<% if current_controller == 'events' and current_action == 'index' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; Events
+	</div>
+	<div class="info-right">
+		<%= will_paginate @events %>
+	</div>
+<% end %>
+
+<% if current_controller == 'events' and current_action == 'edit' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Events', events_path %> &raquo; 
+		<%= link_to h(@event.title), event_path(@event) %> &raquo; Editing Event
 	</div>
 <% end %>
 
@@ -20,23 +47,38 @@
 	</div>
 <% end %>
 
-<% if current_controller == 'events' and current_action == 'edit' %>
-	<div class="info-left">
-		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Calendar', events_path %> &raquo; 
-		<%= link_to h(@event.title), event_path(@event) %> &raquo; Editing Event
-	</div>
-<% end %>
-
 <% if current_controller == 'events' and current_action == 'show' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Calendar', events_path %> &raquo; <%=h @event.title %>
+		<%= link_to 'Events', events_path %> &raquo; <%=h @event.title %>
 	</div>
 	<div class="info-right">
 		<% if can_edit?(@event) %>
 			<%= link_to 'Edit Event', edit_event_path %>
 		<% end %>
+	</div>
+<% end %>
+
+<% if current_controller == 'forums' and current_action == 'index' %>
+	<div class="info-right">
+		<%= link_to('View All Topics &raquo;', topics_path) %>
+	</div>
+<% end %>
+
+<% if current_controller == 'forums' and current_action == 'show' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; 
+		<%= link_to @forum.category.name, category_path(@forum.category) %> &raquo; <%= @forum.name %>
+	</div>
+	<div class="info-right">
+		<%= will_paginate @topics %>
+	</div>
+<% end %>
+
+<% if current_controller == 'headers' and current_action == 'index' %>
+	<div class="info-right">
+		<%= will_paginate @headers %>
 	</div>
 <% end %>
 
@@ -67,6 +109,12 @@
 	</div>
 <% end %>
 
+<% if current_controller == 'home' and current_action == 'index' %>
+	<div class="info-right">
+		<%= will_paginate @topics %>
+	</div>
+<% end %>
+
 <% if current_controller == 'themes' and current_action == 'new' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
@@ -79,6 +127,19 @@
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
 		<%= link_to 'Users', users_path %> &raquo; Themes
+	</div>
+	<div class="info-right">
+		<%= will_paginate @themes %>
+	</div>
+<% end %>
+
+<% if current_controller == 'topics' and current_action == 'index' %>
+	<div class="info-left">
+		<%= link_to 'Home', home_path %> &raquo; 
+		<%= link_to 'Forum', forum_home_path %> &raquo; All Topics
+	</div>
+	<div class="info-right">
+		<%= will_paginate @topics %>
 	</div>
 <% end %>
 
@@ -96,18 +157,6 @@
 	</div>
 <% end %>
 
-<% if current_controller == 'topics' and current_action == 'index' %>
-	<div class="info-left">
-		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Forum', forum_home_path %> &raquo; All Topics
-	</div>
-	<div class="info-right">
-		<% if current_controller == 'home' %>
-			<%= link_to 'View All Topics &raquo;', topics_path %>
-		<% end %>
-	</div>
-<% end %>
-
 <% if current_controller == 'topics' and current_action == 'show' %>
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
@@ -117,24 +166,13 @@
 		<%=h @topic.title %>
 	</div>
 	<div class="info-right">
-		<% if can_edit?(@topic) %>
-			<%= link_to 'Edit Topic', edit_topic_path %>
-		<% end %>
+		<%= will_paginate @posts %>
 	</div>
 <% end %>
 
-<% if current_controller == 'categories' and current_action == 'show' %>
-	<div class="info-left">
-		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
-	</div>
-<% end %>
-
-<% if current_controller == 'forums' and current_action == 'show' %>
-	<div class="info-left">
-		<%= link_to 'Home', home_path %> &raquo; 
-		<%= link_to 'Forum', forum_home_path %> &raquo; 
-		<%= link_to @forum.category.name, category_path(@forum.category) %> &raquo; <%= @forum.name %>
+<% if current_controller == 'uploads' and current_action == 'index' %>
+	<div class="info-right">
+		<%= will_paginate @uploads %>
 	</div>
 <% end %>
 
@@ -142,6 +180,12 @@
 	<div class="info-left">
 		<%= link_to 'Home', home_path %> &raquo; 
 		<%= link_to 'Files', files_home_path %> &raquo; New File
+	</div>
+<% end %>
+
+<% if current_controller == 'users' and current_action == 'index' %>
+	<div class="info-right">
+		<%= will_paginate @users %>
 	</div>
 <% end %>
 

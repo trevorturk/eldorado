@@ -19,13 +19,6 @@ calendar({:year => @year, :month => @month}) do |d|
 end
 %>
 
-<div class="info-right">
-	<%= link_to "&laquo; Previous", events_path(:params => {:month => @prev_month, :year => @prev_year}) %> &nbsp; 
-	<%= link_to "Today", events_path %> &nbsp; 
-	<%= link_to "Next &raquo;", events_path(:params => {:month => @next_month, :year => @next_year}) %>
-</div>
-<div style="clear:both;"> </div>
-
 <% if !@events.blank? %>
 	<table cellspacing="0">
 		<thead>
@@ -46,8 +39,4 @@ end
 			<% end %>
 		</tbody>
 	</table>
-	<div class="info-right">
-		<%= will_paginate @events %>
-	</div>
-	<div style="clear:both;"> </div>
 <% end %>

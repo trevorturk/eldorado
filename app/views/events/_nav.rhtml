@@ -1,0 +1,8 @@
+<div style="float:right;">
+	<%= link_to "&laquo; Previous", events_path(:params => {:month => @prev_month, :year => @prev_year}) %> &nbsp; 
+	<% unless params[:month].blank? %>
+		<%= link_to "Today", events_path %> &nbsp; 
+	<% end %>
+	<%= link_to "Next &raquo;", events_path(:params => {:month => @next_month, :year => @next_year}) %>
+</div>
+<div style="clear:both;"> </div>
