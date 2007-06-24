@@ -17,5 +17,8 @@ class HomeControllerTest < Test::Unit::TestCase
   def test_should_get_index
     get :index
     assert_response :success
+    login_as :trevor
+    get :index
+    assert_response :success
   end
 end

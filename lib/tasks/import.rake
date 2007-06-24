@@ -61,7 +61,7 @@ namespace :db do
       @index += 1
       @item.site_title = i[1] if @index == 2 # o_board_title
       @item.site_tagline = i[1] if @index == 3 # o_board_desc
-      TZ = i[1] if @index == 4 # o_server_timezone
+      TZ = i[1].to_i if @index == 4 # o_server_timezone
     end
     @item.footer_left = ''
     @item.footer_right = 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>'
