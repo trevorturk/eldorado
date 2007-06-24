@@ -111,7 +111,7 @@
 
 <% if current_controller == 'home' and current_action == 'index' %>
 	<div class="info-right">
-		<%= will_paginate @topics %>
+		<%= will_paginate @topics unless @topics.blank? %>
 	</div>
 <% end %>
 

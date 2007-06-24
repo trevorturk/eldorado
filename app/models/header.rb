@@ -36,8 +36,7 @@ class Header < ActiveRecord::Base
   end
 
   def vote_up
-    self.votes = self.votes + 1
-    self.save!
+    self.votes.increment!
   end
 
   def vote_down

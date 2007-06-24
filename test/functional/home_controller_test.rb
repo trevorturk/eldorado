@@ -14,7 +14,8 @@ class HomeControllerTest < Test::Unit::TestCase
   end
 
   # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_should_get_index
+    get :index
+    assert_response :success
   end
 end
