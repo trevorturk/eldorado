@@ -98,7 +98,7 @@ namespace :db do
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!
       # manually fix timestamp issues raised by controller actions etc
-      ActiveRecord::Base.connection.execute("UPDATE users SET profile_updated_at = '#{Time.at(i[5].to_i).utc.to_s(:db)+(TZ.hours)}', last_login_at = '#{Time.at(i[6].to_i).utc.to_s(:db)+(TZ.hours)}' WHERE id = '#{@item.id}'")
+      ActiveRecord::Base.connection.execute("UPDATE users SET profile_updated_at = '#{Time.at(i[5].to_i).utc+(TZ.hours).to_s(:db)}', last_login_at = '#{Time.at(i[6].to_i).utc+(TZ.hours).to_s(:db)}' WHERE id = '#{@item.id}'")
       puts "Importing user: #{@item.id}"
     end
     #
@@ -233,9 +233,9 @@ namespace :db do
       @item.save!
       # manually fix timestamp issues raised by controller actions etc
       if i[4].nil? # edited
-        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[3].to_i).utc.to_s(:db)+(TZ.hours)}' WHERE id = '#{@item.id}'") # posted
+        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[3].to_i).utc+(TZ.hours).to_s(:db)}' WHERE id = '#{@item.id}'") # posted
       else
-        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[4].to_i).utc.to_s(:db)+(TZ.hours)}' WHERE id = '#{@item.id}'") # edited
+        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[4].to_i).utc+(TZ.hours).to_s(:db)}' WHERE id = '#{@item.id}'") # edited
       end
       puts "Importing post: #{@item.id}"
     end
