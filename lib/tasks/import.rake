@@ -14,17 +14,13 @@ namespace :db do
     # Before doing anything else this will completely destroy your existing El Dorado database. 
     # It will most likely take a long time, so importing to/from a remote database might be a bad idea.
     # Be careful to keep your text encoding consistent. Most databases will be in latin1.
-    # This whole shebang is only tested with PunBB 1.2.15.
+    # This whole shebang is only tested with PunBB 1.2.15. Times may not be 100% accurate
+    # due to time-zone and daylight savings issues, but they'll be close.
     # The user with id 2 (the "guest" user is 1) will be set as the only "admin" user.
     # Any topics, posts, etc made by a user not in the database will be assigned to the "guest" user.
     # 
     # importing: pun_bans, pun_categories, pun_config, pun_forums, pun_posts, pun_ranks, pun_topics, pun_users, pun_subscriptions
     # ignoring: pun_censoring, pun_forum_perms, pun_groups, pun_online, pun_reports, pun_search_cache, pun_search_matches, pun_search_words
-    # 
-    # Caveats:
-    # times may not be 100% accurate due to time-zone issues, but they'll be close
-    #
-    # ---
     # 
     # STORE RAILS DATABASE CONNECTION INFO
     #
@@ -65,6 +61,7 @@ namespace :db do
       @index += 1
       @item.site_title = i[1] if @index == 2 # o_board_title
       @item.site_tagline = i[1] if @index == 3 # o_board_desc
+      TZ = i[1] if @index == 4 # o_server_timezone
     end
     @item.footer_left = ''
     @item.footer_right = 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>'
@@ -95,13 +92,13 @@ namespace :db do
       @item.password_hash = i[2] # password 
       @item.email = i[3] # email 
       @item.signature = i[4] # signature       
-      @item.created_at = Time.at(i[5].to_i).utc.to_time # registered 
-      @item.online_at = Time.at(i[6].to_i).utc.to_time # last_visit 
+      @item.created_at = Time.at(i[5].to_i).utc.to_time+TZ.hours # registered 
+      @item.online_at = Time.at(i[6].to_i).utc.to_time+TZ.hours # last_visit 
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!
       # manually fix timestamp issues raised by controller actions etc
-      ActiveRecord::Base.connection.execute("UPDATE users SET profile_updated_at = '#{Time.at(i[5].to_i).utc.to_s(:db)}', last_login_at = '#{Time.at(i[6].to_i).utc.to_s(:db)}' WHERE id = '#{@item.id}'")
+      ActiveRecord::Base.connection.execute("UPDATE users SET profile_updated_at = '#{Time.at(i[5].to_i).utc.to_s(:db)+TZ.hours}', last_login_at = '#{Time.at(i[6].to_i).utc.to_s(:db)+TZ.hours}' WHERE id = '#{@item.id}'")
       puts "Importing user: #{@item.id}"
     end
     #
@@ -120,7 +117,7 @@ namespace :db do
       @item.ip = i[2] # ip
       @item.email = i[3] # email
       @item.message = i[4] # message
-      @item.expires_at = Time.at(i[5].to_i).utc.to_time unless i[5].nil? # expire
+      @item.expires_at = Time.at(i[5].to_i).utc.to_time+TZ.hours unless i[5].nil? # expire
       @item.save!
       puts "Importing ban: #{@item.id}"
     end
@@ -169,7 +166,7 @@ namespace :db do
       @item.id = i[0] # id 
       @item.name = i[1] # forum_name
       @item.description = i[2] # forum_desc
-      @item.last_post_at = Time.at(i[3].to_i).utc.to_time # last_post
+      @item.last_post_at = Time.at(i[3].to_i).utc.to_time+TZ.hours # last_post
       @item.last_post_id = i[4] # last_post_id
         @temp = User.find_by_login(i[5]) # last_poster
         @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
@@ -199,8 +196,8 @@ namespace :db do
         @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
       @item.user_id = @temp.id # get user id instead of username 
       @item.title = i[2] # subject 
-      @item.created_at = Time.at(i[3].to_i).utc.to_time # posted
-      @item.last_post_at = Time.at(i[4].to_i).utc.to_time # last_post
+      @item.created_at = Time.at(i[3].to_i).utc.to_time+TZ.hours # posted
+      @item.last_post_at = Time.at(i[4].to_i).utc.to_time+TZ.hours # last_post
       @item.last_post_id = i[5] # last_post_id      
         @temp = User.find_by_login(i[6]) # last_poster
         @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
@@ -226,7 +223,7 @@ namespace :db do
       @item.id = i[0] # id 
       @item.user_id = i[1] # poster_id 
       @item.body = i[2] # message
-      @item.created_at = Time.at(i[3].to_i).utc.to_time # posted
+      @item.created_at = Time.at(i[3].to_i).utc.to_time+TZ.hours # posted
       unless i[5].nil? # edited_by
           @temp = User.find_by_login(i[5]) # edited_by
           @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
@@ -236,9 +233,9 @@ namespace :db do
       @item.save!
       # manually fix timestamp issues raised by controller actions etc
       if i[4].nil? # edited
-        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[3].to_i).utc.to_s(:db)}' WHERE id = '#{@item.id}'") # posted
+        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[3].to_i).utc.to_s(:db)+TZ.hours}' WHERE id = '#{@item.id}'") # posted
       else
-        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[4].to_i).utc.to_s(:db)}' WHERE id = '#{@item.id}'") # edited
+        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[4].to_i).utc.to_s(:db)+TZ.hours}' WHERE id = '#{@item.id}'") # edited
       end
       puts "Importing post: #{@item.id}"
     end
