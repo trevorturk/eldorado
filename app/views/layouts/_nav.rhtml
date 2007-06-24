@@ -32,6 +32,7 @@
 			<% elsif current_controller == "users" %>
 				<%= link_to('Register a New User', new_user_path) %>
 			<% end %>
+			&nbsp; <%= link_to_function 'Search', "$('search').toggle();q.focus()" %>
 			<% if admin? %>&nbsp; <%= link_to('Admin', admin_path) %><% end %>
 			&nbsp; <%= link_to('Logout', logout_path) %>
 		<% else %>

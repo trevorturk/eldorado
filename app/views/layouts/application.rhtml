@@ -33,6 +33,7 @@
 			<div class="content">
 			
 				<%= render :partial => 'layouts/nav' %>
+				<%= render :partial => 'layouts/search' %>
 						
 				<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
 				<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
@@ -40,7 +41,6 @@
 				<%= yield %>
 			
 				<%= render :partial => 'layouts/nav2' %>
-				
 				<%= render :partial => 'layouts/stats' %>
 						
 			</div>
@@ -52,7 +52,7 @@
 			</div>
 		
 	</div>
-				
+		
 	<div style="margin:20px"> </div>
 		
 </body>

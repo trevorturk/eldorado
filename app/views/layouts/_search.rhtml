@@ -1,13 +1,10 @@
 <% form_tag search_path, :method => 'post' do %>
-	<div class="box">
-		<span class="top">Search</span>
-		<p class="label"><label for="q">Search the Forum</label></p>
+	<div id="search" class="box" <%= 'style="display:none;"' unless current_controller == 'search' %>>
+		<span class="top">Search Topics</span>
 		<p><%= text_field_tag :q, params[:q], :id => :search, :style => "width:31%" %></p>
 		<p>
 			<%= submit_tag "Search", :disable_with => "Search" %><span> or 
-			<%= link_to 'Cancel', home_path %>
+			<%= link_to_function 'Cancel', "$('search').toggle()" %>
 		</p>
 	</div>
 <% end %>
-
-<%= javascript_tag "search.focus();" %>
