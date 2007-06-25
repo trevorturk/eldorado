@@ -1,18 +1,19 @@
 namespace :db do
   desc "Imports PunBB content"
   task :import => :environment do
+    puts "This task will import from a PunBB database defined as 'import' in your database.yml file."
+    puts "It will import into your 'development' database unless you specify otherwise (e.g. 'rake db:import RAILS_ENV=production')."
+    puts "Please make sure the receiving database is empty before continuing."
+    puts "Tested with PunBB version 1.2.15."
+    puts "Type '1' to continue, or '2' to quit."
+    confirmation = STDIN.gets.chomp
+    exit unless confirmation == "1"
     system "rake db:schema:load"
     ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[RAILS_ENV])
-    if (User.count != 0) or (Option.count != 0)
-      puts 'Error: Setup can only be performed on an empty database.'
-      exit
-    end
     #
     # ABOUT
     #
     # This will import a PunBB database into the El Dorado structure. 
-    # Before doing anything else this will completely destroy your existing El Dorado database. 
-    # It will most likely take a long time, so importing to/from a remote database might be a bad idea.
     # Be careful to keep your text encoding consistent. Most databases will be in latin1.
     # This whole shebang is only tested with PunBB 1.2.15. Times may not be 100% accurate
     # due to time-zone and daylight savings issues, but they'll be close.
@@ -27,24 +28,6 @@ namespace :db do
     eldorado = ActiveRecord::Base.configurations
     prefix = eldorado['import']['prefix']
     puts 'Starting import...'
-    #
-    # DESTROY EXISTING ELDORADO DATABASE
-    #
-    Avatar.destroy_all
-    Event.destroy_all
-    Header.destroy_all
-    Option.destroy_all
-    Theme.destroy_all
-    Upload.destroy_all
-    #
-    User.destroy_all
-    Ban.destroy_all
-    Rank.destroy_all
-    Category.destroy_all
-    Forum.destroy_all
-    Topic.destroy_all
-    Post.destroy_all
-    Subscription.destroy_all
     #
     # CONFIG
     #
@@ -98,7 +81,9 @@ namespace :db do
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!
       # manually fix timestamp issues raised by controller actions etc
-      ActiveRecord::Base.connection.execute("UPDATE users SET profile_updated_at = '#{Time.at(i[5].to_i).utc+(TZ.hours).to_s(:db)}', last_login_at = '#{Time.at(i[6].to_i).utc+(TZ.hours).to_s(:db)}' WHERE id = '#{@item.id}'")
+      @item.profile_updated_at = @item.created_at
+      @item.last_login_at = @item.online_at
+      @item.save!
       puts "Importing user: #{@item.id}"
     end
     #
@@ -218,12 +203,19 @@ namespace :db do
     ActiveRecord::Base.establish_connection(eldorado['import'])
     @items = ActiveRecord::Base.connection.execute("SELECT id, poster_id, message, posted, edited, edited_by, topic_id FROM #{prefix}posts")
     ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
+    # disable timestamping to fix timestamp issues raised by controller actions etc
+    ActiveRecord::Base.record_timestamps = false
     for i in @items
       @item = Post.new
       @item.id = i[0] # id 
       @item.user_id = i[1] # poster_id 
       @item.body = i[2] # message
       @item.created_at = Time.at(i[3].to_i).utc.to_time+(TZ.hours) # posted
+      if i[4].nil? # edited
+        @item.updated_at = Time.at(i[3].to_i).utc.to_time+(TZ.hours) # posted
+      else
+        @item.updated_at = Time.at(i[4].to_i).utc.to_time+(TZ.hours) # edited
+      end
       unless i[5].nil? # edited_by
           @temp = User.find_by_login(i[5]) # edited_by
           @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
@@ -231,14 +223,10 @@ namespace :db do
       end
       @item.topic_id = i[6] # topic_id      
       @item.save!
-      # manually fix timestamp issues raised by controller actions etc
-      if i[4].nil? # edited
-        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[3].to_i).utc+(TZ.hours).to_s(:db)}' WHERE id = '#{@item.id}'") # posted
-      else
-        ActiveRecord::Base.connection.execute("UPDATE posts SET updated_at = '#{Time.at(i[4].to_i).utc+(TZ.hours).to_s(:db)}' WHERE id = '#{@item.id}'") # edited
-      end
       puts "Importing post: #{@item.id}"
     end
+    # re-enable timestamping
+    ActiveRecord::Base.record_timestamps = true
     #
     # SUBSCRIPTIONS
     #

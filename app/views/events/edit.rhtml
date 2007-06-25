@@ -1,6 +1,6 @@
 <div id="action" style="display:none;">
 	<%= render :partial => 'events/new' %>
-<div>
+</div>
 
 <%= error_messages_for :event %>
 <% form_for(:event, :url => event_path(@event), :html => { :method => :put }) do |f| %>
