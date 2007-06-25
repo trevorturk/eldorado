@@ -161,7 +161,7 @@ h3 {
 	display: block;
 	background: #35604d;
 	color: #fff;
-	padding: 5px;
+	padding: 4px 5px;
 	margin: 0 -10px;
 }
 
@@ -188,7 +188,7 @@ thead th {
 	color: #fff;
 	text-align: left;
 	font-weight: normal;
-	padding: 5px;
+	padding: 4px 5px;
 }
 
 thead th a:link, thead th a:visited {
