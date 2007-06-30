@@ -1,0 +1,54 @@
+SessionTimeout
+=============
+
+::: Overview
+
+SessionTimeout is a Rails plugin that lets you set a session timeout for each new request.
+
+This enables you to timeout a user's session if they are idle for a certain length of time.
+
+With Rails built-in session options, you can set a specific session expiry time however in production mode this expiry time is set just the once. This is fine if you are setting your expiry time far in the future (and therefore you are likely to restart your server processes by that time) but if you want to set your timeout in the near future, your session expiry will soon be a date/time in the past - this will cause a new session to be created for every new request resulting in disaster.
+
+::: Usage
+
+Install the plugin the usual way, then in your ApplicationController, specify the timeout duration by using the session_times_out_in() function. The function takes two parameters - how long you want the idle time to be before your session expires in seconds, and a hash of options.
+
+Example:
+
+class ApplicationController
+	session_times_out_in 600
+end
+
+Sometimes it may be necessary to run a piece of application logic when your session times out - this could be a redirect, some kind of clean up routine, authentication or many other things. You can specify this timeout callback as a symbol, referring to a method in your ApplicationController, or as a Proc. If you specify a Proc, it will be passed an instance of the current controller. Simply set the after_timeout option as follows.
+
+Example with a method:
+
+class ApplicationController
+	session_times_out_in 600, :after_timeout => :do_something
+	
+	def do_something
+	  logger.info "HELLO, IVE TIMED OUT!"
+	end
+end
+
+Example with a Proc:
+
+class ApplicationController
+	session_times_out_in 600, :after_timeout => Proc.new { |controller| controller.do_something_else }
+	
+	def	do_something_else
+		logger.info, "HELLO IVE TIMED OUT!"
+	end
+end
+
+Finally, don't forget you can use Rails' built-in number extensions to specify the timeout:
+
+session_times_out_in 5.minutes
+session_times_out_in 1.hour
+
+::: Contact
+
+Luke Redpath <luke@agileevolved.com> or Jonathan Conway <jonathan@agileevolved.com>
+
+Agile Evolved Open Source
+http://opensource.agileevolved.com

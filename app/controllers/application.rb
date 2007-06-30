@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   
   session :session_key => '_eldorado_session_id'
   
+  session_times_out_in 15.minutes
+  
   protected
     
   def current_user
