@@ -1,7 +1,7 @@
 <% form_tag search_path, :method => 'post' do %>
 	<div id="search" class="box" <%= 'style="display:none;"' unless current_controller == 'search' %>>
 		<span class="top">Search Topics</span>
-		<p><%= text_field_tag :q, params[:q], :id => :search, :style => "width:31%" %></p>
+		<p><%= text_field_tag :query, params[:query], :id => :query, :style => "width:31%" %></p>
 		<p>
 			<%= submit_tag "Search", :disable_with => "Search" %><span> or 
 			<%= link_to_function 'Cancel', "$('search').toggle()" %>

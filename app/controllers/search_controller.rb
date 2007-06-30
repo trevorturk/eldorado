@@ -4,7 +4,7 @@ class SearchController < ApplicationController
   
   def index
     if request.post?
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["title LIKE ?", '%' + params[:q] + '%'])
+      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["title LIKE ?", '%' + params[:query] + '%'])
       render :template => "topics/index"
     else
       render :template => "search/index"
