@@ -10,6 +10,8 @@
 		</p>
 		<p class="label"><label for="description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
+		<p class="label"><label for="location">Location</label></p>
+		<p><%= f.text_field :location, :style => 'width:66%;' %></p>
 		<p class="label"><label for="date">Date</label></p>
 		<p><%= f.datetime_select :date %>&nbsp;Today is <%= Date.today.to_s(:long) %></p>
 		<p>

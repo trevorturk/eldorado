@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id], :include => :forum)
-    @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
+    @posts = @topic.posts(:include => :user)
     @posters = @posts.map(&:user) ; @posters.uniq!
     @topic.hit!
   end

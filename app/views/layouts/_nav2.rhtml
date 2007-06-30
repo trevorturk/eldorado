@@ -166,7 +166,9 @@
 		<%=h @topic.title %>
 	</div>
 	<div class="info-right">
-		<%= will_paginate @posts %>
+		<% if can_edit?(@topic) %>
+			<%= link_to 'Edit Topic', edit_topic_path %>
+		<% end %>
 	</div>
 <% end %>
 

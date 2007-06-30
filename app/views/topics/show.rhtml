@@ -13,9 +13,6 @@
 <div class="info-right">
 	<span class="detail">
 		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
-		<% if can_edit?(@topic) %>
-			&nbsp;|&nbsp; <%= link_to 'Edit', edit_topic_path %>
-		<% end %>
 		<% if logged_in? && !@topic.closed %>
 			&nbsp;|&nbsp; <%= link_to 'Reply', '#reply' %>
 		<% end %>

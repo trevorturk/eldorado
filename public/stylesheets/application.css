@@ -252,6 +252,10 @@ tbody .tds {
 	margin-top: 0;
 }
 
+.thread .body img {
+	max-width: 100%;
+}
+
 .thread dl {
 	margin: 0;
 }
