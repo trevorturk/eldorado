@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 50) do
+ActiveRecord::Schema.define(:version => 52) do
 
   create_table "avatars", :force => true do |t|
     t.column "parent_id",       :integer
@@ -165,7 +165,6 @@ ActiveRecord::Schema.define(:version => 50) do
     t.column "email",              :string
     t.column "password_hash",      :string
     t.column "created_at",         :datetime
-    t.column "last_login_at",      :datetime
     t.column "admin",              :boolean,  :default => false
     t.column "posts_count",        :integer,  :default => 0
     t.column "signature",          :string
@@ -173,6 +172,8 @@ ActiveRecord::Schema.define(:version => 50) do
     t.column "profile_updated_at", :datetime
     t.column "online_at",          :datetime
     t.column "avatar_id",          :integer
+    t.column "auth_token",         :string
+    t.column "auth_token_exp",     :datetime
   end
 
   add_index "users", ["online_at"], :name => "index_users_on_online_at"

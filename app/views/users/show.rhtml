@@ -16,7 +16,7 @@
 	
 	<p style="margin-top:20px">
 		<b>Registered</b>: <%= time_ago_in_words(@user.created_at) %> &nbsp;
-		<b>Last Visit</b>: <%= time_ago_in_words(@user.last_login_at) %> &nbsp;
+		<b>Last Visit</b>: <%= time_ago_in_words(@user.online_at) %> &nbsp;
 		<b>Profile Updated</b>: <%= time_ago_in_words(@user.profile_updated_at) %>
 	</p>
 	<div style="clear:both;"> </div>	

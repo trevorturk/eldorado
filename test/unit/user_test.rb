@@ -18,9 +18,9 @@ class UserTest < Test::Unit::TestCase
   
   def test_user_gets_default_timestamps
     u = User.create(:login => "test", :email => "email", :password => "sdlfkj", :password_confirmation => "sdlfkj")
-    assert_not_nil u.last_login_at
+    assert_not_nil u.online_at
     assert_not_nil u.profile_updated_at
-    assert_equal u.last_login_at, u.profile_updated_at
+    assert_equal u.online_at, u.profile_updated_at
   end
   
 end

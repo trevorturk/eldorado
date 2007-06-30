@@ -26,7 +26,6 @@ Guest:
   password_hash: <%= User.encrypt('testy') %>
   posts_count: 0
   created_at: <%= 5.days.ago.to_s :db %>
-  last_login_at: <%= 5.hours.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
 Administrator:
@@ -37,10 +36,11 @@ Administrator:
   admin: 1
   posts_count: 1
   created_at: <%= 5.days.ago.to_s :db %>
-  last_login_at: <%= 5.hours.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
   bio: 'admin'
+  auth_token: 153c53039f6e8e8ca832d1512702f412298ec3a9
+  auth_token_exp: <%= (Time.now.utc - 1.week).to_s :db %> # expired
 Timothy:
   id: 3
   login: Timothy
@@ -48,9 +48,10 @@ Timothy:
   posts_count: 3450
   password_hash: <%= User.encrypt('test') %>
   created_at: <%= 5.days.ago.to_s :db %>
-  last_login_at: <%= 5.hours.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  auth_token: 244cd62e5130681b86c01f8de9e9762d9a3f3645
+  auth_token_exp: <%= (Time.now.utc + 1.week).to_s :db %> # not expired
 trevor:
   id: 4
   login: trevor
@@ -58,7 +59,6 @@ trevor:
   posts_count: 1000
   password_hash: <%= User.encrypt('test') %>
   created_at: <%= 5.days.ago.to_s :db %>
-  last_login_at: <%= 5.hours.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
   bio: 'my bio'
@@ -70,6 +70,5 @@ banned:
   posts_count: 0
   password_hash: <%= User.encrypt('test') %>
   created_at: <%= 5.days.ago.to_s :db %>
-  last_login_at: <%= 5.hours.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>

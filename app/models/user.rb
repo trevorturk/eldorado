@@ -35,11 +35,11 @@ class User < ActiveRecord::Base
   validates_length_of       :login, :maximum => 25
   validates_confirmation_of :password, :on => :create
   
-  before_create { |u| u.last_login_at = u.profile_updated_at = Time.now.utc }
+  before_create { |u| u.online_at = u.profile_updated_at = Time.now.utc }
     
   attr_reader :password
   
-  attr_protected :id, :created_at, :last_login_at, :admin, :posts_count
+  attr_protected :id, :created_at, :admin, :posts_count
    
   def password=(value)
     return if value.blank?

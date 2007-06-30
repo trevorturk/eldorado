@@ -67,7 +67,13 @@ class UsersController < ApplicationController
   end
   
   def logout
+    redirect_to home_path unless logged_in?
     @flash = flash[:notice]
+    @user = User.find_by_id(session[:user_id])
+    @user.auth_token = nil
+    @user.auth_token_exp = nil
+    @user.save!
+    cookies.delete :auth_token
     reset_online_at
     reset_session
     flash[:notice] = @flash
@@ -83,8 +89,11 @@ class UsersController < ApplicationController
   
   def do_login(user)
     session[:user_id] = user.id
-    session[:last_session_at] = user.last_login_at
-    user.last_login_at = Time.now.utc
+    session[:online_at] = user.online_at
+    user.online_at = Time.now.utc
+    user.auth_token = Digest::SHA1.hexdigest(Time.now.to_s + rand(123456789).to_s)
+    user.auth_token_exp = 2.weeks.from_now
+    cookies[:auth_token] = { :value => user.auth_token, :expires => user.auth_token_exp }
     user.save!
     redirect_to home_path
   end

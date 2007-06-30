@@ -74,7 +74,7 @@ module ApplicationHelper
   def icon_for(current_item)
     return '<div class="icon"><!-- --></div>' unless logged_in?
     return '<div class="icon"><!-- --></div>' if current_item.updated_at.nil?
-    return '<div class="icon inew"><!-- --></div>' if session[:last_session_at] < current_item.updated_at
+    return '<div class="icon inew"><!-- --></div>' if session[:online_at] < current_item.updated_at
     return '<div class="icon"><!-- --></div>'
   end
   

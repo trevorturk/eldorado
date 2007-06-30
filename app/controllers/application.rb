@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
+  before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
   helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
-  before_filter :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
   
   session :session_key => '_eldorado_session_id'
   
@@ -18,7 +18,17 @@ class ApplicationController < ActionController::Base
   def force_login
     redirect_to login_path and return false unless logged_in?
   end
-      
+
+  def auth_token_login
+    return if logged_in? || cookies[:auth_token].nil?
+    user = User.find_by_auth_token(cookies[:auth_token])
+    if user && Time.now.utc < user.auth_token_exp
+      session[:user_id] = user.id 
+      session[:online_at] = user.online_at
+      redirect_to request.request_uri
+    end
+  end
+        
   def check_bans
     return unless logged_in?
     return if request.path_parameters['action'] == 'logout'

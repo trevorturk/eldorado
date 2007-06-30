@@ -61,7 +61,7 @@ class TopicsController < ApplicationController
   
   def show_new
     redirect_to login_path unless logged_in?
-    @topics = Topic.find(:all, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["last_post_at > ?", current_user.last_login_at])
+    @topics = Topic.find(:all, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["last_post_at > ?", current_user.online_at])
     render(:template => "topics/index")
   end
     

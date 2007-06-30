@@ -43,7 +43,7 @@
 							<%= link_to avatar_for(post.user), user_path(post.user.id) unless post.user.avatar_id.blank? %>
 						</dd>
 						<dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
-						<dd>Last visit: <%= time_ago_in_words(post.user.last_login_at) %></dd>
+						<dd>Last visit: <%= time_ago_in_words(post.user.online_at) %></dd>
 						<dd>Posts: <%= post.user.posts_count %></dd>
 					</dl>
 				</td>

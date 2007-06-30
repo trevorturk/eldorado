@@ -32,7 +32,7 @@ class Test::Unit::TestCase
   
   def login_as(user)
     @request.session[:user_id] = user ? users(user).id : nil
-    @request.session[:last_session_at] = Time.now.utc
+    @request.session[:online_at] = Time.now.utc
   end
   
 end

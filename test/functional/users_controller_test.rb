@@ -109,6 +109,39 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal 4, session[:user_id]
     assert_redirected_to home_path
   end
+
+  def test_good_login_sets_auth_token
+    post :login, :user => {:login => 'trevor', :password => 'test'}
+    users(:trevor).reload
+    assert cookies['auth_token']
+    assert_equal("#{users(:trevor).auth_token}", cookies['auth_token'].first)
+    assert_not_nil users(:trevor).auth_token
+    assert_not_nil users(:trevor).auth_token_exp
+  end
+  
+  def test_bad_login_does_not_set_auth_token
+    post :login, :user => {:login => 'trevor', :password => 'bad'}
+    users(:trevor).reload
+    assert_nil cookies['auth_token']
+    assert_nil users(:trevor).auth_token
+    assert_nil users(:trevor).auth_token_exp
+  end
+  
+  def test_good_auth_token_login
+    @request.cookies["auth_token"] = CGI::Cookie.new("auth_token", "244cd62e5130681b86c01f8de9e9762d9a3f3645")    
+    assert @request.cookies["auth_token"]
+    assert_not_nil users(:Timothy).auth_token_exp
+    get :index
+    assert_equal 3, session[:user_id]
+  end
+ 
+  def test_expired_auth_token_login
+    @request.cookies["auth_token"] = CGI::Cookie.new("auth_token", "153c53039f6e8e8ca832d1512702f412298ec3a9")    
+    assert @request.cookies["auth_token"]
+    assert_not_nil users(:Administrator).auth_token_exp
+    get :index
+    assert_nil session[:user_id]
+  end
   
   def test_current_user_stays_the_same_when_new_user_created
   end

@@ -80,10 +80,9 @@ namespace :db do
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!
-      # manually fix timestamp issues raised by controller actions etc
-      @item.profile_updated_at = @item.created_at
-      @item.last_login_at = @item.online_at
-      @item.save!
+      # manually fix timestamp issues raised by controller actions
+        @item.profile_updated_at = @item.created_at 
+        @item.save!
       puts "Importing user: #{@item.id}"
     end
     #
