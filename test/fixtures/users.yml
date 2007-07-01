@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 49
+# Schema version: 52
 #
 # Table name: users
 #
@@ -8,7 +8,6 @@
 #  email              :string(255)   
 #  password_hash      :string(255)   
 #  created_at         :datetime      
-#  last_login_at      :datetime      
 #  admin              :boolean(1)    
 #  posts_count        :integer(11)   default(0)
 #  signature          :string(255)   
@@ -16,6 +15,8 @@
 #  profile_updated_at :datetime      
 #  online_at          :datetime      
 #  avatar_id          :integer(11)   
+#  auth_token         :string(255)   
+#  auth_token_exp     :datetime      
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
@@ -72,3 +73,12 @@ banned:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+post_test:
+  id: 6
+  login: post
+  email: post@test.com
+  posts_count: 0
+  password_hash: <%= User.encrypt('test') %>
+  created_at: <%= 5.days.ago.to_s :db %>
+  profile_updated_at: <%= 5.hours.ago.to_s :db %>
+  online_at: <%= 2.weeks.ago.to_s :db %>

@@ -61,8 +61,10 @@ class TopicsController < ApplicationController
   
   def show_new
     redirect_to login_path unless logged_in?
-    @topics = Topic.find(:all, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["last_post_at > ?", current_user.online_at])
-    render(:template => "topics/index")
+    @topic = Topic.find(params[:id])
+    @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at > ?", session[:online_at]])
+    @post = Post.find(@topic.last_post_id) if @post.nil?
+    redirect_to topic_path(:id => @topic.id, :anchor => 'p' + @post.id.to_s)
   end
     
   def unknown_request
@@ -72,6 +74,8 @@ class TopicsController < ApplicationController
         params[:id] = @post.topic_id # set the regular topic_id value as id with this post's topic_id
       end
       redirect_to topic_path(:id => params[:id], :anchor => params[:anchor])
+    elsif request.request_uri.include?('action=show_new') # legacy url format from punbb
+      redirect_to topics_path
     else
       redirect_to topics_path
     end

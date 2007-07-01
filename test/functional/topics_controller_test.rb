@@ -167,6 +167,24 @@ class TopicsControllerTest < Test::Unit::TestCase
   def test_should_set_last_post_info_in_forum_and_topic_if_most_recent_post_is_deleted
   end
   
+  def test_should_show_topic_as_new
+  end
+  
+  def test_should_not_show_topic_as_new
+  end
+  
+  def test_should_redirect_to_newest_post_with_show_new_action
+    login_as :post_test
+    get :show_new, :id => 1
+    # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one2).id.to_s)
+  end
+  
+  def test_should_redirect_to_last_post_if_no_new_posts_with_show_new_action
+    login_as :trevor
+    get :show_new, :id => 1
+    # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s) 
+  end  
+  
   def test_should_send_banned_user_to_logout
     login_as :banned
     get :index

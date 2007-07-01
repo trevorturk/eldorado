@@ -70,14 +70,16 @@ module ApplicationHelper
       return current_user.admin? || (current_user.id == current_item.user_id) 
     end
   end
-  
-  def icon_for(current_item)
-    return '<div class="icon"><!-- --></div>' unless logged_in?
-    return '<div class="icon"><!-- --></div>' if current_item.updated_at.nil?
-    return '<div class="icon inew"><!-- --></div>' if session[:online_at] < current_item.updated_at
-    return '<div class="icon"><!-- --></div>'
+
+  def is_new?(item)
+    return true if logged_in? && session[:online_at] < item.updated_at
   end
   
+  def icon_for(item)
+    return '<div class="icon inew"><!-- --></div>' if is_new?(item)
+    return '<div class="icon"><!-- --></div>'
+  end
+    
   def bb(text)
     text = simple_format(bbcodeize(white_list(h(text))))
     auto_link(text) do |t|

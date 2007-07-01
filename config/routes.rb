@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :member => { :quote => :get }
   map.resources :subscriptions
   map.resources :themes, :member => { :select => :post, :deselect => :post }
-  map.resources :topics, :collection => { :show_new => :get }
+  map.resources :topics, :member => { :show_new => :get }
   map.resources :uploads
   map.resources :users, :member => { :confirm_delete => :get }
 

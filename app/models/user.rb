@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 49
+# Schema version: 52
 #
 # Table name: users
 #
@@ -8,7 +8,6 @@
 #  email              :string(255)   
 #  password_hash      :string(255)   
 #  created_at         :datetime      
-#  last_login_at      :datetime      
 #  admin              :boolean(1)    
 #  posts_count        :integer(11)   default(0)
 #  signature          :string(255)   
@@ -16,6 +15,8 @@
 #  profile_updated_at :datetime      
 #  online_at          :datetime      
 #  avatar_id          :integer(11)   
+#  auth_token         :string(255)   
+#  auth_token_exp     :datetime      
 #
 
 require 'digest/sha1'

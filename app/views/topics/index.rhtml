@@ -46,10 +46,9 @@
 					<td class="tcm"><%=h topic.replies %></td>
 					<td class="tcm"><%=h topic.views %></td>
 					<td class="tcr">
-						<% if !topic.last_post_at.blank? %>
-							<%=h time_ago_in_words(topic.last_post_at) %> by <%=h topic.last_poster.login %>
-						<% end %>
-						</td>
+						<%= link_to time_ago_in_words(topic.last_post_at), show_new_topic_path(topic) %> 
+						by <%=h topic.last_poster.login %>
+					</td>
 				</tr>
 			<% end %>
 		</tbody>
