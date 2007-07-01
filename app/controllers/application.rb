@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
-  helper_method :current_user, :logged_in?, :force_login, :reset_online_at, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
+  helper_method :current_user, :logged_in?, :force_login, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
   
   session :session_key => '_eldorado_session_id'
   
@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
     @ban = Ban.find(:first, :conditions => ["user_id = ? or ip = ? or email = ? and (expires_at > ? or expires_at is ?)", current_user.id, request.remote_ip, current_user.email, Time.now.utc, nil])
     if @ban
       flash[:notice] = 'This account is banned' 
-      flash[:notice] << ' until '+@ban.expires_at.strftime("%B %d, %Y") unless @ban.expires_at.blank?
-      flash[:notice] << ' with the message: '+@ban.message unless @ban.message.blank?
+      flash[:notice] << ' until ' + @ban.expires_at.strftime("%B %d, %Y") unless @ban.expires_at.blank?
+      flash[:notice] << ' with the message: ' + @ban.message unless @ban.message.blank?
       redirect_to logout_path and return false
     end
   end
@@ -47,11 +47,7 @@ class ApplicationController < ActionController::Base
     return unless logged_in?
     User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id] 
   end
-    
-  def reset_online_at
-    User.update_all ['online_at = ?', Time.now.utc-5.minutes], ['id = ?', current_user.id] 
-  end
-    
+        
   def admin?()
     logged_in? && (current_user.admin == true)
   end

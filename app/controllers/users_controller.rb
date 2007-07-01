@@ -74,7 +74,6 @@ class UsersController < ApplicationController
     @user.auth_token_exp = nil
     @user.save!
     cookies.delete :auth_token
-    reset_online_at
     reset_session
     flash[:notice] = @flash
     redirect_to home_path

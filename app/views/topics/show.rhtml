@@ -30,7 +30,7 @@
 		<thead>
 			<tr>
 				<th><%= time_ago_in_words(post.created_at) %></th>
-				<th class="thr"><%= link_to "#"+(index).to_s, topic_path(:anchor => 'p'+post.id.to_s) %></a></th>
+				<th class="thr"><%= link_to "#" + (index).to_s, topic_path(:anchor => 'p' + post.id.to_s) %></a></th>
 			</tr>
 		</thead>
 		<tbody>
