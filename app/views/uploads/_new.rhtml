@@ -3,7 +3,6 @@
 	<% form_for(:upload, :url => uploads_path, :html => { :multipart => true }) do |f| -%>
 	<span class="top">New File</span>
 	<p><%= f.file_field :uploaded_data %></p>
-	<p>Files must be under 15mb.</p>
 	<p>
 		<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
 		<% if current_action != 'new' %>

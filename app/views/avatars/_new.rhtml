@@ -3,7 +3,6 @@
 	<div class="box">
 		<span class="top">New Avatar</span>
 		<p><%= f.file_field :uploaded_data %></p>
-		<p>Avatars must be smaller than 50k.</p>
 		<p>
 			<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
 			<% if current_action != 'new' %>
