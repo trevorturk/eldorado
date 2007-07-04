@@ -21,6 +21,9 @@
 		<%= link_to 'Home', home_path %> &raquo; 
 		<%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
 	</div>
+	<div class="info-right">
+		<%= will_paginate @topics %>
+	</div>
 <% end %>
 
 <% if current_controller == 'events' and current_action == 'index' %>

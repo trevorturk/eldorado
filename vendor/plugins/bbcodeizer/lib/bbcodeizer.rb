@@ -23,16 +23,16 @@ module BBCodeizer
       :googlevid             => [ /\[googlevid\](.+?)video.google.com\/videoplay\?docid=(.*?)\[\/googlevid\]/i, '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2&amp;hl=en"></embed>' ],
       :flash                 => [ /\[flash\](.+?)\[\/flash\]/i, '<object width="100%" height="100%"><param name="movie" value="\1"></param><embed src="\1" type="application/x-shockwave-flash" width="100%" height="100%"></embed></object>' ],
       :spoiler               => [ /\[spoiler\](.+?)\[\/spoiler\]/i, '<a href="#" onclick="$(\'_SPOILER\').toggle(); return false;">Show Spoiler</a><div id="_SPOILER" style="display:none;">\1</div>' ],
-      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_MP3" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_MP3&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ]
+      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_MP3" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_MP3&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ],
+      :funnyordie            => [ /\[funnyordie\](.+?)funnyordie.com\/videos\/(.+?)\[\/funnyordie\]/i, '<object id="myFlash" type="application/x-shockwave-flash" width="464" height="380" wmode="transparent" data="http://www2.funnyordie.com/public/flash/fodplayer.swf?file=http://www2.funnyordie.com/\2.flv&autoStart=false"><param name="movie" value="http://www2.funnyordie.com/public/flash/fodplayer.swf?file=http://www2.funnyordie.com/\2.flv&autoStart=false" /><param name="wmode" value="transparent" /><param name="swliveconnect" value="true" /><embed type="application/x-shockwave-flash" src="http://www2.funnyordie.com/public/flash/fodplayer.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noScale" salign="TL" bgcolor="#000000" flashvars="file=http://www2.funnyordie.com/\2.flv&autoStart=false" />' ]
     }
-    
-    # removed quotes from cites, added youtube, googlevid, spoiler, mp3
+    # removed quotes from cites, added youtube, googlevid, spoiler, mp3, funnyordie
 
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
     # These names correspond to either names above or methods in this module.
     TagList = [ :bold, :italic, :underline, :email_with_name, :email_sans_name, 
                 :url_with_title, :url_sans_title, :image, :size, :color,
-                :code, :quote, :youtube, :googlevid, :flash, :spoiler, :mp3 ]
+                :code, :quote, :youtube, :googlevid, :flash, :spoiler, :mp3, :funnyordie ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)
