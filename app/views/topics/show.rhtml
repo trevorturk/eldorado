@@ -48,16 +48,21 @@
 					</dl>
 				</td>
 				<td class="body">
-					<%= bb(post.body) %>
-					<% if (post.updated_at > post.created_at+5.minutes) %>
-						<p class="edited">
-							Last edited <%= time_ago_in_words(post.updated_at) %>
-							<%= 'by ' + post.editor.login unless post.editor.nil? %>
-						</p>
-					<% end %>
-					<% if !post.user.signature.blank? %>
-						<hr class="sig"><%= bb(post.user.signature) %>
-					<% end %>
+					<div class="post-body">
+						<%= bb(post.body) %>
+						<% if (post.updated_at > post.created_at+5.minutes) %>
+							<p class="edited">
+								Last edited <%= time_ago_in_words(post.updated_at) %>
+								<%= 'by ' + post.editor.login unless post.editor.nil? %>
+							</p>
+						<% end %>
+						<% if !post.user.signature.blank? %>
+							<hr class="sig-hr">
+							<div class="sig">
+								<%= bb(post.user.signature) %>
+							</div>
+						<% end %>
+					</div>
 				</td>
 			</tr>
 			<tr>

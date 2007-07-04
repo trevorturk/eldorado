@@ -83,7 +83,7 @@ module ApplicationHelper
   def bb(text)
     text = simple_format(bbcodeize(white_list(h(text))))
     auto_link(text) do |t|
-      truncate(t, 30)
+      truncate(t)
     end
   end
     

@@ -243,7 +243,7 @@ tbody .tds {
 }
 
 .thread .body {
-	width: 74%;
+	width: 76%;
 	line-height: 1.4em;
 	background: #dedfdf;
 }
@@ -252,7 +252,8 @@ tbody .tds {
 	margin-top: 0;
 }
 
-.thread .body img {
+.post-body, .post-body img {
+	overflow: hidden;
 	max-width: 100%;
 }
 
@@ -371,7 +372,7 @@ cite {
 	font-style: normal;
 }
 
-.sig {
+.sig-hr {
 	margin-top: 20px;
 	width: 200px;
 	color: #ccc;
