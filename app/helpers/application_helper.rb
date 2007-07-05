@@ -36,10 +36,7 @@ module ApplicationHelper
   end
   
   def avatar_for(user)
-    if !user.avatar_id.blank?
-      @avatar = Avatar.find(user.avatar_id)
-      image_tag @avatar.public_filename
-    end
+    image_tag user.avatar unless user.avatar.nil?
   end
   
   def rank_for(posts_count, admin)

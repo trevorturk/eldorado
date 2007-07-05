@@ -16,6 +16,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
+    @padding = params[:page] ; @padding = 1 if @padding.nil? ; @padding = ((@padding.to_i - 1) * 30) # to get post #s w/ pagination
     @topic.hit!
   end
 

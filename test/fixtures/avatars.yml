@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 52
+# Schema version: 53
 #
 # Table name: avatars
 #
@@ -22,7 +22,7 @@ calvin:
   id: 1
   parent_id: 
   content_type: MyString
-  filename: MyString.png
+  filename: calvin.png
   thumbnail: 
   size: 
   width: 

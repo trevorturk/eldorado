@@ -35,7 +35,9 @@
 		<thead>
 			<tr>
 				<th><%= time_ago_in_words(post.created_at) %></th>
-				<th class="thr"><%= link_to "#" + (index).to_s, topic_path(:anchor => 'p' + post.id.to_s) %></a></th>
+				<th class="thr">
+					<%= link_to "#" + (index + @padding).to_s, topic_path(:anchor => 'p' + post.id.to_s) %>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,7 +47,7 @@
 						<dt><%= link_to h(post.user.login), user_path(post.user.id) %></dt>
 						<dd class="rank"><%= rank_for(post.user.posts_count, post.user.admin) %></dd>
 						<dd class="avatar">
-							<%= link_to avatar_for(post.user), user_path(post.user.id) unless post.user.avatar_id.blank? %>
+							<%= link_to avatar_for(post.user), user_path(post.user.id) unless post.user.avatar.nil? %>
 						</dd>
 						<dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
 						<dd>Last visit: <%= time_ago_in_words(post.user.online_at) %></dd>

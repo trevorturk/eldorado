@@ -71,11 +71,7 @@ module WillPaginate
         links.unshift page_link_or_span(entries.previous_page, 'disabled', options.delete(:prev_label))
         links.push    page_link_or_span(entries.next_page,     'disabled', options.delete(:next_label))
         
-        if options[:compact] == true
-          content_tag :span, links.join(options.delete(:separator)), options
-        else
-          content_tag :div, links.join(options.delete(:separator)), options
-        end
+        content_tag :span, links.join(options.delete(:separator)), options
       end
     end
     

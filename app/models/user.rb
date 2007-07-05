@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 52
+# Schema version: 53
 #
 # Table name: users
 #
@@ -14,7 +14,7 @@
 #  bio                :text          
 #  profile_updated_at :datetime      
 #  online_at          :datetime      
-#  avatar_id          :integer(11)   
+#  avatar             :string(255)   
 #  auth_token         :string(255)   
 #  auth_token_exp     :datetime      
 #

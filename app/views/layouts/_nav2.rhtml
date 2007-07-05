@@ -172,7 +172,8 @@
 		<% if can_edit?(@topic) %>
 			<%= link_to 'Edit Topic', edit_topic_path %>
 		<% end %>
-		<%= will_paginate @posts, :inner_window => 1, :outer_window => 0 %>
+		<% if @topic.last_page != 1 && can_edit?(@topic) %><span class="detail">&nbsp;|&nbsp;</span><% end %>
+		<%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
 	</div>
 <% end %>
 
@@ -209,10 +210,10 @@
 		<%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
 	</div>
 	<div class="info-right">
-		<% if can_edit?(@user) && @user.avatar_id %>
+		<% if can_edit?(@user) && @user.avatar %>
 			<%= link_to 'Change Avatar', avatars_path %> 
 			<%= link_to '(x)', deselect_avatar_path, :method => :post %>
-		<% elsif can_edit?(@user) && @user.avatar_id.nil? %>
+		<% elsif can_edit?(@user) && @user.avatar.nil? %>
 			<%= link_to 'Get an Avatar', avatars_path %>
 		<% end %>
 		<% if can_edit?(@user) %>

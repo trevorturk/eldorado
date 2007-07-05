@@ -17,11 +17,11 @@ task :import_punbb_avatars => :environment do
     end
     @item.current_user_id = @item.user_id
     @item.save!
-    User.update_all ['avatar_id = ?', @item.id], ['id = ?', @item.user_id]
+    User.update_all ['avatar = ?', @item.public_filename], ['id = ?', @item.user_id]
     puts "Importing avatar: #{@item.id}"
   end
   # remove guest user's avatar
-  User.update_all ['avatar_id = ?', nil], ['id = ?', 1] 
+  User.update_all ['avatar = ?', nil], ['id = ?', 1] 
   Avatar.update_all ['current_user_id = ?', nil], ['current_user_id = ?', 1] 
   puts 'Import completed successfully.'
 end

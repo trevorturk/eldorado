@@ -66,7 +66,7 @@ class AvatarsControllerTest < Test::Unit::TestCase
     login_as :Timothy
     post :select, :id => avatars(:calvin).id
     users(:Timothy).reload
-    assert_equal users(:Timothy).avatar_id, 1
+    assert_equal users(:Timothy).avatar, avatars(:calvin).public_filename
   end
   
 end

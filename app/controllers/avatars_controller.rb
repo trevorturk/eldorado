@@ -24,8 +24,8 @@ class AvatarsController < ApplicationController
   def destroy
     @avatar = Avatar.find(params[:id])
     redirect_to avatars_path and return false unless admin? || (current_user == @avatar.user)
-    @user = User.find_by_avatar_id(@avatar.id)
-    @user.update_attributes(:avatar_id => nil) if @user 
+    @user = User.find_by_id(@avatar.current_user_id)
+    @user.update_attributes(:avatar => nil) if @user 
     @avatar.destroy
     redirect_to avatars_url
   end
@@ -39,15 +39,15 @@ class AvatarsController < ApplicationController
     @old_avatar.update_attributes(:current_user_id => nil) if @old_avatar
     # set the current_user_id for the new avatar
     @avatar.update_attributes(:current_user_id => current_user.id)
-    # set the new avatar_id for the current user
-    current_user.update_attributes(:avatar_id => @avatar.id)
+    # set the new avatar for the current user
+    current_user.update_attributes(:avatar => @avatar.public_filename)
     redirect_to user_path(current_user)
   end
   
   def deselect
-    @avatar = Avatar.find(current_user.avatar_id)
+    @avatar = Avatar.find_by_current_user_id(current_user.id)
     @avatar.update_attributes(:current_user_id => nil)
-    current_user.update_attributes(:avatar_id => nil)
+    current_user.update_attributes(:avatar => nil)
     redirect_to user_path(current_user)
   end
   

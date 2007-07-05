@@ -11,7 +11,7 @@ module SessionTimeout
   end
   
   def check_session_expiry(time, opts)
-    logger.info "::: Checking session expiry"
+    # logger.info "::: Checking session expiry"
     if session[:expires_at]
       if session_has_timed_out?
         # logger.info "::: Session has expired, resetting session."

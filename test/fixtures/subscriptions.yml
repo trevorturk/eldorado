@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 52
+# Schema version: 53
 #
 # Table name: subscriptions
 #
