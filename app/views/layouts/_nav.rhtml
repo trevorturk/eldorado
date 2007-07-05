@@ -9,7 +9,7 @@
 	</p>
 	<p class="nav-right">
 		<% if logged_in? %>
-			<% if %w(home categories topics posts forums).include?(current_controller) %>
+			<% if %w(home categories topics forums).include?(current_controller) %>
 				<%= link_to_function 'Start a New Topic', "$('action').toggle();$('topic_title').focus();" %>
 			<% elsif current_controller == 'avatars' %>
 				<%= link_to_function 'Upload a New Avatar', "$('action').toggle();" %>

@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(params[:post])
     @topic = Topic.find(params[:post][:topic_id])
     if (@topic.posts << @post) 
-      redirect_to topic_path(:id => @topic.id, :anchor => 'p' + @post.id.to_s)
+      redirect_to topic_path(:id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s)
     else 
       flash[:notice] = "Posts cannot be blank"
       redirect_to topic_path(@topic)
