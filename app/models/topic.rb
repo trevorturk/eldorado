@@ -21,6 +21,7 @@
 class Topic < ActiveRecord::Base
     
   has_many :posts, :order => 'posts.created_at', :dependent => :destroy 
+  has_many :posters, :through => :posts, :source => :user, :uniq => true
   belongs_to :user
   belongs_to :forum, :counter_cache => true
   belongs_to :last_poster, :foreign_key => "last_post_by", :class_name => "User"
@@ -46,5 +47,9 @@ class Topic < ActiveRecord::Base
   def replies 
     self.posts_count - 1
   end
-    
+  
+  def last_page
+    (posts_count.to_f / 30.0).ceil.to_i
+  end
+      
 end

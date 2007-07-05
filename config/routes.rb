@@ -25,11 +25,13 @@ ActionController::Routing::Routes.draw do |map|
   map.search '/search', :controller => 'search', :action => 'index'  
   map.files_home '/files', :controller => 'uploads', :action => 'index'
   map.forum_home '/forum', :controller => 'forums', :action => 'index'
-    
-  map.catch_all "*path", :controller => "topics", :action => "unknown_request"
+  
+  map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'
   
   map.connect ':controller/service.wsdl', :action => 'wsdl'
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action/:id'  
+  
+  map.catch_all "*path", :controller => "topics", :action => "unknown_request"
   
 end

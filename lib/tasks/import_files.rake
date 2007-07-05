@@ -18,6 +18,7 @@ task :import_punbb_avatars => :environment do
     @item.current_user_id = @item.user_id
     @item.save!
     User.update_all ['avatar_id = ?', @item.id], ['id = ?', @item.user_id]
+    puts "Importing avatar: #{@item.id}"
   end
   # remove guest user's avatar
   User.update_all ['avatar_id = ?', nil], ['id = ?', 1] 
@@ -38,6 +39,7 @@ task :import_headers => :environment do
     @item.content_type = 'image/png' if File.extname(item).downcase == '.png'
     @item.user_id = 1
     @item.save!
+    puts "Importing header: #{@item.id}"
   end
   puts 'Import completed successfully.'
 end
@@ -85,6 +87,7 @@ task :import_files => :environment do
     @item.content_type = 'application/zip' if File.extname(item).downcase == '.zip'
     @item.user_id = 1
     @item.save!
+    puts "Importing file: #{@item.id}"
   end
   puts 'Import completed successfully.'
 end

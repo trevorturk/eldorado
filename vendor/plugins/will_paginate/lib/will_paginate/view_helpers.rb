@@ -58,10 +58,11 @@ module WillPaginate
         # build the list of the links
         links = (1..total_pages).inject([]) do |list, n|
           if visible.include? n
+            list << 'Page' if options[:compact] == true
             list << page_link_or_span((n != page ? n : nil), 'current', n)
           elsif n == beginning.last + 1 || n == tail.first - 1
             # ellipsis represents the gap between windows
-            list << '...'
+            list << '...' unless options[:compact] == true
           end
           list
         end
@@ -70,7 +71,11 @@ module WillPaginate
         links.unshift page_link_or_span(entries.previous_page, 'disabled', options.delete(:prev_label))
         links.push    page_link_or_span(entries.next_page,     'disabled', options.delete(:next_label))
         
-        content_tag :div, links.join(options.delete(:separator)), options
+        if options[:compact] == true
+          content_tag :span, links.join(options.delete(:separator)), options
+        else
+          content_tag :div, links.join(options.delete(:separator)), options
+        end
       end
     end
     

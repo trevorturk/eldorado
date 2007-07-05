@@ -1,0 +1,31 @@
+RandomFinders
+=============
+
+Allows quick and easy fetching of random records, or records in random order.
+
+Simply pass the :random to the order in any finder method.
+
+Examples
+========
+
+Find a random article
+  Article.find(:first, :order => :random)
+  
+Randomize photos
+  Photo.find(:all, :order => :random)
+  
+
+Caveat
+======
+
+This will not treat you nicely with large datasets.  
+
+Read about it here:
+http://daniel.collectiveidea.com/blog/tags/random_finders
+
+
+
+Based on an idea by Mike Burns
+http://mikeburnscoder.wordpress.com/2006/08/18/retrieving-random-elements-from-an-activerecord/
+
+Copyright (c) 2007 Daniel Morrison, Collective Idea (http://collectiveidea.com), released under the MIT license

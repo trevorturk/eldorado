@@ -9,10 +9,10 @@ module ApplicationHelper
   protected
   
   def random_header_css
-    if current_controller == 'headers' and (current_action == 'edit' or current_action == 'show')
+    if current_controller == 'headers' && (current_action == 'edit' || current_action == 'show')
       @header = Header.find(params[:id])
     else
-      @header = Header.find(:first, :order => "RAND()", :conditions => ["votes >= ?", 0])
+      @header = Header.find(:first, :order => :random, :conditions => ["votes >= ?", 0])
     end    
     return '<style type="text/css">.header { background: #333 url("' + @header.public_filename + '"); }</style>' if @header
   end

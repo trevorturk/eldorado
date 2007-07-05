@@ -7,22 +7,27 @@
 	<span class="detail">
 		&laquo; <%= link_to @topic.forum.name, forum_path(@topic.forum) %>
 		&laquo; <%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %>
-		&nbsp;|&nbsp; <%= link_to_function "#{pluralize(@posts.length, 'Post')} by #{pluralize(@posters.length, 'User')}", "$('info').toggle()" %>
+		&nbsp;|&nbsp; 
+		<%= link_to_remote "#{pluralize(@topic.posts_count, 'Post')} by #{pluralize(@topic.posters, 'User')}", :url => {:action => 'show_posters', :id => @topic.id} %>				
 	</span>
 </div>
 <div class="info-right">
 	<span class="detail">
 		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
-		<% if logged_in? && !@topic.closed %>
-			&nbsp;|&nbsp; <%= link_to 'Reply', '#reply' %>
+		<% if logged_in? && !@topic.closed %>&nbsp;| 
+			<% if @topic.last_page != 1 %>
+				<%= will_paginate @posts, 
+						:prev_label => '&nbsp;&laquo;&nbsp;', :next_label => '&nbsp;&raquo;&nbsp;', 
+						:inner_window => 0, :outer_window => -1, :compact => true 
+						%> |
+			<% end %>
+			&nbsp;<%= link_to 'Reply', '#reply' %>
 		<% end %>
 	</span>
 </div>
 <div style="clear:both;"> </div>
 
-<div class="info-left" id="info" style="display:none;">
-	<p class="detail posters"><%= @posters.map { |u| "#{h u.login}" } * ", " %></p>
-</div>
+<div class="info-left detail" id="posters" style="display:none;"></div>
 <div style="clear:both;"> </div>
 
 <% @posts.each_with_index do |post, index| index+=1 %>

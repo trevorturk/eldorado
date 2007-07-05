@@ -14,9 +14,8 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id], :include => :forum)
-    @posts = @topic.posts(:include => :user)
-    @posters = @posts.map(&:user) ; @posters.uniq!
+    @topic = Topic.find(params[:id])
+    @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
     @topic.hit!
   end
 
@@ -64,7 +63,16 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at > ?", session[:online_at]])
     @post = Post.find(@topic.last_post_id) if @post.nil?
-    redirect_to topic_path(:id => @topic.id, :anchor => 'p' + @post.id.to_s)
+    redirect_to topic_path(:id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s)
+  end
+  
+  def show_posters
+    @topic = Topic.find(params[:id])
+    @posters = @topic.posts.map(&:user) ; @posters.uniq!
+    render :update do |page| 
+      page.toggle :posters
+      page.replace_html 'posters', "#{@posters.map { |u| "#{h u.login}" } * ', ' }" 
+    end 
   end
     
   def unknown_request
