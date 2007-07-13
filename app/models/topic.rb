@@ -49,7 +49,7 @@ class Topic < ActiveRecord::Base
   end
   
   def last_page
-    (posts_count.to_f / 30.0).ceil.to_i
+    [(posts_count.to_f / 30).ceil.to_i, 1].max
   end
       
 end
