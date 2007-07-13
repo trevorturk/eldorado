@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   
-  before_filter :force_login, :except => [:index, :show, :unknown_request]
+  before_filter :force_login, :except => [:index, :show, :show_posters, :unknown_request]
   before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
   before_filter :check_privacy, :only => [:show]
   
@@ -16,7 +16,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
-    @padding = params[:page] ; @padding = 1 if @padding.nil? ; @padding = ((@padding.to_i - 1) * 30) # to get post #s w/ pagination
+    @padding = params[:page] ? params[:page] : 1 ; @padding = ((@padding.to_i - 1) * 30) # to get post #s w/ pagination
     @topic.hit!
   end
 

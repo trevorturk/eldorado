@@ -13,16 +13,15 @@
 </div>
 <div class="info-right">
 	<span class="detail">
-		<% if @topic.private %>Private<% else %>Public<% end %><% if @topic.closed %>, Closed<% end %>
-		<% if logged_in? && !@topic.closed %>&nbsp;| 
-			<% if @topic.last_page != 1 %>
-				<%= will_paginate @posts, 
-						:prev_label => '&nbsp;&laquo;&nbsp;', :next_label => '&nbsp;&raquo;&nbsp;', 
-						:inner_window => 0, :outer_window => -1, :compact => true 
-						%> |
-			<% end %>
-			&nbsp;<%= link_to 'Reply', '#reply' %>
+		<%= @topic.private? ? 'Private' : 'Public' %><%= @topic.closed? ? ', Closed' : '' %>
+		&nbsp;| 
+		<% if @topic.last_page != 1 %>
+			<%= will_paginate @posts, 
+					:prev_label => '&nbsp;&laquo;&nbsp;', :next_label => '&nbsp;&raquo;&nbsp;', 
+					:inner_window => 0, :outer_window => -1, :compact => true 
+					%> |
 		<% end %>
+		&nbsp;<%= link_to 'Reply', '#reply' %>
 	</span>
 </div>
 <div style="clear:both;"> </div>
@@ -94,6 +93,7 @@
 	</table>
 <% end %>
 
+<span id="reply"></span>
 <% if logged_in? && !@topic.closed %>
 	<%= render :partial => 'posts/new' %>
 <% elsif logged_in? && @topic.closed %>
