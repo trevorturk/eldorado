@@ -8,20 +8,19 @@
 		&laquo; <%= link_to @topic.forum.name, forum_path(@topic.forum) %>
 		&laquo; <%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %>
 		&nbsp;|&nbsp; 
-		<%= link_to_remote "#{pluralize(@topic.posts_count, 'Post')} by #{pluralize(@topic.posters, 'User')}", :url => {:action => 'show_posters', :id => @topic.id} %>				
+		<%= @topic.private? ? 'Private' : 'Public' %><%= @topic.closed? ? ', Closed' : '' %>
 	</span>
 </div>
 <div class="info-right">
 	<span class="detail">
-		<%= @topic.private? ? 'Private' : 'Public' %><%= @topic.closed? ? ', Closed' : '' %>
-		&nbsp;| 
+		<%= link_to_remote "#{pluralize(@topic.posts_count, 'Post')} by #{pluralize(@topic.posters, 'User')}", :url => {:action => 'show_posters', :id => @topic.id} %>
 		<% if @topic.last_page != 1 %>
+		&nbsp;| 
 			<%= will_paginate @posts, 
 					:prev_label => '&nbsp;&laquo;&nbsp;', :next_label => '&nbsp;&raquo;&nbsp;', 
 					:inner_window => 0, :outer_window => -1, :compact => true 
-					%> |
+					%>
 		<% end %>
-		&nbsp;<%= link_to 'Reply', '#reply' %>
 	</span>
 </div>
 <div style="clear:both;"> </div>
@@ -81,7 +80,7 @@
 				</td>
 				<td class="body links">
 					<% if can_edit?(post) %>
-						<%= link_to 'Edit', edit_post_path(post) %>&nbsp;
+						<%= link_to 'Edit', edit_post_path(post) %>&nbsp;|
 					<% end %>
 					<% if logged_in? && !@topic.closed %>
 						<%= link_to 'Quote', quote_post_path(post) %>
