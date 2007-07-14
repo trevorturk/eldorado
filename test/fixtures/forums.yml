@@ -24,8 +24,8 @@ one:
   topics_count: 1
   posts_count: 1
   position: 1
-  last_post_id: 1
-  last_post_at: 2007-03-21 16:05:52
+  last_post_id: 3
+  last_post_at: <%= 3.weeks.ago.to_s :db %>
   last_post_by: 1
 two:
   id: 2

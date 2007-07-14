@@ -23,12 +23,12 @@ Testing:
   id: 1
   user_id: 4
   title: Testing
-  created_at: <%= 5.days.ago.to_s :db %>
+  created_at: <%= 3.weeks.ago.to_s :db %>
   views: 31
-  posts_count: 1
-  last_post_id: 1
-  last_post_at: <%= 5.minutes.ago.to_s :db %>
-  last_post_by: 2
+  posts_count: 3
+  last_post_id: 3
+  last_post_at: <%= 1.week.ago.to_s :db %>
+  last_post_by: 1
   private: 0
   closed: 0
   forum_id: 1

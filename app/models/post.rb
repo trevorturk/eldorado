@@ -29,6 +29,9 @@ class Post < ActiveRecord::Base
   
   after_destroy do |p| 
     @topic = Topic.find(p.topic.id)
+    @post = Post.find(:first, :conditions => ['topic_id = ?', @topic.id], :order => 'created_at desc')
+    Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', @post.id, @post.created_at, @post.user_id], ['id = ?', @topic.id])
+    Forum.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', @post.id, @post.created_at, @post.user_id], ['id = ?', @topic.forum_id])
     Forum.decrement_counter("posts_count", @topic.forum_id)
   end
   
