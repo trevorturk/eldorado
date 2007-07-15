@@ -32,7 +32,7 @@
 	<table class="thread" cellspacing="0" id="p<%= post.id %>">
 		<thead>
 			<tr>
-				<th><%= time_ago_in_words(post.created_at) %></th>
+				<th><%= distance_of_time_in_words(post.created_at, TzTime.at(Time.now), true, true) %></th>
 				<th class="thr">
 					<%= link_to "#" + (index + @padding).to_s, topic_path(:anchor => 'p' + post.id.to_s) %>
 				</th>

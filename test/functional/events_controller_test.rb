@@ -14,9 +14,9 @@ class EventsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_index
-    # get :index
-    # assert_response :success
-    # assert assigns(:events)
+    get :index
+    assert_response :success
+    assert assigns(:events)
   end
 
   def test_should_get_new
@@ -31,8 +31,8 @@ class EventsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_event
-    # get :show, :id => 1
-    # assert_response :success
+    get :show, :id => 1
+    assert_response :success
   end
 
   def test_should_get_edit

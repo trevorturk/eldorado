@@ -1,0 +1,10 @@
+Description:
+    Stubs out a new database migration. Pass the migration name, either
+    CamelCased or under_scored, as an argument. A migration class is generated
+    in db/migrate prefixed by the latest migration number.
+
+Example:
+    `./script/generate migration AddSslFlag`
+
+    With 4 existing migrations, this creates the AddSslFlag migration in
+    db/migrate/005_add_ssl_flag.rb

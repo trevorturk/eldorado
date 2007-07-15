@@ -29,6 +29,8 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build params[:event]
     if @event.save
+      @event.date = TzTime.zone.utc_to_local(@event.date)
+      @event.save
       redirect_to events_url
     else
       render :action => "_new"

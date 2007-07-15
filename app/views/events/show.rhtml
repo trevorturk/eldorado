@@ -11,7 +11,7 @@
 <% if !@event.description.blank? %>
 	<blockquote>
 		<p style="margin-top:0;font-weight:bold;">
-			<%= (tz(@event.date)).strftime("%A, %B %d at %I:%M %p (%Z)") %> at <%=h @event.location %>
+			<%=tz @event.date %> at <%=h @event.location %>
 		</p>
 		<%=h @event.description %>
 	</blockquote>
