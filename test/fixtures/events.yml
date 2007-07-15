@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 53
+# Schema version: 54
 #
 # Table name: events
 #
@@ -20,13 +20,17 @@ one:
   id: 1
   title: MyString
   description: MyText
-  date: 2007-03-14 09:19:14
+  date: <%= 5.hours.ago.to_s :db %>
   user_id: 1
   location: MyText
+  created_at: <%= 5.hours.ago.to_s :db %>
+  updated_at: <%= 5.hours.ago.to_s :db %>
 two:
   id: 2
   title: MyString
   description: MyText
-  date: 2007-03-14 09:19:14
+  date: <%= 5.hours.ago.to_s :db %>
   user_id: 1
   location: MyText
+  created_at: <%= 5.hours.ago.to_s :db %>
+  updated_at: <%= 5.hours.ago.to_s :db %>

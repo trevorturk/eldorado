@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 53
+# Schema version: 54
 #
 # Table name: events
 #
@@ -19,8 +19,8 @@ class Event < ActiveRecord::Base
   
   belongs_to :user
   
-  validates_presence_of :title, :description, :date
+  validates_presence_of :title, :description, :date, :user_id
   
-  attr_protected :id, :user_id, :created_at, :updated_at 
+  attr_protected :id, :created_at, :updated_at 
   
 end

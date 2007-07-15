@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   
+  around_filter :set_timezone
   before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
   helper_method :current_user, :logged_in?, :force_login, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
   
@@ -67,6 +68,12 @@ class ApplicationController < ActionController::Base
     else
       return current_user.admin? || (current_user.id == current_item.user_id) 
     end
+  end
+
+  def set_timezone
+    TzTime.zone = logged_in? ? current_user.tz : TimeZone.new('Etc/UTC')
+    yield
+    TzTime.reset!
   end
   
   def get_reminders

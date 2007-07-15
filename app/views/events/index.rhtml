@@ -34,7 +34,7 @@ end
 					<td class="tcl">
 						<%= link_to h(event.title), event_path(event) %> by <%=h event.user.login %>
 					</td>
-					<td class="tcr"><%= event.date %></td>
+					<td class="tcr"><%=tz event.date %></td>
 				</tr>
 			<% end %>
 		</tbody>

@@ -15,6 +15,8 @@
 		<p><%= f.text_area :bio, :rows => "3", :style => "width:50%;" %></p>
 		<p class="label"><label for="signature">Signature</label></p>
 		<p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
+		<p class="label"><label>Timezone</label></p>
+		<p><%= time_zone_select 'user', 'time_zone', TZInfo::Timezone.all.sort, :model => TZInfo::Timezone %></p>
 		<p>
 			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %><span> or 
 			<%= link_to 'Delete', confirm_delete_user_path %> or 

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 53
+# Schema version: 54
 #
 # Table name: users
 #
@@ -17,6 +17,7 @@
 #  avatar             :string(255)   
 #  auth_token         :string(255)   
 #  auth_token_exp     :datetime      
+#  time_zone          :string(255)   default("Etc/UTC")
 #
 
 require 'digest/sha1'
@@ -37,6 +38,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :on => :create
   
   before_create { |u| u.online_at = u.profile_updated_at = Time.now.utc }
+  
+  composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
     
   attr_reader :password
   
