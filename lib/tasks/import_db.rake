@@ -77,13 +77,14 @@ namespace :db do
       @item.email = i[3] # email 
       @item.signature = i[4] # signature
       @item.created_at = TzTime.at(Time.at(i[5].to_i)) # registered 
-      @item.online_at = TzTime.at(Time.at(i[6].to_i)) # last_visit 
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
-      @item.time_zone = 'Etc/GMT' + i[6].to_s
+      @item.time_zone = ('Etc/GMT' + i[7].to_s) unless i[7] == 0 # timezone
+        @item.time_zone = 'Etc/GMT' if @item.time_zone == 'Etc/GMT0' # fix for users with no zone
       @item.save!
       # manually fix timestamp issues raised by controller actions
         @item.profile_updated_at = @item.created_at 
+        @item.online_at = TzTime.at(Time.at(i[6].to_i)) # last_visit 
         @item.save!
       puts "Importing user: #{@item.id}"
     end
