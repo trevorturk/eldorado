@@ -46,12 +46,14 @@ namespace :db do
       @item.site_tagline = i[1] if @index == 3 # o_board_desc
       TZ = i[1].to_i if @index == 4 # o_server_timezone
     end
+    TZ = '+' + TZ.to_s if TZ == TZ.abs # add a plus sign if this is a positive number
+    TZ = '' if TZ == '+0' # clear timezone if it's 0, will end up being GMT
+    TzTime.zone = TZInfo::Timezone.get("Etc/GMT#{TZ.to_s}")
     @item.footer_left = ''
     @item.footer_right = 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>'
     @item.newest_user = 'Newest User'
     @item.admin_rank = 'Administrator'
     @item.save!
-    TzTime.zone =TimeZone.new(TZ)
     #
     # USERS
     #
@@ -223,7 +225,7 @@ namespace :db do
           @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
         @item.updated_by = @temp.id # get user id instead of username
       end
-      @item.topic_id = i[6] # topic_id      
+      @item.topic_id = i[6] # topic_id
       @item.save!
       puts "Importing post: #{@item.id}"
     end
