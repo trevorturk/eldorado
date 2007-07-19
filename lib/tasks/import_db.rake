@@ -17,6 +17,7 @@ namespace :db do
     # This will import a PunBB database into the El Dorado structure. 
     # Be careful to keep your text encoding consistent. Most databases will be in latin1.
     # This whole shebang is only tested with PunBB 1.2.15.
+    # Times may not be 100% accurate do to timezone and daylight savings issues. 
     # The user with id 2 (the "guest" user is 1) will be set as the only "admin" user.
     # Any topics, posts, etc made by a user not in the database will be assigned to the "guest" user.
     # 
@@ -61,7 +62,7 @@ namespace :db do
     # num_posts (will be updated during import), 
     # group_id, title, realname, url, jabber, icq, msn, aim, yahoo, location, use_avatar, 
     # disp_topics, disp_posts, email_setting, save_pass, notify_with_post, show_smilies, 
-    # show_img, show_img_sig, show_avatars, show_sig, language, style, last_post, 
+    # show_img, show_img_sig, show_avatars, show_sig, timezone, language, style, last_post, 
     # registration_ip, admin_note, activate_string, activate_key, birthday
     #
     # not setting the following for El Dorado:
@@ -69,7 +70,7 @@ namespace :db do
     #
     puts 'Importing users...'
     ActiveRecord::Base.establish_connection(eldorado['import'])
-    @items = ActiveRecord::Base.connection.execute("SELECT id, username, password, email, signature, registered, last_visit, timezone FROM #{prefix}users")
+    @items = ActiveRecord::Base.connection.execute("SELECT id, username, password, email, signature, registered, last_visit FROM #{prefix}users")
     ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
     for i in @items
       @item = User.new
@@ -81,8 +82,6 @@ namespace :db do
       @item.created_at = TzTime.at(Time.at(i[5].to_i)) # registered 
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
-      @item.time_zone = ('Etc/GMT' + i[7].to_s) unless i[7] == 0 # timezone
-        @item.time_zone = 'Etc/GMT' if @item.time_zone == 'Etc/GMT0' # fix for users with no zone
       @item.save!
       # manually fix timestamp issues raised by controller actions
         @item.profile_updated_at = @item.created_at 
