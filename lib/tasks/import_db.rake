@@ -30,6 +30,13 @@ namespace :db do
     prefix = eldorado['import']['prefix']
     puts 'Starting import...'
     #
+    def convert_time_zone_offset(t)
+      t = '+' + t.to_s if t == t.abs # add a plus sign if this is a positive number
+      t = '' if t == '+0' # clear timezone if it's 0, will end up being GMT
+      t = 'Etc/GMT' + t.to_s # this will have a minus sign if it's negative
+    end
+    #
+    #
     # CONFIG
     #
     # ignoring: almost everything
@@ -45,11 +52,9 @@ namespace :db do
       @index += 1
       @item.site_title = i[1] if @index == 2 # o_board_title
       @item.site_tagline = i[1] if @index == 3 # o_board_desc
-      TZ = i[1].to_i if @index == 4 # o_server_timezone
+      TZ = convert_time_zone_offset(i[1].to_i) if @index == 4 # o_server_timezone
     end
-    TZ = '+' + TZ.to_s if TZ == TZ.abs # add a plus sign if this is a positive number
-    TZ = '' if TZ == '+0' # clear timezone if it's 0, will end up being GMT
-    TzTime.zone = TZInfo::Timezone.get("Etc/GMT#{TZ.to_s}")
+    TzTime.zone = TZInfo::Timezone.get(TZ)
     @item.footer_left = ''
     @item.footer_right = 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>'
     @item.newest_user = 'Newest User'
@@ -58,11 +63,10 @@ namespace :db do
     #
     # USERS
     #
-    # ignoring the following fields from PunBB: 
-    # num_posts (will be updated during import), 
+    # ignoring the following fields from PunBB: num_posts (will be updated during import), 
     # group_id, title, realname, url, jabber, icq, msn, aim, yahoo, location, use_avatar, 
     # disp_topics, disp_posts, email_setting, save_pass, notify_with_post, show_smilies, 
-    # show_img, show_img_sig, show_avatars, show_sig, timezone, language, style, last_post, 
+    # show_img, show_img_sig, show_avatars, show_sig, language, style, last_post, 
     # registration_ip, admin_note, activate_string, activate_key, birthday
     #
     # not setting the following for El Dorado:
@@ -70,7 +74,7 @@ namespace :db do
     #
     puts 'Importing users...'
     ActiveRecord::Base.establish_connection(eldorado['import'])
-    @items = ActiveRecord::Base.connection.execute("SELECT id, username, password, email, signature, registered, last_visit FROM #{prefix}users")
+    @items = ActiveRecord::Base.connection.execute("SELECT id, username, password, email, signature, registered, last_visit, timezone FROM #{prefix}users")
     ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
     for i in @items
       @item = User.new
@@ -80,6 +84,7 @@ namespace :db do
       @item.email = i[3] # email 
       @item.signature = i[4] # signature
       @item.created_at = TzTime.at(Time.at(i[5].to_i)) # registered 
+      @item.time_zone = convert_time_offset(i[7].to_i) # timezone
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!

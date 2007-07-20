@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   before_filter :check_privacy, :only => [:show, :edit]
   before_filter :can_edit_event, :only => [:edit, :update, :destroy]
   before_filter :load_vars
+
+  before_create: :fix_timezone
   
   def index
     if logged_in?
@@ -29,8 +31,6 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build params[:event]
     if @event.save
-      @event.date = TzTime.zone.utc_to_local(@event.date)
-      @event.save
       redirect_to events_url
     else
       render :action => "_new"
@@ -61,7 +61,11 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     redirect_to event_path(@event) and return false unless admin? || (current_user == @event.user)
   end
-
+  
+  def fix_timezone
+    self.date = TzTime.at(date)
+  end
+  
   def load_vars
     @month = (params[:month] || Time.now.month).to_i
     @year = (params[:year] || Time.now.year).to_i

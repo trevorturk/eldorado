@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   belongs_to :editor, :foreign_key => "updated_by", :class_name => "User"
   
   validates_presence_of :user_id, :body
-    
+  
   tz_time_attributes :created_at, :updated_at
   
   after_create do |p| 

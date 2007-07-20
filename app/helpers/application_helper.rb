@@ -69,7 +69,8 @@ module ApplicationHelper
   end
 
   def is_new?(item)
-    return true if logged_in? && session[:online_at] < item.updated_at
+    return false unless logged_in?
+    return true if session[:online_at] < item.updated_at
   end
   
   def icon_for(item)

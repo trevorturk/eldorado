@@ -37,6 +37,8 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   config.active_record.default_timezone = :utc
+  require_gem 'tzinfo'
+  include TZInfo
   
   # See Rails::Configuration for more options
 end
