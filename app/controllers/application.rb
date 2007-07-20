@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    TzTime.zone = logged_in? ? current_user.tz : TimeZone.new('Etc/UTC')
+    TzTime.zone = logged_in? ? current_user.tz : TZInfo::Timezone.get('Etc/UTC')
     yield
     TzTime.reset!
   end

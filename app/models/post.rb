@@ -19,9 +19,7 @@ class Post < ActiveRecord::Base
   belongs_to :editor, :foreign_key => "updated_by", :class_name => "User"
   
   validates_presence_of :user_id, :body
-  
-  tz_time_attributes :created_at, :updated_at
-  
+    
   after_create do |p| 
     @topic = Topic.find(p.topic_id)
     Topic.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', p.id, p.created_at, p.user_id], ['id = ?', @topic.id])

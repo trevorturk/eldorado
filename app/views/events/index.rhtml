@@ -3,7 +3,7 @@
 </div>
 
 <%=
-calendar({:year => @year, :month => @month}) do |d|
+calendar({:year => @date.year, :month => @date.month}) do |d|
   cell_text = "#{d.mday}" 
 	if (d.to_date == Date.today)
 	  cell_text = "<b>Today #{d.mday}</b>" 

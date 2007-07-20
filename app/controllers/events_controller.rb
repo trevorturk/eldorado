@@ -3,11 +3,9 @@ class EventsController < ApplicationController
   before_filter :force_login, :except => [:index, :show]
   before_filter :check_privacy, :only => [:show, :edit]
   before_filter :can_edit_event, :only => [:edit, :update, :destroy]
-  before_filter :load_vars
-
-  before_create: :fix_timezone
   
   def index
+    @date = Time.parse("#{params[:date]} || Time.now")
     if logged_in?
       @events = Event.paginate(:page => params[:page], :order => 'updated_at desc')
     else
@@ -31,6 +29,8 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build params[:event]
     if @event.save
+      @event.date = TzTime.zone.utc_to_local(@event.date)
+      @event.save
       redirect_to events_url
     else
       render :action => "_new"
@@ -60,27 +60,6 @@ class EventsController < ApplicationController
   def can_edit_event
     @event = Event.find(params[:id])
     redirect_to event_path(@event) and return false unless admin? || (current_user == @event.user)
-  end
-  
-  def fix_timezone
-    self.date = TzTime.at(date)
-  end
-  
-  def load_vars
-    @month = (params[:month] || Time.now.month).to_i
-    @year = (params[:year] || Time.now.year).to_i
-    @prev_month = @month - 1
-    @prev_year = @year
-    @next_month = @month + 1
-    @next_year = @year
-    if @prev_month == 0
-      @prev_month = 12
-      @prev_year = @year - 1
-    end
-    if @next_month == 13
-      @next_month = 1
-      @next_year = @year + 1
-    end
   end
   
 end

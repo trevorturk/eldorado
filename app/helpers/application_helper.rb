@@ -103,7 +103,7 @@ module ApplicationHelper
     distance_in_minutes = (((to_time - from_time).abs)/60).round
     distance_in_seconds = ((to_time - from_time).abs).round
     case distance_in_minutes
-      when 0..1           then time = (distance_in_seconds < 60) ? "#{distance_in_seconds} seconds ago" : '1 minute ago'
+      when 0..1           then time = (distance_in_seconds < 60) ? "#{pluralize(distance_in_seconds, 'second')} ago" : '1 minute ago'
       when 2..59          then time = "#{distance_in_minutes} minutes ago"
       when 60..90         then time = "1 hour ago"
       when 90..1440       then time = "#{(distance_in_minutes.to_f / 60.0).round} hours ago"
