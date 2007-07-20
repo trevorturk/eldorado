@@ -30,13 +30,6 @@ namespace :db do
     prefix = eldorado['import']['prefix']
     puts 'Starting import...'
     #
-    def convert_time_zone_offset(t)
-      t = '+' + t.to_s if t == t.abs # add a plus sign if this is a positive number
-      t = '' if t == '+0' # clear timezone if it's 0, will end up being GMT
-      t = 'Etc/GMT' + t.to_s # this will have a minus sign if it's negative
-    end
-    #
-    #
     # CONFIG
     #
     # ignoring: almost everything
@@ -52,7 +45,7 @@ namespace :db do
       @index += 1
       @item.site_title = i[1] if @index == 2 # o_board_title
       @item.site_tagline = i[1] if @index == 3 # o_board_desc
-      TZ = convert_time_zone_offset(i[1].to_i) if @index == 4 # o_server_timezone
+      TZ = convert_tz(i[1].to_i) if @index == 4 # o_server_timezone
     end
     TzTime.zone = TZInfo::Timezone.get(TZ)
     @item.footer_left = ''
@@ -84,7 +77,7 @@ namespace :db do
       @item.email = i[3] # email 
       @item.signature = i[4] # signature
       @item.created_at = TzTime.at(Time.at(i[5].to_i)) # registered 
-      @item.time_zone = convert_time_offset(i[7].to_i) # timezone
+      @item.time_zone = convert_tz(i[7].to_i) # timezone
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!
