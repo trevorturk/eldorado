@@ -45,9 +45,11 @@ namespace :db do
       @index += 1
       @item.site_title = i[1] if @index == 2 # o_board_title
       @item.site_tagline = i[1] if @index == 3 # o_board_desc
-      TZ = convert_tz(i[1].to_i) if @index == 4 # o_server_timezone
+      tz = i[1].to_i if @index == 4 # o_server_timezone
     end
-    TzTime.zone = TZInfo::Timezone.get(TZ)
+    tz = '+' + tz.to_s if tz == tz.abs # add a plus sign if this is a positive number
+    tz = '' if tz == '+0' # clear timezone if it's 0, will end up being GMT
+    TzTime.zone = TZInfo::Timezone.get("Etc/GMT#{tz.to_s}")
     @item.footer_left = ''
     @item.footer_right = 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>'
     @item.newest_user = 'Newest User'
@@ -56,7 +58,8 @@ namespace :db do
     #
     # USERS
     #
-    # ignoring the following fields from PunBB: num_posts (will be updated during import), 
+    # ignoring the following fields from PunBB: 
+    # num_posts (will be updated during import), 
     # group_id, title, realname, url, jabber, icq, msn, aim, yahoo, location, use_avatar, 
     # disp_topics, disp_posts, email_setting, save_pass, notify_with_post, show_smilies, 
     # show_img, show_img_sig, show_avatars, show_sig, language, style, last_post, 
@@ -77,7 +80,10 @@ namespace :db do
       @item.email = i[3] # email 
       @item.signature = i[4] # signature
       @item.created_at = TzTime.at(Time.at(i[5].to_i)) # registered 
-      @item.time_zone = convert_tz(i[7].to_i) # timezone
+        tz = i[7].to_i
+        tz = '+' + tz.to_s if tz == tz.abs # add a plus sign if this is a positive number
+        tz = '' if tz == '+0' # clear timezone if it's 0, will end up being GMT
+      @item.time_zone = 'Etc/GMT' + tz.to_s
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!

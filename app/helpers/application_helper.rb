@@ -88,12 +88,6 @@ module ApplicationHelper
   def tz(time_at)
     TzTime.zone.utc_to_local(time_at.utc).strftime("%a, %d %b %Y %H:%M:%S")
   end
-  
-  def convert_tz(t)
-    t = '+' + t.to_s if t == t.abs # add a plus sign if a positive number
-    t = '' if t == '+0' # clear timezone if it's 0, will end up being GMT
-    t = 'Etc/GMT' + t.to_s # this will have a minus sign if it's negative
-  end
     
   def current_controller
     request.path_parameters['controller']
