@@ -16,3 +16,11 @@ config.action_controller.perform_caching             = true
 
 # Disable delivery errors if you bad email addresses should just be ignored
 # config.action_mailer.raise_delivery_errors = false
+
+config.after_initialize do
+  require 'application' unless Object.const_defined?(:ApplicationController)
+  LoggedExceptionsController.class_eval do
+    session :session_key => '_eldorado_session_id'
+    self.application_name = "El Dorado"    
+  end
+end

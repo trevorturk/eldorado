@@ -2,179 +2,190 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 54) do
+ActiveRecord::Schema.define(:version => 55) do
 
   create_table "avatars", :force => true do |t|
-    t.column "parent_id",       :integer
-    t.column "content_type",    :string
-    t.column "filename",        :string
-    t.column "thumbnail",       :string
-    t.column "size",            :integer
-    t.column "width",           :integer
-    t.column "height",          :integer
-    t.column "user_id",         :integer
-    t.column "current_user_id", :integer
-    t.column "created_at",      :datetime
-    t.column "updated_at",      :datetime
+    t.integer  "parent_id"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "user_id"
+    t.integer  "current_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "bans", :force => true do |t|
-    t.column "user_id",    :integer
-    t.column "ip",         :string
-    t.column "email",      :string
-    t.column "message",    :string
-    t.column "expires_at", :datetime
+    t.integer  "user_id"
+    t.string   "ip"
+    t.string   "email"
+    t.string   "message"
+    t.datetime "expires_at"
   end
 
   create_table "categories", :force => true do |t|
-    t.column "name",     :string
-    t.column "position", :integer, :default => 0
+    t.string  "name"
+    t.integer "position", :default => 0
   end
 
   create_table "events", :force => true do |t|
-    t.column "title",       :string
-    t.column "description", :text
-    t.column "date",        :datetime
-    t.column "private",     :boolean,  :default => false
-    t.column "reminder",    :boolean
-    t.column "user_id",     :integer
-    t.column "created_at",  :datetime
-    t.column "updated_at",  :datetime
-    t.column "location",    :text
+    t.string   "title"
+    t.text     "description"
+    t.datetime "date"
+    t.boolean  "private",     :default => false
+    t.boolean  "reminder"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "location"
   end
 
   add_index "events", ["date"], :name => "index_events_on_date"
 
   create_table "forums", :force => true do |t|
-    t.column "category_id",  :integer
-    t.column "name",         :string
-    t.column "description",  :text
-    t.column "topics_count", :integer,  :default => 0
-    t.column "posts_count",  :integer,  :default => 0
-    t.column "position",     :integer,  :default => 0
-    t.column "last_post_id", :integer
-    t.column "last_post_at", :datetime
-    t.column "last_post_by", :integer
+    t.integer  "category_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "topics_count", :default => 0
+    t.integer  "posts_count",  :default => 0
+    t.integer  "position",     :default => 0
+    t.integer  "last_post_id"
+    t.datetime "last_post_at"
+    t.integer  "last_post_by"
   end
 
   add_index "forums", ["category_id"], :name => "index_forums_on_category_id"
   add_index "forums", ["category_id", "last_post_at"], :name => "index_forums_on_last_post_at"
 
   create_table "headers", :force => true do |t|
-    t.column "parent_id",    :integer
-    t.column "content_type", :string
-    t.column "filename",     :string
-    t.column "thumbnail",    :string
-    t.column "size",         :integer
-    t.column "width",        :integer
-    t.column "height",       :integer
-    t.column "description",  :text
-    t.column "user_id",      :integer
-    t.column "created_at",   :datetime
-    t.column "updated_at",   :datetime
-    t.column "votes",        :integer,  :default => 0
+    t.integer  "parent_id"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "votes",        :default => 0
+  end
+
+  create_table "logged_exceptions", :force => true do |t|
+    t.string   "exception_class"
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.text     "message"
+    t.text     "backtrace"
+    t.text     "environment"
+    t.text     "request"
+    t.datetime "created_at"
   end
 
   create_table "options", :force => true do |t|
-    t.column "site_title",   :string
-    t.column "site_tagline", :string
-    t.column "footer_left",  :text
-    t.column "footer_right", :text
-    t.column "admin_rank",   :string
-    t.column "newest_user",  :string
-    t.column "theme_id",     :integer
+    t.string  "site_title"
+    t.string  "site_tagline"
+    t.text    "footer_left"
+    t.text    "footer_right"
+    t.string  "admin_rank"
+    t.string  "newest_user"
+    t.integer "theme_id"
   end
 
   create_table "posts", :force => true do |t|
-    t.column "user_id",    :integer
-    t.column "topic_id",   :integer
-    t.column "body",       :text
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "updated_by", :integer
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "updated_by"
   end
 
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
 
   create_table "ranks", :force => true do |t|
-    t.column "title",     :string
-    t.column "min_posts", :integer
+    t.string  "title"
+    t.integer "min_posts"
   end
 
   create_table "sessions", :force => true do |t|
-    t.column "session_id", :string
-    t.column "data",       :text
-    t.column "updated_at", :datetime
+    t.string   "session_id"
+    t.text     "data"
+    t.datetime "updated_at"
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "subscriptions", :force => true do |t|
-    t.column "user_id",  :integer
-    t.column "topic_id", :integer
+    t.integer "user_id"
+    t.integer "topic_id"
   end
 
   create_table "themes", :force => true do |t|
-    t.column "parent_id",    :integer
-    t.column "content_type", :string
-    t.column "filename",     :string
-    t.column "thumbnail",    :string
-    t.column "size",         :integer
-    t.column "width",        :integer
-    t.column "height",       :integer
-    t.column "user_id",      :integer
-    t.column "created_at",   :datetime
-    t.column "updated_at",   :datetime
+    t.integer  "parent_id"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "topics", :force => true do |t|
-    t.column "user_id",      :integer
-    t.column "title",        :string
-    t.column "created_at",   :datetime
-    t.column "views",        :integer,  :default => 0
-    t.column "posts_count",  :integer,  :default => 0
-    t.column "last_post_id", :integer
-    t.column "last_post_at", :datetime
-    t.column "last_post_by", :integer
-    t.column "private",      :boolean,  :default => false
-    t.column "closed",       :boolean,  :default => false
-    t.column "sticky",       :boolean,  :default => false
-    t.column "forum_id",     :integer
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.integer  "views",        :default => 0
+    t.integer  "posts_count",  :default => 0
+    t.integer  "last_post_id"
+    t.datetime "last_post_at"
+    t.integer  "last_post_by"
+    t.boolean  "private",      :default => false
+    t.boolean  "closed",       :default => false
+    t.boolean  "sticky",       :default => false
+    t.integer  "forum_id"
   end
 
   add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
   add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_last_post_at"
 
   create_table "uploads", :force => true do |t|
-    t.column "parent_id",    :integer
-    t.column "content_type", :string
-    t.column "filename",     :string
-    t.column "thumbnail",    :string
-    t.column "size",         :integer
-    t.column "width",        :integer
-    t.column "height",       :integer
-    t.column "user_id",      :integer
-    t.column "created_at",   :datetime
-    t.column "updated_at",   :datetime
+    t.integer  "parent_id"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.column "login",              :string
-    t.column "email",              :string
-    t.column "password_hash",      :string
-    t.column "created_at",         :datetime
-    t.column "admin",              :boolean,  :default => false
-    t.column "posts_count",        :integer,  :default => 0
-    t.column "signature",          :string
-    t.column "bio",                :text
-    t.column "profile_updated_at", :datetime
-    t.column "online_at",          :datetime
-    t.column "avatar",             :string
-    t.column "auth_token",         :string
-    t.column "auth_token_exp",     :datetime
-    t.column "time_zone",          :string,   :default => "Etc/UTC"
+    t.string   "login"
+    t.string   "email"
+    t.string   "password_hash"
+    t.datetime "created_at"
+    t.boolean  "admin",              :default => false
+    t.integer  "posts_count",        :default => 0
+    t.string   "signature"
+    t.text     "bio"
+    t.datetime "profile_updated_at"
+    t.datetime "online_at"
+    t.string   "avatar"
+    t.string   "auth_token"
+    t.datetime "auth_token_exp"
+    t.string   "time_zone",          :default => "Etc/UTC"
   end
 
   add_index "users", ["online_at"], :name => "index_users_on_online_at"

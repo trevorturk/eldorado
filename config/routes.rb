@@ -28,6 +28,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'
   
+  map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil
+  
   map.connect ':controller/service.wsdl', :action => 'wsdl'
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action/:id'  

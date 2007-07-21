@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   
   session_times_out_in 10.minutes
   
+  include ExceptionLoggable
+  
   protected
     
   def current_user

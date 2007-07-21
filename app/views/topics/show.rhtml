@@ -13,7 +13,7 @@
 </div>
 <div class="info-right">
 	<span class="detail">
-		<%= link_to_remote "#{pluralize(@topic.posts_count, 'Post')} by #{pluralize(@topic.posters, 'User')}", :url => {:action => 'show_posters', :id => @topic.id} %>
+		<%= link_to_remote "#{pluralize(@topic.posts_counts, 'Post')} by #{pluralize(@topic.posters, 'User')}", :url => {:action => 'show_posters', :id => @topic.id} %>
 		<% if @topic.last_page != 1 %>
 		&nbsp;| 
 			<%= will_paginate @posts, 
