@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   session :session_key => '_eldorado_session_id'
   
-  session_times_out_in 10.minutes
+  # session_times_out_in 10.minutes
   
   include ExceptionLoggable
   
@@ -48,7 +48,8 @@ class ApplicationController < ActionController::Base
   
   def update_online_at
     return unless logged_in?
-    User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id] 
+    session[:online_at] = current_user.online_at if current_user.online_at + 10.minutes < Time.now.utc 
+    User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
   end
         
   def admin?()
