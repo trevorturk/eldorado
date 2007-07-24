@@ -62,7 +62,7 @@ class TopicsController < ApplicationController
   def show_new
     redirect_to login_path unless logged_in?
     @topic = Topic.find(params[:id])
-    @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at > ?", session[:online_at]])
+    @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]])
     @post = Post.find(@topic.last_post_id) if @post.nil?
     redirect_to topic_path(:id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s)
   end

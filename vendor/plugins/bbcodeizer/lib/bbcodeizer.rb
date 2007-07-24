@@ -23,7 +23,8 @@ module BBCodeizer
       :googlevid             => [ /\[googlevid\](.+?)video.google.com\/videoplay\?docid=(.*?)\[\/googlevid\]/i, '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2&amp;hl=en"></embed>' ],
       :flash                 => [ /\[flash\](.+?)\[\/flash\]/i, '<object width="100%" height="100%"><param name="movie" value="\1"></param><embed src="\1" type="application/x-shockwave-flash" width="100%" height="100%"></embed></object>' ],
       :spoiler               => [ /\[spoiler\](.+?)\[\/spoiler\]/i, '<a href="#" onclick="$(\'_SPOILER\').toggle(); return false;">Show Spoiler</a><div id="_SPOILER" style="display:none;">\1</div>' ],
-      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_MP3" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_MP3&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ],
+      :nsfw                  => [ /\[nsfw\](.+?)\[\/nsfw\]/i, '<a href="#" onclick="$(\'_NSFW\').toggle(); return false;">NSFW</a><div id="_NSFW" style="display:none;">\1</div>' ],
+      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_MP3" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_MP3&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object><br /><a href="\1">\1</a>' ],
       :funnyordie            => [ /\[funnyordie\](.+?)funnyordie.com\/videos\/(.+?)\[\/funnyordie\]/i, '<object id="myFlash" type="application/x-shockwave-flash" width="464" height="380" wmode="transparent" data="http://www2.funnyordie.com/public/flash/fodplayer.swf?file=http://www2.funnyordie.com/\2.flv&autoStart=false"><param name="movie" value="http://www2.funnyordie.com/public/flash/fodplayer.swf?file=http://www2.funnyordie.com/\2.flv&autoStart=false" /><param name="wmode" value="transparent" /><param name="swliveconnect" value="true" /><embed type="application/x-shockwave-flash" src="http://www2.funnyordie.com/public/flash/fodplayer.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noScale" salign="TL" bgcolor="#000000" flashvars="file=http://www2.funnyordie.com/\2.flv&autoStart=false" />' ],
       :superdeluxe           => [ /\[superdeluxe\](.+?)superdeluxe.com\/sd\/contentDetail.do\?id=(.+?)\[\/superdeluxe\]/i, '<object width="400" height="350"><param name="allowFullScreen" value="true" /><param name="movie" value="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" /><param name="FlashVars" value="id=\2" /><embed src="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" FlashVars="id=\2" type="application/x-shockwave-flash" width="400" height="350" allowFullScreen="true" ></embed></object>' ],
       :comedycentral         => [ /\[comedycentral\](.+?)comedycentral.com\/motherload\/index.jhtml\?ml_video=(.+?)\[\/comedycentral\]/i, '<embed FlashVars="config=http://www.comedycentral.com/motherload/xml/data_synd.jhtml?vid=\2%26myspace=false" src="http://www.comedycentral.com/motherload/syndicated_player/index.jhtml" quality="high" bgcolor="#006699" width="340" height="325" name="comedy_player" align="middle" allowScriptAccess="always" allownetworking="external" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>' ]
@@ -34,7 +35,7 @@ module BBCodeizer
     # These names correspond to either names above or methods in this module.
     TagList = [ :bold, :italic, :underline, :email_with_name, :email_sans_name, 
                 :url_with_title, :url_sans_title, :image, :size, :color,
-                :code, :quote, :youtube, :googlevid, :flash, :spoiler, :mp3, 
+                :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :mp3, 
                 :funnyordie, :superdeluxe, :comedycentral ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
@@ -54,6 +55,10 @@ module BBCodeizer
         random_string = Array.new(6, '').collect{char[rand(char.size)]}.join
         text = text.sub('_MP3', random_string)
         text = text.sub('_MP3', random_string)
+        char = ("a".."z").to_a + ("1".."9").to_a 
+        random_string = Array.new(6, '').collect{char[rand(char.size)]}.join
+        text = text.sub('_NSFW', random_string)
+        text = text.sub('_NSFW', random_string)
       end
       text
     end

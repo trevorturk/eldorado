@@ -81,7 +81,7 @@ module ApplicationHelper
   def bb(text)
     text = simple_format(bbcodeize(white_list(h(text))))
     auto_link(text) do |t|
-      truncate(t)
+      truncate(t, 50)
     end
   end
   
@@ -111,7 +111,7 @@ module ApplicationHelper
       when 2160..2880     then time = "#{(distance_in_minutes.to_f / 1440.0).round} days ago" # 1.5 days to 2 days
       else time = from_time.strftime("%a, %d %b %Y")
     end
-    return from_time.strftime("%a, %d %b %Y %H:%M:%S") if (detail && distance_in_minutes > 2880)
+    return from_time.strftime("%a, %d %b %Y, ") + (from_time.strftime("%I")).to_i.to_s + from_time.strftime(":%M%p").downcase if (detail && distance_in_minutes > 2880)
     return time
   end
       
