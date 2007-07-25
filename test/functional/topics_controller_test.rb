@@ -191,4 +191,8 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_redirected_to logout_path
   end
   
+  def test_should_redirect_to_same_path_when_logging_in_with_cookie
+    
+  end
+  
 end

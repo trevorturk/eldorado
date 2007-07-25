@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     if user && Time.now.utc < user.auth_token_exp
       session[:user_id] = user.id 
       session[:online_at] = user.online_at
-      redirect_to request.request_uri and return
+      redirect_to request.request_uri and return false
     end
   end
         
