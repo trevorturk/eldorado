@@ -1,5 +1,5 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'themes/new' %>
+	<%= render :partial => 'themes/new' if %w(index).include?(current_action) %>
 </div>
 
 <div class="box">

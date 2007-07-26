@@ -1,5 +1,5 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'new' %>
+	<%= render :partial => 'new' if %w(index).include?(current_action) %>
 </div>
 
 <div class="info-left">

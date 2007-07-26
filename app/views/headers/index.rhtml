@@ -1,5 +1,5 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'headers/new' %>
+	<%= render :partial => 'headers/new' if %w(index).include?(current_action) %>
 </div>
 
 <% for header in @headers %>

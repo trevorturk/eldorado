@@ -11,17 +11,17 @@
 		<% if logged_in? %>
 			<% if %w(home categories topics forums).include?(current_controller) %>
 				<%= link_to_function 'Start a New Topic', "$('action').toggle();$('topic_title').focus();" %>
-			<% elsif current_controller == 'avatars' %>
+			<% elsif current_controller == 'avatars' && %w(index).include?(current_action) %>
 				<%= link_to_function 'Upload a New Avatar', "$('action').toggle();" %>
-			<% elsif current_controller == "events" %>
+			<% elsif current_controller == "events" && %w(index).include?(current_action) %>
 				<%= link_to_function 'Add a New Event', "$('action').toggle();$('event_title').focus();" %>
-			<% elsif current_controller == 'headers' %>
+			<% elsif current_controller == 'headers' && %w(index).include?(current_action) %>
 				<%= link_to_function 'Upload a New Header', "$('action').toggle();" %>
-			<% elsif current_controller == "themes" %>
+			<% elsif current_controller == "themes" && %w(index).include?(current_action) %>
 				<%= link_to_function 'Upload a New Theme', "$('action').toggle();" %>
-			<% elsif current_controller == "uploads" %>
+			<% elsif current_controller == "uploads" && %w(index).include?(current_action) %>
 				<%= link_to_function 'Upload a New File', "$('action').toggle();" %>
-			<% elsif current_controller == "users" %>
+			<% elsif current_controller == "users" && %w(index).include?(current_action) %>
 				<%= link_to('Register a New User', new_user_path) %>
 			<% end %>
 			&nbsp; <%= link_to_function 'Search', "$('search').toggle();$('query').focus();" %>
