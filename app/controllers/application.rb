@@ -5,9 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?, :force_login, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
   
   session :session_key => '_eldorado_session_id'
-  
-  # session_times_out_in 10.minutes
-  
+    
   include ExceptionLoggable
   
   protected
