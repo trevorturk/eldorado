@@ -15,9 +15,9 @@
 	<% end %>	
 	
 	<p style="margin-top:20px">
-		<b>Registered</b>: <%= time_ago_in_words(@user.created_at) %> &nbsp;
-		<b>Last Visit</b>: <%= time_ago_in_words(@user.online_at) %> &nbsp;
-		<b>Profile Updated</b>: <%= time_ago_in_words(@user.profile_updated_at) %>
+		<b>Registered</b>: <%= time_ago_or_time_stamp(@user.created_at) %> &nbsp;
+		<b>Last Visit</b>: <%= time_ago_or_time_stamp(@user.online_at) %> &nbsp;
+		<b>Profile Updated</b>: <%= time_ago_or_time_stamp(@user.profile_updated_at) %>
 	</p>
 	<div style="clear:both;"> </div>	
 </div>

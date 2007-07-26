@@ -27,7 +27,7 @@
 						<td class="tcm"><%=h forum.posts_count %></td>
 						<td class="tcr">
 							<% if !forum.last_post_id.blank? %>
-								<%=h time_ago_in_words(forum.last_post_at) %> <br /> by 
+								<%=h time_ago_or_time_stamp(forum.last_post_at) %> <br /> by 
 								<%=h forum.last_poster.login %>
 							<% end %>
 						</td>

@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_filter :can_edit_event, :only => [:edit, :update, :destroy]
   
   def index
-    @date = Time.parse("#{params[:date]} || Time.now")
+    @date = Time.parse("#{params[:date]} || TzTime.now")
     if logged_in?
       @events = Event.paginate(:page => params[:page], :order => 'updated_at desc')
     else
@@ -29,8 +29,6 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build params[:event]
     if @event.save
-      @event.date = TzTime.zone.utc_to_local(@event.date)
-      @event.save
       redirect_to events_url
     else
       render :action => "_new"

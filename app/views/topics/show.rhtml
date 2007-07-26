@@ -28,7 +28,7 @@
 	<table class="thread" cellspacing="0" id="p<%= post.id %>">
 		<thead>
 			<tr>
-				<th><%= distance_of_time_in_words(tz(post.created_at), TzTime.now, true, true) %></th>
+				<th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
 				<th class="thr">
 					<%= link_to "#" + (index + @padding).to_s, topic_path(:anchor => 'p' + post.id.to_s) %>
 				</th>
@@ -45,7 +45,7 @@
 						</dd>
 						<dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
 						<% unless post.user.is_online? %>
-							<dd>Last visit: <%= time_ago_in_words(post.user.online_at) %></dd>
+							<dd>Last visit: <%= time_ago_or_time_stamp(post.user.online_at) %></dd>
 						<% end %>
 						<dd>Posts: <%= post.user.posts_count %></dd>
 					</dl>
@@ -55,7 +55,7 @@
 						<%= bb(post.body) %>
 						<% if (post.updated_at > post.created_at+5.minutes) %>
 							<p class="edited">
-								Last edited <%= time_ago_in_words(post.updated_at) %>
+								Last edited <%= time_ago_or_time_stamp(post.updated_at) %>
 								<%= 'by ' + post.editor.login unless post.editor.nil? %>
 							</p>
 						<% end %>

@@ -46,7 +46,7 @@
 					<td class="tcm"><%=h topic.replies %></td>
 					<td class="tcm"><%=h topic.views %></td>
 					<td class="tcr">
-						<%= link_to distance_of_time_in_words(tz(topic.last_post_at), TzTime.now, true, false), show_new_topic_path(topic) %> 
+						<%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
 						by <%=h topic.last_poster.login %>
 					</td>
 				</tr>
