@@ -1,6 +1,6 @@
-require 'mt-capistrano'
+# Capistrano 1 recipe example for Media Temple (gs)
 
-# This Capistrano recipe is an example that works well for Media Temple.
+require 'mt-capistrano'
 
 set :site,         "0000"
 set :application,  "appname"

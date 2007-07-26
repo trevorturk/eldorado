@@ -14,8 +14,8 @@
 <div class="info-right">
 	<span class="detail">
 		<%= link_to_remote "#{pluralize(@topic.posts_count, 'Post')} by #{pluralize(@topic.posters, 'User')}", :url => {:action => 'show_posters', :id => @topic.id} %>
-		<% if @topic.last_page != 1 %>
-		&nbsp;|&nbsp;<%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+		<% if 1 %>
+		&nbsp;|&nbsp;&nbsp;<%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
 		<% end %>
 	</span>
 </div>

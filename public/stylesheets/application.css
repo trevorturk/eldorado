@@ -478,6 +478,10 @@ cite {
 	border-color: #8BB453 #7A9E48 #709142 #799C47;
 }
 
+.pagination {
+	display: inline;
+}
+
 #notice, #error {
 	border: 1px solid #999;
 	background: #eee;
