@@ -31,7 +31,9 @@ class Topic < ActiveRecord::Base
   attr_accessor :body
   
   attr_accessible :title, :private, :closed, :sticky, :forum_id
-      
+  
+  PER_PAGE = 30
+  
   def hit!
     self.class.increment_counter :views, id
   end
@@ -49,7 +51,7 @@ class Topic < ActiveRecord::Base
   end
   
   def last_page
-    [(posts_count.to_f / 30).ceil.to_i, 1].max
+    [(posts_count.to_f / PER_PAGE).ceil.to_i, 1].max
   end
-      
+    
 end

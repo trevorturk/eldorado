@@ -38,5 +38,11 @@ class Post < ActiveRecord::Base
   attr_accessor :title, :private, :forum_id
   
   attr_accessible :body
+  
+  def page
+    posts = Post.find_all_by_topic_id(self.topic_id, :select => 'id', :order => 'created_at').map(&:id)
+    post_number = posts.rindex(self.id) + 1
+    (post_number.to_f / Topic::PER_PAGE).ceil
+  end
         
 end

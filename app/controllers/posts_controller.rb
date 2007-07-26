@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   def update 
     @post.updated_by = current_user.id
     if @post.update_attributes(params[:post]) 
-      redirect_to topic_path(:id => @topic.id, :anchor => 'p' + @post.id.to_s)
+      redirect_to topic_path(:id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s)
     else 
       render :action => :edit 
     end 

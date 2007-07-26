@@ -7,4 +7,8 @@ class PostTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_page_value_set_properly
+  end
+  
 end

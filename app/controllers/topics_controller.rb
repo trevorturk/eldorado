@@ -15,8 +15,8 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
-    @padding = params[:page] ? params[:page] : 1 ; @padding = ((@padding.to_i - 1) * 30) # to get post #s w/ pagination
+    @posts = @topic.posts.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => :user)
+    @padding = params[:page] ? params[:page] : 1 ; @padding = ((@padding.to_i - 1) * Topic::PER_PAGE) # to get post #s w/ pagination
     @topic.hit!
   end
 
@@ -64,7 +64,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]])
     @post = Post.find(@topic.last_post_id) if @post.nil?
-    redirect_to topic_path(:id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s)
+    redirect_to topic_path(:id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s)
   end
   
   def show_posters
