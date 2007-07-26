@@ -2,20 +2,20 @@
 <% form_for(:event, :url => events_path) do |f| %>
 <div class="box">
 		<span class="top">New Event</span>
-		<p class="label"><label for="title">Title</label></p>
+		<p class="label"><label for="event_title">Title</label></p>
 		<p>
 			<%= f.text_field :title, :style => 'width:66%;' %> &nbsp; 
-			<%= f.check_box(:private) %><label for="private"> Private</label> &nbsp; 
-			<%= f.check_box(:reminder) %><label for="reminder"> Reminder</label>
+			<%= f.check_box(:private) %><label for="event_private"> Private</label> &nbsp; 
+			<%= f.check_box(:reminder) %><label for="event_reminder"> Reminder</label>
 		</p>
-		<p class="label"><label for="description">Description</label></p>
+		<p class="label"><label for="event_description">Description</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
-		<p class="label"><label for="location">Location</label></p>
+		<p class="label"><label for="event_location">Location</label></p>
 		<p><%= f.text_field :location, :style => 'width:66%;' %></p>
-		<p class="label"><label for="date">Date</label></p>
+		<p class="label"><label for="event_date">Date</label></p>
 		<p><%= f.datetime_select :date %>&nbsp;Today is <%= Date.today.to_s(:long) %></p>
 		<p>
-			<%= submit_tag "Add Event", :disable_with => "Add Event" %><span> or 
+			<%= submit_tag "Add Event", :disable_with => "Add Event" %> 
 			<% if current_action != 'new' %>
 				<%= link_to_function 'Cancel', "$('action').toggle()" %>
 			<% else %>

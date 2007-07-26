@@ -4,10 +4,10 @@
 		<span class="top">New Header</span>
 		<p><%= f.file_field :uploaded_data %></p>
 		<p>Headers should be sized 760x200px.</p>
-		<p class="label"><label for="description">Description (optional)</label></p>
+		<p class="label"><label for="header_description">Description (optional)</label></p>
 		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
 		<p>
-			<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
+			<%= submit_tag "Upload", :disable_with => "Upload" %> 
 			<% if current_action != 'new' %>
 				<%= link_to_function 'Cancel', "$('action').toggle()" %>
 			<% else %>

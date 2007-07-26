@@ -2,12 +2,12 @@
 <% form_for(:user, :url => login_path) do |f| %>
 	<div class="box login">
 		<span class="top">Login</span>
-		<p class="label"><label for="login">Username</label></p>
+		<p class="label"><label for="user_login">Username</label></p>
 		<p><%= f.text_field :login, :style => "width:30%" %></p>
-		<p class="label"><label for="password">Password</label></p>
+		<p class="label"><label for="user_password">Password</label></p>
 		<p><%= f.password_field :password, :style => "width:30%" %></p>
 		<p>
-			<%= submit_tag "Login", :disable_with => "Login" %><span> or 
+			<%= submit_tag "Login", :disable_with => "Login" %> 
 			<%= link_to 'Cancel', home_path %>
 		</p>
 	</div>

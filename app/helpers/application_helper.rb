@@ -51,11 +51,11 @@ module ApplicationHelper
   
   def tab(name)
     if name == current_controller
-      'tab'
+      'current_tab'
     elsif name == "forums" && ((current_controller == "categories") || (current_controller == "topics") || (current_controller == "posts"))
-      'tab'
+      'current_tab'
     elsif name == "users" && ((current_controller == "avatars") || (current_controller == "themes"))
-      'tab'
+      'current_tab'
     end
   end
   

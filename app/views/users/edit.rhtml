@@ -2,23 +2,23 @@
 <% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| -%>
 	<div class="box">
 		<span class="top">Edit User</span>
-		<p class="label"><label for="username">Username</label></p>
+		<p class="label"><label for="user_username">Username</label></p>
 		<p><%= f.text_field :login, :style => "width:31%" %></p>
-		<p class="label"><label for="email">Email</label></p>
+		<p class="label"><label for="user_email">Email</label></p>
 		<p><%= f.text_field :email, :style => "width:31%" %></p>
-		<p class="label"><label for="password">Password (twice)</label></p>
+		<p class="label"><label for="user_password">Password (twice)</label></p>
 		<p>
 			<%= f.password_field :password, :style => "width:15%" %> &nbsp;
 			<%= f.password_field :password_confirmation, :style => "width:15%" %>
 		</p>
-		<p class="label"><label for="bio">Bio</label></p>
+		<p class="label"><label for="user_bio">Bio</label></p>
 		<p><%= f.text_area :bio, :rows => "3", :style => "width:50%;" %></p>
-		<p class="label"><label for="signature">Signature</label></p>
+		<p class="label"><label for="user_signature">Signature</label></p>
 		<p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
-		<p class="label"><label>Timezone</label></p>
+		<p class="label"><label for="user_time_zone">Timezone</label></p>
 		<p><%= time_zone_select 'user', 'time_zone', TZInfo::Timezone.all.sort, :model => TZInfo::Timezone %></p>
 		<p>
-			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %><span> or 
+			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
 			<%= link_to 'Delete', confirm_delete_user_path %> or 
 			<%= link_to 'Cancel', user_path(@user) %>
 		</p>

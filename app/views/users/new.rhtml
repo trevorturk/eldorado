@@ -3,17 +3,17 @@
 <% form_for(:user, :url => users_path) do |f| %>
 	<div class="box">
 		<span class="top">Register</span>
-		<p class="label"><label for="username">Username</label></p>
+		<p class="label"><label for="user_username">Username</label></p>
 		<p><%= f.text_field :login, :style => "width:31%" %></p>
-		<p class="label"><label for="email">Email</label></p>
+		<p class="label"><label for="user_email">Email</label></p>
 		<p><%= f.text_field :email, :style => "width:31%" %></p>
-		<p class="label"><label for="password">Password (twice)</label></p>
+		<p class="label"><label for="user_password">Password (twice)</label></p>
 		<p>
 			<%= f.password_field :password, :style => "width:15%" %> &nbsp;
 			<%= f.password_field :password_confirmation, :style => "width:15%" %>
 		</p>
 		<p>
-			<%= submit_tag "Register", :disable_with => "Register" %><span> or 
+			<%= submit_tag "Register", :disable_with => "Register" %> 
 			<%= link_to 'Cancel', home_path %>
 		</p>
 	</div>

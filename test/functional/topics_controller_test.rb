@@ -192,7 +192,11 @@ class TopicsControllerTest < Test::Unit::TestCase
   end
   
   def test_should_redirect_to_same_path_when_logging_in_with_cookie
-    
+    # log in
+    # delete cookie
+    # use show_new action, which should use the cookie to log in and redirect to the requested url
+    # get :show_new, :id => 1
+    # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s)
   end
   
 end

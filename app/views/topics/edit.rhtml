@@ -2,11 +2,11 @@
 <% form_for(:topic, :url => topic_path(@topic), :html => { :method => :put }) do |f| %>
 	<div class="box">
 		<span class="top">Edit Topic</span>
-		<p class="label"><label for="title">Title</label></p>
+		<p class="label"><label for="topic_title">Title</label></p>
 		<p>
 			<%= f.text_field :title, :style => "width:66%" %> &nbsp; 
-			<%= f.check_box(:private) %><label for="private"> Private</label> &nbsp; 
-			<%= f.check_box(:closed) %><label for="closed"> Closed</label>
+			<%= f.check_box(:private) %><label for="topic_private"> Private</label> &nbsp; 
+			<%= f.check_box(:closed) %><label for="topic_closed"> Closed</label>
 		</p>
 		<p>
 			<%= submit_tag "Edit Topic", :disable_with => "Edit Topic" %> or 

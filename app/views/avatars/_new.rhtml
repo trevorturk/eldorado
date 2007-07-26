@@ -4,7 +4,7 @@
 		<span class="top">New Avatar</span>
 		<p><%= f.file_field :uploaded_data %></p>
 		<p>
-			<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
+			<%= submit_tag "Upload", :disable_with => "Upload" %> 
 			<% if current_action != 'new' %>
 				<%= link_to_function 'Cancel', "$('action').toggle()" %>
 			<% else %>

@@ -67,12 +67,14 @@ class UsersController < ApplicationController
   end
   
   def logout
-    redirect_to home_path unless logged_in?
+    redirect_to home_path and return false unless logged_in?
     @flash = flash[:notice]
     @user = User.find_by_id(session[:user_id])
-    @user.auth_token = nil
-    @user.auth_token_exp = nil
-    @user.save!
+    if @user
+      @user.auth_token = nil
+      @user.auth_token_exp = nil
+      @user.save!
+    end
     cookies.delete :auth_token
     reset_session
     flash[:notice] = @flash

@@ -3,7 +3,7 @@
 		<span class="top">Search Topics</span>
 		<p><%= text_field_tag :query, params[:query], :id => :query, :style => "width:31%" %></p>
 		<p>
-			<%= submit_tag "Search", :disable_with => "Search" %><span> or 
+			<%= submit_tag "Search", :disable_with => "Search" %> 
 			<%= link_to_function 'Cancel', "$('search').toggle()" %>
 		</p>
 	</div>

@@ -104,7 +104,7 @@ h3 {
 	background: #333;
 }
 
-.tabs li.tab a:link, .tabs li.tab a:visited, .tabs li.tab a:hover, .tabs li.tab a:active {
+.tabs li.current_tab a:link, .tabs li.current_tab a:visited, .tabs li.current_tab a:hover, .tabs li.current_tab a:active {
 	background: #fff;
 	color: #333 !important;
 	text-decoration: none;
