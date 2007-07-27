@@ -54,15 +54,12 @@ class PostsControllerTest < Test::Unit::TestCase
   def test_quoting_a_post_should_work
   end
   
-  def test_should_reset_last_post_info_for_topic_and_forum_on_post_destroy
+  def test_should_reset_last_post_info_for_topic_on_post_destroy
     login_as :Administrator
     assert_equal topics(:Testing).last_post_id, posts(:one3).id
-    assert_equal forums(:one).last_post_id, posts(:one3).id
     delete :destroy, :id => posts(:one3).id
     topics(:Testing).reload
-    forums(:one).reload
-    # assert_equal topics(:Testing).last_post_id, posts(:one2).id
-    # assert_equal forums(:one).last_post_id, posts(:one2).id
+    assert_equal topics(:Testing).last_post_id, posts(:one2).id
   end
   
 end

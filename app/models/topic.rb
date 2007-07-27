@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 54
+# Schema version: 56
 #
 # Table name: topics
 #
@@ -24,6 +24,7 @@ class Topic < ActiveRecord::Base
   has_many :posters, :through => :posts, :source => :user, :uniq => true
   belongs_to :user
   belongs_to :forum, :counter_cache => true
+  belongs_to :last_post, :foreign_key => "last_post_id", :class_name => "Post"
   belongs_to :last_poster, :foreign_key => "last_post_by", :class_name => "User"
   
   validates_presence_of :user_id, :title, :forum_id
@@ -52,6 +53,12 @@ class Topic < ActiveRecord::Base
   
   def last_page
     [(posts_count.to_f / PER_PAGE).ceil.to_i, 1].max
+  end
+  
+  def update_cached_fields
+    post = posts.find(:first, :order => 'posts.created_at desc')
+    return if post.nil? # return if this was the last post in the thread
+    self.class.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', post.id, post.created_at, post.user_id], ['id = ?', self.id])
   end
     
 end

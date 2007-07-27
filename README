@@ -28,11 +28,11 @@ Use "cap deploy_with_migrations" to upgrade your database and app at the same ti
 
 Released under the MIT License, Copyright 2006 Trevor Turk (see LICENSE file for details)
 
-# Credits #
+# Thanks #
 
-This app would not have been possible without the fine people of: 
-NewAthens (http://newathens.org), Beast (http://beast.caboo.se/), 
-PunBB (http://punbb.org), WordPress (http://wordpress.org), and K2 (http://getk2.com/).
+NewAthens.org, Matt Brent, Max Mearsheimer, Timothy O'Connell, Rick Olson, Josh Goebel, 
+Justin Palmer, Rickard Andersson (PunBB), Matt Mullenweg et al. (Wordpress), 
+Michael Heilemann et al. (k2), Josh Peek, and others...
 
 - Trevor Turk
 http://almosteffortless.com

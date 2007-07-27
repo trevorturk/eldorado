@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 54
+# Schema version: 56
 #
 # Table name: forums
 #
@@ -10,9 +10,6 @@
 #  topics_count :integer(11)   default(0)
 #  posts_count  :integer(11)   default(0)
 #  position     :integer(11)   default(0)
-#  last_post_id :integer(11)   
-#  last_post_at :datetime      
-#  last_post_by :integer(11)   
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
@@ -21,20 +18,7 @@ one:
   category_id: 1
   name: MyString
   description: MyText
-  topics_count: 1
-  posts_count: 1
-  position: 1
-  last_post_id: 3
-  last_post_at: <%= 3.weeks.ago.to_s :db %>
-  last_post_by: 1
-two:
-  id: 2
-  category_id: 1
-  name: MyString
-  description: MyText
-  topics_count: 1
-  posts_count: 1
-  position: 1
-  last_post_id: 1
-  last_post_at: 2007-03-21 16:05:52
-  last_post_by: 1
+  topics_count: 2
+  posts_count: 4
+  position: 0
+

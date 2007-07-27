@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 55) do
+ActiveRecord::Schema.define(:version => 56) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -46,19 +46,16 @@ ActiveRecord::Schema.define(:version => 55) do
   add_index "events", ["date"], :name => "index_events_on_date"
 
   create_table "forums", :force => true do |t|
-    t.integer  "category_id"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "topics_count", :default => 0
-    t.integer  "posts_count",  :default => 0
-    t.integer  "position",     :default => 0
-    t.integer  "last_post_id"
-    t.datetime "last_post_at"
-    t.integer  "last_post_by"
+    t.integer "category_id"
+    t.string  "name"
+    t.text    "description"
+    t.integer "topics_count", :default => 0
+    t.integer "posts_count",  :default => 0
+    t.integer "position",     :default => 0
   end
 
   add_index "forums", ["category_id"], :name => "index_forums_on_category_id"
-  add_index "forums", ["category_id", "last_post_at"], :name => "index_forums_on_last_post_at"
+  add_index "forums", ["category_id"], :name => "index_forums_on_last_post_at"
 
   create_table "headers", :force => true do |t|
     t.integer  "parent_id"

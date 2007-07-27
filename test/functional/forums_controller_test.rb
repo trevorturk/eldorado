@@ -16,6 +16,15 @@ class ForumsControllerTest < Test::Unit::TestCase
   def test_should_get_index
     get :index
     assert_response :success
+    login_as :Administrator
+    get :index
+    assert_response :success
+  end
+  
+  def test_should_get_index_if_logged_in
+    login_as :Administrator
+    get :index
+    assert_response :success
   end
 
   def test_should_get_new

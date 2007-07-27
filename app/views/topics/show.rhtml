@@ -30,7 +30,7 @@
 			<tr>
 				<th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
 				<th class="thr">
-					<%= link_to "#" + (index + @padding).to_s, topic_path(:anchor => 'p' + post.id.to_s) %>
+					<%= link_to "#" + (index + @padding).to_s, topic_path(:page => @page, :anchor => 'p' + post.id.to_s) %>
 				</th>
 			</tr>
 		</thead>

@@ -18,7 +18,7 @@
 			<tbody>
 				<% for forum in category.forums %>
 					<tr>
-						<td class="tci"><%= icon_for(forum) %></td>
+						<td class="tci"><%= icon_for(forum.last_topic.last_post) %></td>
 						<td class="tcl">
 							<span class="forum-name"><%= link_to h(forum.name), forum_path(forum) %></span>
 							<br /><%=h forum.description %>
@@ -26,9 +26,9 @@
 						<td class="tcm"><%=h forum.topics_count %></td>
 						<td class="tcm"><%=h forum.posts_count %></td>
 						<td class="tcr">
-							<% if !forum.last_post_id.blank? %>
-								<%=h time_ago_or_time_stamp(forum.last_post_at) %> <br /> by 
-								<%=h forum.last_poster.login %>
+							<% if forum.posts_count > 0 %>
+								<%=h time_ago_or_time_stamp(forum.last_topic.last_post_at) %> <br /> by 
+								<%=h forum.last_topic.user.login %>
 							<% end %>
 						</td>
 					</tr>

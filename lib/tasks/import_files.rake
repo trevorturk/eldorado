@@ -1,5 +1,6 @@
 desc "Imports PunBB avatars in public/avatars and associates them with their corresponding users"
 task :import_punbb_avatars => :environment do
+  ActiveRecord::Base.record_timestamps = false
   @items = Dir.glob(RAILS_ROOT+'/public/avatars/*')
   @items.each do |item|
     @item = Avatar.new
@@ -16,6 +17,8 @@ task :import_punbb_avatars => :environment do
       @item.user_id = 1
     end
     @item.current_user_id = @item.user_id
+    @item.created_at = File.mtime(item)
+    @item.updated_at = File.mtime(item)
     @item.save!
     User.update_all ['avatar = ?', @item.public_filename], ['id = ?', @item.user_id]
     puts "Importing avatar: #{@item.id}"
@@ -28,6 +31,7 @@ end
 
 desc "Imports headers in public/headers and associates them with guest user (id=1)"
 task :import_headers => :environment do
+  ActiveRecord::Base.record_timestamps = false
   @items = Dir.glob(RAILS_ROOT+'/public/headers/*')
   @items.each do |item|
     @item = Header.new
@@ -38,6 +42,8 @@ task :import_headers => :environment do
     @item.content_type = 'image/gif' if File.extname(item).downcase == '.gif'
     @item.content_type = 'image/png' if File.extname(item).downcase == '.png'
     @item.user_id = 1
+    @item.created_at = File.mtime(item)
+    @item.updated_at = File.mtime(item)
     @item.save!
     puts "Importing header: #{@item.id}"
   end
@@ -46,6 +52,7 @@ end
 
 desc "Imports files in public/files and associates them with guest user (id=1)"
 task :import_files => :environment do
+  ActiveRecord::Base.record_timestamps = false
   @items = Dir.glob(RAILS_ROOT+'/public/files/*')
   @items.each do |item|
     @item = Upload.new
@@ -86,6 +93,8 @@ task :import_files => :environment do
     @item.content_type = 'application/vnd.ms-excel' if File.extname(item).downcase == '.xls'
     @item.content_type = 'application/zip' if File.extname(item).downcase == '.zip'
     @item.user_id = 1
+    @item.created_at = File.mtime(item)
+    @item.updated_at = File.mtime(item)
     @item.save!
     puts "Importing file: #{@item.id}"
   end
