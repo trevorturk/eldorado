@@ -18,7 +18,7 @@ one:
   id: 1
   site_title: 'El Dorado.org'
   site_tagline: 'tagline'
-  footer_left: 'left'
-  footer_right: 'right'
+  announcement: 'announcement'
+  footer: 'footer'
   admin_rank: 'Administrator'
   newest_user: 'Newest User'

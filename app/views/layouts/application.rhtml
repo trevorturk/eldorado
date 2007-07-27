@@ -38,6 +38,8 @@
 						
 				<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
 				<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
+
+				<div class="announcement"><%= @options.announcement %></div>
 			
 				<%= yield %>
 			
@@ -46,11 +48,7 @@
 						
 			</div>
 		
-			<div class="footer">
-				<div style="float:left;"><%= @options.footer_left %></div>
-				<div style="float:right;"><%= @options.footer_right %></div>
-				<div style="clear:both;"> </div>
-			</div>
+			<div class="footer"><%= @options.footer %></div>
 		
 	</div>
 		
