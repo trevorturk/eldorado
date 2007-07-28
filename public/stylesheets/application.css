@@ -522,5 +522,5 @@ cite {
 }
 
 .login {
-	background: url('http://newathens.org/files/ascii-girl.jpg');
+	background: #f1f1f1 url('http://newathens.org/files/ascii-girl.jpg') bottom;
 }
