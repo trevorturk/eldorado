@@ -27,8 +27,8 @@
 						<td class="tcm"><%=h forum.posts_count %></td>
 						<td class="tcr">
 							<% if forum.posts_count > 0 %>
-								<%=h time_ago_or_time_stamp(forum.last_topic.last_post_at) %> <br /> by 
-								<%=h forum.last_topic.user.login %>
+								<%= link_to time_ago_or_time_stamp(forum.last_topic.last_post_at), show_new_topic_path(forum.last_topic) %>
+								<br /> by <%=h forum.last_topic.last_poster.login %>
 							<% end %>
 						</td>
 					</tr>
