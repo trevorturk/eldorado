@@ -349,8 +349,8 @@ namespace :import do
       @item.user_id = 1
       @item.created_at = File.mtime(item)
       @item.updated_at = File.mtime(item)
+      puts "Importing file: #{@item.filename}"
       @item.save!
-      puts "Importing file: #{@item.id}"
     end
     puts 'Import completed successfully.'
   end
