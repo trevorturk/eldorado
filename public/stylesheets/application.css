@@ -520,3 +520,7 @@ cite {
 #errorExplanation ul li {
 	padding: 2px 0;
 }
+
+.login {
+	background: url('http://newathens.org/files/ascii-girl.jpg');
+}

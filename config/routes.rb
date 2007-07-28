@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.admin_import '/admin/import', :controller => 'admin', :action => 'import'
 
   map.search '/search', :controller => 'search', :action => 'index'  
-  map.files_home '/files', :controller => 'uploads', :action => 'index'
+  map.files_home '/uploads', :controller => 'uploads', :action => 'index'
   map.forum_home '/forum', :controller => 'forums', :action => 'index'
   
   map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'
