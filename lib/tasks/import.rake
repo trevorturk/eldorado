@@ -254,6 +254,7 @@ namespace :import do
       @item = Avatar.new
       @item.filename = File.basename(item)
       @item.size = File.size(item)
+      @item.content_type = 'application/octet-stream'
       @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpg'
       @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpeg'
       @item.content_type = 'image/gif' if File.extname(item).downcase == '.gif'
@@ -287,6 +288,7 @@ namespace :import do
       @item = Header.new
       @item.filename = File.basename(item)
       @item.size = File.size(item)
+      @item.content_type = 'application/octet-stream'
       @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpg'
       @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpeg'
       @item.content_type = 'image/gif' if File.extname(item).downcase == '.gif'
