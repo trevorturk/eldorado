@@ -143,25 +143,19 @@ namespace :import do
     #
     # FORUMS
     #
-    # ignoring: redirect_url, moderators, sort_by, 
-    # num_topics (will be updated during import), num_posts (will be updated during import)
+    # ignoring: redirect_url, moderators, sort_by, num_topics/num_posts will be updated during import
     # 
     puts 'Importing forums...'
     ActiveRecord::Base.establish_connection(eldorado['import'])
-    @items = ActiveRecord::Base.connection.execute("SELECT id, forum_name, forum_desc, last_post, last_post_id, last_poster, disp_position, cat_id FROM #{prefix}forums")
+    @items = ActiveRecord::Base.connection.execute("SELECT id, forum_name, forum_desc, disp_position, cat_id FROM #{prefix}forums")
     ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
     for i in @items
       @item = Forum.new
       @item.id = i[0] # id 
       @item.name = i[1] # forum_name
       @item.description = i[2] # forum_desc
-      @item.last_post_at = TzTime.at(Time.at(i[3].to_i)) # last_post
-      @item.last_post_id = i[4] # last_post_id
-        @temp = User.find_by_login(i[5]) # last_poster
-        @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
-      @item.last_post_by = @temp.id # get user id instead of username
-      @item.position = i[6] # disp_position
-      @item.category_id = i[7] # cat_id
+      @item.position = i[3] # disp_position
+      @item.category_id = i[4] # cat_id
       @item.save!
       puts "Importing forum: #{@item.id}"
     end
