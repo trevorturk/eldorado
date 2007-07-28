@@ -32,5 +32,9 @@ class Upload < ActiveRecord::Base
     file_system_path = (thumbnail ? thumbnail_class : self).attachment_options[:path_prefix].to_s
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
   end
-      
+
+  def public_filename
+    'files/' + filename
+  end
+
 end
