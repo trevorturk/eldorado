@@ -1,6 +1,6 @@
-namespace :db do
-  desc "Imports PunBB content"
-  task :import => :environment do
+namespace :import do
+  desc "Imports a PunBB (version 1.2.15) database"
+  task :database => :environment do
     require 'tzinfo'
     puts "This task will import from a PunBB database defined as 'import' in your database.yml file."
     puts "It will import into your 'development' database unless you specify otherwise (e.g. 'rake db:import RAILS_ENV=production')."
@@ -14,10 +14,7 @@ namespace :db do
     #
     # ABOUT
     #
-    # This will import a PunBB database into the El Dorado structure. 
-    # Be careful to keep your text encoding consistent. Most databases will be in latin1.
-    # This whole shebang is only tested with PunBB 1.2.15.
-    # Times may not be 100% accurate do to timezone and daylight savings issues. 
+    # This will import a PunBB database into the El Dorado structure. Only tested with PunBB 1.2.15.
     # The user with id 2 (the "guest" user is 1) will be set as the only "admin" user.
     # Any topics, posts, etc made by a user not in the database will be assigned to the "guest" user.
     # 
@@ -50,8 +47,8 @@ namespace :db do
     tz = '+' + tz.to_s if tz == tz.abs # add a plus sign if this is a positive number
     tz = '' if tz == '+0' # clear timezone if it's 0, will end up being GMT
     TzTime.zone = TZInfo::Timezone.get("Etc/GMT#{tz.to_s}")
-    @item.footer_left = ''
-    @item.footer_right = 'Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a>'
+    @item.announcement = ''
+    @item.footer = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
     @item.newest_user = 'Newest User'
     @item.admin_rank = 'Administrator'
     @item.save!
@@ -250,6 +247,115 @@ namespace :db do
     #
     # DONE
     #
+    puts 'Import completed successfully.'
+  end
+end
+
+namespace :import do
+  desc "Imports PunBB avatars in public/avatars and associates them with their corresponding users"
+  task :avatars => :environment do
+    ActiveRecord::Base.record_timestamps = false
+    @items = Dir.glob(RAILS_ROOT+'/public/avatars/*')
+    @items.each do |item|
+      @item = Avatar.new
+      @item.filename = File.basename(item)
+      @item.size = File.size(item)
+      @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpg'
+      @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpeg'
+      @item.content_type = 'image/gif' if File.extname(item).downcase == '.gif'
+      @item.content_type = 'image/png' if File.extname(item).downcase == '.png'
+      begin # find corresponding user or use the guest
+        @user_id = File.basename(item).chomp(".")
+        @item.user_id = User.find(@user_id).id
+      rescue
+        @item.user_id = 1
+      end
+      @item.current_user_id = @item.user_id
+      @item.created_at = File.mtime(item)
+      @item.updated_at = File.mtime(item)
+      @item.save!
+      User.update_all ['avatar = ?', @item.public_filename], ['id = ?', @item.user_id]
+      puts "Importing avatar: #{@item.id}"
+    end
+    # remove guest user's avatar
+    User.update_all ['avatar = ?', nil], ['id = ?', 1] 
+    Avatar.update_all ['current_user_id = ?', nil], ['current_user_id = ?', 1] 
+    puts 'Import completed successfully.'
+  end
+end
+
+namespace :import do
+  desc "Imports headers in public/headers and associates them with guest user (id=1)"
+  task :headers => :environment do
+    ActiveRecord::Base.record_timestamps = false
+    @items = Dir.glob(RAILS_ROOT+'/public/headers/*')
+    @items.each do |item|
+      @item = Header.new
+      @item.filename = File.basename(item)
+      @item.size = File.size(item)
+      @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpg'
+      @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpeg'
+      @item.content_type = 'image/gif' if File.extname(item).downcase == '.gif'
+      @item.content_type = 'image/png' if File.extname(item).downcase == '.png'
+      @item.user_id = 1
+      @item.created_at = File.mtime(item)
+      @item.updated_at = File.mtime(item)
+      @item.save!
+      puts "Importing header: #{@item.id}"
+    end
+    puts 'Import completed successfully.'
+  end
+end
+
+namespace :import do
+  desc "Imports files in public/files and associates them with guest user (id=1)"
+  task :files => :environment do
+    ActiveRecord::Base.record_timestamps = false
+    @items = Dir.glob(RAILS_ROOT+'/public/files/*')
+    @items.each do |item|
+      @item = Upload.new
+      @item.filename = File.basename(item)
+      @item.size = File.size(item)
+      @item.content_type = 'application/octet-stream'
+      @item.content_type = 'video/3gpp2' if File.extname(item).downcase == '.3g2'
+      @item.content_type = 'audio/x-aiff' if File.extname(item).downcase == '.aif'
+      @item.content_type = 'video/x-ms-asf' if File.extname(item).downcase == '.asf'
+      @item.content_type = 'video/x-msvideo' if File.extname(item).downcase == '.avi'
+      @item.content_type = 'image/bmp' if File.extname(item).downcase == '.bmp'
+      @item.content_type = 'text/css' if File.extname(item).downcase == '.css'
+      @item.content_type = 'application/msword' if File.extname(item).downcase == '.doc'
+      @item.content_type = 'image/gif' if File.extname(item).downcase == '.gif'
+      @item.content_type = 'text/html' if File.extname(item).downcase == '.html'
+      @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpe'
+      @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpeg'
+      @item.content_type = 'image/jpeg' if File.extname(item).downcase == '.jpg'
+      @item.content_type = 'application/x-javascript' if File.extname(item).downcase == '.js'
+      @item.content_type = 'audio/midi' if File.extname(item).downcase == '.mid'
+      @item.content_type = 'video/quicktime' if File.extname(item).downcase == '.mov'
+      @item.content_type = 'audio/mpeg' if File.extname(item).downcase == '.mp3'
+      @item.content_type = 'video/mp4' if File.extname(item).downcase == '.mp4'
+      @item.content_type = 'video/mpeg' if File.extname(item).downcase == '.mpeg'
+      @item.content_type = 'video/mpeg' if File.extname(item).downcase == '.mpg'
+      @item.content_type = 'application/pdf' if File.extname(item).downcase == '.pdf'
+      @item.content_type = 'image/png' if File.extname(item).downcase == '.png'
+      @item.content_type = 'application/x-photoshop' if File.extname(item).downcase == '.psd'
+      @item.content_type = 'text/x-python-script' if File.extname(item).downcase == '.py'
+      @item.content_type = 'text/x-ruby-script' if File.extname(item).downcase == '.rb'
+      @item.content_type = 'text/rtf' if File.extname(item).downcase == '.rtf'
+      @item.content_type = 'application/x-shockwave-flash' if File.extname(item).downcase == '.swf'
+      @item.content_type = 'image/tiff' if File.extname(item).downcase == '.tif'
+      @item.content_type = 'image/tiff' if File.extname(item).downcase == '.tiff'
+      @item.content_type = 'text/plain' if File.extname(item).downcase == '.txt'
+      @item.content_type = 'audio/x-wav' if File.extname(item).downcase == '.wav'
+      @item.content_type = 'video/x-ms-wmv' if File.extname(item).downcase == '.wmv'
+      @item.content_type = 'application/vnd.ms-excel' if File.extname(item).downcase == '.xls'
+      @item.content_type = 'application/zip' if File.extname(item).downcase == '.zip'
+      @item.user_id = 1
+      @item.created_at = File.mtime(item)
+      @item.updated_at = File.mtime(item)
+      @item.save!
+      puts "Importing file: #{@item.id}"
+    end
     puts 'Import completed successfully.'
   end
 end
