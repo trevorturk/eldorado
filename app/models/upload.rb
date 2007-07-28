@@ -34,10 +34,6 @@ class Upload < ActiveRecord::Base
     file_system_path = (thumbnail ? thumbnail_class : self).attachment_options[:path_prefix].to_s
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
   end
-
-  def public_filename
-    '/files/' + filename
-  end
   
   def reject_index_files
     errors.add_to_base("Invalid file name") and return false if %w(index.html index.htm).include?(filename)

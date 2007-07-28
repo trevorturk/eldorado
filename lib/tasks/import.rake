@@ -351,6 +351,8 @@ namespace :import do
       @item.updated_at = File.mtime(item)
       puts "Importing file: #{@item.filename}"
       @item.save!
+      # hack to allow un-sanatized filenames into the database without attachment_fu interference
+      Upload.update_all ['filename = ?', File.basename(item)], ['id = ?', @item.id]
     end
     puts 'Import completed successfully.'
   end
