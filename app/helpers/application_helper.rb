@@ -117,7 +117,6 @@ module ApplicationHelper
   end
   
   def time_stamp(time)
-    time.strftime("%a, %d %b %Y, ") + (time.strftime("%I")).to_i.to_s + time.strftime(":%M%p").downcase
+    time.to_datetime.strftime("%a, %d %b %Y, %l:%M%P").squeeze(' ')  
   end
-  
 end
