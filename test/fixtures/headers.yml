@@ -21,21 +21,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-  parent_id: 
-  content_type: MyString
-  filename: MyString.png
-  thumbnail: 
-  size: 1
-  width: 
-  height: 
+  content_type: image/jpeg
+  filename: MyString1.png
+  size: 31559
   user_id: 1
+  votes: 0
 two:
   id: 2
-  parent_id: 
-  content_type: MyString
-  filename: MyString.png
-  thumbnail: 
-  size: 1
-  width: 
-  height: 
-  user_id: 1
+  content_type: image/jpeg
+  filename: MyString2.png
+  size: 22483
+  user_id: 2
+  votes: 0

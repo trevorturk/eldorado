@@ -28,7 +28,7 @@ class Header < ActiveRecord::Base
   validates_uniqueness_of :filename
   validates_presence_of :user_id
   
-  attr_protected :id, :parent_id, :user_id, :created_at, :updated_at, :votes
+  attr_protected :id, :parent_id, :user_id, :created_at, :updated_at
   
   def full_filename(thumbnail = nil)
     file_system_path = (thumbnail ? thumbnail_class : self).attachment_options[:path_prefix].to_s
@@ -36,7 +36,8 @@ class Header < ActiveRecord::Base
   end
 
   def vote_up
-    self.votes.increment!
+    self.votes = self.votes + 1
+    self.save!
   end
 
   def vote_down

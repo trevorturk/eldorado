@@ -40,4 +40,33 @@ class HeadersControllerTest < Test::Unit::TestCase
     
   def test_should_destroy_header
   end
+  
+  def test_should_vote_up
+    login_as :trevor
+    assert_equal 0, headers(:one).votes
+    post :vote_up, :id => 1
+    assert_response :success
+    headers(:one).reload
+    assert_equal 1, headers(:one).votes
+  end
+  
+  def test_should_vote_down
+    login_as :trevor
+    assert_equal 0, headers(:one).votes
+    post :vote_down, :id => 1
+    assert_response :success
+    headers(:one).reload
+    assert_equal -1, headers(:one).votes
+  end
+  
+  def test_should_vote_up_requries_login
+    post :vote_up, :id => 1
+    assert_redirected_to login_path
+  end 
+
+  def test_should_vote_down_requries_login
+    post :vote_down, :id => 1
+    assert_redirected_to login_path
+  end
+  
 end
