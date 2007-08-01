@@ -53,9 +53,9 @@
 				<td class="body">
 					<div class="post-body">
 						<%= bb(post.body) %>
-						<% if (post.updated_at > post.created_at+5.minutes) %>
+						<% if (post.updated_at > post.created_at + 5.minutes) %>
 							<p class="edited">
-								Last edited <%= time_ago_or_time_stamp(post.updated_at) %>
+								Last edited <%= time_ago_or_time_stamp(post.updated_at, TzTime.now, true, true) %>
 								<%= 'by ' + post.editor.login unless post.editor.nil? %>
 							</p>
 						<% end %>
