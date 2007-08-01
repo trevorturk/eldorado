@@ -22,7 +22,7 @@ class Header < ActiveRecord::Base
   
   belongs_to :user
   
-  has_attachment :storage => :file_system, :path_prefix => 'public/headers', :max_size => 15.megabytes
+  has_attachment :storage => :file_system, :path_prefix => 'public/headers', :max_size => 500.kilobytes
   
   validates_as_attachment
   validates_uniqueness_of :filename
