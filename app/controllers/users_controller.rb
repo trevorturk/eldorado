@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   
   before_filter :can_edit_user, :only => [:edit, :update, :destroy, :confirm_delete]
   
-  filter_parameter_logging "password"
-  
   def index
     @users = User.paginate(:page => params[:page], :order => 'profile_updated_at desc')
   end
