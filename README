@@ -8,6 +8,7 @@ config/database.example.yml & config/deploy.example.rb
 # Setup # 
 
 Required gems: tzinfo - run: "sudo gem install tzinfo" on your computer and your host's.
+Requires Edge Rails for the tztime plugin: http://weblog.jamisbuck.org/2007/2/2/introducing-tztime
 
 If you're not importing anything (starting a new site), run this command: "rake db:schema:load".
 
@@ -20,7 +21,6 @@ Other available rake tasks include: import:avatars, import:headers, and import:f
 # Upgrading #
 
 http://almosteffortless.com | http://eldorado.googlecode.com/svn
-
 Use "rake db:migrate" to upgrade your database from an older version
 Use "cap deploy_with_migrations" to upgrade your database and app at the same time using Capistrano 
 
