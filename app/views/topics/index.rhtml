@@ -43,8 +43,8 @@
 							<%= link_to h(topic.forum.name), forum_path(topic.forum) %>
 						</td>
 					<% end %>
-					<td class="tcm"><%=h topic.replies %></td>
-					<td class="tcm"><%=h topic.views %></td>
+					<td class="tcm"><%= number_with_delimiter(topic.replies) %></td>
+					<td class="tcm"><%= number_with_delimiter(topic.views) %></td>
 					<td class="tcr">
 						<%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
 						by <%=h topic.last_poster.login %>

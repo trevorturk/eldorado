@@ -9,7 +9,7 @@
 			<%= f.check_box(:closed) %><label for="topic_closed"> Closed</label>
 		</p>
 		<p>
-			<%= submit_tag "Edit Topic", :disable_with => "Edit Topic" %> or 
+			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %> or 
 			<%= link_to 'Delete', topic_path, :confirm => 'Are you sure?', :method => :delete %> or 
 			<%= link_to 'Cancel', topics_path %>
 		</p>

@@ -6,7 +6,6 @@
 		<% end %>
 	</p>
 	<p class="nav-right">
-				
 		<%= pluralize(number_with_delimiter(@posts_count) || 0, 'Post') %> by 
 		<%= pluralize(number_with_delimiter(@user_count), 'User') %> | 
 		<%= @options.newest_user %>: <%= link_to h(@newest_user.login), user_path(@newest_user.id) %>

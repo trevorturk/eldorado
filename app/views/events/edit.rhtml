@@ -13,7 +13,7 @@
 		<p class="label"><label for="event_date">Date</label></p>
 		<p><%= f.datetime_select :date %></p>
 		<p>
-			<%= submit_tag "Edit Event", :disable_with => "Edit Event" %> 
+			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
 			<%= link_to 'Delete', event_path(@event), :confirm => 'Are you sure?', :method => :delete %> or 
 			<%= link_to 'Cancel', event_path(@event) %>
 		</p>
