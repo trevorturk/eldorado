@@ -29,6 +29,25 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal old_post_count+1, Post.count
   end
   
+  def test_post_create_redirects_to_correct_page
+    login_as :trevor
+    topic = Topic.find_by_id('1')
+    assert_equal topic.posts_count, 3
+    topic.posts_count = 29
+    topic.save!
+    assert_equal topic.last_page, 1
+    post :create, :post => { :topic_id => "1", :body => "this is a test" }  
+    topic = Topic.find_by_id('1')
+    assert_equal topic.posts_count, 30
+    assert_equal topic.last_page, 1
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+    post :create, :post => { :topic_id => "1", :body => "this is a test!" }  
+    topic = Topic.find_by_id('1')
+    assert_equal topic.posts_count, 31
+    assert_equal topic.last_page, 2
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '2'
+  end
+  
   def test_posts_count_increments_when_post_created
     login_as :trevor
     old_forum_post_count = Forum.find_by_id('1').posts_count

@@ -8,7 +8,13 @@ class TopicTest < Test::Unit::TestCase
     assert true
   end
   
-  def cannot_view_private_topic_unless_logged_in
+  def test_last_page
+    topic = topics(:Testing)
+    assert_equal topic.last_page, 1
+    topic.posts_count = 30
+    assert_equal topic.last_page, 1
+    topic.posts_count = 31
+    assert_equal topic.last_page, 2
   end
   
 end
