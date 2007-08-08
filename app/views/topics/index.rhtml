@@ -22,7 +22,7 @@
 	<table cellspacing="0" class="topics-index">
 		<thead>
 			<tr>
-				<th class="tcl" colspan="2">Topics</th>
+				<th class="tcl" colspan="2"><%= link_to 'Topics', topics_path %></th>
 				<% if current_controller != 'forums' %>
 					<th class="tcl tcf">Forum</th>
 				<% end %>
