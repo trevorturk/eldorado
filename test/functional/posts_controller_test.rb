@@ -47,6 +47,12 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal topic.last_page, 2
     assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '2'
   end
+
+  def test_post_update_redirects_to_correct_page
+    login_as :trevor
+    post :create, :post => { :topic_id => "1", :body => "this is a test" }  
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+  end
   
   def test_posts_count_increments_when_post_created
     login_as :trevor

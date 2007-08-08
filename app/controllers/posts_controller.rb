@@ -18,7 +18,6 @@ class PostsController < ApplicationController
     @topic.posts_count += 1 # hack to set last_page correctly
     if (@topic.posts << @post) 
       redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s
-      #redirect_to topic_path(:id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s)
     else 
       flash[:notice] = "Posts cannot be blank"
       redirect_to topic_path(@topic)
@@ -28,7 +27,7 @@ class PostsController < ApplicationController
   def update 
     @post.updated_by = current_user.id
     if @post.update_attributes(params[:post]) 
-      redirect_to topic_path(:id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s)
+      redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
     else 
       render :action => :edit 
     end 
