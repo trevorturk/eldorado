@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_filter :can_edit_event, :only => [:edit, :update, :destroy]
   
   def index
-    @date = Time.parse("#{params[:date]} || TzTime.now")
+    @date = Time.parse("#{params[:date]} || TzTime.at(Time.now.utc)")
     if logged_in?
       @events = Event.paginate(:page => params[:page], :order => 'updated_at desc')
     else
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
     @event.destroy
     redirect_to events_url
   end
-    
+      
   def check_privacy
     @event = Event.find(params[:id])
     redirect_to login_path if (!logged_in? && @event.private)

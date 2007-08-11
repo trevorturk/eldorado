@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :uploads, :dependent => :destroy
       
-  validates_presence_of     :login, :email, :password_hash
+  validates_presence_of     :login, :email, :password_hash, :time_zone
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
   validates_confirmation_of :password, :on => :create
