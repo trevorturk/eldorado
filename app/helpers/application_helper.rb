@@ -85,8 +85,12 @@ module ApplicationHelper
     end
   end
   
-  def tz(time_at)
-    time_stamp(TzTime.zone.utc_to_local(time_at.utc))
+  def tz(time)
+    time_stamp(TzTime.zone.utc_to_local(time.utc))
+  end
+  
+  def tz_today?(time)
+    return true if TzTime.now.strftime('%Y-%m-%d') == TzTime.zone.utc_to_local(time.utc).strftime('%Y-%m-%d')
   end
     
   def current_controller

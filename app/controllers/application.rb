@@ -81,9 +81,9 @@ class ApplicationController < ActionController::Base
   
   def get_reminders
     if logged_in?
-      @reminders = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and reminder = ?", Date.today, true])
+      @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ?", true])
     else
-      @reminders = Event.find(:all, :order => 'date asc', :conditions => ["DATE(date) = ? and reminder = ? and private = ?", Date.today, true, false])
+      @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ? and private = ?", true, false])
     end
   end
   
