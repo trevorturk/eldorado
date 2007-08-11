@@ -61,4 +61,7 @@ class EventsControllerTest < Test::Unit::TestCase
   def test_should_create_event_with_correct_time_for_user_time_zone
   end
   
+  def test_should_show_reminder_on_correct_date_for_current_user
+  end
+  
 end
