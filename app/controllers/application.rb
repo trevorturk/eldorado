@@ -80,8 +80,8 @@ class ApplicationController < ActionController::Base
   end
   
   def get_reminders
-    @reminders = [] unless logged_in?
     @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ?", true])
+    @reminders = [] unless logged_in?
   end
   
   def get_stats
