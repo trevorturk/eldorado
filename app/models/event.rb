@@ -22,5 +22,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :title, :description, :date, :user_id
   
   attr_protected :id, :created_at, :updated_at 
+  
+  tz_time_attributes :date
       
 end

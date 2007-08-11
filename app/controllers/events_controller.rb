@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_filter :can_edit_event, :only => [:edit, :update, :destroy]
   
   def index
-    @date = Time.parse("#{params[:date]} || TzTime.at(Time.now.utc)")
+    @date = Time.parse("#{params[:date]} || TzTime.now")
     if logged_in?
       @events = Event.paginate(:page => params[:page], :order => 'updated_at desc')
     else

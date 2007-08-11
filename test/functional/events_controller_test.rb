@@ -56,7 +56,9 @@ class EventsControllerTest < Test::Unit::TestCase
   end
   
   def test_should_not_show_private_event_if_not_logged_in
-    
+  end
+  
+  def test_should_create_event_with_correct_time_for_user_time_zone
   end
   
 end
