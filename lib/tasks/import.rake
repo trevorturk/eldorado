@@ -6,6 +6,7 @@ namespace :import do
     puts "It will import into your 'development' database unless you specify otherwise (e.g. 'rake db:import RAILS_ENV=production')."
     puts "Please make sure the receiving database is empty before continuing."
     puts "Tested with PunBB version 1.2.15."
+    puts "WARNING: The importing of timestamps and timezones isn't 100% accurate. Proceed at your own risk."
     puts "Type '1' to continue, or '2' to quit."
     confirmation = STDIN.gets.chomp
     exit unless confirmation == "1"
@@ -17,6 +18,7 @@ namespace :import do
     # This will import a PunBB database into the El Dorado structure. Only tested with PunBB 1.2.15.
     # The user with id 2 (the "guest" user is 1) will be set as the only "admin" user.
     # Any topics, posts, etc made by a user not in the database will be assigned to the "guest" user.
+    # WARNING: The importing of timestamps and timezones isn't 100% accurate. Proceed at your own risk. 
     # 
     # importing: pun_bans, pun_categories, pun_config, pun_forums, pun_posts, pun_ranks, pun_topics, pun_users, pun_subscriptions
     # ignoring: pun_censoring, pun_forum_perms, pun_groups, pun_online, pun_reports, pun_search_cache, pun_search_matches, pun_search_words
