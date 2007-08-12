@@ -1,7 +1,7 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'headers/new' if %w(index).include?(current_action) %>
+  <%= render :partial => 'headers/new' if %w(index).include?(current_action) %>
 </div>
 
 <% for header in @headers %>
-	<p><%= link_to image_tag(header.public_filename), header_path(header) %></p>
+  <p><%= link_to image_tag(header.public_filename), header_path(header) %></p>
 <% end %>

@@ -44,7 +44,7 @@ module ApplicationHelper
     @ranks ||=  Rank.find(:all, :order => "min_posts")
     return "Member" if @ranks.blank?
     for r in @ranks
-		  @rank = r if posts_count >= r.min_posts
+      @rank = r if posts_count >= r.min_posts
     end
     return h(@rank.title)
   end

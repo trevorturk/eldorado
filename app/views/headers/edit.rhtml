@@ -1,22 +1,22 @@
 <%= error_messages_for :header %>
 
 <div class="info-left">
-	<span class="title"><%=h @header.filename %></span>
-	<span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
+  <span class="title"><%=h @header.filename %></span>
+  <span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
 </div>
 <div style="clear:both;"> </div>
 
 <% form_for(:header, :url => header_path(@header), :html => { :method => :put }) do |f| -%>
-	<div class="box">
-		<span class="top">Edit Header</span>
-		<p class="label"><label for="header_description">Description</label></p>
-		<p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
-		<p>
-			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
-			<%= link_to 'Delete', header_path(@header), :confirm => 'Are you sure?', :method => :delete %> or 
-			<%= link_to 'Cancel', header_path(@header) %>
-		</p>
-	</div>
+  <div class="box">
+    <span class="top">Edit Header</span>
+    <p class="label"><label for="header_description">Description</label></p>
+    <p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
+    <p>
+      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
+      <%= link_to 'Delete', header_path(@header), :confirm => 'Are you sure?', :method => :delete %> or 
+      <%= link_to 'Cancel', header_path(@header) %>
+    </p>
+  </div>
 <% end %>
 
 <%= javascript_tag "$('header_description').focus();" %>

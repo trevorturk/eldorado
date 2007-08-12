@@ -1,16 +1,16 @@
 <%= error_messages_for :post %>
 <% form_for(:post, :url => post_path(@post), :html => { :method => :put }) do |f| %>
-	<div class="box">
-		<span class="top">Edit Post</span>
-		<p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
-		<p>
-			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
-			<% if @topic.posts_count > 1 %>
-				<%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> or 
-			<% end %>
-			<%= link_to 'Cancel', topic_path(@topic) %>
-		</p>
-	</div>
+  <div class="box">
+    <span class="top">Edit Post</span>
+    <p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
+    <p>
+      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
+      <% if @topic.posts_count > 1 %>
+        <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> or 
+      <% end %>
+      <%= link_to 'Cancel', topic_path(@topic) %>
+    </p>
+  </div>
 <% end %>
 
 <%= javascript_tag "$('post_body').focus();" %>

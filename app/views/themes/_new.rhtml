@@ -1,16 +1,16 @@
 <%= error_messages_for :theme %>
 <% form_for(:theme, :url => themes_path, :html => { :multipart => true }) do |f| -%>
-	<div class="box">
-		<span class="top">New Theme</span>
-		<p><%= f.file_field :uploaded_data %></p>
-		<p>Themes must be smaller than 50k.</p>
-		<p>
-			<%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
-			<% if current_action != 'new' %>
-				<%= link_to_function 'Cancel', "$('action').toggle()" %>
-			<% else %>
-				<%= link_to 'Cancel', themes_path %>
-			<% end %>
-		</p>
-	</div>
+  <div class="box">
+    <span class="top">New Theme</span>
+    <p><%= f.file_field :uploaded_data %></p>
+    <p>Themes must be smaller than 50k.</p>
+    <p>
+      <%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
+      <% if current_action != 'new' %>
+        <%= link_to_function 'Cancel', "$('action').toggle()" %>
+      <% else %>
+        <%= link_to 'Cancel', themes_path %>
+      <% end %>
+    </p>
+  </div>
 <% end %>

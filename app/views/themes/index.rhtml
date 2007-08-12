@@ -1,21 +1,21 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'themes/new' if %w(index).include?(current_action) %>
+  <%= render :partial => 'themes/new' if %w(index).include?(current_action) %>
 </div>
 
 <div class="box">
-	<span class="top">Themes</span>	
-	<% for theme in @themes %>
-		<p>
-			<%= link_to theme.filename, theme.public_filename %> by 
-			<%= link_to h(theme.user.login), user_path(theme.user) %> 
-			<% if @current_theme == theme %>
-				<%= link_to '(deselect)', deselect_theme_path(theme), :method => :post %>
-			<% else %>
-				<%= link_to '(select)', select_theme_path(theme), :method => :post %>
-			<% end %>
-			<% if can_edit?(theme) %>
-				<%= link_to '(x)', theme_path(theme), :confirm => 'Are you sure?', :method => :delete %>
-			<% end %>
-		</p>
-	<% end %>
+  <span class="top">Themes</span>  
+  <% for theme in @themes %>
+    <p>
+      <%= link_to theme.filename, theme.public_filename %> by 
+      <%= link_to h(theme.user.login), user_path(theme.user) %> 
+      <% if @current_theme == theme %>
+        <%= link_to '(deselect)', deselect_theme_path(theme), :method => :post %>
+      <% else %>
+        <%= link_to '(select)', select_theme_path(theme), :method => :post %>
+      <% end %>
+      <% if can_edit?(theme) %>
+        <%= link_to '(x)', theme_path(theme), :confirm => 'Are you sure?', :method => :delete %>
+      <% end %>
+    </p>
+  <% end %>
 </div>

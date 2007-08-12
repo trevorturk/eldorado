@@ -1,56 +1,56 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'topics/new' %>
+  <%= render :partial => 'topics/new' %>
 </div>
 
 <% if current_controller == 'categories' %>
-	<div class="info-left">
-		<span class="title"><%=h @category.name %></span>
-		<span class="detail"> &laquo; <%= @forums.map { |f| link_to "#{h f.name}", forum_path(f) } * ", " %></span>
-	</div>
+  <div class="info-left">
+    <span class="title"><%=h @category.name %></span>
+    <span class="detail"> &laquo; <%= @forums.map { |f| link_to "#{h f.name}", forum_path(f) } * ", " %></span>
+  </div>
 <% elsif current_controller == 'forums' %>
-	<div class="info-left">
-		<span class="title"><%=h @forum.name %></span>
-		<span class="detail">
-			&laquo; <%= link_to h(@forum.category.name), category_path(@forum.category) %>
-		</span>
-		<span class="detail">&nbsp;| &nbsp;<%=h @forum.description %></span>
-	</div>
+  <div class="info-left">
+    <span class="title"><%=h @forum.name %></span>
+    <span class="detail">
+      &laquo; <%= link_to h(@forum.category.name), category_path(@forum.category) %>
+    </span>
+    <span class="detail">&nbsp;| &nbsp;<%=h @forum.description %></span>
+  </div>
 <% end %>
 <div style="clear:both;"> </div>
 
 <% if !@topics.blank? %>
-	<table cellspacing="0" class="topics-index">
-		<thead>
-			<tr>
-				<th class="tcl" colspan="2"><%= link_to 'Topics', topics_path %></th>
-				<% if current_controller != 'forums' %>
-					<th class="tcl tcf">Forum</th>
-				<% end %>
-				<th class="tcm">Replies</th>
-				<th class="tcm">Views</th>
-				<th class="tcr">Activity</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for topic in @topics %>
-				<tr>
-					<td class="tci"><%= icon_for(topic) %></td>
-					<td class="tcl">
-						<%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
-					</td>
-					<% if current_controller != 'forums' %>
-						<td class="tcl">
-							<%= link_to h(topic.forum.name), forum_path(topic.forum) %>
-						</td>
-					<% end %>
-					<td class="tcm"><%= number_with_delimiter(topic.replies) %></td>
-					<td class="tcm"><%= number_with_delimiter(topic.views) %></td>
-					<td class="tcr">
-						<%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
-						by <%=h topic.last_poster.login %>
-					</td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
+  <table cellspacing="0" class="topics-index">
+    <thead>
+      <tr>
+        <th class="tcl" colspan="2"><%= link_to 'Topics', topics_path %></th>
+        <% if current_controller != 'forums' %>
+          <th class="tcl tcf">Forum</th>
+        <% end %>
+        <th class="tcm">Replies</th>
+        <th class="tcm">Views</th>
+        <th class="tcr">Activity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for topic in @topics %>
+        <tr>
+          <td class="tci"><%= icon_for(topic) %></td>
+          <td class="tcl">
+            <%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
+          </td>
+          <% if current_controller != 'forums' %>
+            <td class="tcl">
+              <%= link_to h(topic.forum.name), forum_path(topic.forum) %>
+            </td>
+          <% end %>
+          <td class="tcm"><%= number_with_delimiter(topic.replies) %></td>
+          <td class="tcm"><%= number_with_delimiter(topic.views) %></td>
+          <td class="tcr">
+            <%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
+            by <%=h topic.last_poster.login %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

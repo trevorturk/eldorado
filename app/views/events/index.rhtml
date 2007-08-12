@@ -1,13 +1,13 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'events/new' %>
+  <%= render :partial => 'events/new' %>
 </div>
 
 <%=
 calendar({:year => @date.year, :month => @date.month}) do |d|
   cell_text = "#{d.mday}" 
-	if (d.to_date == Date.today)
-	  cell_text = "<b>Today #{d.mday}</b>" 
-	end
+  if (d.to_date == Date.today)
+    cell_text = "<b>Today #{d.mday}</b>" 
+  end
   cell_attrs = {:class => 'day'}
   @events.each do |e|
     if e.date.to_date == d
@@ -20,23 +20,23 @@ end
 %>
 
 <% if !@events.blank? %>
-	<table cellspacing="0">
-		<thead>
-			<tr>
-				<th class="tcl" colspan="2">Events</th>
-				<th class="tcr">Date</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for event in @events %>
-				<tr>
-					<td class="tci"><%= icon_for(event) %></td>
-					<td class="tcl">
-						<%= link_to h(event.title), event_path(event) %> by <%=h event.user.login %>
-					</td>
-					<td class="tcr"><%=tz event.date %></td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th class="tcl" colspan="2">Events</th>
+        <th class="tcr">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for event in @events %>
+        <tr>
+          <td class="tci"><%= icon_for(event) %></td>
+          <td class="tcl">
+            <%= link_to h(event.title), event_path(event) %> by <%=h event.user.login %>
+          </td>
+          <td class="tcr"><%=tz event.date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

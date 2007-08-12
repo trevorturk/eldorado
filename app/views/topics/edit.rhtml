@@ -1,19 +1,19 @@
-<%= error_messages_for :topic %>	
+<%= error_messages_for :topic %>  
 <% form_for(:topic, :url => topic_path(@topic), :html => { :method => :put }) do |f| %>
-	<div class="box">
-		<span class="top">Edit Topic</span>
-		<p class="label"><label for="topic_title">Title</label></p>
-		<p>
-			<%= f.text_field :title, :style => "width:66%" %> &nbsp; 
-			<%= f.check_box(:private) %><label for="topic_private"> Private</label> &nbsp; 
-			<%= f.check_box(:closed) %><label for="topic_closed"> Closed</label>
-		</p>
-		<p>
-			<%= submit_tag "Save Changes", :disable_with => "Save Changes" %> or 
-			<%= link_to 'Delete', topic_path, :confirm => 'Are you sure?', :method => :delete %> or 
-			<%= link_to 'Cancel', topics_path %>
-		</p>
-	</div>
+  <div class="box">
+    <span class="top">Edit Topic</span>
+    <p class="label"><label for="topic_title">Title</label></p>
+    <p>
+      <%= f.text_field :title, :style => "width:66%" %> &nbsp; 
+      <%= f.check_box(:private) %><label for="topic_private"> Private</label> &nbsp; 
+      <%= f.check_box(:closed) %><label for="topic_closed"> Closed</label>
+    </p>
+    <p>
+      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> or 
+      <%= link_to 'Delete', topic_path, :confirm => 'Are you sure?', :method => :delete %> or 
+      <%= link_to 'Cancel', topics_path %>
+    </p>
+  </div>
 <% end %>
 
 <%= javascript_tag "$('topic_title').focus();" %>

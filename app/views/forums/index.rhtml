@@ -1,42 +1,42 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'topics/new' %>
+  <%= render :partial => 'topics/new' %>
 </div>
 
 <% for category in @categories %>
-		<table cellspacing="0" class="forums-index">
-			<thead>
-				<tr>
-					<th colspan="5"><%= link_to h(category.name), category_path(category) %></th>
-				</tr>
-				<tr class="forums-list">
-					<th class="tcl" colspan="2">Forums</th>
-					<th class="tcm">Topics</th>
-					<th class="tcm">Posts</th>
-					<th class="tcr">Activity</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% for forum in category.forums %>
-					<tr>
-						<td class="tci"><%= icon_for(forum.last_topic.last_post) %></td>
-						<td class="tcl">
-							<span class="forum-name"><%= link_to h(forum.name), forum_path(forum) %></span>
-							<br /><%=h forum.description %>
-						</td>
-						<td class="tcm"><%= number_with_delimiter(forum.topics_count) %></td>
-						<td class="tcm"><%= number_with_delimiter(forum.posts_count) %></td>
-						<td class="tcr">
-							<% if forum.posts_count > 0 %>
-								<% if logged_in? %>
-									<%= link_to time_ago_or_time_stamp(forum.last_topic.last_post_at), show_new_topic_path(forum.last_topic) %>
-								<% else %>
-									<%= time_ago_or_time_stamp(forum.last_topic.last_post_at) %>
-								<% end %>
-								<br /> by <%=h forum.last_topic.last_poster.login %>
-							<% end %>
-						</td>
-					</tr>
-				<% end %>
-			</tbody>	
-		</table>
+    <table cellspacing="0" class="forums-index">
+      <thead>
+        <tr>
+          <th colspan="5"><%= link_to h(category.name), category_path(category) %></th>
+        </tr>
+        <tr class="forums-list">
+          <th class="tcl" colspan="2">Forums</th>
+          <th class="tcm">Topics</th>
+          <th class="tcm">Posts</th>
+          <th class="tcr">Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for forum in category.forums %>
+          <tr>
+            <td class="tci"><%= icon_for(forum.last_topic.last_post) %></td>
+            <td class="tcl">
+              <span class="forum-name"><%= link_to h(forum.name), forum_path(forum) %></span>
+              <br /><%=h forum.description %>
+            </td>
+            <td class="tcm"><%= number_with_delimiter(forum.topics_count) %></td>
+            <td class="tcm"><%= number_with_delimiter(forum.posts_count) %></td>
+            <td class="tcr">
+              <% if forum.posts_count > 0 %>
+                <% if logged_in? %>
+                  <%= link_to time_ago_or_time_stamp(forum.last_topic.last_post_at), show_new_topic_path(forum.last_topic) %>
+                <% else %>
+                  <%= time_ago_or_time_stamp(forum.last_topic.last_post_at) %>
+                <% end %>
+                <br /> by <%=h forum.last_topic.last_poster.login %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>
 <% end %>

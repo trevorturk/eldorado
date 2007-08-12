@@ -1,60 +1,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<meta http-equiv="Content-Script-Type" content="text/javascript" />
-	<meta name="description" content="<%= page_title %>" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="description" content="<%= page_title %>" />
 
-	<title><%= page_title %></title>
-	<meta name="generator" content="http://almosteffortless.com/" />
+  <title><%= page_title %></title>
+  <meta name="generator" content="http://almosteffortless.com/" />
 
-	<%= random_header_css %>
-	<%= theme_css %>
-	
+  <%= random_header_css %>
+  <%= theme_css %>
+  
   <%= javascript_include_tag "prototype", "audio-player", :cache => true %>
 
 </head>
 <body>
 
-	<div class="wrapper">
-		
-		<% for reminder in @reminders %>
-		  <% if tz_today?(reminder.date) %>
-			  <div class="reminders"><%= link_to h(reminder.title), event_path(reminder) %></div>
-			<% end %>
-		<% end %>
-		
-		<div class="header">
-			<h1><%= link_to h(@options.site_title), home_path %></h1>
-			<div class="tagline"><%=h @options.site_tagline %></div>		
-		</div>
-		
-			<%= render :partial => 'layouts/tabs' %>
-		
-			<div class="content">
-			
-				<%= render :partial => 'layouts/nav' %>
-				<%= render :partial => 'layouts/search' %>
-						
-				<%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
-				<%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
+  <div class="wrapper">
+    
+    <% for reminder in @reminders %>
+      <% if tz_today?(reminder.date) %>
+        <div class="reminders"><%= link_to h(reminder.title), event_path(reminder) %></div>
+      <% end %>
+    <% end %>
+    
+    <div class="header">
+      <h1><%= link_to h(@options.site_title), home_path %></h1>
+      <div class="tagline"><%=h @options.site_tagline %></div>    
+    </div>
+    
+      <%= render :partial => 'layouts/tabs' %>
+    
+      <div class="content">
+      
+        <%= render :partial => 'layouts/nav' %>
+        <%= render :partial => 'layouts/search' %>
+            
+        <%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
+        <%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
 
-				<div class="announcement"><%= @options.announcement %></div>
-			
-				<%= yield %>
-			
-				<%= render :partial => 'layouts/nav2' %>
-				<%= render :partial => 'layouts/stats' %>
-						
-			</div>
-		
-			<div class="footer"><%= @options.footer %></div>
-		
-	</div>
-		
-	<div style="margin:20px"> </div>
-		
+        <div class="announcement"><%= @options.announcement %></div>
+      
+        <%= yield %>
+      
+        <%= render :partial => 'layouts/nav2' %>
+        <%= render :partial => 'layouts/stats' %>
+            
+      </div>
+    
+      <div class="footer"><%= @options.footer %></div>
+    
+  </div>
+    
+  <div style="margin:20px"> </div>
+    
 </body>
 </html>

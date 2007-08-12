@@ -1,33 +1,33 @@
-<%= error_messages_for :topic %>	
+<%= error_messages_for :topic %>  
 <% form_for(:topic, :url => topics_path) do |f| %>
-	<div class="box">
-		<span class="top">New Topic</span>
-		<p class="label"><label for="topic_title">Title</label></p>
-		<p>
-			<% if current_controller == 'topics' and current_action != 'create' %>
-				<%= f.text_field :title, :style => "width:66%", :value => '' %>
-			<% else %>
-				<%= f.text_field :title, :style => "width:66%" %>
-			<% end %>
-			 &nbsp; <%= f.check_box(:private) %><label for="topic_private"> Private</label>
-		</p>
-		<p class="label"><label for="topic_forum">Forum</label></p>
-		<p>
-			<%= 
-				@all_forums = Forum.find(:all, :order => "name") 
-				f.collection_select(:forum_id, @all_forums, :id, :name) 			
-			%>
-		</p>
-		<p class="label"><label for="topic_body">Body</label></p>
-		<p><%= f.text_area :body, :rows => '8', :style => 'width:66%;' %></p>
-		<p>
-			<%= submit_tag "Post Topic", :disable_with => "Post Topic" %> or 
-			<% if current_action != 'new' %>
-				<%= link_to_function 'Cancel', "$('action').toggle()" %>
-			<% else %>
-				<%= link_to 'Cancel', forum_home_path %>
-			<% end %>
-			or <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %>
-		</p>
-	</div>
+  <div class="box">
+    <span class="top">New Topic</span>
+    <p class="label"><label for="topic_title">Title</label></p>
+    <p>
+      <% if current_controller == 'topics' and current_action != 'create' %>
+        <%= f.text_field :title, :style => "width:66%", :value => '' %>
+      <% else %>
+        <%= f.text_field :title, :style => "width:66%" %>
+      <% end %>
+       &nbsp; <%= f.check_box(:private) %><label for="topic_private"> Private</label>
+    </p>
+    <p class="label"><label for="topic_forum">Forum</label></p>
+    <p>
+      <%= 
+        @all_forums = Forum.find(:all, :order => "name") 
+        f.collection_select(:forum_id, @all_forums, :id, :name)       
+      %>
+    </p>
+    <p class="label"><label for="topic_body">Body</label></p>
+    <p><%= f.text_area :body, :rows => '8', :style => 'width:66%;' %></p>
+    <p>
+      <%= submit_tag "Post Topic", :disable_with => "Post Topic" %> or 
+      <% if current_action != 'new' %>
+        <%= link_to_function 'Cancel', "$('action').toggle()" %>
+      <% else %>
+        <%= link_to 'Cancel', forum_home_path %>
+      <% end %>
+      or <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %>
+    </p>
+  </div>
 <% end %>

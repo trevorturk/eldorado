@@ -1,18 +1,18 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'events/new' if %w(index).include?(current_action) %>
+  <%= render :partial => 'events/new' if %w(index).include?(current_action) %>
 </div>
 
 <div class="info-left">
-	<span class="title"><%=h @event.title %></span>
-	<span class="detail">by <%= link_to h(@event.user.login), user_path(@event.user) %></span>
+  <span class="title"><%=h @event.title %></span>
+  <span class="detail">by <%= link_to h(@event.user.login), user_path(@event.user) %></span>
 </div>
 <div style="clear:both;"> </div>
 
 <% if !@event.description.blank? %>
-	<blockquote>
-		<p style="margin-top:0;font-weight:bold;">
-			<%=tz @event.date %> at <%=h @event.location %>
-		</p>
-		<%=h @event.description %>
-	</blockquote>
+  <blockquote>
+    <p style="margin-top:0;font-weight:bold;">
+      <%=tz @event.date %> at <%=h @event.location %>
+    </p>
+    <%=h @event.description %>
+  </blockquote>
 <% end %>

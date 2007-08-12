@@ -1,20 +1,20 @@
 <div id="action" style="display:none;">
-	<%= render :partial => 'new' if %w(index).include?(current_action) %>
+  <%= render :partial => 'new' if %w(index).include?(current_action) %>
 </div>
 
 <div class="info-left">
-	<span class="title"><%=h @header.filename %></span>
-	<span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
+  <span class="title"><%=h @header.filename %></span>
+  <span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
 </div>
 <div class="info-right">
-	Votes (<span id="remote"><%= render :partial => 'votes' %></span>)
-	<% if logged_in? %>
-		<%= link_to_remote "+", :url => {:action => 'vote_up'}, :update => 'remote' %>
-		<%= link_to_remote "&ndash;", :url => {:action => 'vote_down'}, :update => 'remote' %>
-	<% end %>
+  Votes (<span id="remote"><%= render :partial => 'votes' %></span>)
+  <% if logged_in? %>
+    <%= link_to_remote "+", :url => {:action => 'vote_up'}, :update => 'remote' %>
+    <%= link_to_remote "&ndash;", :url => {:action => 'vote_down'}, :update => 'remote' %>
+  <% end %>
 </div>
 <div style="clear:both;"> </div>
 
 <% if !@header.description.blank? %>
-	<blockquote><%=h @header.description %></blockquote>
+  <blockquote><%=h @header.description %></blockquote>
 <% end %>

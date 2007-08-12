@@ -1,35 +1,35 @@
 <div class="nav">
-	<p class="nav-left">
-		<% if logged_in? %>
-			Logged in as <b><%= link_to h(current_user.login), user_path(current_user.id) %></b> | 
-			Last visit <%= time_ago_or_time_stamp(session[:online_at]) %>
-		<% else %>
-			You are not logged in
-		<% end %>
-	</p>
-	<p class="nav-right">
-		<% if logged_in? %>
-			<% if %w(home categories topics forums).include?(current_controller) %>
-				<%= link_to_function 'Start a New Topic', "$('action').toggle();$('topic_title').focus();" %>
-			<% elsif current_controller == 'avatars' && %w(index).include?(current_action) %>
-				<%= link_to_function 'Upload a New Avatar', "$('action').toggle();" %>
-			<% elsif current_controller == "events" && %w(index).include?(current_action) %>
-				<%= link_to_function 'Add a New Event', "$('action').toggle();$('event_title').focus();" %>
-			<% elsif current_controller == 'headers' && %w(index).include?(current_action) %>
-				<%= link_to_function 'Upload a New Header', "$('action').toggle();" %>
-			<% elsif current_controller == "themes" && %w(index).include?(current_action) %>
-				<%= link_to_function 'Upload a New Theme', "$('action').toggle();" %>
-			<% elsif current_controller == "uploads" && %w(index).include?(current_action) %>
-				<%= link_to_function 'Upload a New File', "$('action').toggle();" %>
-			<% elsif current_controller == "users" && %w(index).include?(current_action) %>
-				<%= link_to('Register a New User', new_user_path) %>
-			<% end %>
-			&nbsp; <%= link_to_function 'Search', "$('search').toggle();$('query').focus();" %>
-			&nbsp; <%= link_to('Logout', logout_path) %>
-		<% else %>
-			<%= link_to('Register', register_path) %> &nbsp;
-			<%= link_to('Login', login_path) %> 
-		<% end %>
-	</p>
+  <p class="nav-left">
+    <% if logged_in? %>
+      Logged in as <b><%= link_to h(current_user.login), user_path(current_user.id) %></b> | 
+      Last visit <%= time_ago_or_time_stamp(session[:online_at]) %>
+    <% else %>
+      You are not logged in
+    <% end %>
+  </p>
+  <p class="nav-right">
+    <% if logged_in? %>
+      <% if %w(home categories topics forums).include?(current_controller) %>
+        <%= link_to_function 'Start a New Topic', "$('action').toggle();$('topic_title').focus();" %>
+      <% elsif current_controller == 'avatars' && %w(index).include?(current_action) %>
+        <%= link_to_function 'Upload a New Avatar', "$('action').toggle();" %>
+      <% elsif current_controller == "events" && %w(index).include?(current_action) %>
+        <%= link_to_function 'Add a New Event', "$('action').toggle();$('event_title').focus();" %>
+      <% elsif current_controller == 'headers' && %w(index).include?(current_action) %>
+        <%= link_to_function 'Upload a New Header', "$('action').toggle();" %>
+      <% elsif current_controller == "themes" && %w(index).include?(current_action) %>
+        <%= link_to_function 'Upload a New Theme', "$('action').toggle();" %>
+      <% elsif current_controller == "uploads" && %w(index).include?(current_action) %>
+        <%= link_to_function 'Upload a New File', "$('action').toggle();" %>
+      <% elsif current_controller == "users" && %w(index).include?(current_action) %>
+        <%= link_to('Register a New User', new_user_path) %>
+      <% end %>
+      &nbsp; <%= link_to_function 'Search', "$('search').toggle();$('query').focus();" %>
+      &nbsp; <%= link_to('Logout', logout_path) %>
+    <% else %>
+      <%= link_to('Register', register_path) %> &nbsp;
+      <%= link_to('Login', login_path) %> 
+    <% end %>
+  </p>
 </div>
 <div style="clear:both"> </div>

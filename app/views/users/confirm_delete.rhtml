@@ -1,11 +1,11 @@
 <%= error_messages_for :user %>
 <% form_tag user_path(@user), :method => :delete do %>
-	<div class="box">
-		<span class="top">Delete User</span>
-			<p><label for="confirm">Confirm</label>: <%= check_box_tag(:confirm) %></p>
-			<p>
-				<%= submit_tag "Delete User", :disable_with => "Delete User" %> 
-				<%= link_to 'Cancel', user_path(@user) %>
-			</p>
-	</div>
+  <div class="box">
+    <span class="top">Delete User</span>
+      <p><label for="confirm">Confirm</label>: <%= check_box_tag(:confirm) %></p>
+      <p>
+        <%= submit_tag "Delete User", :disable_with => "Delete User" %> 
+        <%= link_to 'Cancel', user_path(@user) %>
+      </p>
+  </div>
 <% end %>

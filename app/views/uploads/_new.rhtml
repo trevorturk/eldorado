@@ -1,15 +1,15 @@
 <%= error_messages_for :upload %>
 <div class="box">
-	<% form_for(:upload, :url => uploads_path, :html => { :multipart => true }) do |f| -%>
-	<span class="top">New File</span>
-	<p><%= f.file_field :uploaded_data %></p>
-	<p>
-		<%= submit_tag "Upload", :disable_with => "Upload" %> 
-		<% if current_action != 'new' %>
-			<%= link_to_function 'Cancel', "$('action').toggle()" %>
-		<% else %>
-			<%= link_to 'Cancel', files_home_path %>
-		<% end %>
-	</p>
-	<% end %>
+  <% form_for(:upload, :url => uploads_path, :html => { :multipart => true }) do |f| -%>
+  <span class="top">New File</span>
+  <p><%= f.file_field :uploaded_data %></p>
+  <p>
+    <%= submit_tag "Upload", :disable_with => "Upload" %> 
+    <% if current_action != 'new' %>
+      <%= link_to_function 'Cancel', "$('action').toggle()" %>
+    <% else %>
+      <%= link_to 'Cancel', files_home_path %>
+    <% end %>
+  </p>
+  <% end %>
 </div>
