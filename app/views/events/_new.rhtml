@@ -13,7 +13,7 @@
     <p class="label"><label for="event_location">Location</label></p>
     <p><%= f.text_field :location, :style => 'width:66%;' %></p>
     <p class="label"><label for="event_date">Date</label></p>
-    <p><%= f.datetime_select :date %></p>
+    <p><%= f.datetime_select :date %>&nbsp;Currently: <%=tz TzTime.now %></p>
     <p>
       <%= submit_tag "Add Event", :disable_with => "Add Event" %> 
       <% if current_action != 'new' %>

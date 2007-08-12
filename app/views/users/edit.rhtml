@@ -16,7 +16,10 @@
     <p class="label"><label for="user_signature">Signature</label></p>
     <p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
     <p class="label"><label for="user_time_zone">Timezone</label></p>
-    <p><%= time_zone_select 'user', 'time_zone', TZInfo::Timezone.all.sort, :model => TZInfo::Timezone %></p>
+    <p>
+      <%= time_zone_select 'user', 'time_zone', TZInfo::Timezone.all.sort, :model => TZInfo::Timezone %>
+      &nbsp;Currently: <%=tz TzTime.now %>
+    </p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
       <%= link_to 'Delete', confirm_delete_user_path %> or 
