@@ -4,7 +4,11 @@
 
 <div class="info-left">
   <span class="title"><%=h @event.title %></span>
-  <span class="detail">by <%= link_to h(@event.user.login), user_path(@event.user) %></span>
+  <span class="detail">
+    by <%= link_to h(@event.user.login), user_path(@event.user) %>
+    &nbsp;|&nbsp; 
+    <%= @event.private? ? 'Private' : 'Public' %><%= @event.reminder? ? ', Reminder' : '' %>
+  </span>
 </div>
 <div style="clear:both;"> </div>
 
