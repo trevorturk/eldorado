@@ -183,7 +183,13 @@ class TopicsControllerTest < Test::Unit::TestCase
     login_as :trevor
     get :show_new, :id => 1
     # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s) 
-  end  
+  end
+  
+  def test_should_redirect_to_top_of_page_for_topic_with_no_anchor_if_first_post_in_thread
+    login_as :trevor
+    get :show_new, :id => 2
+    assert_redirected_to topic_path(:id => "2") 
+  end
   
   def test_should_send_banned_user_to_logout
     login_as :banned
