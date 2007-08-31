@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   
-  before_filter :force_login, :except => [:index, :show, :show_posters, :unknown_request]
+  before_filter :force_login, :except => [:index, :show, :show_posters, :show_new, :unknown_request]
   before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
   before_filter :check_privacy, :only => [:show]
   
@@ -61,9 +61,8 @@ class TopicsController < ApplicationController
   end
   
   def show_new
-    redirect_to login_path unless logged_in?
     @topic = Topic.find(params[:id])
-    @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]])
+    @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]]) unless !logged_in?
     @post = Post.find(@topic.last_post_id) if @post.nil?
     redirect_to topic_path(:id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s)
   end
