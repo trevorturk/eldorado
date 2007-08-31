@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 58) do
+ActiveRecord::Schema.define(:version => 59) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 58) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "location"
   end
 
   add_index "events", ["date"], :name => "index_events_on_date"

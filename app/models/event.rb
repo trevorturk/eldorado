@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 56
+# Schema version: 59
 #
 # Table name: events
 #
@@ -12,7 +12,6 @@
 #  user_id     :integer(11)   
 #  created_at  :datetime      
 #  updated_at  :datetime      
-#  location    :text          
 #
 
 class Event < ActiveRecord::Base

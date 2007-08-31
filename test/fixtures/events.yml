@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 56
+# Schema version: 59
 #
 # Table name: events
 #
@@ -12,7 +12,6 @@
 #  user_id     :integer(11)   
 #  created_at  :datetime      
 #  updated_at  :datetime      
-#  location    :text          
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
@@ -22,7 +21,6 @@ one:
   description: MyText
   date: <%= 5.hours.ago.to_s :db %>
   user_id: 1
-  location: MyText
   created_at: <%= 5.hours.ago.to_s :db %>
   updated_at: <%= 5.hours.ago.to_s :db %>
 two:
@@ -31,6 +29,5 @@ two:
   description: MyText
   date: <%= 5.hours.ago.to_s :db %>
   user_id: 1
-  location: MyText
   created_at: <%= 5.hours.ago.to_s :db %>
   updated_at: <%= 5.hours.ago.to_s :db %>

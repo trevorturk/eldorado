@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 56
+# Schema version: 59
 #
 # Table name: users
 #
@@ -17,7 +17,7 @@
 #  avatar             :string(255)   
 #  auth_token         :string(255)   
 #  auth_token_exp     :datetime      
-#  time_zone          :string(255)   default("Etc/UTC")
+#  time_zone          :string(255)   default("UTC")
 #
 
 require 'digest/sha1'
