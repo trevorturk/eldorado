@@ -121,8 +121,12 @@
 <% if current_controller == 'search' %>
   <%= '<div style="padding-top:5px;"> </div>' unless @posts.blank? %>
   <div class="info-right">
-    <%= will_paginate @topics unless @topics.blank? %>
+    <%= will_paginate @events unless @events.blank? %>
+    <%= will_paginate @headers unless @headers.blank? %>
     <%= will_paginate @posts unless @posts.blank? %>
+    <%= will_paginate @topics unless @topics.blank? %>
+    <%= will_paginate @uploads unless @uploads.blank? %>
+    <%= will_paginate @users unless @users.blank? %>
   </div>
 <% end %>
 
