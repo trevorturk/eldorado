@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 59) do
+ActiveRecord::Schema.define(:version => 60) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 59) do
     t.string  "admin_rank"
     t.string  "newest_user"
     t.integer "theme_id"
+    t.string  "favicon"
   end
 
   create_table "posts", :force => true do |t|
