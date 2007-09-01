@@ -6,12 +6,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <meta name="description" content="<%= page_title %>" />
+  
+  <title><%= page_title %></title>
+  <!-- Powered by El Dorado (http://almosteffortless.com) -->
+
   <% unless @options.favicon.blank? %>
     <link rel="shortcut icon" href="<%= @options.favicon %>" />
   <% end %>
-
-  <title><%= page_title %></title>
-  <!-- Powered by El Dorado (http://almosteffortless.com) -->
 
   <%= random_header_css %>
   <%= theme_css %>
@@ -39,7 +40,7 @@
       <div class="content">
       
         <%= render :partial => 'layouts/nav' %>
-        <%= render :partial => 'layouts/search' %>
+        <%= render :partial => 'search/form' %>
             
         <%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
         <%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>

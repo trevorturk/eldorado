@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 59
+# Schema version: 60
 #
 # Table name: forums
 #

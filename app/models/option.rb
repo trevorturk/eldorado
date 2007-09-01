@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 59
+# Schema version: 60
 #
 # Table name: options
 #
@@ -11,6 +11,7 @@
 #  admin_rank   :string(255)   
 #  newest_user  :string(255)   
 #  theme_id     :integer(11)   
+#  favicon      :string(255)   
 #
 
 class Option < ActiveRecord::Base

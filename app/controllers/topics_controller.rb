@@ -7,9 +7,9 @@ class TopicsController < ApplicationController
   def index
     @topic = Topic.new
     if logged_in?      
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
+      @topics = Topic.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
+      @topics = Topic.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
   end
 

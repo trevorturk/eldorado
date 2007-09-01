@@ -118,6 +118,14 @@
   </div>
 <% end %>
 
+<% if current_controller == 'search' %>
+  <%= '<div style="padding-top:5px;"> </div>' unless @posts.blank? %>
+  <div class="info-right">
+    <%= will_paginate @topics unless @topics.blank? %>
+    <%= will_paginate @posts unless @posts.blank? %>
+  </div>
+<% end %>
+
 <% if current_controller == 'themes' and current_action == 'new' %>
   <div class="info-left">
     <%= link_to 'Home', home_path %> &raquo; 
