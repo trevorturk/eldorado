@@ -15,7 +15,7 @@ class SearchController < ApplicationController
       @headers = Header.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => :user, :order => 'headers.created_at desc', :conditions => ["filename LIKE ?", '%' + params[:query] + '%'])        
       render :template => "headers/index"
     elsif params[:type] == 'posts'
-      @posts = Post.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => :user, :order => 'posts.created_at desc', :conditions => ["body LIKE ?", '%' + params[:query] + '%'])        
+      @posts = Post.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => [:user, :topic], :order => 'posts.created_at desc', :conditions => ["body LIKE ?", '%' + params[:query] + '%'])        
       render :template => "topics/show"
     elsif params[:type] == 'topics'
       @topics = Topic.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["title LIKE ?", '%' + params[:query] + '%'])

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController 
   
   before_filter :redirect_to_home, :only => [:index, :show]
-  before_filter :force_login
+  before_filter :force_login, :except => [:locate]
   before_filter :find_topic_and_post, :except => [:index, :new, :create]
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
   
@@ -41,6 +41,11 @@ class PostsController < ApplicationController
   def quote
     @post.body = "[quote=#{@post.user.login}]#{@post.body}[/quote]"
     render :template => "posts/_new"
+  end
+  
+  def locate
+    @post = Post.find(params[:id])
+    redirect_to :controller => 'topics', :action => 'show', :id => @post.topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
   end
     
   def find_topic_and_post

@@ -33,7 +33,7 @@
         <th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
         <th class="thr">
           <% if current_controller == 'search' %>
-            <%= link_to post.topic.title + ' &raquo;', topic_path(:id => post.topic.id) %>
+            <%= link_to post.topic.title + ' &raquo;', locate_post_path(post) %>
           <% else %>
             <%= link_to "#" + (index + @padding).to_s, topic_path(:page => @page, :anchor => 'p' + post.id.to_s) %>
           <% end %>
@@ -83,14 +83,20 @@
           <% end %>
         </td>
         <td class="body links">
-          <% unless current_controller == 'search' %>
-            <% if can_edit?(post) %>
-              <%= link_to 'Edit', edit_post_path(post) %>&nbsp;|
+          <% if can_edit?(post) %>
+            <%= link_to 'Edit', edit_post_path(post) %>&nbsp;|
+          <% end %>
+          
+          <% if current_controller == 'search' %>
+            <% if logged_in? && !post.topic.closed %>
+              <%= link_to 'Quote', quote_post_path(post) %>
             <% end %>
+          <% else %>
             <% if logged_in? && !@topic.closed %>
               <%= link_to 'Quote', quote_post_path(post) %>
             <% end %>
           <% end %>
+          
         </td>
       </tr>
     </tbody>
