@@ -28,7 +28,8 @@ module BBCodeizer
       :superdeluxe           => [ /\[superdeluxe\](.+?)superdeluxe.com\/sd\/contentDetail.do\?id=(.+?)\[\/superdeluxe\]/i, '<object width="400" height="350"><param name="allowFullScreen" value="true" /><param name="movie" value="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" /><param name="FlashVars" value="id=\2" /><embed src="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" FlashVars="id=\2" type="application/x-shockwave-flash" width="400" height="350" allowFullScreen="true" ></embed></object>' ],
       :comedycentral         => [ /\[comedycentral\](.+?)comedycentral.com\/motherload\/index.jhtml\?ml_video=(.+?)\[\/comedycentral\]/i, '<embed FlashVars="config=http://www.comedycentral.com/motherload/xml/data_synd.jhtml?vid=\2%26myspace=false" src="http://www.comedycentral.com/motherload/syndicated_player/index.jhtml" quality="high" bgcolor="#006699" width="340" height="325" name="comedy_player" align="middle" allowScriptAccess="always" allownetworking="external" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>' ],
       :revver                => [ /\[revver\](.+?)revver.com\/watch\/(.+?)\[\/revver\]/i, '<embed type="application/x-shockwave-flash" src="http://flash.revver.com/player/1.0/player.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noScale" salign="TL" bgcolor="#000000" flashvars="mediaId=\2&affiliateId=0&allowFullScreen=true" allowfullscreen="true" height="392" width="480"></embed>' ],
-      :myspacetv             => [ /\[myspacetv\](.+?)myspace(.+?)videoid=(.+?)\[\/myspacetv\]/i, '<embed src="http://lads.myspace.com/videos/vplayer.swf" flashvars="m=\3&v=2&type=video" type="application/x-shockwave-flash" width="430" height="346"></embed>' ]
+      :myspacetv             => [ /\[myspacetv\](.+?)myspace(.+?)videoid=(.+?)\[\/myspacetv\]/i, '<embed src="http://lads.myspace.com/videos/vplayer.swf" flashvars="m=\3&v=2&type=video" type="application/x-shockwave-flash" width="430" height="346"></embed>' ],
+      :collegehumor          => [ /\[collegehumor\](.+?)collegehumor.com\/video:(.+?)\[\/collegehumor\]/i, '<embed src="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=\2" quality="best" width="400" height="300" type="application/x-shockwave-flash"></embed>' ]
     }
     # removed quotes from cites, added youtube, googlevid, spoiler, mp3, funnyordie, superdeluxe, comedycentral
 
@@ -37,7 +38,7 @@ module BBCodeizer
     TagList = [ :bold, :italic, :underline, :email_with_name, :email_sans_name, 
                 :url_with_title, :url_sans_title, :image, :size, :color,
                 :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :mp3, 
-                :superdeluxe, :comedycentral, :revver, :myspacetv ]
+                :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)
