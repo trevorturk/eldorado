@@ -5,6 +5,9 @@ class SearchController < ApplicationController
   def index
     if params[:type].blank? || params[:query].blank?
       render :template => "search/index"
+    elsif params[:type] == 'avatars'
+      @avatars = Avatar.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => :user, :order => 'avatars.created_at desc', :conditions => ["filename LIKE ?", '%' + params[:query] + '%'])        
+      render :template => "avatars/index"
     elsif params[:type] == 'events'
       @events = Event.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => :user, :order => 'events.created_at desc', :conditions => ["title LIKE ?", '%' + params[:query] + '%'])        
       render :template => "events/index"

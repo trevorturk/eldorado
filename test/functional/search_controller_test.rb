@@ -19,4 +19,23 @@ class SearchControllerTest < Test::Unit::TestCase
     get :index
     assert_response :success
   end
+  
+  def test_should_accept_searches
+    login_as :trevor
+    get :index, :type => 'avatars', :query => 'test'
+    assert_response :success
+    get :index, :type => 'events', :query => 'test'
+    assert_response :success
+    get :index, :type => 'files', :query => 'test'
+    assert_response :success
+    get :index, :type => 'headers', :query => 'test'
+    assert_response :success
+    get :index, :type => 'posts', :query => 'test'
+    assert_response :success
+    get :index, :type => 'topics', :query => 'test'
+    assert_response :success
+    get :index, :type => 'users', :query => 'test'
+    assert_response :success
+  end
+  
 end
