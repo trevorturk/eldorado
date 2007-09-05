@@ -4,7 +4,7 @@
     <%= link_to 'Users', users_path %> &raquo; Avatars
   </div>
   <div class="info-right">
-    <%= will_paginate @avatars %>
+    <%= will_paginate @avatars, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
@@ -22,7 +22,7 @@
     <%= link_to 'Forum', forum_home_path %> &raquo; <%= h@category.name %>
   </div>
   <div class="info-right">
-    <%= will_paginate @topics %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
@@ -31,7 +31,7 @@
     <%= link_to 'Home', home_path %> &raquo; Events
   </div>
   <div class="info-right">
-    <%= will_paginate @events %>
+    <%= will_paginate @events, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
@@ -75,13 +75,13 @@
     <%= link_to @forum.category.name, category_path(@forum.category) %> &raquo; <%= @forum.name %>
   </div>
   <div class="info-right">
-    <%= will_paginate @topics %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
 <% if current_controller == 'headers' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @headers %>
+    <%= will_paginate @headers, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
@@ -114,19 +114,18 @@
 
 <% if current_controller == 'home' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @topics unless @topics.blank? %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @topics.blank? %>
   </div>
 <% end %>
 
 <% if current_controller == 'search' %>
-  <%= '<div style="padding-top:5px;"> </div>' unless @posts.blank? %>
-  <div class="info-right">
-    <%= will_paginate @events unless @events.blank? %>
-    <%= will_paginate @headers unless @headers.blank? %>
-    <%= will_paginate @posts unless @posts.blank? %>
-    <%= will_paginate @topics unless @topics.blank? %>
-    <%= will_paginate @uploads unless @uploads.blank? %>
-    <%= will_paginate @users unless @users.blank? %>
+  <div class="info-right" style="padding-top:5px;">
+    <%= will_paginate @events, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @events.blank? %>
+    <%= will_paginate @headers, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @headers.blank? %>
+    <%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @posts.blank? %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @topics.blank? %>
+    <%= will_paginate @uploads, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @uploads.blank? %>
+    <%= will_paginate @users, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @users.blank? %>
   </div>
 <% end %>
 
@@ -144,7 +143,7 @@
     <%= link_to 'Users', users_path %> &raquo; Themes
   </div>
   <div class="info-right">
-    <%= will_paginate @themes %>
+    <%= will_paginate @themes, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
@@ -154,7 +153,7 @@
     <%= link_to 'Forum', forum_home_path %> &raquo; All Topics
   </div>
   <div class="info-right">
-    <%= will_paginate @topics %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
@@ -177,8 +176,7 @@
     <%= link_to 'Home', home_path %> &raquo; 
     <%= link_to 'Forum', forum_home_path %> <%= link_to 'Topics', topics_path %> &raquo; 
     <%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %> &raquo; 
-    <%= link_to @topic.forum.name, forum_path(@topic.forum) %> &raquo; 
-    <%=h @topic.title %>
+    <%= link_to @topic.forum.name, forum_path(@topic.forum) %>
   </div>
   <div class="info-right">
     <% if can_edit?(@topic) %>
@@ -191,7 +189,7 @@
 
 <% if current_controller == 'uploads' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @uploads %>
+    <%= will_paginate @uploads, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
@@ -204,7 +202,7 @@
 
 <% if current_controller == 'users' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @users %>
+    <%= will_paginate @users, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
 
