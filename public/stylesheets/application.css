@@ -206,18 +206,19 @@ tbody {
 tbody td {
   padding: 5px;
   vertical-align: top;
+	vertical-align: middle;
   border-top: 1px solid #cedeb9;
   border-right: 1px solid #cedeb9;
 }
 
 tbody .tci {
   width: 10px !important;
+	vertical-align: top;
   border-right: 0;
 }
 
 tbody .tcm {
   text-align: center;
-  vertical-align: middle;
   background: #dedfdf;
 }
 

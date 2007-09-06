@@ -17,10 +17,24 @@
         <tr>
           <td class="tci"><%= icon_for(upload) %></td>
           <td class="tcl">
-            <%= link_to upload.filename, upload.public_filename %> by <%=h upload.user.login %>
+            <%= link_to upload.filename, upload.public_filename %>
+            
+            <% if upload.content_type == 'audio/mpeg' %>
+              <%= link_to_function '(&raquo;)', "$('mp3-#{upload.public_filename}').toggle()" %>
+            <% end %>
+            
+            by <%=h upload.user.login %>
+            
             <% if can_edit?(upload) %>
               <%= link_to '(x)', upload_path(upload), :confirm => 'Are you sure?', :method => :delete %>
             <% end %>
+            
+            <% if upload.content_type == 'audio/mpeg' %>
+              <div id="<%= "mp3-#{upload.public_filename}" %>" style="display:none;">
+                <%= bb("[mp3]#{home_url.chop + upload.public_filename}[/mp3]") %>
+              </div>
+            <% end %>
+            
           </td>
           <td class="tcl"><%= upload.content_type %></td>
           <td class="tcm"><%= number_to_human_size(upload.size) %></td>
