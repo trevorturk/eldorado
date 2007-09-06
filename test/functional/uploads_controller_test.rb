@@ -18,6 +18,13 @@ class UploadsControllerTest < Test::Unit::TestCase
     assert_response :success
     assert assigns(:uploads)
   end
+  
+  def test_should_get_index_if_logged_in
+    login_as :trevor
+    get :index
+    assert_response :success
+    assert assigns(:uploads)
+  end
 
   def test_should_get_new
   end

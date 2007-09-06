@@ -4,7 +4,11 @@ class UploadsController < ApplicationController
   before_filter :force_login, :except => [:index]
   
   def index
-    @uploads = Upload.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc')
+    if logged_in?
+      @uploads = Upload.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc')
+    else
+      @uploads = Upload.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc', :conditions => ["private = ?", false])
+    end
   end
 
   def new

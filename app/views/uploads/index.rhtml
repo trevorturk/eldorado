@@ -18,16 +18,10 @@
           <td class="tci"><%= icon_for(upload) %></td>
           <td class="tcl">
             <%= link_to upload.filename, upload.public_filename %>
-            
-            <% if upload.content_type == 'audio/mpeg' %>
-              <%= link_to_function '(&raquo;)', "$('mp3-#{upload.public_filename}').toggle()" %>
-            <% end %>
-            
+            <%= '<span class="detail">Private</span>' if upload.private? %>
+            <%= link_to_function '(&raquo;)', "$('mp3-#{upload.public_filename}').toggle()" if upload.content_type == 'audio/mpeg' %>
             by <%=h upload.user.login %>
-            
-            <% if can_edit?(upload) %>
-              <%= link_to '(x)', upload_path(upload), :confirm => 'Are you sure?', :method => :delete %>
-            <% end %>
+            <%= link_to '(x)', upload_path(upload), :confirm => 'Are you sure?', :method => :delete if can_edit?(upload) %>
             
             <% if upload.content_type == 'audio/mpeg' %>
               <div id="<%= "mp3-#{upload.public_filename}" %>" style="display:none;">
