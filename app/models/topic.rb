@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 61
+# Schema version: 62
 #
 # Table name: topics
 #
@@ -13,7 +13,7 @@
 #  last_post_at :datetime      
 #  last_post_by :integer(11)   
 #  private      :boolean(1)    
-#  closed       :boolean(1)    
+#  locked       :boolean(1)    
 #  sticky       :boolean(1)    
 #  forum_id     :integer(11)   
 #
@@ -31,7 +31,7 @@ class Topic < ActiveRecord::Base
     
   attr_accessor :body
   
-  attr_accessible :title, :private, :closed, :sticky, :forum_id
+  attr_accessible :title, :private, :locked, :sticky, :forum_id
   
   PER_PAGE = 30
   

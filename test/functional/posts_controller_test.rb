@@ -92,4 +92,25 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
   end
   
+  def test_should_not_allow_post_if_logged_in_and_locked
+    login_as :Timothy
+    old_post_count = Post.count
+    post :create, :post => { :topic_id => "3", :body => "this is a test" }
+    assert_equal old_post_count, Post.count
+  end
+
+  def test_should_allow_post_if_logged_in_and_locked_but_is_admin
+    login_as :Administrator
+    old_post_count = Post.count
+    post :create, :post => { :topic_id => "3", :body => "this is a test" }
+    assert_equal old_post_count+1, Post.count
+  end
+
+  def test_should_allow_post_if_logged_in_and_locked_but_is_topic_creator
+    login_as :trevor
+    old_post_count = Post.count
+    post :create, :post => { :topic_id => "3", :body => "this is a test" }
+    assert_equal old_post_count+1, Post.count
+  end
+  
 end

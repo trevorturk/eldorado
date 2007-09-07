@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 61
+# Schema version: 62
 #
 # Table name: posts
 #

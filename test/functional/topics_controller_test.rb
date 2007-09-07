@@ -204,5 +204,39 @@ class TopicsControllerTest < Test::Unit::TestCase
     # get :show_new, :id => 1
     # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s)
   end
+
+  def test_should_allow_post_if_logged_in
+    login_as :trevor
+    get :show, :id => 1
+    assert_response :success
+    assert_select "span#reply"
+  end
+  
+  def test_should_not_allow_post_if_not_logged_in
+    get :show, :id => 1
+    assert_response :success
+    assert_select "span#reply", false
+  end
+  
+  def test_should_not_allow_post_if_logged_in_and_locked
+    login_as :Timothy
+    get :show, :id => 3
+    assert_response :success
+    assert_select "span#reply", false
+  end
+
+  def test_should_allow_post_if_logged_in_and_locked_but_is_admin
+    login_as :Administrator
+    get :show, :id => 3
+    assert_response :success
+    assert_select "span#reply"
+  end
+
+  def test_should_allow_post_if_logged_in_and_locked_but_is_topic_creator
+    login_as :trevor
+    get :show, :id => 3
+    assert_response :success
+    assert_select "span#reply"
+  end
   
 end

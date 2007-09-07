@@ -13,8 +13,11 @@ class PostsController < ApplicationController
   end 
     
   def create
-    @post = current_user.posts.build(params[:post])
     @topic = Topic.find(params[:post][:topic_id])
+    @post = current_user.posts.build(params[:post])
+    if @topic.locked
+      redirect_to home_path and return false unless admin? || (current_user == @topic.user)
+    end
     @topic.posts_count += 1 # hack to set last_page correctly
     if (@topic.posts << @post) 
       redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s

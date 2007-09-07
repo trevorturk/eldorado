@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 61) do
+ActiveRecord::Schema.define(:version => 62) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(:version => 61) do
     t.datetime "last_post_at"
     t.integer  "last_post_by"
     t.boolean  "private",      :default => false
-    t.boolean  "closed",       :default => false
+    t.boolean  "locked"
     t.boolean  "sticky",       :default => false
     t.integer  "forum_id"
   end

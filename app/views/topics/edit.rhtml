@@ -6,7 +6,7 @@
     <p>
       <%= f.text_field :title, :style => "width:66%" %> &nbsp; 
       <%= f.check_box(:private) %><label for="topic_private"> Private</label> &nbsp; 
-      <%= f.check_box(:closed) %><label for="topic_closed"> Closed</label>
+      <%= f.check_box(:locked) %><label for="topic_locked"> Locked</label>
     </p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> or 

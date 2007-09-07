@@ -9,7 +9,7 @@
       &laquo; <%= link_to @topic.forum.name, forum_path(@topic.forum) %>
       &laquo; <%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %>
       &nbsp;|&nbsp; 
-      <%= @topic.private? ? 'Private' : 'Public' %><%= @topic.closed? ? ', Closed' : '' %>
+      <%= @topic.private? ? 'Private' : 'Public' %><%= @topic.locked? ? ', Locked' : '' %>
     </span>
   </div>
   <div class="info-right">
@@ -88,11 +88,11 @@
           <% end %>
           
           <% if current_controller == 'search' %>
-            <% if logged_in? && !post.topic.closed %>
+            <% if logged_in? && !post.topic.locked %>
               <%= link_to 'Quote', quote_post_path(post) %>
             <% end %>
           <% else %>
-            <% if logged_in? && !@topic.closed %>
+            <% if logged_in? && !@topic.locked %>
               <%= link_to 'Quote', quote_post_path(post) %>
             <% end %>
           <% end %>
@@ -104,14 +104,15 @@
 <% end %>
 
 <% unless current_controller == 'search' %>
-  <span id="reply"></span>
-  <% if logged_in? && !@topic.closed %>
+  <% if logged_in? && (!@topic.locked || can_edit?(@topic)) %>
     <%= render :partial => 'posts/new' %>
-  <% elsif logged_in? && @topic.closed %>
+  <% end %>
+  <% if @topic.locked && !can_edit?(@topic) %>
     <div class="nav nav-footer">
-      <p class="nav-left">This Topic is Closed</p>
+      <p class="nav-right">This Topic is Locked</p>
     </div>
-  <% else %>
+  <% end %>
+  <% if !logged_in? %>
     <div class="nav nav-footer">
       <p class="nav-right">
         <%= link_to('Login', login_path) %> or 
