@@ -83,12 +83,12 @@ class UsersController < ApplicationController
   
   def can_edit_user
     @user = User.find(params[:id])
-    redirect_to user_path(@user) and return false unless admin? || (current_user == @user)
+    redirect_to home_path and return false unless admin? || (current_user == @user)
   end
   
   def do_login(user)
     session[:user_id] = user.id
-    session[:online_at] = user.online_at
+    session[:online_at] = Time.now.utc
     user.online_at = Time.now.utc
     user.auth_token = Digest::SHA1.hexdigest(Time.now.to_s + rand(123456789).to_s)
     user.auth_token_exp = 2.weeks.from_now

@@ -23,7 +23,7 @@ class AvatarsController < ApplicationController
 
   def destroy
     @avatar = Avatar.find(params[:id])
-    redirect_to avatars_path and return false unless admin? || (current_user == @avatar.user)
+    redirect_to home_path and return false unless admin? || (current_user == @avatar.user)
     @user = User.find_by_id(@avatar.current_user_id)
     @user.update_attributes(:avatar => nil) if @user 
     @avatar.destroy
@@ -32,14 +32,10 @@ class AvatarsController < ApplicationController
   
   def select
     @avatar = Avatar.find(params[:id])
-    #check if avatar is already in use
     redirect_to avatars_path and return false unless @avatar.current_user_id.blank?
-    # clear the current_user_id info for the user's current avatar
     @old_avatar = Avatar.find_by_current_user_id(current_user.id)
     @old_avatar.update_attributes(:current_user_id => nil) if @old_avatar
-    # set the current_user_id for the new avatar
     @avatar.update_attributes(:current_user_id => current_user.id)
-    # set the new avatar for the current user
     current_user.update_attributes(:avatar => @avatar.public_filename)
     redirect_to user_path(current_user)
   end

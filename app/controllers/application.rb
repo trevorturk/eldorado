@@ -48,10 +48,10 @@ class ApplicationController < ActionController::Base
   
   def update_online_at
     return unless logged_in?
-    session[:online_at] = current_user.online_at if current_user.online_at + 10.minutes < Time.now.utc 
+    session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
     User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
   end
-        
+  
   def admin?()
     logged_in? && (current_user.admin == true)
   end

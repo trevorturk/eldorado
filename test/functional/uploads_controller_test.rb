@@ -60,7 +60,7 @@ class UploadsControllerTest < Test::Unit::TestCase
     old_count = Upload.count
     delete :destroy, :id => 2
     assert_equal old_count, Upload.count
-    assert_redirected_to files_home_path
+    assert_redirected_to home_path
   end
   
 end

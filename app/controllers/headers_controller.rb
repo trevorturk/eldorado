@@ -58,7 +58,7 @@ class HeadersController < ApplicationController
   
   def can_edit_header
     @header = Header.find(params[:id])
-    redirect_to header_path(@header) and return false unless admin? || (current_user == @header.user)
+    redirect_to home_path and return false unless admin? || (current_user == @header.user)
   end
   
 end

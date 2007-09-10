@@ -37,6 +37,7 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   config.active_record.default_timezone = :utc
+  ENV['TZ'] = 'UTC' # This makes Time.now return time in UTC
   
   # See Rails::Configuration for more options
 end

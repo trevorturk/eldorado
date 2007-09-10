@@ -57,7 +57,7 @@ class EventsController < ApplicationController
     
   def can_edit_event
     @event = Event.find(params[:id])
-    redirect_to event_path(@event) and return false unless admin? || (current_user == @event.user)
+    redirect_to home_path and return false unless admin? || (current_user == @event.user)
   end
   
 end

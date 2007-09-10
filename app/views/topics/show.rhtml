@@ -45,7 +45,7 @@
         <td class="profile">
           <dl>
             <dt><%= link_to h(post.user.login), user_path(post.user.id) %></dt>
-            <dd class="rank"><%= rank_for(post.user.posts_count, post.user.admin) %></dd>
+            <dd class="rank"><%= rank_for(post.user) %></dd>
             <dd class="avatar">
               <%= link_to avatar_for(post.user), user_path(post.user.id) unless post.user.avatar.nil? %>
             </dd>

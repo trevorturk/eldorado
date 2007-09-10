@@ -28,7 +28,7 @@ class UploadsController < ApplicationController
 
   def destroy
     @upload = Upload.find(params[:id])
-    redirect_to files_home_path and return false unless admin? || (current_user == @upload.user)
+    redirect_to home_path and return false unless admin? || (current_user == @upload.user)
     @upload.destroy
     redirect_to files_home_path
   end

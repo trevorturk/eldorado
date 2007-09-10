@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   end 
   
   def can_edit_post
-    redirect_to topic_path(@topic) and return false unless admin? || (current_user == @post.user)
+    redirect_to home_path and return false unless admin? || (current_user == @post.user)
   end
     
 end

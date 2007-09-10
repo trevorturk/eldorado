@@ -34,7 +34,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_not_be_able_to_edit_wrong_user
     login_as :trevor
     get :edit, :id => 2
-    assert_redirected_to user_path(:id => 2)
+    assert_redirected_to home_path
   end
   
   def test_should_be_able_to_edit_self
@@ -58,7 +58,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_not_update_user_if_not_authorized
     login_as :trevor
     put :update, :id => 2, :user => { :bio => "ok!" }
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to home_path
     assert_equal "admin", users(:Administrator).bio
   end
     

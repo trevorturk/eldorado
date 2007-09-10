@@ -91,7 +91,7 @@ class TopicsControllerTest < Test::Unit::TestCase
   def test_should_fail_to_update_topic_if_wrong_user
     login_as :Timothy
     put :update, :id => 1, :topic => { :title => "bogus!" }
-    assert_redirected_to topic_path(topics(:Testing))
+    assert_redirected_to home_path
     assert_equal "Testing", topics(:Testing).title
   end
   
@@ -122,7 +122,7 @@ class TopicsControllerTest < Test::Unit::TestCase
     old_count = Topic.count
     delete :destroy, :id => 1
     assert_equal old_count, Topic.count
-    assert_redirected_to topic_path(topics(:Testing))
+    assert_redirected_to home_path
   end
   
   def test_should_destroy_topic_if_admin
