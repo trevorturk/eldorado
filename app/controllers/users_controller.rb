@@ -88,7 +88,7 @@ class UsersController < ApplicationController
   
   def do_login(user)
     session[:user_id] = user.id
-    session[:online_at] = Time.now.utc
+    session[:online_at] = user.online_at
     user.online_at = Time.now.utc
     user.auth_token = Digest::SHA1.hexdigest(Time.now.to_s + rand(123456789).to_s)
     user.auth_token_exp = 2.weeks.from_now
