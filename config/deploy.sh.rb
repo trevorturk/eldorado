@@ -18,6 +18,7 @@ after 'deploy:update_code', 'deploy:create_symlinks'
 namespace :deploy do
   task :restart do
     run "/var/lib/gems/1.8/bin/mongrel_rails stop -P #{shared_path}/log/mongrel.8000.pid"
+    sleep 5
     run "/var/lib/gems/1.8/bin/mongrel_rails start -d -e production -p 8000 -P log/mongrel.8000.pid -c #{release_path} --user root --group root"
   end
 end
