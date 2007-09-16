@@ -30,9 +30,9 @@ module BBCodeizer
       :revver                => [ /\[revver\](.+?)revver.com\/watch\/(.+?)\[\/revver\]/i, '<embed type="application/x-shockwave-flash" src="http://flash.revver.com/player/1.0/player.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noScale" salign="TL" bgcolor="#000000" flashvars="mediaId=\2&affiliateId=0&allowFullScreen=true" allowfullscreen="true" height="392" width="480"></embed>' ],
       :myspacetv             => [ /\[myspacetv\](.+?)myspace(.+?)videoid=(.+?)\[\/myspacetv\]/i, '<embed src="http://lads.myspace.com/videos/vplayer.swf" flashvars="m=\3&v=2&type=video" type="application/x-shockwave-flash" width="430" height="346"></embed>' ],
       :collegehumor          => [ /\[collegehumor\](.+?)collegehumor.com\/video:(.+?)\[\/collegehumor\]/i, '<embed src="http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=\2" quality="best" width="400" height="300" type="application/x-shockwave-flash"></embed>' ],
-      :metacafe              => [ /\[metacafe\](.+?)metacafe.com\/watch\/(.+?)\/(.+?)\/\[\/metacafe\]/i, '<embed src="http://www.metacafe.com/fplayer/\2/\3.swf" width="400" height="345" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>' ]
+      :metacafe              => [ /\[metacafe\](.+?)metacafe.com\/watch\/(.+?)\/(.+?)\/\[\/metacafe\]/i, '<embed src="http://www.metacafe.com/fplayer/\2/\3.swf" width="400" height="345" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>' ],
+      :yahoovid              => [ /\[yahoovid\](.+?)id=(.+?)&(.+?)vid=(.+?)'(.+?)\[\/yahoovid\]/i, '<embed src="http://us.i1.yimg.com/cosmos.bcst.yahoo.com/player/media/swf/FLVVideoSolo.swf" flashvars="id=\2&vid=\4" type="application/x-shockwave-flash" width="425" height="350"></embed>' ]
     }
-    # removed quotes from cites, added youtube, googlevid, spoiler, mp3, funnyordie, superdeluxe, comedycentral
 
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
     # These names correspond to either names above or methods in this module.
@@ -40,7 +40,7 @@ module BBCodeizer
                 :url_with_title, :url_sans_title, :image, :size, :color,
                 :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :mp3, 
                 :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor,
-                :metacafe ]
+                :metacafe, :yahoovid ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)
