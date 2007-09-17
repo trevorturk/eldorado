@@ -13,6 +13,7 @@
     </span>
   </div>
   <div class="info-right">
+    <span class="title">&nbsp;</span>
     <span class="detail">
       <%= link_to_remote "#{pluralize(number_with_delimiter(@topic.posts_count), 'Post')} by #{pluralize(number_with_delimiter(@topic.posters), 'User')}", :url => {:action => 'show_posters', :id => @topic.id} %>
       <% if @topic.last_page != 1 %>

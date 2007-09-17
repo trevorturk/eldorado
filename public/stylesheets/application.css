@@ -309,6 +309,14 @@ tbody .tds {
   color: #333;
 }
 
+.forums-admin ul ul {
+	margin-left: 15px;
+}
+
+.forums-admin ul ul li {
+	margin-bottom: 5px;
+}
+
 .forum-name {
   font-weight: bold;
   font-size: 12px;
@@ -335,7 +343,7 @@ tbody .tds {
 
 .info-right {
   float: right;
-  margin: 1px 0 10px 0;
+  margin: 0 0 10px 0;
   padding-right: 5px;
   border-right: 1px solid #f1f1f1;
 }
