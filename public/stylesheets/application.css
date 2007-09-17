@@ -257,7 +257,6 @@ tbody .tds {
 
 .post-body, .post-body img {
   overflow: hidden;
-  max-width: 100%;
 }
 
 .thread dl {
@@ -440,6 +439,14 @@ cite {
   width: 32%;
   height: 130px;
   border: 1px solid #ccc;
+}
+
+.post-body img {
+	max-width: 560px;
+}
+
+.thread dd.avatar img, .profile-avatar img, .avatar-list .avatar img {
+	max-width: 150px;
 }
 
 .dayName th {
