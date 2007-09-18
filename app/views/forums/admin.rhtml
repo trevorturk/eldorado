@@ -1,0 +1,17 @@
+<div class="box">
+  <span class="top">Forum Administration</span>
+  <div class="forums-admin">
+    <ul id="category-list">
+      <% for category in @categories %>
+        <li><%=h category.name %></li>
+        <ul id="forum-list">
+          <% for forum in category.forums %>
+            <li id="item_<%= forum.id %>">
+              <%=h forum.name %><br /><span class="detail"><%=h forum.description %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ul>
+  </div>
+</div>

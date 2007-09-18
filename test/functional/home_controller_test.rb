@@ -32,5 +32,9 @@ class HomeControllerTest < Test::Unit::TestCase
   def test_should_update_session_online_at
     # if current_user HASN'T been active in the last 10 minutes
   end
-  
+
+  def test_should_have_correct_online_at
+    # if current_user just logged in, save they're online_at from the db for use in session
+  end
+
 end
