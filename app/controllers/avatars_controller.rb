@@ -23,7 +23,7 @@ class AvatarsController < ApplicationController
 
   def destroy
     @avatar = Avatar.find(params[:id])
-    redirect_to home_path and return false unless admin? || (current_user == @avatar.user)
+    redirect_to root_path and return false unless admin? || (current_user == @avatar.user)
     @user = User.find_by_id(@avatar.current_user_id)
     @user.update_attributes(:avatar => nil) if @user 
     @avatar.destroy

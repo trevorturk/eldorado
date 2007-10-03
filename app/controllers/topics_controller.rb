@@ -93,7 +93,7 @@ class TopicsController < ApplicationController
   
   def can_edit_topic
     @topic = Topic.find(params[:id])
-    redirect_to home_path and return false unless admin? || (current_user == @topic.user)
+    redirect_to root_path and return false unless admin? || (current_user == @topic.user)
   end
   
   def check_privacy

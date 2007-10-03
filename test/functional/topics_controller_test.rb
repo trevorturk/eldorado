@@ -91,7 +91,7 @@ class TopicsControllerTest < Test::Unit::TestCase
   def test_should_fail_to_update_topic_if_wrong_user
     login_as :Timothy
     put :update, :id => 1, :topic => { :title => "bogus!" }
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     assert_equal "Testing", topics(:Testing).title
   end
   
@@ -122,7 +122,7 @@ class TopicsControllerTest < Test::Unit::TestCase
     old_count = Topic.count
     delete :destroy, :id => 1
     assert_equal old_count, Topic.count
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
   
   def test_should_destroy_topic_if_admin
@@ -141,10 +141,10 @@ class TopicsControllerTest < Test::Unit::TestCase
   def test_should_redirect_to_topic_with_viewtopic_php_style_url_second_version
   end
   
-  def test_should_redirect_to_home_path_if_viewtopic_id_not_found
+  def test_should_redirect_to_root_path_if_viewtopic_id_not_found
     # get :unknown_request, :path => "viewtopic.php", :id => "23823"
     # assert_redirected_to topic_path(:id => "23823")
-    # assert_redirected_to home_path
+    # assert_redirected_to root_path
   end
   
   def test_should_fail_to_find_topic_with_viewtopic_php_url_if_private_and_not_logged_in

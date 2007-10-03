@@ -33,18 +33,18 @@ class ForumsControllerTest < Test::Unit::TestCase
   def test_should_get_new
     # on consolidated admin page
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     login_as :Administrator
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
 
   def test_should_get_admin
     get :admin
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     login_as :Administrator
     get :admin
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
   
   def test_should_create_forum
@@ -62,27 +62,27 @@ class ForumsControllerTest < Test::Unit::TestCase
   def test_should_get_edit
     # not implemented yet
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     login_as :Administrator
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
   
   def test_should_update_forum
     # not implemented yet
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     login_as :Administrator
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
   
   def test_should_destroy_forum
     # not implemented yet
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     login_as :Administrator
     get :new
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
 end

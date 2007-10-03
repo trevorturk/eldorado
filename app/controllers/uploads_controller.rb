@@ -20,7 +20,7 @@ class UploadsController < ApplicationController
     @upload = current_user.uploads.build params[:upload]
     if @upload.save
       flash[:notice] = "#{home_url.chop + @upload.public_filename}"
-      redirect_to files_home_path
+      redirect_to files_root_path
     else
       render :template => "uploads/_new"
     end
@@ -28,9 +28,9 @@ class UploadsController < ApplicationController
 
   def destroy
     @upload = Upload.find(params[:id])
-    redirect_to home_path and return false unless admin? || (current_user == @upload.user)
+    redirect_to root_path and return false unless admin? || (current_user == @upload.user)
     @upload.destroy
-    redirect_to files_home_path
+    redirect_to files_root_path
   end
     
 end

@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   end
   
   def login
-    redirect_to home_path if logged_in?
+    redirect_to root_path if logged_in?
     if request.post?
       @user = User.authenticate(params[:user][:login], params[:user][:password]) 
       if @user
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
   
   def logout
-    redirect_to home_path and return false unless logged_in?
+    redirect_to root_path and return false unless logged_in?
     @flash = flash[:notice]
     @user = User.find_by_id(session[:user_id])
     if @user
@@ -76,14 +76,14 @@ class UsersController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = @flash
-    redirect_to home_path
+    redirect_to root_path
   end
     
   protected
   
   def can_edit_user
     @user = User.find(params[:id])
-    redirect_to home_path and return false unless admin? || (current_user == @user)
+    redirect_to root_path and return false unless admin? || (current_user == @user)
   end
   
   def do_login(user)
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
     user.auth_token_exp = 2.weeks.from_now
     cookies[:auth_token] = { :value => user.auth_token, :expires => user.auth_token_exp }
     user.save!
-    redirect_to home_path
+    redirect_to root_path
   end
   
 end

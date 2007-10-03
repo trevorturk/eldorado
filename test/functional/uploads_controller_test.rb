@@ -52,7 +52,7 @@ class UploadsControllerTest < Test::Unit::TestCase
     old_count = Upload.count
     delete :destroy, :id => 1
     assert_equal old_count-1, Upload.count
-    assert_redirected_to files_home_path
+    assert_redirected_to files_root_path
   end
   
   def test_should_not_destroy_upload_if_not_authorized
@@ -60,7 +60,7 @@ class UploadsControllerTest < Test::Unit::TestCase
     old_count = Upload.count
     delete :destroy, :id => 2
     assert_equal old_count, Upload.count
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
   
 end

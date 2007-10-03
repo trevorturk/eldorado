@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:post][:topic_id])
     @post = current_user.posts.build(params[:post])
     if @topic.locked
-      redirect_to home_path and return false unless admin? || (current_user == @topic.user)
+      redirect_to root_path and return false unless admin? || (current_user == @topic.user)
     end
     @topic.posts_count += 1 # hack to set last_page correctly
     if (@topic.posts << @post) 
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   end 
   
   def can_edit_post
-    redirect_to home_path and return false unless admin? || (current_user == @post.user)
+    redirect_to root_path and return false unless admin? || (current_user == @post.user)
   end
     
 end

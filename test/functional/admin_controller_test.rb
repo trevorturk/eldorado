@@ -21,7 +21,7 @@ class AdminControllerTest < Test::Unit::TestCase
   def test_only_admins_can_use_admin_controller
   end
   
-  def non_admins_are_redirected_to_home_path
+  def non_admins_are_redirected_to_root_path
   end
   
 end

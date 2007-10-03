@@ -56,7 +56,7 @@ class AvatarsControllerTest < Test::Unit::TestCase
     old_count = Avatar.count
     delete :destroy, :id => 1
     assert_equal old_count, Avatar.count
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
     
   def test_should_set_clear_users_using_avatar_if_avatar_destroyed

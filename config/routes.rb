@@ -12,21 +12,15 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :uploads
   map.resources :users, :member => { :confirm_delete => :get }
 
-  map.home  '', :controller => 'home', :action => 'index' 
-
+  map.root :controller => 'home'
+  
   map.login '/login', :controller => 'users', :action => 'login'
   map.logout '/logout', :controller => 'users', :action => 'logout'
   map.register '/register', :controller => 'users', :action => 'new'
-
-  map.admin '/admin', :controller => 'admin', :action => 'index'
-  map.admin_themes '/admin/themes', :controller => 'admin', :action => 'themes'
-  map.admin_import '/admin/import', :controller => 'admin', :action => 'import'
-
-  map.search '/search', :controller => 'search', :action => 'index'  
-  map.files_home '/files', :controller => 'uploads', :action => 'index'
-  map.forum_home '/forum', :controller => 'forums', :action => 'index'
+  map.search '/search', :controller => 'search', :action => 'index'
+  map.files_root '/files', :controller => 'uploads', :action => 'index'
+  map.forum_root '/forum', :controller => 'forums', :action => 'index'
   map.forum_admin '/forum/admin', :controller => 'forums', :action => 'admin'
-  
   map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'
   
   map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil

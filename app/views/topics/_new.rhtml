@@ -26,7 +26,7 @@
       <% if current_action != 'new' %>
         <%= link_to_function 'Cancel', "$('action').toggle()" %>
       <% else %>
-        <%= link_to 'Cancel', forum_home_path %>
+        <%= link_to 'Cancel', forum_root_path %>
       <% end %>
       or <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %>
     </p>

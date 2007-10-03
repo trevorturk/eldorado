@@ -57,11 +57,11 @@ class ApplicationController < ActionController::Base
   end
   
   def check_admin
-    redirect_to home_path and return false unless admin?
+    redirect_to root_path and return false unless admin?
   end
   
   def redirect_to_home
-    redirect_to home_path and return false
+    redirect_to root_path and return false
   end
   
   def can_edit?(current_item)

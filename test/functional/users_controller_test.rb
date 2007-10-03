@@ -34,7 +34,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_not_be_able_to_edit_wrong_user
     login_as :trevor
     get :edit, :id => 2
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
   
   def test_should_be_able_to_edit_self
@@ -58,7 +58,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_not_update_user_if_not_authorized
     login_as :trevor
     put :update, :id => 2, :user => { :bio => "ok!" }
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     assert_equal "admin", users(:Administrator).bio
   end
     
@@ -73,7 +73,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_create
     num_users = User.count
     post :create, :user => {:login => 'skdj', :email => 'test@test.com', :password => 'dfj', :password_confirmation => 'dfj'}
-    assert_redirected_to home_path
+    assert_redirected_to root_path
     assert_equal num_users + 1, User.count
   end
 
@@ -107,7 +107,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_good_login_works
     post :login, :user => {:login => 'trevor', :password => 'test'}
     assert_equal 4, session[:user_id]
-    assert_redirected_to home_path
+    assert_redirected_to root_path
   end
 
   def test_good_login_sets_auth_token
