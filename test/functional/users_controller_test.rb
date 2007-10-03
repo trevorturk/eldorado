@@ -5,7 +5,7 @@ require 'users_controller'
 class UsersController; def rescue_action(e) raise e end; end
 
 class UsersControllerTest < Test::Unit::TestCase
-  all_fixtures
+  fixtures :all
   
   def setup
     @controller = UsersController.new

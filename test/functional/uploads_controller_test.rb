@@ -5,7 +5,7 @@ require 'uploads_controller'
 class UploadsController; def rescue_action(e) raise e end; end
 
 class UploadsControllerTest < Test::Unit::TestCase
-  all_fixtures
+  fixtures :all
 
   def setup
     @controller = UploadsController.new

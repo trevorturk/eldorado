@@ -5,7 +5,7 @@ require 'bans_controller'
 class BansController; def rescue_action(e) raise e end; end
 
 class BansControllerTest < Test::Unit::TestCase
-  all_fixtures
+  fixtures :all
 
   def setup
     @controller = BansController.new

@@ -5,7 +5,7 @@ require 'forums_controller'
 class ForumsController; def rescue_action(e) raise e end; end
 
 class ForumsControllerTest < Test::Unit::TestCase
-  all_fixtures
+  fixtures :all
 
   def setup
     @controller = ForumsController.new

@@ -5,7 +5,7 @@ require 'subscriptions_controller'
 class SubscriptionsController; def rescue_action(e) raise e end; end
 
 class SubscriptionsControllerTest < Test::Unit::TestCase
-  all_fixtures
+  fixtures :all
 
   def setup
     @controller = SubscriptionsController.new

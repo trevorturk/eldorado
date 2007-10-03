@@ -85,16 +85,16 @@
         </td>
         <td class="body links">
           <% if can_edit?(post) %>
-            <%= link_to 'Edit', edit_post_path(post) %>&nbsp;|
+            <%= link_to 'Edit', edit_post_path(post) %>
           <% end %>
           
           <% if current_controller == 'search' %>
             <% if logged_in? && !post.topic.locked %>
-              <%= link_to 'Quote', quote_post_path(post) %>
+              &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
             <% end %>
           <% else %>
             <% if logged_in? && !@topic.locked %>
-              <%= link_to 'Quote', quote_post_path(post) %>
+              &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
             <% end %>
           <% end %>
           

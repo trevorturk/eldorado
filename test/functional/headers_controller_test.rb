@@ -5,7 +5,7 @@ require 'headers_controller'
 class HeadersController; def rescue_action(e) raise e end; end
 
 class HeadersControllerTest < Test::Unit::TestCase
-  all_fixtures
+  fixtures :all
 
   def setup
     @controller = HeadersController.new
