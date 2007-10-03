@@ -14,7 +14,7 @@ Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
   
   # Skip frameworks you're not going to use (only works if using vendor/rails)
-  config.frameworks -= [ :action_web_service, :action_mailer ]
+  # config.frameworks -= [ :action_web_service, :action_mailer ]
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
@@ -37,18 +37,20 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   config.active_record.default_timezone = :utc
-  ENV['TZ'] = 'UTC' # This makes Time.now return time in UTC
+  
+  # Make Time.now return time in UTC
+  ENV['TZ'] = 'UTC'
   
   # See Rails::Configuration for more options
 end
 
 # Add new inflection rules using the following format 
 # (all these examples are active by default):
-Inflector.inflections do |inflect|
+# Inflector.inflections do |inflect|
 #   inflect.plural /^(ox)$/i, '\1en'
 #   inflect.singular /^(ox)en/i, '\1'
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )
-end
+# end
 
 # Include your application configuration below
