@@ -2,20 +2,20 @@ Welcome to El Dorado!
 
 # Installation #
 
-Remove the "example" part of the following filenames and put in the details for your setup:
-config/database.example.yml & config/deploy.example.rb
+Requirements: Rails 2.0 (or greater), and the "tzinfo" gem.
 
-# Setup # 
+1) Edit config/database.yml and config/deploy.rb according to your setup
+2) Run "rake db:schema:load" (see note below) and start your web server
+3) Visit your new site, note your temporary password, and log in
 
-Required gems: tzinfo - run: "sudo gem install tzinfo" on your computer and your host's.
-Requires Edge Rails for the tztime plugin: http://weblog.jamisbuck.org/2007/2/2/introducing-tztime
+NOTE: Rake tasks generally only affect the local "development" database. To install on a public site, 
+you would need to run "rake db:schema:load RAILS_ENV=production" on the remote server.
 
-Run this command: "rake db:schema:load" if you're not importing anything (starting a new site).
-Note: If you're setting things up on your host, add "RAILS_ENV=production" to the end of rake tasks.
+# Importing from a PunBB site (version 1.2.15) #
 
-If you're importing from an existing PunBB site (only tested with version 1.2.15), 
-fill in the "import" section of config/database.yml and run the command: "rake import:database".
-Other available rake tasks include: import:avatars, import:headers, and import:files.
+1) Set up the "import" section of config/database.yml
+2) Run "rake import:database" (see note above)
+3) Run the other available rake tasks as necessary: import:avatars, import:headers, and import:files
 
 # Upgrading #
 
