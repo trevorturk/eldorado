@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   
-  before_filter :force_login, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show]
   before_filter :check_privacy, :only => [:show, :edit]
   before_filter :can_edit_event, :only => [:edit, :update, :destroy]
   

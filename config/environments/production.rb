@@ -23,6 +23,6 @@ config.after_initialize do
     session :session_key => '_eldorado_session_id'
     self.application_name = "El Dorado"
     include AuthenticationSystem
-    before_filter :check_admin
+    before_filter :require_admin
   end
 end

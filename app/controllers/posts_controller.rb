@@ -1,7 +1,7 @@
 class PostsController < ApplicationController 
   
   before_filter :find_topic_and_post, :except => [:new, :create]
-  before_filter :force_login, :except => [:show]
+  before_filter :require_login, :except => [:show]
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
   
   def index

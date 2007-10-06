@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   
   around_filter :set_timezone
   before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
-  helper_method :current_user, :logged_in?, :force_login, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
+  helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
   
   session :session_key => '_eldorado_session_id'
   
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   
   protected
       
-  def redirect_to_home
+  def redirect_home
     redirect_to root_path and return false
   end
 

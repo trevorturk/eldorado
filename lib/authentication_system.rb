@@ -14,11 +14,11 @@ module AuthenticationSystem
     logged_in? && (current_user.admin == true)
   end
   
-  def force_login
+  def require_login
     redirect_to login_path and return false unless logged_in?
   end
   
-  def check_admin
+  def require_admin
     redirect_to root_path and return false unless admin?
   end    
 

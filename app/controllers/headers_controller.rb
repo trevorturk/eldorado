@@ -1,6 +1,6 @@
 class HeadersController < ApplicationController
   
-  before_filter :force_login, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show]
   before_filter :can_edit_header, :only => [:edit, :update, :destroy]
   
   def index

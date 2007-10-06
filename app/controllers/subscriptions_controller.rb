@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
 
-  before_filter :redirect_to_home
+  before_filter :redirect_home
 
 end

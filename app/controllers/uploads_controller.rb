@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
   
-  before_filter :redirect_to_home, :only => [:show, :edit, :update]
-  before_filter :force_login, :except => [:index]
+  before_filter :redirect_home, :only => [:show, :edit, :update]
+  before_filter :require_login, :except => [:index]
   
   def index
     if logged_in?

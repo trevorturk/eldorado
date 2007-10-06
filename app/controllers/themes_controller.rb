@@ -1,7 +1,7 @@
 class ThemesController < ApplicationController
   
-  before_filter :redirect_to_home, :only => [:show, :edit, :update]
-  before_filter :check_admin 
+  before_filter :redirect_home, :only => [:show, :edit, :update]
+  before_filter :require_admin 
   
   def index
     @themes = Theme.paginate(:page => params[:page], :per_page => Topic::PER_PAGE)

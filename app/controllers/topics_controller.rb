@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   
-  before_filter :force_login, :except => [:index, :show, :show_posters, :show_new, :unknown_request]
+  before_filter :require_login, :except => [:index, :show, :show_posters, :show_new, :unknown_request]
   before_filter :can_edit_topic, :only => [:edit, :update, :destroy]
   before_filter :check_privacy, :only => [:show]
   
