@@ -43,16 +43,7 @@ class ApplicationController < ActionController::Base
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
     User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
   end
-      
-  def can_edit?(current_item)
-    return false unless logged_in?
-    if request.path_parameters['controller'] == "users"
-      return current_user.admin? || (current_user.id == current_item.id) 
-    else
-      return current_user.admin? || (current_user.id == current_item.user_id) 
-    end
-  end
-
+  
   def set_timezone
     TzTime.zone = logged_in? ? current_user.tz : TZInfo::Timezone.get('UTC')
     yield

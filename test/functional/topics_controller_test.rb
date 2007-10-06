@@ -74,6 +74,12 @@ class TopicsControllerTest < Test::Unit::TestCase
     get :edit, :id => 1
     assert_response :success
   end
+  
+  def test_should_get_edit_if_admin
+    login_as :Administrator
+    get :edit, :id => 1
+    assert_response :success
+  end
  
   def test_should_fail_to_update_topic_if_not_authorized
     put :update, :id => 1, :topic => { :title => "bogus!"}

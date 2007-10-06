@@ -1,7 +1,7 @@
 class HeadersController < ApplicationController
   
   before_filter :require_login, :except => [:index, :show]
-  before_filter :can_edit_header, :only => [:edit, :update, :destroy]
+  before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
     @headers = Header.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'created_at desc')
@@ -54,11 +54,6 @@ class HeadersController < ApplicationController
     @header = Header.find(params[:id])
     @header.vote_down
     render :partial => 'votes'
-  end
-  
-  def can_edit_header
-    @header = Header.find(params[:id])
-    redirect_to root_path and return false unless admin? || (current_user == @header.user)
   end
   
 end
