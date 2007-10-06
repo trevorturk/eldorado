@@ -11,7 +11,7 @@ set :password,     "password"
 
 ssh_options[:username] = 'serveradmin%app.com'
 
-set :repository, "http://eldorado.googlecode.com/svn/trunk/"
+set :repository, "http://eldorado.googlecode.com/svn/stable/"
 set :deploy_to,  "/home/#{site}/containers/rails/#{application}"
 
 set :checkout, "export"
