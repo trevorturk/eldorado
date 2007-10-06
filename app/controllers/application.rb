@@ -8,20 +8,12 @@ class ApplicationController < ActionController::Base
   
   filter_parameter_logging "password"
     
-  include ExceptionLoggable
+  include ExceptionLoggable, AuthenticationSystem
   
   protected
-    
-  def current_user
-    @current_user ||= ((session[:user_id] && User.find_by_id(session[:user_id])) || 0)
-  end
-    
-  def logged_in?()
-    current_user != 0
-  end
-  
-  def force_login
-    redirect_to login_path and return false unless logged_in?
+      
+  def redirect_to_home
+    redirect_to root_path and return false
   end
 
   def auth_token_login
@@ -51,19 +43,7 @@ class ApplicationController < ActionController::Base
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
     User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
   end
-  
-  def admin?()
-    logged_in? && (current_user.admin == true)
-  end
-  
-  def check_admin
-    redirect_to root_path and return false unless admin?
-  end
-  
-  def redirect_to_home
-    redirect_to root_path and return false
-  end
-  
+      
   def can_edit?(current_item)
     return false unless logged_in?
     if request.path_parameters['controller'] == "users"

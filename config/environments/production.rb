@@ -21,6 +21,8 @@ config.after_initialize do
   require 'application' unless Object.const_defined?(:ApplicationController)
   LoggedExceptionsController.class_eval do
     session :session_key => '_eldorado_session_id'
-    self.application_name = "El Dorado"    
+    self.application_name = "El Dorado"
+    include AuthenticationSystem
+    before_filter :check_admin
   end
 end
