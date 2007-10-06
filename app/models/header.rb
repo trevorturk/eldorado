@@ -44,5 +44,9 @@ class Header < ActiveRecord::Base
     self.votes = self.votes - 1
     self.save!
   end
+  
+  def to_s
+    filename.to_s
+  end
 
 end

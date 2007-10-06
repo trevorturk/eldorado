@@ -60,5 +60,9 @@ class Topic < ActiveRecord::Base
     return if post.nil? # return if this was the last post in the thread
     self.class.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', post.id, post.created_at, post.user_id], ['id = ?', self.id])
   end
+  
+  def to_s
+    title.to_s
+  end
     
 end

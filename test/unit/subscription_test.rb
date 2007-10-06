@@ -7,4 +7,10 @@ class SubscriptionTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_to_s
+    s = Subscription.find(1)
+    assert_equal s.to_s, '1'
+  end
+  
 end

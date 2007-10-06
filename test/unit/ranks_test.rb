@@ -7,5 +7,10 @@ class RanksTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_to_s
+    r = Rank.find(1)
+    assert_equal r.to_s, 'no_posts'
+  end
     
 end

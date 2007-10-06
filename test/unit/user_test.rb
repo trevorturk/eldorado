@@ -23,4 +23,9 @@ class UserTest < Test::Unit::TestCase
     assert_equal u.online_at, u.profile_updated_at
   end
   
+  def test_to_s
+    u = User.find(1)
+    assert_equal u.to_s, 'Guest'
+  end
+  
 end

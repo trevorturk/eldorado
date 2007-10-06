@@ -28,12 +28,12 @@ module ApplicationHelper
 
   def page_title
     page_title = h(@options.site_title)
-    page_title << ': ' + @category.name unless @category.nil? or @category.name.nil?
-    page_title << ': ' + @event.title unless @event.nil? or @event.title.nil?
-    page_title << ': ' + @forum.name unless @forum.nil? or @forum.name.nil?
-    page_title << ': ' + @header.filename unless @header.nil? or @header.filename.nil?
-    page_title << ': ' + @topic.title unless @topic.nil? or @topic.title.nil?
-    page_title << ': ' + @user.login unless @user.nil? or @user.login.nil?
+    page_title << ': ' + @category.to_s unless @category.nil? or @category.name.nil?
+    page_title << ': ' + @event.to_s unless @event.nil? or @event.title.nil?
+    page_title << ': ' + @forum.to_s unless @forum.nil? or @forum.name.nil?
+    page_title << ': ' + @header.to_s unless @header.nil? or @header.filename.nil?
+    page_title << ': ' + @topic.to_s unless @topic.nil? or @topic.title.nil?
+    page_title << ': ' + @user.to_s unless @user.nil? or @user.login.nil?
     return page_title
   end
   

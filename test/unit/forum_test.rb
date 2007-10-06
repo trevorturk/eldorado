@@ -7,4 +7,10 @@ class ForumTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_to_s
+    f = Forum.find(1)
+    assert_equal f.to_s, 'MyString'
+  end  
+
 end

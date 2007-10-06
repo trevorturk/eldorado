@@ -24,5 +24,9 @@ class Forum < ActiveRecord::Base
   def updated_at
     last_post_at
   end
-    
+  
+  def to_s
+    name.to_s
+  end
+  
 end

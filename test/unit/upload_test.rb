@@ -7,4 +7,10 @@ class UploadTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_to_s
+    u = Upload.find(1)
+    assert_equal u.to_s, 'MyString.png'
+  end
+  
 end

@@ -39,5 +39,9 @@ class Post < ActiveRecord::Base
     topic.update_cached_fields
     Forum.decrement_counter("posts_count", topic.forum_id)
   end
+  
+  def to_s
+    body.to_s
+  end
           
 end

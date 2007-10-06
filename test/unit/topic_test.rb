@@ -17,4 +17,9 @@ class TopicTest < Test::Unit::TestCase
     assert_equal topic.last_page, 2
   end
   
+  def test_to_s
+    t = Topic.find(1)
+    assert_equal t.to_s, 'Testing'
+  end
+  
 end
