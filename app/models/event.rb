@@ -23,5 +23,9 @@ class Event < ActiveRecord::Base
   attr_protected :id, :created_at, :updated_at 
   
   tz_time_attributes :date
-      
+  
+  def to_s
+    title.to_s
+  end
+  
 end

@@ -7,4 +7,10 @@ class BanTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_to_s
+    b = Ban.find(1)
+    assert_equal b.to_s, '1'
+  end
+  
 end

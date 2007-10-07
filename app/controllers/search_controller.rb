@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   
-  before_filter :force_login
+  before_filter :require_login
   
   def index
     if params[:type].blank? || params[:query].blank?

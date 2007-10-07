@@ -7,4 +7,10 @@ class HeaderTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_to_s
+    h = Header.find(1)
+    assert_equal h.to_s, 'MyString1.png'
+  end
+
 end

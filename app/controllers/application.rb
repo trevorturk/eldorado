@@ -2,26 +2,18 @@ class ApplicationController < ActionController::Base
   
   around_filter :set_timezone
   before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
-  helper_method :current_user, :logged_in?, :force_login, :is_online?, :admin?, :check_admin, :redirect_to_home, :can_edit?
+  helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
   
   session :session_key => '_eldorado_session_id'
   
   filter_parameter_logging "password"
     
-  include ExceptionLoggable
+  include ExceptionLoggable, AuthenticationSystem
   
   protected
-    
-  def current_user
-    @current_user ||= ((session[:user_id] && User.find_by_id(session[:user_id])) || 0)
-  end
-    
-  def logged_in?()
-    current_user != 0
-  end
-  
-  def force_login
-    redirect_to login_path and return false unless logged_in?
+      
+  def redirect_home
+    redirect_to root_path and return false
   end
 
   def auth_token_login
@@ -52,27 +44,6 @@ class ApplicationController < ActionController::Base
     User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
   end
   
-  def admin?()
-    logged_in? && (current_user.admin == true)
-  end
-  
-  def check_admin
-    redirect_to root_path and return false unless admin?
-  end
-  
-  def redirect_to_home
-    redirect_to root_path and return false
-  end
-  
-  def can_edit?(current_item)
-    return false unless logged_in?
-    if request.path_parameters['controller'] == "users"
-      return current_user.admin? || (current_user.id == current_item.id) 
-    else
-      return current_user.admin? || (current_user.id == current_item.user_id) 
-    end
-  end
-
   def set_timezone
     TzTime.zone = logged_in? ? current_user.tz : TZInfo::Timezone.get('UTC')
     yield

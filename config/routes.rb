@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :events
   map.resources :forums
   map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
-  map.resources :posts, :member => { :quote => :get, :locate => :get }
+  map.resources :posts, :member => { :quote => :get }
   map.resources :subscriptions
   map.resources :themes, :member => { :select => :post, :deselect => :post }
   map.resources :topics, :member => { :show_new => :get }

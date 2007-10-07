@@ -34,9 +34,9 @@
         <th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
         <th class="thr">
           <% if current_controller == 'search' %>
-            <%= link_to post.topic.title + ' &raquo;', locate_post_path(post) %>
+            <%= link_to post.topic.title + ' &raquo;', post_path(post) %>
           <% else %>
-            <%= link_to "#" + (index + @padding).to_s, topic_path(:page => @page, :anchor => 'p' + post.id.to_s) %>
+            <%= link_to "#" + (index + @padding).to_s, post_path(post) %>
           <% end %>
         </th>
       </tr>

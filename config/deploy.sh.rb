@@ -1,7 +1,7 @@
 # Capistrano 2 recipe example for Slicehost (Debian Etch)
 
 set :application, "eldorado"
-set :repository,  "http://eldorado.googlecode.com/svn/trunk/"
+set :repository,  "http://eldorado.googlecode.com/svn/current/"
 set :deploy_to, "/home/eldorado"
 set :deploy_via, :export
 set :user, 'root'

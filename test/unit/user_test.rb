@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < Test::Unit::TestCase
-  all_fixtures
+  fixtures :all
   
   def test_require_login_email_and_password
     u = User.create
@@ -21,6 +21,11 @@ class UserTest < Test::Unit::TestCase
     assert_not_nil u.online_at
     assert_not_nil u.profile_updated_at
     assert_equal u.online_at, u.profile_updated_at
+  end
+  
+  def test_to_s
+    u = User.find(1)
+    assert_equal u.to_s, 'Guest'
   end
   
 end

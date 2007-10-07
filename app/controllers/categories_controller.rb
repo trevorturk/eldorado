@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   
-  before_filter :redirect_to_home, :except => [:show]
+  before_filter :redirect_home, :except => [:show]
     
   def show
     @category = Category.find(params[:id], :include => :forums)

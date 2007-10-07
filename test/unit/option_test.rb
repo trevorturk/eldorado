@@ -7,4 +7,10 @@ class OptionTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_to_s
+    o = Option.find(1)
+    assert_equal o.to_s, 'El Dorado.org'
+  end
+  
 end

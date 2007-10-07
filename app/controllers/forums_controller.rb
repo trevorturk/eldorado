@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
   
-  before_filter :redirect_to_home, :only => [:new, :edit, :update, :destroy]
-  before_filter :check_admin, :except => [:index, :show]
+  before_filter :redirect_home, :only => [:new, :edit, :update, :destroy]
+  before_filter :require_admin, :except => [:index, :show]
   
   def index
     @categories = Category.find(:all, :include => [:forums], :order => 'categories.position, forums.position')

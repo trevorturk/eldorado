@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :can_edit_user, :only => [:edit, :update, :destroy, :confirm_delete]
+  before_filter :can_edit, :only => [:edit, :update, :destroy, :confirm_delete]
   
   def index
     @users = User.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'profile_updated_at desc')
@@ -80,12 +80,7 @@ class UsersController < ApplicationController
   end
     
   protected
-  
-  def can_edit_user
-    @user = User.find(params[:id])
-    redirect_to root_path and return false unless admin? || (current_user == @user)
-  end
-  
+    
   def do_login(user)
     session[:user_id] = user.id
     session[:online_at] = user.online_at

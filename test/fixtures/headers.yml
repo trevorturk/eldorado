@@ -24,7 +24,7 @@ one:
   content_type: image/jpeg
   filename: MyString1.png
   size: 31559
-  user_id: 1
+  user_id: 4
   votes: 0
 two:
   id: 2

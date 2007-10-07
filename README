@@ -4,7 +4,7 @@ Welcome to El Dorado!
 
 Requirements: Rails 2.0 (or greater), and the "tzinfo" gem.
 
-1) Edit config/database.yml and config/deploy.rb according to your setup
+1) Set up config/database.yml and config/deploy.rb according to your setup
 2) Run "rake db:schema:load" (see note below) and start your web server
 3) Visit your new site, note your temporary password, and log in
 
@@ -19,7 +19,7 @@ you would need to run "rake db:schema:load RAILS_ENV=production" on the remote s
 
 # Upgrading #
 
-Visit http://almosteffortless.com and http://eldorado.googlecode.com/svn for updates and news.
+Visit http://almosteffortless.com and http://code.google.com/p/eldorado/source for updates and news.
 Use "rake db:migrate" to upgrade your database from an older version after new releases.
 Use "cap deploy:migrations" to upgrade your database and app at the same time using Capistrano.
 

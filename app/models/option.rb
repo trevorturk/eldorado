@@ -15,4 +15,9 @@
 #
 
 class Option < ActiveRecord::Base
+  
+  def to_s
+    site_title.to_s
+  end
+  
 end

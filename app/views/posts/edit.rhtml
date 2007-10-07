@@ -9,7 +9,7 @@
       <% if @topic.posts_count > 1 %>
         <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> or 
       <% end %>
-      <%= link_to 'Cancel', locate_post_path(@post) %>
+      <%= link_to 'Cancel', post_path(@post) %>
     </p>
   </div>
 <% end %>
