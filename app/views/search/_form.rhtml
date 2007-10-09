@@ -7,8 +7,8 @@
         <option<%= ' selected="selected"' if params[:type] == 'events' || current_controller == 'events' %> value='events'>Events</option>
         <option<%= ' selected="selected"' if params[:type] == 'files' || current_controller == 'uploads' %> value='files'>Files</option>
         <option<%= ' selected="selected"' if params[:type] == 'headers' || current_controller == 'headers' %> value='headers'>Headers</option>
-        <option<%= ' selected="selected"' if params[:type] == 'posts' %> value='posts'>Posts</option>
-        <option<%= ' selected="selected"' if params[:type] == 'topics' || %w(home categories topics forums).include?(current_controller) %> value='topics'>Topics</option>
+        <option<%= ' selected="selected"' if params[:type] == 'posts' || current_controller == 'posts' %> value='posts'>Posts</option>
+        <option<%= ' selected="selected"' if params[:type] == 'topics' || params[:type].blank? || %w(home categories topics forums).include?(current_controller) %> value='topics'>Topics</option>
         <option<%= ' selected="selected"' if params[:type] == 'users' || current_controller == 'users' %> value='users'>Users</option>
       </select> &nbsp;
       <%= text_field_tag :query, params[:query], :id => :query, :style => "width:31%" %>
