@@ -6,8 +6,8 @@
   <div class="info-left">
     <span class="title"><%=h @topic.title %></span>
     <span class="detail">
-      &laquo; <%= link_to @topic.forum.name, forum_path(@topic.forum) %>
-      &laquo; <%= link_to @topic.forum.category.name, category_path(@topic.forum.category) %>
+      &laquo; <%= link_to @topic.forum.name, @topic.forum %>
+      &laquo; <%= link_to @topic.forum.category.name, @topic.forum.category %>
       &nbsp;|&nbsp; 
       <%= @topic.private? ? 'Private' : 'Public' %><%= @topic.locked? ? ', Locked' : '' %>
     </span>
@@ -34,9 +34,9 @@
         <th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
         <th class="thr">
           <% if current_controller == 'search' %>
-            <%= link_to post.topic.title + ' &raquo;', post_path(post) %>
+            <%= link_to post.topic.title + ' &raquo;', post %>
           <% else %>
-            <%= link_to "#" + (index + @padding).to_s, post_path(post) %>
+            <%= link_to "#" + (index + @padding).to_s, post %>
           <% end %>
         </th>
       </tr>
@@ -45,10 +45,10 @@
       <tr>
         <td class="profile">
           <dl>
-            <dt><%= link_to h(post.user.login), user_path(post.user.id) %></dt>
+            <dt><%= link_to h(post.user.login), post.user %></dt>
             <dd class="rank"><%= rank_for(post.user) %></dd>
             <dd class="avatar">
-              <%= link_to avatar_for(post.user), user_path(post.user.id) unless post.user.avatar.nil? %>
+              <%= link_to avatar_for(post.user), post.user unless post.user.avatar.nil? %>
             </dd>
             <dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
             <% unless post.user.is_online? %>

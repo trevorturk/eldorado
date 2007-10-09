@@ -9,7 +9,6 @@ class ThemesController < ApplicationController
   end
 
   def new
-    @theme = Theme.new
     render :template => "themes/_new"
   end
 

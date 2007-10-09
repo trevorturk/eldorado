@@ -28,7 +28,6 @@ class UsersControllerTest < Test::Unit::TestCase
     get :new
     assert_response :success
     assert_template 'new'
-    assert_not_nil assigns(:user)
   end
   
   def test_should_not_be_able_to_edit_wrong_user

@@ -6,7 +6,7 @@
     <table cellspacing="0" class="forums-index">
       <thead>
         <tr>
-          <th colspan="5"><%= link_to h(category.name), category_path(category) %></th>
+          <th colspan="5"><%= link_to h(category.name), category %></th>
         </tr>
         <tr class="forums-list">
           <th class="tcl" colspan="2">Forums</th>
@@ -20,7 +20,7 @@
           <tr>
             <td class="tci"><%= icon_for(forum.last_topic.last_post) unless forum.last_topic.nil? %></td>
             <td class="tcl">
-              <span class="forum-name"><%= link_to h(forum.name), forum_path(forum) %></span>
+              <span class="forum-name"><%= link_to h(forum.name), forum %></span>
               <br /><%=h forum.description %>
             </td>
             <td class="tcm"><%= number_with_delimiter(forum.topics_count) %></td>

@@ -12,7 +12,7 @@
     <% for user in @users %>
       <tr>
         <td class="tci"><%= icon_for(user) %></td>
-        <td class="tcl"><%= link_to h(user.login), user_path(user.id) %></td>
+        <td class="tcl"><%= link_to h(user.login), user %></td>
         <td class="tcl"><%= time_ago_or_time_stamp(user.profile_updated_at) %></td>
         <td class="tcl"><%= time_ago_or_time_stamp(user.online_at) %></td>
         <td class="tcm"><%= number_with_delimiter(user.posts_count) %></td>

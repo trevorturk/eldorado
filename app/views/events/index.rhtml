@@ -12,7 +12,7 @@
     cell_attrs = {:class => 'day'}
     @events.each do |e|
       if e.date.to_date == d
-        cell_text << "<p>#{ link_to h(e.title), event_path(e) }</p>"
+        cell_text << "<p>#{ link_to h(e.title), e }</p>"
         cell_attrs[:class] = 'specialDay'
       end
     end
@@ -34,7 +34,7 @@
         <tr>
           <td class="tci"><%= icon_for(event) %></td>
           <td class="tcl">
-            <%= link_to h(event.title), event_path(event) %> by <%=h event.user.login %>
+            <%= link_to h(event.title), event %> by <%=h event.user.login %>
           </td>
           <td class="tcr"><%=tz event.date %></td>
         </tr>

@@ -20,6 +20,7 @@ class PostsController < ApplicationController
     
   def create
     @topic = Topic.find(params[:post][:topic_id])
+    redirect_to root_path and return false unless @topic
     @post = current_user.posts.build(params[:post])
     if @topic.locked
       redirect_to root_path and return false unless admin? || (current_user == @topic.user)
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
       redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @topic.last_page, :anchor => 'p' + @post.id.to_s
     else 
       flash[:notice] = "Posts cannot be blank"
-      redirect_to topic_path(@topic)
+      redirect_to @topic
     end 
   end 
 
@@ -44,7 +45,7 @@ class PostsController < ApplicationController
 
   def destroy 
     @post.destroy if @topic.posts_count > 1
-    redirect_to topic_url(@topic) 
+    redirect_to @topic
   end 
   
   def quote

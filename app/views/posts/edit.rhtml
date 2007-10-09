@@ -1,5 +1,5 @@
 <%= error_messages_for :post %>
-<% form_for(:post, :url => post_path(@post), :html => { :method => :put }) do |f| %>
+<% form_for @post, :html => { :method => :put } do |f| %>
   <div class="box">
     <span class="top">Edit Post</span>
     <p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
@@ -9,7 +9,7 @@
       <% if @topic.posts_count > 1 %>
         <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> or 
       <% end %>
-      <%= link_to 'Cancel', post_path(@post) %>
+      <%= link_to 'Cancel', @post %>
     </p>
   </div>
 <% end %>

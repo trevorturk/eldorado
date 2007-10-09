@@ -23,7 +23,7 @@
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
       <%= link_to 'Delete', confirm_delete_user_path %> or 
-      <%= link_to 'Cancel', user_path(@user) %>
+      <%= link_to 'Cancel', @user %>
     </p>
   </div>
 <% end %>

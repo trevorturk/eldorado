@@ -18,7 +18,7 @@
   <%= theme_css %>
   
   <%= javascript_include_tag "prototype", "audio-player", :cache => true %>
-
+  
 </head>
 <body>
 
@@ -26,7 +26,7 @@
     
     <% for reminder in @reminders %>
       <% if tz_today?(reminder.date) %>
-        <div class="reminders"><%= link_to h(reminder.title), event_path(reminder) %></div>
+        <div class="reminders"><%= link_to h(reminder.title), reminder %></div>
       <% end %>
     <% end %>
     

@@ -2,7 +2,7 @@
 
 <%= error_messages_for :subscription %>
 
-<% form_for(:subscription, :url => subscription_path(@subscription), :html => { :method => :put }) do |f| %>
+<% form_for @subscription, :html => { :method => :put } do |f| %>
   <p>
     <b>User</b><br />
     <%= f.text_field :user_id %>
@@ -18,5 +18,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', subscription_path(@subscription) %> |
+<%= link_to 'Show', @subscription %> |
 <%= link_to 'Back', subscriptions_path %>

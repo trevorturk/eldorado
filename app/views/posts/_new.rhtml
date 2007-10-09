@@ -1,4 +1,5 @@
-<% form_for :post, :url => posts_path do |f| -%>
+<% @post = Post.new %>
+<% form_for @post do |f| -%>
   <div class="box">
     <span id="reply" class="top">Post a Reply</span><br />
       <%= f.hidden_field :topic_id, :value => @topic.id %>

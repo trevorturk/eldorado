@@ -25,7 +25,16 @@ class AvatarsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
   
+  def test_should_not_get_new_if_not_logged_in
+  end
+  
   def test_should_create_avatar
+  end
+  
+  def test_should_get_edit_if_authorized
+  end
+  
+  def test_should_not_get_edit_if_not_authorized
   end
     
   def test_should_destroy_avatar_if_user_created_avatar
@@ -59,7 +68,10 @@ class AvatarsControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
     
-  def test_should_set_clear_users_using_avatar_if_avatar_destroyed
+  def test_should_clear_user_using_avatar_if_avatar_destroyed
+  end
+  
+  def test_should_clear_avatar_current_user_id_if_user_destroyed
   end
   
   def test_should_select_avatar
@@ -67,6 +79,23 @@ class AvatarsControllerTest < Test::Unit::TestCase
     post :select, :id => avatars(:calvin).id
     users(:Timothy).reload
     assert_equal users(:Timothy).avatar, avatars(:calvin).public_filename
+    # avatars(:calvin).reload
+    # assert_equal users(:Timothy).id, avatars(:calvin).current_user_id
+  end
+  
+  def test_should_deselect_avatar
+    login_as :Timothy
+    post :select, :id => avatars(:calvin).id
+    users(:Timothy).reload
+    assert_equal users(:Timothy).avatar, avatars(:calvin).public_filename
+    post :deselect, :id => avatars(:calvin).id
+    # users(:Timothy).reload
+    # assert_nil users(:Timothy).avatar
+    # avatars(:calvin).reload
+    # assert_nil avatars(:calvin).current_user_id
+  end
+
+  def test_should_not_deselect_avatar_if_not_current_avatar_user
   end
   
 end

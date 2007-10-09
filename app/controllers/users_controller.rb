@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
   end
 
   def create
@@ -34,7 +33,7 @@ class UsersController < ApplicationController
     @user.update_attributes(params[:user])
     @user.profile_updated_at = Time.now.utc
     @user.save!
-    redirect_to user_path(@user)
+    redirect_to @user
   end
   
   def destroy

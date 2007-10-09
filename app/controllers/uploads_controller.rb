@@ -12,7 +12,6 @@ class UploadsController < ApplicationController
   end
 
   def new
-    @upload = Upload.new
     render :template => "uploads/_new"
   end
 

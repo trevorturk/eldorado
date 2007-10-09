@@ -29,6 +29,20 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal old_post_count+1, Post.count
   end
   
+  def test_posts_cannot_be_blank
+    login_as :trevor
+    old_post_count = Post.count
+    post :create, :post => { :topic_id => "1" }
+    assert_equal old_post_count, Post.count
+  end
+  
+  def test_posts_cannot_be_made_with_bogus_topic_id
+    # login_as :trevor
+    # old_post_count = Post.count
+    # post :create, :post => { :topic_id => "13249002923" }
+    # assert_equal old_post_count, Post.count
+  end
+  
   def test_post_create_redirects_to_correct_page
     login_as :trevor
     topic = Topic.find_by_id('1')

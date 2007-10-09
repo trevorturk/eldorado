@@ -4,7 +4,7 @@
 
 <div class="info-left">
   <span class="title"><%=h @header.filename %></span>
-  <span class="detail">by <%= link_to h(@header.user.login), user_path(@header.user) %></span>
+  <span class="detail">by <%= link_to h(@header.user.login), @header.user %></span>
 </div>
 <div class="info-right">
   Votes (<span id="remote"><%= render :partial => 'votes' %></span>)

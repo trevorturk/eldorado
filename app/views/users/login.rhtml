@@ -1,5 +1,6 @@
 <%= error_messages_for :user %>
-<% form_for(:user, :url => login_path) do |f| %>
+<% @user = User.new %>
+<% form_for @user, :url => login_path do |f| %>
   <div class="box login">
     <span class="top">Login</span>
     <p class="label"><label for="user_login">Username</label></p>

@@ -25,6 +25,14 @@ class HeadersControllerTest < Test::Unit::TestCase
   end
   
   def test_should_create_header
+    login_as :Administrator
+    old_count = Header.count
+    put :create, :header => {:description => "test"}
+    # assert_equal old_count+1, Header.count
+    # assert_redirected_to topic_path(assigns(:header))
+  end
+  
+  def test_should_not_create_header_without_file
   end
 
   def test_should_show_header

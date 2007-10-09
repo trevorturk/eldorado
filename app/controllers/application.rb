@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
   around_filter :set_timezone
   before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   
   session :session_key => '_eldorado_session_id'
-  
   filter_parameter_logging "password"
     
-  include ExceptionLoggable, AuthenticationSystem
+  include AuthenticationSystem, ExceptionLoggable
   
   protected
       
@@ -59,6 +59,11 @@ class ApplicationController < ActionController::Base
     @newest_user = User.find(:first, :order => "created_at desc")
     @user_count = User.count
     @posts_count = Forum.sum('posts_count')
+  end
+  
+  def record_not_found
+    flash[:notice] = "Sorry, the page you requested was not found."
+    redirect_to root_path
   end
   
   def get_options

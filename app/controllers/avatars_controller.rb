@@ -8,7 +8,6 @@ class AvatarsController < ApplicationController
   end
 
   def new
-    @avatar = Avatar.new
     render :template => "avatars/_new"
   end
 
@@ -37,14 +36,16 @@ class AvatarsController < ApplicationController
     @old_avatar.update_attributes(:current_user_id => nil) if @old_avatar
     @avatar.update_attributes(:current_user_id => current_user.id)
     current_user.update_attributes(:avatar => @avatar.public_filename)
-    redirect_to user_path(current_user)
+    redirect_to current_user
   end
   
   def deselect
+    @avatar = Avatar.find(params[:id])
+    redirect_to avatars_path and return false unless @avatar.current_user_id
     @avatar = Avatar.find_by_current_user_id(current_user.id)
     @avatar.update_attributes(:current_user_id => nil)
     current_user.update_attributes(:avatar => nil)
-    redirect_to user_path(current_user)
+    redirect_to current_user
   end
   
 end

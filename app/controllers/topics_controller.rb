@@ -38,7 +38,7 @@ class TopicsController < ApplicationController
       @post.user_id = current_user.id
     end
     if @topic.save && @post.save
-      redirect_to topic_url(@topic)
+      redirect_to @topic
     else
       render :action => "_new"
     end
@@ -46,7 +46,7 @@ class TopicsController < ApplicationController
 
   def update
     if @topic.update_attributes(params[:topic])
-      redirect_to topic_url(@topic)
+      redirect_to @topic
     else
       render :action => "edit"
     end
@@ -65,7 +65,7 @@ class TopicsController < ApplicationController
     redirect_to topic_path(:id => params[:id]) and return if @topic.posts_count == 1 # if the first post, see it from the top of the page
     @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]]) unless !logged_in?
     @post = Post.find(@topic.last_post_id) if @post.nil?
-    redirect_to post_path(@post)
+    redirect_to @post
   end
   
   def show_posters

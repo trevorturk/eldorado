@@ -1,5 +1,6 @@
 <%= error_messages_for :avatar %>
-<% form_for(:avatar, :url => avatars_path, :html => { :multipart => true }) do |f| -%>
+<% @avatar = Avatar.new %>
+<% form_for @avatar, :html => { :multipart => true } do |f| -%>
   <div class="box">
     <span class="top">New Avatar</span>
     <p><%= f.file_field :uploaded_data %></p>

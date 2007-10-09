@@ -5,13 +5,13 @@
 <% if current_controller == 'categories' %>
   <div class="info-left">
     <span class="title"><%=h @category.name %></span>
-    <span class="detail"> &laquo; <%= @forums.map { |f| link_to "#{h f.name}", forum_path(f) } * ", " %></span>
+    <span class="detail"> &laquo; <%= @forums.map { |f| link_to "#{h f.name}", f } * ", " %></span>
   </div>
 <% elsif current_controller == 'forums' %>
   <div class="info-left">
     <span class="title"><%=h @forum.name %></span>
     <span class="detail">
-      &laquo; <%= link_to h(@forum.category.name), category_path(@forum.category) %>
+      &laquo; <%= link_to h(@forum.category.name), @forum.category %>
     </span>
     <span class="detail">&nbsp;| &nbsp;<%=h @forum.description %></span>
   </div>
@@ -36,11 +36,11 @@
         <tr>
           <td class="tci"><%= icon_for(topic) %></td>
           <td class="tcl">
-            <%= link_to h(topic.title), topic_path(topic) %> by <%=h topic.user.login %>
+            <%= link_to h(topic.title), topic %> by <%=h topic.user.login %>
           </td>
           <% if current_controller != 'forums' %>
             <td class="tcl">
-              <%= link_to h(topic.forum.name), forum_path(topic.forum) %>
+              <%= link_to h(topic.forum.name), topic.forum %>
             </td>
           <% end %>
           <td class="tcm"><%= number_with_delimiter(topic.replies) %></td>

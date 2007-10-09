@@ -18,7 +18,6 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
     render :template => "events/_new"
   end
 
@@ -38,7 +37,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update_attributes(params[:event])
-      redirect_to event_url(@event)
+      redirect_to @event
     else
       render :action => "edit"
     end

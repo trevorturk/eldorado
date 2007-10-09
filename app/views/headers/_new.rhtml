@@ -1,5 +1,6 @@
 <%= error_messages_for :header %>
-<% form_for(:header, :url => headers_path, :html => { :multipart => true }) do |f| -%>
+<% @header = Header.new %>
+<% form_for @header, :html => { :multipart => true } do |f| -%>
   <div class="box">
     <span class="top">New Header</span>
     <p><%= f.file_field :uploaded_data %></p>

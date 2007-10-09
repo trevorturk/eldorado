@@ -12,7 +12,6 @@ class HeadersController < ApplicationController
   end
 
   def new
-    @header = Header.new
     render :template => "headers/_new"
   end
 
@@ -23,7 +22,7 @@ class HeadersController < ApplicationController
   def create
     @header = current_user.headers.build params[:header]
     if @header.save
-      redirect_to header_url(@header)
+      redirect_to @header
     else
       render :action => "_new"
     end
@@ -32,7 +31,7 @@ class HeadersController < ApplicationController
   def update
     @header = Header.find(params[:id])
     if @header.update_attributes(params[:header])
-      redirect_to header_url(@header)
+      redirect_to @header
     else
       render :action => "edit"
     end

@@ -1,5 +1,6 @@
-<%= error_messages_for :topic %>  
-<% form_for(:topic, :url => topics_path) do |f| %>
+<%= error_messages_for :topic %>
+<% @new_topic = Topic.new %>
+<% form_for @new_topic do |f| %>
   <div class="box">
     <span class="top">New Topic</span>
     <p class="label"><label for="topic_title">Title</label></p>

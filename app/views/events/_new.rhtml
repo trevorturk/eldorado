@@ -1,6 +1,7 @@
 <%= error_messages_for :event %>
-<% form_for(:event, :url => events_path) do |f| %>
-<div class="box">
+<% @event = Event.new %>
+<% form_for @event do |f| %>
+  <div class="box">
     <span class="top">New Event</span>
     <p class="label"><label for="event_title">Title</label></p>
     <p>

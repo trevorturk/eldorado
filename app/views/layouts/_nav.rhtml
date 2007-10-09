@@ -1,7 +1,7 @@
 <div class="nav">
   <p class="nav-left">
     <% if logged_in? %>
-      Logged in as <b><%= link_to h(current_user.login), user_path(current_user.id) %></b> | 
+      Logged in as <b><%= link_to h(current_user.login), current_user %></b> | 
       Last visit <%= time_ago_or_time_stamp(session[:online_at]) %>
     <% else %>
       You are not logged in
