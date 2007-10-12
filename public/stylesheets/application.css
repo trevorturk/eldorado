@@ -449,6 +449,36 @@ cite {
 	max-width: 150px;
 }
 
+.home-left table {
+	float: left;
+	width: 68%;
+}
+
+.home-left .topics-index .tcr {
+  width: 40%;
+}
+
+.home-right table {
+	float: right;
+	width: 30%;
+}
+
+.home-right .calendar-nav {
+	display: none;
+}
+
+.home-right .specialDay {
+  background: #cedeb9;
+}
+
+.home-right .specialDay a:link, .home-right .specialDay a:visited {
+  color: #333;
+}
+
+.todayDay {
+  background: #d1d1d1;
+}
+
 .dayName th {
   background: #d1d1d1;
   color: #333;
@@ -459,7 +489,7 @@ cite {
   color: #ccc;
 }
 
-.day, .otherMonth, .specialDay {
+.day, .otherMonth, .specialDay, .todayDay {
   text-align: right;
 }
 
