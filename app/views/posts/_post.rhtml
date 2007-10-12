@@ -5,7 +5,7 @@
       <th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
       <th class="thr">
         <% if %w(search posts).include?(current_controller) %>
-          <%= link_to post.topic.title + ' &raquo;', locate_post_path(post) %>
+          <%= link_to post.topic.title + ' &raquo;', topic_post_path(post) %>
         <% else %>
           <%= "#" + (index + @padding).to_s %>
         <% end %>
@@ -58,13 +58,11 @@
         <span id ="post-link-<%= post.id %>">
           <%= link_to_function 'Link', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
         </span>
-        
         <span id="post-links-<%= post.id %>" style="display:none;">
           <%= link_to 'Post', post %>
-          &nbsp; <%= link_to 'Topic', locate_post_path(post) %>
+          &nbsp; <%= link_to 'Topic', topic_post_path(post) %>
           &nbsp; <%= link_to_function '(x)', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
-        </span>
-                  
+        </span>   
         <% if current_controller == 'search' %>
           <% if logged_in? && !post.topic.locked %>
             &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
@@ -74,11 +72,9 @@
             &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
           <% end %>
         <% end %>
-        
         <% if can_edit?(post) %>
           &nbsp; <%= link_to 'Edit', edit_post_path(post) %>
         <% end %>
-        
       </td>
     </tr>
   </tbody>

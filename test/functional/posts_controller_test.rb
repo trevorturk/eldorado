@@ -96,7 +96,7 @@ class PostsControllerTest < Test::Unit::TestCase
   end
 
   def test_locate_action_should_work
-    get :locate, :id => 1
+    get :topic, :id => 1
     assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
   end
   

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController 
   
   before_filter :find_topic_and_post, :except => [:new, :create]
-  before_filter :require_login, :except => [:show, :locate]
+  before_filter :require_login, :except => [:show, :topic]
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
   
   def index
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
     redirect_to @topic
   end 
   
-  def locate
+  def topic
     redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
   end
   
