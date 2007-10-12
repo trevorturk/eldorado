@@ -1,7 +1,7 @@
 class PostsController < ApplicationController 
   
   before_filter :find_topic_and_post, :except => [:new, :create]
-  before_filter :require_login, :except => [:show]
+  before_filter :require_login, :except => [:show, :locate]
   before_filter :can_edit_post, :only => [:edit, :update, :destroy]
   
   def index
@@ -9,7 +9,8 @@ class PostsController < ApplicationController
   end
   
   def show
-    redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
+    @posts = Post.find_all_by_id(params[:id])
+    render :template => "posts/_post"
   end
   
   def new
@@ -47,6 +48,10 @@ class PostsController < ApplicationController
     @post.destroy if @topic.posts_count > 1
     redirect_to @topic
   end 
+  
+  def locate
+    redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
+  end
   
   def quote
     @post.body = "[quote=#{@post.user.login}]#{@post.body}[/quote]"

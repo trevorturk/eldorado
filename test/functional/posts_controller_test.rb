@@ -89,21 +89,29 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal old_forum_post_count-1, new_forum_post_count
     assert_equal old_topic_post_count-1, new_topic_post_count
   end
-  
-  def test_quoting_a_post_should_work
+
+  def test_show_action_should_work
+    get :show, :id => 1
+    assert_response :success
+  end
+
+  def test_locate_action_should_work
+    get :locate, :id => 1
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
   end
   
+  def test_quote_action_should_work
+    login_as :trevor
+    get :quote, :id => 1
+    assert_response :success
+  end
+    
   def test_should_reset_last_post_info_for_topic_on_post_destroy
     login_as :Administrator
     assert_equal topics(:Testing).last_post_id, posts(:one3).id
     delete :destroy, :id => posts(:one3).id
     topics(:Testing).reload
     assert_equal topics(:Testing).last_post_id, posts(:one2).id
-  end
-  
-  def test_show_action_should_work
-    get :show, :id => 1
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
   end
   
   def test_should_not_allow_post_if_logged_in_and_locked

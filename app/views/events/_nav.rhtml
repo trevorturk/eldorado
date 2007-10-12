@@ -1,3 +1,12 @@
-<%= link_to "&laquo; Previous", events_path(:params => {:date => @date.last_month.strftime("%Y-%m") + '-01'}) %> &nbsp;
-<%= link_to "Today", events_path %> &nbsp;
-<%= link_to "Next &raquo;", events_path(:params => {:date => @date.next_month.strftime("%Y-%m") + '-01'}) %>
+<span style="float:left;">
+  <% if current_controller == 'events' %>
+    <%= link_to @date.strftime("%B %Y"), events_path %>
+  <% else %>
+    <%= link_to 'Events &raquo;', events_path %>
+  <% end %>
+</span>
+<span class="calendar-nav" style="float:right;">
+  <%= link_to "&laquo; Prev", events_path(:params => {:date => @date.last_month.strftime("%Y-%m") + '-01'}) %>&nbsp;
+  <%= link_to "Today", events_path %>&nbsp;
+  <%= link_to "Next &raquo;", events_path(:params => {:date => @date.next_month.strftime("%Y-%m") + '-01'}) %>
+</span>
