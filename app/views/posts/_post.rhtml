@@ -1,86 +1,85 @@
-<% @posts.each_with_index do |post, index| index+=1 %>
-  <table class="thread" cellspacing="0" id="p<%= post.id %>">
-    <thead>
-      <tr>
-        <th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
-        <th class="thr">
-          <% if %w(search posts).include?(current_controller) %>
-            <%= link_to post.topic.title + ' &raquo;', locate_post_path(post) %>
-          <% else %>
-            <%= "#" + (index + @padding).to_s %>
+<% post = @post unless @post.nil? %>
+<table class="thread" cellspacing="0" id="p<%= post.id %>">
+  <thead>
+    <tr>
+      <th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
+      <th class="thr">
+        <% if %w(search posts).include?(current_controller) %>
+          <%= link_to post.topic.title + ' &raquo;', locate_post_path(post) %>
+        <% else %>
+          <%= "#" + (index + @padding).to_s %>
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="profile">
+        <dl>
+          <dt><%= link_to h(post.user.login), post.user %></dt>
+          <dd class="rank"><%= rank_for(post.user) %></dd>
+          <dd class="avatar">
+            <%= link_to avatar_for(post.user), post.user unless post.user.avatar.nil? %>
+          </dd>
+          <dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
+          <% unless post.user.is_online? %>
+            <dd>Last visit: <%= time_ago_or_time_stamp(post.user.online_at) %></dd>
           <% end %>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="profile">
-          <dl>
-            <dt><%= link_to h(post.user.login), post.user %></dt>
-            <dd class="rank"><%= rank_for(post.user) %></dd>
-            <dd class="avatar">
-              <%= link_to avatar_for(post.user), post.user unless post.user.avatar.nil? %>
-            </dd>
-            <dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
-            <% unless post.user.is_online? %>
-              <dd>Last visit: <%= time_ago_or_time_stamp(post.user.online_at) %></dd>
-            <% end %>
-            <dd>Posts: <%= post.user.posts_count %></dd>
-          </dl>
-        </td>
-        <td class="body">
-          <div class="post-body">
-            <%= bb(post.body) %>
-            <% if (post.updated_at > post.created_at + 5.minutes) %>
-              <p class="edited">
-                Last edited <%= time_ago_or_time_stamp(post.updated_at, TzTime.now, true, true) %>
-                <%= 'by ' + post.editor.login unless post.editor.nil? %>
-              </p>
-            <% end %>
-            <% if !post.user.signature.blank? %>
-              <hr class="sig-hr" />
-              <div class="sig">
-                <%= bb(post.user.signature) %>
-              </div>
-            <% end %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <% if post.user.is_online? %>
-            <b>Online</b>
-          <% else %>
-            Offline
+          <dd>Posts: <%= post.user.posts_count %></dd>
+        </dl>
+      </td>
+      <td class="body">
+        <div class="post-body">
+          <%= bb(post.body) %>
+          <% if (post.updated_at > post.created_at + 5.minutes) %>
+            <p class="edited">
+              Last edited <%= time_ago_or_time_stamp(post.updated_at, TzTime.now, true, true) %>
+              <%= 'by ' + post.editor.login unless post.editor.nil? %>
+            </p>
           <% end %>
-        </td>
-        <td class="body links">
-          <span id ="post-link-<%= post.id %>">
-            <%= link_to_function 'Link', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
-          </span>
-          
-          <span id="post-links-<%= post.id %>" style="display:none;">
-            <%= link_to 'Post', post %>
-            &nbsp; <%= link_to 'Topic', locate_post_path(post) %>
-            &nbsp; <%= link_to_function '(x)', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
-          </span>
-                    
-          <% if current_controller == 'search' %>
-            <% if logged_in? && !post.topic.locked %>
-              &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
-            <% end %>
-          <% else %>
-            <% if logged_in? && !@topic.locked %>
-              &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
-            <% end %>
+          <% if !post.user.signature.blank? %>
+            <hr class="sig-hr" />
+            <div class="sig">
+              <%= bb(post.user.signature) %>
+            </div>
           <% end %>
-          
-          <% if can_edit?(post) %>
-            &nbsp; <%= link_to 'Edit', edit_post_path(post) %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% if post.user.is_online? %>
+          <b>Online</b>
+        <% else %>
+          Offline
+        <% end %>
+      </td>
+      <td class="body links">
+        <span id ="post-link-<%= post.id %>">
+          <%= link_to_function 'Link', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
+        </span>
+        
+        <span id="post-links-<%= post.id %>" style="display:none;">
+          <%= link_to 'Post', post %>
+          &nbsp; <%= link_to 'Topic', locate_post_path(post) %>
+          &nbsp; <%= link_to_function '(x)', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
+        </span>
+                  
+        <% if current_controller == 'search' %>
+          <% if logged_in? && !post.topic.locked %>
+            &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
           <% end %>
-          
-        </td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
+        <% else %>
+          <% if logged_in? && !@topic.locked %>
+            &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
+          <% end %>
+        <% end %>
+        
+        <% if can_edit?(post) %>
+          &nbsp; <%= link_to 'Edit', edit_post_path(post) %>
+        <% end %>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>

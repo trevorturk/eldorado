@@ -27,7 +27,9 @@
 <div class="info-left detail" id="posters" style="display:none;"></div>
 <div style="clear:both;"> </div>
 
-<%= render :partial => @posts %>
+<% @posts.each_with_index do |post, index| index+=1 %>
+  <%= render :partial => 'posts/post', :locals => { :post => post, :index => index } %>
+<% end %>
 
 <% unless current_controller == 'search' %>
   <% if logged_in? && (!@topic.locked || can_edit?(@topic)) %>

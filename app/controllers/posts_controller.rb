@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
   
   def show
-    @posts = Post.find_all_by_id(params[:id])
+    @post = Post.find(params[:id])
     render :template => "posts/_post"
   end
   
