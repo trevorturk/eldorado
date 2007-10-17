@@ -1,5 +1,5 @@
 <div id="action" style="display:none;">
-  <%= render :partial => 'uploads/new' if %w(index).include?(current_action) %>
+  <%= render 'uploads/new' if %w(index).include?(current_action) %>
 </div>
 
 <% if !@uploads.blank? %>
@@ -25,7 +25,7 @@
             
             <% if upload.content_type == 'audio/mpeg' %>
               <div id="<%= "mp3-#{upload.public_filename}" %>" style="display:none;">
-                <%= bb("[mp3]#{home_url.chop + upload.public_filename}[/mp3]") %>
+                <%= bb("[mp3]#{root_url.chop + upload.public_filename}[/mp3]") %>
               </div>
             <% end %>
             

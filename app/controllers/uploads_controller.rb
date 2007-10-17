@@ -12,16 +12,15 @@ class UploadsController < ApplicationController
   end
 
   def new
-    render :template => "uploads/_new"
   end
 
   def create
     @upload = current_user.uploads.build params[:upload]
     if @upload.save
-      flash[:notice] = "#{home_url.chop + @upload.public_filename}"
+      flash[:notice] = "#{root_url.chop + @upload.public_filename}"
       redirect_to files_root_path
     else
-      render :template => "uploads/_new"
+      render :action => "new"
     end
   end
 

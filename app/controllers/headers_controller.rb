@@ -12,7 +12,6 @@ class HeadersController < ApplicationController
   end
 
   def new
-    render :template => "headers/_new"
   end
 
   def edit
@@ -24,7 +23,7 @@ class HeadersController < ApplicationController
     if @header.save
       redirect_to @header
     else
-      render :action => "_new"
+      render :action => "new"
     end
   end
   

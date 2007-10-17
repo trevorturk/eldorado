@@ -10,7 +10,6 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    render :template => "posts/_post"
   end
   
   def new
@@ -55,7 +54,7 @@ class PostsController < ApplicationController
   
   def quote
     @post.body = "[quote=#{@post.user.login}]#{@post.body}[/quote]"
-    render :template => "posts/_new"
+    render :template => "posts/new"
   end
       
   def find_topic_and_post

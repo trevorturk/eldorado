@@ -8,7 +8,6 @@ class AvatarsController < ApplicationController
   end
 
   def new
-    render :template => "avatars/_new"
   end
 
   def create
@@ -16,7 +15,7 @@ class AvatarsController < ApplicationController
     if @avatar.save
       redirect_to avatars_path
     else
-      render :action => "_new"
+      render :action => "new"
     end
   end
 

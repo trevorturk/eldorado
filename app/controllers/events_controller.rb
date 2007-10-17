@@ -18,7 +18,6 @@ class EventsController < ApplicationController
   end
 
   def new
-    render :template => "events/_new"
   end
 
   def edit
@@ -30,7 +29,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_url
     else
-      render :action => "_new"
+      render :action => "new"
     end
   end
 

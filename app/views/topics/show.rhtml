@@ -1,5 +1,5 @@
 <div id="action" style="display:none;">
-  <%= render :partial => 'topics/new' %>
+  <%= render 'topics/new' %>
 </div>
 
 <% unless current_controller == 'search' %>
@@ -28,12 +28,12 @@
 <div style="clear:both;"> </div>
 
 <% @posts.each_with_index do |post, index| index+=1 %>
-  <%= render :partial => 'posts/post', :locals => { :post => post, :index => index } %>
+  <%= render 'posts/show', { :post => post, :index => index } %>
 <% end %>
 
 <% unless current_controller == 'search' %>
   <% if logged_in? && (!@topic.locked || can_edit?(@topic)) %>
-    <%= render :partial => 'posts/new' %>
+    <%= render 'posts/new' %>
   <% end %>
   <% if @topic.locked && !can_edit?(@topic) %>
     <div class="nav nav-footer">

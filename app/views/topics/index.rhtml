@@ -1,5 +1,5 @@
 <div id="action" style="display:none;">
-  <%= render :partial => 'topics/new' %>
+  <%= render 'topics/new' %>
 </div>
 
 <% if current_controller == 'categories' %>
@@ -22,12 +22,14 @@
   <table cellspacing="0" class="topics-index">
     <thead>
       <tr>
-        <th class="tcl" colspan="2"><%= link_to 'Topics', topics_path %></th>
-        <% if current_controller != 'forums' %>
+        <th class="tcl" colspan="2"><%= link_to 'Topics &raquo;', topics_path %></th>
+        <% if %w(categories topics).include?(current_controller) %>
           <th class="tcl tcf">Forum</th>
         <% end %>
         <th class="tcm">Replies</th>
-        <th class="tcm">Views</th>
+        <% unless current_controller == 'home' %>
+          <th class="tcm">Views</th>
+        <% end %>
         <th class="tcr">Activity</th>
       </tr>
     </thead>
@@ -38,13 +40,15 @@
           <td class="tcl">
             <%= link_to h(topic.title), topic %> by <%=h topic.user.login %>
           </td>
-          <% if current_controller != 'forums' %>
+          <% if %w(categories topics).include?(current_controller) %>
             <td class="tcl">
               <%= link_to h(topic.forum.name), topic.forum %>
             </td>
           <% end %>
           <td class="tcm"><%= number_with_delimiter(topic.replies) %></td>
-          <td class="tcm"><%= number_with_delimiter(topic.views) %></td>
+          <% unless current_controller == 'home' %>
+            <td class="tcm"><%= number_with_delimiter(topic.views) %></td>
+          <% end %>
           <td class="tcr">
             <%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
             by <%=h topic.last_poster.login %>

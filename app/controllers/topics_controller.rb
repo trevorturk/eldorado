@@ -24,7 +24,6 @@ class TopicsController < ApplicationController
   def new
     @topic = Topic.new
     @topic.forum_id = params[:forum_id] 
-    render :template => "topics/_new"
   end
 
   def edit
@@ -40,7 +39,7 @@ class TopicsController < ApplicationController
     if @topic.save && @post.save
       redirect_to @topic
     else
-      render :action => "_new"
+      render :action => "new"
     end
   end
 

@@ -1,34 +1,9 @@
 <div id="action" style="display:none;">
-  <%= render :partial => 'topics/new' %>
+  <%= render 'topics/new' %>
 </div>
 
 <div class="home-left">
-  <% if !@topics.blank? %>
-    <table cellspacing="0" class="topics-index">
-      <thead>
-        <tr>
-          <th class="tcl" colspan="2"><%= link_to 'Topics &raquo;', topics_path %></th>
-          <th class="tcm">Replies</th>
-          <th class="tcr">Activity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for topic in @topics %>
-          <tr>
-            <td class="tci"><%= icon_for(topic) %></td>
-            <td class="tcl">
-              <%= link_to h(topic.title), topic %> by <%=h topic.user.login %>
-            </td>
-            <td class="tcm"><%= number_with_delimiter(topic.replies) %></td>
-            <td class="tcr">
-              <%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
-              by <%=h topic.last_poster.login %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
+  <%= render 'topics/index' %>
 </div>
 
 <div class="home-right">
