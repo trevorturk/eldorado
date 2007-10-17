@@ -35,11 +35,12 @@
       <div class="tagline"><%=h @options.site_tagline %></div>
     </div>
     
-      <%= render :partial => 'layouts/tabs' %>
+      <%= render 'shared/tabs' %>
     
       <div class="content">
       
-        <%= render :partial => 'layouts/nav' %>
+        <%= render 'shared/nav' %>
+        
         <%= render :partial => 'search/form' %>
             
         <%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
@@ -49,8 +50,8 @@
       
         <%= yield %>
       
-        <%= render :partial => 'layouts/nav2' %>
-        <%= render :partial => 'layouts/stats' %>
+        <%= render 'shared/nav2' %>
+        <%= render 'shared/stats' %>
             
       </div>
     
