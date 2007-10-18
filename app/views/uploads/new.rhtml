@@ -1,7 +1,7 @@
 <%= error_messages_for :upload %>
 <% @upload = Upload.new %>
 <% form_for @upload, :html => { :multipart => true } do |f| -%>
-  <div class="box">
+  <div class="box" id="box-uploads-new">
     <span class="top">New File</span>
     <p>
       <%= f.file_field :uploaded_data %>

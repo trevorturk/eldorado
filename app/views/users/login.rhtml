@@ -1,7 +1,7 @@
 <%= error_messages_for :user %>
 <% @user = User.new %>
 <% form_for @user, :url => login_path do |f| %>
-  <div class="box login">
+  <div class="box" id="box-users-login">
     <span class="top">Login</span>
     <p class="label"><label for="user_login">Username</label></p>
     <p><%= f.text_field :login, :style => "width:30%" %></p>

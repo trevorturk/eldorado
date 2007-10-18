@@ -1,6 +1,6 @@
 <%= error_messages_for :user %>
 <% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| -%>
-  <div class="box">
+  <div class="box" id="box-users-edit">
     <span class="top">Edit User</span>
     <p class="label"><label for="user_username">Username</label></p>
     <p><%= f.text_field :login, :style => "width:31%" %></p>

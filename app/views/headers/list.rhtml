@@ -1,0 +1,19 @@
+<% if !@headers.blank? %>
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th class="tcl" colspan="2"><%= link_to 'Headers', headers_path %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for header in @headers %>
+        <tr>
+          <td class="tci"><%= icon_for(header) %></td>
+          <td class="tcl">
+            <%= link_to header.filename, header %> by <%=h header.user.login %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

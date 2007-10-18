@@ -2,7 +2,7 @@
   <% if current_controller == 'events' %>
     <%= link_to @date.strftime("%B %Y"), events_path %>
   <% else %>
-    <%= link_to 'Events &raquo;', events_path %>
+    <%= link_to 'Events', events_path %>
   <% end %>
 </span>
 <span class="calendar-nav" style="float:right;">

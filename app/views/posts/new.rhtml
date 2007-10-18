@@ -1,6 +1,6 @@
 <% @post = Post.new %>
 <% form_for @post do |f| -%>
-  <div class="box">
+  <div class="box" id="box-posts-new">
     <span id="reply" class="top">Post a Reply</span><br />
       <%= f.hidden_field :topic_id, :value => @topic.id %>
       <%= f.text_area :body, :rows => '8', :style => "width:66%;" %>

@@ -1,7 +1,7 @@
 <%= error_messages_for :event %>
 <% @event = Event.new %>
 <% form_for @event do |f| %>
-  <div class="box">
+  <div class="box" id="box-events-new">
     <span class="top">New Event</span>
     <p class="label"><label for="event_title">Title</label></p>
     <p>

@@ -1,7 +1,7 @@
 <%= error_messages_for :user %>
 <% @user = User.new %>
 <% form_for @user do |f| %>
-  <div class="box">
+  <div class="box" id="box-users-new">
     <span class="top">Register</span>
     <p class="label"><label for="user_username">Username</label></p>
     <p><%= f.text_field :login, :style => "width:31%" %></p>

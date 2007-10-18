@@ -5,9 +5,9 @@ class UploadsController < ApplicationController
   
   def index
     if logged_in?
-      @uploads = Upload.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc')
+      @uploads = Upload.paginate(:page => params[:page], :order => 'updated_at desc')
     else
-      @uploads = Upload.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc', :conditions => ["private = ?", false])
+      @uploads = Upload.paginate(:page => params[:page], :order => 'updated_at desc', :conditions => ["private = ?", false])
     end
   end
 

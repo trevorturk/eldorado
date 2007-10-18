@@ -1,6 +1,6 @@
 <%= error_messages_for :user %>
 <% form_tag user_path(@user), :method => :delete do %>
-  <div class="box">
+  <div class="box" id="box-users-confirmation">
     <span class="top">Delete User</span>
       <p><label for="confirm">Confirm</label>: <%= check_box_tag(:confirm) %></p>
       <p>

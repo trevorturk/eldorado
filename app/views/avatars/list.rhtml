@@ -1,0 +1,19 @@
+<% if !@avatars.blank? %>
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th class="tcl" colspan="2"><%= link_to 'Avatars', avatars_path %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for avatar in @avatars %>
+        <tr>
+          <td class="tci"><%= icon_for(avatar) %></td>
+          <td class="tcl">
+            <%= link_to avatar.filename, avatar.public_filename %> by <%=h avatar.user.login %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

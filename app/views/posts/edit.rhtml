@@ -1,6 +1,6 @@
 <%= error_messages_for :post %>
 <% form_for @post, :html => { :method => :put } do |f| %>
-  <div class="box">
+  <div class="box" id="box-posts-edit">
     <span class="top">Edit Post</span>
     <p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
     <p>

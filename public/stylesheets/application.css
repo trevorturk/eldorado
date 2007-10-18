@@ -449,18 +449,18 @@ cite {
 	max-width: 150px;
 }
 
-.home-left table {
+.home-left {
 	float: left;
 	width: 68%;
 }
 
-.home-left .topics-index .tcr {
-  width: 40%;
-}
-
-.home-right table {
+.home-right {
 	float: right;
 	width: 30%;
+}
+
+.home-left .topics-index .tcr {
+  width: 40%;
 }
 
 .home-right .calendar-nav {
@@ -468,7 +468,7 @@ cite {
 }
 
 .home-right .specialDay {
-  background: #cedeb9;
+  background: #d1d1d1;
 }
 
 .home-right .specialDay a:link, .home-right .specialDay a:visited {
@@ -574,8 +574,4 @@ div.tooltip {
 
 #errorExplanation ul li {
   padding: 2px 0;
-}
-
-.login {
-  background: #f1f1f1 url('http://newathens.org/files/ascii-girl.jpg') bottom;
 }

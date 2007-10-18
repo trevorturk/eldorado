@@ -4,7 +4,7 @@ class AvatarsController < ApplicationController
   before_filter :require_login, :except => [:index]
   
   def index
-    @avatars = Avatar.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc')
+    @avatars = Avatar.paginate(:page => params[:page], :order => 'updated_at desc')
   end
 
   def new

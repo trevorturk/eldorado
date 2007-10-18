@@ -8,14 +8,14 @@ class TopicsController < ApplicationController
   def index
     @topic = Topic.new
     if logged_in?      
-      @topics = Topic.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => [:user, :last_poster], :order => 'last_post_at desc')
+      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
-      @topics = Topic.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
+      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
   end
 
   def show
-    @posts = @topic.posts.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :include => :user)
+    @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
     @page = params[:page] ? params[:page] : 1
     @padding = ((@page.to_i - 1) * Topic::PER_PAGE) # to get post #s w/ pagination
     @topic.hit!

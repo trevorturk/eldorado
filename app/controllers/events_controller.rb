@@ -7,9 +7,9 @@ class EventsController < ApplicationController
   def index
     @date = Time.parse("#{params[:date]} || TzTime.now")
     if logged_in?
-      @events = Event.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc')
+      @events = Event.paginate(:page => params[:page], :order => 'updated_at desc')
     else
-      @events = Event.paginate(:page => params[:page], :per_page => Topic::PER_PAGE, :order => 'updated_at desc', :conditions => ["private = ?", false])
+      @events = Event.paginate(:page => params[:page], :order => 'updated_at desc', :conditions => ["private = ?", false])
     end
   end
 

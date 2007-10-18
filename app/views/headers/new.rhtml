@@ -1,7 +1,7 @@
 <%= error_messages_for :header %>
 <% @header = Header.new %>
 <% form_for @header, :html => { :multipart => true } do |f| -%>
-  <div class="box">
+  <div class="box" id="box-headers-new">
     <span class="top">New Header</span>
     <p><%= f.file_field :uploaded_data %></p>
     <p>Headers should be sized 760x200px.</p>

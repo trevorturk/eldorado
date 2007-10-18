@@ -31,7 +31,7 @@ end
 
 namespace :deploy do
   task :create_symlinks do
-    %w{avatars files headers}.each do |share|
+    %w{avatars files headers themes}.each do |share|
       run "rm -rf #{release_path}/public/#{share}"
       run "mkdir -p #{shared_path}/system/#{share}"
       run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
