@@ -14,7 +14,7 @@ module ApplicationHelper
     else
       @header = Header.find(:first, :order => :random, :conditions => ["votes >= ?", 0])
     end    
-    return '<style type="text/css">.header { background: #333 url("' + @header.public_filename + '"); }</style>' if @header
+    return '<style type="text/css">.header { background: #333 url("' + @header.public_filename + '") !important; }</style>' if @header
   end
     
   def theme_css
