@@ -13,14 +13,14 @@
   <% unless @options.favicon.blank? %>
     <link rel="shortcut icon" href="<%= @options.favicon %>" />
   <% end %>
-
+  
   <%= random_header_css %>
   <%= theme_css %>
   
-  <%= javascript_include_tag "prototype", "audio-player", :cache => true %>
+  <%= javascript_include_tag "prototype", "audio-player", "tooltip", :cache => true %>
   
 </head>
-<body>
+<body class="controller-<%= current_controller %> action-<%= current_action %>">
 
   <div class="wrapper">
     

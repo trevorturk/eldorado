@@ -498,6 +498,13 @@ cite {
   text-align: left;
 }
 
+div.tooltip {
+	margin: 6px;
+  padding: 4px;
+	color: #fff;
+  background-color: #35604d;
+}
+
 .reminders {
   background: #35604d;
   color: #fff;

@@ -45,7 +45,7 @@ two:
 mp3:
   id: 3
   parent_id: 
-  content_type: mp3
+  content_type: audio/mpeg
   filename: mp3.mp3
   thumbnail: 
   size: 1
