@@ -36,7 +36,7 @@ body {
 }
 
 a:link, a:visited {
-  color: #3371a3;
+  color: #3779B0;
   text-decoration: none;
 }
 
@@ -527,7 +527,7 @@ div.tooltip {
 }
 
 .inew {
-  border-color: #448ECF #3876A8 #346D9C #3C7CB5;
+  border-color: #448ECF #3876A8 #366F9E #3F7FB8;
 }
 
 .pagination {
