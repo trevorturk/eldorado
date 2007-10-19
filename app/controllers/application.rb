@@ -87,6 +87,7 @@ class ApplicationController < ActionController::Base
       @post.save!
       flash[:notice] = "Setup complete. You can now log in as 'Administrator' with the password '#{pass}'"
       @options = Option.find(:first)
+      @category = nil; @forum = nil; @user = nil; @topic = nil; @post = nil # reset for page_title
     end
   end
             

@@ -25,6 +25,17 @@ class HomeControllerTest < Test::Unit::TestCase
     assert_response :success
   end
 
+  def test_initial_setup_should_work
+    # Category.destroy_all
+    # Forum.destroy_all
+    # Option.destroy_all
+    # Post.destroy_all
+    # Topic.destroy_all
+    # User.destroy_all
+    # get :index
+    # assert_response :success
+  end
+
   def test_should_not_update_session_online_at
     # if current_user HAS been active in the last 10 minutes
   end
