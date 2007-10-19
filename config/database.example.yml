@@ -4,7 +4,7 @@ development:
   adapter: mysql
   database: eldorado_development
   username: root
-  password:
+  password: 
   host: localhost
 
 # Warning: The database defined as 'test' will be erased and
@@ -14,7 +14,7 @@ test:
   adapter: mysql
   database: eldorado_test
   username: root
-  password:
+  password: 
   host: localhost
 
 production:
