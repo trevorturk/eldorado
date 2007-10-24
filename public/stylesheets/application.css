@@ -203,8 +203,8 @@ tbody {
 tbody td {
   padding: 5px;
   vertical-align: top;
-  border-top: 1px solid #cedeb9;
-  border-right: 1px solid #cedeb9;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
 
 tbody .tci {

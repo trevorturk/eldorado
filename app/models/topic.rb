@@ -31,7 +31,7 @@ class Topic < ActiveRecord::Base
     
   attr_accessor :body
   
-  attr_accessible :title, :private, :locked, :sticky, :forum_id
+  # attr_accessible :title, :private, :locked, :sticky, :forum_id, :body
   
   PER_PAGE = 30
   

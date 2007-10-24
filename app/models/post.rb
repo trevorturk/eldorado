@@ -20,9 +20,9 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :user_id, :body
   
-  attr_accessor :title, :private, :forum_id
+  attr_accessor :title, :forum_id, :private, :locked, :sticky
   
-  attr_accessible :body
+  # attr_accessible :body
 
   def page
     posts = Post.find_all_by_topic_id(self.topic_id, :select => 'id', :order => 'created_at').map(&:id)

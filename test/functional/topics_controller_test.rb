@@ -245,4 +245,10 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_select "span#reply"
   end
   
+  def test_should_error_on_topic_create_if_attr_accessible_is_not_set_right_in_post_model
+  end
+  
+  def test_should_error_on_topic_create_if_attr_accessor_is_not_set_right_in_post_model
+  end
+  
 end

@@ -14,6 +14,11 @@ Rails::Initializer.run do |config|
   
   # Settings in config/environments/* take precedence those specified here
   
+  # Vendor Everything: http://errtheblog.com/post/2120
+  config.load_paths += Dir["#{RAILS_ROOT}/vendor/gems/**"].map do |dir| 
+    File.directory?(lib = "#{dir}/lib") ? lib : dir
+  end
+  
   # Use the database for sessions instead of the file system
   # (create the session table with 'rake db:sessions:create')
   config.action_controller.session_store = :active_record_store
@@ -25,3 +30,6 @@ Rails::Initializer.run do |config|
   ENV['TZ'] = 'UTC'
   
 end
+
+# Require gems in vendor/gems
+%w(tzinfo).each { |g| require g }

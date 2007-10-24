@@ -2,8 +2,6 @@ Welcome to El Dorado!
 
 # Installation #
 
-Requirements: Rails 2.0 (or greater), and the "tzinfo" gem.
-
 1) Set up config/database.yml and config/deploy.rb according to your setup
 2) Run "rake db:schema:load" (see note below) and start your web server
 3) Visit your new site, note your temporary password, and log in
