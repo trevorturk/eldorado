@@ -7,9 +7,9 @@ class EventsController < ApplicationController
   def index
     @date = Time.parse("#{params[:date]} || TzTime.now")
     if logged_in?
-      @events = Event.paginate(:page => params[:page], :order => 'updated_at desc')
+      @events = Event.find(:all, :conditions => ['created_at between ? and ?', @date.strftime("%Y-%m") + '-01', @date.next_month.strftime("%Y-%m") + '-01'])
     else
-      @events = Event.paginate(:page => params[:page], :order => 'updated_at desc', :conditions => ["private = ?", false])
+      @events = Event.find(:all, :conditions => ['created_at between ? and ? and private = ?', @date.strftime("%Y-%m") + '-01', @date.next_month.strftime("%Y-%m") + '-01', false])
     end
   end
 

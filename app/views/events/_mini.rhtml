@@ -5,7 +5,7 @@ calendar({:year => @date.year, :month => @date.month}) do |d|
   cell_attrs[:class] += 'todayDay ' if (d.to_date == TzTime.now.to_date)
   @events.each do |e|
     if e.date.to_date == d
-      cell_text = "#{ link_to d.mday, events_path, :id => 'cal-' + e.id.to_s }"
+      cell_text = "#{ link_to d.mday, events_path, :id => 'cal-' + d.to_date.to_s }"
       cell_attrs[:class] += 'specialDay '
     end
   end
@@ -15,6 +15,6 @@ end
 
 <script type="text/javascript">
 <% @events.each do |e| %>
-  <%= "var my_tooltip = new Tooltip('#{'cal-' + e.id.to_s }', '#{e.title}')" %>
+  <%= "var my_tooltip = new Tooltip('#{'cal-' + e.date.to_date.to_s }', '#{e.title}')" %>
 <% end %>
 </script>
