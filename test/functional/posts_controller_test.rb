@@ -135,4 +135,7 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal old_post_count+1, Post.count
   end
   
+  def test_should_quotes_actually_work
+  end
+  
 end
