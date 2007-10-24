@@ -1,4 +1,4 @@
-<% @post = Post.new %>
+<% @post = Post.new if @post.nil? %>
 <% form_for @post do |f| -%>
   <div class="box" id="box-posts-new">
     <span id="reply" class="top">Post a Reply</span><br />
