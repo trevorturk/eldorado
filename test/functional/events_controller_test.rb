@@ -27,7 +27,7 @@ class EventsControllerTest < Test::Unit::TestCase
     old_count = Event.count
     post :create, :event => {:title => "test", :description => "test", :date => Time.now }
     assert_equal old_count+1, Event.count
-    assert_redirected_to events_path
+    assert_redirected_to event_path(assigns(:event))
   end
 
   def test_should_show_event
