@@ -1,5 +1,5 @@
 <%= error_messages_for :avatar %>
-<% @avatar = Avatar.new %>
+<% @avatar = Avatar.new unless @avatar %>
 <% form_for @avatar, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-avatars-new">
     <span class="top">New Avatar</span>

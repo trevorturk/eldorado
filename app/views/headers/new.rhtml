@@ -1,5 +1,5 @@
 <%= error_messages_for :header %>
-<% @header = Header.new %>
+<% @header = Header.new unless @header %>
 <% form_for @header, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-headers-new">
     <span class="top">New Header</span>

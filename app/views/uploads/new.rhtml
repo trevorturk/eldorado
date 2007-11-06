@@ -1,5 +1,5 @@
 <%= error_messages_for :upload %>
-<% @upload = Upload.new %>
+<% @upload = Upload.new unless @upload %>
 <% form_for @upload, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-uploads-new">
     <span class="top">New File</span>

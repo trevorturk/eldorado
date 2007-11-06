@@ -1,5 +1,5 @@
 <%= error_messages_for :user %>
-<% @user = User.new %>
+<% @user = User.new unless @user %>
 <% form_for @user do |f| %>
   <div class="box" id="box-users-new">
     <span class="top">Register</span>

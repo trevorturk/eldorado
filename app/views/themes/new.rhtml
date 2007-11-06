@@ -1,5 +1,5 @@
 <%= error_messages_for :theme %>
-<% @theme = Theme.new %>
+<% @theme = Theme.new unless @theme %>
 <% form_for @theme, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-themes-new">
     <span class="top">New Theme</span>
