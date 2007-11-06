@@ -39,7 +39,7 @@ class Upload < ActiveRecord::Base
   def reject_index_files
     errors.add_to_base("Invalid file name") and return false if %w(index.html index.htm).include?(filename)
   end
-  
+    
   def to_s
     filename.to_s
   end

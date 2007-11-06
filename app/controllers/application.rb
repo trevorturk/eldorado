@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   around_filter :set_timezone
   before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
+  
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   
   session :session_key => '_eldorado_session_id'
@@ -37,7 +38,7 @@ class ApplicationController < ActionController::Base
       redirect_to logout_path and return false
     end
   end
-  
+    
   def update_online_at
     return unless logged_in?
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
