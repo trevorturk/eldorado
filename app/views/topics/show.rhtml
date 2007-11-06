@@ -31,6 +31,11 @@
   <%= render 'posts/show', { :post => post, :index => index } %>
 <% end %>
 
+<div class="info-right" style="margin-top:5px;">
+  <%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+</div>
+<div style="clear:both;"> </div>
+
 <% unless current_controller == 'search' %>
   <% if logged_in? && (!@topic.locked || can_edit?(@topic)) %>
     <%= render 'posts/new' %>
