@@ -15,6 +15,6 @@ end
 
 <script type="text/javascript">
 <% @events.each do |e| %>
-  <%= "var my_tooltip = new Tooltip('#{'cal-' + e.date.to_date.to_s }', '#{e.title}')" %>
+  <%= "var my_tooltip = new Tooltip('#{'cal-' + e.date.to_date.to_s }', '#{escape_single_quotes(e.title)}')" %>
 <% end %>
 </script>
