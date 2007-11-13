@@ -48,6 +48,7 @@ class UsersController < ApplicationController
   end
   
   def confirm_delete
+    @user = User.find(params[:id])
   end
   
   def login
