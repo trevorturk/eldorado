@@ -161,4 +161,10 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_show_user_as_online_if_online_at_within_last_5_minutes
   end
   
+  def test_confirm_delete_page_works
+    get :confirm_delete, :id => 1
+    assert_response :success
+    assert_template 'confirm_delete'
+  end
+  
 end

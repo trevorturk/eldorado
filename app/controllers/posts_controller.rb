@@ -54,6 +54,7 @@ class PostsController < ApplicationController
   
   def quote
     @body = "[quote=#{@post.user.login}]#{@post.body}[/quote]"
+    @post = nil # clear post so form with create a new one
     render :template => "posts/new"
   end
       

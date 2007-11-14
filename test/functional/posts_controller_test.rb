@@ -135,7 +135,11 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal old_post_count+1, Post.count
   end
   
-  def test_should_quotes_actually_work
+  def test_should_work_when_quoting_a_post
+    # quote an existing post
+    # see new post template
+    # post object should be a new post
+    # body of new post should be body of quoted post
   end
   
 end
