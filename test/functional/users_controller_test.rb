@@ -75,6 +75,15 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_template 'edit'
     assert_not_nil assigns(:user)
   end
+  
+  def test_should_not_update_user_if_no_email
+    login_as :trevor
+    put :update, :id => 4, :user => { :email => "" }
+    assert_redirected_to edit_user_path
+  end
+  
+  def test_should_enforce_password_confirmation_on_update
+  end
 
   def test_create
     num_users = User.count

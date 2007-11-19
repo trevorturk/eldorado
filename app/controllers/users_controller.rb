@@ -32,8 +32,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
     @user.profile_updated_at = Time.now.utc
-    @user.save!
-    redirect_to @user
+    if @user.save
+      redirect_to @user
+    else
+      redirect_to edit_user_path(@user)
+    end
   end
   
   def destroy
