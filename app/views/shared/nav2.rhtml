@@ -53,12 +53,6 @@
   </div>
 <% end %>
 
-<% if current_controller == 'forums' and current_action == 'index' %>
-  <div class="info-right" style="margin-top:5px;">
-    <%= link_to('View All Topics &raquo;', topics_path) %>
-  </div>
-<% end %>
-
 <% if current_controller == 'forums' and current_action == 'show' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 

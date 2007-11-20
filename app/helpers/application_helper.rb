@@ -18,16 +18,13 @@ module ApplicationHelper
   end
     
   def theme_css
-    if @options.theme_id.nil?
-      return '<style type="text/css">@import "/stylesheets/application.css";</style>'
-    else
-      @theme = Theme.find(@options.theme_id) 
-      return '<style type="text/css">@import "' + @theme.public_filename + '";</style>'
-    end
+    return '<style type="text/css">@import "/stylesheets/application.css";</style>' if @settings.theme_id.blank? 
+    @theme = Theme.find(@settings.theme_id)
+    return '<style type="text/css">@import "' + @theme.public_filename + '";</style>'
   end
 
   def page_title
-    page_title = h(@options.title)
+    page_title = h(@settings.title)
     page_title << ': ' + @category.to_s unless @category.nil? or @category.name.nil?
     page_title << ': ' + @event.to_s unless @event.nil? or @event.title.nil?
     page_title << ': ' + @forum.to_s unless @forum.nil? or @forum.name.nil?

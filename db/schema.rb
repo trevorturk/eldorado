@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 63) do
+ActiveRecord::Schema.define(:version => 64) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -82,15 +82,6 @@ ActiveRecord::Schema.define(:version => 63) do
     t.datetime "created_at"
   end
 
-  create_table "options", :force => true do |t|
-    t.string  "title"
-    t.string  "tagline"
-    t.text    "announcement"
-    t.text    "footer"
-    t.integer "theme_id"
-    t.string  "favicon"
-  end
-
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
@@ -116,6 +107,15 @@ ActiveRecord::Schema.define(:version => 63) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "settings", :force => true do |t|
+    t.string  "title"
+    t.string  "tagline"
+    t.text    "announcement"
+    t.text    "footer"
+    t.integer "theme_id"
+    t.string  "favicon"
+  end
 
   create_table "subscriptions", :force => true do |t|
     t.integer "user_id"

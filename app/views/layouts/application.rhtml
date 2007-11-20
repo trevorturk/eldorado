@@ -10,8 +10,8 @@
   <title><%= page_title %></title>
   <!-- Powered by El Dorado (http://almosteffortless.com) -->
 
-  <% unless @options.favicon.blank? %>
-    <link rel="shortcut icon" href="<%= @options.favicon %>" />
+  <% unless @settings.favicon.blank? %>
+    <link rel="shortcut icon" href="<%= @settings.favicon %>" />
   <% end %>
   
   <%= random_header_css %>
@@ -31,8 +31,8 @@
     <% end %>
     
     <div class="header">
-      <h1><%= link_to h(@options.title), root_path %></h1>
-      <div class="tagline"><%=h @options.tagline %></div>
+      <h1><%= link_to h(@settings.title), root_path %></h1>
+      <div class="tagline"><%=h @settings.tagline %></div>
     </div>
     
       <%= render 'shared/tabs' %>
@@ -46,7 +46,7 @@
         <%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
         <%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
 
-        <div class="announcement"><%= @options.announcement %></div>
+        <div class="announcement"><%= @settings.announcement %></div>
       
         <%= yield %>
       
@@ -55,7 +55,7 @@
             
       </div>
     
-      <div class="footer"><%= @options.footer %></div>
+      <div class="footer"><%= @settings.footer %></div>
     
   </div>
     

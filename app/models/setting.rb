@@ -1,7 +1,7 @@
 # == Schema Information
-# Schema version: 63
+# Schema version: 64
 #
-# Table name: options
+# Table name: settings
 #
 #  id           :integer(11)   not null, primary key
 #  title        :string(255)   
@@ -12,7 +12,7 @@
 #  favicon      :string(255)   
 #
 
-class Option < ActiveRecord::Base
+class Setting < ActiveRecord::Base
   
   def to_s
     title.to_s

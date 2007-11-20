@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   around_filter :set_timezone
-  before_filter :auth_token_login, :check_bans, :update_online_at, :get_options, :get_stats, :get_reminders
+  before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
@@ -55,24 +55,20 @@ class ApplicationController < ActionController::Base
     @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ?", true])
     @reminders = [] unless logged_in?
   end
-  
-  def get_stats
-    @newest_user = User.find(:first, :order => "created_at desc")
-    @user_count = User.count
-    @posts_count = Forum.sum('posts_count')
-  end
-  
+    
   def record_not_found
     flash[:notice] = "Sorry, the page you requested was not found."
     redirect_to root_path
   end
   
-  def get_options
-    @options = Option.find(:first)
-    if @options.blank? # set default options
-      return if (Category.count != 0) || (Forum.count != 0) || (Option.count != 0) || (Post.count != 0) || (Topic.count != 0) || (User.count != 0)
-      @option = Option.new(:title => 'El Dorado.org', :tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :announcement => '', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>')
-      @option.save!
+  def get_settings
+    @users_count = User.count
+    @newest_user = User.find(:first, :order => "created_at desc")
+    @settings = Setting.find(:first)
+    if @settings.blank? # set default settings
+      return if (Category.count != 0) || (Forum.count != 0) || (Setting.count != 0) || (Post.count != 0) || (Topic.count != 0) || (User.count != 0)
+      @setting = Setting.new(:title => 'El Dorado.org', :tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :announcement => '', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>')
+      @setting.save!
       @category = Category.new(:name => 'Test Category')
       @category.save!
       @forum = @category.forums.build(:name => 'Test Forum', :description => "This is just a test forum")
@@ -87,7 +83,7 @@ class ApplicationController < ActionController::Base
       @post.topic_id = 1
       @post.save!
       flash[:notice] = "Setup complete. You can now log in as 'Administrator' with the password '#{pass}'"
-      @options = Option.find(:first)
+      @settings = Setting.find(:first)
       @category = nil; @forum = nil; @user = nil; @topic = nil; @post = nil # reset for page_title
     end
   end

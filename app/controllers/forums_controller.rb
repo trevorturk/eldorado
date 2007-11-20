@@ -5,6 +5,8 @@ class ForumsController < ApplicationController
   
   def index
     @categories = Category.find(:all, :include => [:forums], :order => 'categories.position, forums.position')
+    @posts_count = Forum.sum('posts_count')
+    @topics_count = Forum.sum('topics_count')
   end
 
   def show

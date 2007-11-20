@@ -5,7 +5,7 @@ class ThemesController < ApplicationController
   
   def index
     @themes = Theme.paginate(:page => params[:page], :per_page => Topic::PER_PAGE)
-    @current_theme = Theme.find(@options.theme_id) unless @options.theme_id.nil?
+    @current_theme = Theme.find(@settings.theme_id) unless @settings.theme_id.nil?
   end
 
   def new
@@ -23,19 +23,19 @@ class ThemesController < ApplicationController
   def destroy
     @theme = Theme.find(params[:id])
     redirect_to themes_path and return false unless can_edit?(@theme)
-    @options.update_attributes(:theme_id => nil) if @options.theme_id == @theme.id
+    @settings.update_attributes(:theme_id => nil) if @settings.theme_id == @theme.id
     @theme.destroy
     redirect_to themes_path
   end
   
   def select
     @theme = Theme.find(params[:id])
-    @options.update_attributes(:theme_id => @theme.id)
+    @settings.update_attributes(:theme_id => @theme.id)
     redirect_to themes_path
   end
   
   def deselect
-    @options.update_attributes(:theme_id => nil)
+    @settings.update_attributes(:theme_id => nil)
     redirect_to themes_path
   end
   

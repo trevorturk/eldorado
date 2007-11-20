@@ -38,7 +38,7 @@ namespace :import do
     ActiveRecord::Base.establish_connection(eldorado['import'])
     @items = ActiveRecord::Base.connection.execute("SELECT conf_name, conf_value FROM #{prefix}config LIMIT 4")
     ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
-    @item = Option.new
+    @item = Setting.new
     @index = 0
     for i in @items 
       @index += 1

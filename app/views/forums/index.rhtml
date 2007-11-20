@@ -2,6 +2,19 @@
   <%= render 'topics/new' %>
 </div>
 
+<div class="info-left">
+  <span class="title">Forum</span>
+  <span class="detail">&nbsp;|&nbsp;
+    <%= pluralize(number_with_delimiter(@posts_count) || 0, 'Post') %> in 
+    <%= pluralize(number_with_delimiter(@topics_count) || 0, 'Topic') %>
+  </span>
+</div>
+<div class="info-right">
+  <span class="title">&nbsp;</span>
+  <span class="detail"><%= link_to('View All Topics &raquo;', topics_path) %></span>
+</div>
+<div style="clear:both;"> </div>
+
 <% for category in @categories %>
     <table cellspacing="0" class="forums-index">
       <thead>

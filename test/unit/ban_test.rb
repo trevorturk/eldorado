@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class BanTest < Test::Unit::TestCase
-  fixtures :bans
+  fixtures :all
 
   # Replace this with your real tests.
   def test_truth
