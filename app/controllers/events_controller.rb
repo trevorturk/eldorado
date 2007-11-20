@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   
   before_filter :require_login, :except => [:index, :show]
-  before_filter :check_privacy, :only => [:show, :edit]
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
@@ -15,6 +14,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    redirect_to login_path if (!logged_in? && @event.private)
   end
 
   def new

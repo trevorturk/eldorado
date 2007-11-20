@@ -1,8 +1,6 @@
 class TopicsController < ApplicationController
   
   before_filter :require_login, :except => [:index, :show, :show_posters, :show_new, :unknown_request]
-  before_filter :find_topic, :only => [:show, :edit, :update, :destroy, :show_new, :show_posters]
-  before_filter :check_privacy, :only => [:show]
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
@@ -15,6 +13,8 @@ class TopicsController < ApplicationController
   end
 
   def show
+    @topic = Topic.find(params[:id])
+    redirect_to login_path if (!logged_in? && @topic.private)
     @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
     @page = params[:page] ? params[:page] : 1
     @padding = ((@page.to_i - 1) * Topic::PER_PAGE) # to get post #s w/ pagination
@@ -27,6 +27,7 @@ class TopicsController < ApplicationController
   end
 
   def edit
+    @topic = Topic.find(params[:id])
   end
 
   def create
@@ -44,6 +45,7 @@ class TopicsController < ApplicationController
   end
 
   def update
+    @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
       redirect_to @topic
     else
@@ -52,15 +54,13 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    @topic = Topic.find(params[:id])
     @topic.destroy
     redirect_to topics_url
   end
-  
-  def find_topic
-    @topic = Topic.find(params[:id])
-  end
-  
+    
   def show_new
+    @topic = Topic.find(params[:id])
     redirect_to topic_path(:id => params[:id]) and return if @topic.posts_count == 1 # if the first post, see it from the top of the page
     @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]]) unless !logged_in?
     @post = Post.find(@topic.last_post_id) if @post.nil?
@@ -68,6 +68,7 @@ class TopicsController < ApplicationController
   end
   
   def show_posters
+    @topic = Topic.find(params[:id])
     @posters = @topic.posts.map(&:user) ; @posters.uniq!
     render :update do |page| 
       page.toggle :posters
