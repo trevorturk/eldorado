@@ -12,11 +12,11 @@ class ApplicationController < ActionController::Base
   include AuthenticationSystem, ExceptionLoggable
   
   protected
-      
+  
   def redirect_home
     redirect_to root_path and return false
   end
-
+  
   def auth_token_login
     return if logged_in? || cookies[:auth_token].nil?
     user = User.find_by_auth_token(cookies[:auth_token])
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       redirect_to request.request_uri and return false
     end
   end
-        
+  
   def check_bans
     return unless logged_in?
     return if request.path_parameters['action'] == 'logout'
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
       redirect_to logout_path and return false
     end
   end
-    
+  
   def update_online_at
     return unless logged_in?
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ?", true])
     @reminders = [] unless logged_in?
   end
-    
+  
   def record_not_found
     flash[:notice] = "Sorry, the page you requested was not found."
     redirect_to root_path
@@ -87,5 +87,5 @@ class ApplicationController < ActionController::Base
       @category = nil; @forum = nil; @user = nil; @topic = nil; @post = nil # reset for page_title
     end
   end
-            
+  
 end
