@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
   def page_title
-    page_title = h(@options.site_title)
+    page_title = h(@options.title)
     page_title << ': ' + @category.to_s unless @category.nil? or @category.name.nil?
     page_title << ': ' + @event.to_s unless @event.nil? or @event.title.nil?
     page_title << ': ' + @forum.to_s unless @forum.nil? or @forum.name.nil?
@@ -42,7 +42,7 @@ module ApplicationHelper
   end
   
   def rank_for(user)
-    return @options.admin_rank if user.admin
+    return 'Administrator' if user.admin
     @ranks ||=  Rank.find(:all, :order => "min_posts")
     return "Member" if @ranks.blank?
     for r in @ranks

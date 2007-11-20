@@ -42,8 +42,8 @@ namespace :import do
     @index = 0
     for i in @items 
       @index += 1
-      @item.site_title = i[1] if @index == 2 # o_board_title
-      @item.site_tagline = i[1] if @index == 3 # o_board_desc
+      @item.title = i[1] if @index == 2 # o_board_title
+      @item.tagline = i[1] if @index == 3 # o_board_desc
       tz = i[1].to_i if @index == 4 # o_server_timezone
     end
     tz = '+' + tz.to_s if tz == tz.abs # add a plus sign if this is a positive number
@@ -51,8 +51,6 @@ namespace :import do
     TzTime.zone = TZInfo::Timezone.get("Etc/GMT#{tz.to_s}")
     @item.announcement = ''
     @item.footer = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
-    @item.newest_user = 'Newest User'
-    @item.admin_rank = 'Administrator'
     @item.save!
     #
     # USERS

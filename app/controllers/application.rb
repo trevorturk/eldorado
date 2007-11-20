@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
     @options = Option.find(:first)
     if @options.blank? # set default options
       return if (Category.count != 0) || (Forum.count != 0) || (Option.count != 0) || (Post.count != 0) || (Topic.count != 0) || (User.count != 0)
-      @option = Option.new(:site_title => 'El Dorado.org', :site_tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :announcement => '', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>', :newest_user => 'Newest User', :admin_rank => 'Administrator')
+      @option = Option.new(:title => 'El Dorado.org', :tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :announcement => '', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>')
       @option.save!
       @category = Category.new(:name => 'Test Category')
       @category.save!
