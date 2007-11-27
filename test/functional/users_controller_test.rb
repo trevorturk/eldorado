@@ -78,8 +78,10 @@ class UsersControllerTest < Test::Unit::TestCase
   
   def test_should_not_update_user_if_no_email
     login_as :trevor
-    put :update, :id => 4, :user => { :email => "" }
-    assert_redirected_to edit_user_path
+    put :update, :id => 4, :user => { :login => "won't work", :email => "" }
+    assert_template 'edit'
+    users(:trevor).reload
+    assert_equal 'trevor', users(:trevor).login
   end
   
   def test_should_enforce_password_confirmation_on_update
