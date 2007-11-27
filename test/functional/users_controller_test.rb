@@ -84,7 +84,27 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal 'trevor', users(:trevor).login
   end
   
-  def test_should_enforce_password_confirmation_on_update
+  def test_should_allow_user_to_change_password_password_change
+    login_as :trevor
+    put :update, :id => 4, :user => { :password => "ok", :password_confirmation => "ok" }
+    users(:trevor).reload
+    assert_equal User.encrypt('ok'), users(:trevor).password_hash
+  end
+  
+  def test_should_enforce_password_confirmation_on_update_if_password_is_present
+    login_as :trevor
+    put :update, :id => 4, :user => { :password => "ok", :password_confirmation => "" }
+    assert_template 'edit'
+    users(:trevor).reload
+    assert_equal User.encrypt('test'), users(:trevor).password_hash
+  end
+  
+  def test_should_not_change_password_if_left_blank_in_edit_form
+    login_as :trevor
+    put :update, :id => 4, :user => { :bio => 'it works!', :password => "", :password_confirmation => "" }
+    users(:trevor).reload
+    assert_equal User.encrypt('test'), users(:trevor).password_hash
+    assert_equal 'it works!', users(:trevor).bio
   end
 
   def test_create

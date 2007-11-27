@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
   validates_confirmation_of :password, :on => :create
+  validates_confirmation_of :password, :on => :update, :allow_nil => true
   
   before_create { |u| u.online_at = u.profile_updated_at = Time.now.utc }
   
