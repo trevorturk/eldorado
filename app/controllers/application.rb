@@ -62,7 +62,6 @@ class ApplicationController < ActionController::Base
   end
   
   def get_settings
-    @users_count = User.count
     @newest_user = User.find(:first, :order => "created_at desc")
     @settings = Setting.find(:first)
     if @settings.blank? # set default settings

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.paginate(:page => params[:page], :order => 'profile_updated_at desc')
-    
+    @users_count = User.count
   end
 
   def show
