@@ -12,8 +12,8 @@
     <p class="label"><label for="header_description">Description</label></p>
     <p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
     <p>
-      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> 
-      <%= link_to 'Delete', @header, :confirm => 'Are you sure?', :method => :delete %> or 
+      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
+      <%= link_to 'Delete', @header, :confirm => 'Are you sure?', :method => :delete %> &nbsp;
       <%= link_to 'Cancel', @header %>
     </p>
   </div>

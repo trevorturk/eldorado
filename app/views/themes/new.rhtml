@@ -6,9 +6,9 @@
     <p><%= f.file_field :uploaded_data %></p>
     <p>Themes must be smaller than 50k.</p>
     <p>
-      <%= submit_tag "Upload", :disable_with => "Upload" %><span> or 
+      <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp; 
       <% if current_action != 'new' %>
-        <%= link_to_function 'Cancel', "$('action').toggle()" %>
+        <%= link_to_function 'Cancel', "$('action').toggle()" %> &nbsp;
       <% else %>
         <%= link_to 'Cancel', themes_path %>
       <% end %>

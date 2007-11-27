@@ -4,10 +4,10 @@
     <span class="top">Edit Post</span>
     <p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
     <p>
-      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %> or 
-      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> or 
+      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
+      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> &nbsp;
       <% if @topic.posts_count > 1 %>
-        <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> or 
+        <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> &nbsp;
       <% end %>
       <%= link_to 'Cancel', @post %>
     </p>

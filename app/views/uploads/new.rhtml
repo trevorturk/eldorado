@@ -8,7 +8,7 @@
       &nbsp; <%= f.check_box(:private) %><label for="upload_private"> Private</label>
     </p>
     <p>
-      <%= submit_tag "Upload", :disable_with => "Upload" %> 
+      <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp; 
       <% if current_action != 'new' %>
         <%= link_to_function 'Cancel', "$('action').toggle()" %>
       <% else %>

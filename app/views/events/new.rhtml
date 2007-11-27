@@ -14,7 +14,7 @@
     <p class="label"><label for="event_date">Date</label></p>
     <p><%= f.datetime_select :date %>&nbsp;Currently: <%=tz TzTime.now %></p>
     <p>
-      <%= submit_tag "Add Event", :disable_with => "Add Event" %> 
+      <%= submit_tag "Add Event", :disable_with => "Add Event" %>&nbsp;
       <% if current_action != 'new' %>
         <%= link_to_function 'Cancel', "$('action').toggle()" %>
       <% else %>

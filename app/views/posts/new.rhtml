@@ -5,7 +5,7 @@
       <%= f.hidden_field :topic_id, :value => @topic.id %>
       <%= f.text_area :body, :value => @body, :rows => '8', :style => "width:66%;" %>
       <p>
-        <%= submit_tag "Post Reply", :disable_with => "Post Reply" %> &nbsp; 
+        <%= submit_tag "Post Reply", :disable_with => "Post Reply" %>&nbsp; 
         <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> &nbsp; 
         <%= link_to('Cancel', topic_post_path(params[:id])) if current_action == 'quote' %>
       </p>

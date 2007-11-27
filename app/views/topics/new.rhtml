@@ -23,13 +23,13 @@
     <p class="label"><label for="topic_body">Body</label></p>
     <p><%= f.text_area :body, :rows => '8', :style => 'width:66%;' %></p>
     <p>
-      <%= submit_tag "Post Topic", :disable_with => "Post Topic" %> or 
+      <%= submit_tag "Post Topic", :disable_with => "Post Topic" %>&nbsp;
+      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %> &nbsp; 
       <% if current_action != 'new' %>
         <%= link_to_function 'Cancel', "$('action').toggle()" %>
       <% else %>
         <%= link_to 'Cancel', forum_root_path %>
       <% end %>
-      or <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %>
     </p>
   </div>
 <% end %>
