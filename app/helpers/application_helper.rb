@@ -8,12 +8,14 @@ module ApplicationHelper
     
   protected
   
-  def random_header_css
-    if current_controller == 'headers' && (current_action == 'edit' || current_action == 'show')
+  def header_css
+    if current_controller == 'headers' && %w(edit show).include?(current_action)
       @header = Header.find(params[:id])
     else
-      @header = Header.find(:first, :order => :random, :conditions => ["votes >= ?", 0])
-    end    
+      count = Header.count
+      return if count == 0
+      @header = Header.find(:first, :offset => rand(Header.count), :conditions => ["votes >= ?", 0])
+    end
     return '<style type="text/css">.header { background: #333 url("' + @header.public_filename + '") !important; }</style>' if @header
   end
     

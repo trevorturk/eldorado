@@ -1,5 +1,0 @@
-require 'base'
-require 'abstract_adapter'
-require 'sqlite_adapter'
-require 'mysql_adapter'
-require 'postgresql_adapter'
