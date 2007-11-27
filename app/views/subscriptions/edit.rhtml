@@ -2,7 +2,7 @@
 
 <%= error_messages_for :subscription %>
 
-<% form_for @subscription, :html => { :method => :put } do |f| %>
+<% form_for @subscription do |f| %>
   <p>
     <b>User</b><br />
     <%= f.text_field :user_id %>
