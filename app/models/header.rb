@@ -32,6 +32,15 @@ class Header < ActiveRecord::Base
   
   attr_protected :id, :parent_id, :user_id, :created_at, :updated_at
   
+  def self.find(*args)
+    if args.first.to_s == "random"
+      ids = connection.select_all("SELECT id FROM headers")
+      super(ids[rand(ids.length)]["id"].to_i)
+    else
+      super
+    end
+  end
+  
   def full_filename(thumbnail = nil)
     file_system_path = (thumbnail ? thumbnail_class : self).attachment_options[:path_prefix].to_s
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))

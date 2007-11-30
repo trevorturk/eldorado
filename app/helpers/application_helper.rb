@@ -14,7 +14,7 @@ module ApplicationHelper
     else
       count = Header.count
       return if count == 0
-      @header = Header.find(:first, :offset => rand(Header.count), :conditions => ["votes >= ?", 0])
+      @header = Header.find(:random, :conditions => ["votes >= ?", 0])
     end
     return '<style type="text/css">.header { background: #333 url("' + @header.public_filename + '") !important; }</style>' if @header
   end

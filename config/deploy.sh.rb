@@ -21,15 +21,9 @@ namespace :deploy do
     sleep 5
     run "/var/lib/gems/1.8/bin/mongrel_rails start -d -e production -p 8000 -P log/mongrel.8000.pid -c #{release_path} --user root --group root"
   end
-end
-
-namespace :deploy do
   task :upload_database_yml do
     put(File.read('config/database.yml'), "#{release_path}/config/database.yml", :mode => 0444)    
   end
-end
-
-namespace :deploy do
   task :create_symlinks do
     %w{avatars files headers themes}.each do |share|
       run "rm -rf #{release_path}/public/#{share}"
