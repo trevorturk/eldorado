@@ -32,13 +32,9 @@ class Header < ActiveRecord::Base
   
   attr_protected :id, :parent_id, :user_id, :created_at, :updated_at
   
-  def self.find(*args)
-    if args.first.to_s == "random"
-      ids = connection.select_all("SELECT id FROM headers")
-      super(ids[rand(ids.length)]["id"].to_i)
-    else
-      super
-    end
+  def self.random
+    ids = connection.select_all("SELECT id FROM headers where votes >= 0")
+    find(ids[rand(ids.length)]["id"].to_i) unless ids.blank?
   end
   
   def full_filename(thumbnail = nil)

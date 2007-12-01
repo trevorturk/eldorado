@@ -12,7 +12,7 @@ module ApplicationHelper
     if current_controller == 'headers' && %w(edit show).include?(current_action)
       @header = Header.find(params[:id])
     else
-      @header = Header.find(:random, :conditions => ["votes >= ?", 0])
+      @header = Header.random
     end
     return '<style type="text/css">.header { background: #333 url("' + @header.public_filename + '") !important; }</style>' if @header
   end
