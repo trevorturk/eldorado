@@ -3,9 +3,9 @@
 #
 # Table name: categories
 #
-#  id       :integer(11)   not null, primary key
-#  name     :string(255)   
-#  position :integer(11)   default(0)
+#  id       :integer(11)     not null, primary key
+#  name     :string(255)     
+#  position :integer(11)     default(0)
 #
 
 class Category < ActiveRecord::Base

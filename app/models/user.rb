@@ -3,21 +3,21 @@
 #
 # Table name: users
 #
-#  id                 :integer(11)   not null, primary key
-#  login              :string(255)   
-#  email              :string(255)   
-#  password_hash      :string(255)   
-#  created_at         :datetime      
-#  admin              :boolean(1)    
-#  posts_count        :integer(11)   default(0)
-#  signature          :string(255)   
-#  bio                :text          
-#  profile_updated_at :datetime      
-#  online_at          :datetime      
-#  avatar             :string(255)   
-#  auth_token         :string(255)   
-#  auth_token_exp     :datetime      
-#  time_zone          :string(255)   default("UTC")
+#  id                 :integer(11)     not null, primary key
+#  login              :string(255)     
+#  email              :string(255)     
+#  password_hash      :string(255)     
+#  created_at         :datetime        
+#  admin              :boolean(1)      
+#  posts_count        :integer(11)     default(0)
+#  signature          :string(255)     
+#  bio                :text            
+#  profile_updated_at :datetime        
+#  online_at          :datetime        
+#  avatar             :string(255)     
+#  auth_token         :string(255)     
+#  auth_token_exp     :datetime        
+#  time_zone          :string(255)     default("UTC")
 #
 
 require 'digest/sha1'

@@ -3,13 +3,13 @@
 #
 # Table name: forums
 #
-#  id           :integer(11)   not null, primary key
-#  category_id  :integer(11)   
-#  name         :string(255)   
-#  description  :text          
-#  topics_count :integer(11)   default(0)
-#  posts_count  :integer(11)   default(0)
-#  position     :integer(11)   default(0)
+#  id           :integer(11)     not null, primary key
+#  category_id  :integer(11)     
+#  name         :string(255)     
+#  description  :text            
+#  topics_count :integer(11)     default(0)
+#  posts_count  :integer(11)     default(0)
+#  position     :integer(11)     default(0)
 #
 
 class Forum < ActiveRecord::Base
