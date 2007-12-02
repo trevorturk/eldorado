@@ -14,12 +14,9 @@ end
 %>
 
 <script type="text/javascript">
-Event.observe(window,"load",function() {
-       $$("*").findAll(function(node){
-         return node.getAttribute('title');
-       }).each(function(node){
-         new Tooltip(node,node.title);
-         node.removeAttribute("title");
-       });
-     });
+Event.observe(window, 'load', function(){
+  $$('a').each(function(element){
+    if(element.rel != '') new Tip(element, element.title);
+  });
+});
 </script>
