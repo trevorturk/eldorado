@@ -495,13 +495,6 @@ cite {
   text-align: left;
 }
 
-div.tooltip {
-	margin: 6px;
-  padding: 4px;
-	color: #fff;
-  background-color: #3371a3;
-}
-
 .reminders {
   background: #3371a3;
   color: #fff;
@@ -571,4 +564,13 @@ div.tooltip {
 
 #errorExplanation ul li {
   padding: 2px 0;
+}
+
+.prototip { position: absolute; }
+.prototip .tooltip { position: relative; }
+
+.prototip .default .content { 
+	color: #fff; 
+	background: #3371a3; 
+	padding: 4px 5px;
 }
