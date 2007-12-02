@@ -42,3 +42,10 @@ two:
   body: MyText
   created_at: <%= 1.week.ago.to_s :db %>
   updated_at: <%= 1.week.ago.to_s :db %>
+three:
+  id: 5
+  user_id: 1
+  topic_id: 3
+  body: MyText
+  created_at: <%= 1.week.ago.to_s :db %>
+  updated_at: <%= 1.week.ago.to_s :db %>

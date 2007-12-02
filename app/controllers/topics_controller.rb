@@ -16,6 +16,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     redirect_to login_path if (!logged_in? && @topic.private)
     @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
+    redirect_to @topic if @posts.blank?
     @page = params[:page] ? params[:page] : 1
     @padding = ((@page.to_i - 1) * Topic::PER_PAGE) # to get post #s w/ pagination
     @topic.hit!

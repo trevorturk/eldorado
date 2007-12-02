@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   around_filter :set_timezone
-  before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders
+  before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders, :clean_params
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
@@ -54,6 +54,10 @@ class ApplicationController < ActionController::Base
   def get_reminders
     @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ?", true])
     @reminders = [] unless logged_in?
+  end
+  
+  def clean_params
+    params[:page] = params[:page].to_i; params[:page] = 1 if params[:page] == 0 # ensure page is a positive integer
   end
   
   def record_not_found
