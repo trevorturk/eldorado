@@ -566,11 +566,13 @@ cite {
   padding: 2px 0;
 }
 
-.prototip { position: absolute; }
-.prototip .tooltip { position: relative; }
+.prototip { 
+	position: absolute; 
+}
 
-.prototip .default .content { 
+.tooltip { 
+	position: relative; 
 	color: #fff; 
-	background: #3371a3; 
+	background-color: #3371a3;
 	padding: 4px 5px;
 }
