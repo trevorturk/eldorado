@@ -5,7 +5,7 @@ calendar({:year => @date.year, :month => @date.month}) do |d|
   cell_attrs[:class] += 'todayDay ' if (d.to_date == TzTime.now.to_date)
   @events.each do |e|
     if e.date.to_date == d
-      cell_text = "#{ link_to d.mday, events_path, :id => 'cal-' + d.to_date.to_s, :rel => escape_single_quotes(e.title) }"
+      cell_text = "#{ link_to d.mday, events_path, :id => 'cal-' + d.to_date.to_s, :rel => e.title }"
       cell_attrs[:class] += 'specialDay '
     end
   end
