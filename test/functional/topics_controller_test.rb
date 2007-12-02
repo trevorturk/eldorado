@@ -251,4 +251,14 @@ class TopicsControllerTest < Test::Unit::TestCase
   def test_should_error_on_topic_create_if_attr_accessor_is_not_set_right_in_post_model
   end
   
+  def test_should_be_ok_with_bogus_params_page_value
+    get :show, :id => 1, :page => 'sdlkfjsdfs'
+    assert_response :success
+  end
+  
+  def test_should_redirect_to_first_page_if_page_is_too_many
+    get :show, :id => 1, :page => '2'
+    assert_redirected_to topic_path(:id => 1)
+  end
+  
 end
