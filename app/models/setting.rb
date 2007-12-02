@@ -13,7 +13,7 @@
 #
 
 class Setting < ActiveRecord::Base
-  
+    
   def to_s
     title.to_s
   end

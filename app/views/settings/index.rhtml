@@ -1,0 +1,21 @@
+<% form_for @settings do |f| -%>
+  <div class="box" id="box-settings-index">
+    <span class="top">Settings</span>
+      <p class="label"><label for="setting_title">Title</label></p>
+      <p><%= f.text_field :title, :style => "width:66%" %></p>
+      <p class="label"><label for="setting_tagline">Tagline</label></p>
+      <p><%= f.text_field :tagline, :style => "width:66%" %></p>
+      <p class="label"><label for="setting_announcement">Announcement</label></p>
+      <p><%= f.text_area :announcement, :rows => '3', :style => "width:66%;" %></p>
+      <p class="label"><label for="setting_footer">Footer</label></p>
+      <p><%= f.text_area :footer, :rows => '3', :style => "width:66%;" %></p>
+      <p class="label"><label for="setting_theme_id">Theme ID</label></p>
+      <p><%= f.text_field :theme_id, :style => "width:66%;" %></p>
+      <p class="label"><label for="setting_favicon">Favicon</label></p>
+      <p><%= f.text_field :favicon, :style => "width:66%;" %></p>
+      <p>
+        <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp; 
+        <%= link_to('Cancel', root_path) %>
+      </p>
+    </div>
+<% end %>

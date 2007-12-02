@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forums
   map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
   map.resources :posts, :member => { :quote => :get, :topic => :get }
+  map.resources :settings
   map.resources :subscriptions
   map.resources :themes, :member => { :select => :post, :deselect => :post }
   map.resources :topics, :member => { :show_new => :get }
@@ -18,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'users', :action => 'logout'
   map.register '/register', :controller => 'users', :action => 'new'
   map.search '/search', :controller => 'search', :action => 'index'
+  map.admin '/admin', :controller => 'settings', :action => 'index'
   map.files_root '/files', :controller => 'uploads', :action => 'index'
   map.forum_root '/forum', :controller => 'forums', :action => 'index'
   map.forum_admin '/forum/admin', :controller => 'forums', :action => 'admin'

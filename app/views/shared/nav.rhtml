@@ -25,6 +25,9 @@
         <%= link_to('Register a New User', new_user_path) %>
       <% end %>
       &nbsp; <%= link_to_function 'Search', "$('search').toggle();$('query').focus();" %>
+      <% if admin? && current_controller == 'home' %>
+        &nbsp; <%= link_to 'Admin', admin_path %>
+      <% end %>
       &nbsp; <%= link_to('Logout', logout_path) %>
     <% else %>
       <%= link_to('Register', register_path) %> &nbsp;
