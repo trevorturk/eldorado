@@ -13,7 +13,11 @@
 #
 
 class Setting < ActiveRecord::Base
-    
+  
+  def theme
+    read_attribute(:theme) # not sure why this is needed, but tests are failing without it
+  end
+      
   def to_s
     title.to_s
   end

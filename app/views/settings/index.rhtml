@@ -1,3 +1,13 @@
+<div class="info-left">
+  <span class="title">Administration</span>
+  <span class="detail">
+    &nbsp;| &nbsp;
+    <%= link_to 'Settings', settings_path %> &nbsp; 
+    <%= link_to 'Themes', themes_path %>
+  </span>
+</div>
+<div style="clear:both;"> </div>
+
 <% form_for @settings do |f| -%>
   <div class="box" id="box-settings-index">
     <span class="top">Settings</span>
@@ -9,10 +19,8 @@
       <p><%= f.text_area :announcement, :rows => '3', :style => "width:66%;" %></p>
       <p class="label"><label for="setting_footer">Footer</label></p>
       <p><%= f.text_area :footer, :rows => '3', :style => "width:66%;" %></p>
-      <p class="label"><label for="setting_theme_id">Theme ID</label></p>
-      <p><%= f.text_field :theme_id, :style => "width:66%;" %></p>
       <p class="label"><label for="setting_favicon">Favicon</label></p>
-      <p><%= f.text_field :favicon, :style => "width:66%;" %></p>
+      <p><%= f.text_field :favicon, :style => "width:66%;" %></p>      
       <p>
         <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp; 
         <%= link_to('Cancel', root_path) %>

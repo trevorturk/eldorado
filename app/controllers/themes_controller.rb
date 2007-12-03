@@ -4,8 +4,8 @@ class ThemesController < ApplicationController
   before_filter :require_admin 
   
   def index
-    @themes = Theme.paginate(:page => params[:page], :per_page => Topic::PER_PAGE)
-    @current_theme = Theme.find(@settings.theme_id) unless @settings.theme_id.nil?
+    @themes = Theme.paginate(:page => params[:page])
+    @current_theme = Theme.find_by_filename(@settings.theme) unless @settings.theme.blank?
   end
 
   def new
@@ -23,19 +23,19 @@ class ThemesController < ApplicationController
   def destroy
     @theme = Theme.find(params[:id])
     redirect_to themes_path and return false unless can_edit?(@theme)
-    @settings.update_attributes(:theme_id => nil) if @settings.theme_id == @theme.id
+    @settings.update_attributes(:theme => nil) if @settings.theme == @theme.filename
     @theme.destroy
     redirect_to themes_path
   end
   
   def select
     @theme = Theme.find(params[:id])
-    @settings.update_attributes(:theme_id => @theme.id)
+    @settings.update_attributes(:theme => @theme.filename)
     redirect_to themes_path
   end
   
   def deselect
-    @settings.update_attributes(:theme_id => nil)
+    @settings.update_attributes(:theme => nil)
     redirect_to themes_path
   end
   
