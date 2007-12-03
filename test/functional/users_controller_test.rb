@@ -36,6 +36,18 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
+  def test_should_not_be_able_to_edit_if_not_logged_in
+    get :edit, :id => 2
+    assert_redirected_to root_path
+  end
+  
+  def test_should_not_be_able_to_update_if_not_logged_in
+    put :update, :id => 4, :user => { :bio => "ok!" }
+    assert_redirected_to root_path
+    users(:trevor).reload
+    assert_not_equal "ok!", users(:trevor).bio
+  end
+  
   def test_should_be_able_to_edit_self
     login_as :trevor
     get :edit, :id => 4
@@ -48,7 +60,7 @@ class UsersControllerTest < Test::Unit::TestCase
     login_as :Administrator
     put :update, :id => 4, :user => { :bio => "ok!" }
     assert_redirected_to user_path(assigns(:user))
-    users(:trevor).bio
+    users(:trevor).reload
     assert_equal "ok!", users(:trevor).bio
   end
   
@@ -193,6 +205,7 @@ class UsersControllerTest < Test::Unit::TestCase
   end
   
   def test_confirm_delete_page_works
+    login_as :Administrator
     get :confirm_delete, :id => 1
     assert_response :success
     assert_template 'confirm_delete'
