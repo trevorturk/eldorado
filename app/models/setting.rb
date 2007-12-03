@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 64
+# Schema version: 65
 #
 # Table name: settings
 #
@@ -8,7 +8,7 @@
 #  tagline      :string(255)     
 #  announcement :text            
 #  footer       :text            
-#  theme_id     :integer(11)     
+#  theme        :string(255)     
 #  favicon      :string(255)     
 #
 
