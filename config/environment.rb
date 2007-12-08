@@ -1,35 +1,24 @@
-# Be sure to restart your web server when you modify this file.
-
-# Uncomment below to force Rails into production mode when 
-# you don't control web/app server and can't set it the proper way
-# ENV['RAILS_ENV'] ||= 'production'
+# Bootstrap the Rails environment, frameworks, and default configuration
+# Settings in config/environments/* take precedence those specified here
+# Be sure to restart your web server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-# RAILS_GEM_VERSION = '1.2.3'
+RAILS_GEM_VERSION = '2.0.1' unless defined? RAILS_GEM_VERSION
 
-# Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+require 'yaml'
 
 Rails::Initializer.run do |config|
   
-  # Settings in config/environments/* take precedence those specified here
-  
-  # Vendor Everything: http://errtheblog.com/post/2120
-  config.load_paths += Dir["#{RAILS_ROOT}/vendor/gems/**"].map do |dir| 
-    File.directory?(lib = "#{dir}/lib") ? lib : dir
-  end
-  
-  # Use the database for sessions instead of the file system
-  # (create the session table with 'rake db:sessions:create')
-  config.action_controller.session_store = :active_record_store
-
-  # Make Active Record use UTC-base instead of local time
+  # Make Active Record use UTC-base instead of local time, and make Time.new return time in UTC
   config.active_record.default_timezone = :utc
-  
-  # Make Time.now return time in UTC
   ENV['TZ'] = 'UTC'
   
+  # The session_key and secret (for verifying session data integrity) can be set in config/database.yml
+  db = YAML.load_file('config/database.yml')
+  config.action_controller.session = {
+    :session_key => db[RAILS_ENV]['session_key'],
+    :secret      => db[RAILS_ENV]['secret']
+  }
+      
 end
-
-# Require gems in vendor/gems
-%w(tzinfo).each { |g| require g }

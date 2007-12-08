@@ -6,7 +6,10 @@ RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
 module Rails
   class << self
     def boot!
-      pick_boot.run unless booted?
+      unless booted?
+        preinitialize
+        pick_boot.run
+      end
     end
 
     def booted?
@@ -19,6 +22,14 @@ module Rails
 
     def vendor_rails?
       File.exist?("#{RAILS_ROOT}/vendor/rails")
+    end
+
+    def preinitialize
+      load(preinitializer_path) if File.exists?(preinitializer_path)
+    end
+
+    def preinitializer_path
+      "#{RAILS_ROOT}/config/preinitializer.rb"
     end
   end
 
@@ -44,12 +55,12 @@ module Rails
 
     def load_rails_gem
       if version = self.class.gem_version
-        gem 'rails', "=#{version}"
+        gem 'rails', version
       else
         gem 'rails'
       end
     rescue Gem::LoadError => load_error
-      STDERR.puts %(Missing the Rails #{version} gem. Please `gem install -v=#{version} rails`, update your RAILS_GEM_VERSION setting in config/environment.rb for the Rails version you do have installed, or comment out RAILS_GEM_VERSION to use the latest version installed.)
+      $stderr.puts %(Missing the Rails #{version} gem. Please `gem install -v=#{version} rails`, update your RAILS_GEM_VERSION setting in config/environment.rb for the Rails version you do have installed, or comment out RAILS_GEM_VERSION to use the latest version installed.)
       exit 1
     end
 
@@ -72,17 +83,17 @@ module Rails
         require 'rubygems'
 
         unless rubygems_version >= '0.9.4'
-          STDERR.puts %(Rails requires RubyGems >= 0.9.4 (you have #{rubygems_version}). Please `gem update --system` and try again.)
+          $stderr.puts %(Rails requires RubyGems >= 0.9.4 (you have #{rubygems_version}). Please `gem update --system` and try again.)
           exit 1
         end
 
       rescue LoadError
-        STDERR.puts %(Rails requires RubyGems >= 0.9.4. Please install RubyGems and try again: http://rubygems.rubyforge.org)
+        $stderr.puts %(Rails requires RubyGems >= 0.9.4. Please install RubyGems and try again: http://rubygems.rubyforge.org)
         exit 1
       end
 
       def parse_gem_version(text)
-        $1 if text =~ /^[^#]*RAILS_GEM_VERSION\s*=\s*'([\d.]+)'/
+        $1 if text =~ /^[^#]*RAILS_GEM_VERSION\s*=\s*'([!~<>=]*\s*[\d.]+)'/
       end
 
       private

@@ -2,18 +2,15 @@ Welcome to El Dorado!
 
 # Installation #
 
-1) Set up config/database.yml and config/deploy.rb according to your setup
-2) Run "rake db:schema:load" (see note below) and start your web server
-3) Visit your new site, note your temporary password, and log in
-
-NOTE: Rake tasks generally only affect the local "development" database. To install on a public site, 
-you would need to run "rake db:schema:load RAILS_ENV=production" on the remote server.
+1) Install the required gems: Rails 2.0.1 and TZInfo (run this command to install them: "sudo gem install rails tzinfo")
+2) Rename config/database.example.yml to config/database.yml and fill in the database and session details for your setup
+3) Run "rake db:schema:load" and start your web server (use "rake db:schema:load RAILS_ENV=production" for a live site)
+4) Visit your new site and log in using the password displayed (log in and edit the user account to change this password)
 
 # Importing from a PunBB site (version 1.2.15) #
 
-1) Set up the "import" section of config/database.yml
-2) Run "rake import:database" (see note above)
-3) Run the other available rake tasks as necessary: import:avatars, import:headers, and import:files
+1) Set up the "import" section of config/database.yml and run "rake import:database"
+2) Run optional rake tasks if necessary: import:avatars, import:headers, and import:files
 
 # Upgrading #
 
@@ -29,7 +26,7 @@ Released under the MIT License, Copyright 2006 Trevor Turk (see LICENSE file for
 
 NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et a. (Ruby), 
 DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson (PunBB), 
-Matt Mullenweg et al. (Wordpress), Michael Heilemann et al. (k2), Josh Peek, and Jeff Stahler...
+Matt Mullenweg et al. (Wordpress), Michael Heilemann et al. (k2), and Josh Peek.
 
 - Trevor Turk
 http://almosteffortless.com

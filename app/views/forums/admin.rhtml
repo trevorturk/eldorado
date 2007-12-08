@@ -13,5 +13,21 @@
         </ul>
       <% end %>
     </ul>
-  </div>
+  </div>  
+</div>
+
+<div class="box" id="box-categories-new">
+  <%= error_messages_for :category %>
+  <% @category = Category.new unless @category %>
+  <% form_for @category do |f| %>
+    <span class="top">New Category</span>
+    <p class="label"><label for="category_name">Name</label></p>
+    <p><%= f.text_field :name, :style => 'width:66%;' %></p>
+    <p class="label"><label for="category_position">Position</label></p>
+    <p><%= f.text_field :position, :style => 'width:5%;' %></p>
+    <p>
+      <%= submit_tag "Add Category", :disable_with => "Add Category" %>&nbsp;
+      <%= link_to 'Cancel', forum_admin_path %>
+    </p>
+  <% end %>
 </div>

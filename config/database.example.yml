@@ -1,32 +1,35 @@
-# MySQL (default setup).  Versions 4.1 and 5.0 are recommended.
-
 development:
   adapter: mysql
   database: eldorado_development
   username: root
   password: 
   host: localhost
+  session_key: eldorado_development
+  secret: YrDOFOmYJyFg2tTZykCbZjWYQUbKBt
 
-# Warning: The database defined as 'test' will be erased and
-# re-generated from your development database when you run 'rake'.
-# Do not set this db to the same as development or production.
 test:
   adapter: mysql
   database: eldorado_test
   username: root
   password: 
   host: localhost
+  session_key: eldorado_test
+  secret: Pl8qJNFc8mo1yt1xtHOmfUGHOPEutu
 
+# This "session_key" can be any string, and should be unique to your installation (e.g. mysite_session)
+# This "secret" must be a random string, at least 30 characters long, and kept secret for security
 production:
   adapter: mysql
   database: eldorado_production
   username: root
   password: 
   host: localhost
+  session_key: 
+  secret: 
 
 import:
   adapter: mysql
-  database: eldorado_import
+  database: punbb
   username: root
   password: 
   host: localhost
