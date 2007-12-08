@@ -4,6 +4,7 @@ class ChangeSettingsThemeIdToTheme < ActiveRecord::Migration
     change_column :settings, :theme, :string
     
     settings = Setting.find(:first)
+    return if settings.blank?
     settings.theme = Theme.find(settings.theme).filename
     settings.save
   end

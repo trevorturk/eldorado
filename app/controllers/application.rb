@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
   
   around_filter :set_timezone
-  before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders, :clean_params
+  before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders, :get_newest_user, :clean_params
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
+  helper :all
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   
@@ -65,8 +66,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
   
-  def get_settings
+  def get_newest_user
     @newest_user = User.find(:first, :order => "created_at desc")
+  end
+  
+  def get_settings
     @settings = Setting.find(:first)
     if @settings.blank? # set default settings
       return if (Category.count != 0) || (Forum.count != 0) || (Setting.count != 0) || (Post.count != 0) || (Topic.count != 0) || (User.count != 0)
