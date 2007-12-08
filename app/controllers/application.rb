@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
+  protect_from_forgery unless RAILS_ENV == 'test'
   helper :all
-  protect_from_forgery
   
   around_filter :set_timezone
   before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders, :get_newest_user, :clean_params
