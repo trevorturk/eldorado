@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   def update 
     @post.updated_by = current_user.id
     if @post.update_attributes(params[:post]) 
-      redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
+      redirect_to topic_post_path(@post)
     else 
       render :action => :edit 
     end 
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
 
   def destroy 
     @post.destroy if @topic.posts_count > 1
-    redirect_to @topic
+    redirect_to show_new_topic_path(@topic)
   end 
   
   def topic
