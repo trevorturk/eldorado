@@ -41,7 +41,7 @@
       
         <%= render 'shared/nav' %>
         
-        <%= render :partial => 'search/form' %>
+        <%= render :partial => 'search/form.html.erb' %>
             
         <%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
         <%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>

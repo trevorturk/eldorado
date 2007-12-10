@@ -45,13 +45,13 @@ class HeadersController < ApplicationController
   def vote_up
     @header = Header.find(params[:id])
     @header.vote_up
-    render :partial => 'votes'
+    render :partial => 'votes.html.erb'
   end
   
   def vote_down
     @header = Header.find(params[:id])
     @header.vote_down
-    render :partial => 'votes'
+    render :partial => 'votes.html.erb'
   end
   
 end
