@@ -15,7 +15,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-  title: 'El Dorado.org'
+  title: 'El Dorado'
   tagline: 'tagline'
   announcement: 'announcement'
   footer: 'footer'

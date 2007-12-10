@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
     @settings = Setting.find(:first)
     if @settings.blank? # set default settings
       return if (Category.count != 0) || (Forum.count != 0) || (Setting.count != 0) || (Post.count != 0) || (Topic.count != 0) || (User.count != 0)
-      @setting = Setting.new(:title => 'El Dorado.org', :tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :announcement => '', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>')
+      @setting = Setting.new(:title => 'El Dorado', :tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :announcement => '', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>')
       @setting.save!
       @category = Category.new(:name => 'Test Category')
       @category.save!

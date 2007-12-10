@@ -30,12 +30,12 @@ class SettingsControllerTest < Test::Unit::TestCase
     put :update, :id => 1, :setting => { :title => 'test' }
     assert_redirected_to root_path
     settings(:one).reload
-    assert_equal "El Dorado.org", settings(:one).title
+    assert_equal "El Dorado", settings(:one).title
     login_as :trevor
     put :update, :id => 1, :setting => { :title => 'test' }
     assert_redirected_to root_path
     settings(:one).reload
-    assert_equal "El Dorado.org", settings(:one).title
+    assert_equal "El Dorado", settings(:one).title
   end
   
   def test_should_update_if_authorized

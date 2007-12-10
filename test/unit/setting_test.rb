@@ -10,7 +10,7 @@ class SettingTest < Test::Unit::TestCase
   
   def test_to_s
     o = Setting.find(1)
-    assert_equal o.to_s, 'El Dorado.org'
+    assert_equal o.to_s, 'El Dorado'
   end
   
 end
