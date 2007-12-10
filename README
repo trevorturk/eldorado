@@ -1,32 +1,37 @@
-Welcome to El Dorado!
+== Welcome to El Dorado
 
-# Installation #
+El Dorado is a full-stack community web application written in Ruby/Rails.
 
-1) Install the required gems: Rails 2.0.1 and TZInfo (run this command to install them: "sudo gem install rails tzinfo")
-2) Rename config/database.example.yml to config/database.yml and fill in the database and session details for your setup
+== Installation
+
+1) Install the required gems: Rails 2.0.1 or greater and TZInfo (run: "sudo gem install rails tzinfo")
+2) Rename config/database.example.yml to config/database.yml and fill in the database and session details
 3) Run "rake db:schema:load" and start your web server (use "rake db:schema:load RAILS_ENV=production" for a live site)
 4) Visit your new site and log in using the password displayed (log in and edit the user account to change this password)
 
-# Importing from a PunBB site (version 1.2.15) #
+== Importing from PunBB (version 1.2.15)
 
-1) Set up the "import" section of config/database.yml and run "rake import:database"
-2) Run optional rake tasks if necessary: import:avatars, import:headers, and import:files
+1) Fill in the "import" section of config/database.yml and run "rake import:database"
+2) Run optional rake tasks as necessary: import:avatars, import:headers, and import:files
 
-# Upgrading #
+== Upgrading
 
 Visit http://almosteffortless.com and http://code.google.com/p/eldorado/source for updates and news.
-Use "rake db:migrate" to upgrade your database from an older version after new releases.
-Use "cap deploy:migrations" to upgrade your database and app at the same time using Capistrano.
+Use "rake db:migrate" to upgrade your database after new releases (use "cap deploy:migrations" if you're using Capistrano).
 
-# License #
+== License
 
 Released under the MIT License, Copyright 2006 Trevor Turk (see LICENSE file for details).
 
-# Thanks #
+== Contributors
+
+Trevor Turk, Josh Peek, and Wilhelm Chung.
+
+== Thanks
 
 NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et a. (Ruby), 
 DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson (PunBB), 
-Matt Mullenweg et al. (Wordpress), Michael Heilemann et al. (k2), and Josh Peek.
+Matt Mullenweg et al. (Wordpress), and Michael Heilemann et al. (k2).
 
-- Trevor Turk
-http://almosteffortless.com
+--
+Trevor Turk (http://almosteffortless.com)
