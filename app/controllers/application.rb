@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error
   
   session :session_key => '_eldorado_session_id'
   filter_parameter_logging "password"
@@ -65,6 +66,11 @@ class ApplicationController < ActionController::Base
   
   def record_not_found
     flash[:notice] = "Sorry, the page you requested was not found."
+    redirect_to root_path
+  end
+  
+  def generic_error
+    flash[:notice] = "Sorry, there was an error."
     redirect_to root_path
   end
   
