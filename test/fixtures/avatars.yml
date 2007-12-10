@@ -44,3 +44,16 @@ two:
   current_user_id: 1
   created_at: 2007-04-02 17:46:11
   updated_at: 2007-04-02 17:46:11
+test:
+  id: 3
+  parent_id: 
+  content_type: MyString
+  filename: MyString.png
+  thumbnail: 
+  size: 
+  width: 
+  height: 
+  user_id: 4
+  current_user_id: 1
+  created_at: 2007-04-02 17:46:11
+  updated_at: 2007-04-02 17:46:11

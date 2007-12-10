@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_many :themes, :dependent => :destroy
   has_many :topics, :dependent => :destroy
   has_many :uploads, :dependent => :destroy
+  has_one :current_avatar, :class_name => 'Avatar', :foreign_key => 'current_user_id', :dependent => :nullify
       
   validates_presence_of     :login, :email, :password_hash, :time_zone
   validates_uniqueness_of   :login, :case_sensitive => false

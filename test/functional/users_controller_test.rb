@@ -211,4 +211,47 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_template 'confirm_delete'
   end
   
+  def test_delete_user_works_if_self
+    login_as :Timothy
+    old_count = User.count
+    delete :destroy, :id => 3, :confirm => 1
+    assert_equal old_count-1, User.count
+    assert_redirected_to users_path
+  end
+  
+  def test_delete_user_works_if_admin
+    login_as :Administrator
+    old_count = User.count
+    delete :destroy, :id => 4, :confirm => 1
+    assert_equal old_count-1, User.count
+    assert_redirected_to users_path
+  end
+  
+  def test_delete_user_does_not_work_if_not_admin_or_self
+    login_as :Timothy
+    old_count = User.count
+    delete :destroy, :id => 2, :confirm => 1
+    assert_equal old_count, User.count
+    assert_redirected_to root_path
+  end
+  
+  def test_delete_user_does_not_work_if_not_logged_in
+    old_count = User.count
+    delete :destroy, :id => 1, :confirm => 1
+    assert_equal old_count, User.count
+    assert_redirected_to root_path
+  end
+  
+  def test_that_deleting_user_cleans_up_in_use_avatar
+    # log in as admin, delete guest account using the "test" avatar, check that test avatar has no current_user_id
+    login_as :Administrator
+    old_count = User.count
+    delete :destroy, :id => 1, :confirm => 1
+    assert_equal old_count-1, User.count
+    assert_redirected_to users_path
+    avatars(:test).reload
+    assert_nil avatars(:test).current_user_id
+    assert_equal avatars(:test).user_id, 4
+  end
+  
 end
