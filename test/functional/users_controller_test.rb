@@ -192,6 +192,15 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_nil session[:user_id]
   end
   
+  def test_login_action_doesnt_bomb_with_bogus_params
+    post :login
+    assert_response :success
+    assert_nil session[:user_id]
+    post :login, :sdfsdf => {:sdfsdf => 'sdfsdf'}
+    assert_response :success
+    assert_nil session[:user_id]
+  end
+  
   def test_current_user_stays_the_same_when_new_user_created
   end
   
