@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 65
+# Schema version: 67
 #
 # Table name: users
 #
@@ -17,7 +17,7 @@
 #  avatar             :string(255)     
 #  auth_token         :string(255)     
 #  auth_token_exp     :datetime        
-#  time_zone          :string(255)     default("UTC")
+#  time_zone          :string(255)     
 #
 
 require 'digest/sha1'
@@ -33,13 +33,13 @@ class User < ActiveRecord::Base
   has_many :uploads, :dependent => :destroy
   has_one :current_avatar, :class_name => 'Avatar', :foreign_key => 'current_user_id', :dependent => :nullify
       
-  validates_presence_of     :login, :email, :password_hash, :time_zone
+  validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
   validates_confirmation_of :password, :on => :create
   validates_confirmation_of :password, :on => :update, :allow_blank => true
   
-  before_create { |u| u.online_at = u.profile_updated_at = Time.now.utc }
+  before_create :set_defaults
   
   composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
     
@@ -71,6 +71,11 @@ class User < ActiveRecord::Base
   
   def self.users_online
     User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes])
+  end
+  
+  def set_defaults
+    self.online_at = self.profile_updated_at = Time.now.utc
+    self.time_zone = Setting.find(:first).time_zone
   end
   
   def to_s

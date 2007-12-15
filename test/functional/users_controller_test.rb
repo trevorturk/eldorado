@@ -263,4 +263,10 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal avatars(:test).user_id, 4
   end
   
+  def test_that_default_time_zone_works
+    post :create, :user => {:login => 'timezone', :email => 'test@test.com', :password => 'dfj', :password_confirmation => 'dfj'}
+    user = User.find_by_login('timezone')
+    assert_equal user.time_zone, 'US/Central'
+  end
+  
 end

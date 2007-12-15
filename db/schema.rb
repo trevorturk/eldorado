@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 66) do
+ActiveRecord::Schema.define(:version => 67) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 66) do
     t.text   "footer"
     t.string "theme"
     t.string "favicon"
+    t.string "time_zone",    :default => "UTC"
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -179,7 +180,7 @@ ActiveRecord::Schema.define(:version => 66) do
     t.string   "avatar"
     t.string   "auth_token"
     t.datetime "auth_token_exp"
-    t.string   "time_zone",          :default => "UTC"
+    t.string   "time_zone"
   end
 
   add_index "users", ["online_at"], :name => "index_users_on_online_at"

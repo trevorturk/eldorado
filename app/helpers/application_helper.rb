@@ -82,11 +82,7 @@ module ApplicationHelper
       truncate(t, 50)
     end
   end
-  
-  def escape_single_quotes(text)
-    text.gsub(/[']/, '\\\\\'')
-  end
-  
+    
   def tz(time)
     time_stamp(TzTime.zone.utc_to_local(time.utc))
   end

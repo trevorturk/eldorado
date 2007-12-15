@@ -45,5 +45,5 @@ class SettingsControllerTest < Test::Unit::TestCase
     settings(:one).reload
     assert_equal "test", settings(:one).title
   end
-
+  
 end

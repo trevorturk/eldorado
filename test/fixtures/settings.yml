@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 65
+# Schema version: 67
 #
 # Table name: settings
 #
@@ -10,12 +10,11 @@
 #  footer       :text            
 #  theme        :string(255)     
 #  favicon      :string(255)     
+#  time_zone    :string(255)     default("UTC")
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
   title: 'El Dorado'
-  tagline: 'tagline'
-  announcement: 'announcement'
-  footer: 'footer'
+  time_zone: 'US/Central'

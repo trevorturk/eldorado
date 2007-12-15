@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 65
+# Schema version: 67
 #
 # Table name: users
 #
@@ -17,7 +17,7 @@
 #  avatar             :string(255)     
 #  auth_token         :string(255)     
 #  auth_token_exp     :datetime        
-#  time_zone          :string(255)     default("UTC")
+#  time_zone          :string(255)     
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
@@ -30,6 +30,7 @@ Guest:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  time_zone: 'UTC'
 Administrator:
   id: 2
   login: Administrator
@@ -43,6 +44,7 @@ Administrator:
   bio: 'admin'
   auth_token: 153c53039f6e8e8ca832d1512702f412298ec3a9
   auth_token_exp: <%= (Time.now.utc - 1.week).to_s :db %> # expired
+  time_zone: 'UTC'
 Timothy:
   id: 3
   login: Timothy
@@ -54,6 +56,7 @@ Timothy:
   online_at: <%= 5.hours.ago.to_s :db %>
   auth_token: 244cd62e5130681b86c01f8de9e9762d9a3f3645
   auth_token_exp: <%= (Time.now.utc + 1.week).to_s :db %> # not expired
+  time_zone: 'UTC'
 trevor:
   id: 4
   login: trevor
@@ -65,6 +68,7 @@ trevor:
   online_at: <%= 5.hours.ago.to_s :db %>
   bio: 'my bio'
   avatar: 4.gif
+  time_zone: 'UTC'
 banned:
   id: 5
   login: banned
@@ -74,6 +78,7 @@ banned:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  time_zone: 'UTC'
 post_test:
   id: 6
   login: post
@@ -83,3 +88,4 @@ post_test:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 2.weeks.ago.to_s :db %>
+  time_zone: 'UTC'

@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  def settings
+    @settings ||= Setting.find(:first)
+  end
+  
   def redirect_home
     redirect_to root_path and return false
   end
@@ -50,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_timezone
-    TzTime.zone = logged_in? ? current_user.tz : TZInfo::Timezone.get('UTC')
+    TzTime.zone = logged_in? ? current_user.tz : settings.tz
     yield
     TzTime.reset!
   end
@@ -79,7 +83,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_settings
-    @settings = Setting.find(:first)
+    @settings ||= Setting.find(:first)
     if @settings.blank? # set default settings
       return if (Category.count != 0) || (Forum.count != 0) || (Setting.count != 0) || (Post.count != 0) || (Topic.count != 0) || (User.count != 0)
       @setting = Setting.new(:title => 'El Dorado', :tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :announcement => '', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>')

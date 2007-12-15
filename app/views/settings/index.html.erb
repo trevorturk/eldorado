@@ -21,7 +21,12 @@
       <p class="label"><label for="setting_footer">Footer</label></p>
       <p><%= f.text_area :footer, :rows => '3', :style => "width:66%;" %></p>
       <p class="label"><label for="setting_favicon">Favicon</label></p>
-      <p><%= f.text_field :favicon, :style => "width:66%;" %></p>      
+      <p><%= f.text_field :favicon, :style => "width:66%;" %></p>
+      <p class="label"><label for="setting_time_zone">Default Timezone</label></p>
+      <p>
+        <%= time_zone_select 'settings', 'time_zone', TZInfo::Timezone.all.sort, :model => TZInfo::Timezone %>
+        &nbsp;Currently: <%=tz TzTime.now %>
+      </p>
       <p>
         <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp; 
         <%= link_to('Cancel', root_path) %>
