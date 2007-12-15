@@ -337,8 +337,15 @@ tbody .tds {
   border-left: 1px solid #f1f1f1;
 }
 
+.info-center {
+	float: left;
+	margin: 0px 8px;
+	text-align: center;
+}
+
 .info-right {
   float: right;
+	text-align: right;
   margin: 0 0 10px 0;
   padding-right: 5px;
   border-right: 1px solid #f1f1f1;
@@ -465,7 +472,7 @@ cite {
 }
 
 .home-right .specialDay {
-  background: #e1e1e1;
+  background: #d1d1d1;
 }
 
 .home-right .specialDay a:link, .home-right .specialDay a:visited {

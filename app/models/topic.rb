@@ -28,7 +28,9 @@ class Topic < ActiveRecord::Base
   belongs_to :last_poster, :foreign_key => "last_post_by", :class_name => "User"
   
   validates_presence_of :user_id, :title, :forum_id
-    
+  
+  acts_as_ordered :order => 'last_post_id'
+  
   attr_accessor :body
   
   # attr_accessible :title, :private, :locked, :sticky, :forum_id, :body
