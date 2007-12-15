@@ -33,15 +33,15 @@
 
 <% unless current_controller == 'search' %>
   <div class="info-left detail" style="margin-top:5px;width:32%;">
-    <%= link_to('&laquo; ' + truncate(@topic.previous.title, 50), show_new_topic_path(@topic.previous)) unless @topic.previous == @topic %>
-    <% if @topic.previous == @topic %>&laquo; Previous Topic<% end %>
+    <%= link_to('&laquo; ' + truncate(@previous_topic.title, 45), show_new_topic_path(@previous_topic)) unless @previous_topic == @topic %>
+    <% if @previous_topic == @topic %>&laquo; Previous Topic<% end %>
   </div>
   <div class="info-center detail" style="margin-top:5px;width:32%;">
     <%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :next_label => 'Next Page &raquo;', :prev_label => '&laquo; Prev Page' %>
   </div>
   <div class="info-right detail" style="margin-top:5px;width:32%;">
-    <%= link_to(truncate(@topic.next.title, 50) + ' &raquo;', show_new_topic_path(@topic.next)) unless @topic.next == @topic %>
-    <% if @topic.next == @topic %>Next Topic &raquo;<% end %>
+    <%= link_to(truncate(@next_topic.title, 45) + ' &raquo;', show_new_topic_path(@next_topic)) unless @next_topic == @topic %>
+    <% if @next_topic == @topic %>Next Topic &raquo;<% end %>
   </div>
   <div style="clear:both;"> </div>
 <% end %>
