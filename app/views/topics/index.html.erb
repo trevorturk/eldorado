@@ -62,7 +62,7 @@
     <div class="nav nav-footer">
       <p class="nav-left">
         <% if @category.forums.blank? %>
-          <%= link_to 'Create a New Forum &raquo;', new_forum_path(:category_id => @category.id) %>
+          <%= link_to 'Add a New Forum &raquo;', new_forum_path(:category_id => @category.id) %>
         <% else %>
           <%= link_to 'Start a New Topic &raquo;', new_topic_path %>
         <% end %>
