@@ -1,13 +1,4 @@
-<div class="info-left">
-  <span class="title">Administration</span>
-  <span class="detail">
-    &nbsp;| &nbsp;
-    <%= link_to 'Settings', settings_path %> &nbsp; 
-    <%= link_to 'Forum', forum_admin_path %> &nbsp; 
-    <%= link_to 'Themes', themes_path %>
-  </span>
-</div>
-<div style="clear:both;"> </div>
+<%= render 'shared/admin.html.erb' %>
 
 <% form_for @settings do |f| -%>
   <div class="box" id="box-settings-index">

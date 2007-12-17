@@ -14,10 +14,7 @@ class PostsController < ApplicationController
   
   def new
   end
-  
-  def edit
-  end 
-    
+
   def create
     @topic = Topic.find(params[:post][:topic_id])
     redirect_to root_path and return false unless @topic
@@ -32,8 +29,11 @@ class PostsController < ApplicationController
       flash[:notice] = "Posts cannot be blank"
       redirect_to @topic
     end 
+  end
+  
+  def edit
   end 
-
+    
   def update 
     @post.updated_by = current_user.id
     if @post.update_attributes(params[:post]) 

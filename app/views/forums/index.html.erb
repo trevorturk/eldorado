@@ -31,7 +31,13 @@
       <tbody>
         <% for forum in category.forums %>
           <tr>
-            <td class="tci"><%= icon_for(forum.last_topic.last_post) unless forum.last_topic.nil? %></td>
+            <td class="tci">
+              <% if forum.last_topic.nil? %>
+                <%= icon_for(nil) %>
+              <% else %>
+                <%= icon_for(forum.last_topic.last_post) %>
+              <% end %>
+            </td>
             <td class="tcl">
               <span class="forum-name"><%= link_to h(forum.name), forum %></span>
               <br /><%=h forum.description %>

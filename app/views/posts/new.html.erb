@@ -1,7 +1,7 @@
 <% @post = Post.new unless @post %>
 <% form_for @post do |f| -%>
   <div class="box" id="box-posts-new">
-    <span id="reply" class="top">Post a Reply: <%= @topic.title unless @topic.title.blank? %></span><br />
+    <span id="reply" class="top">Post a Reply</span><br />
       <%= f.hidden_field :topic_id, :value => @topic.id %>
       <%= f.text_area :body, :value => @body, :rows => '8', :style => "width:66%;" %>
       <p>

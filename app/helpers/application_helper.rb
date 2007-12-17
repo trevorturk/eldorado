@@ -72,6 +72,7 @@ module ApplicationHelper
   end
   
   def icon_for(item)
+    return '<div class="icon"><!-- --></div>' if item.nil?
     return '<div class="icon inew"><!-- --></div>' if is_new?(item)
     return '<div class="icon"><!-- --></div>'
   end

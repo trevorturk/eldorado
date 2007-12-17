@@ -14,10 +14,6 @@ class HeadersController < ApplicationController
   def new
   end
 
-  def edit
-    @header = Header.find(params[:id])
-  end
-
   def create
     @header = current_user.headers.build params[:header]
     if @header.save
@@ -25,6 +21,10 @@ class HeadersController < ApplicationController
     else
       render :action => "new"
     end
+  end
+
+  def edit
+    @header = Header.find(params[:id])
   end
   
   def update

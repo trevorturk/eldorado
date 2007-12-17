@@ -351,6 +351,14 @@ tbody .tds {
   border-right: 1px solid #f1f1f1;
 }
 
+.info-width {
+	width: 32%;
+}
+
+.info-space {
+	margin-top: 5px;
+}
+
 .title {
   font-size: 12px;
   font-weight: bold;

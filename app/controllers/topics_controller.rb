@@ -25,12 +25,7 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @topic = Topic.new
-    @topic.forum_id = params[:forum_id] 
-  end
-
-  def edit
-    @topic = Topic.find(params[:id])
+    @topic = Topic.new(:forum_id => params[:forum_id])
   end
 
   def create
@@ -45,6 +40,10 @@ class TopicsController < ApplicationController
     else
       render :action => "new"
     end
+  end
+
+  def edit
+    @topic = Topic.find(params[:id])
   end
 
   def update

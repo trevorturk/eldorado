@@ -57,4 +57,20 @@
       <% end %>
     </tbody>
   </table>
+<% else %>
+  <% if current_controller == 'categories' %>
+    <div class="nav nav-footer">
+      <p class="nav-left">
+        <% if @category.forums.blank? %>
+          <%= link_to 'Create a New Forum &raquo;', new_forum_path(:category_id => @category.id) %>
+        <% else %>
+          <%= link_to 'Start a New Topic &raquo;', new_topic_path %>
+        <% end %>
+      </p>
+    </div>
+  <% elsif current_controller == 'forums' %>
+    <div class="nav nav-footer">
+      <p class="nav-left"><%= link_to 'Start a New Topic &raquo;', new_topic_path(:forum_id => @forum.id) %></p>
+    </div>
+  <% end %>
 <% end %>

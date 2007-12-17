@@ -21,7 +21,11 @@
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Forum', forum_root_path %> &raquo; <%= h@category.name %>
   </div>
-  <div class="info-right">
+  <div class="info-right detail">
+    <% if admin? %>
+      <%= link_to 'Add a New Forum', new_forum_path(:category_id => @category.id) %> &nbsp;|&nbsp;
+      <%= link_to 'Edit Category', edit_category_path(@category) %>
+    <% end %>
     <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>
@@ -49,6 +53,15 @@
   <div class="info-right">
     <% if can_edit?(@event) %>
       <%= link_to 'Edit Event', edit_event_path %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_controller == 'forums' and current_action == 'index' %>
+  <div class="info-right info-space detail">
+    <% if admin? %>
+      <%= link_to('Add a New Category', new_category_path) %> &nbsp;|&nbsp;
+      <%= link_to('Add a New Forum', new_forum_path) %>
     <% end %>
   </div>
 <% end %>
@@ -117,10 +130,6 @@
 <% end %>
 
 <% if current_controller == 'themes' and current_action == 'index' %>
-  <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Users', users_path %> &raquo; Themes
-  </div>
   <div class="info-right">
     <%= will_paginate @themes, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
