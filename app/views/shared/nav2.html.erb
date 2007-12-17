@@ -73,6 +73,9 @@
     <%= link_to @forum.category.name, @forum.category %> &raquo; <%= @forum.name %>
   </div>
   <div class="info-right">
+    <% if admin? %>
+      <%= link_to 'Edit Forum', edit_forum_path(@forum) %>
+    <% end %>
     <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
 <% end %>

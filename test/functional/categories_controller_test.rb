@@ -87,13 +87,26 @@ class CategoriesControllerTest < Test::Unit::TestCase
   end
   
   def test_should_not_update_category_if_not_admin_or_not_logged_in
-    get :edit, :id => 1
+    put :update, :id => 1, :category => { :id => 1, :name => 'update works!' }
+    categories(:one).reload
+    assert_equal categories(:one).name, 'test category'
     assert_redirected_to root_path
     login_as :trevor
-    get :edit, :id => 1
+    put :update, :id => 1, :category => { :id => 1, :name => 'update works!' }
+    categories(:one).reload
+    assert_equal categories(:one).name, 'test category'
     assert_redirected_to root_path
   end
   
   def test_should_destroy_category
+    # not implemented yet
+    delete :destroy, :id => 1
+    assert_redirected_to root_path
+    login_as :trevor
+    delete :destroy, :id => 1
+    assert_redirected_to root_path
+    login_as :Administrator
+    delete :destroy, :id => 1
+    assert_redirected_to root_path
   end
 end

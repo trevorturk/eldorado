@@ -10,7 +10,7 @@ class ForumTest < Test::Unit::TestCase
   
   def test_to_s
     f = Forum.find(1)
-    assert_equal f.to_s, 'MyString'
+    assert_equal f.to_s, 'test forum'
   end  
 
 end

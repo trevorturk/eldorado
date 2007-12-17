@@ -16,7 +16,7 @@
 one:
   id: 1
   category_id: 1
-  name: MyString
+  name: 'test forum'
   description: MyText
   topics_count: 2
   posts_count: 4

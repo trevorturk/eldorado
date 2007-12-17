@@ -28,5 +28,22 @@ class ForumsController < ApplicationController
     render :action => 'new' and return false unless @forum.save
     redirect_to @forum
   end
+  
+  def edit
+    @forum = Forum.find(params[:id])
+  end
+  
+  def update
+    @forum = Forum.find(params[:id])
+    if @forum.update_attributes(params[:forum])
+      redirect_to @forum
+    else
+      render :action => "edit"
+    end
+  end
+  
+  def destroy
+    redirect_to root_path
+  end
      
 end

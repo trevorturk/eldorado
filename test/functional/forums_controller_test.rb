@@ -57,30 +57,45 @@ class ForumsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
 
-  def test_should_get_edit
-    # not implemented yet
-    get :new
-    assert_redirected_to root_path
+  def test_should_get_edit_if_admin
     login_as :Administrator
-    get :new
+    get :edit, :id => 1
+    assert_response :success
+  end
+  
+  def test_should_not_get_edit_if_not_admin_or_not_logged_in
+    get :edit, :id => 1
+    assert_redirected_to root_path
+    login_as :trevor
+    get :edit, :id => 1
     assert_redirected_to root_path
   end
   
-  def test_should_update_forum
-    # not implemented yet
-    get :new
-    assert_redirected_to root_path
+  def test_should_update_forum_if_admin
     login_as :Administrator
-    get :new
+    put :update, :id => 1, :forum => { :id => 1, :name => 'update works!' }
+    forums(:one).reload
+    assert_redirected_to forum_path(forums(:one))
+    assert_equal forums(:one).name, 'update works!'
+  end
+  
+  def test_should_not_update_forum_if_not_admin_or_not_logged_in
+    put :update, :id => 1, :forum => { :id => 1, :name => 'update works!' }
+    forums(:one).reload
+    assert_equal forums(:one).name, 'test forum'
+    assert_redirected_to root_path
+    login_as :trevor
+    put :update, :id => 1, :forum => { :id => 1, :name => 'update works!' }
+    forums(:one).reload
+    assert_equal forums(:one).name, 'test forum'
     assert_redirected_to root_path
   end
   
-  def test_should_destroy_forum
+  def test_should_destroy_forum_if_admin
     # not implemented yet
-    get :new
-    assert_redirected_to root_path
     login_as :Administrator
-    get :new
+    delete :destroy, :id => 1
     assert_redirected_to root_path
   end
+  
 end

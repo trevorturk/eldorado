@@ -40,7 +40,7 @@ class CategoriesController < ApplicationController
   end
   
   def destroy
-    redirect_to forum_root_path
+    redirect_to root_path
   end
     
 end
