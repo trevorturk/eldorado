@@ -23,7 +23,7 @@
   </div>
   <div class="info-right detail">
     <% if admin? %>
-      <%= link_to 'Add a New Forum', new_forum_path(:category_id => @category.id) %> &nbsp;|&nbsp;
+      <%= link_to 'Create a New Forum', new_forum_path(:category_id => @category.id) %> &nbsp;|&nbsp;
       <%= link_to 'Edit Category', edit_category_path(@category) %>
     <% end %>
     <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
@@ -60,8 +60,8 @@
 <% if current_controller == 'forums' and current_action == 'index' %>
   <div class="info-right info-space detail">
     <% if admin? %>
-      <%= link_to('Add a New Category', new_category_path) %> &nbsp;|&nbsp;
-      <%= link_to('Add a New Forum', new_forum_path) %>
+      <%= link_to('Create a New Category', new_category_path) %> &nbsp;|&nbsp;
+      <%= link_to('Create a New Forum', new_forum_path) %>
     <% end %>
   </div>
 <% end %>
