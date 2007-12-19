@@ -50,9 +50,9 @@ module ApplicationHelper
   def tab(name)
     if name == current_controller
       'current_tab'
-    elsif name == "forums" && ((current_controller == "categories") || (current_controller == "topics") || (current_controller == "posts"))
+    elsif name == "forums" && %w(categories topics posts).include?(current_controller)
       'current_tab'
-    elsif name == "users" && ((current_controller == "avatars") || (current_controller == "themes"))
+    elsif name == "users" && ((current_controller == "avatars"))
       'current_tab'
     end
   end
