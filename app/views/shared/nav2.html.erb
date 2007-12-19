@@ -21,9 +21,9 @@
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Forum', forum_root_path %> &raquo; <%= h@category.name %>
   </div>
-  <div class="info-right detail">
+  <div class="info-right">
     <% if admin? %>
-      <%= link_to 'Add a New Forum', new_forum_path(:category_id => @category.id) %> &nbsp;|&nbsp;
+      <%= link_to 'New Forum', new_forum_path(:category_id => @category.id) %> &nbsp;
       <%= link_to 'Edit Category', edit_category_path(@category) %>
     <% end %>
     <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
@@ -58,10 +58,10 @@
 <% end %>
 
 <% if current_controller == 'forums' and current_action == 'index' %>
-  <div class="info-right info-space detail">
+  <div class="info-right info-space">
     <% if admin? %>
-      <%= link_to('Add a New Category', new_category_path) %> &nbsp;|&nbsp;
-      <%= link_to('Add a New Forum', new_forum_path) %>
+      <%= link_to('New Category', new_category_path) %> &nbsp;
+      <%= link_to('New Forum', new_forum_path) %>
     <% end %>
   </div>
 <% end %>
