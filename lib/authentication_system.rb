@@ -29,7 +29,7 @@ module AuthenticationSystem
   end
     
   def can_edit
-    return false unless logged_in?
+    redirect_to root_path and return false unless logged_in?
     klass = request.path_parameters['controller'].singularize.classify.constantize
     @item = klass.find(params[:id])
     if request.path_parameters['controller'] == "users"
