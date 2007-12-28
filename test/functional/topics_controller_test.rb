@@ -23,11 +23,19 @@ class TopicsControllerTest < Test::Unit::TestCase
     login_as :trevor
     old_topic_count = Topic.count
     old_post_count = Post.count
-    post :create, :topic => { :title => "test", :body => "this is a test", :forum_id => "1" }  
+    post :create, :topic => { :title => "test topic create", :body => "this is a test for topic create", :forum_id => "1" }  
     assert assigns(:topic)
     assert assigns(:post)
     assert_equal old_topic_count+1, Topic.count
+    t = Topic.find(:first, :order => 'id desc')
+    assert_equal t.user_id, users(:trevor).id
+    assert_equal t.title, 'test topic create'
+    assert_equal t.forum_id, 1
     assert_equal old_post_count+1, Post.count
+    p = Post.find(:first, :order => 'id desc')
+    assert_equal p.user_id, users(:trevor).id
+    assert_equal p.topic_id, t.id
+    assert_equal p.body, 'this is a test for topic create'
     assert_redirected_to topic_path(assigns(:topic))
   end
   

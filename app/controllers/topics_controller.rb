@@ -4,7 +4,6 @@ class TopicsController < ApplicationController
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
-    @topic = Topic.new
     if logged_in?      
       @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
@@ -25,21 +24,13 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @topic = Topic.new(:forum_id => params[:forum_id])
   end
 
   def create
-    @topic = Topic.new(params[:topic])
-    if @topic
-      @topic.user_id = current_user.id
-      @post = @topic.posts.build(params[:topic])
-      @post.user_id = current_user.id
-    end
-    if @topic.save && @post.save
-      redirect_to @topic
-    else
-      render :action => "new"
-    end
+    @topic = current_user.topics.build(params[:topic])
+    @post = @topic.posts.build(params[:topic]) ; @post.user = current_user
+    redirect_to @topic and return if @topic.save && @post.save
+    @new_topic = @topic; render :action => "new"
   end
 
   def edit
@@ -77,7 +68,7 @@ class TopicsController < ApplicationController
       page.replace_html 'posters', "#{@posters.map { |u| "#{h u.login}" } * ', ' }" 
     end 
   end
-    
+  
   def unknown_request
     if request.request_uri.include?('viewtopic.php') # catch punbb-style urls
       if params[:id].blank? # punbb can show a topic based on the post_id being passed as "pid"
@@ -88,8 +79,8 @@ class TopicsController < ApplicationController
     elsif request.request_uri.include?('action=show_new') # legacy url format from punbb
       redirect_to topics_path
     else
-      redirect_to topics_path
+      redirect_to root_path
     end
   end
-    
+  
 end
