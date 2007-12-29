@@ -93,7 +93,7 @@ module CalendarHelper
     end
 
     cal = %(<table class="#{options[:table_class]}" border="0" cellspacing="0" cellpadding="0">) 
-    cal << %(<caption class="#{options[:month_name_class]}"></caption><thead><tr><th colspan="7">#{Date::MONTHNAMES[options[:month]]}</th></tr><tr class="#{options[:day_name_class]}">)
+    cal << %(<thead><tr class="#{options[:month_name_class]}"><th colspan="7">#{render :partial => 'events/nav.html.erb'}</th></tr><tr class="#{options[:day_name_class]}">)
     day_names.each do |d|
       unless d[options[:abbrev]].eql? d
         cal << "<th scope='col'><abbr title='#{d}'>#{d[options[:abbrev]]}</abbr></th>"
