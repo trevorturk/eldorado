@@ -1,0 +1,127 @@
+== BBCodeizer Plugin
+
+BBCodeizer is a Rails plugin to translate BBCode to HTML. The main interface
+is provided through the helper method "bbcodeize." Use of it is as simple as
+passing a string to bbcodeize:
+
+  <%= bbcodeize post.body %>
+
+You can also invoke the BBCodeizer directly without the helper:
+
+  render :text => BBCodeizer.bbcodeize(post.body)
+  
+All settings are centralized so you can very quickly deactivate any tag or 
+modify the HTML that is generated. You can modify these settings by adding
+lines to the end of your environment.rb. For example:
+
+  # deactivate [color], [size], and [code] tags
+  BBCodeizer.deactivate(:color, :size, :code)
+  
+  # use <b> instead of <strong>
+  BBCodeizer.replace_using(:bold, '<b>\1</b>')
+  
+These changes should be considered one-time configuration, e.g. tags
+cannot be deactivated then activated again.
+
+== Warning
+
+While BBCodeizer does some validation (see below), you should be aware it is
+possible to create unsafe HTML in the wrong hands (for example, invoking
+Javascript using the [url] tag). It is highly recommended you run the
+resulting HTML through a sanity checker such as WhiteList:
+
+  http://svn.techno-weenie.net/projects/plugins/white_list/
+
+Once installed, the following is a helper method that will produce nicely
+formatted, safe HTML:
+
+  def format_text(text)
+    white_list(simple_format(auto_link(bbcodeize(h(text)))))
+  end
+
+== Supported Tags
+
+BBCodeizer currently supports the following tags. The default HTML expansion
+is documented here.
+
+  [u]text[/u]
+
+    <u>text</u>
+
+  [b]text[/b]
+
+    <strong>text</strong>
+
+  [i]text[/i]
+
+    <em>text</em>
+
+  [img]http://example.com/image.gif[/img]
+
+    <img src="http://example.com/image.gif" />
+
+  [email=joe@example.com]Joe Example[/email]
+
+    <a href="mailto:joe@example.com">Joe Example</a>
+
+  [email]joe@example.com[/email]
+
+   <a href="mailto:joe@example.com">joe@example.com</a>
+
+  [code]bbcodeize(string)[/code]
+
+    <pre>bbcodeize(string)</pre>
+
+  [url=http://www.google.com]Google[/url]
+
+    <a href="http://www.google.com">Google</a>
+
+  [url]http://www.google.com[/url]
+
+    <a href="http://www.google.com">http://www.google.com</a>
+
+  [quote="Shakespeare"]To be or not to be[/quote]
+
+    <blockquote><cite>Shakespeare wrote:</cite><br />To be or not to
+  be</blockquote>
+
+  [quote]That is the question[/quote]
+
+    <blockquote>That is the question</blockquote>
+
+  [size=32]Big Text[/size]
+
+    <span style="font-size: 32px">Big Text</span>
+
+  [color=red]Red Text[/color] [color=#ABCDEF]Alphabet-colored Text[/color]
+
+    <span style="color: red">Red Text</span>
+    <span style="color: #ABCDEF">Alphabet Colored Text</span>
+
+== Validation
+
+BBCodeizer aims to produce HTML that will not break your site - all opening
+tags must have a closing tag or they will not be replaced (unmatched tags are
+left as-is). All [code] and [quote] tags are left entirely untouched if there
+is any mismatch with either of these. All other tags will replace as many as
+possible and leave the remaining unmatched tags as-is. 
+
+BBCodeizer attempts to produce XHTML-compliant markup, however, misuse of
+nesting tags is not validated or corrected. For example:
+
+ [b]bold [u]bold + underline[/b] underline[/u]
+
+Will produce the following HTML:
+
+ <strong>bold <u>bold + underline</strong> underline</u>
+
+Colors in the [color] tag are not validated - any string can be used. Strings
+containing semicolons are not allowed to prevent users from adding additional
+style rules.
+
+Sizes used in the [size] tag are validated - only 1 or 2 digit numbers are
+accepted.
+
+-----------------
+Copyright (c) 2006 Jonathan Dance / Agora Games
+Distributed under the MIT license
