@@ -4,7 +4,7 @@ El Dorado is a full-stack community web application written in Ruby/Rails.
 
 == Installation
 
-1) Install the required gems: Rails 2.0.1 or greater and TZInfo (run: "sudo gem install rails tzinfo")
+1) Install the required gems: Rails 2.0.2 or greater and TZInfo (run: "sudo gem install rails tzinfo")
 2) Rename config/database.example.yml to config/database.yml and fill in the database and session details
 3) Run "rake db:schema:load" and start your web server (use "rake db:schema:load RAILS_ENV=production" for a live site)
 4) Visit your new site and log in using the password displayed (log in and edit the user account to change this password)
