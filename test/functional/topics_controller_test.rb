@@ -261,7 +261,8 @@ class TopicsControllerTest < Test::Unit::TestCase
   
   def test_should_be_ok_with_bogus_params_page_value
     get :show, :id => 1, :page => 'sdlkfjsdfs'
-    assert_response :success
+    assert_redirected_to root_path
+    assert_equal "Sorry, the page number you requested was not valid.", flash[:notice]
   end
   
   def test_should_redirect_to_first_page_if_page_is_too_many

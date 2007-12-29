@@ -4,11 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
     
   around_filter :set_timezone
-  before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders, :get_newest_user, :clean_params
+  before_filter :auth_token_login, :check_bans, :update_online_at, :get_settings, :get_reminders, :get_newest_user
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error
+  rescue_from WillPaginate::InvalidPage, :with => :invalid_page
   
   session :session_key => '_eldorado_session_id'
   filter_parameter_logging "password"
@@ -63,18 +64,19 @@ class ApplicationController < ActionController::Base
     @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ?", true])
     @reminders = [] unless logged_in?
   end
-  
-  def clean_params
-    params[:page] = params[:page].to_i; params[:page] = 1 if params[:page] == 0 # ensure page is a positive integer
+      
+  def generic_error
+    flash[:notice] = "Sorry, there was an error."
+    redirect_to root_path
   end
-  
+
   def record_not_found
     flash[:notice] = "Sorry, the page you requested was not found."
     redirect_to root_path
   end
-  
-  def generic_error
-    flash[:notice] = "Sorry, there was an error."
+
+  def invalid_page
+    flash[:notice] = "Sorry, the page number you requested was not valid."
     redirect_to root_path
   end
   
