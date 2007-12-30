@@ -1,18 +1,14 @@
 development:
-  adapter: mysql
-  database: eldorado_development
-  username: root
-  password: 
-  host: localhost
+  adapter: sqlite3
+  database: db/development.sqlite3
+  timeout: 5000
   session_key: eldorado_development
   secret: YrDOFOmYJyFg2tTZykCbZjWYQUbKBt
 
 test:
-  adapter: mysql
-  database: eldorado_test
-  username: root
-  password: 
-  host: localhost
+  adapter: sqlite3
+  database: db/test.sqlite3
+  timeout: 5000
   session_key: eldorado_test
   secret: Pl8qJNFc8mo1yt1xtHOmfUGHOPEutu
 

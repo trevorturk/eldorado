@@ -55,6 +55,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_timezone
+    settings = Setting.new if settings.nil?
     TzTime.zone = logged_in? ? current_user.tz : settings.tz
     yield
     TzTime.reset!
