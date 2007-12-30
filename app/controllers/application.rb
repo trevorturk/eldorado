@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   session :session_key => '_eldorado_session_id'
   filter_parameter_logging "password"
     
-  include AuthenticationSystem, ExceptionLoggable
+  include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
   
   protected
   
@@ -65,22 +65,7 @@ class ApplicationController < ActionController::Base
     @reminders = Event.find(:all, :order => 'date asc', :conditions => ["reminder = ?", true])
     @reminders = [] unless logged_in?
   end
-      
-  def generic_error
-    flash[:notice] = "Sorry, there was an error."
-    redirect_to root_path
-  end
-
-  def record_not_found
-    flash[:notice] = "Sorry, the page you requested was not found."
-    redirect_to root_path
-  end
-
-  def invalid_page
-    flash[:notice] = "Sorry, the page number you requested was not valid."
-    redirect_to root_path
-  end
-  
+    
   def get_newest_user
     @newest_user = User.find(:first, :order => "created_at desc")
   end
