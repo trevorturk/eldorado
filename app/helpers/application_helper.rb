@@ -91,7 +91,23 @@ module ApplicationHelper
   def tz_today?(time)
     return true if TzTime.now.strftime('%Y-%m-%d') == TzTime.zone.utc_to_local(time.utc).strftime('%Y-%m-%d')
   end
-    
+
+  def current_page(collection)
+    'Page ' + collection.current_page.to_s + ' of ' + collection.page_count.to_s
+  end
+
+  def prev_page(collection)
+    unless collection.current_page == 1 or collection.page_count == 0
+      link_to('&laquo; Previous page', { :page => collection.previous_page }.merge(params.reject{|k,v| k=='page'}))
+    end
+  end
+  
+  def next_page(collection)
+    unless collection.current_page == collection.page_count or collection.page_count == 0
+      link_to('Next page &raquo;', { :page => collection.next_page }.merge(params.reject{|k,v| k=='page'}))
+    end
+  end
+  
   def current_controller
     request.path_parameters['controller']
   end

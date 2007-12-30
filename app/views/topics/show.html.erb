@@ -32,16 +32,14 @@
 <% end %>
 
 <% unless current_controller == 'search' %>
-  <div class="info-left info-space info-width info-footer detail">
-    <%= link_to('&laquo; ' + truncate(@previous_topic.title, 45), show_new_topic_path(@previous_topic)) unless @previous_topic == @topic %>
-    <% if @previous_topic == @topic %>&laquo; Previous Topic<% end %>
+  <div class="info-left info-space info-width info-footer">
+    <%= prev_page @posts %>
   </div>
-  <div class="info-center info-space info-width info-footer detail">
-    <%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :next_label => 'Next Page &raquo;', :prev_label => '&laquo; Prev Page' %>
+  <div class="info-center info-space info-width info-footer">
+    <%= current_page @posts %>
   </div>
-  <div class="info-right info-space info-width info-footer detail">
-    <%= link_to(truncate(@next_topic.title, 45) + ' &raquo;', show_new_topic_path(@next_topic)) unless @next_topic == @topic %>
-    <% if @next_topic == @topic %>Next Topic &raquo;<% end %>
+  <div class="info-right info-space info-width info-footer">
+    <%= next_page @posts %>
   </div>
   <div style="clear:both;"> </div>
 <% end %>
