@@ -339,7 +339,7 @@ tbody .tds {
 
 .info-center {
 	float: left;
-	margin: 0px 8px;
+	margin: 0 8px 10px 8px;
 	text-align: center;
 }
 
