@@ -40,7 +40,7 @@ module WillPaginate
     # == Options for paginating finders
     # * <tt>:page</tt> -- REQUIRED, but defaults to 1 if false or nil
     # * <tt>:per_page</tt> -- defaults to <tt>CurrentModel.per_page</tt> (which is 30 if not overridden)
-    # * <tt>:total entries</tt> -- use only if you manually count total entries
+    # * <tt>:total_entries</tt> -- use only if you manually count total entries
     # * <tt>:count</tt> -- additional options that are passed on to +count+
     # 
     module ClassMethods
@@ -51,19 +51,28 @@ module WillPaginate
       # 
       #   @developers = Developer.paginate_by_sql ['select * from developers where salary > ?', 80000],
       #                           :page => params[:page], :per_page => 3
+      #
+      # A query for counting rows will automatically be generated if you don't
+      # supply <tt>:total_entries</tt>. If you experience problems with this
+      # generated SQL, you might want to perform the count manually in your
+      # application.
       # 
       def paginate_by_sql(sql, options)
-        options, page, per_page = wp_parse_options!(options)
-
-        WillPaginate::Collection.create(page, per_page) do |pager|
+        WillPaginate::Collection.create(*wp_parse_options!(options)) do |pager|
           query = sanitize_sql(sql)
-          count_query = "SELECT COUNT(*) FROM (#{query}) AS count_table" unless options[:total_entries]
           options.update :offset => pager.offset, :limit => pager.per_page
           
+          original_query = query.dup
           add_limit! query, options
+          # perfom the find
           pager.replace find_by_sql(query)
           
-          pager.total_entries = options[:total_entries] || count_by_sql(count_query) unless pager.total_entries
+          unless pager.total_entries
+            count_query = original_query.sub /\bORDER\s+BY\s+[\w`,\s]+$/mi, ''
+            count_query = "SELECT COUNT(*) FROM (#{count_query}) AS count_table"
+            # perform the count query
+            pager.total_entries = count_by_sql(count_query)
+          end
         end
       end
 
@@ -84,7 +93,8 @@ module WillPaginate
           return method_missing_without_paginate(method, *args, &block) 
         end
 
-        options, page, per_page, total_entries = wp_parse_options!(args.pop)
+        options = args.pop
+        page, per_page, total_entries = wp_parse_options!(options)
         # an array of IDs may have been given:
         total_entries ||= (Array === args.first and args.first.size)
         
@@ -151,7 +161,7 @@ module WillPaginate
         page     = options.delete(:page) || 1
         per_page = options.delete(:per_page) || self.per_page
         total    = options.delete(:total_entries)
-        [options, page, per_page, total]
+        [page, per_page, total]
       end
 
     private
