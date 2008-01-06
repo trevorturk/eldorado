@@ -2,6 +2,7 @@ class UploadsController < ApplicationController
   
   before_filter :redirect_home, :only => [:show, :edit, :update]
   before_filter :require_login, :except => [:index]
+  before_filter :can_edit, :only => [:destroy]
   
   def index
     if logged_in?
@@ -26,7 +27,6 @@ class UploadsController < ApplicationController
 
   def destroy
     @upload = Upload.find(params[:id])
-    redirect_to root_path and return false unless admin? || (current_user == @upload.user)
     @upload.destroy
     redirect_to files_root_path
   end

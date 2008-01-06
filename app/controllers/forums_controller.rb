@@ -21,6 +21,7 @@ class ForumsController < ApplicationController
   
   def new
     @forum = Forum.new(:category_id => params[:category_id])
+    redirect_to new_category_path if Category.count == 0
   end
   
   def create

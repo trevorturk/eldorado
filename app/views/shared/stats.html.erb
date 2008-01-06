@@ -6,6 +6,8 @@
     <% end %>
   </p>
   <p class="nav-right">
-    Newest User: <%= link_to h(@newest_user.login), @newest_user %>
+    <% unless @newest_user.blank? %>
+      Newest User: <%= link_to h(@newest_user.login), @newest_user %>
+    <% end %>
   </p>
 </div>

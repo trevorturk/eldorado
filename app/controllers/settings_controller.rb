@@ -6,7 +6,7 @@ class SettingsController < ApplicationController
   def index
     @settings = Setting.find(:first)
   end
-  
+    
   def update 
     @setting = Setting.find(params[:id])
     params[:setting][:time_zone] = params[:settings][:time_zone] unless params[:settings].nil? # hack for form plural issue

@@ -1,5 +1,5 @@
 module ExceptionHandler
-
+  
   protected
 
   def generic_error

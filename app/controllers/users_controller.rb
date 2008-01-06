@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.admin = true if User.count == 0
     render :action => :new and return unless @user.save
-    flash[:notice] = "The new user has been created."
     if logged_in?
       redirect_to users_path and return
     else
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   end
   
   def logout
-    redirect_to root_path and return false unless logged_in?
+    redirect_home unless logged_in?
     @flash = flash[:notice]
     @user = User.find_by_id(session[:user_id])
     if @user

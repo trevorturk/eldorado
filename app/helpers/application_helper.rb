@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def page_title
-    page_title = h(@settings.title)
+    page_title = h(@settings.title) unless @settings.nil?
     page_title << ': ' + @category.to_s unless @category.nil? or @category.name.nil?
     page_title << ': ' + @event.to_s unless @event.nil? or @event.title.nil?
     page_title << ': ' + @forum.to_s unless @forum.nil? or @forum.name.nil?

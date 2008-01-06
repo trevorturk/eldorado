@@ -13,7 +13,7 @@ module AuthenticationSystem
   def admin?()
     logged_in? && (current_user.admin == true)
   end
-  
+    
   def require_login
     redirect_to login_path and return false unless logged_in?
   end

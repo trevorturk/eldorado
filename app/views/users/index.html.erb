@@ -8,30 +8,32 @@
   <div style="clear:both;"> </div>
 <% end %>
 
-<table cellspacing="0">
-  <thead>
-    <tr>
-      <th class="tcl" colspan="2"><%= link_to 'Users', users_path %></th>
-      <% unless current_controller == 'home' %>
-        <th class="tcl">Profile Updated</th>
-        <th class="tcl">Last Visit</th>
-        <th class="tcm">Posts</th>
-        <th class="tcr">Registered</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% for user in @users %>
+<% unless @users.blank? %>
+  <table cellspacing="0">
+    <thead>
       <tr>
-        <td class="tci"><%= icon_for(user) %></td>
-        <td class="tcl"><%= link_to h(user.login), user %></td>
+        <th class="tcl" colspan="2"><%= link_to 'Users', users_path %></th>
         <% unless current_controller == 'home' %>
-          <td class="tcl"><%= time_ago_or_time_stamp(user.profile_updated_at) %></td>
-          <td class="tcl"><%= time_ago_or_time_stamp(user.online_at) %></td>
-          <td class="tcm"><%= number_with_delimiter(user.posts_count) %></td>
-          <td class="tcr"><%= user.created_at.strftime("%b %d, %Y") %></td>
+          <th class="tcl">Profile Updated</th>
+          <th class="tcl">Last Visit</th>
+          <th class="tcm">Posts</th>
+          <th class="tcr">Registered</th>
         <% end %>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% for user in @users %>
+        <tr>
+          <td class="tci"><%= icon_for(user) %></td>
+          <td class="tcl"><%= link_to h(user.login), user %></td>
+          <% unless current_controller == 'home' %>
+            <td class="tcl"><%= time_ago_or_time_stamp(user.profile_updated_at) %></td>
+            <td class="tcl"><%= time_ago_or_time_stamp(user.online_at) %></td>
+            <td class="tcm"><%= number_with_delimiter(user.posts_count) %></td>
+            <td class="tcr"><%= user.created_at.strftime("%b %d, %Y") %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

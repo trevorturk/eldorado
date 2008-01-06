@@ -60,8 +60,10 @@
 <% if current_controller == 'forums' and current_action == 'index' %>
   <div class="info-right info-space">
     <% if admin? %>
-      <%= link_to('New Category', new_category_path) %> &nbsp;
-      <%= link_to('New Forum', new_forum_path) %>
+      <%= link_to('New Category', new_category_path) %>
+      <% unless Category.count == 0 %>
+        &nbsp; <%= link_to('New Forum', new_forum_path) %>
+      <% end %>
     <% end %>
   </div>
 <% end %>
