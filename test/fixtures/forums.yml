@@ -21,4 +21,7 @@ one:
   topics_count: 2
   posts_count: 4
   position: 0
+deleteme:
+  name: deleteme
+  category: deleteme
 

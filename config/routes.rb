@@ -1,9 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :avatars, :member => { :select => :post, :deselect => :post }
   map.resources :bans
-  map.resources :categories
+  map.resources :categories, :member => { :confirm_delete => :get }
   map.resources :events
-  map.resources :forums
+  map.resources :forums, :member => { :confirm_delete => :get }
   map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
   map.resources :posts, :member => { :quote => :get, :topic => :get }
   map.resources :settings

@@ -58,3 +58,10 @@ Locked:
   private: 1
   locked: 1
   forum_id: 1
+deleteme:
+  user_id: 4
+  title: deleteme
+  forum: deleteme
+  last_post_id: 6
+  last_post_at: <%= 5.minutes.ago.to_s :db %>
+  last_post_by: 4

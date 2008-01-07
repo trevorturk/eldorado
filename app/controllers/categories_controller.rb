@@ -38,9 +38,20 @@ class CategoriesController < ApplicationController
       render :action => "edit"
     end
   end
-  
+    
   def destroy
-    redirect_to root_path
+    @category = Category.find(params[:id])
+    if params[:confirm] != "1"
+      flash[:notice] = "You must check the confirmation box"
+      redirect_to confirm_delete_category_path(@category)
+    else
+      @category.destroy
+      redirect_to forum_root_path
+    end
+  end
+  
+  def confirm_delete
+    @category = Category.find(params[:id])
   end
     
 end

@@ -98,15 +98,43 @@ class CategoriesControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
-  def test_should_destroy_category
-    # not implemented yet
-    delete :destroy, :id => 1
-    assert_redirected_to root_path
-    login_as :trevor
-    delete :destroy, :id => 1
-    assert_redirected_to root_path
+  def test_should_destroy_category_if_authorized_and_confirmed
+    old_category_count = Category.count
+    old_forum_count = Forum.count
+    old_topic_count = Topic.count
+    old_post_count = Post.count
     login_as :Administrator
-    delete :destroy, :id => 1
+    delete :destroy, :id => categories(:deleteme).id, :confirm => 1
+    assert_equal old_category_count-1, Category.count
+    assert_equal old_forum_count-1, Forum.count
+    assert_equal old_topic_count-1, Topic.count
+    assert_equal old_post_count-1, Post.count
+    assert_redirected_to forum_root_path
+  end
+  
+  def test_should_not_delete_category_if_not_confirmed
+    old_category_count = Category.count
+    login_as :Administrator
+    delete :destroy, :id => categories(:deleteme).id
+    assert_equal old_category_count, Category.count
+    assert_redirected_to confirm_delete_category_path(:id => categories(:deleteme).id)
+  end
+  
+  def test_should_not_delete_category_if_not_authorized
+    old_category_count = Category.count
+    get :confirm_delete, :id => categories(:deleteme).id
+    assert_equal old_category_count, Category.count
+    assert_redirected_to root_path
+    delete :destroy, :id => categories(:deleteme).id, :confirm => 1
+    assert_equal old_category_count, Category.count
     assert_redirected_to root_path
   end
+  
+  def test_should_not_delete_category_if_not_logged_in
+    old_category_count = Category.count
+    delete :destroy, :id => categories(:deleteme).id, :confirm => 1
+    assert_equal old_category_count, Category.count
+    assert_redirected_to root_path
+  end
+  
 end

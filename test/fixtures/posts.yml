@@ -49,3 +49,8 @@ three:
   body: MyText
   created_at: <%= 1.week.ago.to_s :db %>
   updated_at: <%= 1.week.ago.to_s :db %>
+deleteme:
+  id: 6
+  user: trevor
+  topic: deleteme
+  body: deleteme

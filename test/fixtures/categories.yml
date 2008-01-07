@@ -17,3 +17,5 @@ two:
   id: 2
   name: 'second category'
   position: '0'
+deleteme:
+  name: deleteme
