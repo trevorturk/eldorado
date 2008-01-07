@@ -54,14 +54,16 @@ module BBCodeizer
           self.send(tag, text)
         end
         # Replace the matching random ids for the following tags: spoiler, nsfw, mp3
-        random_id = BBCodeizer::random_id; 2.times { text = text.sub('_RANDOM_ID_', random_id) }
+        random_id = BBCodeizer::random_id
+        2.times { text = text.sub('_RANDOM_ID_', random_id) }
       end
       text
     end
     
     # Random id for use in +tags+
     def random_id
-      char = ("a".."z").to_a + ("1".."9").to_a; Array.new(6, '').collect{char[rand(char.size)]}.join
+      char = ("a".."z").to_a + ("1".."9").to_a; 
+      Array.new(6, '').collect{char[rand(char.size)]}.join
     end
 
     # Configuration option to deactivate particular +tags+.
