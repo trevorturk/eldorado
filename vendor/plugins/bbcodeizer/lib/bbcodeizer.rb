@@ -61,7 +61,7 @@ module BBCodeizer
         end
 
         ['_MP3'].each do |tag_id_name|
-          text.gsub!(tag_id_name, random_id())
+          text.gsub!(tag_id_name, BBCodeizer::random_id)
         end
       end
       text
@@ -116,9 +116,7 @@ module BBCodeizer
         if substitution.kind_of?(String)
           string.gsub!(*Tags[tag])
         elsif substitution.kind_of?(Proc)
-          while string =~ regex
-            string.sub!(regex, substitution.call)
-          end
+          string.sub!(regex, substitution.call) while string =~ regex
         end
       end
     end
