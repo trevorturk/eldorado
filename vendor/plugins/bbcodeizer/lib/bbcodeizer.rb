@@ -22,9 +22,9 @@ module BBCodeizer
       :youtube               => [ /\[youtube\](.+?)youtube.com\/watch\?v=(.+?)\[\/youtube\]/i, '<object width="425" height="350"><param name="movie" value="http://www.youtube.com/v/\2"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" width="425" height="350"></embed></object>' ],
       :googlevid             => [ /\[googlevid\](.+?)video.google.com\/videoplay\?docid=(.*?)\[\/googlevid\]/i, '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2&amp;hl=en"></embed>' ],
       :flash                 => [ /\[flash\](.+?)\[\/flash\]/i, '<object width="100%" height="100%"><param name="movie" value="\1"></param><embed src="\1" type="application/x-shockwave-flash" width="100%" height="100%"></embed></object>' ],
-      :spoiler               => [ /\[spoiler\](.+?)\[\/spoiler\]/im, '<a href="#" class="spoiler-link" onclick="$(\'_SPOILER\').toggle(); return false;">SPOILER</a><div id="_SPOILER" class="spoiler" style="display:none;">\1</div>' ],
-      :nsfw                  => [ /\[nsfw\](.+?)\[\/nsfw\]/i, '<a href="#" class="nsfw-link" onclick="$(\'_NSFW\').toggle(); return false;">NSFW</a><div id="_NSFW" class="nsfw" style="display:none;">\1</div>' ],
-      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_MP3" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_MP3&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ],
+      :spoiler               => [ /\[spoiler\](.+?)\[\/spoiler\]/im, '<a href="#" class="spoiler-link" onclick="$(\'_RANDOM_ID_\').toggle(); return false;">SPOILER</a><div id="_RANDOM_ID_" class="spoiler" style="display:none;">\1</div>' ],
+      :nsfw                  => [ /\[nsfw\](.+?)\[\/nsfw\]/i, '<a href="#" class="nsfw-link" onclick="$(\'_RANDOM_ID_\').toggle(); return false;">NSFW</a><div id="_RANDOM_ID_" class="nsfw" style="display:none;">\1</div>' ],
+      :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_RANDOM_ID_" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_RANDOM_ID_&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ],
       :superdeluxe           => [ /\[superdeluxe\](.+?)superdeluxe.com\/sd\/contentDetail.do\?id=(.+?)\[\/superdeluxe\]/i, '<object width="400" height="350"><param name="allowFullScreen" value="true" /><param name="movie" value="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" /><param name="FlashVars" value="id=\2" /><embed src="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" FlashVars="id=\2" type="application/x-shockwave-flash" width="400" height="350" allowFullScreen="true" ></embed></object>' ],
       :comedycentral         => [ /\[comedycentral\](.+?)comedycentral.com\/motherload\/index.jhtml\?ml_video=(.+?)\[\/comedycentral\]/i, '<embed FlashVars="config=http://www.comedycentral.com/motherload/xml/data_synd.jhtml?vid=\2%26myspace=false" src="http://www.comedycentral.com/motherload/syndicated_player/index.jhtml" quality="high" bgcolor="#006699" width="340" height="325" name="comedy_player" align="middle" allowScriptAccess="always" allownetworking="external" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>' ],
       :revver                => [ /\[revver\](.+?)revver.com\/watch\/(.+?)\[\/revver\]/i, '<embed type="application/x-shockwave-flash" src="http://flash.revver.com/player/1.0/player.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" scale="noScale" salign="TL" bgcolor="#000000" flashvars="mediaId=\2&affiliateId=0&allowFullScreen=true" allowfullscreen="true" height="392" width="480"></embed>' ],
@@ -53,9 +53,8 @@ module BBCodeizer
         else
           self.send(tag, text)
         end
-        random_id = BBCodeizer::random_id; 2.times { text = text.sub('_SPOILER', random_id) } # spoiler
-        random_id = BBCodeizer::random_id; 2.times { text = text.sub('_MP3', random_id) } # mp3
-        random_id = BBCodeizer::random_id; 2.times { text = text.sub('_NSFW', random_id) } # nsfw
+        # Replace the matching random ids for the following tags: spoiler, nsfw, mp3
+        random_id = BBCodeizer::random_id; 2.times { text = text.sub('_RANDOM_ID_', random_id) }
       end
       text
     end
