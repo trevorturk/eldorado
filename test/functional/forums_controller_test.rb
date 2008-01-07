@@ -91,10 +91,49 @@ class ForumsControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
-  def test_should_destroy_forum_if_admin
-    # not implemented yet
+  def test_should_destroy_forum_if_authorized_and_confirmed
+    old_forum_count = Forum.count
+    old_topic_count = Topic.count
+    old_post_count = Post.count
     login_as :Administrator
-    delete :destroy, :id => 1
+    delete :destroy, :id => forums(:deleteme).id, :confirm => 1
+    assert_equal old_forum_count-1, Forum.count
+    assert_equal old_topic_count-1, Topic.count
+    assert_equal old_post_count-1, Post.count
+    assert_redirected_to forum_root_path
+  end
+  
+  def test_should_not_delete_forum_if_not_confirmed
+    old_forum_count = Forum.count
+    login_as :Administrator
+    delete :destroy, :id => forums(:deleteme).id
+    assert_equal old_forum_count, Forum.count
+    assert_redirected_to confirm_delete_forum_path(:id => forums(:deleteme).id)
+  end
+  
+  def test_should_not_get_delete_confirmation_screen_if_not_authorized_or_not_logged_in
+    old_forum_count = Forum.count
+    get :confirm_delete, :id => forums(:deleteme).id
+    assert_redirected_to root_path
+    login_as :trevor
+    get :confirm_delete, :id => forums(:deleteme).id
+    assert_redirected_to root_path
+  end
+  
+  def test_should_not_delete_forum_if_not_authorized
+    old_forum_count = Forum.count
+    get :confirm_delete, :id => forums(:deleteme).id
+    assert_equal old_forum_count, Forum.count
+    assert_redirected_to root_path
+    delete :destroy, :id => forums(:deleteme).id, :confirm => 1
+    assert_equal old_forum_count, Forum.count
+    assert_redirected_to root_path
+  end
+  
+  def test_should_not_delete_category_if_not_logged_in
+    old_forum_count = Forum.count
+    delete :destroy, :id => forums(:deleteme).id, :confirm => 1
+    assert_equal old_forum_count, Forum.count
     assert_redirected_to root_path
   end
   

@@ -44,7 +44,18 @@ class ForumsController < ApplicationController
   end
   
   def destroy
-    redirect_to root_path
+    @forum = Forum.find(params[:id])
+    if params[:confirm] != "1"
+      flash[:notice] = "You must check the confirmation box"
+      redirect_to confirm_delete_forum_path(@forum)
+    else
+      @forum.destroy
+      redirect_to forum_root_path
+    end
+  end
+  
+  def confirm_delete
+    @forum = Forum.find(params[:id])
   end
      
 end

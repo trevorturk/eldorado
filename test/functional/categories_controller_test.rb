@@ -120,6 +120,15 @@ class CategoriesControllerTest < Test::Unit::TestCase
     assert_redirected_to confirm_delete_category_path(:id => categories(:deleteme).id)
   end
   
+  def test_should_not_get_delete_confirmation_screen_if_not_authorized_or_not_logged_in
+    old_category_count = Category.count
+    get :confirm_delete, :id => categories(:deleteme).id
+    assert_redirected_to root_path
+    login_as :trevor
+    get :confirm_delete, :id => categories(:deleteme).id
+    assert_redirected_to root_path
+  end
+  
   def test_should_not_delete_category_if_not_authorized
     old_category_count = Category.count
     get :confirm_delete, :id => categories(:deleteme).id

@@ -1,6 +1,6 @@
 <%= error_messages_for :category %>
 <% form_tag category_path(@category), :method => :delete do %>
-  <div class="box" id="box-users-confirmation">
+  <div class="box" id="box-categories-confirmation">
     <span class="top">Delete Category</span>
       <p>Deleting a category destroys all of the forums, topics, and posts it contains.</p>
       <p><label for="confirm">Check this box to confirm deleting the category <u><%= @category.name %></u></label>: <%= check_box_tag(:confirm) %></p>
