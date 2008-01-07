@@ -60,7 +60,6 @@ module BBCodeizer
       text
     end
     
-    # Random id for use in +tags+
     def random_id
       char = ("a".."z").to_a + ("1".."9").to_a; 
       Array.new(6, '').collect{char[rand(char.size)]}.join
