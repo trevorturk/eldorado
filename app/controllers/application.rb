@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   
   around_filter :get_settings, :set_timezone
   before_filter :get_newest_user, :auth_token_login, :check_bans, :update_online_at, :get_reminders
-  helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :require_login, :require_admin, :redirect_home
+  helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error
