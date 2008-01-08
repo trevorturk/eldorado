@@ -57,15 +57,6 @@ module ApplicationHelper
     end
   end
   
-  def can_edit?(current_item)
-    return false unless logged_in?
-    if current_controller == "users"
-      return admin? || (current_user.id == current_item.id) 
-    else
-      return admin? || (current_user.id == current_item.user_id) 
-    end
-  end
-
   def is_new?(item)
     return false unless logged_in?
     return true if session[:online_at] < item.updated_at
