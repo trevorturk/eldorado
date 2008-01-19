@@ -65,6 +65,11 @@ class User < ActiveRecord::Base
     return true if banned_until > Time.now unless banned_until.nil?
   end
   
+  def remove_ban
+    self.ban_message = self.banned_until = nil
+    self.save
+  end
+  
   def self.authenticate(login, password)
     find_by_login_and_password_hash(login, encrypt(password))
   end

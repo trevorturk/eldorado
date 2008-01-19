@@ -292,4 +292,21 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
+  def test_should_remove_ban_if_admin
+    login_as :Administrator
+    post :remove_ban, :id => users(:banned).id
+    assert_redirected_to user_path(users(:banned))
+    users(:banned).reload
+    assert_nil users(:banned).ban_message
+    assert_nil users(:banned).banned_until
+  end
+  
+  def test_should_not_remove_ban_if_not_admin_or_not_logged_in
+    post :remove_ban, :id => users(:banned).id
+    assert_redirected_to root_path
+    login_as :trevor
+    post :remove_ban, :id => users(:banned).id
+    assert_redirected_to root_path
+  end
+  
 end
