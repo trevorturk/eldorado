@@ -164,7 +164,7 @@ namespace :import do
     # 
     puts 'Importing topics...'
     ActiveRecord::Base.establish_connection(eldorado['import'])
-    @items = ActiveRecord::Base.connection.execute("SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, num_views, closed, sticky, forum_id FROM #{prefix}topics")
+    @items = ActiveRecord::Base.connection.execute("SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, num_views, closed, sticky, forum_id FROM #{prefix}topics WHERE last_post_id != 0")
     ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
     for i in @items
       @item = Topic.new
