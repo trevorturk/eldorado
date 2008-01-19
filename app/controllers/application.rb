@@ -60,11 +60,11 @@ class ApplicationController < ActionController::Base
   def check_bans
     return unless logged_in?
     return if request.path_parameters['action'] == 'logout'
-    @ban = Ban.find(:first, :conditions => ['user_id = ? or ip = ? or email = ? and (expires_at > ? or expires_at is ?)', current_user.id, request.remote_ip, current_user.email, Time.now.utc, nil])
-    if @ban
+    return if current_user.banned_until.blank?
+    if current_user.banned_until > Time.now
       flash[:notice] = 'This account is banned' 
-      flash[:notice] << ' until ' + @ban.expires_at.strftime("%B %d, %Y") unless @ban.expires_at.blank?
-      flash[:notice] << ' with the message: ' + @ban.message unless @ban.message.blank?
+      flash[:notice] << ' until ' + current_user.banned_until.strftime("%B %d, %Y")
+      flash[:notice] << ' with the message: ' + current_user.ban_message unless current_user.ban_message.blank?
       redirect_to logout_path and return false
     end
   end
