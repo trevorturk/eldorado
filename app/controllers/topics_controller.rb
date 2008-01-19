@@ -12,13 +12,11 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id])
+    @topic = Topic.find(params[:id], :include => :forum)
     redirect_to login_path if (!logged_in? && @topic.private)
     @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
     redirect_to @topic if @posts.blank? # if params[:page] is too big, no posts will be found
     @page = params[:page] ? params[:page] : 1
-    @previous_topic = @topic.previous
-    @next_topic = @topic.next
     @padding = ((@page.to_i - 1) * Topic::PER_PAGE) # to get post #s w/ pagination
     @topic.hit!
   end

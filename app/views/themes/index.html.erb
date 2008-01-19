@@ -1,9 +1,5 @@
 <%= render 'shared/admin.html.erb' %>
 
-<div id="action" style="display:none;">
-  <%= render 'themes/new' if %w(index).include?(current_action) %>
-</div>
-
 <% unless @themes.empty? %>
   <div class="box" id="box-themes-index">
     <span class="top">Themes</span>  
