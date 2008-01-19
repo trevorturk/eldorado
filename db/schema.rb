@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 67) do
+ActiveRecord::Schema.define(:version => 68) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -181,6 +181,8 @@ ActiveRecord::Schema.define(:version => 67) do
     t.string   "auth_token"
     t.datetime "auth_token_exp"
     t.string   "time_zone"
+    t.string   "ban_message"
+    t.datetime "banned_until"
   end
 
   add_index "users", ["online_at"], :name => "index_users_on_online_at"
