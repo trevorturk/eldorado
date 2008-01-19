@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :can_edit, :only => [:edit, :update, :destroy, :confirm_delete]
+  before_filter :require_admin, :only => [:ban]
   
   def index
     @users = User.paginate(:page => params[:page], :order => 'profile_updated_at desc')
@@ -49,6 +50,10 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to users_path
     end
+  end
+  
+  def ban
+    @user = User.find(params[:id])
   end
   
   def confirm_delete

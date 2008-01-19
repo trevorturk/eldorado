@@ -252,8 +252,8 @@ tbody .tds {
   margin-top: 0;
 }
 
-.post-body, .post-body img {
-  overflow: hidden;
+.post-body, .post-body img, .post-body pre {
+  overflow: auto;
 }
 
 .thread dl {

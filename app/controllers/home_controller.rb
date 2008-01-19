@@ -10,7 +10,7 @@ class HomeController < ApplicationController
       @users = User.find(:all, :limit => 3, :order => 'profile_updated_at desc')
       @avatars = Avatar.find(:all, :limit => 3, :include => :user, :order => 'avatars.updated_at desc')
     else
-      render(:template => "users/login")
+      render :template => 'users/login'
     end
   end
   

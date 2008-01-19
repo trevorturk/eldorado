@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     return true if online_at > Time.now.utc-5.minutes unless online_at.nil?
   end
   
+  def banned?
+    return true if banned_until > Time.now unless banned_until.nil?
+  end
+  
   def self.authenticate(login, password)
     find_by_login_and_password_hash(login, encrypt(password))
   end

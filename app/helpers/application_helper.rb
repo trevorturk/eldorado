@@ -39,6 +39,7 @@ module ApplicationHelper
   
   def rank_for(user)
     return 'Administrator' if user.admin
+    return 'Banned' if user.banned?
     @ranks ||=  Rank.find(:all, :order => "min_posts")
     return "Member" if @ranks.blank?
     for r in @ranks

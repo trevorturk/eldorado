@@ -1,0 +1,21 @@
+<%= error_messages_for :user %>
+<% form_for @user do |f| -%>
+  <div class="box" id="box-users-ban">
+    <span class="top">Ban User</span>
+    <p class="label"><label for="user_login">Username</label></p>
+    <p><%= @user %></p>
+    <p class="label"><label for="user_ban_message">Message</label></p>
+    <p><%= f.text_field :ban_message, :style => "width:31%" %></p>
+    <p class="label"><label for="user_banned_until">Ban Until</label></p>
+    <p><%= f.datetime_select :banned_until %>&nbsp;Currently: <%=tz TzTime.now %></p>
+    <p>
+      <% if @user.banned? %>
+        <%= submit_tag "Edit Ban", :disable_with => "Edit Ban" %>&nbsp; 
+        <%= link_to 'Remove Ban', remove_ban_user_path(@user), :method => :post %> &nbsp;
+      <% else %>
+        <%= submit_tag "Ban User", :disable_with => "Ban User" %>&nbsp; 
+      <% end %>
+      <%= link_to 'Cancel', @user %>
+    </p>
+  </div>
+<% end %>

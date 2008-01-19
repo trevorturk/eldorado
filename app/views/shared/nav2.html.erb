@@ -217,6 +217,14 @@
     <% elsif can_edit?(@user) && @user.avatar.nil? %>
       <%= link_to 'Get an Avatar', avatars_path %>
     <% end %>
+    <% if admin? && current_user != @user %>
+      <% if @user.banned? %>
+      &nbsp; <%= link_to 'Edit Ban', ban_user_path(@user) %>
+      <%= link_to '(x)', remove_ban_user_path(@user), :method => :post %>
+      <% else %>
+      &nbsp; <%= link_to 'Ban User', ban_user_path(@user) %>
+      <% end %>
+    <% end %>
     <% if can_edit?(@user) %>
       &nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
     <% end %>

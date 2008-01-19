@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :themes, :member => { :select => :post, :deselect => :post }
   map.resources :topics, :member => { :show_new => :get }
   map.resources :uploads
-  map.resources :users, :member => { :confirm_delete => :get }
+  map.resources :users, :member => { :confirm_delete => :get, :ban => :get, :remove_ban => :post }
 
   map.root :controller => 'home'
   

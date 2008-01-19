@@ -278,4 +278,18 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal User.find_by_login('user2').admin, false
   end
   
+  def test_should_get_ban_if_admin
+    login_as :Administrator
+    get :ban, :id => users(:trevor).id
+    assert_response :success
+  end
+  
+  def test_should_not_get_ban_if_not_admin_or_not_logged_in
+    get :ban, :id => users(:trevor).id
+    assert_redirected_to root_path
+    login_as :trevor
+    get :ban, :id => users(:trevor).id
+    assert_redirected_to root_path
+  end
+  
 end
