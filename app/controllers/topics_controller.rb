@@ -28,7 +28,7 @@ class TopicsController < ApplicationController
     @topic = current_user.topics.build(params[:topic])
     @post = @topic.posts.build(params[:topic]) ; @post.user = current_user
     redirect_to @topic and return if @topic.save && @post.save
-    @new_topic = @topic; render :action => "new"
+    render :action => "new"
   end
 
   def edit

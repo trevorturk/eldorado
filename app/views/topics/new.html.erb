@@ -1,6 +1,6 @@
 <%= error_messages_for :topic %>
-<% @new_topic = Topic.new(:forum_id => params[:forum_id]) unless @new_topic %>
-<% form_for @new_topic do |f| %>
+<% @topic = Topic.new(:forum_id => params[:forum_id]) unless @topic %>
+<% form_for @topic do |f| %>
   <div class="box" id="box-new-new">
     <span class="top">New Topic</span>
     <p class="label"><label for="topic_title">Title</label></p>

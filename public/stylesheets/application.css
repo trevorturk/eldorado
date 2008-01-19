@@ -581,6 +581,10 @@ cite {
   padding: 2px 0;
 }
 
+.fieldWithErrors {
+	display: inline;
+}
+
 .prototip { 
 	position: absolute; 
 }
