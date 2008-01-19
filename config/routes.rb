@@ -1,6 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :avatars, :member => { :select => :post, :deselect => :post }
-  map.resources :bans
   map.resources :categories, :member => { :confirm_delete => :get }
   map.resources :events
   map.resources :forums, :member => { :confirm_delete => :get }

@@ -204,13 +204,7 @@ class TopicsControllerTest < Test::Unit::TestCase
     get :show_new, :id => 2
     assert_redirected_to topic_path(:id => "2") 
   end
-  
-  def test_should_send_banned_user_to_logout
-    login_as :banned
-    get :index
-    assert_redirected_to logout_path
-  end
-  
+    
   def test_should_redirect_to_same_path_when_logging_in_with_cookie
     # log in
     # delete cookie

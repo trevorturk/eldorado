@@ -205,9 +205,9 @@ class UsersControllerTest < Test::Unit::TestCase
   end
   
   def test_should_not_allow_banned_user_to_login
-    # post :login, :user => {:login => 'banned', :password => 'test'}
-    # assert_redirected_to logout_path
-    # assert_nil session[:user_id]
+    login_as :banned
+    get :index
+    assert_redirected_to logout_path
   end
   
   def test_should_show_user_as_online_if_online_at_within_last_5_minutes
