@@ -1,0 +1,7 @@
+<% unless @reminders.nil? %>
+  <% for reminder in @reminders %>
+    <% if tz_today?(reminder.date) %>
+      <div class="reminders"><%= link_to h(reminder.title), reminder %></div>
+    <% end %>
+  <% end %>
+<% end %>

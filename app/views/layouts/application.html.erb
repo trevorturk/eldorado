@@ -22,13 +22,7 @@
 
   <div class="wrapper">
     
-    <% unless @reminders.nil? %>
-      <% for reminder in @reminders %>
-        <% if tz_today?(reminder.date) %>
-          <div class="reminders"><%= link_to h(reminder.title), reminder %></div>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= render :partial => 'events/reminders.html.erb' %>
     
     <div class="header">
       <h1><%= link_to h(@settings.title), root_path %></h1>
@@ -41,7 +35,7 @@
       
         <%= render 'shared/nav' %>
         
-        <%= render :partial => 'search/form.html.erb' %>
+        <%= render :partial => 'search/form.html.erb' if current_controller == 'search' %>
             
         <%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
         <%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
