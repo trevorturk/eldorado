@@ -25,14 +25,6 @@ ActiveRecord::Schema.define(:version => 68) do
     t.datetime "updated_at"
   end
 
-  create_table "bans", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "ip"
-    t.string   "email"
-    t.string   "message"
-    t.datetime "expires_at"
-  end
-
   create_table "categories", :force => true do |t|
     t.string  "name"
     t.integer "position", :default => 0

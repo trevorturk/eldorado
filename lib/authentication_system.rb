@@ -21,7 +21,29 @@ module AuthenticationSystem
   def require_admin
     redirect_to root_path and return false unless admin?
   end
-      
+  
+  def auth_token_login
+    return if logged_in? || cookies[:auth_token].nil?
+    user = User.find_by_auth_token(cookies[:auth_token])
+    if user && Time.now.utc < user.auth_token_exp
+      session[:user_id] = user.id 
+      session[:online_at] = user.online_at
+      redirect_to request.request_uri and return false
+    end
+  end
+  
+  def check_bans
+    return unless logged_in?
+    return if request.path_parameters['action'] == 'logout'
+    return if current_user.banned_until.blank?
+    if current_user.banned_until > Time.now
+      flash[:notice] = 'This account is banned' 
+      flash[:notice] << ' until ' + current_user.banned_until.strftime("%B %d, %Y")
+      flash[:notice] << ' with the message: ' + current_user.ban_message unless current_user.ban_message.blank?
+      redirect_to logout_path and return false
+    end
+  end
+   
   def can_edit
     redirect_to root_path and return false unless logged_in?
     klass = request.path_parameters['controller'].singularize.classify.constantize

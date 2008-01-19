@@ -79,6 +79,8 @@ banned:
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
   time_zone: 'UTC'
+  ban_message: 'get banned!'
+  banned_until: <%= (Time.now + 5.days).to_s :db %>
 post_test:
   id: 6
   login: post

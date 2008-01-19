@@ -95,20 +95,14 @@ namespace :import do
     #
     puts 'Importing bans...'
     ActiveRecord::Base.establish_connection(eldorado['import'])
-    @items = ActiveRecord::Base.connection.execute("SELECT id, username, ip, email, message, expire FROM #{prefix}bans")
+    @items = ActiveRecord::Base.connection.execute("SELECT username, message, expire FROM #{prefix}bans")
     ActiveRecord::Base.establish_connection(eldorado[RAILS_ENV])
     for i in @items
-      @item = Ban.new
-      @item.id = i[0] # id
-        @temp = User.find_by_login(i[1]) # username
-        @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
-      @item.user_id = @temp.id # get user_id instead of username      
-      @item.ip = i[2] # ip
-      @item.email = i[3] # email
-      @item.message = i[4] # message
-      @item.expires_at = TzTime.at(Time.at(i[5].to_i)) unless i[5].nil? # expire
+      @item = User.find_by_login(i[0]) # username
+      @item.ban_message = i[1] # message
+      @item.banned_until = TzTime.at(Time.at(i[2].to_i)) unless i[2].nil? # expire
       @item.save!
-      puts "Importing ban: #{@item.id}"
+      puts "Importing ban: #{@item.login}"
     end
     #
     # RANKS
@@ -186,7 +180,7 @@ namespace :import do
         @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
       @item.last_post_by = @temp.id # get user id instead of username
       @item.views = i[7] # num_views
-      @item.closed = i[8] # closed
+      @item.locked = i[8] # locked
       @item.sticky = i[9] # sticky
       @item.forum_id = i[10] # forum_id
       @item.save!

@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
   
   around_filter :get_settings, :set_timezone
-  before_filter :get_newest_user, :auth_token_login, :check_bans, :update_online_at, :get_reminders
+  before_filter :get_newest_user, :auth_token_login, :check_bans, :get_reminders
+  after_filter  :update_online_at
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
@@ -47,28 +48,6 @@ class ApplicationController < ActionController::Base
     @reminders = [] unless logged_in?
   end
     
-  def auth_token_login
-    return if logged_in? || cookies[:auth_token].nil?
-    user = User.find_by_auth_token(cookies[:auth_token])
-    if user && Time.now.utc < user.auth_token_exp
-      session[:user_id] = user.id 
-      session[:online_at] = user.online_at
-      redirect_to request.request_uri and return false
-    end
-  end
-  
-  def check_bans
-    return unless logged_in?
-    return if request.path_parameters['action'] == 'logout'
-    return if current_user.banned_until.blank?
-    if current_user.banned_until > Time.now
-      flash[:notice] = 'This account is banned' 
-      flash[:notice] << ' until ' + current_user.banned_until.strftime("%B %d, %Y")
-      flash[:notice] << ' with the message: ' + current_user.ban_message unless current_user.ban_message.blank?
-      redirect_to logout_path and return false
-    end
-  end
-  
   def update_online_at
     return unless logged_in?
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
