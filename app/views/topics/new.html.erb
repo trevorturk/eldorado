@@ -1,5 +1,7 @@
 <%= error_messages_for :topic %>
-<% @topic = Topic.new(:forum_id => params[:forum_id]) unless @topic %>
+<% @topic = Topic.new unless @topic %>
+<% @categories = Category.find(:all, :order => 'categories.position') %>
+<% @forum_id = @topic.forum_id unless @topic.forum_id.blank?; @forum_id ||= params[:forum_id].to_i %>
 <% form_for @topic do |f| %>
   <div class="box" id="box-new-new">
     <span class="top">New Topic</span>
@@ -10,10 +12,15 @@
     </p>
     <p class="label"><label for="topic_forum">Forum</label></p>
     <p>
-      <%= 
-        @all_forums = Forum.find(:all, :order => "name") 
-        f.collection_select(:forum_id, @all_forums, :id, :name)       
-      %>
+      <select id="topic_forum_id" name="topic[forum_id]">
+        <option disabled="disabled" value="">Select a Forum</option>
+        <% for category in @categories %>
+          <option disabled="disabled" value=""><%= category.name %></option>
+          <% for forum in category.forums %>
+            <option value="<%= forum.id %>"<%= ' selected="selected"' if forum.id == @forum_id %>>&nbsp;&nbsp;<%= forum.name %></option>
+          <% end %>
+        <% end %>
+      </select>
     </p>
     <p class="label"><label for="topic_body">Body</label></p>
     <p><%= f.text_area :body, :rows => '8', :style => 'width:66%;' %></p>

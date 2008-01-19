@@ -9,6 +9,9 @@
       <% if @topic.posts_count > 1 %>
         <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> &nbsp;
       <% end %>
+      <% if can_edit?(@post.topic) %>
+        <%= link_to 'Edit Topic', edit_topic_path(@post.topic) %> &nbsp; 
+      <% end %>
       <%= link_to 'Cancel', topic_post_path(@post) %>
     </p>
   </div>
