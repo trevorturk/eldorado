@@ -21,7 +21,9 @@ ActionController::Routing::Routes.draw do |map|
   map.admin 'admin', :controller => 'settings', :action => 'index'
   map.files_root 'files', :controller => 'uploads', :action => 'index'
   map.forum_root 'forum', :controller => 'forums', :action => 'index'
+  
   map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'
+  
   map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil
   
   map.catch_all '*path', :controller => 'topics', :action => 'unknown_request'
