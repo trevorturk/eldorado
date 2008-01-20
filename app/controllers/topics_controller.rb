@@ -4,13 +4,13 @@ class TopicsController < ApplicationController
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
-    if logged_in?      
+    if logged_in?
       @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
     else
       @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
     end
   end
-
+  
   def show
     @topic = Topic.find(params[:id], :include => :forum)
     redirect_to login_path if (!logged_in? && @topic.private)
@@ -20,21 +20,21 @@ class TopicsController < ApplicationController
     @padding = ((@page.to_i - 1) * Topic::PER_PAGE) # to get post #s w/ pagination
     @topic.hit!
   end
-
+  
   def new
   end
-
+  
   def create
     @topic = current_user.topics.build(params[:topic])
     @post = @topic.posts.build(params[:topic]) ; @post.user = current_user
     redirect_to @topic and return if @topic.save && @post.save
     render :action => "new"
   end
-
+  
   def edit
     @topic = Topic.find(params[:id])
   end
-
+  
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
     @topic.destroy
     redirect_to topics_url
   end
-    
+  
   def show_new
     @topic = Topic.find(params[:id])
     @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]]) unless !logged_in?
@@ -60,10 +60,10 @@ class TopicsController < ApplicationController
   def show_posters
     @topic = Topic.find(params[:id])
     @posters = @topic.posts.map(&:user) ; @posters.uniq!
-    render :update do |page| 
+    render :update do |page|
       page.toggle :posters
-      page.replace_html 'posters', "#{@posters.map { |u| "#{h u.login}" } * ', ' }" 
-    end 
+      page.replace_html 'posters', "#{@posters.map { |u| "#{h u.login}" } * ', ' }"
+    end
   end
   
   def unknown_request

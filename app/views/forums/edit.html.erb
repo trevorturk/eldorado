@@ -6,6 +6,12 @@
     <p><%= f.text_field :name, :style => 'width:66%;' %></p>
     <p class="label"><label for="forum_description">Description</label></p>
     <p><%= f.text_field :description, :style => 'width:66%;' %></p>
+    <p>
+      <%= 
+        @all_categories = Category.find(:all, :order => "name") 
+        f.collection_select(:category_id, @all_categories, :id, :name)       
+      %>
+    </p>
     <p class="label"><label for="forum_position">Position</label></p>
     <p><%= f.text_field :position, :style => 'width:5%;' %></p>
     <p>
