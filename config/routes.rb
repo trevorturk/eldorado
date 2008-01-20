@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :topics, :member => { :show_new => :get }
   map.resources :uploads
   map.resources :users, :member => { :confirm_delete => :get, :ban => :get, :remove_ban => :post }
-
+  
   map.root :controller => 'home'
   
   map.login 'login', :controller => 'users', :action => 'login'
@@ -22,13 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   map.files_root 'files', :controller => 'uploads', :action => 'index'
   map.forum_root 'forum', :controller => 'forums', :action => 'index'
   map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'
-  
   map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil
-  
-  map.connect ':controller/service.wsdl', :action => 'wsdl'
-  map.connect ':controller/:action/:id.:format'
-  map.connect ':controller/:action/:id'  
-  
+    
   map.catch_all '*path', :controller => 'topics', :action => 'unknown_request'
   
 end

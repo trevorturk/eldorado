@@ -72,6 +72,14 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal "ok!", users(:trevor).bio
   end
   
+  def test_should_not_be_able_to_make_self_admin_if_not_admin
+    login_as :trevor
+    put :update, :id => 4, :user => { :bio => "ok!?", :admin => true }
+    users(:trevor).reload
+    assert_equal "ok!?", users(:trevor).bio
+    assert_equal false, users(:trevor).admin
+  end
+  
   def test_should_not_update_user_if_not_authorized
     login_as :trevor
     put :update, :id => 2, :user => { :bio => "ok!" }
