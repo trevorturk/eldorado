@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.root :controller => 'home'
+  
   map.resources :avatars, :member => { :select => :post, :deselect => :post }
   map.resources :categories, :member => { :confirm_delete => :get }
   map.resources :events
@@ -10,9 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :themes, :member => { :select => :post, :deselect => :post }
   map.resources :topics, :member => { :show_new => :get }
   map.resources :uploads
-  map.resources :users, :member => { :confirm_delete => :get, :ban => :get, :remove_ban => :post }
-  
-  map.root :controller => 'home'
+  map.resources :users, :member => { :confirm_delete => :get, :ban => :get, :remove_ban => :post }  
   
   map.login 'login', :controller => 'users', :action => 'login'
   map.logout 'logout', :controller => 'users', :action => 'logout'
@@ -23,7 +23,6 @@ ActionController::Routing::Routes.draw do |map|
   map.forum_root 'forum', :controller => 'forums', :action => 'index'
   map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'
   map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil
-    
-  map.catch_all '*path', :controller => 'topics', :action => 'unknown_request'
   
+  map.catch_all '*path', :controller => 'topics', :action => 'unknown_request'
 end
