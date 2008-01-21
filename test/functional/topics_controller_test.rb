@@ -152,6 +152,11 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_redirected_to topic_path(:id => "1")
   end
   
+  def test_should_redirect_to_forum_with_viewforum_php_style_url
+    get :unknown_request, :path => "viewforum.php", :id => "1"
+    assert_redirected_to forum_path(:id => "1")
+  end
+  
   def test_should_redirect_to_topic_with_viewtopic_php_style_url_second_version
   end
   

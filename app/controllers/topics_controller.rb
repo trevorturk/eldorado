@@ -73,6 +73,8 @@ class TopicsController < ApplicationController
         params[:id] = @post.topic_id # set the regular topic_id value as id with this post's topic_id
       end
       redirect_to topic_path(:id => params[:id], :anchor => params[:anchor])
+    elsif request.request_uri.include?('viewforum.php') # legacy url format from punbb for forums
+      redirect_to forum_path(:id => params[:id]) unless params[:id].blank? 
     elsif request.request_uri.include?('action=show_new') # legacy url format from punbb
       redirect_to topics_path
     else
