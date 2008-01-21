@@ -34,6 +34,8 @@ module CalendarHelper
   #
   #   :show_today        => false             # Highlights today on the calendar using the CSS class 'today'. 
   #                                           # Defaults to true.
+  #   :previous_month_text   => nil           # Displayed left of the month name if set
+  #   :next_month_text   => nil               # Displayed right of the month name if set
   #
   # For more customization, you can pass a code block to this method, that will get one argument, a Date object,
   # and return a values for the individual table cells. The block can return an array, [cell_text, cell_attrs],
@@ -77,7 +79,9 @@ module CalendarHelper
       :abbrev => (0..2),
       :first_day_of_week => 0,
       :accessible => false,
-      :show_today => true
+      :show_today => true,
+      :previous_month_text => nil,
+      :next_month_text => nil
     }
     options = defaults.merge options
 
@@ -92,8 +96,18 @@ module CalendarHelper
       day_names.push(day_names.shift)
     end
 
-    cal = %(<table class="#{options[:table_class]}" border="0" cellspacing="0" cellpadding="0">) 
-    cal << %(<thead><tr class="#{options[:month_name_class]}"><th colspan="7">#{render :partial => 'events/nav.html.erb'}</th></tr><tr class="#{options[:day_name_class]}">)
+    # TODO Use some kind of builder instead of straight HTML
+    cal = %(<table class="#{options[:table_class]}" border="0" cellspacing="0" cellpadding="0">)
+    cal << %(<thead><tr>)
+    if options[:previous_month_text] or options[:next_month_text]
+      cal << %(<th colspan="2">#{options[:previous_month_text]}</th>)
+      colspan=3
+    else
+      colspan=7
+    end
+    cal << %(<th colspan="7">#{render :partial => 'events/nav.html.erb'}</th>)
+    cal << %(<th colspan="2">#{options[:next_month_text]}</th>) if options[:next_month_text]
+    cal << %(</tr><tr class="#{options[:day_name_class]}">)
     day_names.each do |d|
       unless d[options[:abbrev]].eql? d
         cal << "<th scope='col'><abbr title='#{d}'>#{d[options[:abbrev]]}</abbr></th>"

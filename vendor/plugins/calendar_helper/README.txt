@@ -11,14 +11,15 @@ Authors
 Jeremy Voorhis -- http://jvoorhis.com
 Original implementation
 
-Jarkko Laine -- http://jlaine.net/
-Dynamic enhancements for starting week on Monday and highlighting weekends
-
 Geoffrey Grosenbach -- http://nubyonrails.com
 Test suite and conversion to a Rails plugin
 
-Tom Armitage -- http://infovore.org
-Improvements to markup (abbreviations on day-headings, <caption>); introduction of :accessible option.
+Contributors
+============
+
+* Jarkko Laine http://jlaine.net/
+* Tom Armitage http://infovore.org
+* Bryan Larsen http://larsen.st
 
 Usage
 =====

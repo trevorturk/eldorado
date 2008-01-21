@@ -18,6 +18,10 @@
   text-align: center;
 }
 
+thead tr {
+  color: black;
+}
+
 .monthName th {
   font-weight: normal;
   text-align: right;

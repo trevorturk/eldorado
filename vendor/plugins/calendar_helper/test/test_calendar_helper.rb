@@ -14,11 +14,13 @@ class CalendarHelperTest < Test::Unit::TestCase
   # include Inflector
   # include ActionController::Assertions::SelectorAssertions
   include CalendarHelper
-  
+
 
   def test_with_output
-    output = "<h2>Past Month</h2>" + calendar_with_defaults
-    output << "<h2>Current Month</h2>" + calendar_for_this_month
+    output = []
+    %w(calendar_with_defaults calendar_for_this_month calendar_with_next_and_previous).each do |methodname|
+      output << "<h2>#{methodname}</h2>\n" +  send(methodname.to_sym) + "\n\n"
+    end
     write_sample "sample.html", output
   end
 
@@ -116,6 +118,13 @@ class CalendarHelperTest < Test::Unit::TestCase
   def calendar_for_this_month(options={})
     options = { :year => Time.now.year, :month => Time.now.month}.merge options
     calendar options
+  end
+
+  def calendar_with_next_and_previous
+    calendar_for_this_month({
+      :previous_month_text => "PREVIOUS",
+      :next_month_text => "NEXT"
+    })
   end
 
   def write_sample(filename, content)
