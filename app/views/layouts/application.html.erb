@@ -34,13 +34,13 @@
       <div class="content">
       
         <%= render 'shared/nav' %>
+
+        <div class="announcement"><%= @settings.announcement %></div>
         
         <%= render :partial => 'search/form.html.erb' if current_controller == 'search' %>
             
         <%= content_tag 'div', h(flash[:notice]), :id => 'notice' if flash[:notice] %>
         <%= content_tag 'div', h(flash[:error]), :id => 'error' if flash[:error] %>
-
-        <div class="announcement"><%= @settings.announcement %></div>
       
         <%= yield %>
       
