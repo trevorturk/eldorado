@@ -27,7 +27,7 @@ class TopicsController < ApplicationController
   def create
     @topic = current_user.topics.build(params[:topic])
     @post = @topic.posts.build(params[:topic]) ; @post.user = current_user
-    redirect_to @topic and return if @topic.save && @post.save
+    redirect_to @topic and return true if @topic.save && @post.save
     render :action => "new"
   end
   

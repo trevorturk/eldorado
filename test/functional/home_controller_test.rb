@@ -26,14 +26,10 @@ class HomeControllerTest < Test::Unit::TestCase
   end
 
   def test_initial_setup_should_work
-    # Category.destroy_all
-    # Forum.destroy_all
-    # Option.destroy_all
-    # Post.destroy_all
-    # Topic.destroy_all
-    # User.destroy_all
-    # get :index
-    # assert_response :success
+    User.destroy_all
+    Setting.destroy_all
+    get :index
+    assert_redirected_to new_user_path
   end
 
   def test_should_not_update_session_online_at

@@ -18,9 +18,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.admin = true if User.count == 0
-    render :action => :new and return unless @user.save
+    render :action => :new and return false unless @user.save
     if logged_in?
-      redirect_to users_path and return
+      redirect_to users_path and return true
     else
       do_login(@user)
     end
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   end
   
   def login
-    redirect_to root_path if logged_in?
+    redirect_to root_path and return false if logged_in?
     if request.post?
       @user = User.authenticate(params[:user][:login], params[:user][:password]) unless params[:user].blank?
       if @user
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   end
   
   def logout
-    redirect_home unless logged_in?
+    redirect_to root_path and return false unless logged_in?
     @flash = flash[:notice]
     @user = User.find_by_id(session[:user_id])
     if @user

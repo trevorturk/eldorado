@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 67
+# Schema version: 68
 #
 # Table name: events
 #
-#  id          :integer(11)     not null, primary key
+#  id          :integer         not null, primary key
 #  title       :string(255)     
 #  description :text            
 #  date        :datetime        
-#  private     :boolean(1)      
-#  reminder    :boolean(1)      
-#  user_id     :integer(11)     
+#  private     :boolean         
+#  reminder    :boolean         
+#  user_id     :integer         
 #  created_at  :datetime        
 #  updated_at  :datetime        
 #

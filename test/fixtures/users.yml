@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 67
+# Schema version: 68
 #
 # Table name: users
 #
-#  id                 :integer(11)     not null, primary key
+#  id                 :integer         not null, primary key
 #  login              :string(255)     
 #  email              :string(255)     
 #  password_hash      :string(255)     
 #  created_at         :datetime        
-#  admin              :boolean(1)      
-#  posts_count        :integer(11)     default(0)
+#  admin              :boolean         
+#  posts_count        :integer         default(0)
 #  signature          :string(255)     
 #  bio                :text            
 #  profile_updated_at :datetime        
@@ -18,6 +18,8 @@
 #  auth_token         :string(255)     
 #  auth_token_exp     :datetime        
 #  time_zone          :string(255)     
+#  ban_message        :string(255)     
+#  banned_until       :datetime        
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

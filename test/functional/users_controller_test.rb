@@ -209,6 +209,17 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_nil session[:user_id]
   end
   
+  def test_should_not_error_if_trying_to_log_in_when_logged_in_already
+    login_as :trevor
+    post :login, :user => {:login => 'trevor', :password => 'test'}
+    assert_redirected_to root_path
+  end
+  
+  def test_should_not_error_if_trying_to_logout_in_when_not_logged_in
+    get :logout
+    assert_redirected_to root_path
+  end
+  
   def test_current_user_stays_the_same_when_new_user_created
   end
   

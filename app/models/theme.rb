@@ -1,17 +1,17 @@
 # == Schema Information
-# Schema version: 67
+# Schema version: 68
 #
 # Table name: themes
 #
-#  id           :integer(11)     not null, primary key
-#  parent_id    :integer(11)     
+#  id           :integer         not null, primary key
+#  parent_id    :integer         
 #  content_type :string(255)     
 #  filename     :string(255)     
 #  thumbnail    :string(255)     
-#  size         :integer(11)     
-#  width        :integer(11)     
-#  height       :integer(11)     
-#  user_id      :integer(11)     
+#  size         :integer         
+#  width        :integer         
+#  height       :integer         
+#  user_id      :integer         
 #  created_at   :datetime        
 #  updated_at   :datetime        
 #

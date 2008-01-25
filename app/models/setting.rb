@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 67
+# Schema version: 68
 #
 # Table name: settings
 #
-#  id           :integer(11)     not null, primary key
+#  id           :integer         not null, primary key
 #  title        :string(255)     
 #  tagline      :string(255)     
 #  announcement :text            
@@ -19,8 +19,18 @@ class Setting < ActiveRecord::Base
   
   composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
   
+  DEFAULT_TITLE   = 'El Dorado'
+  DEFAULT_TAGLINE = 'A full-stack community web application written in Ruby/Rails'
+  DEFAULT_FOOTER  = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
+  
   def theme
     read_attribute(:theme) # not sure why this is needed, but tests are failing without it
+  end
+  
+  def self.defaults
+    @settings = Setting.new(:title => DEFAULT_TITLE, :tagline => DEFAULT_TAGLINE, :footer => DEFAULT_FOOTER)
+    @settings.save
+    @settings
   end
   
   def to_s

@@ -24,8 +24,7 @@ class ApplicationController < ActionController::Base
   def get_settings
     @settings ||= Setting.find(:first)
     if @settings.nil?
-      @settings = Setting.new(:title => 'El Dorado', :tagline => 'All an elaborate, unapproachable, unprofitable, retributive joke', :footer => '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>')
-      @settings.save!
+      @settings = Setting.defaults
       flash[:notice] = 'Welcome to El Dorado! Please create a new user account for yourself.'
       redirect_to new_user_path
     end
