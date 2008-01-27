@@ -9,7 +9,7 @@ El Dorado is a full-stack community web application written in Ruby/Rails.
 3) Run "rake db:schema:load" ("rake db:schema:load RAILS_ENV=production" for a live site)
 4) Start the web server ("script/server") and visit the new site to create your first user account
 
-== Importing from PunBB (version 1.2.15)
+== Importing from PunBB (version 1.2.16)
 
 1) Fill in the "import" section of config/database.yml and run "rake import:database"
 2) Run optional rake tasks as necessary: import:avatars, import:headers, and import:files
@@ -19,17 +19,11 @@ El Dorado is a full-stack community web application written in Ruby/Rails.
 Visit http://almosteffortless.com and http://code.google.com/p/eldorado/source for updates and news.
 Use "rake db:migrate" to upgrade your database after new releases (use "cap deploy:migrations" if you're using Capistrano).
 
-== License
+== About
 
-Released under the MIT License, Copyright 2006 Trevor Turk (see LICENSE file for details).
+Contributors: Trevor Turk, Josh Peek, and Wilhelm Chung.
 
-== Contributors
-
-Trevor Turk, Josh Peek, and Wilhelm Chung.
-
-== Thanks
-
-NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et a. (Ruby), 
+Thanks: NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et a. (Ruby), 
 DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson (PunBB), 
 Matt Mullenweg et al. (Wordpress), and Michael Heilemann et al. (k2).
 
