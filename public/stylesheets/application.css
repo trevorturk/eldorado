@@ -359,6 +359,10 @@ tbody .tds {
 	margin-top: 5px;
 }
 
+.info-next {
+	font-weight: bold;
+}
+
 .title {
   font-size: 12px;
   font-weight: bold;

@@ -28,13 +28,13 @@
 <% end %>
 
 <% unless current_controller == 'search' %>
-  <div class="info-left info-space info-width info-footer">
+  <div class="info-left info-space info-width info-footer info-prev">
     <%= prev_page @posts %>
   </div>
-  <div class="info-center info-space info-width info-footer">
+  <div class="info-center info-space info-width info-footer info-page">
     <%= current_page @posts %>
   </div>
-  <div class="info-right info-space info-width info-footer">
+  <div class="info-right info-space info-width info-footer info-next">
     <%= next_page @posts %>
   </div>
   <div style="clear:both;"> </div>
