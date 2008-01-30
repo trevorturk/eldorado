@@ -169,9 +169,10 @@ class FinderTest < ActiveRecordTestCase
   end
 
   def test_paginate_with_group
-    entries = Developer.paginate :page => 1, :per_page => 10, :group => 'salary'
+    entries = Developer.paginate :page => 1, :per_page => 10,
+                                 :group => 'salary', :select => 'salary', :order => 'salary'
     expected = [ users(:david), users(:jamis), users(:dev_10), users(:poor_jamis) ].map(&:salary).sort
-    assert_equal expected, entries.map(&:salary).sort
+    assert_equal expected, entries.map(&:salary)
   end
 
   def test_paginate_with_dynamic_finder
@@ -193,12 +194,6 @@ class FinderTest < ActiveRecordTestCase
     end
   end
 
-  def test_count_distinct
-    entries = Developer.paginate :select => 'DISTINCT salary', :page => 1, :per_page => 4
-    assert_equal 4, entries.size
-    assert_equal 4, entries.total_entries
-  end
-
   def test_scoped_paginate
     entries = Developer.with_poor_ones { Developer.paginate :page => 1 }
 
@@ -206,12 +201,16 @@ class FinderTest < ActiveRecordTestCase
     assert_equal 2, entries.total_entries
   end
 
-  # Are we on edge? Find out by testing find_all which was removed in [6998]
+  def test_readonly
+    assert_nothing_raised { Developer.paginate :readonly => true, :page => 1 }
+  end
+
+  # Is this Rails 2.0? Find out by testing find_all which was removed in [6998]
   unless Developer.respond_to? :find_all
     def test_paginate_array_of_ids
       # AR finders also accept arrays of IDs
       # (this was broken in Rails before [6912])
-      entries = Developer.paginate((1..8).to_a, :per_page => 3, :page => 2)
+      entries = Developer.paginate((1..8).to_a, :per_page => 3, :page => 2, :order => 'id')
       assert_equal (4..6).to_a, entries.map(&:id)
       assert_equal 8, entries.total_entries
     end
@@ -265,11 +264,10 @@ class FinderTest < ActiveRecordTestCase
 
     def test_paginate_by_sql
       assert_respond_to Developer, :paginate_by_sql
-      Developer.expects(:find_by_sql).with('sql LIMIT 3 OFFSET 3').returns([])
+      Developer.expects(:find_by_sql).with(regexp_matches(/sql LIMIT 3(,| OFFSET) 3/)).returns([])
       Developer.expects(:count_by_sql).with('SELECT COUNT(*) FROM (sql) AS count_table').returns(0)
       
       entries = Developer.paginate_by_sql 'sql', :page => 2, :per_page => 3
-      assert_equal 0, entries.total_entries
     end
 
     def test_paginate_by_sql_respects_total_entries_setting
@@ -285,6 +283,18 @@ class FinderTest < ActiveRecordTestCase
       Developer.expects(:count_by_sql).with("SELECT COUNT(*) FROM (sql\n ) AS count_table").returns(0)
       
       entries = Developer.paginate_by_sql "sql\n ORDER\nby foo, bar, `baz` ASC", :page => 1
+    end
+
+    def test_count_skips_select
+      Developer.stubs(:find).returns([])
+      Developer.expects(:count).with({}).returns(0)
+      Developer.paginate :select => 'salary', :page => 1
+    end
+
+    def test_count_select_when_distinct
+      Developer.stubs(:find).returns([])
+      Developer.expects(:count).with(:select => 'DISTINCT salary').returns(0)
+      Developer.paginate :select => 'DISTINCT salary', :page => 1
     end
   end
 end

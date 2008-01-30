@@ -23,18 +23,15 @@ class Header < ActiveRecord::Base
   belongs_to :user
   
   has_attachment :storage => :file_system, :path_prefix => 'public/headers', :max_size => 500.kilobytes
-  
   validates_as_attachment
+  
   validates_uniqueness_of :filename
   validates_presence_of :user_id
-  
-  before_create :reject_index_files
-  
+    
   attr_protected :id, :parent_id, :user_id, :created_at, :updated_at
   
-  def self.random
-    ids = connection.select_all("SELECT id FROM headers where votes >= 0")
-    find(ids[rand(ids.length)]["id"].to_i) unless ids.blank?
+  def validate
+    errors.add("filename", "is invalid") if %w(index.html index.htm).include?(filename.downcase)
   end
   
   def full_filename(thumbnail = nil)
@@ -42,10 +39,11 @@ class Header < ActiveRecord::Base
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
   end
   
-  def reject_index_files
-    errors.add_to_base("Invalid file name") and return false if %w(index.html index.htm).include?(filename)
+  def self.random
+    ids = connection.select_all("SELECT id FROM headers where votes >= 0")
+    find(ids[rand(ids.length)]["id"].to_i) unless ids.blank?
   end
-  
+    
   def vote_up
     self.votes = self.votes + 1
     self.save!
