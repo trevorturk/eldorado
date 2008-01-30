@@ -23,21 +23,13 @@ class Header < ActiveRecord::Base
   belongs_to :user
   
   has_attachment :storage => :file_system, :path_prefix => 'public/headers', :max_size => 500.kilobytes
-  validates_as_attachment
+  include AttachmentFuExtensions
   
+  validates_as_attachment
   validates_uniqueness_of :filename
   validates_presence_of :user_id
     
   attr_protected :id, :parent_id, :user_id, :created_at, :updated_at
-  
-  def validate
-    errors.add("filename", "is invalid") if %w(index.html index.htm).include?(filename.downcase)
-  end
-  
-  def full_filename(thumbnail = nil)
-    file_system_path = (thumbnail ? thumbnail_class : self).attachment_options[:path_prefix].to_s
-    File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
-  end
   
   def self.random
     ids = connection.select_all("SELECT id FROM headers where votes >= 0")
