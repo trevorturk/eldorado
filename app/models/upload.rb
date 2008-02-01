@@ -23,12 +23,6 @@ class Upload < ActiveRecord::Base
   
   has_attachment :storage => :file_system, :path_prefix => 'public/files', :max_size => 100.megabytes
   include AttachmentFuExtensions
-
-  validates_as_attachment
-  validates_uniqueness_of :filename
-  validates_presence_of :user_id
-    
-  attr_protected :id, :parent_id, :user_id, :created_at, :updated_at 
       
   def is_mp3?
     return true if %w(audio/mpeg audio/mpg).include?(content_type)

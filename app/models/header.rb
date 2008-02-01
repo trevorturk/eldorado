@@ -25,12 +25,6 @@ class Header < ActiveRecord::Base
   has_attachment :storage => :file_system, :path_prefix => 'public/headers', :max_size => 500.kilobytes
   include AttachmentFuExtensions
   
-  validates_as_attachment
-  validates_uniqueness_of :filename
-  validates_presence_of :user_id
-    
-  attr_protected :id, :parent_id, :user_id, :created_at, :updated_at
-  
   def self.random
     ids = connection.select_all("SELECT id FROM headers where votes >= 0")
     find(ids[rand(ids.length)]["id"].to_i) unless ids.blank?
