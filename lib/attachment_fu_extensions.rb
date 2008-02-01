@@ -1,6 +1,6 @@
 module AttachmentFuExtensions
   
-  # include some standard attachment_fu calls
+  # include some standard attachment_fu stuff
   def self.included(klass)
     klass.send :validates_as_attachment
     klass.send :validates_uniqueness_of, :filename
@@ -14,7 +14,7 @@ module AttachmentFuExtensions
     File.join(RAILS_ROOT, file_system_path, thumbnail_name_for(thumbnail))
   end
   
-  # prevent users from uploading index files that would be served instead of your the template/action
+  # prevent users from uploading index files that would be served instead of the template/action
   def validate
     errors.add("filename", "is invalid") if %w(index.html index.htm).include?(filename.downcase)
   end
