@@ -147,14 +147,29 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_redirected_to topics_path
   end
   
-  def test_should_redirect_to_topic_with_viewtopic_php_style_url
-    get :unknown_request, :path => "viewtopic.php", :pid => "1"
+  def test_should_redirect_to_topic_with_viewtopic_php_style_url_with_post_id
+    get :unknown_request, :path => "viewtopic.php", :pid => "2"
     assert_redirected_to topic_path(:id => "1")
+  end
+  
+  def test_should_redirect_to_topic_with_other_viewtopic_php_style_url_with_topic_id
+    get :unknown_request, :path => "viewtopic.php", :id => "1"
+    assert_redirected_to topic_path(:id => "1")
+  end
+  
+  def test_should_redirect_to_topic_with_empty_viewtopic_php_style_url
+    get :unknown_request, :path => "viewtopic.php"
+    assert_redirected_to root_path
   end
   
   def test_should_redirect_to_forum_with_viewforum_php_style_url
     get :unknown_request, :path => "viewforum.php", :id => "1"
     assert_redirected_to forum_path(:id => "1")
+  end
+  
+  def test_should_redirect_to_forum_with_empty_viewforum_php_style_url
+    get :unknown_request, :path => "viewforum.php"
+    assert_redirected_to root_path
   end
   
   def test_should_redirect_to_topic_with_viewtopic_php_style_url_second_version
