@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.register 'register', :controller => 'users', :action => 'new'
   map.search 'search', :controller => 'search', :action => 'index'
   map.admin 'admin', :controller => 'settings', :action => 'index'
-  map.files_root 'files', :controller => 'uploads', :action => 'index'
+  map.files 'files', :controller => 'uploads', :action => 'index'
   map.forum_root 'forum', :controller => 'forums', :action => 'index'
   
   map.show_posters 'topics/show_posters', :controller => 'topics', :action => 'show_posters'

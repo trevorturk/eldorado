@@ -19,7 +19,7 @@ class UploadsController < ApplicationController
     @upload = current_user.uploads.build params[:upload]
     if @upload.save
       flash[:notice] = "#{root_url.chop + @upload.public_filename}"
-      redirect_to files_root_path
+      redirect_to files_path
     else
       render :action => "new"
     end
@@ -28,7 +28,7 @@ class UploadsController < ApplicationController
   def destroy
     @upload = Upload.find(params[:id])
     @upload.destroy
-    redirect_to files_root_path
+    redirect_to files_path
   end
     
 end

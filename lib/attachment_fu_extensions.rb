@@ -16,7 +16,7 @@ module AttachmentFuExtensions
   
   # prevent users from uploading index files that would be served instead of the template/action
   def validate
-    errors.add("filename", "is invalid") if %w(index.html index.htm).include?(filename.downcase)
+    errors.add("filename", "is invalid") if filename? && %w(index.html index.htm).include?(filename.downcase)
   end
   
 end

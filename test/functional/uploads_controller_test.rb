@@ -32,6 +32,12 @@ class UploadsControllerTest < Test::Unit::TestCase
   def test_should_create_upload
   end
 
+  def test_should_not_bomb_on_empty_create_upload
+    login_as :trevor
+    post :create
+    assert_response :success
+  end
+
   def test_should_show_upload
     get :show, :id => 1
     assert_response :redirect
@@ -52,7 +58,7 @@ class UploadsControllerTest < Test::Unit::TestCase
     old_count = Upload.count
     delete :destroy, :id => 1
     assert_equal old_count-1, Upload.count
-    assert_redirected_to files_root_path
+    assert_redirected_to files_path
   end
   
   def test_should_not_destroy_upload_if_not_authorized
