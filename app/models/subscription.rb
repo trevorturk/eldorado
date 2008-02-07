@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 68
+# Schema version: 69
 #
 # Table name: subscriptions
 #
-#  id       :integer         not null, primary key
-#  user_id  :integer         
-#  topic_id :integer         
+#  id       :integer(11)     not null, primary key
+#  user_id  :integer(11)     
+#  topic_id :integer(11)     
 #
 
 class Subscription < ActiveRecord::Base

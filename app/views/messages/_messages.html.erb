@@ -1,0 +1,10 @@
+<% for message in @messages %>
+  <tr>
+    <td class="tcu"><%= message.user %></td>
+    <td class="tcl"><%= bb(message.body) %></td>
+    <td class="tcr">
+      <%#= time_ago_or_time_stamp(message.created_at, TzTime.now, true, true) %>
+      <%= link_to '(x)', message, :confirm => 'Are you sure?', :method => :delete if can_edit?(message) %>
+    </td>
+  </tr>
+<% end %>

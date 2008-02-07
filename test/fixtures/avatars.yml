@@ -1,18 +1,18 @@
 # == Schema Information
-# Schema version: 68
+# Schema version: 69
 #
 # Table name: avatars
 #
-#  id              :integer         not null, primary key
-#  parent_id       :integer         
+#  id              :integer(11)     not null, primary key
+#  parent_id       :integer(11)     
 #  content_type    :string(255)     
 #  filename        :string(255)     
 #  thumbnail       :string(255)     
-#  size            :integer         
-#  width           :integer         
-#  height          :integer         
-#  user_id         :integer         
-#  current_user_id :integer         
+#  size            :integer(11)     
+#  width           :integer(11)     
+#  height          :integer(11)     
+#  user_id         :integer(11)     
+#  current_user_id :integer(11)     
 #  created_at      :datetime        
 #  updated_at      :datetime        
 #

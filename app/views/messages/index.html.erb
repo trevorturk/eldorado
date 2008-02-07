@@ -1,0 +1,20 @@
+<div class="box" id="box-messages-new">
+  <span id="reply" class="top">Messages</span><br />
+  <% if logged_in? %>
+    <% @message = Message.new unless @message %>
+    <% remote_form_for @message, :complete => "$('message_body').clear();$('message_body').focus();" do |f| -%>
+      <%= f.text_field :body, :value => '', :style => "width:66%;" %>&nbsp; 
+      <%= submit_tag "Post Message", :disable_with => "Post Message" %>&nbsp; 
+      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %>
+    <% end %>
+    <div>&nbsp;</div>
+  <% end %>
+  <table cellspacing="0" class="messages-index">
+    <tbody id="messages-index">
+      <%= render :partial => 'messages' %>
+    </tbody>
+  </table>
+</div>
+
+<%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
+<%= javascript_tag "$('message_body').focus();$('message_body').writeAttribute('autocomplete', 'off');" %>

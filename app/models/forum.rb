@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 68
+# Schema version: 69
 #
 # Table name: forums
 #
-#  id           :integer         not null, primary key
-#  category_id  :integer         
+#  id           :integer(11)     not null, primary key
+#  category_id  :integer(11)     
 #  name         :string(255)     
 #  description  :text            
-#  topics_count :integer         default(0)
-#  posts_count  :integer         default(0)
-#  position     :integer         default(0)
+#  topics_count :integer(11)     default(0)
+#  posts_count  :integer(11)     default(0)
+#  position     :integer(11)     default(0)
 #
 
 class Forum < ActiveRecord::Base

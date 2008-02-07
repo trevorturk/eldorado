@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 68
+# Schema version: 69
 #
 # Table name: users
 #
-#  id                 :integer         not null, primary key
+#  id                 :integer(11)     not null, primary key
 #  login              :string(255)     
 #  email              :string(255)     
 #  password_hash      :string(255)     
 #  created_at         :datetime        
-#  admin              :boolean         
-#  posts_count        :integer         default(0)
+#  admin              :boolean(1)      
+#  posts_count        :integer(11)     default(0)
 #  signature          :string(255)     
 #  bio                :text            
 #  profile_updated_at :datetime        
@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :avatars, :dependent => :destroy
   has_many :events, :dependent => :destroy
   has_many :headers, :dependent => :destroy
+  has_many :messages, :dependent => :destroy
   has_many :posts, :dependent => :destroy
   has_many :themes, :dependent => :destroy
   has_many :topics, :dependent => :destroy

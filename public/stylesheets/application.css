@@ -327,7 +327,35 @@ tbody .tds {
 }
 
 .topics-index .tcf {
-    width: 14%;
+	width: 14%;
+}
+
+.messages-index, .messages-index p {
+	margin: 0;
+	border: 0;
+}
+
+.messages-index .tcu {
+	width: 10%;
+	text-align: right;
+	font-weight: bold;
+	padding-right: 8px;
+}
+
+.messages-index .tcl {
+	padding-left: 8px;
+	border-right: 0;
+}
+
+.messages-index .tcr {
+	width: 25%;
+	text-align: right;
+	border-left: 0;
+	color: #999;
+}
+
+.messages-index .tcr a {
+	color: #999;
 }
 
 .info-left {
@@ -357,10 +385,6 @@ tbody .tds {
 
 .info-space {
 	margin-top: 5px;
-}
-
-.info-next {
-	font-weight: bold;
 }
 
 .title {

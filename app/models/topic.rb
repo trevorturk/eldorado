@@ -1,21 +1,21 @@
 # == Schema Information
-# Schema version: 68
+# Schema version: 69
 #
 # Table name: topics
 #
-#  id           :integer         not null, primary key
-#  user_id      :integer         
+#  id           :integer(11)     not null, primary key
+#  user_id      :integer(11)     
 #  title        :string(255)     
 #  created_at   :datetime        
-#  views        :integer         default(0)
-#  posts_count  :integer         default(0)
-#  last_post_id :integer         
+#  views        :integer(11)     default(0)
+#  posts_count  :integer(11)     default(0)
+#  last_post_id :integer(11)     
 #  last_post_at :datetime        
-#  last_post_by :integer         
-#  private      :boolean         
-#  locked       :boolean         
-#  sticky       :boolean         
-#  forum_id     :integer         
+#  last_post_by :integer(11)     
+#  private      :boolean(1)      
+#  locked       :boolean(1)      
+#  sticky       :boolean(1)      
+#  forum_id     :integer(11)     
 #
 
 class Topic < ActiveRecord::Base

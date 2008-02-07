@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 68
+# Schema version: 69
 #
 # Table name: settings
 #
-#  id           :integer         not null, primary key
+#  id           :integer(11)     not null, primary key
 #  title        :string(255)     
 #  tagline      :string(255)     
 #  announcement :text            
