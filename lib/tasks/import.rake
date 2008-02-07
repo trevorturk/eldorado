@@ -1,3 +1,8 @@
+def tz_to_timezone(tz)
+  timezone = (tz == 0) ? "" : (-tz > 0) ? "+#{-tz}" : "#{-tz}"
+  "Etc/GMT#{timezone}"
+end
+
 namespace :import do
   desc "Imports a PunBB (version 1.2.15) database"
   task :database => :environment do
@@ -46,9 +51,7 @@ namespace :import do
       @item.tagline = i[1] if @index == 3 # o_board_desc
       tz = i[1].to_i if @index == 4 # o_server_timezone
     end
-    tz = '+' + tz.to_s if tz == tz.abs # add a plus sign if this is a positive number
-    tz = '' if tz == '+0' # clear timezone if it's 0, will end up being GMT
-    TzTime.zone = TZInfo::Timezone.get("Etc/GMT#{tz.to_s}")
+    TzTime.zone = TZInfo::Timezone.get(tz_to_timezone(tz))
     @item.announcement = ''
     @item.footer = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
     @item.save!
@@ -77,16 +80,14 @@ namespace :import do
       @item.email = i[3] # email 
       @item.signature = i[4] # signature
       @item.created_at = TzTime.at(Time.at(i[5].to_i)) # registered 
-        tz = i[7].to_i
-        tz = '+' + tz.to_s if tz == tz.abs # add a plus sign if this is a positive number
-        tz = '' if tz == '+0' # clear timezone if it's 0, will end up being GMT
-      @item.time_zone = 'Etc/GMT' + tz.to_s
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!
       # manually fix timestamp issues raised by controller actions
         @item.profile_updated_at = @item.created_at 
         @item.online_at = TzTime.at(Time.at(i[6].to_i)) # last_visit 
+        tz = i[7].to_i
+        @item.time_zone = tz_to_timezone(tz)
         @item.save!
       puts "Importing user: #{@item.id}"
     end
