@@ -44,4 +44,10 @@ class HomeControllerTest < Test::Unit::TestCase
     # if current_user just logged in, save they're online_at from the db for use in session
   end
 
+  def test_should_catch_request_with_cgi_in_path
+    # e.g. http://localhost:3000/topics.cgi?topic=1
+    get :index, :format => 'cgi'
+    assert_redirected_to root_path
+  end
+  
 end

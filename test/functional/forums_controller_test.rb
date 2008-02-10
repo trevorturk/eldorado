@@ -136,5 +136,5 @@ class ForumsControllerTest < Test::Unit::TestCase
     assert_equal old_forum_count, Forum.count
     assert_redirected_to root_path
   end
-  
+    
 end

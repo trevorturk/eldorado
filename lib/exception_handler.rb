@@ -7,7 +7,7 @@ module ExceptionHandler
     redirect_to root_path
   end
 
-  def record_not_found
+  def not_found
     flash[:notice] = "Sorry, the page you requested was not found."
     redirect_to root_path
   end

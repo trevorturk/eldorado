@@ -11,9 +11,10 @@ class ApplicationController < ActionController::Base
   before_filter :get_newest_user, :auth_token_login, :check_bans, :get_reminders, :update_online_at
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?
   
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error
   rescue_from WillPaginate::InvalidPage, :with => :invalid_page
+  rescue_from ActionController::MissingTemplate, :with => :not_found
   
   def redirect_home
     redirect_to root_path and return false
