@@ -1,4 +1,4 @@
-<% unless current_controller == 'search' %>
+<% unless %w(posts search users).include?(current_controller) %>
   <div class="info-left">
     <span class="title"><%=h @topic.title %></span>
     <span class="detail">
@@ -20,6 +20,18 @@
   <div style="clear:both;"> </div>
 <% end %>
 
+<% if %w(users).include?(current_controller) %>
+  <div class="info-left">
+    <span class="title"><%=h @user.to_s %></span>
+    <span class="detail">&nbsp;|&nbsp; <%= @user.posts.size %> Posts</span>
+  </div>
+  <div class="info-right">
+    <span class="title">&nbsp;</span>
+    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
+  </div>
+  <div style="clear:both;"> </div>
+<% end %>
+
 <div class="info-left detail" id="posters" style="display:none;"></div>
 <div style="clear:both;"> </div>
 
@@ -27,7 +39,7 @@
   <%= render 'posts/show', { :post => post, :index => index } %>
 <% end %>
 
-<% unless current_controller == 'search' %>
+<% unless %w(search).include?(current_controller) %>
   <div class="info-left info-space info-width info-footer info-prev">
     <%= prev_page @posts %>
   </div>
@@ -40,7 +52,7 @@
   <div style="clear:both;"> </div>
 <% end %>
 
-<% unless current_controller == 'search' %>
+<% unless %w(posts search users).include?(current_controller) %>
   <% if logged_in? && (!@topic.locked || can_edit?(@topic)) %>
     <%= render 'posts/new' %>
   <% end %>

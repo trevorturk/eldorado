@@ -4,7 +4,7 @@
     <tr>
       <th><%= time_ago_or_time_stamp(post.created_at, TzTime.now, true, true) %></th>
       <th class="thr">
-        <% if %w(search posts).include?(current_controller) %>
+        <% if %w(search posts users).include?(current_controller) %>
           <%= link_to post.topic.title + ' &raquo;', topic_post_path(post) %>
         <% else %>
           <%= "#" + (index + @padding).to_s %>
@@ -63,7 +63,7 @@
           &nbsp; <%= link_to 'Topic', topic_post_path(post) %>
           &nbsp; <%= link_to_function '(x)', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
         </span>   
-        <% if current_controller == 'search' %>
+        <% if %w(posts search users).include?(current_controller) %>
           <% if logged_in? && !post.topic.locked %>
             &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
           <% end %>

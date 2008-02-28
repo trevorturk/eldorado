@@ -328,4 +328,11 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
+  def test_user_posts_path_should_work
+    get :posts, :id => users(:trevor).id
+    assert_response :success
+    get :posts, :id => users(:noposts).id
+    assert_response :success
+  end
+  
 end

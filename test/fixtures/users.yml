@@ -93,3 +93,13 @@ post_test:
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 2.weeks.ago.to_s :db %>
   time_zone: 'UTC'
+noposts:
+  id: 7
+  login: noposts
+  email: noposts@test.com
+  posts_count: 0
+  password_hash: <%= User.encrypt('test') %>
+  created_at: <%= 5.days.ago.to_s :db %>
+  profile_updated_at: <%= 5.hours.ago.to_s :db %>
+  online_at: <%= 2.weeks.ago.to_s :db %>
+  time_zone: 'UTC'

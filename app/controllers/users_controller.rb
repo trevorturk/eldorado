@@ -51,6 +51,16 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
+
+  def confirm_delete
+    @user = User.find(params[:id])
+  end
+  
+  def posts
+    @user = User.find(params[:id])
+    @posts = @user.posts.paginate(:page => params[:page])
+    render :template => 'topics/show'
+  end
   
   def ban
     @user = User.find(params[:id])
@@ -61,11 +71,7 @@ class UsersController < ApplicationController
     @user.remove_ban
     redirect_to user_path(@user)
   end
-  
-  def confirm_delete
-    @user = User.find(params[:id])
-  end
-  
+    
   def login
     redirect_to root_path and return false if logged_in?
     if request.post?
