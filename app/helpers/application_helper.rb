@@ -14,7 +14,11 @@ module ApplicationHelper
     else
       @header = Header.random
     end
-    return '<style type="text/css">.header { background: #333 url("' + @header.public_filename + '") !important; }</style>' if @header
+    if @header
+      return '<style type="text/css">.header { background: url("' + @header.public_filename + '"); }</style>'
+    else
+      return '<style type="text/css">.header { background: url("/images/eldorado.jpg"); }</style>'
+    end
   end
     
   def theme_css

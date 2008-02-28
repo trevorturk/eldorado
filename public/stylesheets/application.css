@@ -21,7 +21,7 @@ body {
   
 .header {
   height: 200px;
-  background-color: #3371a3;
+  background-color: #333;
 }
 
 .content {
@@ -36,12 +36,13 @@ body {
 }
 
 a:link, a:visited {
-  color: #3371a3;
+  color: #638137;
   text-decoration: none;
 }
 
 a:active, a:hover {
   text-decoration: underline;
+	color: #8EB653;
 }
 
 h1 { 
@@ -148,7 +149,7 @@ h3 {
 }
 
 .box {
-  border: 1px solid #3371a3;
+  border: 1px solid #35604d;
   padding: 0 10px;
   margin-bottom: 10px;
   background: #f1f1f1;
@@ -156,7 +157,7 @@ h3 {
 
 .box .top {
   display: block;
-  background: #3371a3;
+  background: #35604d;
   color: #fff;
   padding: 4px 5px;
   margin: 0 -10px;
@@ -176,12 +177,12 @@ h3 {
 
 table {
   width: 100%;
-  border: 1px solid #3371a3;
+  border: 1px solid #35604d;
   margin-bottom: 10px;
 }
 
 thead th {
-  background: #3371a3;
+  background: #35604d;
   color: #fff;
   text-align: left;
   font-weight: normal;
@@ -203,8 +204,8 @@ tbody {
 tbody td {
   padding: 5px;
   vertical-align: top;
-  border-top: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+  border-top: 1px solid #cedeb9;
+  border-right: 1px solid #cedeb9;
 }
 
 tbody .tci {
@@ -539,7 +540,7 @@ cite {
 }
 
 .reminders {
-  background: #3371a3;
+  background: #35604d;
   color: #fff;
   text-align: center;
   padding: 4px;
@@ -563,7 +564,7 @@ cite {
 }
 
 .inew {
-  border-color: #448ECF #3876A8 #366F9E #3F7FB8;
+  border-color: #8BB453 #7A9E48 #709142 #799C47;
 }
 
 .pagination {
@@ -620,6 +621,6 @@ cite {
 .tooltip { 
 	position: relative; 
 	color: #fff; 
-	background-color: #3371a3;
+	background-color: #35604d;
 	padding: 4px 5px;
 }
