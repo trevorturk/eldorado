@@ -12,4 +12,9 @@ class Test::Unit::TestCase
     @request.session[:online_at] = Time.now.utc
   end
   
+  def private_site
+    settings = Setting.find(:first)
+    settings.destroy
+  end
+  
 end

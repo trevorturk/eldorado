@@ -24,7 +24,25 @@ class HomeControllerTest < Test::Unit::TestCase
     get :index
     assert_response :success
   end
-
+  
+  def test_should_get_index_when_not_logged_in
+    get :index
+    assert_response :success
+  end
+  
+  def test_should_redirect_to_login_if_site_is_private_and_not_logged_in
+    private_site
+    get :index
+    assert_redirected_to login_path
+  end
+  
+  def test_should_get_index_if_site_is_private_and_logged_in
+    login_as :trevor
+    private_site
+    get :index
+    assert_response :success
+  end
+  
   def test_initial_setup_should_work
     User.destroy_all
     Setting.destroy_all
@@ -49,5 +67,5 @@ class HomeControllerTest < Test::Unit::TestCase
     get :index, :format => 'cgi'
     assert_redirected_to root_path
   end
-  
+    
 end

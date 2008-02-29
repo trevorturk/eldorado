@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
   
   around_filter :get_settings, :set_timezone
-  before_filter :get_newest_user, :auth_token_login, :check_bans, :get_reminders, :update_online_at
-  helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?
+  before_filter :check_privacy, :get_newest_user, :auth_token_login, :check_bans, :get_reminders, :update_online_at
+  helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :locked_out?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error

@@ -1,6 +1,6 @@
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION   = '2.0.2' unless defined? RAILS_GEM_VERSION
-APPLICATION_VERSION = '0.9.1'
+APPLICATION_VERSION = '0.9.2'
 
 require File.join(File.dirname(__FILE__), 'boot')
 

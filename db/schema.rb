@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 70) do
+ActiveRecord::Schema.define(:version => 72) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -107,13 +107,15 @@ ActiveRecord::Schema.define(:version => 70) do
   end
 
   create_table "settings", :force => true do |t|
-    t.string "title"
-    t.string "tagline"
-    t.text   "announcement"
-    t.text   "footer"
-    t.string "theme"
-    t.string "favicon"
-    t.string "time_zone",    :default => "UTC"
+    t.string  "title"
+    t.string  "tagline"
+    t.text    "announcement"
+    t.text    "footer"
+    t.string  "theme"
+    t.string  "favicon"
+    t.string  "time_zone",     :default => "UTC"
+    t.boolean "private",       :default => false
+    t.string  "login_message", :default => "You are not logged in"
   end
 
   create_table "subscriptions", :force => true do |t|

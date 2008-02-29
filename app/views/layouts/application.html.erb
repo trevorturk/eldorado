@@ -29,7 +29,7 @@
       <div class="tagline"><%=h @settings.tagline %></div>
     </div>
     
-      <%= render 'shared/tabs' %>
+      <%= render 'shared/tabs' unless locked_out? %>
     
       <div class="content">
       
@@ -45,7 +45,7 @@
         <%= yield %>
       
         <%= render 'shared/nav2' %>
-        <%= render 'shared/stats' %>
+        <%= render 'shared/stats' unless locked_out? %>
             
       </div>
     

@@ -1,16 +1,18 @@
 # == Schema Information
-# Schema version: 69
+# Schema version: 72
 #
 # Table name: settings
 #
-#  id           :integer(11)     not null, primary key
-#  title        :string(255)     
-#  tagline      :string(255)     
-#  announcement :text            
-#  footer       :text            
-#  theme        :string(255)     
-#  favicon      :string(255)     
-#  time_zone    :string(255)     default("UTC")
+#  id            :integer(11)     not null, primary key
+#  title         :string(255)     
+#  tagline       :string(255)     
+#  announcement  :text            
+#  footer        :text            
+#  theme         :string(255)     
+#  favicon       :string(255)     
+#  time_zone     :string(255)     default("UTC")
+#  private       :boolean(1)      
+#  login_message :string(255)     default("You are not logged in")
 #
 
 class Setting < ActiveRecord::Base
@@ -19,16 +21,17 @@ class Setting < ActiveRecord::Base
   
   composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
   
-  DEFAULT_TITLE   = 'El Dorado'
-  DEFAULT_TAGLINE = 'A full-stack community web application written in Ruby/Rails'
-  DEFAULT_FOOTER  = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
+  TITLE = 'El Dorado'
+  TAGLINE = 'A full-stack community web application written in Ruby/Rails'
+  FOOTER = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
+  LOGIN_MESSAGE = 'You are not logged in'
   
   def theme
     read_attribute(:theme) # not sure why this is needed, but tests are failing without it
   end
   
   def self.defaults
-    @settings = Setting.new(:title => DEFAULT_TITLE, :tagline => DEFAULT_TAGLINE, :footer => DEFAULT_FOOTER)
+    @settings = Setting.new(:title => TITLE, :tagline => TAGLINE, :footer => FOOTER, :login_message => LOGIN_MESSAGE)
     @settings.save
     @settings
   end

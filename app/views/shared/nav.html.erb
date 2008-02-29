@@ -4,7 +4,7 @@
       Logged in as <b><%= link_to h(current_user.login), current_user %></b> | 
       Last visit <%= time_ago_or_time_stamp(session[:online_at]) %>
     <% else %>
-      You are not logged in
+      <%= @settings.login_message %>
     <% end %>
   </p>
   <p class="nav-right">
@@ -28,7 +28,8 @@
         &nbsp; <%= link_to 'Admin', admin_path %>
       <% end %>
       &nbsp; <%= link_to 'Logout', logout_path %>
-    <% else %>
+    <% end %>
+    <% if !logged_in? && !locked_out? %>
       <%= link_to 'Register', register_path %> &nbsp;
       <%= link_to 'Login', login_path %> 
     <% end %>

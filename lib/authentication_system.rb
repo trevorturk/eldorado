@@ -13,13 +13,21 @@ module AuthenticationSystem
   def admin?()
     logged_in? && (current_user.admin == true)
   end
-    
+
+  def locked_out?()
+    return true if @settings.private? && !logged_in?
+  end
+      
   def require_login
     redirect_to login_path and return false unless logged_in?
   end
-  
+
   def require_admin
     redirect_to root_path and return false unless admin?
+  end
+
+  def check_privacy
+    redirect_to login_path and return false if locked_out?
   end
   
   def auth_token_login
