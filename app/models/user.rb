@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   end
   
   def self.users_online
-    User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes])
+    User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes], :order => 'online_at desc', :limit => 10)
   end
   
   def set_defaults
