@@ -284,4 +284,17 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_redirected_to topic_path(:id => 1)
   end
   
+  def test_should_not_show_topic_if_private_site_and_not_logged_in
+    private_site
+    get :show, :id => 1
+    assert_redirected_to login_path
+  end
+  
+  def test_should_show_topic_if_private_site_and_logged_in
+    private_site
+    login_as :trevor
+    get :show, :id => 1
+    assert_response :success
+  end
+  
 end
