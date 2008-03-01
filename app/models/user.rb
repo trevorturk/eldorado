@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
   
   def is_online?
-    return true if online_at > Time.now.utc-5.minutes unless online_at.nil?
+    return true if online_at > Time.now-5.minutes unless online_at.nil?
   end
   
   def banned?
@@ -82,11 +82,11 @@ class User < ActiveRecord::Base
   end
   
   def self.users_online
-    User.find(:all, :conditions => ["online_at > ?", Time.now.utc-5.minutes], :order => 'online_at desc', :limit => 10)
+    User.find(:all, :conditions => ["online_at > ?", Time.now-5.minutes], :order => 'online_at desc', :limit => 10)
   end
   
   def set_defaults
-    self.online_at = self.profile_updated_at = Time.now.utc
+    self.online_at = self.profile_updated_at = Time.now
     self.time_zone = Setting.find(:first).time_zone
   end
   

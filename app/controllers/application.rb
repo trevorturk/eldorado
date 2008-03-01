@@ -43,14 +43,13 @@ class ApplicationController < ActionController::Base
   end
   
   def get_reminders
-    @reminders = Event.find(:all, :order => 'date asc', :conditions => ['reminder = ?', true])
-    @reminders = [] unless logged_in?
+    @reminders = Event.reminders unless locked_out?
   end
     
   def update_online_at
     return unless logged_in?
-    session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
-    User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
+    session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now
+    User.update_all ['online_at = ?', Time.now], ['id = ?', current_user.id]
   end
           
 end

@@ -33,7 +33,7 @@ module AuthenticationSystem
   def auth_token_login
     return if logged_in? || cookies[:auth_token].nil?
     user = User.find_by_auth_token(cookies[:auth_token])
-    if user && Time.now.utc < user.auth_token_exp
+    if user && Time.now < user.auth_token_exp
       session[:user_id] = user.id 
       session[:online_at] = user.online_at
       redirect_to request.request_uri and return false

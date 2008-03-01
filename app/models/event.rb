@@ -28,4 +28,8 @@ class Event < ActiveRecord::Base
     title.to_s
   end
   
+  def self.reminders
+    find(:all, :order => 'date asc', :conditions => { :reminder => true, :date => Time.now-2.hours..Time.now+8.hours })
+  end
+  
 end
