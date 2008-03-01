@@ -30,6 +30,7 @@
       &nbsp; <%= link_to 'Logout', logout_path %>
     <% end %>
     <% if !logged_in? && !locked_out? %>
+      &nbsp; <%= link_to 'Search', search_path(:type => current_controller) %> &nbsp; 
       <%= link_to 'Register', register_path %> &nbsp;
       <%= link_to 'Login', login_path %> 
     <% end %>

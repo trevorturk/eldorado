@@ -1,7 +1,5 @@
 class SearchController < ApplicationController
-  
-  before_filter :require_login
-  
+    
   def index
     if params[:type].blank? || params[:query].blank?
       render :template => 'search/index'
