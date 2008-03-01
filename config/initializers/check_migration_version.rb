@@ -6,7 +6,9 @@ highest_version = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").map { |f|
 }.max
 
 unless defined?(Rake) # skip when run from tasks like rake db:migrate
-  if current_version != highest_version
+  if current_version == 0
+    abort "Database not set up. Follow instructions in README and run 'rake db:schema:load' to get started."
+  elsif current_version != highest_version
     abort "Expected migration version #{highest_version}, got #{current_version}. Run 'rake db:migrate' to upgrade schema."
   end
 end

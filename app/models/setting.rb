@@ -23,7 +23,7 @@ class Setting < ActiveRecord::Base
   
   TITLE = 'El Dorado'
   TAGLINE = 'A full-stack community web application written in Ruby/Rails'
-  FOOTER = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
+  FOOTER = '<p style="text-align:right;margin:0;">Powered by <a href="http://almosteffortless.com/eldorado/">El Dorado</a> | <a href="http://almosteffortless.com">&aelig;</a></p>'
   LOGIN_MESSAGE = 'You are not logged in'
   
   def theme
