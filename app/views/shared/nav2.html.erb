@@ -115,6 +115,16 @@
   </div>
 <% end %>
 
+<% if current_controller == 'posts' and %w(show edit).include?(current_action) %>
+  <div class="info-left" style="padding-top:5px;">
+    <%= link_to 'Home', root_path %> &raquo; 
+    <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
+    <%= link_to @post.topic.forum.category.name, @post.topic.forum.category %> &raquo; 
+    <%= link_to @post.topic.forum.name, @topic.forum %> &raquo;
+    <%= link_to @post.topic.to_s, @post.topic %>
+  </div>
+<% end %>
+
 <% if current_controller == 'search' %>
   <div class="info-right" style="padding-top:5px;">
     <%= will_paginate @events, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @events.blank? %>
