@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :themes, :member => { :select => :post, :deselect => :post }
   map.resources :topics, :member => { :show_new => :get }
   map.resources :uploads
-  map.resources :users, :member => { :posts => :get, :confirm_delete => :get, :ban => :get, :remove_ban => :post }
+  map.resources :users, :member => { :posts => :get, :confirm_delete => :get, :admin => :post, :ban => :get, :remove_ban => :post }
   
   map.search 'search', :controller => 'search', :action => 'index'
   

@@ -49,6 +49,7 @@ module ApplicationHelper
     for r in @ranks
       @rank = r if user.posts_count >= r.min_posts
     end
+    return "Member" if @rank.nil? # if no ranks are low enough
     return h(@rank.title)
   end
   

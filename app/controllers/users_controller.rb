@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :can_edit, :only => [:edit, :update, :destroy, :confirm_delete]
-  before_filter :require_admin, :only => [:ban, :remove_ban]
+  before_filter :require_admin, :only => [:admin, :ban, :remove_ban]
   skip_filter :check_privacy, :only => [:login, :logout]
   
   def index
@@ -61,6 +61,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.paginate(:page => params[:page])
     render :template => 'topics/show'
+  end
+  
+  def admin
+    @user = User.find(params[:id])
+    @user.toggle!(:admin)
+    redirect_to user_path(@user)
   end
   
   def ban

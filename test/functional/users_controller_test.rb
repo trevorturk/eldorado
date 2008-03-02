@@ -79,6 +79,13 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal "ok!?", users(:trevor).bio
     assert_equal false, users(:trevor).admin
   end
+
+  def test_should_not_be_able_to_make_self_admin_when_creating_account
+    post :create, :user => { :login => "notadmin", :email => "test@aol.com", :password => 'test', :password_confirmation => 'test', :admin => true }
+    user = User.find(:first, :order => 'id desc')
+    assert_equal user.login, 'notadmin'
+    assert_equal user.admin, false
+  end
   
   def test_should_not_update_user_if_not_authorized
     login_as :trevor
@@ -345,11 +352,39 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
+  def test_should_grant_admin_if_admin
+    login_as :Administrator
+    post :admin, :id => users(:trevor).id
+    assert_redirected_to user_path(users(:trevor))
+    users(:trevor).reload
+    assert_equal users(:trevor).admin, true
+  end
+  
+  def test_should_revoke_admin_if_admin
+    login_as :Administrator
+    post :admin, :id => users(:Administrator).id
+    assert_redirected_to user_path(users(:Administrator))
+    users(:Administrator).reload
+    assert_equal users(:Administrator).admin, false
+  end
+  
+  def test_should_not_toggle_admin_if_not_admin_or_not_logged_in
+    post :admin, :id => users(:trevor).id
+    users(:trevor).reload
+    assert_equal users(:trevor).admin, false
+    assert_redirected_to root_path
+    login_as :trevor
+    post :admin, :id => users(:trevor).id
+    users(:trevor).reload
+    assert_equal users(:trevor).admin, false
+    assert_redirected_to root_path
+  end
+  
   def test_user_posts_path_should_work
     get :posts, :id => users(:trevor).id
     assert_response :success
     get :posts, :id => users(:noposts).id
     assert_response :success
   end
-  
+    
 end
