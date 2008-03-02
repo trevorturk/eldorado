@@ -11,11 +11,7 @@ class ForumsController < ApplicationController
   def show
     @forum = Forum.find(params[:id], :include => :category)
     @topic = Topic.new ; @topic.forum_id = @forum.id # set forum_id for new topic select default option
-    if logged_in?
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ?", @forum.id])
-    else
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ? and private = ?", @forum.id, false])
-    end
+    @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["forum_id = ?", @forum.id])
     render(:template => "topics/index")
   end
   

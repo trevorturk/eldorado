@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 72
+# Schema version: 73
 #
 # Table name: posts
 #
@@ -20,7 +20,7 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :user_id, :body
   
-  attr_accessor :title, :forum_id, :private, :locked, :sticky
+  attr_accessor :title, :forum_id, :locked, :sticky
   
   # attr_accessible :body
 

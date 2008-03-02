@@ -98,17 +98,6 @@ class EventsControllerTest < Test::Unit::TestCase
     assert_equal old_count, Event.count
     assert_redirected_to login_path
   end
-
-  def test_should_show_private_event_if_logged_in
-    login_as :trevor
-    get :show, :id => 3
-    assert_response :success
-  end
-  
-  def test_should_not_show_private_event_if_not_logged_in
-    get :show, :id => 3
-    assert_redirected_to login_path
-  end
   
   def test_should_create_event_with_correct_time_for_user_time_zone
   end

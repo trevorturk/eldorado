@@ -5,11 +5,7 @@ class UploadsController < ApplicationController
   before_filter :can_edit, :only => [:destroy]
   
   def index
-    if logged_in?
-      @uploads = Upload.paginate(:page => params[:page], :order => 'updated_at desc')
-    else
-      @uploads = Upload.paginate(:page => params[:page], :order => 'updated_at desc', :conditions => ["private = ?", false])
-    end
+    @uploads = Upload.paginate(:page => params[:page], :order => 'updated_at desc')
   end
 
   def new

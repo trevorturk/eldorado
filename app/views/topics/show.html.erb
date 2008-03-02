@@ -4,8 +4,6 @@
     <span class="detail">
       &laquo; <%= link_to @topic.forum.name, @topic.forum %>
       &laquo; <%= link_to @topic.forum.category.name, @topic.forum.category %>
-      &nbsp;|&nbsp; 
-      <%= @topic.private? ? 'Private' : 'Public' %><%= @topic.locked? ? ', Locked' : '' %>
     </span>
   </div>
   <div class="info-right">

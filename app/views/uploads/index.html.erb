@@ -22,7 +22,6 @@
             <% end %>
             
             <% unless current_controller == 'home' %>
-              <%= '<span class="detail">Private</span>' if upload.private? %>
               <%= link_to_function '(&raquo;)', "$('mp3-#{upload.public_filename}').toggle()" if upload.is_mp3? %>
             <% end %>
             

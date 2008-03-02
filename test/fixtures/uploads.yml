@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 72
+# Schema version: 73
 #
 # Table name: uploads
 #
@@ -14,7 +14,6 @@
 #  user_id      :integer(11)     
 #  created_at   :datetime        
 #  updated_at   :datetime        
-#  private      :boolean(1)      
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

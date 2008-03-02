@@ -4,16 +4,11 @@ class TopicsController < ApplicationController
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
-    if logged_in?
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
-    else
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ["private = ?", false])
-    end
+    @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
   end
   
   def show
     @topic = Topic.find(params[:id], :include => :forum)
-    redirect_to login_path if (!logged_in? && @topic.private)
     @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
     redirect_to @topic if @posts.blank? # if params[:page] is too big, no posts will be found
     @page = params[:page] ? params[:page] : 1

@@ -3,10 +3,7 @@
 <% form_for @upload, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-uploads-new">
     <span class="top">New File</span>
-    <p>
-      <%= f.file_field :uploaded_data %>
-      &nbsp; <%= f.check_box(:private) %><label for="upload_private"> Private</label>
-    </p>
+    <p><%= f.file_field :uploaded_data %></p>
     <p>
       <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp; 
       <% if current_action != 'new' %>

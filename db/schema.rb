@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 72) do
+ActiveRecord::Schema.define(:version => 73) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(:version => 72) do
     t.string   "title"
     t.text     "description"
     t.datetime "date"
-    t.boolean  "private",     :default => false
     t.boolean  "reminder"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -52,8 +51,8 @@ ActiveRecord::Schema.define(:version => 72) do
     t.integer "position",     :default => 0
   end
 
-  add_index "forums", ["category_id"], :name => "index_forums_on_last_post_at"
   add_index "forums", ["category_id"], :name => "index_forums_on_category_id"
+  add_index "forums", ["category_id"], :name => "index_forums_on_last_post_at"
 
   create_table "headers", :force => true do |t|
     t.integer  "parent_id"
@@ -98,8 +97,8 @@ ActiveRecord::Schema.define(:version => 72) do
     t.integer  "updated_by"
   end
 
-  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
+  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
 
   create_table "ranks", :force => true do |t|
     t.string  "title"
@@ -145,14 +144,13 @@ ActiveRecord::Schema.define(:version => 72) do
     t.integer  "last_post_id"
     t.datetime "last_post_at"
     t.integer  "last_post_by"
-    t.boolean  "private",      :default => false
     t.boolean  "locked"
     t.boolean  "sticky",       :default => false
     t.integer  "forum_id"
   end
 
-  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_last_post_at"
   add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
+  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_last_post_at"
 
   create_table "uploads", :force => true do |t|
     t.integer  "parent_id"
@@ -165,7 +163,6 @@ ActiveRecord::Schema.define(:version => 72) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "private",      :default => false
   end
 
   create_table "users", :force => true do |t|

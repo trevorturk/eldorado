@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 72
+# Schema version: 73
 #
 # Table name: topics
 #
@@ -12,7 +12,6 @@
 #  last_post_id :integer(11)     
 #  last_post_at :datetime        
 #  last_post_by :integer(11)     
-#  private      :boolean(1)      
 #  locked       :boolean(1)      
 #  sticky       :boolean(1)      
 #  forum_id     :integer(11)     
@@ -29,7 +28,6 @@ Testing:
   last_post_id: 3
   last_post_at: <%= 1.week.ago.to_s :db %>
   last_post_by: 1
-  private: 0
   locked: 0
   forum_id: 1
 Private:
@@ -42,7 +40,6 @@ Private:
   last_post_id: 1
   last_post_at: <%= 5.minutes.ago.to_s :db %>
   last_post_by: 2
-  private: 1
   locked: 0
   forum_id: 1
 Locked:
@@ -55,7 +52,6 @@ Locked:
   last_post_id: 1
   last_post_at: <%= 5.minutes.ago.to_s :db %>
   last_post_by: 2
-  private: 1
   locked: 1
   forum_id: 1
 deleteme:

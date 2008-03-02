@@ -61,17 +61,6 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
 
-  def test_should_not_show_private_topic_unless_logged_in
-    get :show, :id => 2
-    assert_redirected_to login_path
-  end
-  
-  def test_should_show_private_topic_if_logged_in
-    login_as :trevor
-    get :show, :id => 2
-    assert_response :success
-  end
-
   def test_should_fail_to_get_edit_unless_user_created_topic
     get :edit, :id => 1
     assert_redirected_to login_path
@@ -180,18 +169,7 @@ class TopicsControllerTest < Test::Unit::TestCase
     # assert_redirected_to topic_path(:id => "23823")
     # assert_redirected_to root_path
   end
-  
-  def test_should_fail_to_find_topic_with_viewtopic_php_url_if_private_and_not_logged_in
-    # get :unknown_request, :path => "viewtopic.php", :id => "2"
-    # assert_redirected_to topic_path(:id => "2")
-  end
-  
-  def test_should_find_topic_with_viewtopic_php_url_if_private_and_logged_in
-    # login_as :trevor
-    # get :unknown_request, :path => "viewtopic.php", :id => "2"
-    # assert_redirected_to topic_path(:id => "2")
-  end
-  
+    
   def test_should_set_last_post_info_in_forum_and_topic_on_new_topic
   end
   
