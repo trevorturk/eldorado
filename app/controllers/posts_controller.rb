@@ -1,11 +1,12 @@
 class PostsController < ApplicationController 
   
-  before_filter :find_topic_and_post, :except => [:new, :create]
-  before_filter :require_login, :except => [:show, :topic]
+  before_filter :find_topic_and_post, :except => [:index, :new, :create]
+  before_filter :require_login, :except => [:index, :show, :topic]
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
-    redirect_to topics_path
+    @posts = Post.paginate(:page => params[:page], :order => 'created_at desc')
+    render :template => 'topics/show'
   end
   
   def show

@@ -13,6 +13,11 @@ class PostsControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
   end
   
+  def test_index_should_work
+    get :index
+    assert_response :success
+  end
+  
   def test_posts_cannot_be_made_unless_logged_in
     old_post_count = Post.count
     post :create, :post => { :topic_id => "1", :body => "this is a test" }

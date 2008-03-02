@@ -15,6 +15,7 @@
       <% elsif current_controller == 'events' %><%= link_to 'Add a New Event', new_event_path %>
       <% elsif current_controller == 'forums' %><%= link_to 'Start a New Topic', new_topic_path(:forum_id => params[:id]) %>
       <% elsif current_controller == 'headers' %><%= link_to 'Upload a New Header', new_header_path %>
+      <% elsif current_controller == 'posts' %><%= link_to 'Start a New Topic', new_topic_path %>
       <% elsif current_controller == 'themes' %><%= link_to 'Upload a New Theme', new_theme_path %>
       <% elsif current_controller == 'topics' %>
         <% if @topic && @topic.forum %><%= link_to 'Start a New Topic', new_topic_path(:forum_id => @topic.forum.id) %>

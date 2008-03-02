@@ -51,6 +51,6 @@ three:
   updated_at: <%= 1.week.ago.to_s :db %>
 deleteme:
   id: 6
-  user: trevor
+  user_id: 4
   topic: deleteme
   body: deleteme

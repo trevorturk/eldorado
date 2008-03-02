@@ -18,6 +18,18 @@
   <div style="clear:both;"> </div>
 <% end %>
 
+<% if %w(posts).include?(current_controller) %>
+  <div class="info-left">
+    <span class="title"><%= @posts.size %> Posts</span>
+    <span class="detail"></span>
+  </div>
+  <div class="info-right">
+    <span class="title">&nbsp;</span>
+    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
+  </div>
+  <div style="clear:both;"> </div>
+<% end %>
+
 <% if %w(users).include?(current_controller) %>
   <div class="info-left">
     <span class="title"><%=h @user.to_s %></span>
