@@ -1,0 +1,16 @@
+<%= error_messages_for :rank %>
+<% @rank = Rank.new unless @rank %>
+<% form_for @rank do |f| %>
+  <div class="box" id="box-ranks-new">
+    <span class="top">New Rank</span>
+    <p class="label"><label for="rank_title">Title</label></p>
+    <p><%= f.text_field :title, :style => 'width:20%;' %></p>
+    <p class="label"><label for="rank_min_posts">Minimum Posts</label></p>
+    <p><%= f.text_field :min_posts, :style => 'width:5%;' %></p>
+    <p>
+      <%= submit_tag "Add Rank", :disable_with => "Add Rank" %>&nbsp;
+      <%= link_to 'Cancel', ranks_path %>
+    </p>
+</div>
+<% end %>
+<%= javascript_tag "$('rank_title').focus();" %>

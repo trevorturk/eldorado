@@ -1,0 +1,2 @@
+module RankHelper
+end

@@ -1,8 +1,10 @@
 <%= render 'shared/admin.html.erb' %>
 
-<% unless @themes.empty? %>
-  <div class="box" id="box-themes-index">
-    <span class="top">Themes</span>  
+<div class="box" id="box-themes-index">
+  <span class="top">Themes</span>
+  <% if @themes.empty? %>
+    <p><%= link_to 'Upload a New Theme &raquo;', new_theme_path %></p>
+  <% else %>
     <% for theme in @themes %>
       <p>
         <%= link_to theme.filename, theme.public_filename %> by 
@@ -17,5 +19,5 @@
         <% end %>
       </p>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>

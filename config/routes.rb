@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
   map.resources :messages, :collection => { :refresh => :get }
   map.resources :posts, :member => { :quote => :get, :topic => :get }
+  map.resources :ranks
   map.resources :settings
   map.resources :subscriptions
   map.resources :themes, :member => { :select => :post, :deselect => :post }
