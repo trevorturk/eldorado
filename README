@@ -16,7 +16,7 @@ El Dorado is a full-stack community web application written in Ruby/Rails.
 
 == Upgrading
 
-Visit http://almosteffortless.com and http://github.com/trevorturk/el-dorado/ for updates and news.
+Visit http://almosteffortless.com/ and http://github.com/trevorturk/el-dorado/ for updates and news.
 Use "rake db:migrate" to upgrade your database after new releases (use "cap deploy:migrations" if you're using Capistrano).
 
 == About
@@ -28,4 +28,4 @@ DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson (P
 Matt Mullenweg et al. (Wordpress), and Michael Heilemann et al. (k2).
 
 --
-Trevor Turk (http://almosteffortless.com)
+Trevor Turk (http://almosteffortless.com/)
