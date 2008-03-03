@@ -16,7 +16,7 @@ El Dorado is a full-stack community web application written in Ruby/Rails.
 
 == Upgrading
 
-Visit http://almosteffortless.com and http://code.google.com/p/eldorado/source for updates and news.
+Visit http://almosteffortless.com and http://github.com/trevorturk/el-dorado/ for updates and news.
 Use "rake db:migrate" to upgrade your database after new releases (use "cap deploy:migrations" if you're using Capistrano).
 
 == About
