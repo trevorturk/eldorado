@@ -8,6 +8,3 @@
 /public/headers/*
 /public/themes/*
 /tmp/*
-/tmp/cache/*
-/tmp/sessions/*
-/tmp/sockets/*
