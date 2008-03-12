@@ -1,10 +1,10 @@
 .DS_Store
+/log/*.log
+/tmp/**/*
 /config/database.yml
 /config/deploy.rb
 /db/*.sqlite3
-/log/*.log
 /public/avatars/*
 /public/files/*
 /public/headers/*
 /public/themes/*
-/tmp/*
