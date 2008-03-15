@@ -20,7 +20,7 @@
 
 <% if %w(posts).include?(current_controller) %>
   <div class="info-left">
-    <span class="title"><%= number_with_delimiter(Post.count) %> Posts</span>
+    <span class="title"><%= number_with_delimiter(@posts.total_entries) %> Posts</span>
     <span class="detail"></span>
   </div>
   <div class="info-right">
