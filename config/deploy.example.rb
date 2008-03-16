@@ -18,8 +18,8 @@ after   'deploy:update_code', 'deploy:create_symlinks'
 namespace :deploy do
   task :restart do
     # Example single mongrel restart task 
-    run "/var/lib/gems/1.8/bin/mongrel_rails stop -P #{shared_path}/log/mongrel.8000.pid"; sleep 15
-    run "/var/lib/gems/1.8/bin/mongrel_rails start -d -e production -p 8000 -P log/mongrel.8000.pid -c #{release_path} --user root --group root"; sleep 15
+    begin run "/var/lib/gems/1.8/bin/mongrel_rails stop -P #{shared_path}/log/mongrel.8000.pid"; rescue; end; sleep 15;
+    begin run "/var/lib/gems/1.8/bin/mongrel_rails start -d -e production -p 8000 -P log/mongrel.8000.pid -c #{release_path} --user root --group root"; rescue; end; sleep 15;
   end
   task :config_database do
     put(File.read('config/database.yml'), "#{release_path}/config/database.yml", :mode => 0444)
