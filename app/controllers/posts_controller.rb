@@ -58,11 +58,11 @@ class PostsController < ApplicationController
     @post = nil # clear post so form with create a new one
     render :template => "posts/new"
   end
-      
+  
   def find_topic_and_post
     @post = Post.find(params[:id])
     @topic = Topic.find(@post.topic.id)
     redirect_to topics_url unless @topic
   end 
-      
+
 end

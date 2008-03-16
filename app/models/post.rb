@@ -21,8 +21,6 @@ class Post < ActiveRecord::Base
   validates_presence_of :user_id, :body
   
   attr_accessor :title, :forum_id, :locked, :sticky
-  
-  # attr_accessible :body
 
   def page
     posts = Post.find_all_by_topic_id(self.topic_id, :select => 'id', :order => 'created_at').map(&:id)
@@ -43,5 +41,5 @@ class Post < ActiveRecord::Base
   def to_s
     body.to_s
   end
-          
+  
 end

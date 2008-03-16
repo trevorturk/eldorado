@@ -20,7 +20,6 @@
 class Topic < ActiveRecord::Base
     
   has_many :posts, :order => 'posts.created_at', :dependent => :destroy 
-  has_many :posters, :through => :posts, :source => :user, :uniq => true
   belongs_to :user
   belongs_to :forum, :counter_cache => true
   belongs_to :last_post, :foreign_key => "last_post_id", :class_name => "Post"
@@ -29,19 +28,13 @@ class Topic < ActiveRecord::Base
   validates_presence_of :user_id, :title, :forum_id
     
   attr_accessor :body
-  
-  # attr_accessible :title, :locked, :sticky, :forum_id, :body
-  
+    
   PER_PAGE = 30
   
   def hit!
     self.class.increment_counter :views, id
   end
-  
-  def posters
-    posts.map { |p| p.user_id }.uniq.size
-  end
-  
+    
   def updated_at
     last_post_at
   end
