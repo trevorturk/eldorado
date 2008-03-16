@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   
-  before_filter :require_login, :except => [:index, :show, :show_posters, :show_new, :unknown_request]
+  before_filter :require_login, :except => [:index, :show, :show_new, :unknown_request]
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
@@ -51,16 +51,7 @@ class TopicsController < ApplicationController
     @post = Post.find(@topic.last_post_id) if @post.nil?
     redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
   end
-  
-  def show_posters
-    @topic = Topic.find(params[:id])
-    @posters = @topic.posts.map(&:user) ; @posters.uniq!
-    render :update do |page|
-      page.toggle :posters
-      page.replace_html 'posters', "#{@posters.map { |u| "#{h u.login}" } * ', ' }"
-    end
-  end
-  
+    
   def unknown_request
     if request.request_uri.include?('viewtopic.php') # catch punbb-style urls
       if params[:id].blank? # punbb can show a topic based on the post_id being passed as "pid"
