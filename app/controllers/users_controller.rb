@@ -110,6 +110,7 @@ class UsersController < ApplicationController
   protected
     
   def do_login(user)
+    user.online_at = Time.now if user.online_at.nil?
     session[:user_id] = user.id
     session[:online_at] = user.online_at
     user.online_at = Time.now

@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   def updated_at
     profile_updated_at
   end
-  
+    
   def is_online?
     return true if online_at > Time.now-5.minutes unless online_at.nil?
   end
@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   end
   
   def set_defaults
-    self.online_at = self.profile_updated_at = Time.now
+    self.profile_updated_at = Time.now
     self.time_zone = Setting.find(:first).time_zone
   end
   
