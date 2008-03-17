@@ -1,5 +1,9 @@
 # via http://snippets.dzone.com/posts/show/3994
 
+# current_user = User.find(1)
+# upload = current_user.uploads.new(:uploaded_data => UrlUpload.new('http://almosteffortless.com/files/nascar.jpg'))
+# upload.save!
+
 require 'open-uri'
 require 'action_controller/vendor/html-scanner/html/document'
 
@@ -11,11 +15,11 @@ OpenURI::Buffer.module_eval {
 
 class UrlUpload
   
-  attr_reader :original_filename, :attachment_data
+  attr_reader :attachment_data, :original_filename
   
   def initialize(url)
     @attachment_data = open(url)
-    @original_filename = determine_filename
+    @original_filename = File.basename(self.attachment_data.base_uri.path)
   end
 
   def method_missing(symbol, *args)
@@ -24,14 +28,6 @@ class UrlUpload
     else
       super
     end
-  end
-  
-  private
-  
-  def determine_filename
-    path = self.attachment_data.base_uri.path
-    filename = File.basename(path).downcase
-    filename
   end
     
 end
