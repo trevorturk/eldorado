@@ -482,9 +482,10 @@ cite {
   border: 1px solid #ccc;
 }
 
-.post-body img {
-	max-width: 560px;
-}
+.post-body img { max-width: 560px; }
+.post-body blockquote img { max-width: 528px; }
+.post-body blockquote blockquote img { max-width: 494px; }
+.post-body blockquote blockquote blockquote img { max-width: 459px; }
 
 .thread dd.avatar img, .profile-avatar img, .avatar-list .avatar img {
 	max-width: 150px;
