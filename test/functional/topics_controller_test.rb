@@ -295,6 +295,13 @@ class TopicsControllerTest < Test::Unit::TestCase
   end
   
   def test_should_update_cached_forum_fields_if_topic_destroyed
+    login_as :Administrator
+    assert_equal 1, forums(:moving_from).topics_count
+    assert_equal 1, forums(:moving_from).posts_count
+    delete :destroy, :id => 4
+    forums(:moving_from).reload
+    assert_equal 0, forums(:moving_from).topics_count
+    assert_equal 0, forums(:moving_from).posts_count  
   end
   
 end

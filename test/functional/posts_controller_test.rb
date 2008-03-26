@@ -72,6 +72,56 @@ class PostsControllerTest < Test::Unit::TestCase
     post :create, :post => { :topic_id => "1", :body => "this is a test" }  
     assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
   end
+
+  def test_post_edit_works_if_creator
+    login_as :trevor
+    get :edit, :id => posts(:one1)
+    assert_response :success
+  end
+  
+  def test_post_edit_works_if_admin
+    login_as :Administrator
+    get :edit, :id => posts(:one1)
+    assert_response :success
+  end
+  
+  def test_post_edit_does_not_work_if_not_creator_or_admin
+    login_as :Timothy
+    get :edit, :id => posts(:one1)
+    assert_redirected_to root_path
+  end
+  
+  def test_post_edit_does_not_work_if_not_logged_in
+    get :edit, :id => posts(:one1)
+    assert_redirected_to login_path
+  end
+
+  def test_post_update_works_if_creator
+    login_as :trevor
+    put :update, :id => posts(:one1), :post => { :body => 'edit!!!' }
+    posts(:one1).reload
+    assert_equal posts(:one1).body, 'edit!!!'
+  end
+  
+  def test_post_update_works_if_admin
+    login_as :Administrator
+    put :update, :id => posts(:one1), :post => { :body => 'admin!!!' }
+    posts(:one1).reload
+    assert_equal posts(:one1).body, 'admin!!!'
+  end
+  
+  def test_post_update_doesnt_work_if_not_admin_or_creator
+    login_as :Timothy
+    put :update, :id => posts(:one1), :post => { :body => 'edit!!!' }
+    posts(:one1).reload
+    assert_equal posts(:one1).body, 'MyText'
+  end
+  
+  def test_post_update_doesnt_work_if_not_logged_in
+    put :update, :id => posts(:one1), :post => { :body => 'edit!!!' }
+    posts(:one1).reload
+    assert_equal posts(:one1).body, 'MyText'
+  end
   
   def test_posts_count_increments_when_post_created
     login_as :trevor
