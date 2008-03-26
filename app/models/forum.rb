@@ -14,7 +14,7 @@
 
 class Forum < ActiveRecord::Base
   
-  has_many :topics, :order => 'topics.last_post_at', :dependent => :destroy
+  has_many :topics, :order => 'topics.last_post_at desc', :dependent => :destroy
   has_one :last_topic, :class_name => "Topic", :order => "last_post_at desc"
   belongs_to :category
   
