@@ -31,8 +31,18 @@ class Topic < ActiveRecord::Base
     
   PER_PAGE = 30
   
+  def before_update
+    @old_forum = Topic.find(id).forum
+  end
+  
+  def after_update
+    return if @old_forum == forum
+    Forum.update_all(['topics_count = ?, posts_count = ?', @old_forum.topics_count-1, @old_forum.posts_count-self.posts.count], ['id = ?', @old_forum.id])
+    Forum.update_all(['topics_count = ?, posts_count = ?', forum.topics_count+1, forum.posts_count+self.posts.count], ['id = ?', forum.id])
+  end
+  
   def hit!
-    self.class.increment_counter :views, id
+    self.class.increment_counter(:views, id)
   end
     
   def updated_at

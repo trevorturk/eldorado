@@ -21,7 +21,18 @@ one:
   topics_count: 2
   posts_count: 4
   position: 0
+moving_from:
+  id: 2
+  name: moving_from
+  category_id: 1
+  topics_count: 1
+  posts_count: 1
+moving_to:
+  id: 3
+  name: moving_to
+  category_id: 1
+  topics_count: 0
+  posts_count: 0
 deleteme:
   name: deleteme
   category: deleteme
-

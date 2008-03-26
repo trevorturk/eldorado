@@ -54,3 +54,8 @@ deleteme:
   user_id: 4
   topic: deleteme
   body: deleteme
+moving:
+  id: 7
+  user_id: 4
+  topic_id: 4
+  body: moving

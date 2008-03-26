@@ -54,6 +54,14 @@ Locked:
   last_post_by: 2
   locked: 1
   forum_id: 1
+moving:
+  id: 4
+  user_id: 4
+  title: moving
+  forum_id: 2
+  last_post_id: 7
+  last_post_at: <%= 5.minutes.ago.to_s :db %>
+  last_post_by: 4
 deleteme:
   user_id: 4
   title: deleteme

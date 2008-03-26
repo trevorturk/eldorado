@@ -275,4 +275,26 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
   
+  def test_should_update_cached_fields_when_moving_topics_between_forums    
+    login_as :Administrator
+    assert_equal 2, topics(:moving).forum_id
+    assert_equal 1, forums(:moving_from).topics_count
+    assert_equal 1, forums(:moving_from).posts_count
+    assert_equal 0, forums(:moving_to).topics_count
+    assert_equal 0, forums(:moving_to).posts_count
+    put :update, :id => 4, :topic => { :forum_id => 3 }
+    topics(:moving).reload
+    forums(:moving_from).reload
+    forums(:moving_to).reload
+    assert_redirected_to topic_path(topics(:moving))
+    assert_equal 3, topics(:moving).forum_id
+    assert_equal 0, forums(:moving_from).topics_count
+    assert_equal 0, forums(:moving_from).posts_count
+    assert_equal 1, forums(:moving_to).topics_count
+    assert_equal 1, forums(:moving_to).posts_count
+  end
+  
+  def test_should_update_cached_forum_fields_if_topic_destroyed
+  end
+  
 end
