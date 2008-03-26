@@ -1,0 +1,13 @@
+<p class="label"><label for="topic_forum">Forum</label></p>
+<p>
+  <select id="topic_forum_id" name="topic[forum_id]">
+    <option disabled="disabled" value="">Select a Forum</option>
+    <% @forum_id = @topic.forum_id unless @topic.forum_id.blank?; @forum_id ||= params[:forum_id].to_i %>
+    <% for category in Category.find(:all, :order => 'categories.position') %>
+      <option disabled="disabled" value=""><%= category.name %></option>
+      <% for forum in category.forums %>
+        <option value="<%= forum.id %>"<%= ' selected="selected"' if forum.id == @forum_id %>>&nbsp;&nbsp;<%= forum.name %></option>
+      <% end %>
+    <% end %>
+  </select>
+</p>
