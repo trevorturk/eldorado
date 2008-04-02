@@ -1,6 +1,11 @@
 == Welcome to El Dorado
 
-El Dorado is a full-stack community web application written in Ruby/Rails.
+El Dorado is a full-stack community web application written in Ruby/Rails. It features a Forum, 
+Event calendar, File sharing, Random headers, Avatars, CSS themes, Timezone support, and Privacy settings.
+
+Homepage: http://almosteffortless.com/eldorado
+Demo and support site: http://eldorado.almosteffortless.com
+Open source git repository: http://github.com/trevorturk/el-dorado/tree/master
 
 == Installation
 
@@ -9,23 +14,15 @@ El Dorado is a full-stack community web application written in Ruby/Rails.
 3) Run "rake db:schema:load" ("rake db:schema:load RAILS_ENV=production" for a live site)
 4) Start the web server ("script/server") and visit the new site to create your first user account
 
-== Importing from PunBB (version 1.2.16)
+Importing from PunBB (version 1.2.16)
 
 1) Fill in the "import" section of config/database.yml and run "rake import:database"
 2) Run optional rake tasks as necessary: import:avatars, import:headers, and import:files
-
-== Upgrading
-
-Visit http://almosteffortless.com/ and http://github.com/trevorturk/el-dorado/ for updates and news.
-Use "rake db:migrate" to upgrade your database after new releases (use "cap deploy:migrations" if you're using Capistrano).
 
 == About
 
 Contributors: Trevor Turk, Josh Peek, and Wilhelm Chung.
 
-Thanks: NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et a. (Ruby), 
-DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson (PunBB), 
+Thanks: NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et al. (Ruby), 
+DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson et al. (PunBB), 
 Matt Mullenweg et al. (Wordpress), and Michael Heilemann et al. (k2).
-
---
-Trevor Turk (http://almosteffortless.com/)
