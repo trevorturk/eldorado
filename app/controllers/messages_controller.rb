@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_filter :redirect_home, :only => [:show, :new, :edit, :update]
   before_filter :require_login, :only => [:new, :create]
   before_filter :can_edit, :only => [:destroy]
-  skip_filter   :get_settings, :set_timezone, :update_online_at, :get_newest_user, :auth_token_login, :check_bans, :get_reminders, :only => [:refresh]
+  skip_filter   :update_online_at, :get_newest_user, :auth_token_login, :check_bans, :get_reminders, :only => [:refresh]
   
   def index
     session[:refresh_messages] ||= Time.now

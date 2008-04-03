@@ -1,7 +1,7 @@
 == Welcome to El Dorado
 
-El Dorado is a full-stack community web application written in Ruby/Rails. It features a Forum, 
-Event calendar, File sharing, Random headers, Avatars, CSS themes, Timezone support, and Privacy settings.
+El Dorado is a full-stack community web application written in Ruby/Rails. It features a forum, 
+event calendar, file sharing, random headers, avatars, themes, timezone support, and privacy settings.
 
 Homepage: http://almosteffortless.com/eldorado
 Demo and support site: http://eldorado.almosteffortless.com
@@ -25,4 +25,4 @@ Contributors: Trevor Turk, Josh Peek, and Wilhelm Chung.
 
 Thanks: NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et al. (Ruby), 
 DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson et al. (PunBB), 
-Matt Mullenweg et al. (Wordpress), and Michael Heilemann et al. (k2).
+Matt Mullenweg et al. (WordPress), and Michael Heilemann et al. (k2).
