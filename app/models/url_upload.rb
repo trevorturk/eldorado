@@ -1,9 +1,4 @@
 # via http://snippets.dzone.com/posts/show/3994
-
-# current_user = User.find(1)
-# upload = current_user.uploads.new(:uploaded_data => UrlUpload.new('http://almosteffortless.com/files/nascar.jpg'))
-# upload.save!
-
 require 'open-uri'
 require 'action_controller/vendor/html-scanner/html/document'
 

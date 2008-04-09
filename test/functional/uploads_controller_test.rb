@@ -69,4 +69,12 @@ class UploadsControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
+  def test_should_accept_upload_via_url
+    # login_as :trevor
+    # old_count = Upload.count
+    # post :create, :url => '/images/rails.png'
+    # assert_equal old_count + 1, Upload.count
+    # assert_redirected_to files_path
+  end
+  
 end

@@ -12,7 +12,11 @@ class UploadsController < ApplicationController
   end
 
   def create
-    @upload = current_user.uploads.build params[:upload]
+    if params[:upload_url].blank?
+      @upload = current_user.uploads.build(params[:upload])
+    else
+      @upload = current_user.uploads.build(:uploaded_data => UrlUpload.new(params[:upload_url]))
+    end
     if @upload.save
       flash[:notice] = "#{root_url.chop + @upload.public_filename}"
       redirect_to files_path
