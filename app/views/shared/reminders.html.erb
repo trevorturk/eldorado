@@ -1,0 +1,3 @@
+<% for reminder in @event_reminders %>
+  <div class="reminders"><%= link_to h(reminder.title), reminder %></div>
+<% end %>

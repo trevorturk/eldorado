@@ -73,7 +73,8 @@ After:
 Author: Nathaniel Talbott (for Terralien)
 Contact: nathaniel@talbott.ws
 License: MIT
-Home: http://terralien.com/svn/projects/plugins/query_trace/
+Home: http://github.com/ntalbott/query_trace/
+Subversion mirror: https://terralien.devguard.com/svn/projects/plugins/query_trace
 
 
 Copyright (c) 2006 Nathaniel Talbott. All Rights Reserved.

@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = @flash
-    redirect_to root_path
+    redirect_to login_path
   end
     
   protected

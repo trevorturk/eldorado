@@ -10,9 +10,8 @@ Open source git repository: http://github.com/trevorturk/el-dorado/tree/master
 == Installation
 
 1) Install the required gems: Rails 2.0.2 or greater and TZInfo ("sudo gem install rails tzinfo")
-2) Rename config/database.example.yml to config/database.yml and fill in the database and session details
-3) Run "rake db:schema:load" ("rake db:schema:load RAILS_ENV=production" for a live site)
-4) Start the web server ("script/server") and visit the new site to create your first user account
+2) Copy config/database.example.yml to config/database.yml and fill in the database and session details
+3) Start the web server ("script/server") and visit your new site to create the first user account
 
 Importing from PunBB (version 1.2.16)
 

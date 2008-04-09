@@ -81,7 +81,11 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(password)
   end
   
-  def self.users_online
+  def self.newest
+    find(:first, :order => "created_at desc")
+  end
+  
+  def self.online
     User.find(:all, :conditions => ["online_at > ?", Time.now-5.minutes], :order => 'online_at desc', :limit => 10)
   end
   

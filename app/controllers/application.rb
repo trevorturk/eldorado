@@ -8,27 +8,22 @@ class ApplicationController < ActionController::Base
   include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
   
   around_filter :get_settings, :set_timezone
-  before_filter :check_privacy, :get_newest_user, :auth_token_login, :check_bans, :get_reminders, :update_online_at
+  before_filter :auth_token_login, :check_privacy, :check_bans, :update_online_at, :get_layout_vars
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :locked_out?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  rescue_from ActiveRecord::SettingsNotFound, :with => :default_settings
   rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error
-  rescue_from WillPaginate::InvalidPage, :with => :invalid_page
   rescue_from ActionController::MissingTemplate, :with => :not_found
+  rescue_from WillPaginate::InvalidPage, :with => :invalid_page
   
   def redirect_home
     redirect_to root_path and return false
   end
   
-  protected
-  
   def get_settings
     @settings ||= Setting.find(:first)
-    if @settings.nil?
-      @settings = Setting.defaults
-      flash[:notice] = 'Welcome to El Dorado! Please create a new user account for yourself.'
-      redirect_to new_user_path
-    end
+    raise ActiveRecord::SettingsNotFound if @settings.nil?
     yield
   end
   
@@ -37,19 +32,17 @@ class ApplicationController < ActionController::Base
     yield
     TzTime.reset!
   end
-    
-  def get_newest_user
-    @newest_user = User.find(:first, :order => "created_at desc")
+  
+  def get_layout_vars
+    @user_online = User.online
+    @user_newest = User.newest
+    @event_reminders = Event.reminders
   end
   
-  def get_reminders
-    @reminders = Event.reminders unless locked_out?
-  end
-    
   def update_online_at
     return unless logged_in?
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now
     User.update_all ['online_at = ?', Time.now], ['id = ?', current_user.id]
   end
-          
+  
 end

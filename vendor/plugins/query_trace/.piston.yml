@@ -1,0 +1,6 @@
+--- 
+format: 1
+handler: 
+  commit: 9ce6f2e445762b6650fc7fe0bc69446bb87015b3
+  url: git://github.com/ntalbott/query_trace.git
+lock: false

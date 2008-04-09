@@ -1,0 +1,12 @@
+<%= error_messages_for :forum %>
+<% form_tag forum_path(@forum), :method => :delete do %>
+  <div class="box" id="box-forums-confirmation">
+    <span class="top">Delete forum</span>
+      <p>Deleting a forum destroys all of the forums, topics, and posts it contains.</p>
+      <p><label for="confirm">Check this box to confirm deleting the forum <u><%= @forum.name %></u></label>: <%= check_box_tag(:confirm) %></p>
+      <p>
+        <%= submit_tag "Delete forum", :disable_with => "Delete forum" %>&nbsp;
+        <%= link_to 'Cancel', @forum %>
+      </p>
+  </div>
+<% end %>

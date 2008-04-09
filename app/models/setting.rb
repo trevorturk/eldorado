@@ -31,9 +31,7 @@ class Setting < ActiveRecord::Base
   end
   
   def self.defaults
-    @settings = Setting.new(:title => TITLE, :tagline => TAGLINE, :footer => FOOTER, :login_message => LOGIN_MESSAGE)
-    @settings.save
-    @settings
+    Setting.new(:title => TITLE, :tagline => TAGLINE, :footer => FOOTER, :login_message => LOGIN_MESSAGE).save
   end
   
   def to_s
