@@ -16,6 +16,8 @@ class MessagesController < ApplicationController
       render :update do |page|
         page.insert_html :top, 'messages-index', :partial => 'message', :object => @message
       end
+    else
+      render :nothing => true
     end
   end
   
