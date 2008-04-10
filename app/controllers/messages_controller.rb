@@ -3,17 +3,20 @@ class MessagesController < ApplicationController
   before_filter :redirect_home, :only => [:show, :new, :edit, :update]
   before_filter :require_login, :only => [:new, :create]
   before_filter :can_edit, :only => [:destroy]
-  skip_filter   :get_layout_vars, :only => [:refresh]
+  skip_filter   :update_online_at, :get_layout_vars, :only => [:refresh]
   
   def index
-    session[:refresh_messages] ||= Time.now
-    @messages = Message.find(:all, :limit => 7, :include => [:user], :order => 'messages.created_at desc')
+    @messages = Message.recent
+    session[:message_id] = @messages.map(&:id).max if @messages
   end
   
   def create
     @message = current_user.messages.build(params[:message])
-    render :nothing => true and return if @message.save
-    redirect_to chat_path
+    if @message.save
+      render :update do |page|
+        page.insert_html :top, 'messages-index', :partial => 'message', :object => @message
+      end
+    end
   end
   
   def destroy
@@ -23,8 +26,8 @@ class MessagesController < ApplicationController
   end
   
   def refresh
-    @messages = Message.find(:all, :order => 'created_at desc', :conditions => ['created_at >= ?', session[:refresh_messages]])
-    session[:refresh_messages] = Time.now
+    @messages = Message.refresh(session[:message_id], current_user)
+    session[:message_id] = @messages.map(&:id).max unless @messages.empty?
     if @messages
       render :update do |page|
         page.insert_html :top, 'messages-index', :partial => 'messages', :object => @messages
