@@ -6,14 +6,14 @@
     <p id="file_upload"><%= f.file_field :uploaded_data %></p>
     <p id="url_upload" style="display:none;">
       <input id="upload_url" name="upload_url" size="30" style="width:66%" type="text" />&nbsp; 
-      <%= link_to_function '(x)', "$('file_upload').toggle();$('url_upload').toggle()" %>
+      <%= link_to_function '(x)', "$('file_upload').toggle();$('upload_url').clear();$('url_upload').toggle()" %>
     </p>
     <p>
       <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp; 
       <% if current_action != 'new' %>
         <%= link_to_function 'Cancel', "$('action').toggle()" %>
       <% else %>
-        <%= link_to_function 'Upload via URL', "$('file_upload').toggle();$('url_upload').toggle();$('upload_url').focus()" %>&nbsp; 
+        <%= link_to_function 'Upload via URL', "$('file_upload').toggle();$('url_upload').toggle();$('upload_url').clear();$('upload_url').focus()" %> &nbsp; 
         <%= link_to 'Cancel', files_path %>
       <% end %>
     </p>
