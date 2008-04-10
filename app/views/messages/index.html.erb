@@ -1,4 +1,4 @@
-<div class="box" id="box-messages-new">
+<div class="box" id="box-messages-index">
   <span id="reply" class="top">Messages</span><br />
   <% if logged_in? %>
     <% @message = Message.new unless @message %>
@@ -9,11 +9,14 @@
     <% end %>
     <div>&nbsp;</div>
   <% end %>
-  <table cellspacing="0" class="messages-index">
-    <tbody id="messages-index">
-      <%= render :partial => 'messages' %>
-    </tbody>
-  </table>
+  <div id="messages-wrap">
+    <table cellspacing="0" class="messages-index">
+      <tbody id="messages-index">
+        <%= render :partial => 'messages' %>
+      </tbody>
+    </table>
+    <p><%= link_to 'Show More Messages &raquo;', chat_path(:limit => params[:limit].to_i + 100 || 100) %></p>
+  </div>
 </div>
 
 <%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>

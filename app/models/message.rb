@@ -15,8 +15,8 @@ class Message < ActiveRecord::Base
   
   validates_presence_of :body
   
-  def self.recent
-    find(:all, :limit => 7, :include => [:user], :order => 'messages.created_at desc')
+  def self.recent(limit)
+    find(:all, :limit => limit, :include => [:user], :order => 'messages.created_at desc')
   end
   
   def self.refresh(message_id, current_user)

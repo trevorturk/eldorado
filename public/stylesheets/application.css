@@ -331,6 +331,13 @@ tbody .tds {
 	width: 14%;
 }
 
+#messages-wrap {
+	overflow: auto;
+	max-height: 216px;
+	width: 101%;
+	margin-bottom: 3px;
+}
+
 .messages-index, .messages-index p {
 	margin: 0;
 	border: 0;
