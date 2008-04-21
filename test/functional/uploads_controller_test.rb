@@ -72,9 +72,15 @@ class UploadsControllerTest < Test::Unit::TestCase
   def test_should_accept_upload_via_url
     # login_as :trevor
     # old_count = Upload.count
-    # post :create, :url => '/images/rails.png'
+    # post :create, :upload_url => '/images/rails.png'
     # assert_equal old_count + 1, Upload.count
     # assert_redirected_to files_path
+  end
+  
+  def test_should_not_bomb_on_bogus_url_upload
+    login_as :trevor
+    post :create, :upload_url => 'asdfsdfds'
+    assert_redirected_to new_upload_path
   end
   
 end
