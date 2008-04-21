@@ -37,6 +37,7 @@ module BBCodeizer
       :flickr                => [ /\[flickr\](.+?)\/photos\/(.+?)\/(.+?)\[\/flickr\]/i, '<object type="application/x-shockwave-flash" width="400" height="300" data="http://www.flickr.com/apps/video/stewart.swf?v=1.162"><param name="flashvars" value="intl_lang=en-us&amp;photo_id=\3&amp;show_info_box=true"></param><param name="movie" value="http://www.flickr.com/apps/video/stewart.swf?v=1.162"></param><param name="bgcolor" value="#000000"></param><param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/video/stewart.swf?v=1.162" bgcolor="#000000" allowfullscreen="true" flashvars="intl_lang=en-us&amp;photo_id=\3&amp;flickr_show_info_box=true" height="300" width="400"></embed></object>' ],
       :gametrailers          => [ /\[gametrailers\](.+?)gametrailers.com\/player\/(.+?).(.+?)\[\/gametrailers\]/i, '<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" id="gtembed" width="480" height="392">	<param name="allowScriptAccess" value="sameDomain" /> <param name="allowFullScreen" value="true" /> <param name="movie" value="http://www.gametrailers.com/remote_wrap.php?mid=/2"/> <param name="quality" value="high" /> <embed src="http://www.gametrailers.com/remote_wrap.php?mid=27505" swLiveConnect="true" name="gtembed" align="middle" allowScriptAccess="sameDomain" allowFullScreen="true" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="480" height="392"></embed> </object>' ],
       :slideshare            => [ /\[slideshare id=(.+?)&(.+?)=(.+?)&(.+?)=(.+?)\]/i, '<object type="application/x-shockwave-flash" wmode="transparent" data="https://s3.amazonaws.com:443/slideshare/ssplayer.swf?id=\1&#038;doc=\3" width="\5" height="348"><param name="movie" value="https://s3.amazonaws.com:443/slideshare/ssplayer.swf?id=\1&#038;doc=\3" /></object>' ],
+      :funnyordie            => [ /\[funnyordie\](.+?)funnyordie.com\/videos\/(.+?)\[\/funnyordie\]/i, '<object width="464" height="388"><param name="movie" value="http://www2.funnyordie.com/public/flash/fodplayer.swf?6045" /><param name="flashvars" value="key=\2" /><param name="allowfullscreen" value="true" /><embed width="464" height="388" flashvars="key=\2" allowfullscreen="true" quality="high" src="http://www2.funnyordie.com/public/flash/fodplayer.swf?6045" type="application/x-shockwave-flash"></embed></object>' ],
       :atomfilms             => [ /\[atomfilms\](.+?)atomfilms.com\/film\/(.+?)\[\/atomfilms\]/i, '<embed src="http://www.atomfilms.com:80/a/autoplayer/shareEmbed.swf?keyword=\2" width="426" height="350"></embed>' ]
     }
         
@@ -46,7 +47,8 @@ module BBCodeizer
                 :url_with_title, :url_sans_title, :image, :size, :color,
                 :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :mp3, 
                 :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor,
-                :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :atomfilms ]
+                :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :funnyordie, 
+                :atomfilms ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)
