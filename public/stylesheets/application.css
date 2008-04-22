@@ -344,19 +344,18 @@ tbody .tds {
 }
 
 .messages-index .tcu {
-	width: 10%;
 	text-align: right;
 	font-weight: bold;
 	padding-right: 8px;
 }
 
 .messages-index .tcl {
+	width: 75%;
 	padding-left: 8px;
 	border-right: 0;
 }
 
 .messages-index .tcr {
-	width: 25%;
 	text-align: right;
 	border-left: 0;
 	color: #999;
