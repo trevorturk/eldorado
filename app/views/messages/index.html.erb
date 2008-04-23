@@ -1,23 +1,30 @@
-<div class="box" id="box-messages-index">
-  <span id="reply" class="top">Messages</span><br />
-  <% if logged_in? %>
-    <% @message = Message.new unless @message %>
-    <% remote_form_for @message, :complete => "$('message_body').clear();$('message_body').focus();" do |f| -%>
-      <%= f.text_field :body, :value => '', :style => "width:66%;" %>&nbsp; 
-      <%= submit_tag "Post Message", :disable_with => "Post Message" %>&nbsp; 
-      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %>
-    <% end %>
-    <div>&nbsp;</div>
+<div class="info-left">
+  <span class="title">Chat</span>
+  <span class="detail">
+    &laquo; <%= link_to current_user.to_s, current_user if logged_in? %> ...and other people...?
+  </span>
+</div>
+<div style="clear:both;"> </div>
+
+<% if logged_in? %>
+  <% @message = Message.new unless @message %>
+  <% remote_form_for @message, :complete => "$('message_body').clear();$('message_body').focus();" do |f| -%>
+    <%= f.text_field :body, :value => '', :style => "width:66%;" %>&nbsp; 
+    <%= submit_tag "Post Message", :disable_with => "Post Message" %>&nbsp; 
+    <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %>
   <% end %>
-  <div id="messages-wrap">
-    <table cellspacing="0" class="messages-index">
-      <tbody id="messages-index">
-        <%= render :partial => 'messages' %>
-      </tbody>
-    </table>
-    <p><%= link_to 'Show More Messages &raquo;', chat_path(:limit => params[:limit].to_i + 100 || 100) %></p>
+<% end %>
+
+<div id="messages-wrap">
+  <table cellspacing="0" class="messages-index">
+    <tbody id="messages-index">
+      <%= render :partial => 'messages' %>
+    </tbody>
+  </table>
+  <div class="info-left">
+    <br /><%= link_to 'Show More Messages &raquo;', chat_path(:limit => params[:limit].to_i + 100 || 100) %>
   </div>
 </div>
 
-<%#= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
+<%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
 <%= javascript_tag "$('message_body').focus();$('message_body').writeAttribute('autocomplete', 'off');" %>

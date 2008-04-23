@@ -34,6 +34,7 @@ module ApplicationHelper
     page_title << ': ' + @header.to_s unless @header.nil? or @header.filename.nil?
     page_title << ': ' + @topic.to_s unless @topic.nil? or @topic.title.nil?
     page_title << ': ' + @user.to_s unless @user.nil? or @user.login.nil?
+    page_title << ': Chat' if current_controller == 'messages'
     return page_title
   end
   
