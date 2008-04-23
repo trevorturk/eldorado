@@ -75,7 +75,6 @@ class MessagesControllerTest < ActionController::TestCase
     login_as :trevor
     delete :destroy, :id => messages(:two)
     assert_equal old_count-1, Message.count
-    assert_redirected_to messages_path
   end
   
   def test_should_destroy_message_if_admin
@@ -83,7 +82,6 @@ class MessagesControllerTest < ActionController::TestCase
     login_as :Administrator
     delete :destroy, :id => messages(:two)
     assert_equal old_count-1, Message.count
-    assert_redirected_to messages_path
   end
   
   def test_should_not_destroy_message_if_not_logged_in

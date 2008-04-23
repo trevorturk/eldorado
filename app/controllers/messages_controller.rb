@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
   
   def index
     @messages = Message.recent(params[:limit] || 30)
-    session[:message_id] = @messages.map(&:id).max if @messages
+    session[:message_id] = @messages.map(&:id).max unless @messages.empty?
   end
   
   def create
@@ -23,8 +23,13 @@ class MessagesController < ApplicationController
   
   def destroy
     @message = Message.find(params[:id])
-    @message.destroy
-    redirect_to chat_path
+    if @message.destroy
+      render :update do |page|
+        page.remove "message-#{@message.id}"
+      end
+    else
+      render :nothing => true
+    end
   end
   
   def refresh
