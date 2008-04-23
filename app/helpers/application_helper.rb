@@ -133,7 +133,8 @@ module ApplicationHelper
     return time
   end
   
-  def time_stamp(time)
-    time.to_datetime.strftime("%a, %d %b %Y, %l:%M%P").squeeze(' ')  
+  def time_stamp(time, short = false)
+    return time.to_datetime.strftime("%l:%M%P, %d %b").squeeze(' ') if short
+    time.to_datetime.strftime("%a, %d %b %Y, %l:%M%P").squeeze(' ')
   end
 end

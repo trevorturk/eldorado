@@ -15,6 +15,8 @@ class Message < ActiveRecord::Base
   
   validates_presence_of :body
   
+  tz_time_attributes :created_at
+  
   def self.recent(limit)
     find(:all, :limit => limit, :include => [:user], :order => 'messages.created_at desc')
   end
