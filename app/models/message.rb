@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: messages
 #
@@ -26,7 +26,6 @@ class Message < ActiveRecord::Base
   end
   
   def to_s
-    body.to_s
+    body
   end
-  
 end

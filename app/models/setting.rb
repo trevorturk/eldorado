@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: settings
 #
@@ -35,7 +35,6 @@ class Setting < ActiveRecord::Base
   end
   
   def to_s
-    title.to_s
+    title
   end
-  
 end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: categories
 #
@@ -16,7 +16,6 @@ class Category < ActiveRecord::Base
   validates_uniqueness_of   :name, :case_sensitive => false
   
   def to_s
-    name.to_s
+    name
   end
-  
 end

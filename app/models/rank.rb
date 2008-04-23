@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: ranks
 #
@@ -15,7 +15,6 @@ class Rank < ActiveRecord::Base
   validates_numericality_of :min_posts
   
   def to_s
-    title.to_s
+    title
   end
-  
 end

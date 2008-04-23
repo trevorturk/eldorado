@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: uploads
 #
@@ -28,7 +28,6 @@ class Upload < ActiveRecord::Base
   end
     
   def to_s
-    filename.to_s
+    filename
   end
-
 end

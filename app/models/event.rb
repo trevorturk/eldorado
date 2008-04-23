@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: events
 #
@@ -22,13 +22,12 @@ class Event < ActiveRecord::Base
   attr_protected :id, :created_at, :updated_at 
   
   tz_time_attributes :date
-  
-  def to_s
-    title.to_s
-  end
-  
+    
   def self.reminders
     find(:all, :order => 'date asc', :conditions => { :reminder => true, :date => Time.now-2.hours..Time.now+8.hours })
   end
   
+  def to_s
+    title
+  end
 end

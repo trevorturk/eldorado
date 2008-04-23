@@ -24,5 +24,4 @@ class UrlUpload
       super
     end
   end
-    
 end

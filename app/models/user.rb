@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: users
 #
@@ -95,7 +95,6 @@ class User < ActiveRecord::Base
   end
   
   def to_s
-    login.to_s
+    login
   end
-    
 end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: avatars
 #
@@ -26,7 +26,6 @@ class Avatar < ActiveRecord::Base
   include AttachmentFuExtensions
   
   def to_s
-    filename.to_s
+    filename
   end
-  
 end

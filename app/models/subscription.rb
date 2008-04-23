@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: subscriptions
 #
@@ -13,5 +13,4 @@ class Subscription < ActiveRecord::Base
   def to_s
     id.to_s
   end
-  
 end

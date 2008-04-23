@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: headers
 #
@@ -41,7 +41,6 @@ class Header < ActiveRecord::Base
   end
   
   def to_s
-    filename.to_s
+    filename
   end
-
 end

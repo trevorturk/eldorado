@@ -27,15 +27,10 @@ module ApplicationHelper
   end
 
   def page_title
-    page_title = h(@settings.title) unless @settings.nil?
-    page_title << ': ' + @category.to_s unless @category.nil? or @category.name.nil?
-    page_title << ': ' + @event.to_s unless @event.nil? or @event.title.nil?
-    page_title << ': ' + @forum.to_s unless @forum.nil? or @forum.name.nil?
-    page_title << ': ' + @header.to_s unless @header.nil? or @header.filename.nil?
-    page_title << ': ' + @topic.to_s unless @topic.nil? or @topic.title.nil?
-    page_title << ': ' + @user.to_s unless @user.nil? or @user.login.nil?
-    page_title << ': Chat' if current_controller == 'messages'
-    return page_title
+    item = [@category, @event, @forum, @header, @topic, @user].compact.first
+    section = request.env['REQUEST_PATH'].delete('/').capitalize unless request.env['REQUEST_PATH'].nil?
+    section = 'Home' if current_controller == 'home'
+    "#{@settings}: #{item || section}"
   end
   
   def avatar_for(user)

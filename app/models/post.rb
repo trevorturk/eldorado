@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: posts
 #
@@ -39,7 +39,6 @@ class Post < ActiveRecord::Base
   end
   
   def to_s
-    body.to_s
+    body
   end
-  
 end

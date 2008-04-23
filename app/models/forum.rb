@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 73
+# Schema version: 74
 #
 # Table name: forums
 #
@@ -26,7 +26,6 @@ class Forum < ActiveRecord::Base
   end
   
   def to_s
-    name.to_s
+    name
   end
-  
 end
