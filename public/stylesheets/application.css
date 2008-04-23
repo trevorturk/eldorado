@@ -333,8 +333,8 @@ tbody .tds {
 
 #messages-wrap {
 	overflow: auto;
-	max-height: 230px;
-	margin: 10px 0;
+	max-height: 238px;
+	margin-bottom: 10px;
 }
 
 .messages-index, .messages-index p {
@@ -343,19 +343,20 @@ tbody .tds {
 }
 
 .messages-index .tcu {
+	width: 18%;
 	text-align: right;
 	font-weight: bold;
 	padding-right: 8px;
 }
 
 .messages-index .tcl {
-	width: 65%;
-	padding-left: 8px;
+	width: 64%;
 	border-right: 0;
 	background: #dedfdf;
 }
 
 .messages-index .tcr {
+	width: 18%;
 	text-align: right;
 	border-left: 0;
 	color: #999;

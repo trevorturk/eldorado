@@ -7,12 +7,15 @@
 <div style="clear:both;"> </div>
 
 <% if logged_in? %>
-  <% @message = Message.new unless @message %>
-  <% remote_form_for @message, :complete => "$('message_body').clear();$('message_body').focus();" do |f| -%>
-    <%= f.text_field :body, :value => '', :style => "width:66%;" %>&nbsp; 
-    <%= submit_tag "Post Message", :disable_with => "Post Message" %>&nbsp; 
-    <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %>
-  <% end %>
+  <div class="info-left" style="width:100%;">
+    <% @message = Message.new unless @message %>
+    <% remote_form_for @message, :complete => "$('message_body').clear();$('message_body').focus();" do |f| -%>
+      <%= f.text_field :body, :value => '', :style => "width:70%;" %>&nbsp; 
+      <%= submit_tag "Send", :disable_with => "Post Message" %>&nbsp; 
+      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %>
+    <% end %>
+  </div>
+  <div style="clear:both;"> </div>
 <% end %>
 
 <div id="messages-wrap">
@@ -24,6 +27,7 @@
   <div class="info-left">
     <br /><%= link_to 'Show More Messages &raquo;', chat_path(:limit => params[:limit].to_i + 100 || 100) %>
   </div>
+  <div class="clear:both;"> </div>
 </div>
 
 <%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
