@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 74
+# Schema version: 75
 #
 # Table name: users
 #
@@ -20,6 +20,7 @@
 #  time_zone          :string(255)     
 #  ban_message        :string(255)     
 #  banned_until       :datetime        
+#  chatting_at        :datetime        
 #
 
 require 'digest/sha1'
@@ -86,7 +87,11 @@ class User < ActiveRecord::Base
   end
   
   def self.online
-    User.find(:all, :conditions => ["online_at > ?", Time.now-5.minutes], :order => 'online_at desc', :limit => 10)
+    User.find(:all, :conditions => ["online_at > ?", Time.now-5.minutes], :order => 'online_at desc')
+  end
+  
+  def self.chatting
+    User.find(:all, :conditions => ["chatting_at > ?", Time.now-30.seconds], :order => 'login asc')
   end
   
   def set_defaults

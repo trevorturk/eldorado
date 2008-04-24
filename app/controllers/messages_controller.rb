@@ -3,7 +3,9 @@ class MessagesController < ApplicationController
   before_filter :redirect_home, :only => [:show, :new, :edit, :update]
   before_filter :require_login, :only => [:new, :create]
   before_filter :can_edit, :only => [:destroy]
-  skip_filter   :update_online_at, :get_layout_vars, :only => [:refresh]
+  before_filter :update_chatters, :only => [:index, :refresh]
+  
+  skip_filter :update_online_at, :get_layout_vars, :only => [:refresh]
   
   def index
     @messages = Message.recent(params[:limit] || 30)
@@ -38,8 +40,13 @@ class MessagesController < ApplicationController
     if @messages
       render :update do |page|
         page.insert_html :top, 'messages-index', :partial => 'messages', :object => @messages
+        page.replace_html 'chatters', :partial => 'chatters', :object => @chatters
       end
     end
   end
   
+  def update_chatters
+    current_user.update_attribute('chatting_at', Time.now) if logged_in?
+    @chatters = User.chatting
+  end
 end

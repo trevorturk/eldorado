@@ -1,7 +1,7 @@
 <div class="info-left">
   <span class="title">Chat</span>
   <span class="detail">
-    &laquo; <%= link_to current_user.to_s, current_user if logged_in? %> ...and other people...?
+    &laquo; <%= render :partial => 'chatters' %>
   </span>
 </div>
 <div style="clear:both;"> </div>
