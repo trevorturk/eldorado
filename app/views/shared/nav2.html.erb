@@ -139,6 +139,7 @@
   <div class="info-right" style="margin-top:5px;">
     <%= will_paginate @events, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @events.blank? %>
     <%= will_paginate @headers, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @headers.blank? %>
+    <%= will_paginate @messages, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @messages.blank? %>
     <%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @posts.blank? %>
     <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @topics.blank? %>
     <%= will_paginate @uploads, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @uploads.blank? %>

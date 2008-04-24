@@ -30,6 +30,8 @@ class SearchControllerTest < Test::Unit::TestCase
     assert_response :success
     get :index, :type => 'headers', :query => 'test'
     assert_response :success
+    get :index, :type => 'messages', :query => 'test'
+    assert_response :success
     get :index, :type => 'posts', :query => 'test'
     assert_response :success
     get :index, :type => 'topics', :query => 'test'

@@ -27,10 +27,10 @@ module ApplicationHelper
   end
 
   def page_title
-    item = [@category, @event, @forum, @header, @topic, @user].compact.first
-    section = request.env['REQUEST_PATH'].delete('/').capitalize unless request.env['REQUEST_PATH'].nil?
-    section = 'Home' if current_controller == 'home'
-    "#{@settings}: #{item || section}"
+    item = [@category, @event, @forum, @header, @topic, @user].compact.first unless current_action == 'new'
+    page = request.env['REQUEST_PATH'].delete('/').sub('new','').capitalize unless request.env['REQUEST_PATH'].nil? 
+    page = 'Home' if current_controller == 'home'
+    "#{@settings}: #{item || page}"
   end
   
   def avatar_for(user)

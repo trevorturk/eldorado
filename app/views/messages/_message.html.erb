@@ -1,9 +1,5 @@
 <tr id="message-<%= message.id %>">
   <td class="tcu"><%= message.user %></td>
   <td class="tcl"><%= bb(message.body) %></td>
-  <td class="tcr">
-    <%= link_to_remote '(x)', :url => message, :method => :delete if can_edit?(message) %>
-    <%= time_stamp(message.created_at, true) %> 
-  </td>
+  <td class="tcr"><%= link_to time_stamp(message.created_at, true), message %></td>
 </tr>
-

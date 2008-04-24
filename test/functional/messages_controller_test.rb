@@ -42,9 +42,9 @@ class MessagesControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
 
-  def test_should_redirect_on_show_message_action
+  def test_should_show
     get :show, :id => messages(:one)
-    assert_redirected_to root_path
+    assert_response :success
   end
 
   def test_should_not_edit_or_update_if_not_logged_in

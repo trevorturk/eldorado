@@ -1,1 +1,1 @@
-<span id="chatters"><%= @chatters.map { |u| link_to "#{h u.login}", u } * ", " %></span>
+<span id="chatters"><%= @chatters.map { |u| link_to "#{h u.login}", u } * ", " unless @chatters.nil? %></span>

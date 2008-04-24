@@ -4,6 +4,7 @@
     <p>
       <select id="type" name="type">
         <option<%= ' selected="selected"' if params[:type] == 'avatars' || current_controller == 'avatars' %> value='avatars'>Avatars</option>
+        <option<%= ' selected="selected"' if params[:type] == 'messages' || current_controller == 'messages' %> value='messages'>Chat</option>
         <option<%= ' selected="selected"' if params[:type] == 'events' || current_controller == 'events' %> value='events'>Events</option>
         <option<%= ' selected="selected"' if %w(uploads files).include?(params[:type]) || current_controller == 'uploads' %> value='files'>Files</option>
         <option<%= ' selected="selected"' if params[:type] == 'headers' || current_controller == 'headers' %> value='headers'>Headers</option>

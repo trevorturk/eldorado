@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   
-  before_filter :redirect_home, :only => [:show, :new, :edit, :update]
+  before_filter :redirect_home, :only => [:new, :edit, :update]
   before_filter :require_login, :only => [:new, :create]
   before_filter :can_edit, :only => [:destroy]
   before_filter :update_chatters, :only => [:index, :refresh]
@@ -10,6 +10,10 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.recent(params[:limit] || 30)
     session[:message_id] = @messages.map(&:id).max unless @messages.empty?
+  end
+  
+  def show
+    @message = Message.find(params[:id])
   end
   
   def create
