@@ -1,7 +1,8 @@
 <div class="home-left">
   <% unless @chatters.empty? %>
     <div class="info-left">
-      <b>Chat</b>: <span class="detail"><%= render :partial => 'messages/chatters' %></span>
+      <span class="title">Chat</span>
+      <span class="detail">&laquo; <%= render :partial => 'messages/chatters' %></span>
     </div>
   <% end %>
   <%= render 'topics/index' %>
