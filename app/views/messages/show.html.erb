@@ -4,8 +4,8 @@
       <td class="tcu"><%= @message.user %></td>
       <td class="tcl"><%= bb(@message.body) %></td>
       <td class="tcr">
-        <%= link_to_remote '(x)', :url => @message, :method => :delete if can_edit?(@message) %>
-        <%= link_to time_stamp(@message.created_at, true), @message %> 
+        <%= time_stamp(@message.created_at, true) %> 
+        <%= link_to '(x)', @message, :method => :delete if can_edit?(@message) %>
       </td>
     </tr>
   </tbody>

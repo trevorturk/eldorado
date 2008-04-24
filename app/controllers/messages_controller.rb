@@ -29,13 +29,8 @@ class MessagesController < ApplicationController
   
   def destroy
     @message = Message.find(params[:id])
-    if @message.destroy
-      render :update do |page|
-        page.remove "message-#{@message.id}"
-      end
-    else
-      render :nothing => true
-    end
+    @message.destroy
+    redirect_to chat_url
   end
   
   def refresh
