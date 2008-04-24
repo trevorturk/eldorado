@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   end
   
   def self.chatting
-    User.find(:all, :conditions => ["chatting_at > ?", Time.now-30.seconds], :order => 'login asc')
+    User.find(:all, :conditions => ["chatting_at > ?", Time.now-15.seconds], :order => 'login asc')
   end
   
   def set_defaults

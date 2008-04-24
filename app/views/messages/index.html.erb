@@ -18,17 +18,15 @@
   <div style="clear:both;"> </div>
 <% end %>
 
-<div id="messages-wrap">
-  <table cellspacing="0" class="messages-index">
-    <tbody id="messages-index">
-      <%= render :partial => 'messages' %>
-    </tbody>
-  </table>
-  <div class="info-left">
-    <br /><%= link_to 'Show More Messages &raquo;', chat_path(:limit => params[:limit].to_i + 100 || 100) %>
-  </div>
-  <div class="clear:both;"> </div>
+<table cellspacing="0" class="messages-index">
+  <tbody id="messages-index">
+    <%= render :partial => 'messages' %>
+  </tbody>
+</table>
+<div class="info-left">
+  <%= link_to 'Show More Messages &raquo;', chat_path(:limit => params[:limit].to_i + 100 || 100) %>
 </div>
+<div class="clear:both;"> </div>
 
 <%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
 <%= javascript_tag "$('message_body').focus();$('message_body').writeAttribute('autocomplete', 'off');" %>

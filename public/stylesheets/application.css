@@ -331,15 +331,12 @@ tbody .tds {
 	width: 14%;
 }
 
-#messages-wrap {
-	overflow: auto;
-	max-height: 238px;
-	margin-bottom: 10px;
+.messages-index {
+	border: 0;
 }
 
-.messages-index, .messages-index p {
+.messages-index p {
 	margin: 0;
-	border: 0;
 }
 
 .messages-index .tcu {
