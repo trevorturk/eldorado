@@ -1,5 +1,5 @@
 <tr id="message-<%= message.id %>">
   <td class="tcu"><%= message.user %></td>
   <td class="tcl"><%= bb(message.body) %></td>
-  <td class="tcr"><%= link_to time_stamp(message.created_at, true), message %></td>
+  <td class="tcr"><%= link_to time_ago_or_time_stamp(message.created_at), message %></td>
 </tr>

@@ -1,6 +1,6 @@
 <div class="info-left">
   <span class="title">Chat</span>
-  <span class="detail">&laquo; <%= render :partial => 'chatters' %></span>
+  <span class="detail"><%= '&laquo; ' unless @chatters.blank? %><%= render :partial => 'chatters' %></span>
 </div>
 <div style="clear:both;"> </div>
 
