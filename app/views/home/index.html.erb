@@ -1,8 +1,11 @@
 <div class="home-left">
   <% unless @chatters.empty? %>
     <div class="info-left">
-      <span class="title">Chat</span>
-      <span class="detail">&laquo; <%= render :partial => 'messages/chatters' %></span>
+      <span class="title"><%= link_to 'Chat', chat_path %></span>
+      <span class="detail">
+        &laquo; <%= render :partial => 'messages/chatters' %>
+        &nbsp;|&nbsp; Last active at <%= time_stamp(@message.created_at, true) %>
+      </span>
     </div>
   <% end %>
   <%= render 'topics/index' %>

@@ -398,6 +398,10 @@ tbody .tds {
   letter-spacing: -1px;
 }
 
+.title a {
+	color: #333;
+}
+
 .detail {
   color: #999;
   letter-spacing: -1px;

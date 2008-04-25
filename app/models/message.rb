@@ -21,6 +21,10 @@ class Message < ActiveRecord::Base
     find(:all, :limit => limit, :include => [:user], :order => 'messages.created_at desc')
   end
   
+  def self.latest
+    find(:first, :order => 'created_at desc')
+  end
+  
   def self.refresh(message_id, current_user)
     find(:all, :order => 'created_at desc', :conditions => ['id > ? and user_id != ?', message_id, current_user])
   end

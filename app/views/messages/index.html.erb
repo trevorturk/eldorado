@@ -7,7 +7,7 @@
 <% if logged_in? %>
   <div class="info-left" style="width:100%;">
     <% @message = Message.new unless @message %>
-    <% remote_form_for @message, :complete => "$('message_body').clear();$('message_body').focus();" do |f| -%>
+    <% remote_form_for @message, :complete => "$('message_body').clear();" do |f| -%>
       <%= f.text_field :body, :value => '', :style => "width:70%;" %>&nbsp; 
       <%= submit_tag "Send", :disable_with => "Post Message" %>&nbsp; 
       <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %>

@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   def index
       @date = Time.parse("#{params[:date]} || TzTime.now")
       @avatars = Avatar.find(:all, :limit => 3, :include => :user, :order => 'avatars.updated_at desc')
+      @message = Message.latest
       @chatters = User.chatting
       @events = Event.find(:all, :conditions => ['date between ? and ?', @date.strftime("%Y-%m") + '-01', @date.next_month.strftime("%Y-%m") + '-01'])
       @headers = Header.find(:all, :limit => 3, :include => :user, :order => 'headers.created_at desc')
