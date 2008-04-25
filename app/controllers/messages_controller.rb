@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   def index
     current_user.update_attribute('chatting_at', Time.now) if logged_in?
     @chatters = User.chatting
-    @messages = Message.recent(params[:limit] || 30)
+    @messages = Message.paginate(:page => params[:page], :include => [:user], :order => 'messages.created_at desc')
     session[:message_id] = @messages.map(&:id).max unless @messages.empty?
   end
   

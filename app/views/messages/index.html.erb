@@ -4,7 +4,7 @@
 </div>
 <div style="clear:both;"> </div>
 
-<% if logged_in? %>
+<% if logged_in? && params[:page].blank? %>
   <div class="info-left" style="width:100%;">
     <% @message = Message.new unless @message %>
     <% remote_form_for @message, :complete => "$('message_body').clear();" do |f| -%>
@@ -21,11 +21,9 @@
     <%= render :partial => 'messages' %>
   </tbody>
 </table>
-<div class="info-left">
-  <%= link_to 'Show More Messages &raquo;', chat_path(:limit => params[:limit].to_i + 100 || 100) %>
-</div>
-<div class="clear:both;"> </div>
 
-<%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
-<%= periodically_call_remote :url => refresh_chatters_path, :method => 'get', :frequency => 10 %>
-<%= javascript_tag "$('message_body').focus();$('message_body').writeAttribute('autocomplete', 'off');" %>
+<% unless params[:page] %>
+  <%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
+  <%= periodically_call_remote :url => refresh_chatters_path, :method => 'get', :frequency => 10 %>
+  <%= javascript_tag "$('message_body').focus();$('message_body').writeAttribute('autocomplete', 'off');" %>
+<% end %>

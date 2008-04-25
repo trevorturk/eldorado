@@ -14,10 +14,6 @@ class Message < ActiveRecord::Base
   belongs_to :user
   
   validates_presence_of :body
-    
-  def self.recent(limit)
-    find(:all, :limit => limit, :include => [:user], :order => 'messages.created_at desc')
-  end
   
   def self.latest
     find(:first, :order => 'created_at desc')
