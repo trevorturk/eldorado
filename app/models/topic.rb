@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 75
+# Schema version: 76
 #
 # Table name: topics
 #

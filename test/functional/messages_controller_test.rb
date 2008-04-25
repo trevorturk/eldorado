@@ -98,5 +98,15 @@ class MessagesControllerTest < ActionController::TestCase
     assert_equal old_count, Message.count
     assert_redirected_to root_path
   end
+  
+  def test_refresh_messages_path_should_work
+    get :refresh_messages
+    assert_response :success
+  end
+  
+  def test_refresh_chatters_path_should_work
+    get :refresh_chatters
+    assert_response :success
+  end
 
 end

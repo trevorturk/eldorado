@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :events
   map.resources :forums, :member => { :confirm_delete => :get }
   map.resources :headers, :member => { :vote_up => :post, :vote_down => :post }
-  map.resources :messages, :collection => { :refresh => :get }
+  map.resources :messages
   map.resources :posts, :member => { :quote => :get, :topic => :get }
   map.resources :ranks
   map.resources :settings
@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :member => { :posts => :get, :confirm_delete => :get, :admin => :post, :ban => :get, :remove_ban => :post }
   
   map.search 'search', :controller => 'search', :action => 'index'
+  map.refresh_messages 'refresh_messages', :controller => 'messages', :action => 'refresh_messages'
+  map.refresh_chatters 'refresh_chatters', :controller => 'messages', :action => 'refresh_chatters'
   
   map.login 'login', :controller => 'users', :action => 'login'
   map.logout 'logout', :controller => 'users', :action => 'logout'
