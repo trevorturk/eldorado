@@ -321,6 +321,12 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal User.find_by_login('user2').admin, false
   end
   
+  def test_that_user_gets_default_time_values
+    post :create, :user => {:login => 'user1', :email => 'test1@test.com', :password => 'abc', :password_confirmation => 'abc'}
+    assert_not_nil User.find_by_login('user1').online_at
+    assert_not_nil User.find_by_login('user1').logged_out_at    
+  end
+  
   def test_should_get_ban_if_admin
     login_as :Administrator
     get :ban, :id => users(:trevor).id

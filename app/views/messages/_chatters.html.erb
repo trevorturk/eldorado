@@ -1,1 +1,1 @@
-<span id="chatters"><%= @chatters.map { |u| link_to "#{h u.login}", u } * ", " unless @chatters.nil? %></span>
+<%= '&laquo; ' unless @chatters.blank? %><%= @chatters.map { |u| link_to "#{h u.login}", u } * ", " unless @chatters.blank? %>

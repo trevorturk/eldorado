@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
   skip_filter :update_online_at, :get_layout_vars, :only => [:refresh_messages, :refresh_chatters]
   
   def index
-    current_user.update_attribute('chatting_at', Time.now) if logged_in?
+    current_user.update_attribute('chatting_at', Time.now.utc) if logged_in?
     @chatters = User.chatting
     @messages = Message.paginate(:page => params[:page], :include => [:user], :order => 'messages.created_at desc')
     session[:message_id] = @messages.map(&:id).max unless @messages.empty?
@@ -45,7 +45,7 @@ class MessagesController < ApplicationController
   end
   
   def refresh_chatters
-    current_user.update_attribute('chatting_at', Time.now) if logged_in?
+    current_user.update_attribute('chatting_at', Time.now.utc) if logged_in?
     @chatters = User.chatting
     if @chatters
       render :update do |page|

@@ -34,15 +34,15 @@ class ApplicationController < ActionController::Base
   end
   
   def get_layout_vars
-    @user_online = User.online
-    @user_newest = User.newest
+    @users_online = User.online
+    @users_newest = User.newest
     @event_reminders = Event.reminders
   end
   
   def update_online_at
     return unless logged_in?
-    session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now
-    User.update_all ['online_at = ?', Time.now], ['id = ?', current_user.id]
+    session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
+    User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
   end
   
 end

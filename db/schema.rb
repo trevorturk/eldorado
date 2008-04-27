@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 76) do
+ActiveRecord::Schema.define(:version => 79) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -50,9 +50,6 @@ ActiveRecord::Schema.define(:version => 76) do
     t.integer "posts_count",  :default => 0
     t.integer "position",     :default => 0
   end
-
-  add_index "forums", ["category_id"], :name => "index_forums_on_category_id"
-  add_index "forums", ["category_id"], :name => "index_forums_on_last_post_at"
 
   create_table "headers", :force => true do |t|
     t.integer  "parent_id"
@@ -97,8 +94,8 @@ ActiveRecord::Schema.define(:version => 76) do
     t.integer  "updated_by"
   end
 
-  add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
+  add_index "posts", ["topic_id", "created_at"], :name => "index_posts_on_topic_id_and_created_at"
 
   create_table "ranks", :force => true do |t|
     t.string  "title"
@@ -114,7 +111,7 @@ ActiveRecord::Schema.define(:version => 76) do
     t.string  "favicon"
     t.string  "time_zone",     :default => "UTC"
     t.boolean "private",       :default => false
-    t.string  "login_message", :default => "You are not logged in"
+    t.string  "login_message"
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -149,8 +146,7 @@ ActiveRecord::Schema.define(:version => 76) do
     t.integer  "forum_id"
   end
 
-  add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
-  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_last_post_at"
+  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
 
   create_table "uploads", :force => true do |t|
     t.integer  "parent_id"
@@ -183,9 +179,9 @@ ActiveRecord::Schema.define(:version => 76) do
     t.string   "ban_message"
     t.datetime "banned_until"
     t.datetime "chatting_at"
+    t.datetime "logged_out_at"
   end
 
-  add_index "users", ["online_at"], :name => "index_users_on_online_at"
-  add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"
+  add_index "users", ["online_at", "chatting_at", "logged_out_at"], :name => "index_users_on_activity"
 
 end

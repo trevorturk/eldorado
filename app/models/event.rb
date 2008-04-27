@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
   tz_time_attributes :date
     
   def self.reminders
-    find(:all, :order => 'date asc', :conditions => { :reminder => true, :date => Time.now-2.hours..Time.now+8.hours })
+    find(:all, :order => 'date asc', :conditions => { :reminder => true, :date => Time.now.utc-2.hours..Time.now.utc+8.hours })
   end
   
   def to_s

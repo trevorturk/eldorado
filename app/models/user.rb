@@ -62,11 +62,11 @@ class User < ActiveRecord::Base
   end
     
   def is_online?
-    return true if online_at > Time.now-5.minutes unless online_at.nil?
+    return true if online_at > Time.now.utc-5.minutes unless online_at.nil?
   end
   
   def banned?
-    return true if banned_until > Time.now unless banned_until.nil?
+    return true if banned_until > Time.now.utc unless banned_until.nil?
   end
   
   def remove_ban
@@ -83,19 +83,19 @@ class User < ActiveRecord::Base
   end
   
   def self.newest
-    find(:first, :order => "created_at desc")
+    find(:first, :order => 'created_at desc')
   end
   
   def self.online
-    User.find(:all, :conditions => ["online_at > ?", Time.now-5.minutes], :order => 'online_at desc')
+    User.find(:all, :conditions => ['logged_out_at < online_at and (online_at > ? or chatting_at > ?)', Time.now.utc-5.minutes, Time.now.utc-15.seconds], :order => 'login asc')
   end
   
   def self.chatting
-    User.find(:all, :conditions => ["chatting_at > ?", Time.now-10.seconds], :order => 'login asc')
+    User.find(:all, :conditions => ['chatting_at > ?', Time.now.utc-15.seconds], :order => 'login asc')
   end
   
   def set_defaults
-    self.profile_updated_at = Time.now
+    self.profile_updated_at = Time.now.utc
     self.time_zone = Setting.find(:first).time_zone
   end
   

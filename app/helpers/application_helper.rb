@@ -27,10 +27,14 @@ module ApplicationHelper
   end
 
   def page_title
-    item = [@category, @event, @forum, @header, @topic, @user].compact.first unless current_action == 'new'
+    item = [@category, @event, @forum, @header, @topic, @user].compact.first unless %w(new create login logout).include?(current_action)
     page = request.env['REQUEST_PATH'].delete('/').sub('new','').capitalize unless request.env['REQUEST_PATH'].nil? 
     page = 'Home' if current_controller == 'home'
     "#{@settings}: #{item || page}"
+  end
+  
+  def favicon_tag
+    return "<link rel=\"shortcut icon\" href=\"#{@settings.favicon}\" />\n" unless @settings.favicon.blank?
   end
   
   def avatar_for(user)
