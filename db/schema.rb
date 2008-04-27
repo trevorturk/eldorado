@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 79) do
+ActiveRecord::Schema.define(:version => 81) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(:version => 79) do
   end
 
   add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
+  add_index "topics", ["forum_id", "sticky", "last_post_at"], :name => "index_topics_on_sticky_and_last_post_at"
 
   create_table "uploads", :force => true do |t|
     t.integer  "parent_id"
@@ -182,6 +183,7 @@ ActiveRecord::Schema.define(:version => 79) do
     t.datetime "logged_out_at"
   end
 
-  add_index "users", ["online_at", "chatting_at", "logged_out_at"], :name => "index_users_on_activity"
+  add_index "users", ["online_at", "logged_out_at"], :name => "index_users_on_online_at_and_logged_out_at"
+  add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"
 
 end

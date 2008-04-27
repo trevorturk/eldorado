@@ -25,5 +25,5 @@
 <% unless params[:page] %>
   <%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>
   <%= periodically_call_remote :url => refresh_chatters_path, :method => 'get', :frequency => 10 %>
-  <%= javascript_tag "$('message_body').focus();$('message_body').writeAttribute('autocomplete', 'off');" %>
+  <%= javascript_tag "$('message_body').focus();$('message_body').writeAttribute('autocomplete', 'off');" if logged_in? %>
 <% end %>

@@ -304,4 +304,28 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_equal 0, forums(:moving_from).posts_count  
   end
   
+  def test_should_allow_admin_to_create_sticky_topic
+    login_as :Administrator
+    post :create, :topic => { :title => "test_sticky", :body => "body", :forum_id => "1", :sticky => true }  
+    assert_equal true, Topic.find_by_title('test_sticky').sticky
+  end
+  
+  def test_should_allow_admin_to_make_topic_sticky_via_update
+    login_as :Administrator
+    put :update, :id => 1, :topic => { :sticky => true }
+    assert_equal true, topics(:Testing).sticky
+  end
+  
+  def test_should_not_allow_non_admin_to_create_sticky_topic
+    login_as :trevor
+    post :create, :topic => { :title => "test_sticky", :body => "body", :forum_id => "1", :sticky => true }  
+    assert_equal false, Topic.find_by_title('test_sticky').sticky
+  end
+  
+  def test_should_not_allow_non_admin_to_make_topic_sticky_via_update
+    login_as :trevor
+    put :update, :id => 1, :topic => { :sticky => true }
+    assert_equal false, topics(:Testing).sticky
+  end
+  
 end

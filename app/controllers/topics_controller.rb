@@ -2,9 +2,10 @@ class TopicsController < ApplicationController
   
   before_filter :require_login, :except => [:index, :show, :show_new, :unknown_request]
   before_filter :can_edit, :only => [:edit, :update, :destroy]
+  before_filter :clean_params, :only => [:create, :update]
   
   def index
-    @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc')
+    @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'sticky desc, last_post_at desc')
   end
   
   def show
@@ -50,6 +51,10 @@ class TopicsController < ApplicationController
     @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]]) unless !logged_in?
     @post = Post.find(@topic.last_post_id) if @post.nil?
     redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
+  end
+  
+  def clean_params
+    params[:topic][:sticky] = false unless admin?
   end
     
   def unknown_request
