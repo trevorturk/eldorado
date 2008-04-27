@@ -409,6 +409,7 @@ tbody .tds {
 .detail, .detail a.text {
   color: #999;
   letter-spacing: -1px;
+	font-weight: normal;
 }
 
 #filters {
@@ -563,6 +564,17 @@ cite {
 .reminders a {
   color: #fff;
 }
+
+.calendar_select { width: 220px; float: right; text-align: center; margin: 2px; padding: 0; }
+.calendar_date_select .cds_header, .calendar_date_select .cds_footer { padding: 8px; }
+.calendar_date_select td:hover { background-color: #D1D1D1; }
+.calendar_date_select td.selected { background-color: #D1D1D1; }
+.calendar_date_select td div.other { color: #999; }
+.calendar_date_select td.today { font-weight: bold; }
+.calendar_date_select .cds_header a.prev { float: left; padding: 2px 8px; }
+.calendar_date_select .cds_header a.next { float: right; padding: 2px 8px; }
+.calendar_date_select .cds_header a.close { float: right; display: none; }
+.at_sign { display: none; }
 
 .wrapper-footer {
   text-align: center;

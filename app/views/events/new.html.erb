@@ -3,15 +3,12 @@
 <% form_for @event do |f| %>
   <div class="box" id="box-events-new">
     <span class="top">New Event</span>
+    <p class="calendar_select"><%= f.calendar_date_select :date, :embedded => true %></p>
     <p class="label"><label for="event_title">Title</label></p>
-    <p>
-      <%= f.text_field :title, :style => 'width:66%;' %> &nbsp; 
-      <%= f.check_box(:reminder) %><label for="event_reminder"> Reminder</label>
-    </p>
+    <p><%= f.text_field :title, :style => 'width:66%;' %></p>
     <p class="label"><label for="event_description">Description</label></p>
-    <p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
-    <p class="label"><label for="event_date">Date</label></p>
-    <p><%= f.datetime_select :date %>&nbsp;Currently: <%=tz TzTime.now %></p>
+    <p><%= f.text_area :description, :rows => '10', :style => 'width:66%;' %></p>
+    <%= f.check_box(:reminder) %><label for="event_reminder"> Reminder <span class="detail">(Show a reminder 8 hours before and 2 hours after this event.)</span></label>
     <p>
       <%= submit_tag "Add Event", :disable_with => "Add Event" %>&nbsp;
       <% if current_action != 'new' %>
@@ -21,5 +18,9 @@
       <% end %>
     </p>
   <% end %>
+  <div style="clear:both;"> </div>
 </div>
 <%= javascript_tag "$('event_title').focus();" %>
+<% content_for :head do %>
+  <%= calendar_date_select_includes 'default' %>
+<% end %>

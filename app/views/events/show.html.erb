@@ -5,13 +5,11 @@
     <%= @event.reminder? ? '&nbsp;|&nbsp; Reminder' : '' %>
   </span>
 </div>
-<div style="clear:both;"> </div>
+<div style="clear:both;margin-bottom:-10px;"> </div>
 
-<% if !@event.description.blank? %>
-  <blockquote>
-    <p style="margin-top:0;font-weight:bold;">
-      <%=tz @event.date %>
-    </p>
-    <%= bb(@event.description) %>
-  </blockquote>
-<% end %>
+<blockquote>
+  <p style="margin-top:0;font-weight:bold;">
+    <%=tz @event.date %>
+  </p>
+  <%= bb(@event.description) %>
+</blockquote>
