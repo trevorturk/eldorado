@@ -10,7 +10,6 @@ unless defined?(Rake) # skip when loaded from rake tasks
       Rake::Task["db:create"].invoke
       abort 'ERROR: Database has no schema version and is not empty' unless ActiveRecord::Base.connection.tables.blank?
       Rake::Task["db:schema:load"].invoke
-      retry
     end
   end
 end
