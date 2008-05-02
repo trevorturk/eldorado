@@ -30,8 +30,8 @@ namespace :deploy do
   end
   task :create_symlinks do
     require 'yaml'
-    get "#{release_path}/config/symlinks.yml", "/tmp/symlinks.yml"
-    YAML.load_file('/tmp/symlinks.yml').each do |share|
+    download "#{release_path}/config/symlinks.yml", "/tmp/eldorado_symlinks.yml"
+    YAML.load_file('/tmp/eldorado_symlinks.yml').each do |share|
       run "rm -rf #{release_path}/public/#{share}"
       run "mkdir -p #{shared_path}/system/#{share}"
       run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
