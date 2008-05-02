@@ -49,7 +49,7 @@ class MessagesController < ApplicationController
     @chatters = User.chatting
     if @chatters
       render :update do |page|
-        page.redirect_to root_url if logged_in? && current_user.logged_out_at > Time.now.utc-15.seconds
+        page.redirect_to logout_path if logged_in? && current_user.logged_out?
         page.replace_html 'chatters', :partial => 'chatters', :object => @chatters
       end
     end

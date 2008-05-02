@@ -1,10 +1,12 @@
 == Welcome to El Dorado
 
 El Dorado is a full-stack community web application written in Ruby/Rails. It features a forum, 
-event calendar, file sharing, random headers, avatars, themes, timezone support, and privacy settings.
+event calendar, group chat, file sharing, random headers, avatars, themes, timezone support, 
+and privacy settings.
 
 Homepage: http://almosteffortless.com/eldorado
 Demo and support site: http://eldorado.almosteffortless.com
+Issue tracking: http://ae.lighthouseapp.com/projects/421-el-dorado/
 Open source git repository: http://github.com/trevorturk/el-dorado/tree/master
 
 == Installation
@@ -18,10 +20,8 @@ Importing from PunBB (version 1.2.16)
 1) Fill in the "import" section of config/database.yml and run "rake import:database"
 2) Run optional rake tasks as necessary: import:avatars, import:headers, and import:files
 
-== About
+== Thanks
 
-Contributors: Trevor Turk, Josh Peek, and Wilhelm Chung.
-
-Thanks: NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et al. (Ruby), 
+NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et al. (Ruby), 
 DHH et al. (Rails), Rick Olson, Josh Goebel, Justin Palmer, Rickard Andersson et al. (PunBB), 
-Matt Mullenweg et al. (WordPress), and Michael Heilemann et al. (k2).
+Matt Mullenweg et al. (WordPress), Michael Heilemann et al. (k2), Josh Peek, and Wilhelm Chung.

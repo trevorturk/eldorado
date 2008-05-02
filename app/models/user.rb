@@ -87,11 +87,11 @@ class User < ActiveRecord::Base
   end
   
   def self.online
-    User.find(:all, :conditions => ['logged_out_at < online_at and (online_at > ? or chatting_at > ?)', Time.now.utc-5.minutes, Time.now.utc-15.seconds], :order => 'login asc')
+    User.find(:all, :conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc')
   end
   
   def self.chatting
-    User.find(:all, :conditions => ['chatting_at > ?', Time.now.utc-15.seconds], :order => 'login asc')
+    User.find(:all, :conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc')
   end
   
   def set_defaults

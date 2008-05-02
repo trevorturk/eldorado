@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 81) do
+ActiveRecord::Schema.define(:version => 83) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -180,10 +180,9 @@ ActiveRecord::Schema.define(:version => 81) do
     t.string   "ban_message"
     t.datetime "banned_until"
     t.datetime "chatting_at"
-    t.datetime "logged_out_at"
+    t.boolean  "logged_out",         :default => false
   end
 
-  add_index "users", ["online_at", "logged_out_at"], :name => "index_users_on_online_at_and_logged_out_at"
   add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"
 
 end
