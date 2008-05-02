@@ -7,7 +7,7 @@ unless defined?(Rake) # skip when loaded from rake tasks
       highest_version = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").map { |f| f.match(/(\d+)_\w*\.rb$/) ? $1.to_i : 0 }.max
       Rake::Task["db:migrate"].invoke if current_version != highest_version
     rescue
-      Rake::Task["db:create"].invoke
+      # Rake::Task["db:create"].invoke # causes exception with sqlite3, and doesn't work with mysql
       abort 'ERROR: Database has no schema version and is not empty' unless ActiveRecord::Base.connection.tables.blank?
       Rake::Task["db:schema:load"].invoke
     end
