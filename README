@@ -1,24 +1,24 @@
 == Welcome to El Dorado
 
-El Dorado is a full-stack community web application written in Ruby/Rails. It features a forum, 
-event calendar, group chat, file sharing, random headers, avatars, themes, timezone support, 
-and privacy settings.
+El Dorado is a Ruby on Rails application for small groups. It features a forum, event calendar, 
+group chat, file sharing, random headers, avatars, themes, timezone support, and privacy settings.
 
-Homepage: http://almosteffortless.com/eldorado
-Demo and support site: http://eldorado.almosteffortless.com
-Issue tracking: http://ae.lighthouseapp.com/projects/421-el-dorado/
-Open source git repository: http://github.com/trevorturk/el-dorado/tree/master
+http://almosteffortless.com/eldorado
 
 == Installation
 
 1) Install the required gems: Rails 2.0.2 or greater and TZInfo ("sudo gem install rails tzinfo")
-2) Copy config/database.example.yml to config/database.yml and fill in the database and session details
-3) Start the web server ("script/server") and visit your new site to create the first user account
+2) Copy config/database.example.yml to config/database.yml and fill in the appropriate details
+3) Create your database ("rake db:create") and load the schema ("rake db:schema:load")
+4) Start the web server ("script/server") and visit your new site to create the first user account
 
-Importing from PunBB (version 1.2.16)
+== Upgrading
 
-1) Fill in the "import" section of config/database.yml and run "rake import:database"
-2) Run optional rake tasks as necessary: import:avatars, import:headers, and import:files
+Use Capistrano (http://capify.org/) to manage your deployments ("cap deploy:migrations"), otherwise...
+
+1) Download the latest El Dorado release from http://almosteffortless.com/eldorado
+2) Replace the files in your installation aside from avatars/files/headers/themes in public/
+3) Migrate to the latest database schema ("rake db:migrate") and start your server ("script/server")
 
 == Thanks
 
