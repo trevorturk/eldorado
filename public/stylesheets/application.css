@@ -75,22 +75,20 @@ h3 {
   padding: 0 40px;
 }
 
-.tabs { 
-  position: relative;
-  margin: -24px 0 0 13px;
-  width: 710px;
-  font: 1em Verdana, Helvetica, Arial, Sans-Serif;
-  padding: 5px 15px 6px 12px;
+.tabs {
+	position: absolute;
+	top: 203px;
+	margin-left: 26px;
+	font-size: 10px;
 }
   
 .tabs li {
-  display: inline;
-  margin: 0 2px;
+	display: inline;
+	margin: 0px 2px;
 }
   
 .tabs li a {
-  font-size: 10px;
-  padding: 6px 12px;
+	padding: 6px 12px 6px;
 }
 
 .tabs li a:link, .tabs li a:visited {

@@ -7,7 +7,6 @@
   <meta name="description" content="<%= page_title -%>" />
   <title><%= page_title -%></title>
   <%= javascript_include_tag :all, :cache => true %>
-  <%= stylesheet_link_tag 'calendar_date_select' %>
   <%= favicon_tag %>
   <%= header_css %>
   <%= theme_css %>
@@ -18,8 +17,8 @@
     <div class="header">
       <h1><%= link_to h(@settings.title), root_path -%></h1>
       <div class="tagline"><%=h @settings.tagline -%></div>
+      <%= render 'shared/tabs' unless locked_out? -%>
     </div>
-    <%= render 'shared/tabs' unless locked_out? -%>
     <div class="content">
       <%= render 'shared/nav' %>
       <div class="announcement"><%= @settings.announcement -%></div>
