@@ -493,11 +493,6 @@ cite {
   border: 1px solid #ccc;
 }
 
-.post-body img { max-width: 560px; }
-.post-body blockquote img { max-width: 528px; }
-.post-body blockquote blockquote img { max-width: 494px; }
-.post-body blockquote blockquote blockquote img { max-width: 459px; }
-
 .thread dd.avatar img, .profile-avatar img, .avatar-list .avatar img {
 	max-width: 150px;
 }
@@ -583,6 +578,26 @@ cite {
   display: inline;
 }
 
+.prototip { 
+	position: absolute; 
+}
+
+.tooltip { 
+	position: relative; 
+	color: #fff; 
+	background-color: #35604d;
+	padding: 4px 5px;
+}
+
+.post-body img { max-width: 560px; }
+.post-body blockquote img { max-width: 528px; }
+.post-body blockquote blockquote img { max-width: 494px; }
+.post-body blockquote blockquote blockquote img { max-width: 459px; }
+.messages-index img { max-width: 477px; }
+.messages-index blockquote img { max-width: 445px; }
+.messages-index blockquote blockquote img { max-width: 412px; }
+.messages-index blockquote blockquote blockquote img { max-width: 380px; }
+
 .at_sign { display: none; }
 .calendar_select { width: 220px; float: right; text-align: center; margin: 2px; padding: 0; }
 .calendar_date_select .cds_header, .calendar_date_select .cds_footer { padding: 8px; }
@@ -636,15 +651,4 @@ cite {
 
 .fieldWithErrors {
 	display: inline;
-}
-
-.prototip { 
-	position: absolute; 
-}
-
-.tooltip { 
-	position: relative; 
-	color: #fff; 
-	background-color: #35604d;
-	padding: 4px 5px;
 }
