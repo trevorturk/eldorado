@@ -97,9 +97,9 @@ class UsersController < ApplicationController
     @flash = flash[:notice]
     @user = User.find_by_id(session[:user_id])
     if @user
+      @user.logged_out = true
       @user.auth_token = nil
       @user.auth_token_exp = nil
-      @user.logged_out = true
       @user.save!
     end
     cookies.delete :auth_token
@@ -111,15 +111,15 @@ class UsersController < ApplicationController
   protected
     
   def do_login(user)
+    user.logged_out = false
     user.online_at = Time.now.utc if user.online_at.nil?
+    session[:user_id] = user.id
+    session[:online_at] = user.online_at
     user.online_at = Time.now.utc
     user.auth_token = Digest::SHA1.hexdigest(Time.now.utc.to_s + rand(123456789).to_s) unless user.auth_token?
     user.auth_token_exp = 2.weeks.from_now
-    user.logged_out = false
-    user.save!
-    session[:user_id] = user.id
-    session[:online_at] = user.online_at
     cookies[:auth_token] = { :value => user.auth_token, :expires => user.auth_token_exp }
+    user.save!
     redirect_to root_path
   end
 end
