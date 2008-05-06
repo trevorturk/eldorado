@@ -1,11 +1,13 @@
 == Welcome to El Dorado
 
-El Dorado is a Ruby on Rails application for small groups. It features a forum, event calendar, 
-group chat, file sharing, random headers, avatars, themes, timezone support, and privacy settings.
+El Dorado is a full-stack community web application written in Ruby/Rails. It features a forum, 
+event calendar, group chat, file sharing, random headers, avatars, themes, and privacy settings.
 
 http://almosteffortless.com/eldorado
 
 == Installation
+
+Requirements: The ability to run a Ruby on Rails application (http://rubyonrails.org/)
 
 1) Install the required gems: Rails 2.0.2 or greater and TZInfo ("sudo gem install rails tzinfo")
 2) Copy config/database.example.yml to config/database.yml and fill in the appropriate details
@@ -14,11 +16,12 @@ http://almosteffortless.com/eldorado
 
 == Upgrading
 
-Use Capistrano (http://capify.org/) to manage your deployments ("cap deploy:migrations"), otherwise...
+Note: Always back up your database and application files before performing an upgrade.
 
-1) Download the latest El Dorado release from http://almosteffortless.com/eldorado
-2) Replace the files in your installation aside from avatars/files/headers/themes in public/
-3) Migrate to the latest database schema ("rake db:migrate") and start your server ("script/server")
+1) Consider using Capistrano for managing your deployments (see config/deploy.example.rb)
+2) Download the latest El Dorado release from http://almosteffortless.com/eldorado
+3) Replace the files in your installation except for avatars/files/headers/themes in public/
+4) Migrate to the latest database schema ("rake db:migrate" or "cap deploy:migrations")
 
 == Thanks
 
