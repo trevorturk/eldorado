@@ -43,6 +43,9 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :on => :create
   validates_confirmation_of :password, :on => :update, :allow_blank => true
   
+  validates_format_of       :email, :on => :create,
+                            :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  
   before_create :set_defaults
   
   composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
