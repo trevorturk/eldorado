@@ -13,6 +13,8 @@ class UserTest < Test::Unit::TestCase
     u = User.create(:login => "test", :email => "email", :password => "sdlfkj", :password_confirmation => '')
     assert ! u.valid?
     u = User.create(:login => "test", :email => "email", :password => "sdlfkj", :password_confirmation => "sdlfkj")
+    assert ! u.valid?
+    u = User.create(:login => "test", :email => "email@address.com", :password => "sdlfkj", :password_confirmation => "sdlfkj")
     assert u.valid?
   end
     
