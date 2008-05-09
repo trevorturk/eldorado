@@ -171,6 +171,13 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_template "new" 
     assert_equal num_users, User.count
   end
+  
+  def test_should_not_create_user_without_valid_email
+    num_users = User.count
+    post :create, :user => {:login => 'test', :email => 'not_valid', :password => 'test'}
+    assert_template "new" 
+    assert_equal num_users, User.count
+  end
 
   def test_should_not_create_user_without_password_confirmation
     num_users = User.count

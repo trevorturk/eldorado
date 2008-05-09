@@ -40,11 +40,9 @@ class User < ActiveRecord::Base
   validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
+  validates_format_of       :email, :on => :create, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_confirmation_of :password, :on => :create
   validates_confirmation_of :password, :on => :update, :allow_blank => true
-  
-  validates_format_of       :email, :on => :create,
-                            :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   
   before_create :set_defaults
   
