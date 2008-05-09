@@ -15,12 +15,21 @@ class Message < ActiveRecord::Base
   
   validates_presence_of :body
   
-  def self.latest
-    find(:first, :order => 'created_at desc')
+  # TODO can remove w/ rails 2.1
+  def self.last
+    find(:first, :order => 'id desc')
   end
   
-  def self.refresh(message_id, current_user)
-    find(:all, :order => 'created_at desc', :conditions => ['id > ? and user_id != ?', message_id, current_user])
+  def self.more(id)
+    find(:all, :limit => 50, :order => 'messages.id desc', :include => :user, :conditions => ['messages.id < ?', id])
+  end
+  
+  def self.get(limit)
+    find(:all, :limit => limit || 50, :order => 'messages.id desc', :include => :user)
+  end
+  
+  def self.refresh(id, current_user)
+    find(:all, :order => 'messages.id desc', :include => :user, :conditions => ['messages.id > ? and user_id != ?', id, current_user])
   end
   
   def to_s

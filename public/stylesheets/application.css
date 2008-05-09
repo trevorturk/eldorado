@@ -589,6 +589,10 @@ cite {
 	padding: 4px 5px;
 }
 
+.center {
+	text-align: center;
+}
+
 .post-body img { max-width: 560px; }
 .post-body blockquote img { max-width: 528px; }
 .post-body blockquote blockquote img { max-width: 494px; }

@@ -4,13 +4,16 @@ class MessagesController < ApplicationController
   before_filter :require_login, :only => [:create]
   before_filter :can_edit, :only => [:destroy]
   
-  skip_filter :update_online_at, :get_layout_vars, :only => [:refresh_messages, :refresh_chatters]
+  skip_filter :update_online_at, :get_layout_vars, :only => [:more, :refresh, :refresh_chatters]
   
   def index
+    @messages = Message.get(params[:limit])
+    unless @messages.empty?
+      session[:message_id] = @messages.map(&:id).max
+      @last_message = @messages.map(&:id).min
+    end
     current_user.update_attribute('chatting_at', Time.now.utc) if logged_in?
     @chatters = User.chatting
-    @messages = Message.paginate(:page => params[:page], :include => [:user], :order => 'messages.created_at desc')
-    session[:message_id] = @messages.map(&:id).max unless @messages.empty?
   end
   
   def show
@@ -34,7 +37,17 @@ class MessagesController < ApplicationController
     redirect_to chat_url
   end
   
-  def refresh_messages
+  def more
+    @messages = Message.more(params[:id])
+    @last_message = @messages.map(&:id).min unless @messages.empty?
+    render :update do |page|
+      page.insert_html :bottom, 'messages-index', :partial => 'messages', :object => @messages
+      page.replace_html 'messages-more', :partial => 'more', :object => @last_message
+      page.replace_html 'messages-more', :partial => 'more_disabled' if @messages.empty?
+    end
+  end
+  
+  def refresh
     @messages = Message.refresh(session[:message_id], current_user)
     session[:message_id] = @messages.map(&:id).max unless @messages.empty?
     if @messages
@@ -53,5 +66,5 @@ class MessagesController < ApplicationController
         page.replace_html 'chatters', :partial => 'chatters', :object => @chatters
       end
     end
-  end
+  end  
 end

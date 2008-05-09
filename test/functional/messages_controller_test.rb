@@ -99,8 +99,13 @@ class MessagesControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
   
+  def test_more_messages_path_should_work
+    get :more
+    assert_response :success
+  end
+  
   def test_refresh_messages_path_should_work
-    get :refresh_messages
+    get :refresh
     assert_response :success
   end
   
@@ -108,5 +113,5 @@ class MessagesControllerTest < ActionController::TestCase
     get :refresh_chatters
     assert_response :success
   end
-
+  
 end
