@@ -21,7 +21,7 @@ class Message < ActiveRecord::Base
   end
   
   def self.more(id)
-    find(:all, :limit => 50, :order => 'messages.id desc', :include => :user, :conditions => ['messages.id < ?', id])
+    find(:all, :limit => 100, :order => 'messages.id desc', :include => :user, :conditions => ['messages.id < ?', id])
   end
   
   def self.get
