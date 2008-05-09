@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
   skip_filter :update_online_at, :get_layout_vars, :only => [:more, :refresh, :refresh_chatters]
   
   def index
-    @messages = Message.get(params[:limit])
+    @messages = Message.get
     unless @messages.empty?
       session[:message_id] = @messages.map(&:id).max
       @last_message = @messages.map(&:id).min

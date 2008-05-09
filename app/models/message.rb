@@ -24,8 +24,8 @@ class Message < ActiveRecord::Base
     find(:all, :limit => 50, :order => 'messages.id desc', :include => :user, :conditions => ['messages.id < ?', id])
   end
   
-  def self.get(limit)
-    find(:all, :limit => limit || 50, :order => 'messages.id desc', :include => :user)
+  def self.get
+    find(:all, :limit => 100, :order => 'messages.id desc', :include => :user)
   end
   
   def self.refresh(id, current_user)

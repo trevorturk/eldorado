@@ -4,7 +4,7 @@
 </div>
 <div style="clear:both;"> </div>
 
-<% if logged_in? && params[:page].blank? %>
+<% if logged_in? %>
   <div class="info-left" style="width:100%;">
     <% @message = Message.new unless @message %>
     <% remote_form_for @message, :loading => "$('message_body').clear();" do |f| -%>
