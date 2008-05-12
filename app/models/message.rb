@@ -19,13 +19,13 @@ class Message < ActiveRecord::Base
   def self.last
     find(:first, :order => 'id desc')
   end
+    
+  def self.get
+    find(:all, :limit => 50, :order => 'messages.id desc', :include => :user)
+  end
   
   def self.more(id)
     find(:all, :limit => 100, :order => 'messages.id desc', :include => :user, :conditions => ['messages.id < ?', id])
-  end
-  
-  def self.get
-    find(:all, :limit => 100, :order => 'messages.id desc', :include => :user)
   end
   
   def self.refresh(id, current_user)

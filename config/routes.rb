@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-
+  
   map.root :controller => 'home'
   
   map.resources :avatars, :member => { :select => :post, :deselect => :post }
@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :themes, :member => { :select => :post, :deselect => :post }
   map.resources :topics, :member => { :show_new => :get }
   map.resources :uploads
-  map.resources :users, :member => { :posts => :get, :confirm_delete => :get, :admin => :post, :ban => :get, :remove_ban => :post }
+  map.resources :users, :member => { :posts => :get, :admin => :post, :ban => :get, :remove_ban => :post, :confirm_delete => :get }
   
   map.search 'search', :controller => 'search', :action => 'index'
   map.refresh_chatters 'refresh_chatters', :controller => 'messages', :action => 'refresh_chatters'
@@ -23,11 +23,12 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'users', :action => 'login'
   map.logout 'logout', :controller => 'users', :action => 'logout'
   map.register 'register', :controller => 'users', :action => 'new'
+  
   map.admin 'admin', :controller => 'settings', :action => 'index'
-  map.files 'files', :controller => 'uploads', :action => 'index'
   map.chat 'chat', :controller => 'messages', :action => 'index'
+  map.files 'files', :controller => 'uploads', :action => 'index'
   map.forum_root 'forum', :controller => 'forums', :action => 'index'
-    
+  
   map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil
   
   map.catch_all '*path', :controller => 'topics', :action => 'unknown_request'
