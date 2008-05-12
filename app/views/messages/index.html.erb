@@ -23,7 +23,7 @@
 </table>
 
 <p id="messages-more" class="center">
-  <%= render :partial => 'more', :object => @last_message %>
+  <%= render :partial => 'more', :object => @last_message unless @messages.size < 50 %>
 </p>
 
 <%= periodically_call_remote :url => refresh_messages_path, :method => 'get', :frequency => 3 %>

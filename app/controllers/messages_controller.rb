@@ -8,12 +8,12 @@ class MessagesController < ApplicationController
   
   def index
     @messages = Message.get
+    current_user.update_attribute('chatting_at', Time.now.utc) if logged_in?
+    @chatters = User.chatting
     unless @messages.empty?
       session[:message_id] = @messages.map(&:id).max
       @last_message = @messages.map(&:id).min
     end
-    current_user.update_attribute('chatting_at', Time.now.utc) if logged_in?
-    @chatters = User.chatting
   end
   
   def show
@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
     render :update do |page|
       page.insert_html :bottom, 'messages-index', :partial => 'messages', :object => @messages
       page.replace_html 'messages-more', :partial => 'more', :object => @last_message
-      page.replace_html 'messages-more', :partial => 'more_disabled' if @messages.empty?
+      page.remove 'messages-more' if @messages.size < 100
     end
   end
   
