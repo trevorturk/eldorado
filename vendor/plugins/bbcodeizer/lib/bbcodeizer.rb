@@ -26,6 +26,7 @@ module BBCodeizer
       :flash                 => [ /\[flash\](.+?)\[\/flash\]/i, '<object width="100%" height="100%"><param name="movie" value="\1"></param><embed src="\1" type="application/x-shockwave-flash" width="100%" height="100%"></embed></object>' ],
       :spoiler               => [ /\[spoiler\](.+?)\[\/spoiler\]/im, '<a href="#" class="spoiler-link" onclick="$(\'_RANDOM_ID_\').toggle(); return false;">SPOILER</a><div id="_RANDOM_ID_" class="spoiler" style="display:none;">\1</div>' ],
       :nsfw                  => [ /\[nsfw\](.+?)\[\/nsfw\]/im, '<a href="#" class="nsfw-link" onclick="$(\'_RANDOM_ID_\').toggle(); return false;">NSFW</a><div id="_RANDOM_ID_" class="nsfw" style="display:none;">\1</div>' ],
+      :hide                  => [ /\[hide=(.+?)\](.+?)\[\/hide\]/im, '<a href="#" class="hide-link" onclick="$(\'_RANDOM_ID_\').toggle(); return false;">\1</a><div id="_RANDOM_ID_" class="hide" style="display:none;">\2</div>' ],
       :mp3                   => [ /\[mp3\](.+?)\[\/mp3\]/i, '<script language="JavaScript" src="/javascripts/audio-player.js"></script><object type="application/x-shockwave-flash" data="/flash/player.swf" id="_RANDOM_ID_" height="24" width="290"><param name="movie" value="/flash/player.swf"><param name="FlashVars" value="playerID=_RANDOM_ID_&amp;soundFile=\1"><param name="quality" value="high"><param name="menu" value="false"><param name="wmode" value="transparent"></object>' ],
       :superdeluxe           => [ /\[superdeluxe\](.+?)superdeluxe.com\/sd\/contentDetail.do\?id=(.+?)\[\/superdeluxe\]/i, '<object width="400" height="350"><param name="allowFullScreen" value="true" /><param name="movie" value="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" /><param name="FlashVars" value="id=\2" /><embed src="http://www.superdeluxe.com/static/swf/share_vidplayer.swf" FlashVars="id=\2" type="application/x-shockwave-flash" width="400" height="350" allowFullScreen="true" ></embed></object>' ],
       :comedycentral         => [ /\[comedycentral\](.+?)comedycentral.com\/motherload\/index.jhtml\?ml_video=(.+?)\[\/comedycentral\]/i, '<embed FlashVars="config=http://www.comedycentral.com/motherload/xml/data_synd.jhtml?vid=\2%26myspace=false" src="http://www.comedycentral.com/motherload/syndicated_player/index.jhtml" quality="high" bgcolor="#006699" width="340" height="325" name="comedy_player" align="middle" allowScriptAccess="always" allownetworking="external" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>' ],
@@ -44,9 +45,9 @@ module BBCodeizer
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
     # These names correspond to either names above or methods in this module.
     TagList = [ :bold, :italic, :underline, :email_with_name, :email_sans_name, 
-                :url_with_title, :url_sans_title, :image, :size, :color,
-                :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :mp3, 
-                :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor,
+                :url_with_title, :url_sans_title, :image, :size, :color, :code, 
+                :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :hide, :mp3, 
+                :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor, 
                 :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :funnyordie, 
                 :atomfilms ]
 
