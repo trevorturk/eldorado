@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
-    @date = Time.parse("#{params[:date]} || Time.now")
+    @date = Time.parse("#{params[:date]} || Time.now.utc")
     @events = Event.find(:all, :conditions => ['date between ? and ?', @date.strftime("%Y-%m") + '-01', @date.next_month.strftime("%Y-%m") + '-01'])
   end
 

@@ -7,7 +7,7 @@
     <p class="label"><label for="user_ban_message">Message</label></p>
     <p><%= f.text_field :ban_message, :style => "width:31%" %></p>
     <p class="label"><label for="user_banned_until">Ban Until</label></p>
-    <p><%= f.datetime_select :banned_until %>&nbsp;Currently: <%=tz Time.now %></p>
+    <p><%= f.datetime_select :banned_until %></p>
     <p>
       <% if @user.banned? %>
         <%= submit_tag "Edit Ban", :disable_with => "Edit Ban" %>&nbsp; 

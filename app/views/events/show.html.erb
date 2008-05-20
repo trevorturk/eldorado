@@ -9,7 +9,7 @@
 
 <blockquote>
   <p style="margin-top:0;font-weight:bold;">
-    <%=tz @event.date %>
+    <%= time_stamp(@event.date) %>
   </p>
   <%= bb(@event.description) %>
 </blockquote>

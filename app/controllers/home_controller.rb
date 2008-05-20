@@ -1,7 +1,7 @@
 class HomeController < ApplicationController  
   
   def index
-      @date = Time.parse("#{params[:date]} || Time.now")
+      @date = Time.parse("#{params[:date]} || Time.now.utc")
       @avatars = Avatar.find(:all, :limit => 3, :include => :user, :order => 'avatars.updated_at desc')
       @message = Message.last
       @chatters = User.chatting

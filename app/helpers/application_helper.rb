@@ -80,11 +80,7 @@ module ApplicationHelper
       truncate(t, 50)
     end
   end
-    
-  def tz(time)
-    time_stamp(time)
-  end
-
+  
   def current_page(collection)
     'Page ' + collection.current_page.to_s + ' of ' + collection.total_pages.to_s
   end
@@ -109,7 +105,7 @@ module ApplicationHelper
     request.path_parameters['action']
   end
   
-  def time_ago_or_time_stamp(from_time, to_time = Time.now, include_seconds = true, detail = false)
+  def time_ago_or_time_stamp(from_time, to_time = Time.now.utc, include_seconds = true, detail = false)
     return '&ndash;' if from_time.nil?
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
     to_time = to_time.to_time if to_time.respond_to?(:to_time)

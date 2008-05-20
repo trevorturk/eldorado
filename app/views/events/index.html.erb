@@ -34,7 +34,7 @@
           <td class="tcl">
             <%= link_to h(event.title), event %> by <%=h event.user.login %>
           </td>
-          <td class="tcr"><%=tz event.date %></td>
+          <td class="tcr"><%=  time_stamp(event.date) %></td>
         </tr>
       <% end %>
     </tbody>

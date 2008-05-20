@@ -2,7 +2,7 @@
 <table class="thread" cellspacing="0" id="p<%= post.id %>">
   <thead>
     <tr>
-      <th><%= time_ago_or_time_stamp(post.created_at, Time.now, true, true) %></th>
+      <th><%= time_ago_or_time_stamp(post.created_at, Time.now.utc, true, true) %></th>
       <th class="thr">
         <% if %w(search posts users).include?(current_controller) %>
           <%= link_to post.topic.title + ' &raquo;', topic_post_path(post) %>
@@ -33,7 +33,7 @@
           <%= bb(post.body) %>
           <% if (post.updated_at > post.created_at + 5.minutes) %>
             <p class="edited">
-              Last edited <%= time_ago_or_time_stamp(post.updated_at, Time.now, true, true) %>
+              Last edited <%= time_ago_or_time_stamp(post.updated_at, Time.now.utc, true, true) %>
               <%= 'by ' + post.editor.login unless post.editor.nil? %>
             </p>
           <% end %>

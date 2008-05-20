@@ -11,5 +11,5 @@ Rails::Initializer.run do |config|
     :session_key => db[RAILS_ENV]['session_key'],
     :secret      => db[RAILS_ENV]['secret']
   }
-    
+  
 end
