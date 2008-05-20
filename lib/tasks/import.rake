@@ -7,6 +7,15 @@ namespace :import do
   desc "Imports a PunBB (version 1.2.15) database"
   task :database => :environment do
     require 'tzinfo'
+    # For config/database.yml:
+    # import:
+    #   adapter: mysql
+    #   database: punbb
+    #   username: root
+    #   password: 
+    #   host: localhost
+    #   prefix: pun_
+    puts "NOTE: This rake task has not been updated in quite some time and is unlikely to work. Contributions welcome!"
     puts "This task will import from a PunBB database defined as 'import' in your database.yml file."
     puts "It will import into your 'development' database unless you specify otherwise (e.g. 'rake db:import RAILS_ENV=production')."
     puts "Please make sure the receiving database is empty before continuing."

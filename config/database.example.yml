@@ -22,11 +22,3 @@ production:
   host: localhost
   session_key: 
   secret: 
-
-import:
-  adapter: mysql
-  database: punbb
-  username: root
-  password: 
-  host: localhost
-  prefix: pun_

@@ -243,6 +243,7 @@ tbody .tds {
 
 .thread .body {
   width: 76%;
+	max-width: 560px;
   line-height: 1.4em;
   background: #dedfdf;
 }
@@ -251,7 +252,7 @@ tbody .tds {
   margin-top: 0;
 }
 
-.post-body, .post-body img, .post-body pre {
+.post-body {
   overflow: auto;
 }
 
