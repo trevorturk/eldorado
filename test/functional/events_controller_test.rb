@@ -25,7 +25,7 @@ class EventsControllerTest < Test::Unit::TestCase
   def test_should_create_event
     login_as :trevor
     old_count = Event.count
-    post :create, :event => {:title => "test", :description => "test", :date => Time.now }
+    post :create, :event => {:title => "test", :description => "test", :date => Time.now.utc }
     assert_equal old_count+1, Event.count
     assert_redirected_to event_path(assigns(:event))
   end
@@ -39,7 +39,7 @@ class EventsControllerTest < Test::Unit::TestCase
     login_as :Administrator
     get :edit, :id => 1
     assert_response :success
-    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now}
+    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now.utc}
     assert_redirected_to event_path(assigns(:event))
   end
   
@@ -47,14 +47,14 @@ class EventsControllerTest < Test::Unit::TestCase
     login_as :trevor
     get :edit, :id => 1
     assert_response :success
-    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now}
+    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now.utc}
     assert_redirected_to event_path(assigns(:event))
   end
   
   def test_should_not_get_edit_or_perform_update_if_not_logged_in
     get :edit, :id => 1
     assert_redirected_to login_path
-    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now}
+    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now.utc}
     assert_redirected_to login_path
   end
   
@@ -62,13 +62,13 @@ class EventsControllerTest < Test::Unit::TestCase
     login_as :Timothy
     get :edit, :id => 1
     assert_redirected_to root_path
-    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now}
+    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now.utc}
     assert_redirected_to root_path
   end
   
   def test_should_update_event
     login_as :Administrator
-    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now}
+    put :update, :id => 1, :event => {:title => "test", :description => "test", :date => Time.now.utc}
     assert_redirected_to event_path(assigns(:event))
   end
   

@@ -3,7 +3,7 @@
     <%=
     calendar({:year => @date.year, :month => @date.month}) do |d|
       cell_text = "#{d.mday}" 
-      if (d.to_date == Time.now.to_date)
+      if (d.to_date == Time.now.utc.to_date)
         cell_text = "<b>Today #{d.mday}</b>" 
       end
       cell_attrs = {:class => 'day'}
