@@ -7,14 +7,13 @@ class ApplicationController < ActionController::Base
   
   include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
   
-  around_filter :get_settings, :set_timezone
-  before_filter :auth_token_login, :check_privacy, :check_bans, :update_online_at, :get_layout_vars
+  before_filter :get_settings, :auth_token_login, :check_bans, :check_privacy, :set_timezone, :update_online_at, :get_layout_vars
   helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :locked_out?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   rescue_from ActiveRecord::SettingsNotFound, :with => :default_settings
   rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error
-  rescue_from ActionController::MissingTemplate, :with => :not_found
+  rescue_from ActionView::MissingTemplate, :with => :not_found
   rescue_from WillPaginate::InvalidPage, :with => :invalid_page
   
   def redirect_home
@@ -24,13 +23,10 @@ class ApplicationController < ActionController::Base
   def get_settings
     @settings ||= Setting.find(:first)
     raise ActiveRecord::SettingsNotFound if @settings.nil?
-    yield
   end
   
-  def set_timezone
-    TzTime.zone = logged_in? ? current_user.tz : @settings.tz
-    yield
-    TzTime.reset!
+  def set_timezone    
+    Time.zone = logged_in? ? current_user.time_zone : @settings.time_zone
   end
   
   def get_layout_vars

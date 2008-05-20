@@ -1,17 +1,3 @@
-# == Schema Information
-# Schema version: 76
-#
-# Table name: posts
-#
-#  id         :integer(11)     not null, primary key
-#  user_id    :integer(11)     
-#  topic_id   :integer(11)     
-#  body       :text            
-#  created_at :datetime        
-#  updated_at :datetime        
-#  updated_by :integer(11)     
-#
-
 class Post < ActiveRecord::Base
   
   belongs_to :user,  :counter_cache => true

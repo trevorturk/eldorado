@@ -1,5 +1,5 @@
 module ExceptionHandler
-
+  
   class ActiveRecord::SettingsNotFound < StandardError; end
   
   protected

@@ -82,25 +82,21 @@ module ApplicationHelper
   end
     
   def tz(time)
-    time_stamp(TzTime.zone.utc_to_local(time.utc))
-  end
-  
-  def tz_today?(time)
-    return true if TzTime.now.strftime('%Y-%m-%d') == TzTime.zone.utc_to_local(time.utc).strftime('%Y-%m-%d')
+    time_stamp(time)
   end
 
   def current_page(collection)
-    'Page ' + collection.current_page.to_s + ' of ' + collection.page_count.to_s
+    'Page ' + collection.current_page.to_s + ' of ' + collection.total_pages.to_s
   end
 
   def prev_page(collection)
-    unless collection.current_page == 1 or collection.page_count == 0
+    unless collection.current_page == 1 or collection.total_pages == 0
       link_to('&laquo; Previous page', { :page => collection.previous_page }.merge(params.reject{|k,v| k=='page'}))
     end
   end
   
   def next_page(collection)
-    unless collection.current_page == collection.page_count or collection.page_count == 0
+    unless collection.current_page == collection.total_pages or collection.total_pages == 0
       link_to('Next page &raquo;', { :page => collection.next_page }.merge(params.reject{|k,v| k=='page'}))
     end
   end
@@ -113,9 +109,8 @@ module ApplicationHelper
     request.path_parameters['action']
   end
   
-  def time_ago_or_time_stamp(from_time, to_time = TzTime.now, include_seconds = true, detail = false)
+  def time_ago_or_time_stamp(from_time, to_time = Time.now, include_seconds = true, detail = false)
     return '&ndash;' if from_time.nil?
-    from_time = TzTime.zone.utc_to_local(from_time)
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
     to_time = to_time.to_time if to_time.respond_to?(:to_time)
     distance_in_minutes = (((to_time - from_time).abs)/60).round

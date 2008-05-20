@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   before_filter :require_login, :only => [:create]
   before_filter :can_edit, :only => [:destroy]
   
-  skip_filter :update_online_at, :get_layout_vars, :only => [:more, :refresh, :refresh_chatters]
+  skip_filter :update_online_at, :get_layout_vars, :only => [:create, :more, :refresh, :refresh_chatters]
   
   def index
     @messages = Message.get

@@ -1,17 +1,3 @@
-# == Schema Information
-# Schema version: 76
-#
-# Table name: forums
-#
-#  id           :integer(11)     not null, primary key
-#  category_id  :integer(11)     
-#  name         :string(255)     
-#  description  :text            
-#  topics_count :integer(11)     default(0)
-#  posts_count  :integer(11)     default(0)
-#  position     :integer(11)     default(0)
-#
-
 class Forum < ActiveRecord::Base
   
   has_many :topics, :order => 'topics.last_post_at desc', :dependent => :destroy

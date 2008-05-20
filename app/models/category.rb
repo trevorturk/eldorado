@@ -1,13 +1,3 @@
-# == Schema Information
-# Schema version: 76
-#
-# Table name: categories
-#
-#  id       :integer(11)     not null, primary key
-#  name     :string(255)     
-#  position :integer(11)     default(0)
-#
-
 class Category < ActiveRecord::Base
   
   has_many :forums, :order => 'forums.position', :dependent => :destroy

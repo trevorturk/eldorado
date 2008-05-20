@@ -6,7 +6,6 @@ end
 namespace :import do
   desc "Imports a PunBB (version 1.2.15) database"
   task :database => :environment do
-    require 'tzinfo'
     # For config/database.yml:
     # import:
     #   adapter: mysql
@@ -60,7 +59,7 @@ namespace :import do
       @item.tagline = i[1] if @index == 3 # o_board_desc
       tz = i[1].to_i if @index == 4 # o_server_timezone
     end
-    TzTime.zone = TZInfo::Timezone.get(tz_to_timezone(tz))
+    Time.zone = Time.zone.get(tz_to_timezone(tz))
     @item.announcement = ''
     @item.footer = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
     @item.save!
@@ -88,13 +87,13 @@ namespace :import do
       @item.password_hash = i[2] # password 
       @item.email = i[3] # email 
       @item.signature = i[4] # signature
-      @item.created_at = TzTime.at(Time.at(i[5].to_i)) # registered 
+      @item.created_at = Time.at(Time.at(i[5].to_i)) # registered 
         @item.password_hash = User.encrypt(rand.to_s) if @item.login == 'Guest' # random password for Guest user
         @item.admin = true if @item.id == 2 # make first non-guest user into admin
       @item.save!
       # manually fix timestamp issues raised by controller actions
         @item.profile_updated_at = @item.created_at 
-        @item.online_at = TzTime.at(Time.at(i[6].to_i)) # last_visit 
+        @item.online_at = Time.at(Time.at(i[6].to_i)) # last_visit 
         tz = i[7].to_i
         @item.time_zone = tz_to_timezone(tz)
         @item.save!
@@ -110,7 +109,7 @@ namespace :import do
     for i in @items
       @item = User.find_by_login(i[0]) # username
       @item.ban_message = i[1] # message
-      @item.banned_until = TzTime.at(Time.at(i[2].to_i)) unless i[2].nil? # expire
+      @item.banned_until = Time.at(Time.at(i[2].to_i)) unless i[2].nil? # expire
       @item.save!
       puts "Importing ban: #{@item.login}"
     end
@@ -183,8 +182,8 @@ namespace :import do
         @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
       @item.user_id = @temp.id # get user id instead of username 
       @item.title = i[2] # subject 
-      @item.created_at = TzTime.at(Time.at(i[3].to_i)) # posted
-      @item.last_post_at = TzTime.at(Time.at(i[4].to_i)) # last_post
+      @item.created_at = Time.at(Time.at(i[3].to_i)) # posted
+      @item.last_post_at = Time.at(Time.at(i[4].to_i)) # last_post
       @item.last_post_id = i[5] # last_post_id      
         @temp = User.find_by_login(i[6]) # last_poster
         @temp = User.find_by_id(1) if @temp.nil? # assign to guest account if user isn't found
@@ -212,11 +211,11 @@ namespace :import do
       @item.id = i[0] # id 
       @item.user_id = i[1] # poster_id 
       @item.body = i[2] # message
-      @item.created_at = TzTime.at(Time.at(i[3].to_i)) # posted
+      @item.created_at = Time.at(Time.at(i[3].to_i)) # posted
       if i[4].nil? # edited
-        @item.updated_at = TzTime.at(Time.at(i[3].to_i)) # posted
+        @item.updated_at = Time.at(Time.at(i[3].to_i)) # posted
       else
-        @item.updated_at = TzTime.at(Time.at(i[4].to_i)) # edited
+        @item.updated_at = Time.at(Time.at(i[4].to_i)) # edited
       end
       unless i[5].nil? # edited_by
           @temp = User.find_by_login(i[5]) # edited_by
