@@ -27,14 +27,14 @@ ActiveRecord::Schema.define(:version => 83) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
-    t.integer "position", :default => 0
+    t.integer "position", :limit => 255, :default => 0
   end
 
   create_table "events", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "date"
-    t.boolean  "reminder"
+    t.boolean  "reminder",    :default => false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(:version => 83) do
     t.integer  "updated_by"
   end
 
-  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
   add_index "posts", ["topic_id", "created_at"], :name => "index_posts_on_topic_id_and_created_at"
+  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
 
   create_table "ranks", :force => true do |t|
     t.string  "title"
@@ -141,13 +141,13 @@ ActiveRecord::Schema.define(:version => 83) do
     t.integer  "last_post_id"
     t.datetime "last_post_at"
     t.integer  "last_post_by"
-    t.boolean  "locked"
+    t.boolean  "locked",       :default => false
     t.boolean  "sticky",       :default => false
     t.integer  "forum_id"
   end
 
-  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
   add_index "topics", ["forum_id", "sticky", "last_post_at"], :name => "index_topics_on_sticky_and_last_post_at"
+  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
 
   create_table "uploads", :force => true do |t|
     t.integer  "parent_id"
@@ -167,10 +167,10 @@ ActiveRecord::Schema.define(:version => 83) do
     t.string   "email"
     t.string   "password_hash"
     t.datetime "created_at"
-    t.boolean  "admin",              :default => false
-    t.integer  "posts_count",        :default => 0
+    t.boolean  "admin",                             :default => false
+    t.integer  "posts_count",                       :default => 0
     t.string   "signature"
-    t.text     "bio"
+    t.text     "bio",                :limit => 255
     t.datetime "profile_updated_at"
     t.datetime "online_at"
     t.string   "avatar"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(:version => 83) do
     t.string   "ban_message"
     t.datetime "banned_until"
     t.datetime "chatting_at"
-    t.boolean  "logged_out",         :default => false
+    t.boolean  "logged_out",                        :default => false
   end
 
   add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"
