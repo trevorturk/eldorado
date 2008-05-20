@@ -12,4 +12,7 @@ Rails::Initializer.run do |config|
     :secret      => db[RAILS_ENV]['secret']
   }
   
+  config.time_zone = 'UTC'
+  ENV['TZ'] = 'UTC'
+  
 end
