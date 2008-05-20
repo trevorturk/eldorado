@@ -76,8 +76,8 @@ h3 {
 }
 
 .tabs {
-	position: absolute;
-	top: 203px;
+	position: relative;
+	margin-top: 52px;
 	margin-left: 26px;
 	font-size: 10px;
 }

@@ -3,7 +3,7 @@
 <% form_for @event do |f| %>
   <div class="box" id="box-events-new">
     <span class="top">New Event</span>
-    <p class="calendar_select"><%= f.calendar_date_select :date, :embedded => true %></p>
+    <div class="calendar_select"><%= f.calendar_date_select :date, :embedded => true %></div>
     <p class="label"><label for="event_title">Title</label></p>
     <p><%= f.text_field :title, :style => 'width:66%;' %></p>
     <p class="label"><label for="event_description">Description</label></p>
