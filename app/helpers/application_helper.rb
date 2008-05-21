@@ -126,6 +126,6 @@ module ApplicationHelper
   
   def time_stamp(time, short = false)
     return time.strftime("%l:%M%P, %d %b").squeeze(' ') if short
-    time.strftime("%a, %d %b %Y, %l:%M%P %Z").squeeze(' ')
+    time.strftime("%a, %d %b %Y, %l:%M%P").squeeze(' ')
   end
 end
