@@ -10,8 +10,6 @@ class Topic < ActiveRecord::Base
     
   attr_accessor :body
     
-  PER_PAGE = 30
-  
   def before_update
     @old_forum = Topic.find(id).forum
   end
@@ -35,7 +33,7 @@ class Topic < ActiveRecord::Base
   end
   
   def last_page
-    [(posts_count.to_f / PER_PAGE).ceil.to_i, 1].max
+    [(posts_count.to_f / 30).ceil.to_i, 1].max
   end
   
   def update_cached_fields

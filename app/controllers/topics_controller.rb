@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
     @posts = @topic.posts.paginate(:page => params[:page], :include => :user)
     redirect_to @topic if @posts.blank? # if params[:page] is too big, no posts will be found
     @page = params[:page] ? params[:page] : 1
-    @padding = ((@page.to_i - 1) * Topic::PER_PAGE) # to get post #s w/ pagination
+    @padding = ((@page.to_i - 1) * 30) # to get post #s w/ pagination
     @topic.hit!
   end
   
@@ -23,8 +23,11 @@ class TopicsController < ApplicationController
   def create
     @topic = current_user.topics.build(params[:topic])
     @post = @topic.posts.build(params[:topic]) ; @post.user = current_user
-    redirect_to @topic and return true if @topic.save && @post.save
-    render :action => "new"
+    if @topic.save && @post.save
+      redirect_to @topic
+    else
+      render :action => 'new'
+    end
   end
   
   def edit
@@ -71,5 +74,4 @@ class TopicsController < ApplicationController
     end
     redirect_to root_path
   end
-  
 end

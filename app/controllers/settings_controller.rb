@@ -13,5 +13,4 @@ class SettingsController < ApplicationController
     @setting.update_attributes(params[:setting])
     redirect_to settings_path
   end
-
 end

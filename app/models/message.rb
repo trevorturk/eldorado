@@ -3,11 +3,6 @@ class Message < ActiveRecord::Base
   belongs_to :user
   
   validates_presence_of :body
-  
-  # TODO can remove w/ rails 2.1
-  def self.last
-    find(:first, :order => 'id desc')
-  end
     
   def self.get
     find(:all, :limit => 50, :order => 'messages.id desc', :include => :user)

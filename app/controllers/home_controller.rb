@@ -11,5 +11,4 @@ class HomeController < ApplicationController
       @uploads = Upload.find(:all, :limit => 5, :include => :user, :order => 'uploads.updated_at desc')
       @users = User.find(:all, :limit => 3, :order => 'profile_updated_at desc')
   end
-  
 end

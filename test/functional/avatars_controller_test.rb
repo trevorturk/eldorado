@@ -26,15 +26,17 @@ class AvatarsControllerTest < Test::Unit::TestCase
   end
   
   def test_should_not_get_new_if_not_logged_in
+    get :new
+    assert_redirected_to login_path
   end
   
   def test_should_create_avatar
   end
-  
-  def test_should_get_edit_if_authorized
-  end
-  
+    
   def test_should_not_get_edit_if_not_authorized
+    login_as :Timothy
+    get :edit, :id => 1
+    assert_redirected_to root_path
   end
     
   def test_should_destroy_avatar_if_user_created_avatar
@@ -63,17 +65,19 @@ class AvatarsControllerTest < Test::Unit::TestCase
   def test_should_not_destroy_avatar_if_not_authorized
     login_as :Timothy
     old_count = Avatar.count
-    delete :destroy, :id => 1
+    delete :destroy, :id => avatars(:test).id
     assert_equal old_count, Avatar.count
     assert_redirected_to root_path
   end
     
   def test_should_clear_user_using_avatar_if_avatar_destroyed
+    login_as :Administrator
+    assert_equal avatars(:test).current_user_id, users(:trevor).id
+    delete :destroy, :id => avatars(:test)
+    users(:trevor).reload
+    assert_nil users(:trevor).avatar
   end
-  
-  def test_should_clear_avatar_current_user_id_if_user_destroyed
-  end
-  
+    
   def test_should_select_avatar
     login_as :Timothy
     post :select, :id => avatars(:calvin).id

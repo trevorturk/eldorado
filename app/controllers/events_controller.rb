@@ -17,8 +17,11 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(params[:event])
-    redirect_to @event and return true if @event.save
-    render :action => "new"
+    if @event.save
+      redirect_to @event and return true
+    else
+      render :action => "new"
+    end
   end
 
   def edit
@@ -39,5 +42,4 @@ class EventsController < ApplicationController
     @event.destroy
     redirect_to events_url
   end
-  
 end

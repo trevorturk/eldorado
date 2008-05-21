@@ -12,8 +12,11 @@ class RanksController < ApplicationController
   
   def create
     @rank = Rank.new(params[:rank])
-    render :action => 'new' and return false unless @rank.save
-    redirect_to ranks_path
+    if @rank.save
+      redirect_to ranks_path
+    else
+      render :action => 'new'
+    end
   end
   
   def edit
@@ -34,5 +37,4 @@ class RanksController < ApplicationController
     @rank.destroy
     redirect_to ranks_path
   end
-  
 end

@@ -15,8 +15,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, :with => :generic_error
   rescue_from ActionView::MissingTemplate, :with => :not_found
   rescue_from WillPaginate::InvalidPage, :with => :invalid_page
-  rescue_from Errno::ETIMEDOUT, :with => :generic_eror
-  rescue_from Timeout::Error, :with => :generic_eror
   
   def redirect_home
     redirect_to root_path and return false
@@ -40,7 +38,6 @@ class ApplicationController < ActionController::Base
   def update_online_at
     return unless logged_in?
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
-    User.update_all ['online_at = ?', Time.now.utc], ['id = ?', current_user.id]
+    current_user.update_attribute(:online_at, Time.now.utc)
   end
-  
 end

@@ -11,7 +11,7 @@ class ForumsController < ApplicationController
   def show
     @forum = Forum.find(params[:id], :include => :category)
     @topics = @forum.topics.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'topics.sticky desc, topics.last_post_at desc')
-    render(:template => "topics/index")
+    render :template => 'topics/index'
   end
   
   def new
@@ -21,8 +21,11 @@ class ForumsController < ApplicationController
   
   def create
     @forum = Forum.new(params[:forum])
-    render :action => 'new' and return false unless @forum.save
-    redirect_to @forum
+    if @forum.save
+      redirect_to @forum
+    else
+      render :action => 'new'
+    end
   end
   
   def edit
@@ -52,5 +55,4 @@ class ForumsController < ApplicationController
   def confirm_delete
     @forum = Forum.find(params[:id])
   end
-     
 end

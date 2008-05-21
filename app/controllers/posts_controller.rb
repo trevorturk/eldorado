@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     redirect_to root_path and return false unless @topic
     @post = current_user.posts.build(params[:post])
     if @topic.locked
-      redirect_to root_path and return false unless admin? || (current_user == @topic.user)
+      redirect_to root_path and return false unless admin? || (current_user == @topic.user) # TODO can this be a conditional before_filter?
     end
     @topic.posts_count += 1 # hack to set last_page correctly
     if (@topic.posts << @post) 
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
     if @post.update_attributes(params[:post]) 
       redirect_to topic_post_path(@post)
     else 
-      render :action => :edit 
+      render :action => 'edit'
     end 
   end 
 
@@ -56,13 +56,12 @@ class PostsController < ApplicationController
   def quote
     @body = "[quote=#{@post.user.login}]#{@post.body}[/quote]"
     @post = nil # clear post so form with create a new one
-    render :template => "posts/new"
+    render :template => 'posts/new'
   end
   
   def find_topic_and_post
     @post = Post.find(params[:id])
     @topic = Topic.find(@post.topic.id)
     redirect_to topics_url unless @topic
-  end 
-
+  end
 end

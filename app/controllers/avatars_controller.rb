@@ -2,28 +2,26 @@ class AvatarsController < ApplicationController
   
   before_filter :redirect_home, :only => [:show, :edit, :update]
   before_filter :require_login, :except => [:index]
+  before_filter :can_edit, :only => [:destroy]
   
   def index
     @avatars = Avatar.paginate(:page => params[:page], :order => 'updated_at desc')
   end
-
+  
   def new
   end
-
+  
   def create
-    @avatar = current_user.avatars.build params[:avatar]
+    @avatar = current_user.avatars.build(params[:avatar])
     if @avatar.save
       redirect_to avatars_path
     else
       render :action => "new"
     end
   end
-
+  
   def destroy
     @avatar = Avatar.find(params[:id])
-    redirect_to root_path and return false unless admin? || (current_user == @avatar.user)
-    @user = User.find_by_id(@avatar.current_user_id)
-    @user.update_attributes(:avatar => nil) if @user 
     @avatar.destroy
     redirect_to avatars_url
   end
@@ -46,5 +44,4 @@ class AvatarsController < ApplicationController
     current_user.update_attributes(:avatar => nil)
     redirect_to current_user
   end
-  
 end

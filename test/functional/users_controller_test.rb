@@ -308,9 +308,8 @@ class UsersControllerTest < Test::Unit::TestCase
     delete :destroy, :id => 1, :confirm => 1
     assert_equal old_count-1, User.count
     assert_redirected_to users_path
-    avatars(:test).reload
-    assert_nil avatars(:test).current_user_id
-    assert_equal avatars(:test).user_id, 4
+    avatars(:guest).reload
+    assert_nil avatars(:guest).current_user_id
   end
   
   def test_that_default_time_zone_works

@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id], :include => :forums)
     @forums = @category.forums
     @topics = Topic.paginate(:page => params[:page], :include => [:user, :forum, :last_poster], :order => 'topics.last_post_at desc', :conditions => ["forum_id in (?)", @forums.collect(&:id)])
-    render(:template => "topics/index")
+    render :template => 'topics/index'
   end
   
   def new
@@ -18,8 +18,11 @@ class CategoriesController < ApplicationController
     
   def create
     @category = Category.new(params[:category])
-    render :action => 'new' and return false unless @category.save
-    redirect_to forum_root_path
+    if @category.save
+      redirect_to forum_root_path
+    else
+      render :action => 'new'
+    end
   end
   
   def edit
@@ -49,5 +52,4 @@ class CategoriesController < ApplicationController
   def confirm_delete
     @category = Category.find(params[:id])
   end
-    
 end

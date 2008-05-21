@@ -28,6 +28,5 @@ class SearchController < ApplicationController
       @users = User.paginate(:page => params[:page], :order => 'created_at desc', :conditions => ['login LIKE ?', '%' + params[:query] + '%'])        
       render :template => 'users/index'
     end
-  end
-  
+  end  
 end

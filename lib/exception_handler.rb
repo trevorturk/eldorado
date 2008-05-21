@@ -21,13 +21,12 @@ module ExceptionHandler
   
   def default_settings
     Setting.defaults
-    flash[:notice] = 'Welcome to El Dorado! Please create a new user account for yourself.'
+    flash[:notice] = 'Welcome to El Dorado! Please create an admin user account for yourself.'
     redirect_to new_user_path
   end
   
   def url_upload_not_found
     flash[:notice] = "Sorry, the URL you provided was not valid."
     redirect_to new_upload_path
-  end
-  
+  end  
 end

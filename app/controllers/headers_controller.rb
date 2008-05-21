@@ -19,7 +19,7 @@ class HeadersController < ApplicationController
     if @header.save
       redirect_to @header
     else
-      render :action => "new"
+      render :action => 'new'
     end
   end
 
@@ -32,7 +32,7 @@ class HeadersController < ApplicationController
     if @header.update_attributes(params[:header])
       redirect_to @header
     else
-      render :action => "edit"
+      render :action => 'edit'
     end
   end
 
@@ -52,6 +52,5 @@ class HeadersController < ApplicationController
     @header = Header.find(params[:id])
     @header.vote_down
     render :partial => 'votes.html.erb'
-  end
-  
+  end  
 end
