@@ -351,6 +351,8 @@ tbody .tds {
 
 .messages-index .tcl {
 	width: 64%;
+	max-width: 477px;
+	overflow: auto;
 	border-right: 0;
 	background: #dedfdf;
 }
@@ -594,10 +596,11 @@ cite {
 	text-align: center;
 }
 
-.post-body img { max-width: 560px; }
-.post-body blockquote img { max-width: 528px; }
-.post-body blockquote blockquote img { max-width: 494px; }
-.post-body blockquote blockquote blockquote img { max-width: 459px; }
+.post-body img { max-width: 100%; }
+.post-body blockquote img { max-width: 532px; }
+.post-body blockquote blockquote img { max-width: 498px; }
+.post-body blockquote blockquote blockquote img { max-width: 464px; }
+.post-body blockquote blockquote blockquote blockquote img { max-width: 430px; }
 .messages-index img { max-width: 477px; }
 .messages-index blockquote img { max-width: 445px; }
 .messages-index blockquote blockquote img { max-width: 412px; }
