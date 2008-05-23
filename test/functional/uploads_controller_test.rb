@@ -79,8 +79,10 @@ class UploadsControllerTest < Test::Unit::TestCase
   
   def test_should_not_bomb_on_bogus_url_upload
     login_as :trevor
-    post :create, :upload_url => 'asdfsdfds'
-    assert_redirected_to new_upload_path
+    old_count = Upload.count
+    assert_nothing_raised do 
+      post :create, :upload => { :url => 'asdfsdfds' }
+    end
+    assert_equal old_count, Upload.count
   end
-  
 end

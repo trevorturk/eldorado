@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(password)
   end
   
+  # TODO remove in favor of User.last?
   def self.newest
     find(:first, :order => 'created_at desc')
   end

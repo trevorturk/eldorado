@@ -1,5 +1,4 @@
 class UploadsController < ApplicationController
-  require 'open-uri'
   
   before_filter :redirect_home, :only => [:show, :edit, :update]
   before_filter :require_login, :except => [:index]
@@ -18,11 +17,7 @@ class UploadsController < ApplicationController
   end
 
   def create
-    if params[:upload_url].blank?
-      @upload = current_user.uploads.build(params[:upload])
-    else
-      @upload = current_user.uploads.build(:uploaded_data => UrlUpload.new(params[:upload_url]))
-    end
+    @upload = current_user.uploads.build(params[:upload])
     if @upload.save
       flash[:notice] = "#{root_url.chop + @upload.public_filename}"
       redirect_to files_path
