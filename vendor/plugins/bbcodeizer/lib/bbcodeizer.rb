@@ -11,6 +11,9 @@ module BBCodeizer
       :start_quote_with_cite => [ /\[quote=(.*?)\]/i, '<blockquote><p><cite>\1 wrote:</cite></p>' ],
       :start_quote_sans_cite => [ /\[quote\]/i, '<blockquote>' ],
       :end_quote             => [ /\[\/quote\]/i, '</blockquote>' ],
+      :start_list            => [ /\[list\]/i, '<ul>' ],
+      :list_item             => [ /\[\*\](.+?)(?:\r\n?)/, '<li>\1</li>' ],
+      :end_list              => [ /\[\/list\]/i, '</ul>' ],
       :bold                  => [ /\[b\](.+?)\[\/b\]/im, '<strong>\1</strong>' ],
       :italic                => [ /\[i\](.+?)\[\/i\]/im, '<em>\1</em>' ],
       :underline             => [ /\[u\](.+?)\[\/u\]/im, '<u>\1</u>' ],
@@ -49,7 +52,7 @@ module BBCodeizer
                 :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :hide, :mp3, 
                 :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor, 
                 :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :funnyordie, 
-                :atomfilms, :vimeo ]
+                :atomfilms, :vimeo, :list, :list_item ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)
@@ -91,6 +94,13 @@ module BBCodeizer
       # quotes must match, else don't do any replacing
       if string.scan(Tags[:start_quote].first).size == string.scan(Tags[:end_quote].first).size
         apply_tags(string, :start_quote_with_cite, :start_quote_sans_cite, :end_quote)
+      end
+    end
+
+    def list(string)
+      # list tags must match, else don't do any replacing.
+      if string.scan(Tags[:start_list].first).size == string.scan(Tags[:end_list].first).size
+        apply_tags(string, :start_list, :end_list)
       end
     end
 
