@@ -7,7 +7,7 @@
     <p><%= f.text_field :title, :style => 'width:66%;' %></p>
     <p class="label"><label for="event_description">Description</label></p>
     <p><%= f.text_area :description, :rows => '10', :style => 'width:66%;' %></p>
-    <%= f.check_box(:reminder) %><label for="event_reminder"> Reminder <span class="detail">(Show a reminder 8 hours before and 2 hours after this event.)</span></label>
+    <%= f.check_box(:reminder) %><label for="event_reminder"> Reminder <span class="detail">(Show a reminder 6 hours before and 2 hours after this event.)</span></label>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
       <%= link_to 'Delete', @event, :confirm => 'Are you sure?', :method => :delete %> &nbsp; 

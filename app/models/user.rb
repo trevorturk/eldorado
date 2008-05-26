@@ -24,7 +24,10 @@ class User < ActiveRecord::Base
   attr_reader :password
   
   attr_protected :id, :created_at, :admin, :posts_count
-     
+  
+  named_scope :chatting, :conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc'
+  named_scope :online, :conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc'
+  
   def password=(value)
     return if value.blank?
     write_attribute :password_hash, User.encrypt(value)
@@ -55,15 +58,7 @@ class User < ActiveRecord::Base
   def self.encrypt(password)
     Digest::SHA1.hexdigest(password)
   end
-  
-  def self.online
-    User.find(:all, :conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc')
-  end
-  
-  def self.chatting
-    User.find(:all, :conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc')
-  end
-  
+    
   def set_defaults
     self.profile_updated_at = Time.now.utc
     self.time_zone = Setting.find(:first).time_zone
