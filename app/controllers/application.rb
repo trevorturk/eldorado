@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   
   def get_layout_vars
     @users_online = User.online
-    @users_newest = User.newest
+    @users_newest = User.last
     @event_reminders = Event.reminders
   end
   

@@ -56,11 +56,6 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(password)
   end
   
-  # TODO remove in favor of User.last?
-  def self.newest
-    find(:first, :order => 'created_at desc')
-  end
-  
   def self.online
     User.find(:all, :conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc')
   end
