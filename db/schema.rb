@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 83) do
+ActiveRecord::Schema.define(:version => 20080526190223) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -167,10 +167,10 @@ ActiveRecord::Schema.define(:version => 83) do
     t.string   "email"
     t.string   "password_hash"
     t.datetime "created_at"
-    t.boolean  "admin",                             :default => false
-    t.integer  "posts_count",                       :default => 0
+    t.boolean  "admin",              :default => false
+    t.integer  "posts_count",        :default => 0
     t.string   "signature"
-    t.text     "bio",                :limit => 255
+    t.text     "bio"
     t.datetime "profile_updated_at"
     t.datetime "online_at"
     t.string   "avatar"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(:version => 83) do
     t.string   "ban_message"
     t.datetime "banned_until"
     t.datetime "chatting_at"
-    t.boolean  "logged_out",                        :default => false
+    t.boolean  "logged_out",         :default => false
   end
 
   add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"
