@@ -25,15 +25,9 @@ class User < ActiveRecord::Base
   
   attr_protected :id, :created_at, :admin, :posts_count
   
-  named_scope :chatting, :conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc'
-  named_scope :online, :conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc'
-  
-  def password=(value)
-    return if value.blank?
-    write_attribute :password_hash, User.encrypt(value)
-    @password = value
-  end
-  
+  named_scope :chatting, lambda {|*args| {:conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc'}}
+  named_scope :online, lambda {|*args| {:conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc'}}
+    
   def updated_at
     profile_updated_at
   end
@@ -49,6 +43,12 @@ class User < ActiveRecord::Base
   def remove_ban
     self.ban_message = self.banned_until = nil
     self.save
+  end
+  
+  def password=(value)
+    return if value.blank?
+    write_attribute :password_hash, User.encrypt(value)
+    @password = value
   end
   
   def self.authenticate(login, password)

@@ -23,11 +23,7 @@ class Topic < ActiveRecord::Base
   def hit!
     self.class.increment_counter(:views, id)
   end
-    
-  def updated_at
-    last_post_at
-  end
-  
+      
   def replies 
     self.posts_count - 1
   end
@@ -40,6 +36,10 @@ class Topic < ActiveRecord::Base
     post = posts.find(:first, :order => 'posts.created_at desc')
     return if post.nil? # return if this was the last post in the thread
     self.class.update_all(['last_post_id = ?, last_post_at = ?, last_post_by = ?', post.id, post.created_at, post.user_id], ['id = ?', self.id])
+  end
+  
+  def updated_at
+    last_post_at
   end
   
   def to_s
