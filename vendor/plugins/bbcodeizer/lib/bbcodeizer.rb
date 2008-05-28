@@ -5,15 +5,17 @@ module BBCodeizer
     
     #:nodoc:
     Tags = {
-      :start_code            => [ /\[code\]/i, '<pre>' ],
-      :end_code              => [ /\[\/code\]/i, '</pre>' ],
-      :start_quote           => [ /\[quote(?:=.*?)?\]/i, nil ],
-      :start_quote_with_cite => [ /\[quote=(.*?)\]/i, '<blockquote><p><cite>\1 wrote:</cite></p>' ],
-      :start_quote_sans_cite => [ /\[quote\]/i, '<blockquote>' ],
-      :end_quote             => [ /\[\/quote\]/i, '</blockquote>' ],
-      :start_list            => [ /\[list\]/i, '<ul>' ],
-      :list_item             => [ /\[\*\](.+?)(?:\r\n?)/, '<li>\1</li>' ],
-      :end_list              => [ /\[\/list\]/i, '</ul>' ],
+      :literal               => [ /\[\[(.+?)\]\]/im, '&#91\1&#93' ],
+      :start_code            => [ /\[code\](\r\n?)?/i, '<pre>' ],
+      :end_code              => [ /(\r\n?)?\[\/code\]/i, '</pre>' ],
+      :start_list            => [ /\[list\](\r\n?)?/i, '<ul>' ],
+      :start_li              => [ /\[li\](\r\n?)?/i, '<li>' ],
+      :end_li                => [ /(\r\n?)?\[\/li\](\r\n?)?/i, '</li>' ],
+      :end_list              => [ /(\r\n?)?\[\/list\]/i, '</ul>' ],
+      :start_quote           => [ /\[quote(?:=.*?)?\](\r\n?)?/i, '<blockquote>' ],
+      :start_quote_with_cite => [ /\[quote=(.*?)\](\r\n?)?/i, '<blockquote><p><cite>\1 wrote:</cite></p>' ],
+      :start_quote_sans_cite => [ /\[quote\](\r\n?)?/i, '<blockquote>' ],
+      :end_quote             => [ /(\r\n?)?\[\/quote\]/i, '</blockquote>' ],
       :bold                  => [ /\[b\](.+?)\[\/b\]/im, '<strong>\1</strong>' ],
       :italic                => [ /\[i\](.+?)\[\/i\]/im, '<em>\1</em>' ],
       :underline             => [ /\[u\](.+?)\[\/u\]/im, '<u>\1</u>' ],
@@ -47,12 +49,13 @@ module BBCodeizer
         
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
     # These names correspond to either names above or methods in this module.
-    TagList = [ :bold, :italic, :underline, :email_with_name, :email_sans_name, 
+                # The ':literal' tag MUST be first for it to work correctly
+    TagList = [ :literal, :bold, :italic, :underline, :email_with_name, :email_sans_name, 
                 :url_with_title, :url_sans_title, :image, :size, :color, :code, 
                 :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :hide, :mp3, 
                 :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor, 
                 :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :funnyordie, 
-                :atomfilms, :vimeo, :list, :list_item ]
+                :atomfilms, :vimeo, :li, :list ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)
@@ -87,20 +90,39 @@ module BBCodeizer
       # code tags must match, else don't do any replacing.
       if string.scan(Tags[:start_code].first).size == string.scan(Tags[:end_code].first).size
         apply_tags(string, :start_code, :end_code)
+        # strip out newlines from within the tags and replace them with '<br />', otherwise
+        # simple_format will simply append a '<br />' to the newlines, creating double spaces
+        string.gsub!(/#{Tags[:start_code].last}.+?#{Tags[:end_code].last}/im) { |s| s.gsub(/\r\n?/, '<br />') }
       end
     end
   
-    def quote(string)
-      # quotes must match, else don't do any replacing
-      if string.scan(Tags[:start_quote].first).size == string.scan(Tags[:end_quote].first).size
-        apply_tags(string, :start_quote_with_cite, :start_quote_sans_cite, :end_quote)
+    def li(string)
+      # list tags must match, else don't do any replacing.
+      if string.scan(Tags[:start_li].first).size == string.scan(Tags[:end_li].first).size
+        apply_tags(string, :start_li, :end_li)
+        # strip out newlines from within the tags and replace them with '<br />', otherwise
+        # simple_format will simply append a '<br />' to the newlines, creating double spaces
+        string.gsub!(/#{Tags[:start_li].last}.+?#{Tags[:end_li].last}/im) { |s| s.gsub(/\r\n?/, '<br />') }
       end
     end
-
+    
     def list(string)
       # list tags must match, else don't do any replacing.
       if string.scan(Tags[:start_list].first).size == string.scan(Tags[:end_list].first).size
         apply_tags(string, :start_list, :end_list)
+        # strip out newlines from within the tags and replace them with '<br />', otherwise
+        # simple_format will simply append a '<br />' to the newlines, creating double spaces
+        string.gsub!(/#{Tags[:start_list].last}.+?#{Tags[:end_list].last}/im) { |s| s.gsub(/\r\n?/, '<br />') }
+      end
+    end
+    
+    def quote(string)
+      # quotes must match, else don't do any replacing
+      if string.scan(Tags[:start_quote].first).size == string.scan(Tags[:end_quote].first).size
+        apply_tags(string, :start_quote_with_cite, :start_quote_sans_cite, :end_quote)
+        # strip out newlines from within the tags and replace them with '<br />', otherwise
+        # simple_format will simply append a '<br />' to the newlines, creating double spaces
+        string.gsub!(/#{Tags[:start_quote].last}.+?#{Tags[:end_quote].last}/im) { |s| s.gsub(/\r\n?/, '<br />') }
       end
     end
 
