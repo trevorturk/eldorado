@@ -29,7 +29,7 @@ module ApplicationHelper
   def page_title
     item = [@category, @event, @forum, @header, @topic, @user].compact.first unless %w(new create login logout).include?(current_action)
     page = request.env['PATH_INFO'].delete('/').sub('new','').capitalize unless request.env['REQUEST_PATH'].nil? 
-    page = 'Home' if current_controller == 'home'
+    page = @settings.tagline if current_controller == 'home'
     "#{@settings}: #{item || page}"
   end
   
