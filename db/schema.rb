@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(:version => 20080603230322) do
     t.integer  "updated_by"
   end
 
-  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
   add_index "posts", ["topic_id", "created_at"], :name => "index_posts_on_topic_id_and_created_at"
+  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
 
   create_table "ranks", :force => true do |t|
     t.string  "title"
@@ -146,8 +146,8 @@ ActiveRecord::Schema.define(:version => 20080603230322) do
     t.integer  "forum_id"
   end
 
-  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
   add_index "topics", ["forum_id", "sticky", "last_post_at"], :name => "index_topics_on_sticky_and_last_post_at"
+  add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
 
   create_table "uploads", :force => true do |t|
     t.integer  "parent_id"

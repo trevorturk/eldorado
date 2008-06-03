@@ -1,12 +1,16 @@
 class UseRailsNewDefaultTimeZones < ActiveRecord::Migration
   def self.up
     @users = User.all
-    @users.each do |user|
-      user.time_zone = 'UTC' if user.time_zone.nil?
+    @users.each do |user|      
       tz = TZInfo::Timezone.get(user.time_zone) rescue TimeZone[user.time_zone] || TimeZone['UTC']
-      linked_timezone = tz.instance_variable_get('@linked_timezone')
-      time_zone = linked_timezone ? TimeZone::MAPPING.index(linked_timezone.name) : tz.name
-      user.update_attribute(:time_zone, time_zone)
+      time_zone = if tz.is_a?(TZInfo::Timezone)
+        linked_timezone = tz.instance_variable_get('@linked_timezone')
+        name = linked_timezone ? linked_timezone.name : tz.name
+        TimeZone::MAPPING.index(name)
+      else
+        tz.name
+      end
+      user.update_attribute(:time_zone, time_zone) unless time_zone == user.time_zone
     end unless @users.empty?
   end
 
