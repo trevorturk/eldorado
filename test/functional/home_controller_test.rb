@@ -48,6 +48,7 @@ class HomeControllerTest < Test::Unit::TestCase
     Setting.destroy_all
     get :index
     assert_redirected_to new_user_path
+    assert_equal 'UTC', Setting.first.time_zone
   end
 
   def test_should_not_update_session_online_at

@@ -332,6 +332,11 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_not_nil User.find_by_login('user1').online_at
   end
   
+  def test_that_user_gets_default_time_zone_values
+    post :create, :user => {:login => 'user1', :email => 'test1@test.com', :password => 'abc', :password_confirmation => 'abc'}
+    assert_equal User.find_by_login('user1').time_zone, 'US/Central'
+  end
+  
   def test_should_get_ban_if_admin
     login_as :Administrator
     get :ban, :id => users(:trevor).id
