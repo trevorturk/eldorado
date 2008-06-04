@@ -1,7 +1,8 @@
 class UseRailsNewDefaultTimeZones < ActiveRecord::Migration
   def self.up
     @users = User.all
-    @users.each do |user|      
+    @users.each do |user|
+      user.time_zone = 'UTC' if user.time_zone.blank?
       tz = TZInfo::Timezone.get(user.time_zone) rescue TimeZone[user.time_zone] || TimeZone['UTC']
       time_zone = if tz.is_a?(TZInfo::Timezone)
         linked_timezone = tz.instance_variable_get('@linked_timezone')
