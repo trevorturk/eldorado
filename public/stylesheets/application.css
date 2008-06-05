@@ -252,6 +252,10 @@ tbody .tds {
   margin-top: 0;
 }
 
+.thread .body pre {
+	margin-top: -10px;
+}
+
 .post-body {
   overflow: auto;
 }

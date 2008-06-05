@@ -73,12 +73,9 @@ module ApplicationHelper
     return '<div class="icon inew"><!-- --></div>' if is_new?(item)
     return '<div class="icon"><!-- --></div>'
   end
-    
+  
   def bb(text)
-    text = simple_format(bbcodeize(sanitize(h(text))))
-    auto_link(text) do |t|
-      truncate(t, 50)
-    end
+    auto_link(simple_format(bbcodeize(sanitize(h(text))))) {|t| truncate(t, 50)}
   end
   
   def current_page(collection)
