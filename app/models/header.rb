@@ -2,7 +2,7 @@ class Header < ActiveRecord::Base
   
   belongs_to :user
   
-  has_attachment :storage => :file_system, :max_size => 500.kilobytes, :content_type => :image
+  has_attachment :storage => :file_system, :partition => false, :content_type => :image, :max_size => 500.kilobytes
   include AttachmentFuExtensions
   
   def self.random
