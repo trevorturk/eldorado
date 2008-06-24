@@ -21,7 +21,7 @@
     </div>
     <div class="content">
       <%= render 'shared/nav' %>
-      <div class="announcement"><%= @settings.announcement -%></div>
+      <div class="announcement"><%= @settings.announcement if current_controller == 'home' -%></div>
       <%= render :partial => 'search/form.html.erb' if current_controller == 'search' -%>
       <%= render 'shared/flash' -%>
       <%= yield %>
