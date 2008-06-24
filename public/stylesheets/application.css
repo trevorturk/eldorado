@@ -20,6 +20,7 @@ body {
 }
   
 .header {
+	position: relative;
   height: 200px;
   background-color: #333;
 }
@@ -76,35 +77,36 @@ h3 {
 }
 
 .tabs {
-	position: relative;
-	margin-top: 52px;
-	margin-left: 26px;
+	position: absolute;
+	margin: -18px 0 0 14px;
+	padding: 0;
+	bottom: 0;
 	font-size: 10px;
-}
-  
+	}
+
 .tabs li {
 	display: inline;
 	margin: 0px 2px;
-}
-  
-.tabs li a {
+	}
+
+.tabs, .tabs li a {
 	padding: 6px 12px 6px;
-}
+	}
 
-.tabs li a:link, .tabs li a:visited {
-  color: #fff !important;
-  text-decoration: none;
-}
+.tabs li a {
+	color: white;
+	text-decoration: none;
+	}
 
-.tabs li a:hover, .tabs li a:active {
-  background: #333;
-}
+.tabs li a:hover {
+	background: #333;
+	color: #eee;
+	}
 
-.tabs li.current_tab a:link, .tabs li.current_tab a:visited, .tabs li.current_tab a:hover, .tabs li.current_tab a:active {
-  background: #fff;
-  color: #333 !important;
-  text-decoration: none;
-}
+.tabs li.current_tab a, .tabs li.current_tab a:hover {
+	color: #333;
+	background: white;
+	}
 
 .nav {
   margin: 10px 0;
