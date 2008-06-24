@@ -1,3 +1,4 @@
+# http://www.jroller.com/rmcmahon/entry/resizingtextarea_with_prototype
 var ResizingTextArea = Class.create();
 
 ResizingTextArea.prototype = {
