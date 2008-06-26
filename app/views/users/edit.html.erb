@@ -12,9 +12,9 @@
       <%= f.password_field :password_confirmation, :style => "width:15%" %>
     </p>
     <p class="label"><label for="user_bio">Bio</label></p>
-    <p><%= f.text_area :bio, :rows => "3", :style => "width:50%;", :onfocus => "new ResizeableTextarea(this);" %></p>
+    <p><%= f.text_area :bio, :rows => "3", :style => "width:50%;" %></p>
     <p class="label"><label for="user_signature">Signature</label></p>
-    <p><%= f.text_area :signature, :rows => "2", :style => "width:50%;", :onfocus => "new ResizeableTextarea(this);" %></p>
+    <p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
     <p class="label"><label for="user_time_zone">Timezone</label></p>
     <p><%= f.time_zone_select :time_zone, TimeZone.us_zones %></p>
     <p>

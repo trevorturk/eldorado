@@ -12,7 +12,7 @@
     </p>
     <%= render :partial => 'forums/select' %>
     <p class="label"><label for="topic_body">Body</label></p>
-    <p><%= f.text_area :body, :rows => '8', :style => 'width:66%;', :onfocus => "new ResizeableTextarea(this);" %></p>
+    <p><%= f.text_area :body, :rows => '8', :style => 'width:66%;' %></p>
     <p>
       <%= submit_tag "Post Topic", :disable_with => "Post Topic" %>&nbsp;
       <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %> &nbsp; 

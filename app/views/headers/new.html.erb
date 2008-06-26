@@ -6,7 +6,7 @@
     <p><%= f.file_field :uploaded_data %></p>
     <p>Headers should be sized 760x200px.</p>
     <p class="label"><label for="header_description">Description (optional)</label></p>
-    <p><%= f.text_area :description, :rows => '4', :style => 'width:66%;', :onfocus => "new ResizeableTextarea(this);" %></p>
+    <p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
     <p>
       <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp;
       <% if current_action != 'new' %>
