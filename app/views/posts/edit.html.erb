@@ -2,7 +2,7 @@
 <% form_for @post do |f| %>
   <div class="box" id="box-posts-edit">
     <span class="top">Edit Post</span>
-    <p><%= f.text_area :body, :rows => '10', :style => 'width:66%;', :onfocus => "new ResizingTextArea(this);" %></p>
+    <p><%= f.text_area :body, :rows => '10', :style => 'width:66%;', :onfocus => "new ResizeableTextarea(this);" %></p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
       <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> &nbsp;
