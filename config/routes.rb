@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.root :controller => 'home'
   
+  map.resources :articles
   map.resources :avatars, :member => { :select => :post, :deselect => :post }
   map.resources :categories, :member => { :confirm_delete => :get }
   map.resources :events
@@ -25,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.register 'register', :controller => 'users', :action => 'new'
   
   map.admin 'admin', :controller => 'settings', :action => 'index'
+  map.blog 'blog', :controller => 'articles', :action => 'index'
   map.chat 'chat', :controller => 'messages', :action => 'index'
   map.files 'files', :controller => 'uploads', :action => 'index'
   map.forum_root 'forum', :controller => 'forums', :action => 'index'

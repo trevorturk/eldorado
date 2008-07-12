@@ -349,6 +349,37 @@ tbody .tds {
 	width: 14%;
 }
 
+.primary {
+	float: left;
+	max-width: 560px;
+	margin-top: 8px;
+}
+
+.secondary {
+	float: left;
+	margin-top: 14px;
+	padding: 0 10px;
+	border-left: 1px solid #f1f1f1;
+}
+
+.article-body {
+	margin: 8px 6px 40px 6px;
+  line-height: 1.4em;
+}
+
+.article-body p {
+	margin-top: 0;
+}
+
+.secondary-list {
+	margin: 10px;
+	padding-bottom: 10px;
+}
+
+.secondary-list li {
+	margin-bottom: 2px;
+}
+
 .messages-index {
 	border: 0;
 }
@@ -422,6 +453,12 @@ tbody .tds {
 	color: #333;
 }
 
+.article-title {
+	font-size: 18px;
+	font-weight: normal;
+	padding-bottom: 4px;
+}
+
 .detail, .detail a.text {
   color: #999;
   letter-spacing: -1px;
@@ -440,6 +477,13 @@ blockquote {
   border-color: #ACA899 #FFF #FFF #ACA899;
   margin: 10px !important;
   padding: 6px;
+}
+
+.article-body blockquote {
+	background: none !important;
+	border: none;
+  border-left: 1px solid #ccc;
+	padding: 10px;
 }
 
 cite {

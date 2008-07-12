@@ -16,5 +16,4 @@ class TopicTest < Test::Unit::TestCase
     t = Topic.find(1)
     assert_equal t.to_s, 'Testing'
   end
-  
 end

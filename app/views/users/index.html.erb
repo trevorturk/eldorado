@@ -5,6 +5,9 @@
       <%= pluralize(number_with_delimiter(@users_count) || 0, 'Users') %>
     </span>
   </div>
+  <div class="info-right">
+    <%= link_to 'Avatars', avatars_path %> &nbsp; 
+  </div>
   <div style="clear:both;"> </div>
 <% end %>
 

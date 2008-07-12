@@ -2,11 +2,12 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
+  has_many :articles, :dependent => :destroy
   has_many :avatars, :dependent => :destroy
   has_many :events, :dependent => :destroy
   has_many :headers, :dependent => :destroy
   has_many :messages, :dependent => :destroy
-  has_many :posts, :order => 'posts.created_at desc', :dependent => :destroy
+  has_many :posts, :dependent => :destroy
   has_many :themes, :dependent => :destroy
   has_many :topics, :dependent => :destroy
   has_many :uploads, :dependent => :destroy
