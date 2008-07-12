@@ -58,7 +58,7 @@ module ApplicationHelper
       'current_tab'
     elsif name == "forums" && %w(categories topics posts).include?(current_controller)
       'current_tab'
-    elsif name == "users" && ((current_controller == "avatars"))
+    elsif name == "users" && (current_controller == "avatars" || current_controller == "ranks")
       'current_tab'
     end
   end

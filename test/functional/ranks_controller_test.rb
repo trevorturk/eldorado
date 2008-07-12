@@ -3,15 +3,15 @@ require File.dirname(__FILE__) + '/../test_helper'
 class RanksControllerTest < ActionController::TestCase
   fixtures :all
   
-  def test_should_get_index_if_admin
-    login_as :Administrator
+  def test_should_get_index
     get :index
     assert_response :success
   end
   
-  def test_should_not_get_index_if_not_admin
+  def test_should_get_index_if_admin
+    login_as :Administrator
     get :index
-    assert_redirected_to root_path
+    assert_response :success
   end
   
   def test_should_get_new_if_admin
