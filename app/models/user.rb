@@ -2,17 +2,17 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
-  has_many :articles, :dependent => :destroy
-  has_many :avatars, :dependent => :destroy
-  has_many :events, :dependent => :destroy
-  has_many :headers, :dependent => :destroy
-  has_many :messages, :dependent => :destroy
-  has_many :posts, :dependent => :destroy
-  has_many :themes, :dependent => :destroy
-  has_many :topics, :dependent => :destroy
-  has_many :uploads, :dependent => :destroy
+  has_many :articles, :dependent => :destroy, :order => 'created_at desc'
+  has_many :avatars, :dependent => :destroy, :order => 'created_at desc'
+  has_many :events, :dependent => :destroy, :order => 'date desc'
+  has_many :headers, :dependent => :destroy, :order => 'created_at desc'
+  has_many :messages, :dependent => :destroy, :order => 'created_at desc'
+  has_many :posts, :dependent => :destroy, :order => 'created_at desc'
+  has_many :themes, :dependent => :destroy, :order => 'created_at desc'
+  has_many :topics, :dependent => :destroy, :order => 'created_at desc'
+  has_many :uploads, :dependent => :destroy, :order => 'created_at desc'
   has_one :current_avatar, :class_name => 'Avatar', :foreign_key => 'current_user_id', :dependent => :nullify
-      
+  
   validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
@@ -26,9 +26,10 @@ class User < ActiveRecord::Base
   
   attr_protected :id, :created_at, :admin, :posts_count
   
+  named_scope :bloggers, :conditions => 'articles_count > 0', :order => 'articles_count desc'
   named_scope :chatting, lambda {|*args| {:conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc'}}
   named_scope :online, lambda {|*args| {:conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc'}}
-    
+  
   def updated_at
     profile_updated_at
   end

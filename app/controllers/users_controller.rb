@@ -57,6 +57,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  def articles
+    @user = User.find(params[:id])
+    @articles = @user.articles.paginate(:page => params[:page])
+    render :template => 'articles/index'
+  end
+  
   def posts
     @user = User.find(params[:id])
     @posts = @user.posts.paginate(:page => params[:page])

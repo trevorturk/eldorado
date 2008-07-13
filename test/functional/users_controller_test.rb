@@ -402,6 +402,13 @@ class UsersControllerTest < Test::Unit::TestCase
     get :posts, :id => users(:noposts).id
     assert_response :success
   end
+  
+  def test_user_articles_path_should_work
+    get :articles, :id => users(:trevor).id
+    assert_response :success
+    get :articles, :id => users(:noposts).id
+    assert_response :success
+  end
 
   def test_should_set_logged_out_to_false_when_logging_in
     login_as :trevor

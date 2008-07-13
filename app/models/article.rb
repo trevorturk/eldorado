@@ -1,6 +1,6 @@
 class Article < ActiveRecord::Base
   
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   
   validates_presence_of :user_id, :title, :body
   attr_readonly :user_id, :created_at

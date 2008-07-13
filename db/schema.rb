@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080712034609) do
+ActiveRecord::Schema.define(:version => 20080712230439) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(:version => 20080712034609) do
     t.datetime "banned_until"
     t.datetime "chatting_at"
     t.boolean  "logged_out",         :default => false
+    t.integer  "articles_count",     :default => 0
   end
 
   add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"
