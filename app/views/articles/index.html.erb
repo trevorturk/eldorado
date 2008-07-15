@@ -1,29 +1,21 @@
 <div class="primary">
-  <% if @articles.empty? %>
+  <% if @user %>    
+    <div class="info-left">
+      <span class="title">Articles by <%= link_to @user, articles_user_path(@user) %></span>
+    </div>
+    <div style="clear:both;"> </div>
+  <% end %>
+  <% if @articles %>
+    <% for article in @articles %>
+      <%= render :partial => 'articles/article', :object => article %>
+    <% end %>
+  <% else %>
     <div class="info-left">
       <div class="title article-title">No Articles Found</div>
     </div>
-  <% else %>
-    <% for article in @articles %>
-      <div class="info-left">
-        <div class="title article-title">
-          <%= link_to h(article.title), article %>
-        </div>
-        <div class="detail">
-          <%= time_ago_or_time_stamp(article.created_at) %> by 
-          <%= link_to h(article.user), article.user %>
-          <% if can_edit?(article) %>
-            &nbsp;|&nbsp; <%= link_to 'Edit', edit_article_path(article) %>
-          <% end %>
-        </div>
-      </div>
-      <div style="clear:both;"> </div>
-      <div class="article-body">
-        <%=bb article.body %>
-      </div>
-    <% end %>
+    <div style="clear:both;"> </div>
   <% end %>
 </div>
-<div class="secondary articles-secondary">
+<div class="secondary">
   <%= render :partial => 'articles/secondary'%>
 </div>

@@ -1,4 +1,4 @@
-<% @bloggers = User.bloggers %>
+<% @bloggers ||= User.bloggers %>
 <% if @bloggers %>
   <div class="title"><%= link_to 'Contributors', users_path %></div>
   <ul class="secondary-list">
@@ -8,6 +8,7 @@
   </ul>
 <% end %>
 
+<% @articles ||= Article.get %>
 <% if @articles %>
   <div class="title"><%= link_to 'Recent Articles', blog_path %></div>
   <ul class="secondary-list">
