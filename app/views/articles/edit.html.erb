@@ -8,7 +8,8 @@
     <p><%= f.text_area :body, :rows => '10', :class => 'text-field' %></p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
-      <%= link_to 'Cancel', blog_path %>
+      <%= link_to 'Cancel', blog_path %> &nbsp; 
+      <%= link_to 'Delete', article_path, :confirm => 'Are you sure?', :method => :delete %>
     </p>
   <% end %>
   <div class="clear"> </div>

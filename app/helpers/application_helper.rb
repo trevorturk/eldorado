@@ -114,7 +114,7 @@ module ApplicationHelper
   end
   
   def time_stamp(time, short = false)
-    return time.strftime("%l:%M%P, %d %b").squeeze(' ') if short
-    time.strftime("%a, %d %b %Y, %l:%M%P").squeeze(' ')
+    return (time.strftime("%l:%M%p, ").downcase + time.strftime("%d %b")).squeeze(' ') if short
+    (time.strftime("%a, %d %b %Y, %l:%M") + time.strftime("%p").downcase).squeeze(' ')
   end
 end

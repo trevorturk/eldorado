@@ -3,7 +3,7 @@
     <%= link_to h(article.title), article %>
   </div>
   <div class="detail">
-    <%= time_ago_or_time_stamp(article.created_at) %> by 
+    <%= time_ago_or_time_stamp(article.created_at, Time.now.utc, true, true) %> by 
     <%= link_to h(article.user), user_articles_path(article.user) %>
     <% if can_edit?(article) %>
       &nbsp;|&nbsp; <%= link_to 'Edit', edit_article_path(article) %>
