@@ -9,6 +9,9 @@
     <% for article in @articles %>
       <%= render :partial => 'articles/article', :object => article %>
     <% end %>
+    <div class="info-right">
+      <%= will_paginate @articles, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    </div>
   <% else %>
     <div class="info-left">
       <div class="title article-title">No Articles Found</div>
