@@ -358,14 +358,14 @@ tbody .tds {
 }
 
 .messages-index .tcu {
-	width: 18%;
+	width: 20%;
 	text-align: right;
 	font-weight: bold;
 	padding-right: 8px;
 }
 
 .messages-index .tcl {
-	width: 64%;
+	width: 60%;
 	max-width: 477px;
 	overflow: auto;
 	border-right: 0;
@@ -373,7 +373,7 @@ tbody .tds {
 }
 
 .messages-index .tcr {
-	width: 18%;
+	width: 20%;
 	text-align: right;
 	border-left: 0;
 	color: #999;
