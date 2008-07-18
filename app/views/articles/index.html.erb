@@ -1,11 +1,11 @@
 <div class="primary">
-  <% if @user %>    
+  <% if @parent_user %>    
     <div class="info-left">
-      <span class="title">Articles by <%= link_to @user, articles_user_path(@user) %></span>
+      <span class="title">Articles by <%= link_to @parent_user, user_articles_path(@parent_user) %></span>
     </div>
     <div class="clear"> </div>
   <% end %>
-  <% if @articles %>
+  <% if !@articles.empty? %>
     <% for article in @articles %>
       <%= render :partial => 'articles/article', :object => article %>
     <% end %>

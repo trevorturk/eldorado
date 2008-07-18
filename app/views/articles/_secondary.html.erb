@@ -3,16 +3,16 @@
   <div class="title"><%= link_to 'Contributors', users_path %></div>
   <ul class="secondary-list">
     <% @bloggers.each do |user| %>
-      <li><%= link_to user, articles_user_path(user) %> <span class="detail">(<%= user.articles_count %>)</span></li>
+      <li><%= link_to user, user_articles_path(user) %> <span class="detail">(<%= user.articles_count %>)</span></li>
     <% end %>
   </ul>
 <% end %>
 
-<% @articles ||= Article.get %>
-<% if @articles %>
+<% @recent_articles ||= Article.get %>
+<% if @recent_articles %>
   <div class="title"><%= link_to 'Recent Articles', blog_path %></div>
   <ul class="secondary-list">
-    <% @articles.each do |article| %>
+    <% @recent_articles.each do |article| %>
       <li><%= link_to article, article %> <span class="detail">by <%= article.user %></span></li>
     <% end %>
   </ul>

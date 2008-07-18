@@ -197,4 +197,10 @@ class PostsControllerTest < Test::Unit::TestCase
     # body of new post should be body of quoted post
   end
   
+  def test_user_posts_path_should_work
+    get :index, :user_id => users(:trevor).id
+    assert_response :success
+    get :index, :user_id => users(:noposts).id
+    assert_response :success
+  end
 end

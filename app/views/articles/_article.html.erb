@@ -4,7 +4,7 @@
   </div>
   <div class="detail">
     <%= time_ago_or_time_stamp(article.created_at) %> by 
-    <%= link_to h(article.user), articles_user_path(article.user) %>
+    <%= link_to h(article.user), user_articles_path(article.user) %>
     <% if can_edit?(article) %>
       &nbsp;|&nbsp; <%= link_to 'Edit', edit_article_path(article) %>
     <% end %>

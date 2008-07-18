@@ -3,7 +3,7 @@
   <span class="profile-avatar"><%= avatar_for(@user) %></span>
   <div style="margin-top:10px;">
     <span class="profile-title"><%=h @user.login %></span>&nbsp;
-    <span class="profile-rank"><%=h rank_for(@user) %> &mdash; <%= link_to number_with_delimiter(@user.posts_count) + ' posts', posts_user_path(@user) %></span>
+    <span class="profile-rank"><%=h rank_for(@user) %> &mdash; <%= link_to number_with_delimiter(@user.posts_count) + ' posts', user_posts_path(@user) %></span>
   </div>
   
   <div class="profile-bio">

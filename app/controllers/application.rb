@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
   
   before_filter :get_settings, :auth_token_login, :check_bans, :check_privacy, :set_timezone, :update_online_at, :get_layout_vars
-  helper_method :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :locked_out?
+  helper_method :current_user, :current_action, :current_controller, :logged_in?, :is_online?, :admin?, :can_edit?, :locked_out?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   rescue_from ActiveRecord::SettingsNotFound, :with => :default_settings
@@ -39,5 +39,18 @@ class ApplicationController < ActionController::Base
     return unless logged_in?
     session[:online_at] = current_user.online_at.utc if current_user.online_at.utc + 10.minutes < Time.now.utc
     current_user.update_attribute(:online_at, Time.now.utc)
+  end
+  
+  def current_controller
+    request.path_parameters['controller']
+  end
+  
+  def current_action
+    request.path_parameters['action']
+  end
+  
+  def find_parent_user_or_class
+    @parent_user = User.find(params[:user_id]) if params[:user_id]
+    @parent = @parent_user ? @parent_user.send(current_controller) : current_controller.singularize.classify.constantize
   end
 end

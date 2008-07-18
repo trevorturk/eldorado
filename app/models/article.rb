@@ -5,8 +5,8 @@ class Article < ActiveRecord::Base
   validates_presence_of :user_id, :title, :body
   attr_readonly :user_id, :created_at
   
-  def self.get(limit = 15)
-    find(:all, :limit => limit, :order => 'created_at desc', :include => :user)
+  def self.get(page = 1)
+    paginate(:page => page, :per_page => 15, :order => 'created_at desc', :include => :user)
   end
   
   def to_s

@@ -120,4 +120,11 @@ class ArticlesControllerTest < ActionController::TestCase
     end
     assert_redirected_to login_path
   end
+  
+  def test_user_articles_path_should_work
+    get :index, :user_id => users(:trevor).id
+    assert_response :success
+    get :index, :user_id => users(:noposts).id
+    assert_response :success
+  end
 end

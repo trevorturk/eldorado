@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
 
+  before_filter :find_parent_user_or_class, :only => [:index]
   before_filter :require_login, :except => [:index, :show]
   before_filter :can_edit, :only => [:edit, :update, :destroy]
 
   def index
-    @articles = Article.get
+    @articles = @parent.get(params[:page])
   end
 
   def show

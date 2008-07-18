@@ -16,7 +16,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :themes, :member => {:select => :post, :deselect => :post}
   map.resources :topics, :member => {:show_new => :get}
   map.resources :uploads
-  map.resources :users, :member => {:articles => :get, :posts => :get, :admin => :post, :ban => :get, :remove_ban => :post, :confirm_delete => :get}
+  map.resources :users, :member => {:admin => :post, :ban => :get, :remove_ban => :post, :confirm_delete => :get}, 
+                        :has_many => [:articles, :posts]
   
   map.search 'search', :controller => 'search', :action => 'index'
   map.refresh_chatters 'refresh_chatters', :controller => 'messages', :action => 'refresh_chatters'

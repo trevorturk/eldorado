@@ -27,10 +27,10 @@ module ApplicationHelper
   end
 
   def page_title
-    item = [@category, @event, @forum, @header, @topic, @user].compact.first unless %w(new create login logout).include?(current_action)
+    item = [@article, @category, @event, @forum, @header, @message, @topic, @user].compact.first if %w(show edit).include?(current_action)
     page = request.env['PATH_INFO'].delete('/').sub('new','').capitalize unless request.env['REQUEST_PATH'].nil? 
     page = @settings.tagline if current_controller == 'home'
-    "#{@settings}: #{item || page}"
+    "#{@settings.title}: #{item || page}"
   end
   
   def favicon_tag
@@ -79,7 +79,7 @@ module ApplicationHelper
   end
   
   def current_page(collection)
-    'Page ' + collection.current_page.to_s + ' of ' + collection.total_pages.to_s
+    'Page ' + collection.current_page.to_s + ' of ' + collection.total_pages.to_s unless collection.total_pages == 0
   end
 
   def prev_page(collection)
@@ -93,15 +93,7 @@ module ApplicationHelper
       link_to('Next page &raquo;', { :page => collection.next_page }.merge(params.reject{|k,v| k=='page'}))
     end
   end
-  
-  def current_controller
-    request.path_parameters['controller']
-  end
-  
-  def current_action
-    request.path_parameters['action']
-  end
-  
+    
   def time_ago_or_time_stamp(from_time, to_time = Time.now.utc, include_seconds = true, detail = false)
     return '&ndash;' if from_time.nil?
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
