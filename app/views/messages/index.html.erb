@@ -2,7 +2,7 @@
   <span class="title">Chat</span>
   <span class="detail" id="chatters"><%= render :partial => 'chatters' %></span>
 </div>
-<div style="clear:both;"> </div>
+<div class="clear"> </div>
 
 <% if logged_in? %>
   <div class="info-left" style="width:100%;">
@@ -13,7 +13,7 @@
       <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %>
     <% end %>
   </div>
-  <div style="clear:both;"> </div>
+  <div class="clear"> </div>
 <% end %>
 
 <table cellspacing="0" class="messages-index">

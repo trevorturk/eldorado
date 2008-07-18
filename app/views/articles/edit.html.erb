@@ -3,13 +3,13 @@
   <div class="box" id="box-articles-edit">
     <span class="top">Edit Article</span>
     <p class="label"><label for="article_title">Title</label></p>
-    <p><%= f.text_field :title, :style => 'width:66%;' %></p>
+    <p><%= f.text_field :title, :class => 'text-field' %></p>
     <p class="label"><label for="article_body">Body</label></p>
-    <p><%= f.text_area :body, :rows => '10', :style => 'width:66%;' %></p>
+    <p><%= f.text_area :body, :rows => '10', :class => 'text-field' %></p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
       <%= link_to 'Cancel', blog_path %>
     </p>
   <% end %>
-  <div style="clear:both;"> </div>
+  <div class="clear"> </div>
 </div>

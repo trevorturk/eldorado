@@ -4,13 +4,13 @@
   <span class="title"><%=h @header.filename %></span>
   <span class="detail">by <%= link_to h(@header.user.login), @header.user %></span>
 </div>
-<div style="clear:both;"> </div>
+<div class="clear"> </div>
 
 <% form_for @header do |f| -%>
   <div class="box" id="box-headers-edit">
     <span class="top">Edit Header</span>
     <p class="label"><label for="header_description">Description</label></p>
-    <p><%= f.text_area :description, :rows => '4', :style => 'width:66%;' %></p>
+    <p><%= f.text_area :description, :rows => '4', :class => 'text-field' %></p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
       <%= link_to 'Delete', @header, :confirm => 'Are you sure?', :method => :delete %> &nbsp;

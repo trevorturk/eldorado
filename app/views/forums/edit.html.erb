@@ -3,9 +3,9 @@
   <% form_for @forum do |f| %>
     <span class="top">Edit Forum</span>
     <p class="label"><label for="forum_name">Name</label></p>
-    <p><%= f.text_field :name, :style => 'width:66%;' %></p>
+    <p><%= f.text_field :name, :class => 'text-field' %></p>
     <p class="label"><label for="forum_description">Description</label></p>
-    <p><%= f.text_field :description, :style => 'width:66%;' %></p>
+    <p><%= f.text_field :description, :class => 'text-field' %></p>
     <p>
       <%= 
         @all_categories = Category.find(:all, :order => "name") 

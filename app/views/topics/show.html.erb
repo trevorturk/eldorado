@@ -10,7 +10,7 @@
     <span class="title">&nbsp;</span>
     <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
   </div>
-  <div style="clear:both;"> </div>
+  <div class="clear"> </div>
 <% end %>
 
 <% if %w(posts).include?(current_controller) %>
@@ -22,7 +22,7 @@
     <span class="title">&nbsp;</span>
     <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
   </div>
-  <div style="clear:both;"> </div>
+  <div class="clear"> </div>
 <% end %>
 
 <% if %w(users).include?(current_controller) %>
@@ -34,11 +34,11 @@
     <span class="title">&nbsp;</span>
     <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
   </div>
-  <div style="clear:both;"> </div>
+  <div class="clear"> </div>
 <% end %>
 
 <div class="info-left detail" id="posters" style="display:none;"></div>
-<div style="clear:both;"> </div>
+<div class="clear"> </div>
 
 <% @posts.each_with_index do |post, index| index+=1 %>
   <%= render 'posts/show', { :post => post, :index => index } %>
@@ -54,7 +54,7 @@
   <div class="info-right info-space info-width info-footer info-next">
     <%= next_page @posts %>
   </div>
-  <div style="clear:both;"> </div>
+  <div class="clear"> </div>
 <% end %>
 
 <% unless %w(posts search users).include?(current_controller) %>

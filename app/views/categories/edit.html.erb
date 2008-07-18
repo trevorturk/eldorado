@@ -3,7 +3,7 @@
   <% form_for @category do |f| %>
     <span class="top">Edit Category</span>
     <p class="label"><label for="category_name">Name</label></p>
-    <p><%= f.text_field :name, :style => 'width:66%;' %></p>
+    <p><%= f.text_field :name, :class => 'text-field' %></p>
     <p class="label"><label for="category_position">Position</label></p>
     <p><%= f.text_field :position, :style => 'width:5%;' %></p>
     <p>

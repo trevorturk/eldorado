@@ -175,6 +175,10 @@ h3 {
   margin: 0 0 10px 0;
 }
 
+.text-field {
+	width: 66%;
+}
+
 table {
   width: 100%;
   border: 1px solid #35604d;
@@ -489,6 +493,10 @@ blockquote {
 cite {
   font-weight: bold;
   font-style: normal;
+}
+
+.clear {
+	clear: both;
 }
 
 .sig-hr {

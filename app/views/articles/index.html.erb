@@ -3,7 +3,7 @@
     <div class="info-left">
       <span class="title">Articles by <%= link_to @user, articles_user_path(@user) %></span>
     </div>
-    <div style="clear:both;"> </div>
+    <div class="clear"> </div>
   <% end %>
   <% if @articles %>
     <% for article in @articles %>
@@ -13,7 +13,7 @@
     <div class="info-left">
       <div class="title article-title">No Articles Found</div>
     </div>
-    <div style="clear:both;"> </div>
+    <div class="clear"> </div>
   <% end %>
 </div>
 <div class="secondary">
