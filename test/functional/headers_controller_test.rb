@@ -1,10 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'headers_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class HeadersController; def rescue_action(e) raise e end; end
-
-class HeadersControllerTest < Test::Unit::TestCase
+class HeadersControllerTest < ActionController::TestCase
   fixtures :all
 
   def setup

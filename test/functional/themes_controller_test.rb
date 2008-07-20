@@ -1,10 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'themes_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class ThemesController; def rescue_action(e) raise e end; end
-
-class ThemesControllerTest < Test::Unit::TestCase
+class ThemesControllerTest < ActionController::TestCase
   fixtures :all
 
   def setup

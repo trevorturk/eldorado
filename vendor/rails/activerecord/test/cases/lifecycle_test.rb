@@ -2,6 +2,7 @@ require "cases/helper"
 require 'models/topic'
 require 'models/developer'
 require 'models/reply'
+require 'models/minimalistic'
 
 class Topic; def after_find() end end
 class Developer; def after_find() end end
@@ -41,6 +42,14 @@ class TopicObserver < ActiveRecord::Observer
 
   def after_find(topic)
     @topic = topic
+  end
+end
+
+class MinimalisticObserver < ActiveRecord::Observer
+  attr_reader :minimalistic
+
+  def after_find(minimalistic)
+    @minimalistic = minimalistic
   end
 end
 
@@ -132,6 +141,22 @@ class LifecycleTest < ActiveRecord::TestCase
 
     developer = klass.find(1)
     assert_equal developer.name, multi_observer.record.name
+  end
+
+  def test_after_find_cannot_be_observed_when_its_not_defined_on_the_model
+    observer = MinimalisticObserver.instance
+    assert_equal Minimalistic, MinimalisticObserver.observed_class
+
+    minimalistic = Minimalistic.find(1)
+    assert_nil observer.minimalistic
+  end
+
+  def test_after_find_can_be_observed_when_its_defined_on_the_model
+    observer = TopicObserver.instance
+    assert_equal Topic, TopicObserver.observed_class
+
+    topic = Topic.find(1)
+    assert_equal topic, observer.topic
   end
 
   def test_invalid_observer

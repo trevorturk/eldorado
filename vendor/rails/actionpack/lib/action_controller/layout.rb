@@ -254,7 +254,7 @@ module ActionController #:nodoc:
           @template.instance_variable_set("@content_for_layout", content_for_layout)
           response.layout = layout
           status = template_with_options ? options[:status] : nil
-          render_for_text(@template.render_file(layout, true), status)
+          render_for_text(@template.render(layout), status)
         else
           render_with_no_layout(options, extra_options, &block)
         end
@@ -304,7 +304,7 @@ module ActionController #:nodoc:
       end
 
       def layout_directory?(layout_name)
-        @template.finder.find_template_extension_from_handler(File.join('layouts', layout_name))
+        @template.file_exists?("#{File.join('layouts', layout_name)}.#{@template.template_format}")
       end
   end
 end

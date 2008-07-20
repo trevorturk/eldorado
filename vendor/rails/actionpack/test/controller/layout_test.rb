@@ -31,16 +31,8 @@ end
 class MultipleExtensions < LayoutTest
 end
 
-class MabView < ActionView::TemplateHandler
-  def initialize(view)
-  end
-  
-  def render(template)
-    template.source
-  end
-end
-
-ActionView::Template::register_template_handler :mab, MabView
+ActionView::Template::register_template_handler :mab,
+  lambda { |template| template.source.inspect }
 
 class LayoutAutoDiscoveryTest < Test::Unit::TestCase
   def setup
@@ -63,6 +55,7 @@ class LayoutAutoDiscoveryTest < Test::Unit::TestCase
   end
   
   def test_third_party_template_library_auto_discovers_layout
+    ThirdPartyTemplateLibraryController.view_paths.reload!
     @controller = ThirdPartyTemplateLibraryController.new
     get :hello
     assert_equal 'layouts/third_party_template_library', @controller.active_layout

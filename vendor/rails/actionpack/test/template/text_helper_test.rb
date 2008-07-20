@@ -11,6 +11,12 @@ class TextHelperTest < ActionView::TestCase
     @_cycles = nil if (defined? @_cycles)
   end
 
+  def test_concat
+    self.output_buffer = 'foo'
+    assert_equal 'foobar', concat('bar')
+    assert_equal 'foobar', output_buffer
+  end
+
   def test_simple_format
     assert_equal "<p></p>", simple_format(nil)
 
@@ -187,6 +193,7 @@ class TextHelperTest < ActionView::TestCase
               http://www.mail-archive.com/rails@lists.rubyonrails.org/
               http://www.amazon.com/Testing-Equal-Sign-In-Path/ref=pd_bbs_sr_1?ie=UTF8&s=books&qid=1198861734&sr=8-1
               http://en.wikipedia.org/wiki/Sprite_(computer_graphics)
+              http://en.wikipedia.org/wiki/Texas_hold'em
             )
 
     urls.each do |url|

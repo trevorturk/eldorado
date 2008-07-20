@@ -67,15 +67,16 @@ module ActionController
         options = options.dup
 
         if options[:namespace]
-          options[:controller] = "#{options[:path_prefix]}/#{options[:controller]}"
+          options[:controller] = "#{options.delete(:namespace).sub(/\/$/, '')}/#{options[:controller]}"
           options.delete(:path_prefix)
           options.delete(:name_prefix)
-          options.delete(:namespace)
         end
 
         requirements = (options.delete(:requirements) || {}).dup
         defaults     = (options.delete(:defaults)     || {}).dup
         conditions   = (options.delete(:conditions)   || {}).dup
+
+        validate_route_conditions(conditions)
 
         path_keys = segments.collect { |segment| segment.key if segment.respond_to?(:key) }.compact
         options.each do |key, value|
@@ -199,6 +200,19 @@ module ActionController
 
         route
       end
+
+      private
+        def validate_route_conditions(conditions)
+          if method = conditions[:method]
+            if method == :head
+              raise ArgumentError, "HTTP method HEAD is invalid in route conditions. Rails processes HEAD requests the same as GETs, returning just the response headers"
+            end
+
+            unless HTTP_METHODS.include?(method.to_sym)
+              raise ArgumentError, "Invalid HTTP method specified in route conditions: #{conditions.inspect}"
+            end
+          end
+        end
     end
   end
 end

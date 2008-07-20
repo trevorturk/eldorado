@@ -1,10 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'search_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class SearchController; def rescue_action(e) raise e end; end
-
-class SearchControllerTest < Test::Unit::TestCase
+class SearchControllerTest < ActionController::TestCase
   fixtures :all
   
   def setup

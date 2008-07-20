@@ -62,7 +62,7 @@ module ActiveRecord
       changed_attributes.keys
     end
 
-    # Map of changed attrs => [original value, new value]
+    # Map of changed attrs => [original value, new value].
     #   person.changes # => {}
     #   person.name = 'bob'
     #   person.changes # => { 'name' => ['bill', 'bob'] }
@@ -93,27 +93,27 @@ module ActiveRecord
     end
 
     private
-      # Map of change attr => original value.
+      # Map of change <tt>attr => original value</tt>.
       def changed_attributes
         @changed_attributes ||= {}
       end
 
-      # Handle *_changed? for method_missing.
+      # Handle <tt>*_changed?</tt> for +method_missing+.
       def attribute_changed?(attr)
         changed_attributes.include?(attr)
       end
 
-      # Handle *_change for method_missing.
+      # Handle <tt>*_change</tt> for +method_missing+.
       def attribute_change(attr)
         [changed_attributes[attr], __send__(attr)] if attribute_changed?(attr)
       end
 
-      # Handle *_was for method_missing.
+      # Handle <tt>*_was</tt> for +method_missing+.
       def attribute_was(attr)
         attribute_changed?(attr) ? changed_attributes[attr] : __send__(attr)
       end
 
-      # Handle *_will_change! for method_missing.
+      # Handle <tt>*_will_change!</tt> for +method_missing+.
       def attribute_will_change!(attr)
         changed_attributes[attr] = clone_attribute_value(:read_attribute, attr)
       end
@@ -142,9 +142,11 @@ module ActiveRecord
 
       def field_changed?(attr, old, value)
         if column = column_for_attribute(attr)
-          if column.type == :integer && column.null && old.nil?
+          if column.type == :integer && column.null && (old.nil? || old == 0)
             # For nullable integer columns, NULL gets stored in database for blank (i.e. '') values.
             # Hence we don't record it as a change if the value changes from nil to ''.
+            # If an old value of 0 is set to '' we want this to get changed to nil as otherwise it'll
+            # be typecast back to 0 (''.to_i => 0)
             value = nil if value.blank?
           else
             value = column.type_cast(value)

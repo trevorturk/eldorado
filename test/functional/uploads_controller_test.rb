@@ -1,10 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'uploads_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class UploadsController; def rescue_action(e) raise e end; end
-
-class UploadsControllerTest < Test::Unit::TestCase
+class UploadsControllerTest < ActionController::TestCase
   fixtures :all
 
   def setup

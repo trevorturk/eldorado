@@ -1,7 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class MessagesControllerTest < ActionController::TestCase
-
   fixtures :all
 
   def setup

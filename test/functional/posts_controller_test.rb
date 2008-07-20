@@ -1,10 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'posts_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class PostsController; def rescue_action(e) raise e end; end
-
-class PostsControllerTest < Test::Unit::TestCase
+class PostsControllerTest < ActionController::TestCase
   fixtures :all
   
   def setup
@@ -59,18 +55,18 @@ class PostsControllerTest < Test::Unit::TestCase
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 30
     assert_equal topic.last_page, 1
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p' + Post.last.id.to_s
     post :create, :post => { :topic_id => "1", :body => "this is a test!" }  
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 31
     assert_equal topic.last_page, 2
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '2'
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '2', :anchor => 'p' + Post.last.id.to_s
   end
 
   def test_post_update_redirects_to_correct_page
     login_as :trevor
     post :create, :post => { :topic_id => "1", :body => "this is a test" }  
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p' + Post.last.id.to_s
   end
 
   def test_post_edit_works_if_creator
@@ -152,7 +148,7 @@ class PostsControllerTest < Test::Unit::TestCase
 
   def test_locate_action_should_work
     get :topic, :id => 1
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p1'
   end
   
   def test_quote_action_should_work

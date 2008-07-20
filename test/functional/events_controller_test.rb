@@ -1,10 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'events_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class EventsController; def rescue_action(e) raise e end; end
-
-class EventsControllerTest < Test::Unit::TestCase
+class EventsControllerTest < ActionController::TestCase
   fixtures :all
 
   def setup

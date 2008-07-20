@@ -1,10 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'subscriptions_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class SubscriptionsController; def rescue_action(e) raise e end; end
-
-class SubscriptionsControllerTest < Test::Unit::TestCase
+class SubscriptionsControllerTest < ActionController::TestCase
   fixtures :all
 
   def setup

@@ -5,12 +5,12 @@ require 'action_view/helpers/tag_helper'
 module ActionView
   module Helpers #:nodoc:
     # This module provides methods for generating HTML that links views to assets such
-    # as images, javascripts, stylesheets, and feeds. These methods do not verify 
-    # the assets exist before linking to them. 
+    # as images, javascripts, stylesheets, and feeds. These methods do not verify
+    # the assets exist before linking to them.
     #
     # === Using asset hosts
     # By default, Rails links to these assets on the current host in the public
-    # folder, but you can direct Rails to link to assets from a dedicated assets server by 
+    # folder, but you can direct Rails to link to assets from a dedicated assets server by
     # setting ActionController::Base.asset_host in your <tt>config/environment.rb</tt>.  For example,
     # let's say your asset host is <tt>assets.example.com</tt>.
     #
@@ -22,16 +22,16 @@ module ActionView
     #
     # This is useful since browsers typically open at most two connections to a single host,
     # which means your assets often wait in single file for their turn to load.  You can
-    # alleviate this by using a <tt>%d</tt> wildcard in <tt>asset_host</tt> (for example, "assets%d.example.com") 
+    # alleviate this by using a <tt>%d</tt> wildcard in <tt>asset_host</tt> (for example, "assets%d.example.com")
     # to automatically distribute asset requests among four hosts (e.g., "assets0.example.com" through "assets3.example.com")
-    # so browsers will open eight connections rather than two.  
+    # so browsers will open eight connections rather than two.
     #
     #   image_tag("rails.png")
     #     => <img src="http://assets0.example.com/images/rails.png" alt="Rails" />
     #   stylesheet_link_tag("application")
     #     => <link href="http://assets3.example.com/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
     #
-    # To do this, you can either setup 4 actual hosts, or you can use wildcard DNS to CNAME 
+    # To do this, you can either setup 4 actual hosts, or you can use wildcard DNS to CNAME
     # the wildcard to a single asset host.  You can read more about setting up your DNS CNAME records from
     # your ISP.
     #
@@ -86,7 +86,7 @@ module ActionView
     # asset far into the future, but still be able to instantly invalidate it by simply updating the file (and hence updating the timestamp,
     # which then updates the URL as the timestamp is part of that, which in turn busts the cache).
     #
-    # It's the responsibility of the web server you use to set the far-future expiration date on cache assets that you need to take 
+    # It's the responsibility of the web server you use to set the far-future expiration date on cache assets that you need to take
     # advantage of this feature. Here's an example for Apache:
     #
     # # Asset Expiration
@@ -95,16 +95,17 @@ module ActionView
     #   ExpiresDefault "access plus 1 year"
     # </FilesMatch>
     #
-    # Also note that in order for this to work, all your application servers must return the same timestamps. This means that they must 
+    # Also note that in order for this to work, all your application servers must return the same timestamps. This means that they must
     # have their clocks synchronized. If one of them drift out of sync, you'll see different timestamps at random and the cache won't
     # work. Which means that the browser will request the same assets over and over again even thought they didn't change. You can use
-    # something like Live HTTP Headers for Firefox to verify that the cache is indeed working (and that the assets are not being 
+    # something like Live HTTP Headers for Firefox to verify that the cache is indeed working (and that the assets are not being
     # requested over and over).
     module AssetTagHelper
       ASSETS_DIR      = defined?(Rails.public_path) ? Rails.public_path : "public"
       JAVASCRIPTS_DIR = "#{ASSETS_DIR}/javascripts"
       STYLESHEETS_DIR = "#{ASSETS_DIR}/stylesheets"
-      
+      JAVASCRIPT_DEFAULT_SOURCES = ['prototype', 'effects', 'dragdrop', 'controls'].map(&:to_s).freeze unless const_defined?(:JAVASCRIPT_DEFAULT_SOURCES)
+
       # Returns a link tag that browsers and news readers can use to auto-detect
       # an RSS or ATOM feed. The +type+ can either be <tt>:rss</tt> (default) or
       # <tt>:atom</tt>. Control the link options in url_for format using the
@@ -154,10 +155,6 @@ module ActionView
       end
       alias_method :path_to_javascript, :javascript_path # aliased to avoid conflicts with a javascript_path named route
 
-      JAVASCRIPT_DEFAULT_SOURCES = ['prototype', 'effects', 'dragdrop', 'controls'] unless const_defined?(:JAVASCRIPT_DEFAULT_SOURCES)
-      @@javascript_expansions = { :defaults => JAVASCRIPT_DEFAULT_SOURCES.dup }
-      @@stylesheet_expansions = {}
-
       # Returns an html script tag for each of the +sources+ provided. You
       # can pass in the filename (.js extension is optional) of javascript files
       # that exist in your public/javascripts directory for inclusion into the
@@ -193,7 +190,7 @@ module ActionView
       #
       # * = The application.js file is only referenced if it exists
       #
-      # Though it's not really recommended practice, if you need to extend the default JavaScript set for any reason 
+      # Though it's not really recommended practice, if you need to extend the default JavaScript set for any reason
       # (e.g., you're going to be using a certain .js file in every action), then take a look at the register_javascript_include_default method.
       #
       # You can also include all javascripts in the javascripts directory using <tt>:all</tt> as the source:
@@ -209,12 +206,16 @@ module ActionView
       # Note that the default javascript files will be included first. So Prototype and Scriptaculous are available to
       # all subsequently included files.
       #
+      # If you want Rails to search in all the subdirectories under javascripts, you should explicitly set <tt>:recursive</tt>:
+      #
+      #   javascript_include_tag :all, :recursive => true
+      #
       # == Caching multiple javascripts into one
       #
       # You can also cache multiple javascripts into one file, which requires less HTTP connections to download and can better be
       # compressed by gzip (leading to faster transfers). Caching will only happen if ActionController::Base.perform_caching
       # is set to <tt>true</tt> (which is the case by default for the Rails production environment, but not for the development
-      # environment). 
+      # environment).
       #
       # ==== Examples
       #   javascript_include_tag :all, :cache => true # when ActionController::Base.perform_caching is false =>
@@ -235,20 +236,27 @@ module ActionView
       #
       #   javascript_include_tag "prototype", "cart", "checkout", :cache => "shop" # when ActionController::Base.perform_caching is true =>
       #     <script type="text/javascript" src="/javascripts/shop.js"></script>
+      #
+      # The <tt>:recursive</tt> option is also available for caching:
+      #
+      #   javascript_include_tag :all, :cache => true, :recursive => true
       def javascript_include_tag(*sources)
         options = sources.extract_options!.stringify_keys
         cache   = options.delete("cache")
+        recursive = options.delete("recursive")
 
         if ActionController::Base.perform_caching && cache
           joined_javascript_name = (cache == true ? "all" : cache) + ".js"
           joined_javascript_path = File.join(JAVASCRIPTS_DIR, joined_javascript_name)
 
-          write_asset_file_contents(joined_javascript_path, compute_javascript_paths(sources))
+          write_asset_file_contents(joined_javascript_path, compute_javascript_paths(sources, recursive)) unless File.exists?(joined_javascript_path)
           javascript_src_tag(joined_javascript_name, options)
         else
-          expand_javascript_sources(sources).collect { |source| javascript_src_tag(source, options) }.join("\n")
+          expand_javascript_sources(sources, recursive).collect { |source| javascript_src_tag(source, options) }.join("\n")
         end
       end
+
+      @@javascript_expansions = { :defaults => JAVASCRIPT_DEFAULT_SOURCES.dup }
 
       # Register one or more javascript files to be included when <tt>symbol</tt>
       # is passed to <tt>javascript_include_tag</tt>. This method is typically intended
@@ -264,6 +272,8 @@ module ActionView
       def self.register_javascript_expansion(expansions)
         @@javascript_expansions.merge!(expansions)
       end
+
+      @@stylesheet_expansions = {}
 
       # Register one or more stylesheet files to be included when <tt>symbol</tt>
       # is passed to <tt>stylesheet_link_tag</tt>. This method is typically intended
@@ -332,12 +342,16 @@ module ActionView
       #     <link href="/stylesheets/random.styles" media="screen" rel="stylesheet" type="text/css" />
       #     <link href="/css/stylish.css" media="screen" rel="stylesheet" type="text/css" />
       #
-      # You can also include all styles in the stylesheet directory using <tt>:all</tt> as the source:
+      # You can also include all styles in the stylesheets directory using <tt>:all</tt> as the source:
       #
       #   stylesheet_link_tag :all # =>
       #     <link href="/stylesheets/style1.css"  media="screen" rel="stylesheet" type="text/css" />
       #     <link href="/stylesheets/styleB.css"  media="screen" rel="stylesheet" type="text/css" />
       #     <link href="/stylesheets/styleX2.css" media="screen" rel="stylesheet" type="text/css" />
+      #
+      # If you want Rails to search in all the subdirectories under stylesheets, you should explicitly set <tt>:recursive</tt>:
+      #
+      #   stylesheet_link_tag :all, :recursive => true
       #
       # == Caching multiple stylesheets into one
       #
@@ -362,18 +376,23 @@ module ActionView
       #
       #   stylesheet_link_tag "shop", "cart", "checkout", :cache => "payment" # when ActionController::Base.perform_caching is true =>
       #     <link href="/stylesheets/payment.css"  media="screen" rel="stylesheet" type="text/css" />
+      #
+      # The <tt>:recursive</tt> option is also available for caching:
+      #
+      #   stylesheet_link_tag :all, :cache => true, :recursive => true
       def stylesheet_link_tag(*sources)
         options = sources.extract_options!.stringify_keys
         cache   = options.delete("cache")
+        recursive = options.delete("recursive")
 
         if ActionController::Base.perform_caching && cache
           joined_stylesheet_name = (cache == true ? "all" : cache) + ".css"
           joined_stylesheet_path = File.join(STYLESHEETS_DIR, joined_stylesheet_name)
 
-          write_asset_file_contents(joined_stylesheet_path, compute_stylesheet_paths(sources))
+          write_asset_file_contents(joined_stylesheet_path, compute_stylesheet_paths(sources, recursive)) unless File.exists?(joined_stylesheet_path)
           stylesheet_tag(joined_stylesheet_name, options)
         else
-          expand_stylesheet_sources(sources).collect { |source| stylesheet_tag(source, options) }.join("\n")
+          expand_stylesheet_sources(sources, recursive).collect { |source| stylesheet_tag(source, options) }.join("\n")
         end
       end
 
@@ -421,9 +440,9 @@ module ActionView
       #    <img alt="Icon" height="32" src="/icons/icon.gif" width="32" />
       #  image_tag("/icons/icon.gif", :class => "menu_icon") # =>
       #    <img alt="Icon" class="menu_icon" src="/icons/icon.gif" />
-      #  image_tag("mouse.png", :mouseover => "/images/mouse_over.png") # => 
+      #  image_tag("mouse.png", :mouseover => "/images/mouse_over.png") # =>
       #    <img src="/images/mouse.png" onmouseover="this.src='/images/mouse_over.png'" onmouseout="this.src='/images/mouse.png'" alt="Mouse" />
-      #  image_tag("mouse.png", :mouseover => image_path("mouse_over.png")) # => 
+      #  image_tag("mouse.png", :mouseover => image_path("mouse_over.png")) # =>
       #    <img src="/images/mouse.png" onmouseover="this.src='/images/mouse_over.png'" onmouseout="this.src='/images/mouse.png'" alt="Mouse" />
       def image_tag(source, options = {})
         options.symbolize_keys!
@@ -436,23 +455,15 @@ module ActionView
         end
 
         if mouseover = options.delete(:mouseover)
-          options[:onmouseover]	= "this.src='#{image_path(mouseover)}'"
-          options[:onmouseout]	= "this.src='#{image_path(options[:src])}'"
+          options[:onmouseover] = "this.src='#{image_path(mouseover)}'"
+          options[:onmouseout]  = "this.src='#{image_path(options[:src])}'"
         end
 
         tag("img", options)
       end
 
       private
-        def file_exist?(path)
-          @@file_exist_cache ||= {}
-          if !(@@file_exist_cache[path] ||= File.exist?(path))
-            @@file_exist_cache[path] = true
-            false
-          else
-            true
-          end
-        end
+        COMPUTED_PUBLIC_PATHS = ActiveSupport::Cache::MemoryStore.new.silence!.threadsafe!
 
         # Add the the extension +ext+ if not present. Return full URLs otherwise untouched.
         # Prefix with <tt>/dir/</tt> if lacking a leading +/+. Account for relative URL
@@ -472,7 +483,7 @@ module ActionView
                 dir, source, ext, include_host ].join
             end
 
-          ActionView::Base.computed_public_paths[cache_key] ||=
+          source = COMPUTED_PUBLIC_PATHS.fetch(cache_key) do
             begin
               source += ".#{ext}" if ext && File.extname(source).blank? || File.exist?(File.join(ASSETS_DIR, dir, "#{source}.#{ext}"))
 
@@ -485,21 +496,23 @@ module ActionView
                     source = "#{@controller.request.relative_url_root}#{source}"
                   end
                 end
-                source = rewrite_asset_path(source)
 
-                if include_host
-                  host = compute_asset_host(source)
-
-                  if has_request && !host.blank? && host !~ %r{^[-a-z]+://}
-                    host = "#{@controller.request.protocol}#{host}"
-                  end
-
-                  "#{host}#{source}"
-                else
-                  source
-                end
+                rewrite_asset_path(source)
               end
             end
+          end
+
+          if include_host && source !~ %r{^[-a-z]+://}
+            host = compute_asset_host(source)
+
+            if has_request && !host.blank? && host !~ %r{^[-a-z]+://}
+              host = "#{@controller.request.protocol}#{host}"
+            end
+
+            "#{host}#{source}"
+          else
+            source
+          end
         end
 
         # Pick an asset host for this source. Returns +nil+ if no host is set,
@@ -556,30 +569,32 @@ module ActionView
           tag("link", { "rel" => "stylesheet", "type" => Mime::CSS, "media" => "screen", "href" => html_escape(path_to_stylesheet(source)) }.merge(options), false, false)
         end
 
-        def compute_javascript_paths(sources)
-          expand_javascript_sources(sources).collect { |source| compute_public_path(source, 'javascripts', 'js', false) }
+        def compute_javascript_paths(*args)
+          expand_javascript_sources(*args).collect { |source| compute_public_path(source, 'javascripts', 'js', false) }
         end
 
-        def compute_stylesheet_paths(sources)
-          expand_stylesheet_sources(sources).collect { |source| compute_public_path(source, 'stylesheets', 'css', false) }
+        def compute_stylesheet_paths(*args)
+          expand_stylesheet_sources(*args).collect { |source| compute_public_path(source, 'stylesheets', 'css', false) }
         end
 
-        def expand_javascript_sources(sources)
+        def expand_javascript_sources(sources, recursive = false)
           if sources.include?(:all)
-            all_javascript_files = Dir[File.join(JAVASCRIPTS_DIR, '*.js')].collect { |file| File.basename(file).gsub(/\.\w+$/, '') }.sort
-            @@all_javascript_sources ||= ((determine_source(:defaults, @@javascript_expansions).dup & all_javascript_files) + all_javascript_files).uniq
+            all_javascript_files = collect_asset_files(JAVASCRIPTS_DIR, ('**' if recursive), '*.js')
+            @@all_javascript_sources ||= {}
+            @@all_javascript_sources[recursive] ||= ((determine_source(:defaults, @@javascript_expansions).dup & all_javascript_files) + all_javascript_files).uniq
           else
             expanded_sources = sources.collect do |source|
               determine_source(source, @@javascript_expansions)
             end.flatten
-            expanded_sources << "application" if sources.include?(:defaults) && file_exist?(File.join(JAVASCRIPTS_DIR, "application.js"))
+            expanded_sources << "application" if sources.include?(:defaults) && File.exist?(File.join(JAVASCRIPTS_DIR, "application.js"))
             expanded_sources
           end
         end
 
-        def expand_stylesheet_sources(sources)
+        def expand_stylesheet_sources(sources, recursive)
           if sources.first == :all
-            @@all_stylesheet_sources ||= Dir[File.join(STYLESHEETS_DIR, '*.css')].collect { |file| File.basename(file).gsub(/\.\w+$/, '') }.sort
+            @@all_stylesheet_sources ||= {}
+            @@all_stylesheet_sources[recursive] ||= collect_asset_files(STYLESHEETS_DIR, ('**' if recursive), '*.css')
           else
             sources.collect do |source|
               determine_source(source, @@stylesheet_expansions)
@@ -601,10 +616,16 @@ module ActionView
         end
 
         def write_asset_file_contents(joined_asset_path, asset_paths)
-          unless file_exist?(joined_asset_path)
-            FileUtils.mkdir_p(File.dirname(joined_asset_path))
-            File.open(joined_asset_path, "w+") { |cache| cache.write(join_asset_file_contents(asset_paths)) }
-          end
+          FileUtils.mkdir_p(File.dirname(joined_asset_path))
+          File.open(joined_asset_path, "w+") { |cache| cache.write(join_asset_file_contents(asset_paths)) }
+        end
+
+        def collect_asset_files(*path)
+          dir = path.first
+
+          Dir[File.join(*path.compact)].collect do |file|
+            file[-(file.size - dir.size - 1)..-1].sub(/\.\w+$/, '')
+          end.sort
         end
     end
   end

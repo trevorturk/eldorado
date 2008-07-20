@@ -8,12 +8,16 @@ module Fun
   end
 end
 
-
-# FIXME: crashes Ruby 1.9
 class TestController < ActionController::Base
   layout :determine_layout
 
   def hello_world
+  end
+
+  def conditional_hello
+    etag! [:foo, 123]
+    last_modified! Time.now.utc.beginning_of_day
+    render :action => 'hello_world' unless performed?
   end
 
   def render_hello_world
@@ -23,11 +27,11 @@ class TestController < ActionController::Base
   def render_hello_world_with_forward_slash
     render :template => "/test/hello_world"
   end
-  
+
   def render_template_in_top_directory
     render :template => 'shared'
   end
-  
+
   def render_template_in_top_directory_with_slash
     render :template => '/shared'
   end
@@ -86,7 +90,7 @@ class TestController < ActionController::Base
   def render_nothing_with_appendix
     render :text => "appended"
   end
-  
+
   def render_invalid_args
     render("test/hello")
   end
@@ -101,12 +105,7 @@ class TestController < ActionController::Base
   end
 
   def render_line_offset
-    begin
-      render :inline => '<% raise %>', :locals => {:foo => 'bar'}
-    rescue => exc
-    end
-    line = exc.backtrace.first
-    render :text => line
+    render :inline => '<% raise %>', :locals => {:foo => 'bar'}
   end
 
   def heading
@@ -171,7 +170,7 @@ class TestController < ActionController::Base
   def partial_dot_html
     render :partial => 'partial.html.erb'
   end
-  
+
   def partial_as_rjs
     render :update do |page|
       page.replace :foo, :partial => 'partial'
@@ -198,11 +197,11 @@ class TestController < ActionController::Base
 
   def render_alternate_default
     # For this test, the method "default_render" is overridden:
-    @alternate_default_render = lambda {
-	render :update do |page|
-	  page.replace :foo, :partial => 'partial'
-	end
-      }
+    @alternate_default_render = lambda do
+      render :update do |page|
+        page.replace :foo, :partial => 'partial'
+      end
+    end
   end
 
   def rescue_action(e) raise end
@@ -216,9 +215,6 @@ class TestController < ActionController::Base
       end
     end
 end
-
-TestController.view_paths = [ File.dirname(__FILE__) + "/../fixtures/" ]
-Fun::GamesController.view_paths = [ File.dirname(__FILE__) + "/../fixtures/" ]
 
 class RenderTest < Test::Unit::TestCase
   def setup
@@ -241,23 +237,28 @@ class RenderTest < Test::Unit::TestCase
   end
 
   def test_line_offset
-    get :render_line_offset
-    line = @response.body
-    assert(line =~ %r{:(\d+):})
-    assert_equal "1", $1
+    begin
+      get :render_line_offset
+      flunk "the action should have raised an exception"
+    rescue RuntimeError => exc
+      line = exc.backtrace.first
+      assert(line =~ %r{:(\d+):})
+      assert_equal "1", $1,
+        "The line offset is wrong, perhaps the wrong exception has been raised, exception was: #{exc.inspect}"
+    end
   end
 
   def test_render_with_forward_slash
     get :render_hello_world_with_forward_slash
     assert_template "test/hello_world"
   end
-  
+
   def test_render_in_top_directory
     get :render_template_in_top_directory
     assert_template "shared"
     assert_equal "Elastica", @response.body
   end
-  
+
   def test_render_in_top_directory_with_slash
     get :render_template_in_top_directory_with_slash
     assert_template "shared"
@@ -336,11 +337,11 @@ class RenderTest < Test::Unit::TestCase
     assert_response 200
     assert_equal 'appended', @response.body
   end
-  
+
   def test_attempt_to_render_with_invalid_arguments
     assert_raises(ActionController::RenderError) { get :render_invalid_args }
   end
-  
+
   def test_attempt_to_access_object_method
     assert_raises(ActionController::UnknownAction, "No action responded to [clone]") { get :clone }
   end
@@ -411,6 +412,77 @@ class RenderTest < Test::Unit::TestCase
     assert_equal "Goodbye, Local David", @response.body
   end
 
+  def test_should_render_formatted_template
+    get :formatted_html_erb
+    assert_equal 'formatted html erb', @response.body
+  end
+
+  def test_should_render_formatted_xml_erb_template
+    get :formatted_xml_erb, :format => :xml
+    assert_equal '<test>passed formatted xml erb</test>', @response.body
+  end
+
+  def test_should_render_formatted_html_erb_template
+    get :formatted_xml_erb
+    assert_equal '<test>passed formatted html erb</test>', @response.body
+  end
+
+  def test_should_render_formatted_html_erb_template_with_faulty_accepts_header
+    @request.env["HTTP_ACCEPT"] = "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, appliction/x-shockwave-flash, */*"
+    get :formatted_xml_erb
+    assert_equal '<test>passed formatted html erb</test>', @response.body
+  end
+
+  def test_should_render_html_formatted_partial
+    get :partial
+    assert_equal 'partial html', @response.body
+  end
+
+  def test_should_render_html_partial_with_dot
+    get :partial_dot_html
+    assert_equal 'partial html', @response.body
+  end
+
+  def test_should_render_html_formatted_partial_with_rjs
+    xhr :get, :partial_as_rjs
+    assert_equal %(Element.replace("foo", "partial html");), @response.body
+  end
+
+  def test_should_render_html_formatted_partial_with_rjs_and_js_format
+    xhr :get, :respond_to_partial_as_rjs
+    assert_equal %(Element.replace("foo", "partial html");), @response.body
+  end
+
+  def test_should_render_js_partial
+    xhr :get, :partial, :format => 'js'
+    assert_equal 'partial js', @response.body
+  end
+
+  def test_should_render_with_alternate_default_render
+    xhr :get, :render_alternate_default
+    assert_equal %(Element.replace("foo", "partial html");), @response.body
+  end
+
+  def test_should_render_xml_but_keep_custom_content_type
+    get :render_xml_with_custom_content_type
+    assert_equal "application/atomsvc+xml", @response.content_type
+  end
+
+  def test_should_use_implicit_content_type
+    get :implicit_content_type, :format => 'atom'
+    assert_equal Mime::ATOM, @response.content_type
+  end
+end
+
+class EtagRenderTest < Test::Unit::TestCase
+  def setup
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    @controller = TestController.new
+
+    @request.host = "www.nextangle.com"
+  end
+
   def test_render_200_should_set_etag
     get :render_hello_world_from_variable
     assert_equal etag_for("hello david"), @response.headers['ETag']
@@ -463,65 +535,40 @@ class RenderTest < Test::Unit::TestCase
     assert_equal etag_for("<wrapper>\n<html>\n  <p>Hello </p>\n<p>This is grand!</p>\n</html>\n</wrapper>\n"), @response.headers['ETag']
   end
 
-  def test_should_render_formatted_template
-    get :formatted_html_erb
-    assert_equal 'formatted html erb', @response.body
-  end
-  
-  def test_should_render_formatted_xml_erb_template
-    get :formatted_xml_erb, :format => :xml
-    assert_equal '<test>passed formatted xml erb</test>', @response.body
-  end
-  
-  def test_should_render_formatted_html_erb_template
-    get :formatted_xml_erb
-    assert_equal '<test>passed formatted html erb</test>', @response.body
-  end
-  
-  def test_should_render_formatted_html_erb_template_with_faulty_accepts_header
-    @request.env["HTTP_ACCEPT"] = "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, appliction/x-shockwave-flash, */*"
-    get :formatted_xml_erb
-    assert_equal '<test>passed formatted html erb</test>', @response.body
-  end
-
-  def test_should_render_html_formatted_partial
-    get :partial
-    assert_equal 'partial html', @response.body
-  end
-
-  def test_should_render_html_partial_with_dot
-    get :partial_dot_html
-    assert_equal 'partial html', @response.body
-  end
-
-  def test_should_render_html_formatted_partial_with_rjs
-    xhr :get, :partial_as_rjs
-    assert_equal %(Element.replace("foo", "partial html");), @response.body
-  end
-
-  def test_should_render_html_formatted_partial_with_rjs_and_js_format
-    xhr :get, :respond_to_partial_as_rjs
-    assert_equal %(Element.replace("foo", "partial html");), @response.body
-  end
-
-  def test_should_render_js_partial
-    xhr :get, :partial, :format => 'js'
-    assert_equal 'partial js', @response.body
-  end
-
-  def test_should_render_with_alternate_default_render
-    xhr :get, :render_alternate_default
-    assert_equal %(Element.replace("foo", "partial html");), @response.body
-  end
-
-  def test_should_render_xml_but_keep_custom_content_type
-    get :render_xml_with_custom_content_type
-    assert_equal "application/atomsvc+xml", @response.content_type
-  end
-
   protected
-  
     def etag_for(text)
       %("#{Digest::MD5.hexdigest(text)}")
     end
+end
+
+class LastModifiedRenderTest < Test::Unit::TestCase
+  def setup
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    @controller = TestController.new
+
+    @request.host = "www.nextangle.com"
+    @last_modified = Time.now.utc.beginning_of_day.httpdate
+  end
+
+  def test_responds_with_last_modified
+    get :conditional_hello
+    assert_equal @last_modified, @response.headers['Last-Modified']
+  end
+
+  def test_request_not_modified
+    @request.headers["HTTP_IF_MODIFIED_SINCE"] = @last_modified
+    get :conditional_hello
+    assert_equal "304 Not Modified", @response.headers['Status']
+    assert @response.body.blank?, @response.body
+    assert_equal @last_modified, @response.headers['Last-Modified']
+  end
+
+  def test_request_modified
+    @request.headers["HTTP_IF_MODIFIED_SINCE"] = 'Thu, 16 Jul 2008 00:00:00 GMT'
+    get :conditional_hello
+    assert_equal "200 OK", @response.headers['Status']
+    assert !@response.body.blank?
+    assert_equal @last_modified, @response.headers['Last-Modified']
+  end
 end

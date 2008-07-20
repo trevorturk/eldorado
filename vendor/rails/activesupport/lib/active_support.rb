@@ -43,6 +43,9 @@ require 'active_support/ordered_hash'
 require 'active_support/ordered_options'
 require 'active_support/option_merger'
 
+require 'active_support/memoizable'
+require 'active_support/string_inquirer'
+
 require 'active_support/values/time_zone'
 require 'active_support/duration'
 
@@ -53,3 +56,11 @@ require 'active_support/multibyte'
 require 'active_support/base64'
 
 require 'active_support/time_with_zone'
+
+I18n.backend.populate do
+  require 'active_support/locale/en-US.rb'
+end
+
+Inflector = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('Inflector', 'ActiveSupport::Inflector')
+Dependencies = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('Dependencies', 'ActiveSupport::Dependencies')
+TimeZone = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('TimeZone', 'ActiveSupport::TimeZone')

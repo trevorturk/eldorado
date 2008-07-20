@@ -72,7 +72,7 @@ module ActionController
       end
 
       def conditions
-        @conditions = @options[:conditions] || {}
+        @conditions ||= @options[:conditions] || {}
       end
 
       def path
@@ -80,9 +80,9 @@ module ActionController
       end
 
       def new_path
-        new_action = self.options[:path_names][:new] if self.options[:path_names]
+        new_action   = self.options[:path_names][:new] if self.options[:path_names]
         new_action ||= Base.resources_path_names[:new]
-        @new_path ||= "#{path}/#{new_action}"
+        @new_path  ||= "#{path}/#{new_action}"
       end
 
       def member_path
@@ -296,6 +296,10 @@ module ActionController
     #     article_comments_url(:article_id => @article)
     #     article_comment_url(:article_id => @article, :id => @comment)
     #
+    #   If you don't want to load all objects from the database you might want to use the <tt>article_id</tt> directly:
+    #
+    #     articles_comments_url(@comment.article_id, @comment)
+    #
     # * <tt>:name_prefix</tt> - Define a prefix for all generated routes, usually ending in an underscore.
     #   Use this if you have named routes that may clash.
     #
@@ -303,13 +307,13 @@ module ActionController
     #     map.resources :tags, :path_prefix => '/toys/:toy_id',   :name_prefix => 'toy_'
     #
     # You may also use <tt>:name_prefix</tt> to override the generic named routes in a nested resource:
-    # 
+    #
     #   map.resources :articles do |article|
     #     article.resources :comments, :name_prefix => nil
-    #   end 
-    # 
+    #   end
+    #
     # This will yield named resources like so:
-    # 
+    #
     #   comments_url(@article)
     #   comment_url(@article, @comment)
     #
@@ -555,6 +559,7 @@ module ActionController
       def action_options_for(action, resource, method = nil)
         default_options = { :action => action.to_s }
         require_id = !resource.kind_of?(SingletonResource)
+
         case default_options[:action]
           when "index", "new"; default_options.merge(add_conditions_for(resource.conditions, method || :get)).merge(resource.requirements)
           when "create";       default_options.merge(add_conditions_for(resource.conditions, method || :post)).merge(resource.requirements)
