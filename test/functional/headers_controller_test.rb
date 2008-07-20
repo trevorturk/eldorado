@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class HeadersControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = HeadersController.new
@@ -20,16 +19,16 @@ class HeadersControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  def test_should_create_header
-    # login_as :Administrator
-    # old_count = Header.count
-    # put :create, :header => {:description => "test"}
-    # assert_equal old_count+1, Header.count
-    # assert_redirected_to topic_path(assigns(:header))
-  end
+  # def test_should_create_header
+  #   login_as :Administrator
+  #   old_count = Header.count
+  #   put :create, :header => {:description => "test"}
+  #   assert_equal old_count+1, Header.count
+  #   assert_redirected_to topic_path(assigns(:header))
+  # end
   
-  def test_should_not_create_header_without_file
-  end
+  # def test_should_not_create_header_without_file
+  # end
 
   def test_should_show_header
     get :show, :id => 1
@@ -127,5 +126,4 @@ class HeadersControllerTest < ActionController::TestCase
     post :vote_down, :id => 1
     assert_redirected_to login_path
   end
-  
 end

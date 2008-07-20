@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UploadsControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = UploadsController.new
@@ -22,11 +21,11 @@ class UploadsControllerTest < ActionController::TestCase
     assert assigns(:uploads)
   end
 
-  def test_should_get_new
-  end
+  # def test_should_get_new
+  # end
   
-  def test_should_create_upload
-  end
+  # def test_should_create_upload
+  # end
 
   def test_should_not_bomb_on_empty_create_upload
     login_as :trevor
@@ -65,13 +64,13 @@ class UploadsControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
   
-  def test_should_accept_upload_via_url
-    # login_as :trevor
-    # old_count = Upload.count
-    # post :create, :upload_url => '/images/rails.png'
-    # assert_equal old_count + 1, Upload.count
-    # assert_redirected_to files_path
-  end
+  # def test_should_accept_upload_via_url
+  #   login_as :trevor
+  #   old_count = Upload.count
+  #   post :create, :upload_url => '/images/rails.png'
+  #   assert_equal old_count + 1, Upload.count
+  #   assert_redirected_to files_path
+  # end
   
   def test_should_not_bomb_on_bogus_url_upload
     login_as :trevor

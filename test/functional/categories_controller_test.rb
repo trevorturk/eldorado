@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CategoriesControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = CategoriesController.new
@@ -141,5 +140,4 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_equal old_category_count, Category.count
     assert_redirected_to root_path
   end
-  
 end

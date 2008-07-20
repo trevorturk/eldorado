@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class RanksControllerTest < ActionController::TestCase
-  fixtures :all
   
   def test_should_get_index_if_admin
     login_as :Administrator
@@ -63,5 +62,4 @@ class RanksControllerTest < ActionController::TestCase
     assert_equal old_count, Rank.count
     assert_redirected_to root_path
   end
-  
 end

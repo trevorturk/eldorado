@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  fixtures :all
   
   def setup
     @controller = UsersController.new
@@ -247,8 +246,8 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
   
-  def test_current_user_stays_the_same_when_new_user_created
-  end
+  # def test_current_user_stays_the_same_when_new_user_created
+  # end
   
   def test_should_not_allow_banned_user_to_login
     login_as :banned

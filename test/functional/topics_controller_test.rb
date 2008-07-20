@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class TopicsControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = TopicsController.new
@@ -323,5 +322,4 @@ class TopicsControllerTest < ActionController::TestCase
     put :update, :id => 1, :topic => { :sticky => true }
     assert_equal false, topics(:Testing).sticky
   end
-  
 end

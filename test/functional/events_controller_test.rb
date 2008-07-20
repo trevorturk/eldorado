@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class EventsControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = EventsController.new
@@ -15,8 +14,8 @@ class EventsControllerTest < ActionController::TestCase
     assert assigns(:events)
   end
 
-  def test_should_get_new
-  end
+  # def test_should_get_new
+  # end
   
   def test_should_create_event
     login_as :trevor
@@ -95,10 +94,9 @@ class EventsControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
   
-  def test_should_create_event_with_correct_time_for_user_time_zone
-  end
+  # def test_should_create_event_with_correct_time_for_user_time_zone
+  # end
   
-  def test_should_show_reminder_on_correct_date_for_current_user
-  end
-  
+  # def test_should_show_reminder_on_correct_date_for_current_user
+  # end
 end

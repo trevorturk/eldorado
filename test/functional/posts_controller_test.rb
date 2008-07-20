@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  fixtures :all
   
   def setup
     @controller = PostsController.new
@@ -37,12 +36,12 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal old_post_count, Post.count
   end
   
-  def test_posts_cannot_be_made_with_bogus_topic_id
-    # login_as :trevor
-    # old_post_count = Post.count
-    # post :create, :post => { :topic_id => "13249002923" }
-    # assert_equal old_post_count, Post.count
-  end
+  # def test_posts_cannot_be_made_with_bogus_topic_id
+  #   login_as :trevor
+  #   old_post_count = Post.count
+  #   post :create, :post => { :topic_id => "13249002923" }
+  #   assert_equal old_post_count, Post.count
+  # end
   
   def test_post_create_redirects_to_correct_page
     login_as :trevor
@@ -186,11 +185,10 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal old_post_count+1, Post.count
   end
   
-  def test_should_work_when_quoting_a_post
-    # quote an existing post
-    # see new post template
-    # post object should be a new post
-    # body of new post should be body of quoted post
-  end
-  
+  # def test_should_work_when_quoting_a_post
+  #   quote an existing post
+  #   see new post template
+  #   post object should be a new post
+  #   body of new post should be body of quoted post
+  # end
 end

@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SubscriptionsControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = SubscriptionsController.new

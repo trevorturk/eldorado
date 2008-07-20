@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SettingsControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = SettingsController.new
@@ -41,5 +40,4 @@ class SettingsControllerTest < ActionController::TestCase
     settings(:one).reload
     assert_equal "test", settings(:one).title
   end
-    
 end

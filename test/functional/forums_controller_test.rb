@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ForumsControllerTest < ActionController::TestCase
-  fixtures :all
 
   def setup
     @controller = ForumsController.new
@@ -132,5 +131,4 @@ class ForumsControllerTest < ActionController::TestCase
     assert_equal old_forum_count, Forum.count
     assert_redirected_to root_path
   end
-    
 end

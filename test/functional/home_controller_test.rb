@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
-  fixtures :all
   
   def setup
     @controller = HomeController.new
@@ -9,7 +8,6 @@ class HomeControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
   end
 
-  # Replace this with your real tests.
   def test_should_get_index
     get :index
     assert_response :success
@@ -47,22 +45,21 @@ class HomeControllerTest < ActionController::TestCase
     assert_equal 'UTC', Setting.first.time_zone
   end
 
-  def test_should_not_update_session_online_at
-    # if current_user HAS been active in the last 10 minutes
-  end
+  # def test_should_not_update_session_online_at
+  #   # if current_user HAS been active in the last 10 minutes
+  # end
 
-  def test_should_update_session_online_at
-    # if current_user HASN'T been active in the last 10 minutes
-  end
+  # def test_should_update_session_online_at
+  #   # if current_user HASN'T been active in the last 10 minutes
+  # end
 
-  def test_should_have_correct_online_at
-    # if current_user just logged in, save they're online_at from the db for use in session
-  end
+  # def test_should_have_correct_online_at
+  #   # if current_user just logged in, save they're online_at from the db for use in session
+  # end
 
   def test_should_catch_request_with_cgi_in_path
     # e.g. http://localhost:3000/topics.cgi?topic=1
     get :index, :format => 'cgi'
     assert_redirected_to root_path
-  end
-    
+  end 
 end
