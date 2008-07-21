@@ -140,12 +140,7 @@ class TopicsControllerTest < ActionController::TestCase
     get :unknown_request, :path => "viewtopic.php", :id => "1"
     assert_redirected_to topic_path(:id => "1")
   end
-  
-  def test_should_redirect_to_topic_with_empty_viewtopic_php_style_url
-    get :unknown_request, :path => "viewtopic.php"
-    assert_redirected_to root_path
-  end
-  
+    
   def test_should_redirect_to_forum_with_viewforum_php_style_url
     get :unknown_request, :path => "viewforum.php", :id => "1"
     assert_redirected_to forum_path(:id => "1")
@@ -245,13 +240,7 @@ class TopicsControllerTest < ActionController::TestCase
   
   # def test_should_error_on_topic_create_if_attr_accessor_is_not_set_right_in_post_model
   # end
-  
-  def test_should_be_ok_with_bogus_params_page_value
-    get :show, :id => 1, :page => 'sdlkfjsdfs'
-    assert_redirected_to root_path
-    assert_equal "Sorry, the page number you requested was not valid.", flash[:notice]
-  end
-  
+    
   def test_should_redirect_to_first_page_if_page_is_too_many
     get :show, :id => 1, :page => '2'
     assert_redirected_to topic_path(:id => 1)
