@@ -1,7 +1,13 @@
 <div class="primary">
   <div class="info-left">
     <% if !@articles.empty? %>
-      <div class="title article-title">Blog Archives</div>
+      <div class="title article-title">
+        <% if current_controller == 'search' %>
+          Search Results
+        <% else %>
+          Blog Archives
+        <% end %>
+      </div>
     <% else %>
       <div class="title article-title">No Articles Found</div>
     <% end %>
@@ -15,6 +21,7 @@
       by <%= link_to h(article.user.login), user_articles_path(article.user) %></span>
     </li>
   <% end unless @articles.empty? %>
+  <li class="detail"><%= link_to 'Visit the Blog Archives &raquo;', blog_archives_path, :class => 'text' %></li>
   </ul>
 </div>
 <div class="secondary">

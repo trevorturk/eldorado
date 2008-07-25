@@ -15,8 +15,6 @@
     <% @recent_articles.each do |article| %>
       <li><%= link_to article, article %> <span class="detail">by <%= article.user %></span></li>
     <% end %>
-    <li class="detail-li">
-      <%= link_to 'Blog Archives &raquo;', blog_archives_path %>
-    </li>
+    <li class="detail"><%= link_to 'Blog Archives &raquo;', blog_archives_path, :class => 'text' %></li>
   </ul>
 <% end %>

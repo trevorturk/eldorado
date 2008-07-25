@@ -4,8 +4,8 @@ class SearchController < ApplicationController
     if params[:type].blank? || params[:query].blank?
       render :template => 'search/index'
     elsif params[:type] == 'articles'
-      @articles = Article.paginate(:page => params[:page], :include => :user, :order => 'created_at desc', :conditions => ['title or body LIKE ?', '%' + params[:query] + '%'])        
-      render :template => 'articles/index'
+      @articles = Article.all(:include => :user, :order => 'created_at desc', :conditions => ['title LIKE ? OR body LIKE ?', '%'+params[:query]+'%', '%'+params[:query]+'%'])
+      render :template => 'articles/archives'
     elsif params[:type] == 'avatars'
       @avatars = Avatar.paginate(:page => params[:page], :include => :user, :order => 'avatars.created_at desc', :conditions => ['filename LIKE ?', '%' + params[:query] + '%'])        
       render :template => 'avatars/index'

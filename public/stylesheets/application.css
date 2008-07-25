@@ -482,11 +482,6 @@ tbody .tds {
 	font-weight: normal;
 }
 
-.detail-li, .detail-li a {
-	margin-top: 15px;
-	color: #999;
-}
-
 #filters {
   margin: 2px;
   padding: 4px;
