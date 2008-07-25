@@ -127,4 +127,9 @@ class ArticlesControllerTest < ActionController::TestCase
     get :index, :user_id => users(:noposts).id
     assert_response :success
   end
+  
+  def test_articles_archives_path_should_work
+    get :archives
+    assert_response :success
+  end
 end

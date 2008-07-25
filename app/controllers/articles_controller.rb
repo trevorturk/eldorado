@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
   before_filter :find_parent_user_or_class, :only => [:index]
-  before_filter :require_login, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show, :archives]
   before_filter :can_edit, :only => [:edit, :update, :destroy]
 
   def index
@@ -42,5 +42,9 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
     redirect_to(blog_path)
+  end
+  
+  def archives
+    @articles = Article.all(:order => 'created_at desc', :include => :user)
   end
 end

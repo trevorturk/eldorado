@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :articles
   map.resources :avatars, :member => {:select => :post, :deselect => :post}
   map.resources :categories, :member => {:confirm_delete => :get}
+  map.resources :comments
   map.resources :events
   map.resources :forums, :member => {:confirm_delete => :get}
   map.resources :headers, :member => {:vote_up => :post, :vote_down => :post}
@@ -28,6 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.admin 'admin', :controller => 'settings', :action => 'index'
   map.blog 'blog', :controller => 'articles', :action => 'index'
+  map.blog_archives 'blog/archives', :controller => 'articles', :action => 'archives'
   map.chat 'chat', :controller => 'messages', :action => 'index'
   map.files 'files', :controller => 'uploads', :action => 'index'
   map.forum_root 'forum', :controller => 'forums', :action => 'index'

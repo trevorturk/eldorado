@@ -8,9 +8,16 @@
   <% if !@articles.empty? %>
     <% for article in @articles %>
       <%= render :partial => 'articles/article', :object => article %>
+      <div class="comments-link detail">
+        <% if can_edit?(article) %>
+          <%= link_to 'Edit', edit_article_path(article) %> &nbsp;|&nbsp; 
+        <% end %>
+        <%= link_to pluralize(article.comments_count, 'Comments'), article_path(article, :anchor => 'comments') %>
+      </div>
     <% end %>
-    <div class="info-right">
-      <%= will_paginate @articles, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <div class="info-left info-footer">
+      <span class="title">Looking for something?</span>&nbsp;
+      <%= link_to 'Visit the Blog Archives &raquo;', blog_archives_path %>
     </div>
   <% else %>
     <div class="info-left">

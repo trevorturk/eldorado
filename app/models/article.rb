@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
   attr_readonly :user_id, :created_at
   
   def self.get(page = 1)
-    paginate(:page => page, :per_page => 15, :order => 'created_at desc', :include => :user)
+    paginate(:page => page, :per_page => 10, :order => 'created_at desc', :include => :user)
   end
   
   def to_s

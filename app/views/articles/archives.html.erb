@@ -1,0 +1,22 @@
+<div class="primary">
+  <div class="info-left">
+    <% if !@articles.empty? %>
+      <div class="title article-title">Blog Archives</div>
+    <% else %>
+      <div class="title article-title">No Articles Found</div>
+    <% end %>
+  </div>
+  <div class="clear"> </div>
+  <ul class="archives">
+  <% for article in @articles %>
+    <li>
+      <span class="title"><%= link_to article %></span>
+      <span class="detail"><%= time_ago_or_time_stamp(article.created_at) %> 
+      by <%= link_to h(article.user.login), user_articles_path(article.user) %></span>
+    </li>
+  <% end unless @articles.empty? %>
+  </ul>
+</div>
+<div class="secondary">
+  <%= render :partial => 'articles/secondary'%>
+</div>

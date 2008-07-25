@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080712230439) do
+ActiveRecord::Schema.define(:version => 20080725023050) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20080712230439) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "comments_count", :default => 0, :null => false
   end
 
   create_table "avatars", :force => true do |t|
@@ -36,6 +37,15 @@ ActiveRecord::Schema.define(:version => 20080712230439) do
   create_table "categories", :force => true do |t|
     t.string  "name"
     t.integer "position", :limit => 255, :default => 0
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", :force => true do |t|

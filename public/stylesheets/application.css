@@ -447,6 +447,10 @@ tbody .tds {
 	margin-top: 5px;
 }
 
+.info-footer {
+	margin-bottom: 20px;
+}
+
 .title {
   font-size: 12px;
   font-weight: bold;
@@ -463,10 +467,24 @@ tbody .tds {
 	padding-bottom: 3px;
 }
 
+.comments-link {
+	float: right;
+	margin-top: -20px;
+}
+
+.archives li {
+	margin: 7px;
+}
+
 .detail, .detail a.text {
   color: #999;
   letter-spacing: -1px;
 	font-weight: normal;
+}
+
+.detail-li, .detail-li a {
+	margin-top: 15px;
+	color: #999;
 }
 
 #filters {
