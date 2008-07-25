@@ -21,7 +21,9 @@
       by <%= link_to h(article.user.login), user_articles_path(article.user) %></span>
     </li>
   <% end unless @articles.empty? %>
-  <li class="detail"><%= link_to 'Visit the Blog Archives &raquo;', blog_archives_path, :class => 'text' %></li>
+  <% if current_controller == 'search' %>
+    <li class="detail"><%= link_to 'Visit the Blog Archives &raquo;', blog_archives_path, :class => 'text' %></li>
+  <% end %>
   </ul>
 </div>
 <div class="secondary">
