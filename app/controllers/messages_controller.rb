@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
   skip_filter :update_online_at, :get_layout_vars, :only => [:create, :more, :refresh, :refresh_chatters]
   
   def index
-    @messages = Message.get
+    @messages = Message.get(session[:online_at])
     current_user.update_attribute('chatting_at', Time.now.utc) if logged_in?
     @chatters = User.chatting
     unless @messages.empty?

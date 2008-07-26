@@ -4,8 +4,10 @@ class Message < ActiveRecord::Base
   
   validates_presence_of :body
     
-  def self.get
-    find(:all, :limit => 50, :order => 'messages.id desc', :include => :user)
+  def self.get(since = Time.now.utc)
+    messages = all(:limit => 500, :conditions => ['created_at > ?', since], :order => 'messages.id desc', :include => :user)
+    messages = all(:limit => 50, :order => 'messages.id desc', :include => :user) if messages.size < 50
+    messages
   end
   
   def self.more(id)
