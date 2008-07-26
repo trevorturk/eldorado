@@ -1,5 +1,5 @@
-<% @bloggers ||= User.bloggers %>
-<% if @bloggers %>
+<% @bloggers ||= User.blog_authors %>
+<% if @bloggers && @bloggers.size > 1 %>
   <div class="title"><%= link_to 'Authors', users_path %></div>
   <ul class="secondary-list">
     <% @bloggers.each do |user| %>

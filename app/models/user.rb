@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   
   attr_protected :id, :created_at, :admin, :posts_count
   
-  named_scope :bloggers, :conditions => 'articles_count > 0', :order => 'articles_count desc'
+  named_scope :blog_authors, :conditions => 'articles_count > 0', :order => 'articles_count desc'
   named_scope :chatting, lambda {|*args| {:conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc'}}
   named_scope :online, lambda {|*args| {:conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc'}}
   
