@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   
   include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
   
-  before_filter :get_settings, :auth_token_login, :check_bans, :check_privacy, :set_timezone, :update_online_at, :get_layout_vars
+  before_filter :get_settings, :auth_token_login, :check_bans, :check_privacy, :check_admin_only_create, :set_timezone, :update_online_at, :get_layout_vars
   helper_method :current_action, :current_controller, :current_user, :logged_in?, :is_online?, :admin?, :can_edit?, :locked_out?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     raise ActiveRecord::SettingsNotFound if @settings.nil?
   end
   
-  def set_timezone    
+  def set_timezone
     Time.zone = logged_in? ? current_user.time_zone : @settings.time_zone
   end
   
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   def current_controller
     request.path_parameters['controller']
   end
-    
+  
   def find_parent_user_or_class
     @parent_user = User.find(params[:user_id]) if params[:user_id]
     @parent = @parent_user ? @parent_user.send(current_controller) : current_controller.singularize.classify.constantize

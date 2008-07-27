@@ -15,6 +15,11 @@
       <p><%= f.text_area :footer, :rows => '3', :style => "width:66%;" %></p>
       <p class="label"><label for="setting_favicon">Favicon</label></p>
       <p><%= f.text_field :favicon, :style => "width:66%;" %></p>
+      <p class="label">
+        <label for="setting_admin_only_create">Admin-Only Create Actions</label>&nbsp;
+        <span class="detail">For example, "articles" would restrict creating new blog articles to admins only.</span>
+      </p>
+      <p><%= f.text_field :admin_only_create, :style => "width:66%;" %></p>
       <p><%= f.check_box :private %> <label for="setting_private">Private</label>&nbsp; 
         <span class="detail">Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)</span>
       </p>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080725023050) do
+ActiveRecord::Schema.define(:version => 20080727205027) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -128,8 +128,9 @@ ActiveRecord::Schema.define(:version => 20080725023050) do
     t.string  "theme"
     t.string  "favicon"
     t.string  "time_zone"
-    t.boolean "private",       :default => false
+    t.boolean "private",           :default => false
     t.string  "login_message"
+    t.string  "admin_only_create", :default => "",    :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
