@@ -9,7 +9,7 @@
   </p>
   <p class="nav-right">
     <% if logged_in? %>
-      <% unless @settings.admin_only_create.include?(current_controller) %>
+      <% unless @settings.admin_only_create.include?(current_controller) && !admin? %>
         <% if current_controller == 'home' %><%= link_to 'Start a New Topic', new_topic_path %>
         <% elsif current_controller == 'articles' %><%= link_to 'Post a New Article', new_article_path %>
         <% elsif current_controller == 'avatars' %><%= link_to 'Upload a New Avatar', new_avatar_path %>
