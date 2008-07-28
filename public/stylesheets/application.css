@@ -175,8 +175,8 @@ h3 {
   margin: 0 0 10px 0;
 }
 
-#box-comments-new {
-	margin-top: 18px;
+.box-comment {
+	margin-left: 6px;
 }
 
 .text-field {

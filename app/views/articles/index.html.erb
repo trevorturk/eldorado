@@ -10,9 +10,9 @@
       <%= render :partial => 'articles/article', :object => article %>
       <div class="comments-link detail">
         <% if can_edit?(article) %>
-          <%= link_to 'Edit', edit_article_path(article) %> &nbsp;|&nbsp; 
+          <%= link_to 'Edit', edit_article_path(article), :class => 'text' %> &nbsp;|&nbsp; 
         <% end %>
-        <%= link_to pluralize(article.comments_count, 'Comments'), article_path(article, :anchor => 'comments') %>
+        <%= link_to pluralize(article.comments_count, 'Comments'), article_path(article, :anchor => 'comments'), :class => 'text' %>
       </div>
     <% end %>
     <div class="info-left">

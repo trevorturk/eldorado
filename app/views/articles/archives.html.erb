@@ -16,7 +16,7 @@
   <ul class="archives">
   <% for article in @articles %>
     <li>
-      <span class="title"><%= link_to article, article %></span>
+      <span class="title"><%= link_to article, article %></span>&nbsp;
       <span class="detail"><%= time_ago_or_time_stamp(article.created_at) %> 
       by <%= link_to h(article.user.login), user_articles_path(article.user) %></span>
     </li>
