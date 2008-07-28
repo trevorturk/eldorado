@@ -1,0 +1,14 @@
+<div id="comments">
+  <div class="info-left">
+    <div class="title">
+      <%= pluralize(@article.comments_count, 'Comment') %>
+    </div>
+  </div>
+  <div class="clear"> </div>
+</div>
+
+<div class="comments-body">
+  <% @article.comments.each do |comment| %>
+    <%= comment.body %>
+  <% end unless @article.comments.empty? %>
+</div>

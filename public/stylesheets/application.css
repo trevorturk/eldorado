@@ -366,12 +366,12 @@ tbody .tds {
 	padding: 0 10px;
 }
 
-.article-body {
+.article-body, .comments-body {
 	margin: 6px 6px 40px 6px;
   line-height: 1.4em;
 }
 
-.article-body p {
+.article-body p, .comments-body p {
 	margin-top: 0;
 }
 
@@ -381,7 +381,7 @@ tbody .tds {
 }
 
 .secondary-list li {
-	margin-bottom: 8px;
+	margin-bottom: 6px;
 }
 
 .messages-index {

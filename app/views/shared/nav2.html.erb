@@ -1,7 +1,7 @@
 <% if current_controller == 'articles' and current_action == 'show' %>
   <% if can_edit?(@article) %>
     <div class="clear"> </div>
-    <div class="info-left">
+    <div class="info-right">
       <%= link_to 'Edit Article', edit_article_path(@article) %>
     </div>
   <% end %>
