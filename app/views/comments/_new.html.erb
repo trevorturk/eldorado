@@ -4,7 +4,7 @@
     <% form_for @comment do |f| -%>
       <%= f.hidden_field :resource_id, :value => @article.id %>
       <%= f.hidden_field :resource_type, :value => @article.class %>
-      <%= f.text_area :body, :value => @body, :rows => '5', :style => "width:66%;" %>
+      <%= f.text_area :body, :value => @body, :rows => '5', :class => 'text-field' %>
       <p>
         <%= submit_tag "Post Comment", :disable_with => "Post Comment" %>&nbsp; 
         <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> 

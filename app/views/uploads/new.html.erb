@@ -5,7 +5,7 @@
     <span class="top">New File</span>
     <p id="file_upload"><%= f.file_field :uploaded_data %></p>
     <p id="url_upload" style="display:none;">
-      <%= f.text_field :url, :style => "width:66%;" %>&nbsp; 
+      <%= f.text_field :url, :class => 'text-field' %>&nbsp; 
       <%= link_to_function '(x)', "$('file_upload').toggle();$('upload_url').clear();$('url_upload').toggle()" %>
     </p>
     <p>

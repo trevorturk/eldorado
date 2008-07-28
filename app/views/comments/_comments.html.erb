@@ -6,10 +6,8 @@
 </div>
 <div class="clear"> </div>
 
-<div class="comment-body">
+<div class="comment-list">
   <% @comments.each do |comment| %>
-    <div class="comment" id="c<%= comment.id %>">
-      <span class="comment-user"><%= link_to comment.user, comment.user %></span> <%= comment.body %>
-    </div>
+    <%= render :partial => 'comments/comment', :object => comment %>
   <% end unless @comments.empty? %>
 </div>
