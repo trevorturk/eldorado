@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   
   has_many :articles, :dependent => :destroy, :order => 'created_at desc'
   has_many :avatars, :dependent => :destroy, :order => 'created_at desc'
+  has_many :comments, :dependent => :destroy, :order => 'created_at desc'
   has_many :events, :dependent => :destroy, :order => 'date desc'
   has_many :headers, :dependent => :destroy, :order => 'created_at desc'
   has_many :messages, :dependent => :destroy, :order => 'created_at desc'

@@ -1,4 +1,4 @@
-<div class="primary">
+<div id="primary">
   <% if @parent_user %>    
     <div class="info-left">
       <span class="title">Articles by <%= link_to @parent_user, user_articles_path(@parent_user) %></span>
@@ -26,6 +26,6 @@
     <div class="clear"> </div>
   <% end %>
 </div>
-<div class="secondary">
+<div id="secondary">
   <%= render :partial => 'articles/secondary'%>
 </div>

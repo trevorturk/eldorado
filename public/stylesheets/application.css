@@ -175,6 +175,10 @@ h3 {
   margin: 0 0 10px 0;
 }
 
+#box-comments-new {
+	margin-top: 18px;
+}
+
 .text-field {
 	width: 66%;
 }
@@ -279,7 +283,7 @@ tbody .tds {
   margin: 0;
 }
 
-.thread dt {
+.thread dt, .comment-user {
   font-size: 12px;
   font-weight: bold;
   letter-spacing: -1px;
@@ -353,26 +357,34 @@ tbody .tds {
 	width: 14%;
 }
 
-.primary {
+#primary {
 	float: left;
 	width: 550px;
 	margin: 6px 10px 0 0;
 }
 
-.secondary {
+#secondary {
 	float: left;
 	width: 180px;
 	margin-top: 12px;
 	padding: 0 10px;
 }
 
-.article-body, .comments-body {
+.article-body {
 	margin: 6px 6px 40px 6px;
-  line-height: 1.4em;
 }
 
-.article-body p, .comments-body p {
+#comments {
+	margin: 6px 6px 20px 6px;
+}
+
+.article-body p, .comment-body p {
+	line-height: 1.4em;
 	margin-top: 0;
+}
+
+.comment {
+	margin: 0 0 10px 6px;
 }
 
 .secondary-list {
