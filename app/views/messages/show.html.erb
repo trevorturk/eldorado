@@ -1,12 +1,5 @@
 <table cellspacing="0" class="messages-index">
   <tbody id="messages-index">
-    <tr id="message-<%= @message.id %>">
-      <td class="tcu"><%= @message.user %></td>
-      <td class="tcl"><%= bb(@message.body) %></td>
-      <td class="tcr">
-        <%= time_stamp(@message.created_at, true) %> 
-        <%= link_to '(x)', @message, :method => :delete if can_edit?(@message) %>
-      </td>
-    </tr>
+    <%= render :partial => 'messages/message', :message => @message %>
   </tbody>
 </table>
