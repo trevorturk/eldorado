@@ -5,6 +5,10 @@ class Comment < ActiveRecord::Base
   
   validates_presence_of :user_id, :body, :resource
   
+  def self.get(page = 1)
+    paginate(:page => page, :order => 'created_at desc', :include => :user)
+  end
+  
   def to_s
     body
   end

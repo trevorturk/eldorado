@@ -37,9 +37,6 @@
   <div class="clear"> </div>
 <% end %>
 
-<div class="info-left detail" id="posters" style="display:none;"></div>
-<div class="clear"> </div>
-
 <% @posts.each_with_index do |post, index| index+=1 %>
   <%= render 'posts/show', { :post => post, :index => index } %>
 <% end %>

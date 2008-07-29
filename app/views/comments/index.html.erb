@@ -1,0 +1,13 @@
+<div class="info-left">
+  <span class="title"><%= number_with_delimiter(@comments.total_entries) %> Comments</span>
+</div>
+<div class="info-right detail">
+  <%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+</div>
+<div class="clear"> </div>
+
+<div class="comment-list">
+  <% @comments.each do |comment| %>
+    <%= render :partial => 'comments/comment', :object => comment %>
+  <% end %>
+</div>

@@ -43,6 +43,12 @@
   </div>
 <% end %>
 
+<% if current_controller == 'comments' and current_action == 'index' %>
+  <div class="info-right">
+    <%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+  </div>
+<% end %>
+
 <% if current_controller == 'comments' and current_action == 'show' %>
   <% if can_edit?(@comment) %>
     <div class="info-right">

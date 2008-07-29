@@ -1,16 +1,10 @@
 require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
-  # def test_should_get_index
-  #   get :index
-  #   assert_response :success
-  #   assert_not_nil assigns(:comments)
-  # end
-
-  # def test_should_get_new
-  #   get :new
-  #   assert_response :success
-  # end
+  def test_should_get_index
+    get :index
+    assert_response :success
+  end
 
   def test_should_create_comment_if_logged_in
     login_as :trevor
@@ -84,10 +78,34 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
 
-  # def test_should_destroy_comment
-  #   assert_difference('Comment.count', -1) do
-  #     delete :destroy, :id => comments(:one).id
-  #   end
-  #   assert_redirected_to comments_path
-  # end
+  def test_should_destroy_comment_if_admin
+    login_as :Administrator
+    assert_difference('Comment.count', -1) do
+      delete :destroy, :id => comments(:one).id
+    end
+    assert_redirected_to article_path(articles(:one).id.to_s + '#comments')
+  end
+    
+  def test_should_destroy_comment_if_author
+    login_as :trevor
+    assert_difference('Comment.count', -1) do
+      delete :destroy, :id => comments(:one).id
+    end
+    assert_redirected_to article_path(articles(:one).id.to_s + '#comments')
+  end
+  
+  def test_should_not_destroy_comment_if_not_author_or_admin
+    login_as :Timothy
+    assert_no_difference('Comment.count') do
+      delete :destroy, :id => comments(:one).id
+    end
+    assert_redirected_to root_path
+  end
+  
+  def test_should_not_destroy_comment_if_not_logged_in
+    assert_no_difference('Comment.count') do
+      delete :destroy, :id => comments(:one).id
+    end
+    assert_redirected_to login_path
+  end
 end
