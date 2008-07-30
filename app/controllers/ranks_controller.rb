@@ -1,7 +1,7 @@
 class RanksController < ApplicationController
   
   before_filter :redirect_home, :only => [:show]
-  before_filter :require_admin
+  before_filter :require_admin, :except => [:index]
   
   def index
     @ranks = Rank.find(:all, :order => 'min_posts asc')

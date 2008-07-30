@@ -10,7 +10,7 @@
         <tr>
           <td class="tci"><%= icon_for(header) %></td>
           <td class="tcl">
-            <%= link_to truncate(header.filename), header %> by <%=h header.user.login %>
+            <%= link_to truncate(header.filename, 28), header %> by <%=h header.user.login %>
           </td>
         </tr>
       <% end %>

@@ -18,6 +18,10 @@ class Post < ActiveRecord::Base
     Forum.decrement_counter("posts_count", topic.forum_id)
   end
   
+  def self.get(page = 1)
+    paginate(:page => page, :per_page => 15, :order => 'created_at desc', :include => [:topic, :user])
+  end
+  
   def page
     posts = Post.find_all_by_topic_id(self.topic_id, :select => 'id', :order => 'created_at').map(&:id)
     post_number = posts.rindex(self.id) + 1

@@ -1,11 +1,13 @@
 <% if current_controller == 'users' %>
   <div class="info-left">
     <span class="title">Users</span>
-    <span class="detail">&nbsp;|&nbsp;
-      <%= pluralize(number_with_delimiter(@users_count) || 0, 'Users') %>
-    </span>
+    <span class="detail">&nbsp;|&nbsp;<%= pluralize(number_with_delimiter(@users_count) || 0, 'Users') %></span>
+  </div>  
+  <div class="info-right">
+    <span class="title">&nbsp;</span>
+    <span class="detail"><%= link_to 'Avatars', avatars_path %> &nbsp; <%= link_to 'Ranks', ranks_path %></span>
   </div>
-  <div style="clear:both;"> </div>
+  <div class="clear"> </div>
 <% end %>
 
 <% unless @users.blank? %>

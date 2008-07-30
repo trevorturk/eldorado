@@ -3,6 +3,7 @@
     <span class="top">Search</span>
     <p>
       <select id="type" name="type">
+        <option<%= ' selected="selected"' if params[:type] == 'articles' || current_controller == 'articles' %> value='articles'>Articles</option>
         <option<%= ' selected="selected"' if params[:type] == 'avatars' || current_controller == 'avatars' %> value='avatars'>Avatars</option>
         <option<%= ' selected="selected"' if params[:type] == 'messages' || current_controller == 'messages' %> value='messages'>Chat</option>
         <option<%= ' selected="selected"' if params[:type] == 'events' || current_controller == 'events' %> value='events'>Events</option>

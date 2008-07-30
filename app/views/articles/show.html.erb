@@ -1,0 +1,11 @@
+<div id="primary">
+  <%= render :partial => 'articles/article' %>
+  <div id="comments">
+    <%#= render :partial => 'comments/comments', :object => @article, :as => :resource %>
+    <%= render :partial => 'comments/comments', :object => @article %>
+    <%= render :partial => 'comments/new', :object => @article %>
+  </div>
+</div>
+<div id="secondary">
+  <%= render :partial => 'articles/secondary'%>
+</div>

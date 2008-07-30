@@ -22,6 +22,8 @@ class SearchControllerTest < Test::Unit::TestCase
   
   def test_should_accept_searches
     login_as :trevor
+    get :index, :type => 'articles', :query => 'test'
+    assert_response :success
     get :index, :type => 'avatars', :query => 'test'
     assert_response :success
     get :index, :type => 'events', :query => 'test'

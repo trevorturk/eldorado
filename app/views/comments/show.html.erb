@@ -1,0 +1,7 @@
+<div class="info-left">
+  <span class="title"><%= link_to @comment.resource, @comment.resource %></span>
+  <span class="detail">&laquo; <%= link_to 'Comments', polymorphic_path(@comment.resource) + '#comments' %></span>
+</div>
+<div class="clear"> </div>
+
+<%= render :partial => 'comments/comment', :object => @comment %>

@@ -4,7 +4,7 @@
   <div class="box" id="box-new-new">
     <span class="top">New Topic</span>
     <p class="label"><label for="topic_title">Title</label></p>
-    <p><%= f.text_field :title, :style => "width:66%" %>
+    <p><%= f.text_field :title, :class => 'text-field' %>
        &nbsp; <%= f.check_box :locked %><label for="topic_locked"> Locked</label> &nbsp; 
        <% if admin? %>
          <%= f.check_box(:sticky) %><label for="topic_sticky"> Sticky</label>
@@ -12,7 +12,7 @@
     </p>
     <%= render :partial => 'forums/select' %>
     <p class="label"><label for="topic_body">Body</label></p>
-    <p><%= f.text_area :body, :rows => '8', :style => 'width:66%;' %></p>
+    <p><%= f.text_area :body, :rows => '8', :class => 'text-field' %></p>
     <p>
       <%= submit_tag "Post Topic", :disable_with => "Post Topic" %>&nbsp;
       <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %> &nbsp; 

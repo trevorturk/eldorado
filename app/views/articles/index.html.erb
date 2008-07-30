@@ -1,0 +1,31 @@
+<div id="primary">
+  <% if @parent_user %>    
+    <div class="info-left">
+      <span class="title">Articles by <%= link_to @parent_user, user_articles_path(@parent_user) %></span>
+    </div>
+    <div class="clear"> </div>
+  <% end %>
+  <% if !@articles.empty? %>
+    <% for article in @articles %>
+      <%= render :partial => 'articles/article', :object => article %>
+      <div class="comments-link detail">
+        <% if can_edit?(article) %>
+          <%= link_to 'Edit', edit_article_path(article), :class => 'text' %> &nbsp;|&nbsp; 
+        <% end %>
+        <%= link_to pluralize(article.comments_count, 'Comments'), article_path(article, :anchor => 'comments'), :class => 'text' %>
+      </div>
+    <% end %>
+    <div class="info-left">
+      <span class="title">Looking for something?</span>&nbsp;
+      <span class="detail"><%= link_to 'Visit the Blog Archives &raquo;', blog_archives_path %></span>
+    </div>
+  <% else %>
+    <div class="info-left">
+      <div class="title article-title">No Articles Found</div>
+    </div>
+    <div class="clear"> </div>
+  <% end %>
+</div>
+<div id="secondary">
+  <%= render :partial => 'articles/secondary'%>
+</div>

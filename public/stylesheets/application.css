@@ -175,6 +175,14 @@ h3 {
   margin: 0 0 10px 0;
 }
 
+.box-comment {
+	margin-left: 6px;
+}
+
+.text-field {
+	width: 66%;
+}
+
 table {
   width: 100%;
   border: 1px solid #35604d;
@@ -275,7 +283,7 @@ tbody .tds {
   margin: 0;
 }
 
-.thread dt {
+.thread dt, .comment-user {
   font-size: 12px;
   font-weight: bold;
   letter-spacing: -1px;
@@ -349,6 +357,49 @@ tbody .tds {
 	width: 14%;
 }
 
+#primary {
+	float: left;
+	width: 550px;
+	margin: 6px 10px 0 0;
+}
+
+#secondary {
+	float: left;
+	width: 180px;
+	margin-top: 12px;
+	padding: 0 10px;
+}
+
+.article-body {
+	margin: 6px 6px 40px 6px;
+}
+
+#comments {
+	margin: 6px 0 26px 0;
+}
+
+.article-body p, .comment-body p {
+	line-height: 1.4em;
+	margin-top: 0;
+}
+
+.comment {
+	margin: 0 0 25px 6px;
+}
+
+.comment-body {
+	margin-top: 4px;
+}
+
+.secondary-list {
+	margin: 5px 10px;
+	padding-bottom: 20px;
+}
+
+.secondary-list li {
+	margin-bottom: 6px;
+}
+
 .messages-index {
 	border: 0;
 }
@@ -412,6 +463,10 @@ tbody .tds {
 	margin-top: 5px;
 }
 
+.info-footer {
+	margin-bottom: 10px;
+}
+
 .title {
   font-size: 12px;
   font-weight: bold;
@@ -420,6 +475,21 @@ tbody .tds {
 
 .title a {
 	color: #333;
+}
+
+.article-title {
+	font-size: 18px;
+	font-weight: normal;
+	padding-bottom: 3px;
+}
+
+.comments-link {
+	float: right;
+	margin-top: -20px;
+}
+
+.archives li {
+	margin: 7px;
 }
 
 .detail, .detail a.text {
@@ -442,9 +512,20 @@ blockquote {
   padding: 6px;
 }
 
+.article-body blockquote {
+	background: none !important;
+	border: none;
+  border-left: 1px solid #ccc;
+	padding: 10px;
+}
+
 cite {
   font-weight: bold;
   font-style: normal;
+}
+
+.clear {
+	clear: both;
 }
 
 .sig-hr {

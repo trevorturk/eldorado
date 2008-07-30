@@ -17,10 +17,15 @@ class UserTest < Test::Unit::TestCase
     u = User.create(:login => "test", :email => "email@address.com", :password => "sdlfkj", :password_confirmation => "sdlfkj")
     assert u.valid?
   end
-    
+  
+  def test_blog_authors
+    users(:trevor).articles.create(:title => 'test', :body => 'test')
+    authors = User.blog_authors
+    assert_equal true, authors.include?(users(:trevor))
+  end
+  
   def test_to_s
     u = User.find(1)
     assert_equal u.to_s, 'Guest'
   end
-  
 end

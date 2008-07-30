@@ -57,12 +57,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
-  def posts
-    @user = User.find(params[:id])
-    @posts = @user.posts.paginate(:page => params[:page])
-    render :template => 'topics/show'
-  end
-  
   def admin
     @user = User.find(params[:id])
     @user.toggle!(:admin)

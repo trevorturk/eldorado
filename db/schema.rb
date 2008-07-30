@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080603230322) do
+ActiveRecord::Schema.define(:version => 20080727205027) do
+
+  create_table "articles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comments_count", :default => 0, :null => false
+  end
 
   create_table "avatars", :force => true do |t|
     t.integer  "parent_id"
@@ -28,6 +37,15 @@ ActiveRecord::Schema.define(:version => 20080603230322) do
   create_table "categories", :force => true do |t|
     t.string  "name"
     t.integer "position", :limit => 255, :default => 0
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", :force => true do |t|
@@ -94,8 +112,8 @@ ActiveRecord::Schema.define(:version => 20080603230322) do
     t.integer  "updated_by"
   end
 
-  add_index "posts", ["topic_id", "created_at"], :name => "index_posts_on_topic_id_and_created_at"
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
+  add_index "posts", ["topic_id", "created_at"], :name => "index_posts_on_topic_id_and_created_at"
 
   create_table "ranks", :force => true do |t|
     t.string  "title"
@@ -110,8 +128,9 @@ ActiveRecord::Schema.define(:version => 20080603230322) do
     t.string  "theme"
     t.string  "favicon"
     t.string  "time_zone"
-    t.boolean "private",       :default => false
+    t.boolean "private",           :default => false
     t.string  "login_message"
+    t.string  "admin_only_create", :default => "",    :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -146,8 +165,8 @@ ActiveRecord::Schema.define(:version => 20080603230322) do
     t.integer  "forum_id"
   end
 
-  add_index "topics", ["forum_id", "sticky", "last_post_at"], :name => "index_topics_on_sticky_and_last_post_at"
   add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
+  add_index "topics", ["forum_id", "sticky", "last_post_at"], :name => "index_topics_on_sticky_and_last_post_at"
 
   create_table "uploads", :force => true do |t|
     t.integer  "parent_id"
@@ -181,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20080603230322) do
     t.datetime "banned_until"
     t.datetime "chatting_at"
     t.boolean  "logged_out",         :default => false
+    t.integer  "articles_count",     :default => 0
   end
 
   add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"

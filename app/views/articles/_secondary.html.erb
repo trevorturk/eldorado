@@ -1,0 +1,22 @@
+<% @bloggers ||= User.blog_authors %>
+<% if @bloggers && @bloggers.size > 1 %>
+  <div class="title"><%= link_to 'Authors', users_path %></div>
+  <ul class="secondary-list">
+    <% @bloggers.each do |user| %>
+      <li><%= link_to user, user_articles_path(user) %> <span class="detail">(<%= user.articles_count %>)</span></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% @recent_articles = Article.get %>
+<% if @recent_articles %>
+  <div class="title"><%= link_to 'Recent Articles', blog_path %></div>
+  <ul class="secondary-list">
+    <% @recent_articles.each do |article| %>
+      <li><%= link_to article, article %> <span class="detail">by <%= article.user %></span></li>
+    <% end %>
+    <li class="detail"><%= link_to 'Blog Archives &raquo;', blog_archives_path, :class => 'text' %></li>
+  </ul>
+<% end %>
+
+<%#= recent_comments %>

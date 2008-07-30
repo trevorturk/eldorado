@@ -1,0 +1,17 @@
+<%= error_messages_for :article %>
+<% @article = Article.new unless @article %>
+<% form_for @article do |f| %>
+  <div class="box" id="box-articles-new">
+    <span class="top">New Article</span>
+    <p class="label"><label for="article_title">Title</label></p>
+    <p><%= f.text_field :title, :class => 'text-field' %></p>
+    <p class="label"><label for="article_body">Body</label></p>
+    <p><%= f.text_area :body, :rows => '10', :class => 'text-field' %></p>
+    <p>
+      <%= submit_tag "Post Article", :disable_with => "Post Article" %>&nbsp;
+      <%= link_to 'Cancel', blog_path %>
+    </p>
+  <% end %>
+  <div class="clear"> </div>
+</div>
+<%= javascript_tag "$('article_title').focus();" %>

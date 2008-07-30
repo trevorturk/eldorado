@@ -15,7 +15,7 @@
         <tr>
           <td class="tci"><%= icon_for(upload) %></td>
           <td class="tcl">
-            <%= link_to truncate(upload.filename), upload.public_filename %>
+            <%= link_to truncate(upload.filename, 28), upload.public_filename %>
             
             <% unless current_controller == 'home' %>
               <%= link_to_function '(&raquo;)', "$('mp3-#{upload.public_filename}').toggle()" if upload.is_mp3? %>

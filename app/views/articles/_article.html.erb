@@ -1,0 +1,13 @@
+<div class="info-left">
+  <div class="title article-title">
+    <%= link_to h(article.title), article %>
+  </div>
+  <div class="detail">
+    <%= time_ago_or_time_stamp(article.created_at, Time.now.utc, true, true) %> by 
+    <%= link_to h(article.user), user_articles_path(article.user) %>
+  </div>
+</div>
+<div class="clear"> </div>
+<div class="article-body">
+  <%=bb article.body %>
+</div>

@@ -42,7 +42,7 @@ module AuthenticationSystem
   
   def check_bans
     return unless logged_in?
-    return if request.path_parameters['action'] == 'logout'
+    return if current_action == 'logout'
     return if current_user.banned_until.blank?
     if current_user.banned_until > Time.now.utc
       flash[:notice] = 'This account is banned' 
@@ -51,12 +51,18 @@ module AuthenticationSystem
       redirect_to logout_path and return false
     end
   end
-   
+  
+  def check_admin_only_create
+    if @settings.admin_only_create.include?(current_controller) && %w(new create).include?(current_action)
+      redirect_to root_path unless admin?
+    end
+  end
+  
   def can_edit
     redirect_to root_path and return false unless logged_in?
-    klass = request.path_parameters['controller'].singularize.classify.constantize
+    klass = current_controller.singularize.classify.constantize
     @item = klass.find(params[:id])
-    if request.path_parameters['controller'] == "users"
+    if current_controller == "users"
       redirect_to root_path and return false unless admin? || (current_user == @item)
     else
       redirect_to root_path and return false unless admin? || (current_user == @item.user)
@@ -65,7 +71,7 @@ module AuthenticationSystem
       
   def can_edit?(current_item)
     return false unless logged_in?
-    if request.path_parameters['controller'] == "users"
+    if current_controller == "users"
       return current_user.admin? || (current_user == current_item) 
     else
       return current_user.admin? || (current_user.id == current_item.user_id) 

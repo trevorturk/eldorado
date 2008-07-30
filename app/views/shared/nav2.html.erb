@@ -1,3 +1,16 @@
+<% if current_controller == 'articles' and current_action == 'show' %>
+  <% if can_edit?(@article) %>
+    <div class="clear"> </div>
+    <div class="info-left">
+      <%= link_to 'Home', root_path %> &raquo; 
+      <%= link_to 'Blog', blog_path %> &raquo; <%= @article %>
+    </div>
+    <div class="info-right">
+      <%= link_to 'Edit Article', edit_article_path(@article) %>
+    </div>
+  <% end %>
+<% end %>
+
 <% if current_controller == 'avatars' and current_action == 'index' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
@@ -28,6 +41,20 @@
     <% end %>
     <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
   </div>
+<% end %>
+
+<% if current_controller == 'comments' and current_action == 'index' %>
+  <div class="info-right">
+    <%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+  </div>
+<% end %>
+
+<% if current_controller == 'comments' and current_action == 'show' %>
+  <% if can_edit?(@comment) %>
+    <div class="info-right">
+      <%= link_to 'Edit Comment', edit_comment_path(@comment) %>
+    </div>
+  <% end %>
 <% end %>
 
 <% if current_controller == 'events' and current_action == 'edit' %>
@@ -257,4 +284,4 @@
   </div>
 <% end %>
 
-<div style="clear:both;"> </div>
+<div class="clear"> </div>

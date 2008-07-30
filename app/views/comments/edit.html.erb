@@ -1,0 +1,15 @@
+<%= error_messages_for :comment %>
+<% form_for @comment do |f| %>
+  <div class="box" id="box-comments-edit">
+    <span class="top">Edit Comment</span>
+    <p class="label"><label for="comment_body">Body</label></p>
+    <p><%= f.text_area :body, :rows => '5', :class => 'text-field' %></p>
+    <p>
+      <%= submit_tag "Edit Comment", :disable_with => "Edit Comment" %>&nbsp;
+      <%= link_to 'Cancel', @comment.resource %> &nbsp; 
+      <%= link_to 'Delete', @comment, :confirm => 'Are you sure?', :method => :delete %>
+    </p>
+  <% end %>
+  <div class="clear"> </div>
+</div>
+<%= javascript_tag "$('comment_body').focus();" %>

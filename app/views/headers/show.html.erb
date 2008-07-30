@@ -9,7 +9,7 @@
     <%= link_to_remote "&ndash;", :url => {:action => 'vote_down'}, :update => 'remote' %>
   <% end %>
 </div>
-<div style="clear:both;"> </div>
+<div class="clear"> </div>
 
 <% if !@header.description.blank? %>
   <blockquote><%=h @header.description %></blockquote>

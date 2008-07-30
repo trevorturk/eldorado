@@ -1,0 +1,13 @@
+<% @comments = @article.comments(:include => :user) %>
+<div class="info-left">
+  <div class="title">
+    <%= link_to pluralize(@article.comments_count, 'Comment'), comments_path %>
+  </div>
+</div>
+<div class="clear"> </div>
+
+<div class="comment-list">
+  <% @comments.each do |comment| %>
+    <%= render :partial => 'comments/comment', :object => comment %>
+  <% end %>
+</div>
