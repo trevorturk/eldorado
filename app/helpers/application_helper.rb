@@ -79,7 +79,7 @@ module ApplicationHelper
   end
   
   def current_page(collection)
-    'Page ' + collection.current_page.to_s + ' of ' + collection.total_pages.to_s unless collection.total_pages == 0
+    'Page ' + number_with_delimiter(collection.current_page).to_s + ' of ' + number_with_delimiter(collection.total_pages).to_s unless collection.total_pages == 0
   end
 
   def prev_page(collection)
