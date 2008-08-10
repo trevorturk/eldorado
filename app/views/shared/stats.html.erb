@@ -1,4 +1,4 @@
-<div class="nav nav-stats">
+<div class="nav-stats">
   <p class="nav-left">
     <% unless @users_online.blank? %>
       Online: <%= @users_online.map { |u| link_to "#{h u.login}", u } * ", " %>
@@ -9,4 +9,5 @@
       Newest User: <%= link_to h(@users_newest.login), @users_newest %>
     <% end %>
   </p>
+  <div class="clear"> </div>
 </div>
