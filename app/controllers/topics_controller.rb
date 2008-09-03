@@ -46,7 +46,7 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-    redirect_to topics_url
+    redirect_to topics_path
   end
   
   def show_new

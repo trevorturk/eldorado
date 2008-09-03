@@ -23,7 +23,7 @@ class AvatarsController < ApplicationController
   def destroy
     @avatar = Avatar.find(params[:id])
     @avatar.destroy
-    redirect_to avatars_url
+    redirect_to avatars_path
   end
   
   def select

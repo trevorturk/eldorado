@@ -63,6 +63,6 @@ class PostsController < ApplicationController
   def find_topic_and_post
     @post = Post.find(params[:id])
     @topic = Topic.find(@post.topic.id)
-    redirect_to topics_url unless @topic
+    redirect_to topics_path unless @topic
   end
 end

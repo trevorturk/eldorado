@@ -39,7 +39,7 @@ class HeadersController < ApplicationController
   def destroy
     @header = Header.find(params[:id])
     @header.destroy
-    redirect_to headers_url
+    redirect_to headers_path
   end
   
   def vote_up
