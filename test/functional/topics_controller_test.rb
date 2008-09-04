@@ -31,6 +31,12 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_template 'index', :format => 'rss'
   end
+  
+  def test_should_not_get_rss_feed_if_private
+    private_site
+    get :index, :format => 'rss'
+    assert_redirected_to login_path
+  end
 
   def test_should_create_topic
     login_as :trevor
