@@ -51,9 +51,9 @@ class TopicsController < ApplicationController
   
   def show_new
     @topic = Topic.find(params[:id])
-    @post = @topic.posts.find(:first, :order => 'created_at asc', :conditions => ["created_at >= ?", session[:online_at]]) unless !logged_in?
-    @post = Post.find(@topic.last_post_id) if @post.nil?
-    redirect_to :controller => 'topics', :action => 'show', :id => @topic.id, :page => @post.page, :anchor => 'p' + @post.id.to_s
+    @post = @topic.posts.first(:conditions => ["created_at >= ?", session[:online_at]]) if logged_in?
+    @post = @topic.posts.last if @post.nil?
+    redirect_to "/topics/#{@topic.id}?page=#{@post.page}#p#{@post.id.to_s}"
   end
   
   def clean_params
