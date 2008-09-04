@@ -19,10 +19,17 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert assigns(:topics)
   end
   
-  def test_should_get_atom_feed
-    get :index, :format => 'atom'
+  def test_should_get_rss_feed
+    get :index, :format => 'rss'
     assert_response :success
-    assert_template 'index', :format => 'atom'
+    assert_template 'index', :format => 'rss'
+  end
+  
+  def test_should_get_rss_feed_if_no_topics
+    Topic.destroy_all
+    get :index, :format => 'rss'
+    assert_response :success
+    assert_template 'index', :format => 'rss'
   end
 
   def test_should_create_topic

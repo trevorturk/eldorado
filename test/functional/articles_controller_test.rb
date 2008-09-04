@@ -7,10 +7,17 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:articles)
   end
 
-  def test_should_get_atom_feed
-    get :index, :format => 'atom'
+  def test_should_get_rss_feed
+    get :index, :format => 'rss'
     assert_response :success
-    assert_template 'index', :format => 'atom'
+    assert_template 'index', :format => 'rss'
+  end
+  
+  def test_should_get_rss_feed_if_no_articles
+    Article.destroy_all
+    get :index, :format => 'rss'
+    assert_response :success
+    assert_template 'index', :format => 'rss'
   end
 
   def test_should_get_new_if_logged_in
