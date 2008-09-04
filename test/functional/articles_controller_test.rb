@@ -7,6 +7,12 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:articles)
   end
 
+  def test_should_get_atom_feed
+    get :index, :format => 'atom'
+    assert_response :success
+    assert_template 'index', :format => 'atom'
+  end
+
   def test_should_get_new_if_logged_in
     login_as :trevor
     get :new

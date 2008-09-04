@@ -6,6 +6,10 @@ class TopicsController < ApplicationController
   
   def index
     @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'sticky desc, last_post_at desc')
+    respond_to do |format|
+      format.html
+      format.atom
+    end
   end
   
   def show

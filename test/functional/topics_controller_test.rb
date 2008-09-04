@@ -18,6 +18,12 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_response :success
     assert assigns(:topics)
   end
+  
+  def test_should_get_atom_feed
+    get :index, :format => 'atom'
+    assert_response :success
+    assert_template 'index', :format => 'atom'
+  end
 
   def test_should_create_topic
     login_as :trevor
