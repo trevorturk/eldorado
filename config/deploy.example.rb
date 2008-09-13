@@ -16,6 +16,7 @@ role :db,  "000.00.00.000", :primary => true
 before  'deploy:update_code', 'deploy:web:disable'
 after   'deploy:update_code', 'deploy:config_database'
 after   'deploy:update_code', 'deploy:create_symlinks'
+after   'deploy:restart', 'deploy:cleanup'
 after   'deploy:restart', 'deploy:web:enable'
 
 namespace :deploy do
