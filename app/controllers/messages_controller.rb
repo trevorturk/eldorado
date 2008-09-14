@@ -6,8 +6,12 @@ class MessagesController < ApplicationController
   skip_filter :update_online_at, :get_layout_vars, :only => [:create, :more, :refresh, :refresh_chatters]
   
   def index
-    @messages = Message.get(session[:online_at])
-    current_user.update_attribute('chatting_at', Time.now.utc) if logged_in?
+    if logged_in?
+      @messages = Message.get(current_user.chatting_at)
+      current_user.update_attribute('chatting_at', Time.now.utc)
+    else
+      @messages = Message.get
+    end
     @chatters = User.chatting
     unless @messages.empty?
       session[:message_id] = @messages.map(&:id).max

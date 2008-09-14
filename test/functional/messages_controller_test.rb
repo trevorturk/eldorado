@@ -15,7 +15,14 @@ class MessagesControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:messages)
   end
-
+  
+  def test_should_get_index_if_logged_in
+    login_as :trevor
+    get :index
+    assert_response :success
+    assert assigns(:messages)
+  end
+  
   def test_should_not_get_new_if_logged_in
     login_as :trevor
     get :new
