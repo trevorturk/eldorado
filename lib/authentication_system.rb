@@ -17,6 +17,10 @@ module AuthenticationSystem
   def locked_out?()
     return true if @settings.private? && !logged_in?
   end
+  
+  def logged_out?()
+    return true if current_user.logged_out?
+  end
       
   def require_login
     redirect_to login_path and return false unless logged_in?
