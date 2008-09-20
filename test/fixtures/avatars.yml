@@ -21,10 +21,10 @@
 calvin:
   id: 1
   parent_id: 
-  content_type: MyString
+  content_type: image/png
   filename: calvin.png
   thumbnail: 
-  size: 
+  size: 2323
   width: 
   height: 
   user_id: 4
@@ -34,10 +34,10 @@ calvin:
 two:
   id: 2
   parent_id: 
-  content_type: MyString
+  content_type: image/png
   filename: MyString.png
   thumbnail: 
-  size: 
+  size: 324
   width: 
   height: 
   user_id: 1
@@ -47,10 +47,10 @@ two:
 test:
   id: 3
   parent_id: 
-  content_type: MyString
-  filename: MyString.png
+  content_type: image/png
+  filename: MyString2.png
   thumbnail: 
-  size: 
+  size: 1344
   width: 
   height: 
   user_id: 4
@@ -60,10 +60,10 @@ test:
 guest:
   id: 4
   parent_id: 
-  content_type: MyString
-  filename: MyString.png
+  content_type: image/png
+  filename: MyString3.png
   thumbnail: 
-  size: 
+  size: 342
   width: 
   height: 
   user_id: 4

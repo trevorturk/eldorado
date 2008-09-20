@@ -19,6 +19,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
+  user_id: 1
   parent_id: 
   content_type: MyString
   filename: MyString.png
@@ -27,29 +28,5 @@ one:
   width: 
   height: 
   user_id: 4
-  created_at: 2007-03-19 20:03:23
-  updated_at: 2007-03-19 20:03:23
-two:
-  id: 2
-  parent_id: 
-  content_type: MyString
-  filename: MyString.png
-  thumbnail: 
-  size: 1
-  width: 
-  height: 
-  user_id: 1
-  created_at: 2007-03-19 20:03:23
-  updated_at: 2007-03-19 20:03:23
-mp3:
-  id: 3
-  parent_id: 
-  content_type: audio/mpeg
-  filename: mp3.mp3
-  thumbnail: 
-  size: 1
-  width: 
-  height: 
-  user_id: 1
   created_at: 2007-03-19 20:03:23
   updated_at: 2007-03-19 20:03:23

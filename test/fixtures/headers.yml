@@ -21,7 +21,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-  content_type: image/jpeg
+  content_type: image/png
   filename: MyString1.png
   size: 31559
   user_id: 4
@@ -30,7 +30,7 @@ one:
   updated_at: 2007-03-19 20:03:23
 two:
   id: 2
-  content_type: image/jpeg
+  content_type: image/png
   filename: MyString2.png
   size: 22483
   user_id: 2
