@@ -65,7 +65,7 @@ class MessagesController < ApplicationController
     @chatters = User.chatting
     if @chatters
       render :update do |page|
-        page.redirect_to logout_path if logged_in? && logged_out?
+        # page.redirect_to logout_path if logged_in? && logged_out? # seems to cause problems...?
         page.replace_html 'chatters', :partial => 'chatters', :object => @chatters
       end
     end
