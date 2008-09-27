@@ -13,6 +13,20 @@ class ArrayExtAccessTests < Test::Unit::TestCase
     assert_equal %w( a b c ), %w( a b c d ).to(2)
     assert_equal %w( a b c d ), %w( a b c d ).to(10)
   end
+  
+  def test_second_through_tenth
+    array = (1..10).to_a
+    
+    assert_equal array[1], array.second
+    assert_equal array[2], array.third
+    assert_equal array[3], array.fourth
+    assert_equal array[4], array.fifth
+    assert_equal array[5], array.sixth
+    assert_equal array[6], array.seventh
+    assert_equal array[7], array.eighth
+    assert_equal array[8], array.ninth
+    assert_equal array[9], array.tenth
+  end
 end
 
 class ArrayExtToParamTests < Test::Unit::TestCase
@@ -21,7 +35,7 @@ class ArrayExtToParamTests < Test::Unit::TestCase
       "#{self}1"
     end
   end
-  
+
   def test_string_array
     assert_equal '', %w().to_param
     assert_equal 'hello/world', %w(hello world).to_param
@@ -31,7 +45,7 @@ class ArrayExtToParamTests < Test::Unit::TestCase
   def test_number_array
     assert_equal '10/20', [10, 20].to_param
   end
-  
+
   def test_to_param_array
     assert_equal 'custom1/param1', [ToParam.new('custom'), ToParam.new('param')].to_param
   end
@@ -85,7 +99,7 @@ class ArrayExtToSTests < Test::Unit::TestCase
 end
 
 class ArrayExtGroupingTests < Test::Unit::TestCase
-  def test_group_by_with_perfect_fit
+  def test_in_groups_of_with_perfect_fit
     groups = []
     ('a'..'i').to_a.in_groups_of(3) do |group|
       groups << group
@@ -95,7 +109,7 @@ class ArrayExtGroupingTests < Test::Unit::TestCase
     assert_equal [%w(a b c), %w(d e f), %w(g h i)], ('a'..'i').to_a.in_groups_of(3)
   end
 
-  def test_group_by_with_padding
+  def test_in_groups_of_with_padding
     groups = []
     ('a'..'g').to_a.in_groups_of(3) do |group|
       groups << group
@@ -104,7 +118,7 @@ class ArrayExtGroupingTests < Test::Unit::TestCase
     assert_equal [%w(a b c), %w(d e f), ['g', nil, nil]], groups
   end
 
-  def test_group_by_pads_with_specified_values
+  def test_in_groups_of_pads_with_specified_values
     groups = []
 
     ('a'..'g').to_a.in_groups_of(3, 'foo') do |group|
@@ -114,7 +128,7 @@ class ArrayExtGroupingTests < Test::Unit::TestCase
     assert_equal [%w(a b c), %w(d e f), ['g', 'foo', 'foo']], groups
   end
 
-  def test_group_without_padding
+  def test_in_groups_of_without_padding
     groups = []
 
     ('a'..'g').to_a.in_groups_of(3, false) do |group|
@@ -122,6 +136,48 @@ class ArrayExtGroupingTests < Test::Unit::TestCase
     end
 
     assert_equal [%w(a b c), %w(d e f), ['g']], groups
+  end
+
+  def test_in_groups_returned_array_size
+    array = (1..7).to_a
+
+    1.upto(array.size + 1) do |number|
+      assert_equal number, array.in_groups(number).size
+    end
+  end
+
+  def test_in_groups_with_empty_array
+    assert_equal [[], [], []], [].in_groups(3)
+  end
+
+  def test_in_groups_with_block
+    array = (1..9).to_a
+    groups = []
+
+    array.in_groups(3) do |group|
+      groups << group
+    end
+
+    assert_equal array.in_groups(3), groups
+  end
+
+  def test_in_groups_with_perfect_fit
+    assert_equal [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+      (1..9).to_a.in_groups(3)
+  end
+
+  def test_in_groups_with_padding
+    array = (1..7).to_a
+
+    assert_equal [[1, 2, 3], [4, 5, nil], [6, 7, nil]],
+      array.in_groups(3)
+    assert_equal [[1, 2, 3], [4, 5, 'foo'], [6, 7, 'foo']],
+      array.in_groups(3, 'foo')
+  end
+
+  def test_in_groups_without_padding
+    assert_equal [[1, 2, 3], [4, 5], [6, 7]],
+      (1..7).to_a.in_groups(3, false)
   end
 end
 
@@ -222,6 +278,11 @@ class ArrayToXmlTests < Test::Unit::TestCase
 
     assert xml.include?(%(<count>2</count>)), xml
   end
+
+  def test_to_xml_with_empty
+    xml = [].to_xml
+    assert_match(/type="array"\/>/, xml)
+  end
 end
 
 class ArrayExtractOptionsTests < Test::Unit::TestCase
@@ -234,17 +295,15 @@ class ArrayExtractOptionsTests < Test::Unit::TestCase
 end
 
 uses_mocha "ArrayExtRandomTests" do
+  class ArrayExtRandomTests < Test::Unit::TestCase
+    def test_random_element_from_array
+      assert_nil [].rand
 
-class ArrayExtRandomTests < Test::Unit::TestCase
-  def test_random_element_from_array
-    assert_nil [].rand
+      Kernel.expects(:rand).with(1).returns(0)
+      assert_equal 'x', ['x'].rand
 
-    Kernel.expects(:rand).with(1).returns(0)
-    assert_equal 'x', ['x'].rand
-
-    Kernel.expects(:rand).with(3).returns(1)
-    assert_equal 2, [1, 2, 3].rand
+      Kernel.expects(:rand).with(3).returns(1)
+      assert_equal 2, [1, 2, 3].rand
+    end
   end
-end
-
 end

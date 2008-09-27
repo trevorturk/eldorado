@@ -27,7 +27,7 @@ require 'models/sponsor'
 
 class AssociationsTest < ActiveRecord::TestCase
   fixtures :accounts, :companies, :developers, :projects, :developers_projects,
-           :computers
+           :computers, :people, :readers
 
   def test_include_with_order_works
     assert_nothing_raised {Account.find(:first, :order => 'id', :include => :firm)}
@@ -45,7 +45,7 @@ class AssociationsTest < ActiveRecord::TestCase
     assert_equal [], person.readers.find(:all)
     person.save!
     reader = Reader.create! :person => person, :post => Post.new(:title => "foo", :body => "bar")
-    assert_equal [reader], person.readers.find(:all)
+    assert person.readers.find(reader.id)
   end
 
   def test_force_reload
@@ -180,6 +180,26 @@ class AssociationProxyTest < ActiveRecord::TestCase
   def test_failed_reset_returns_nil
     p = setup_dangling_association
     assert_nil p.author.reset
+  end
+
+  def test_reset_loads_association_next_time
+    welcome = posts(:welcome)
+    david = authors(:david)
+    author_assoc = welcome.author
+
+    assert_equal david, welcome.author # So we can be sure the test works correctly
+    author_assoc.reset
+    assert !author_assoc.loaded?
+    assert_nil author_assoc.target
+    assert_equal david, welcome.author
+  end
+
+  def test_assigning_association_id_after_reload
+    welcome = posts(:welcome)
+    welcome.reload
+    assert_nothing_raised do
+      welcome.author_id = authors(:david).id
+    end
   end
 
   def test_reload_returns_assocition

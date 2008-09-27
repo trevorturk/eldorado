@@ -2,15 +2,18 @@ require "cases/helper"
 require 'models/post'
 require 'models/person'
 require 'models/reader'
+require 'models/comment'
 
 class HasManyThroughAssociationsTest < ActiveRecord::TestCase
-  fixtures :posts, :readers, :people
+  fixtures :posts, :readers, :people, :comments
 
   def test_associate_existing
     assert_queries(2) { posts(:thinking);people(:david) }
-    
+
+    posts(:thinking).people
+
     assert_queries(1) do
-       posts(:thinking).people << people(:david)
+      posts(:thinking).people << people(:david)
     end
     
     assert_queries(1) do
@@ -186,5 +189,44 @@ class HasManyThroughAssociationsTest < ActiveRecord::TestCase
 
     post.people_with_callbacks.clear
     assert_equal (%w(Michael David Julian Roger) * 2).sort, log.last(8).collect(&:last).sort
+  end
+
+  def test_dynamic_find_should_respect_association_include
+    # SQL error in sort clause if :include is not included
+    # due to Unknown column 'comments.id'
+    assert Person.find(1).posts_with_comments_sorted_by_comment_id.find_by_title('Welcome to the weblog')
+  end
+
+  def test_count_with_include_should_alias_join_table
+    assert_equal 2, people(:michael).posts.count(:include => :readers)
+  end
+
+  def test_get_ids
+    assert_equal [posts(:welcome).id, posts(:authorless).id].sort, people(:michael).post_ids.sort
+  end
+
+  def test_get_ids_for_loaded_associations
+    person = people(:michael)
+    person.posts(true)
+    assert_queries(0) do
+      person.post_ids
+      person.post_ids
+    end
+  end
+
+  def test_get_ids_for_unloaded_associations_does_not_load_them
+    person = people(:michael)
+    assert !person.posts.loaded?
+    assert_equal [posts(:welcome).id, posts(:authorless).id].sort, person.post_ids.sort
+    assert !person.posts.loaded?
+  end
+
+  uses_mocha 'mocking Tag.transaction' do
+    def test_association_proxy_transaction_method_starts_transaction_in_association_class
+      Tag.expects(:transaction)
+      Post.find(:first).tags.transaction do
+        # nothing
+      end
+    end
   end
 end

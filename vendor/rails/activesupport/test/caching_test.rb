@@ -1,5 +1,11 @@
 require 'abstract_unit'
 
+class CacheKeyTest < Test::Unit::TestCase
+  def test_expand_cache_key
+    assert_equal 'name/1/2/true', ActiveSupport::Cache.expand_cache_key([1, '2', true], :name)
+  end
+end
+
 class CacheStoreSettingTest < Test::Unit::TestCase
   def test_file_fragment_cache_store
     store = ActiveSupport::Cache.lookup_store :file_store, "/path/to/cache/directory"
@@ -62,5 +68,62 @@ uses_mocha 'high-level cache store tests' do
       @cache.expects(:write).with('foo', 'bar', :force => true)
       @cache.fetch('foo', :force => true) { 'bar' }
     end
+  end
+end
+
+class FileStoreTest < Test::Unit::TestCase
+  def setup
+    @cache = ActiveSupport::Cache.lookup_store(:file_store, Dir.pwd)
+  end
+
+  def test_should_read_and_write_strings
+    @cache.write('foo', 'bar')
+    assert_equal 'bar', @cache.read('foo')
+  ensure
+    File.delete("foo.cache")
+  end
+
+  def test_should_read_and_write_hash
+    @cache.write('foo', {:a => "b"})
+    assert_equal({:a => "b"}, @cache.read('foo'))
+  ensure
+    File.delete("foo.cache")
+  end
+
+  def test_should_read_and_write_nil
+    @cache.write('foo', nil)
+    assert_equal nil, @cache.read('foo')
+  ensure
+    File.delete("foo.cache")
+  end
+end
+
+class MemoryStoreTest < Test::Unit::TestCase
+  def setup
+    @cache = ActiveSupport::Cache.lookup_store(:memory_store)
+  end
+
+  def test_should_read_and_write
+    @cache.write('foo', 'bar')
+    assert_equal 'bar', @cache.read('foo')
+  end
+
+  def test_fetch_without_cache_miss
+    @cache.write('foo', 'bar')
+    assert_equal 'bar', @cache.fetch('foo') { 'baz' }
+  end
+
+  def test_fetch_with_cache_miss
+    assert_equal 'baz', @cache.fetch('foo') { 'baz' }
+  end
+
+  def test_fetch_with_forced_cache_miss
+    @cache.fetch('foo', :force => true) { 'bar' }
+  end
+
+  def test_store_objects_should_be_immutable
+    @cache.write('foo', 'bar')
+    assert_raise(ActiveSupport::FrozenObjectError) { @cache.read('foo').gsub!(/.*/, 'baz') }
+    assert_equal 'bar', @cache.read('foo')
   end
 end

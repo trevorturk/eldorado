@@ -2,8 +2,6 @@ module ActionController
   # Dispatches requests to the appropriate controller and takes care of
   # reloading the app after each request when Dependencies.load? is true.
   class Dispatcher
-    @@guard = Mutex.new
-
     class << self
       def define_dispatcher_callbacks(cache_classes)
         unless cache_classes
@@ -26,7 +24,7 @@ module ActionController
           to_prepare(:activerecord_instantiate_observers) { ActiveRecord::Base.instantiate_observers }
         end
 
-        after_dispatch :flush_logger if defined?(RAILS_DEFAULT_LOGGER) && RAILS_DEFAULT_LOGGER.respond_to?(:flush)
+        after_dispatch :flush_logger if Base.logger && Base.logger.respond_to?(:flush)
       end
 
       # Backward-compatible class method takes CGI-specific args. Deprecated
@@ -46,7 +44,7 @@ module ActionController
       def to_prepare(identifier = nil, &block)
         @prepare_dispatch_callbacks ||= ActiveSupport::Callbacks::CallbackChain.new
         callback = ActiveSupport::Callbacks::Callback.new(:prepare_dispatch, block, :identifier => identifier)
-        @prepare_dispatch_callbacks | callback
+        @prepare_dispatch_callbacks.replace_or_append!(callback)
       end
 
       # If the block raises, send status code as a last-ditch response.
@@ -96,20 +94,18 @@ module ActionController
     include ActiveSupport::Callbacks
     define_callbacks :prepare_dispatch, :before_dispatch, :after_dispatch
 
-    def initialize(output, request = nil, response = nil)
+    def initialize(output = $stdout, request = nil, response = nil)
       @output, @request, @response = output, request, response
     end
 
     def dispatch
-      @@guard.synchronize do
-        begin
-          run_callbacks :before_dispatch
-          handle_request
-        rescue Exception => exception
-          failsafe_rescue exception
-        ensure
-          run_callbacks :after_dispatch, :enumerator => :reverse_each
-        end
+      begin
+        run_callbacks :before_dispatch
+        handle_request
+      rescue Exception => exception
+        failsafe_rescue exception
+      ensure
+        run_callbacks :after_dispatch, :enumerator => :reverse_each
       end
     end
 
@@ -123,24 +119,30 @@ module ActionController
       failsafe_rescue exception
     end
 
+    def call(env)
+      @request = RackRequest.new(env)
+      @response = RackResponse.new(@request)
+      dispatch
+    end
+
     def reload_application
       # Run prepare callbacks before every request in development mode
       run_callbacks :prepare_dispatch
 
       Routing::Routes.reload
-      ActionView::TemplateFinder.reload! unless ActionView::Base.cache_template_loading
+      ActionController::Base.view_paths.reload!
     end
 
     # Cleanup the application by clearing out loaded classes so they can
     # be reloaded on the next request without restarting the server.
     def cleanup_application
       ActiveRecord::Base.reset_subclasses if defined?(ActiveRecord)
-      Dependencies.clear
+      ActiveSupport::Dependencies.clear
       ActiveRecord::Base.clear_reloadable_connections! if defined?(ActiveRecord)
     end
 
     def flush_logger
-      RAILS_DEFAULT_LOGGER.flush
+      Base.logger.flush
     end
 
     protected
