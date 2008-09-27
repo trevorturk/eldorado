@@ -6,6 +6,8 @@ class TopicsController < ApplicationController
   
   def index
     @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'sticky desc, last_post_at desc')
+    # :joins => "LEFT OUTER JOIN viewings ON topics.id = viewings.topic_id AND viewings.user_id = #{logged_in? ? current_user.id : 0}" # can't get it
+    # @viewings = Viewing.all(:conditions => {:topic_id => @topics, :user_id => (logged_in? ? current_user.id : 0)})
   end
   
   def show
