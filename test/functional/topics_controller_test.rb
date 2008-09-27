@@ -341,4 +341,31 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_equal false, topics(:Testing).sticky
   end
   
+  def test_should_add_to_the_views_count_of_a_topic_on_topic_show
+    login_as :trevor
+    t = Topic.find(1)
+    assert_difference 't.views' do
+      get :show, :id => 1
+      t.reload
+    end
+  end
+  
+  def test_should_add_a_viewing_of_a_topic_when_user_views_a_topic
+    login_as :trevor
+    assert_difference 'Viewing.count' do
+      get :show, :id => 2
+    end
+  end
+  
+  def test_should_update_a_viewing_instead_of_creating_a_new_viewing_when_a_topic_is_viewed_multiple_times
+    login_as :trevor
+    v = Viewing.first(:conditions => {:user_id => 4, :topic_id => 1})
+    old_updated_at = v.updated_at
+    assert_no_difference 'Viewing.count' do
+      get :show, :id => 1
+    end
+    v.reload
+    assert old_updated_at < v.updated_at
+  end
+  
 end

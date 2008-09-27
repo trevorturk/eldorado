@@ -20,11 +20,16 @@ class Topic < ActiveRecord::Base
     Forum.update_all(['topics_count = ?, posts_count = ?', forum.topics_count+1, forum.posts_count+self.posts.count], ['id = ?', forum.id])
   end
   
+  def viewed_by(user)
+    viewing = user.viewings.find_or_create_by_topic_id(self.id)      
+    viewing.update_attribute(:updated_at, Time.now)
+  end
+  
   def hit!
     self.class.increment_counter(:views, id)
   end
-      
-  def replies 
+  
+  def replies
     self.posts_count - 1
   end
   
@@ -45,4 +50,5 @@ class Topic < ActiveRecord::Base
   def to_s
     title
   end
+  
 end

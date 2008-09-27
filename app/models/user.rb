@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :posts, :dependent => :destroy, :order => 'created_at desc'
   has_many :themes, :dependent => :destroy, :order => 'created_at desc'
   has_many :topics, :dependent => :destroy, :order => 'created_at desc'
+  has_many :viewings, :dependent => :destroy, :order => 'updated_at desc'
   has_many :uploads, :dependent => :destroy, :order => 'created_at desc'
   has_one :current_avatar, :class_name => 'Avatar', :foreign_key => 'current_user_id', :dependent => :nullify
   
