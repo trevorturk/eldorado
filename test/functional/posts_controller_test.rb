@@ -59,7 +59,7 @@ class PostsControllerTest < Test::Unit::TestCase
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 30
     assert_equal topic.last_page, 1
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+    assert_redirected_to 'topics/1?page=1#p8'
     post :create, :post => { :topic_id => "1", :body => "this is a test!" }  
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 31
@@ -152,7 +152,7 @@ class PostsControllerTest < Test::Unit::TestCase
 
   def test_locate_action_should_work
     get :topic, :id => 1
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+    assert_redirected_to 'topics/1?page=1#p8'
   end
   
   def test_quote_action_should_work

@@ -1,18 +1,18 @@
-// CalendarDateSelect version 1.10.2 - a prototype based date picker
-// Questions, comments, bugs? - email the Author - Tim Harper <"timseeharper@gmail.seeom".gsub("see", "c")> 
+// CalendarDateSelect version 1.10.11 - a prototype based date picker
+// Questions, comments, bugs? - see the project page: http://code.google.com/p/calendardateselect
 if (typeof Prototype == 'undefined') alert("CalendarDateSelect Error: Prototype could not be found. Please make sure that your application's layout includes prototype.js (.g. <%= javascript_include_tag :defaults %>) *before* it includes calendar_date_select.js (.g. <%= calendar_date_select_includes %>).");
 if (Prototype.Version < "1.6") alert("Prototype 1.6.0 is required.  If using earlier version of prototype, please use calendar_date_select version 1.8.3");
 
 Element.addMethods({
   purgeChildren: function(element) { $A(element.childNodes).each(function(e){$(e).remove();}); },
   build: function(element, type, options, style) {
-    var newElement = Element.build(type, options, style);
+    var newElement = Element.buildAndAppend(type, options, style);
     element.appendChild(newElement);
     return newElement;
   }
 });
 
-Element.build = function(type, options, style)
+Element.buildAndAppend = function(type, options, style)
 {
   var e = $(document.createElement(type));
   $H(options).each(function(pair) { eval("e." + pair.key + " = pair.value" ); });
@@ -47,7 +47,8 @@ window.f_scrollTop = function() { return ([window.pageYOffset ? window.pageYOffs
 _translations = {
   "OK": "OK",
   "Now": "Now",
-  "Today": "Today"
+  "Today": "Today",
+  "Clear": "Clear"
 }
 SelectBox = Class.create();
 SelectBox.prototype = {
@@ -82,6 +83,7 @@ CalendarDateSelect.prototype = {
       popup: nil,
       time: false,
       buttons: true,
+      clear_button: true,
       year_range: 10,
       close_on_click: nil,
       minute_interval: 5,
@@ -236,6 +238,10 @@ CalendarDateSelect.prototype = {
         buttons_div.build("span", {innerHTML: "&#160;"});
         buttons_div.build("a", { innerHTML: _translations["OK"], href: "#", onclick: function() {this.close(); return false;}.bindAsEventListener(this) });
       }
+      if (this.options.get('clear_button')) {
+        buttons_div.build("span", {innerHTML: "&#160;"});
+        buttons_div.build("a", { innerHTML: _translations["Clear"], href: "#", onclick: function() {this.clearDate(); if (!this.options.get("embedded")) this.close(); return false;}.bindAsEventListener(this) });
+      }
     }
   },
   refresh: function ()
@@ -337,6 +343,12 @@ CalendarDateSelect.prototype = {
     this.date.setDate(1);
   },
   updateFooter:function(text) { if (!text) text = this.dateString(); this.footer_div.purgeChildren(); this.footer_div.build("span", {innerHTML: text }); },
+  clearDate:function() {
+    if ((this.target_element.disabled || this.target_element.readOnly) && this.options.get("popup") != "force") return false;
+    this.target_element.value = "";
+    this.clearSelectedClass();
+    this.updateFooter('&#160;');
+  },
   updateSelectedDate:function(partsOrElement, via_click) {
     var parts = $H(partsOrElement);
     if ((this.target_element.disabled || this.target_element.readOnly) && this.options.get("popup") != "force") return false;

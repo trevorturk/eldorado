@@ -74,17 +74,17 @@ class UsersControllerTest < Test::Unit::TestCase
   
   def test_should_not_be_able_to_make_self_admin_if_not_admin
     login_as :trevor
-    put :update, :id => 4, :user => { :bio => "ok!?", :admin => true }
+    assert_raises RuntimeError do
+      put :update, :id => 4, :user => { :bio => "ok!?", :admin => true }
+    end
     users(:trevor).reload
-    assert_equal "ok!?", users(:trevor).bio
     assert_equal false, users(:trevor).admin
   end
 
   def test_should_not_be_able_to_make_self_admin_when_creating_account
-    post :create, :user => { :login => "notadmin", :email => "test@aol.com", :password => 'test', :password_confirmation => 'test', :admin => true }
-    user = User.find(:first, :order => 'id desc')
-    assert_equal user.login, 'notadmin'
-    assert_equal user.admin, false
+    assert_raises RuntimeError do
+      post :create, :user => { :login => "notadmin", :email => "test@aol.com", :password => 'test', :password_confirmation => 'test', :admin => true }
+    end
   end
   
   def test_should_not_update_user_if_not_authorized

@@ -29,6 +29,11 @@ class CalendarDateSelect
       :time => " %H:%M", 
       :javascript_include => "format_euro_24hr"
     },
+    :euro_24hr_ymd => {
+      :date => "%Y.%m.%d",
+      :time => " %H:%M", 
+      :javascript_include => "format_euro_24hr_ymd"
+    },
     :italian => {
       :date => "%d/%m/%Y",
       :time => " %H:%M",
@@ -108,7 +113,7 @@ class CalendarDateSelect
     def calendar_date_select_process_options(options)
       calendar_options = {}
       callbacks = [:before_show, :before_close, :after_show, :after_close, :after_navigate]
-      for key in [:time, :valid_date_check, :embedded, :buttons, :format, :year_range, :month_year, :popup, :hidden] + callbacks
+      for key in [:time, :valid_date_check, :embedded, :buttons, :clear_button, :format, :year_range, :month_year, :popup, :hidden, :minute_interval] + callbacks
         calendar_options[key] = options.delete(key) if options.has_key?(key)
       end
       
@@ -154,7 +159,7 @@ class CalendarDateSelect
       use_time = options[:time]
       
       if options[:time].to_s=="mixed"
-        use_time = false if Date===obj.send(method)
+        use_time = false if Date===(obj.respond_to?(method) && obj.send(method))
       end
       
       calendar_options = calendar_date_select_process_options(options)
