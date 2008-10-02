@@ -2,6 +2,7 @@
 /log/*.log
 /tmp/**/*
 /config/database.yml
+/config/amazon_s3.yml
 /config/deploy.rb
 /db/*.sqlite3
 /public/avatars/*
