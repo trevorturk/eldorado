@@ -75,7 +75,7 @@ module ApplicationHelper
   end
   
   def bb(text)
-    auto_link(simple_format(bbcodeize(sanitize(h(text))))) {|t| truncate(t, 50)}
+    auto_link(simple_format(bbcodeize(sanitize(h(text))))) {|t| truncate(t, :length => 50)}
   end
   
   def current_page(collection)

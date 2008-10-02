@@ -1,9 +1,8 @@
 <div id="primary">
-  <%= render :partial => 'articles/article' %>
+  <%= render :partial => 'articles/article', :locals => { :article => @article } %>
   <div id="comments">
-    <%#= render :partial => 'comments/comments', :object => @article, :as => :resource %>
-    <%= render :partial => 'comments/comments', :object => @article %>
-    <%= render :partial => 'comments/new', :object => @article %>
+    <%= render :partial => 'comments/comments', :locals => { :article => @article } %>
+    <%= render :partial => 'comments/new', :locals => { :article => @article } %>
   </div>
 </div>
 <div id="secondary">

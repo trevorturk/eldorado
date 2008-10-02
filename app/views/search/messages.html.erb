@@ -1,5 +1,5 @@
 <table cellspacing="0" class="messages-index">
   <tbody id="messages-index">
-    <%= render :partial => 'messages/messages' %>
+    <%= render :partial => 'messages/messages', :locals => { :messages => @messages } %>
   </tbody>
 </table>
