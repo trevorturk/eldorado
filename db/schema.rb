@@ -9,39 +9,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080927025905) do
+ActiveRecord::Schema.define(:version => 20081002051832) do
 
   create_table "articles", :force => true do |t|
-    t.integer  "user_id",        :limit => 11
+    t.integer  "user_id"
     t.string   "title"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "comments_count", :limit => 11, :default => 0, :null => false
+    t.integer  "comments_count", :default => 0, :null => false
   end
 
   create_table "avatars", :force => true do |t|
-    t.integer  "parent_id",       :limit => 11
+    t.integer  "parent_id"
     t.string   "content_type"
     t.string   "filename"
     t.string   "thumbnail"
-    t.integer  "size",            :limit => 11
-    t.integer  "width",           :limit => 11
-    t.integer  "height",          :limit => 11
-    t.integer  "user_id",         :limit => 11
-    t.integer  "current_user_id", :limit => 11
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "user_id"
+    t.integer  "current_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "categories", :force => true do |t|
     t.string  "name"
-    t.integer "position", :limit => 11, :default => 0
+    t.integer "position", :default => 0
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "user_id",       :limit => 11
-    t.integer  "resource_id",   :limit => 11
+    t.integer  "user_id"
+    t.integer  "resource_id"
     t.string   "resource_type"
     t.text     "body"
     t.datetime "created_at"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
     t.text     "description"
     t.datetime "date"
     t.boolean  "reminder"
-    t.integer  "user_id",     :limit => 11
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,27 +61,27 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
   add_index "events", ["date"], :name => "index_events_on_date"
 
   create_table "forums", :force => true do |t|
-    t.integer "category_id",  :limit => 11
+    t.integer "category_id"
     t.string  "name"
     t.text    "description"
-    t.integer "topics_count", :limit => 11, :default => 0
-    t.integer "posts_count",  :limit => 11, :default => 0
-    t.integer "position",     :limit => 11, :default => 0
+    t.integer "topics_count", :default => 0
+    t.integer "posts_count",  :default => 0
+    t.integer "position",     :default => 0
   end
 
   create_table "headers", :force => true do |t|
-    t.integer  "parent_id",    :limit => 11
+    t.integer  "parent_id"
     t.string   "content_type"
     t.string   "filename"
     t.string   "thumbnail"
-    t.integer  "size",         :limit => 11
-    t.integer  "width",        :limit => 11
-    t.integer  "height",       :limit => 11
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
     t.text     "description"
-    t.integer  "user_id",      :limit => 11
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes",        :limit => 11, :default => 0
+    t.integer  "votes",        :default => 0
   end
 
   create_table "logged_exceptions", :force => true do |t|
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "user_id",    :limit => 11
+    t.integer  "user_id"
     t.text     "body"
     t.datetime "created_at"
   end
@@ -104,12 +104,12 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
   add_index "messages", ["created_at"], :name => "index_messages_on_created_at"
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",    :limit => 11
-    t.integer  "topic_id",   :limit => 11
+    t.integer  "user_id"
+    t.integer  "topic_id"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "updated_by", :limit => 11
+    t.integer  "updated_by"
   end
 
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
 
   create_table "ranks", :force => true do |t|
     t.string  "title"
-    t.integer "min_posts", :limit => 11
+    t.integer "min_posts"
   end
 
   create_table "settings", :force => true do |t|
@@ -134,49 +134,49 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
   end
 
   create_table "subscriptions", :force => true do |t|
-    t.integer "user_id",  :limit => 11
-    t.integer "topic_id", :limit => 11
+    t.integer "user_id"
+    t.integer "topic_id"
   end
 
   create_table "themes", :force => true do |t|
-    t.integer  "parent_id",    :limit => 11
+    t.integer  "parent_id"
     t.string   "content_type"
     t.string   "filename"
     t.string   "thumbnail"
-    t.integer  "size",         :limit => 11
-    t.integer  "width",        :limit => 11
-    t.integer  "height",       :limit => 11
-    t.integer  "user_id",      :limit => 11
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "topics", :force => true do |t|
-    t.integer  "user_id",      :limit => 11
+    t.integer  "user_id"
     t.string   "title"
     t.datetime "created_at"
-    t.integer  "views",        :limit => 11, :default => 0
-    t.integer  "posts_count",  :limit => 11, :default => 0
-    t.integer  "last_post_id", :limit => 11
+    t.integer  "views",        :default => 0
+    t.integer  "posts_count",  :default => 0
+    t.integer  "last_post_id"
     t.datetime "last_post_at"
-    t.integer  "last_post_by", :limit => 11
+    t.integer  "last_post_by"
     t.boolean  "locked"
-    t.boolean  "sticky",                     :default => false
-    t.integer  "forum_id",     :limit => 11
+    t.boolean  "sticky",       :default => false
+    t.integer  "forum_id"
   end
 
   add_index "topics", ["forum_id", "last_post_at"], :name => "index_topics_on_forum_id_and_last_post_at"
   add_index "topics", ["forum_id", "sticky", "last_post_at"], :name => "index_topics_on_sticky_and_last_post_at"
 
   create_table "uploads", :force => true do |t|
-    t.integer  "parent_id",    :limit => 11
+    t.integer  "parent_id"
     t.string   "content_type"
     t.string   "filename"
     t.string   "thumbnail"
-    t.integer  "size",         :limit => 11
-    t.integer  "width",        :limit => 11
-    t.integer  "height",       :limit => 11
-    t.integer  "user_id",      :limit => 11
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -186,8 +186,8 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
     t.string   "email"
     t.string   "password_hash"
     t.datetime "created_at"
-    t.boolean  "admin",                            :default => false
-    t.integer  "posts_count",        :limit => 11, :default => 0
+    t.boolean  "admin",              :default => false
+    t.integer  "posts_count",        :default => 0
     t.string   "signature"
     t.text     "bio"
     t.datetime "profile_updated_at"
@@ -199,15 +199,16 @@ ActiveRecord::Schema.define(:version => 20080927025905) do
     t.string   "ban_message"
     t.datetime "banned_until"
     t.datetime "chatting_at"
-    t.boolean  "logged_out",                       :default => false
-    t.integer  "articles_count",     :limit => 11, :default => 0
+    t.boolean  "logged_out",         :default => false
+    t.integer  "articles_count",     :default => 0
+    t.datetime "all_viewed_at"
   end
 
   add_index "users", ["chatting_at"], :name => "index_users_on_chatting_at"
 
   create_table "viewings", :force => true do |t|
-    t.integer  "user_id",    :limit => 11
-    t.integer  "topic_id",   :limit => 11
+    t.integer  "user_id"
+    t.integer  "topic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

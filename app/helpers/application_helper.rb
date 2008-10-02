@@ -66,6 +66,7 @@ module ApplicationHelper
   def is_new?(item)
     return false unless logged_in?
     if item.is_a?(Topic)
+      return true if current_user.all_viewed_at > item.updated_at
       viewing = item.viewings.select {|v| v.user == current_user}.first
       return true if viewing.nil? || viewing.updated_at < item.updated_at
     else
