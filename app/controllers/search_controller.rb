@@ -25,7 +25,7 @@ class SearchController < ApplicationController
       @posts = Post.paginate(:page => params[:page], :include => [:user, :topic], :order => 'posts.created_at desc', :conditions => ['body LIKE ?', '%' + params[:query] + '%'])        
       render :template => 'topics/show'
     elsif params[:type] == 'topics'
-      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'sticky desc, last_post_at desc', :conditions => ['title LIKE ?', '%' + params[:query] + '%'])
+      @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster], :order => 'last_post_at desc', :conditions => ['title LIKE ?', '%' + params[:query] + '%'])
       render :template => 'topics/index'
     elsif params[:type] == 'users'
       @users = User.paginate(:page => params[:page], :order => 'created_at desc', :conditions => ['login LIKE ?', '%' + params[:query] + '%'])        

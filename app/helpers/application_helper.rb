@@ -65,13 +65,21 @@ module ApplicationHelper
   
   def is_new?(item)
     return false unless logged_in?
-    return true if session[:online_at] < item.updated_at
+    if item.is_a?(Topic)
+      viewing = item.viewings.select {|v| v.user == current_user}.first
+      return true if viewing.nil? || viewing.updated_at < item.updated_at
+    else
+      return true if session[:online_at] < item.updated_at
+    end
+    return false
   end
   
   def icon_for(item)
-    return '<div class="icon"><!-- --></div>' if item.nil?
-    return '<div class="icon inew"><!-- --></div>' if is_new?(item)
-    return '<div class="icon"><!-- --></div>'
+    if item && is_new?(item)
+      '<div class="icon inew"><!-- --></div>'
+    else
+      '<div class="icon"><!-- --></div>'
+    end
   end
   
   def bb(text)
