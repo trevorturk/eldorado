@@ -52,11 +52,18 @@ class MessagesController < ApplicationController
   
   def refresh
     @messages = Message.refresh(session[:message_id], current_user)
-    session[:message_id] = @messages.map(&:id).max unless @messages.empty?
-    if @messages
+    if !@messages.empty?
+      session[:message_id] = @messages.map(&:id).max
       render :update do |page|
-        page.insert_html :top, 'messages-index', :partial => 'messages', :object => @messages
+        @messages.each do |message|
+          page << "if ($('message-#{message.id}')){"
+          page << '}else{'
+          page.insert_html :top, 'messages-index', :partial => 'messages', :object => message
+          page << '}'
+        end
       end
+    else
+      render :nothing => true
     end
   end
   
