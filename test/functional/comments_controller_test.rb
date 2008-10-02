@@ -11,7 +11,7 @@ class CommentsControllerTest < ActionController::TestCase
     assert_difference('Comment.count') do
       post :create, :comment => { :resource_id => articles(:one).id, :resource_type => 'Article', :body => 'test' }
     end
-    assert_redirected_to article_path(articles(:one).id.to_s + '#c' + assigns(:comment).id.to_s)
+    assert_redirected_to article_path(articles(:one), :anchor => "c#{assigns(:comment).id.to_s}")    
   end
   
   def test_should_not_create_comment_if_not_logged_in
@@ -54,7 +54,7 @@ class CommentsControllerTest < ActionController::TestCase
     put :update, :id => comments(:one).id, :comment => { :body => 'updated' }
     comments(:one).reload
     assert_equal 'updated', comments(:one).body
-    assert_redirected_to article_path(articles(:one).id.to_s + '#c' + assigns(:comment).id.to_s)
+    assert_redirected_to article_path(articles(:one), :anchor => "c#{assigns(:comment).id.to_s}")    
   end
   
   def test_should_update_comment_if_author
@@ -62,7 +62,7 @@ class CommentsControllerTest < ActionController::TestCase
     put :update, :id => comments(:one).id, :comment => { :body => 'updated' }
     comments(:one).reload
     assert_equal 'updated', comments(:one).body
-    assert_redirected_to article_path(articles(:one).id.to_s + '#c' + assigns(:comment).id.to_s)
+    assert_redirected_to article_path(articles(:one), :anchor => "c#{assigns(:comment).id.to_s}")    
   end
   
   def test_should_not_update_comment_if_not_author_or_admin
@@ -83,7 +83,7 @@ class CommentsControllerTest < ActionController::TestCase
     assert_difference('Comment.count', -1) do
       delete :destroy, :id => comments(:one).id
     end
-    assert_redirected_to article_path(articles(:one).id.to_s + '#comments')
+    assert_redirected_to article_path(articles(:one), :anchor => 'comments')
   end
     
   def test_should_destroy_comment_if_author
@@ -91,7 +91,7 @@ class CommentsControllerTest < ActionController::TestCase
     assert_difference('Comment.count', -1) do
       delete :destroy, :id => comments(:one).id
     end
-    assert_redirected_to article_path(articles(:one).id.to_s + '#comments')
+    assert_redirected_to article_path(articles(:one), :anchor => 'comments')
   end
   
   def test_should_not_destroy_comment_if_not_author_or_admin

@@ -372,11 +372,7 @@ module ActionController
     Routes = RouteSet.new
 
     ActiveSupport::Inflector.module_eval do
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/routing.rb
       # Ensures that routes are reloaded when Rails inflections are updated.
-=======
-	  # Ensures that routes are reloaded when Rails inflections are updated.
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/routing.rb
       def inflections_with_route_reloading(&block)
         returning(inflections_without_route_reloading(&block)) {
           ActionController::Routing::Routes.reload! if block_given?

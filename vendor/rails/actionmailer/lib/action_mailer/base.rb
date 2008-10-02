@@ -296,6 +296,9 @@ module ActionMailer #:nodoc:
     @@default_implicit_parts_order = [ "text/html", "text/enriched", "text/plain" ]
     cattr_accessor :default_implicit_parts_order
 
+    cattr_reader :protected_instance_variables
+    @@protected_instance_variables = %w(@body)
+
     # Specify the BCC addresses for the message
     adv_attr_accessor :bcc
 
@@ -431,12 +434,7 @@ module ActionMailer #:nodoc:
       end
 
       def template_root=(root)
-<<<<<<< HEAD:vendor/rails/actionmailer/lib/action_mailer/base.rb
         self.view_paths = ActionView::Base.process_view_paths(root)
-=======
-        root = ActionView::PathSet::Path.new(root) if root.is_a?(String)
-        write_inheritable_attribute(:template_root, root)
->>>>>>> i18n:vendor/rails/actionmailer/lib/action_mailer/base.rb
       end
 
       private
@@ -587,11 +585,7 @@ module ActionMailer #:nodoc:
       end
 
       def initialize_template_class(assigns)
-<<<<<<< HEAD:vendor/rails/actionmailer/lib/action_mailer/base.rb
         ActionView::Base.new(view_paths, assigns, self)
-=======
-        ActionView::Base.new(template_root, assigns, self)
->>>>>>> i18n:vendor/rails/actionmailer/lib/action_mailer/base.rb
       end
 
       def sort_parts(parts, order = [])

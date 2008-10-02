@@ -68,11 +68,7 @@ class RequestTest < Test::Unit::TestCase
     assert_match /HTTP_CLIENT_IP="8.8.8.8"/, e.message
 
     @request.env['HTTP_X_FORWARDED_FOR'] = '8.8.8.8, 9.9.9.9'
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/request_test.rb
     assert_equal '8.8.8.8', @request.remote_ip(true)
-=======
-    assert_equal '8.8.8.8', @request.remote_ip
->>>>>>> i18n:vendor/rails/actionpack/test/controller/request_test.rb
 
     @request.env.delete 'HTTP_CLIENT_IP'
     @request.env.delete 'HTTP_X_FORWARDED_FOR'
@@ -346,19 +342,12 @@ class RequestTest < Test::Unit::TestCase
   end
 
   def test_nil_format
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/request_test.rb
     ActionController::Base.use_accept_header, old =
       false, ActionController::Base.use_accept_header
 
     @request.instance_eval { @parameters = {} }
-=======
-    @request.instance_eval { @parameters = { :format => nil } }
->>>>>>> i18n:vendor/rails/actionpack/test/controller/request_test.rb
     @request.env["HTTP_X_REQUESTED_WITH"] = "XMLHttpRequest"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/request_test.rb
     assert @request.xhr?
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/controller/request_test.rb
     assert_equal Mime::JS, @request.format
 
   ensure
@@ -894,12 +883,8 @@ class JsonParamsParsingTest < Test::Unit::TestCase
 
   private
     def parse_body(body,content_type)
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/request_test.rb
       env = { 'rack.input'     => StringIO.new(body),
               'CONTENT_TYPE'   => content_type,
-=======
-      env = { 'CONTENT_TYPE'   => content_type,
->>>>>>> i18n:vendor/rails/actionpack/test/controller/request_test.rb
               'CONTENT_LENGTH' => body.size.to_s }
       ActionController::RackRequest.new(env).request_parameters
     end

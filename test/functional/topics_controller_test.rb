@@ -178,82 +178,48 @@ class TopicsControllerTest < ActionController::TestCase
   #   assert_redirected_to topic_path(:id => "23823")
   #   assert_redirected_to root_path
   # end
-    
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
-  def test_should_set_last_post_info_in_forum_and_topic_on_new_topic
-  end
-=======
+
   # def test_should_set_last_post_info_in_forum_and_topic_on_new_topic
   # end
->>>>>>> i18n:test/functional/topics_controller_test.rb
-  
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
-  def test_should_set_last_post_info_in_forum_and_topic_on_new_post_in_existing_topic
-  end
-=======
+
   # def test_should_set_last_post_info_in_forum_and_topic_on_new_post_in_existing_topic
   # end
->>>>>>> i18n:test/functional/topics_controller_test.rb
-  
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
-  def test_should_set_last_post_info_in_forum_and_topic_if_most_recent_post_is_deleted
-  end
-=======
+
   # def test_should_set_last_post_info_in_forum_and_topic_if_most_recent_post_is_deleted
   # end
->>>>>>> i18n:test/functional/topics_controller_test.rb
-  
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
-  def test_should_show_topic_as_new
-  end
-=======
+
   # def test_should_show_topic_as_new
   # end
->>>>>>> i18n:test/functional/topics_controller_test.rb
-  
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
-  def test_should_not_show_topic_as_new
-  end
-=======
+
   # def test_should_not_show_topic_as_new
   # end
->>>>>>> i18n:test/functional/topics_controller_test.rb
   
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
-  def test_should_redirect_to_newest_post_with_show_new_action
-    login_as :post_test
-    get :show_new, :id => 1
-    # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one2).id.to_s)
-  end
-=======
   # def test_should_redirect_to_newest_post_with_show_new_action
   #   login_as :post_test
   #   get :show_new, :id => 1
   #   assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one2).id.to_s)
   # end
-  # 
+  
   # def test_should_redirect_to_last_post_if_no_new_posts_with_show_new_action
   #   login_as :trevor
   #   get :show_new, :id => 1
   #   assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s) 
   # end
->>>>>>> i18n:test/functional/topics_controller_test.rb
   
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
-  def test_should_redirect_to_last_post_if_no_new_posts_with_show_new_action
-    login_as :trevor
-    get :show_new, :id => 1
+  # def test_should_redirect_to_last_post_if_no_new_posts_with_show_new_action
+    # login_as :trevor
+    # get :show_new, :id => 1
     # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s) 
-  end
+  # end
       
-  def test_should_redirect_to_same_path_when_logging_in_with_cookie
+  # def test_should_redirect_to_same_path_when_logging_in_with_cookie
     # log in
     # delete cookie
     # use show_new action, which should use the cookie to log in and redirect to the requested url
     # get :show_new, :id => 1
     # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s)
-  end
-=======
+  # end
+
   # def test_should_redirect_to_top_of_page_for_topic_with_no_anchor_if_first_post_in_thread
   #   login_as :trevor
   #   get :show_new, :id => 2
@@ -267,7 +233,6 @@ class TopicsControllerTest < ActionController::TestCase
   #   get :show_new, :id => 1
   #   assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s)
   # end
->>>>>>> i18n:test/functional/topics_controller_test.rb
 
   def test_should_allow_post_if_logged_in
     login_as :trevor
@@ -379,7 +344,6 @@ class TopicsControllerTest < ActionController::TestCase
     put :update, :id => 1, :topic => { :sticky => true }
     assert_equal false, topics(:Testing).sticky
   end
-<<<<<<< HEAD:test/functional/topics_controller_test.rb
   
   def test_should_add_to_the_views_count_of_a_topic_on_topic_show
     login_as :trevor
@@ -409,6 +373,3 @@ class TopicsControllerTest < ActionController::TestCase
   end
   
 end
-=======
-end
->>>>>>> i18n:test/functional/topics_controller_test.rb

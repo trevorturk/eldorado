@@ -934,7 +934,6 @@ if ActiveRecord::Base.connection.supports_migrations?
       assert_equal(0, ActiveRecord::Migrator.current_version)
     end
 
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/migration_test.rb
     if current_adapter?(:PostgreSQLAdapter)
       def test_migrator_one_up_with_exception_and_rollback
         assert !Person.column_methods_hash.include?(:last_name)
@@ -950,8 +949,6 @@ if ActiveRecord::Base.connection.supports_migrations?
       end
     end
 
-=======
->>>>>>> i18n:vendor/rails/activerecord/test/cases/migration_test.rb
     def test_finds_migrations
       migrations = ActiveRecord::Migrator.new(:up, MIGRATIONS_ROOT + "/valid").migrations
       [['1', 'people_have_last_names'],

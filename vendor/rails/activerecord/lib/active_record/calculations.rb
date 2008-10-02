@@ -186,13 +186,10 @@ module ActiveRecord
             sql << " FROM (SELECT #{distinct}#{column_name}" if use_workaround
             sql << " FROM #{connection.quote_table_name(table_name)} "
           end
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/calculations.rb
 
           joins = ""
           add_joins!(joins, options[:joins], scope)
 
-=======
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/calculations.rb
           if merged_includes.any?
             join_dependency = ActiveRecord::Associations::ClassMethods::JoinDependency.new(self, merged_includes, joins)
             sql << join_dependency.join_associations.collect{|join| join.association_join }.join

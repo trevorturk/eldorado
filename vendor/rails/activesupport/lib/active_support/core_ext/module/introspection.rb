@@ -1,4 +1,3 @@
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
 module ActiveSupport
   module CoreExtensions
     module Module
@@ -11,40 +10,7 @@ module ActiveSupport
         end
         @parent_name
       end
-=======
-class Module
-  # Returns the name of the module containing this one.
-  #
-  #   p M::N.parent_name # => "M"
-  def parent_name
-    unless defined? @parent_name
-      @parent_name = name =~ /::[^:]+\Z/ ? $`.freeze : nil
-    end
-    @parent_name
-  end
 
-  # Returns the module which contains this one according to its name.
-  #
-  #   module M
-  #     module N
-  #     end
-  #   end
-  #   X = M::N
-  #   
-  #   p M::N.parent # => M
-  #   p X.parent    # => M
-  #
-  # The parent of top-level and anonymous modules is Object.
-  #
-  #   p M.parent          # => Object
-  #   p Module.new.parent # => Object
-  #
-  def parent
-    parent_name ? parent_name.constantize : Object
-  end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
-
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
       # Returns the module which contains this one according to its name.
       #
       #   module M
@@ -63,36 +29,7 @@ class Module
       #
       def parent
         parent_name ? parent_name.constantize : Object
-=======
-  # Returns all the parents of this module according to its name, ordered from
-  # nested outwards. The receiver is not contained within the result.
-  #
-  #   module M
-  #     module N
-  #     end
-  #   end
-  #   X = M::N
-  #   
-  #   p M.parents    # => [Object]
-  #   p M::N.parents # => [M, Object]
-  #   p X.parents    # => [M, Object]
-  #
-  def parents
-    parents = []
-    if parent_name
-      parts = parent_name.split('::')
-      until parts.empty?
-        parents << (parts * '::').constantize
-        parts.pop
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
-=======
-    end
-    parents << Object unless parents.include? Object
-    parents
-  end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
 
       # Returns all the parents of this module according to its name, ordered from
       # nested outwards. The receiver is not contained within the result.
@@ -149,18 +86,5 @@ class Module
         local_constants.map { |c| c.to_s }
       end
     end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
-=======
-  else
-    def local_constants #:nodoc:
-      constants(false)
-    end
-  end
-
-  # Returns the names of the constants defined locally rather than the
-  # constants themselves. See <tt>local_constants</tt>.
-  def local_constant_names
-    local_constants.map { |c| c.to_s }
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb
   end
 end

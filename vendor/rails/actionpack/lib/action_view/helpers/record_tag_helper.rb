@@ -49,15 +49,9 @@ module ActionView
       #
       def content_tag_for(tag_name, record, *args, &block)
         prefix  = args.first.is_a?(Hash) ? nil : args.shift
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/record_tag_helper.rb
         options = args.extract_options!
         options.merge!({ :class => "#{dom_class(record)} #{options[:class]}".strip, :id => dom_id(record, prefix) })
         content_tag(tag_name, options, &block)
-=======
-        options = args.first.is_a?(Hash) ? args.shift : {}
-        concat content_tag(tag_name, capture(&block), 
-          options.merge({ :class => "#{dom_class(record)} #{options[:class]}".strip, :id => dom_id(record, prefix) }))
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/record_tag_helper.rb
       end
     end
   end

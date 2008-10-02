@@ -202,19 +202,11 @@ namespace :db do
   end
 
   namespace :fixtures do
-<<<<<<< HEAD:vendor/rails/railties/lib/tasks/databases.rake
     desc "Load fixtures into the current environment's database.  Load specific fixtures using FIXTURES=x,y. Load from subdirectory in test/fixtures using FIXTURES_DIR=z. Specify an alternative path (eg. spec/fixtures) using FIXTURES_PATH=spec/fixtures."
-=======
-    desc "Load fixtures into the current environment's database.  Load specific fixtures using FIXTURES=x,y. Load from subdirectory in test/fixtures using FIXTURES_DIR=z."
->>>>>>> i18n:vendor/rails/railties/lib/tasks/databases.rake
     task :load => :environment do
       require 'active_record/fixtures'
       ActiveRecord::Base.establish_connection(Rails.env)
-<<<<<<< HEAD:vendor/rails/railties/lib/tasks/databases.rake
       base_dir = ENV['FIXTURES_PATH'] ? File.join(Rails.root, ENV['FIXTURES_PATH']) : File.join(Rails.root, 'test', 'fixtures')
-=======
-      base_dir = File.join(Rails.root, 'test', 'fixtures')
->>>>>>> i18n:vendor/rails/railties/lib/tasks/databases.rake
       fixtures_dir = ENV['FIXTURES_DIR'] ? File.join(base_dir, ENV['FIXTURES_DIR']) : base_dir
 
       (ENV['FIXTURES'] ? ENV['FIXTURES'].split(/,/).map {|f| File.join(fixtures_dir, f) } : Dir.glob(File.join(fixtures_dir, '*.{yml,csv}'))).each do |fixture_file|

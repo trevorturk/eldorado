@@ -2,27 +2,15 @@ module ActiveModel
   module StateMachine
     class Event
       attr_reader :name, :success
-<<<<<<< HEAD:vendor/rails/activemodel/lib/active_model/state_machine/event.rb
 
-=======
-      
->>>>>>> i18n:vendor/rails/activemodel/lib/active_model/state_machine/event.rb
       def initialize(machine, name, options = {}, &block)
         @machine, @name, @transitions = machine, name, []
         if machine
-<<<<<<< HEAD:vendor/rails/activemodel/lib/active_model/state_machine/event.rb
           machine.klass.send(:define_method, "#{name}!") do |*args|
-=======
-          machine.klass.send(:define_method, "#{name.to_s}!") do |*args|
->>>>>>> i18n:vendor/rails/activemodel/lib/active_model/state_machine/event.rb
             machine.fire_event(name, self, true, *args)
           end
 
-<<<<<<< HEAD:vendor/rails/activemodel/lib/active_model/state_machine/event.rb
           machine.klass.send(:define_method, name.to_s) do |*args|
-=======
-          machine.klass.send(:define_method, "#{name.to_s}") do |*args|
->>>>>>> i18n:vendor/rails/activemodel/lib/active_model/state_machine/event.rb
             machine.fire_event(name, self, false, *args)
           end
         end

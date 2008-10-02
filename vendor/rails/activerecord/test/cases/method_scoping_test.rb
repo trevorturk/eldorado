@@ -98,7 +98,6 @@ class MethodScopingTest < ActiveRecord::TestCase
     assert_equal developers(:david).attributes, scoped_developers.first.attributes
   end
 
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/method_scoping_test.rb
   def test_scoped_find_using_new_style_joins
     scoped_developers = Developer.with_scope(:find => { :joins => :projects }) do
       Developer.find(:all, :conditions => 'projects.id = 2')
@@ -169,8 +168,6 @@ class MethodScopingTest < ActiveRecord::TestCase
     assert_equal authors(:david).attributes, scoped_authors.first.attributes
   end
 
-=======
->>>>>>> i18n:vendor/rails/activerecord/test/cases/method_scoping_test.rb
   def test_scoped_count_include
     # with the include, will retrieve only developers for the given project
     Developer.with_scope(:find => { :include => :projects }) do

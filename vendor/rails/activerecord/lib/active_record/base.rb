@@ -122,13 +122,10 @@ module ActiveRecord #:nodoc:
   class MissingAttributeError < NoMethodError
   end
 
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/base.rb
   # Raised when unknown attributes are supplied via mass assignment.
   class UnknownAttributeError < NoMethodError
   end
 
-=======
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/base.rb
   # Raised when an error occurred while doing a mass assignment to an attribute through the
   # <tt>attributes=</tt> method. The exception has an +attribute+ property that is the name of the
   # offending attribute.
@@ -754,18 +751,10 @@ module ActiveRecord #:nodoc:
       #
       # ==== Attributes
       #
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/base.rb
       # * +updates+ - A string of column and value pairs that will be set on any records that match conditions.
       #               What goes into the SET clause.
-=======
-      # * +updates+ - A String of column and value pairs that will be set on any records that match conditions.
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/base.rb
       # * +conditions+ - An SQL fragment like "administrator = 1" or [ "user_name = ?", username ]. See conditions in the intro for more info.
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/base.rb
       # * +options+ - Additional options are <tt>:limit</tt> and <tt>:order</tt>, see the examples for usage.
-=======
-      # * +options+ - Additional options are <tt>:limit</tt> and/or <tt>:order</tt>, see the examples for usage.
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/base.rb
       #
       # ==== Examples
       #
@@ -1587,7 +1576,6 @@ module ActiveRecord #:nodoc:
          (safe_to_array(first) + safe_to_array(second)).uniq
         end
 
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/base.rb
         def merge_joins(*joins)
           if joins.any?{|j| j.is_a?(String) || array_of_strings?(j) }
             joins = joins.collect do |join|
@@ -1604,8 +1592,6 @@ module ActiveRecord #:nodoc:
           end
         end
 
-=======
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/base.rb
         # Object#to_a is deprecated, though it does have the desired behavior
         def safe_to_array(o)
           case o

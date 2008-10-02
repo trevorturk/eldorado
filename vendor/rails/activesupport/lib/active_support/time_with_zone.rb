@@ -182,11 +182,7 @@ module ActiveSupport
     def eql?(other)
       utc == other
     end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/time_with_zone.rb
 
-=======
-    
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/time_with_zone.rb
     def +(other)
       # If we're adding a Duration of variable length (i.e., years, months, days), move forward from #time,
       # otherwise move forward from #utc, for accuracy when moving across DST boundaries
@@ -291,11 +287,7 @@ module ActiveSupport
     end
 
     def marshal_load(variables)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/time_with_zone.rb
       initialize(variables[0].utc, ::Time.__send__(:get_zone, variables[1]), variables[2].utc)
-=======
-      initialize(variables[0].utc, ::Time.send!(:get_zone, variables[1]), variables[2].utc)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/time_with_zone.rb
     end
 
     # Ensure proxy class responds to all methods that underlying time instance responds to.
@@ -328,11 +320,7 @@ module ActiveSupport
       def transfer_time_values_to_utc_constructor(time)
         ::Time.utc_time(time.year, time.month, time.day, time.hour, time.min, time.sec, time.respond_to?(:usec) ? time.usec : 0)
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/time_with_zone.rb
 
-=======
-      
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/time_with_zone.rb
       def duration_of_variable_length?(obj)
         ActiveSupport::Duration === obj && obj.parts.flatten.detect {|p| [:years, :months, :days].include? p }
       end

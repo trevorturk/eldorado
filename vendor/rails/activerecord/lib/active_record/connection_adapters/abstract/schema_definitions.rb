@@ -38,13 +38,10 @@ module ActiveRecord
 
       def number?
         type == :integer || type == :float || type == :decimal
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb
       end
 
       def has_default?
         !default.nil?
-=======
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb
       end
 
       # Returns the Ruby class that corresponds to the abstract data type.
@@ -145,15 +142,11 @@ module ActiveRecord
 
         # convert something to a boolean
         def value_to_boolean(value)
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb
           if value.is_a?(String) && value.blank?
             nil
           else
             TRUE_VALUES.include?(value)
           end
-=======
-          TRUE_VALUES.include?(value)
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb
         end
 
         # convert something to a BigDecimal

@@ -189,12 +189,9 @@ module ActiveRecord
 
       def add_observer!(klass)
         klass.add_observer(self)
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/observer.rb
         if respond_to?(:after_find) && !klass.method_defined?(:after_find)
           klass.class_eval 'def after_find() end'
         end
-=======
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/observer.rb
       end
   end
 end

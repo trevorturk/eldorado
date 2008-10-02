@@ -11,7 +11,6 @@ module ActiveSupport
   # to correct it yourself (explained below).
   module Inflector
     extend self
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
 
     # A singleton instance of this class is yielded by Inflector.inflections, which can then be used to specify additional
     # inflection rules. Examples:
@@ -30,36 +29,9 @@ module ActiveSupport
     # already have been loaded.
     class Inflections
       include Singleton
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
-      attr_reader :plurals, :singulars, :uncountables, :humans
-=======
-    # A singleton instance of this class is yielded by Inflector.inflections, which can then be used to specify additional
-    # inflection rules. Examples:
-    #
-    #   ActiveSupport::Inflector.inflections do |inflect|
-    #     inflect.plural /^(ox)$/i, '\1\2en'
-    #     inflect.singular /^(ox)en/i, '\1'
-    #
-    #     inflect.irregular 'octopus', 'octopi'
-    #
-    #     inflect.uncountable "equipment"
-    #   end
-    #
-    # New rules are added at the top. So in the example above, the irregular rule for octopus will now be the first of the
-    # pluralization and singularization rules that is runs. This guarantees that your rules run before any of the rules that may
-    # already have been loaded.
-    class Inflections
-      include Singleton
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
-
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
-=======
       attr_reader :plurals, :singulars, :uncountables, :humans
 
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
       def initialize
         @plurals, @singulars, @uncountables, @humans = [], [], [], []
       end
@@ -67,47 +39,19 @@ module ActiveSupport
       # Specifies a new pluralization rule and its replacement. The rule can either be a string or a regular expression.
       # The replacement should always be a string that may include references to the matched data from the rule.
       def plural(rule, replacement)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
         @uncountables.delete(rule) if rule.is_a?(String)
         @uncountables.delete(replacement)
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
         @plurals.insert(0, [rule, replacement])
       end
 
       # Specifies a new singularization rule and its replacement. The rule can either be a string or a regular expression.
       # The replacement should always be a string that may include references to the matched data from the rule.
       def singular(rule, replacement)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
         @uncountables.delete(rule) if rule.is_a?(String)
         @uncountables.delete(replacement)
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
         @singulars.insert(0, [rule, replacement])
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
-=======
 
-      # Specifies a new irregular that applies to both pluralization and singularization at the same time. This can only be used
-      # for strings, not regular expressions. You simply pass the irregular in singular and plural form.
-      #
-      # Examples:
-      #   irregular 'octopus', 'octopi'
-      #   irregular 'person', 'people'
-      def irregular(singular, plural)
-        if singular[0,1].upcase == plural[0,1].upcase
-          plural(Regexp.new("(#{singular[0,1]})#{singular[1..-1]}$", "i"), '\1' + plural[1..-1])
-          singular(Regexp.new("(#{plural[0,1]})#{plural[1..-1]}$", "i"), '\1' + singular[1..-1])
-        else
-          plural(Regexp.new("#{singular[0,1].upcase}(?i)#{singular[1..-1]}$"), plural[0,1].upcase + plural[1..-1])
-          plural(Regexp.new("#{singular[0,1].downcase}(?i)#{singular[1..-1]}$"), plural[0,1].downcase + plural[1..-1])
-          singular(Regexp.new("#{plural[0,1].upcase}(?i)#{plural[1..-1]}$"), singular[0,1].upcase + singular[1..-1])
-          singular(Regexp.new("#{plural[0,1].downcase}(?i)#{plural[1..-1]}$"), singular[0,1].downcase + singular[1..-1])
-        end
-      end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
-
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
       # Specifies a new irregular that applies to both pluralization and singularization at the same time. This can only be used
       # for strings, not regular expressions. You simply pass the irregular in singular and plural form.
       #
@@ -128,8 +72,6 @@ module ActiveSupport
         end
       end
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
       # Add uncountable words that shouldn't be attempted inflected.
       #
       # Examples:
@@ -237,11 +179,7 @@ module ActiveSupport
       if first_letter_in_uppercase
         lower_case_and_underscored_word.to_s.gsub(/\/(.?)/) { "::#{$1.upcase}" }.gsub(/(?:^|_)(.)/) { $1.upcase }
       else
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
         lower_case_and_underscored_word.first.downcase + camelize(lower_case_and_underscored_word)[1..-1]
-=======
-        lower_case_and_underscored_word.first + camelize(lower_case_and_underscored_word)[1..-1]
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
       end
     end
 
@@ -302,7 +240,6 @@ module ActiveSupport
     def demodulize(class_name_in_module)
       class_name_in_module.to_s.gsub(/^.*::/, '')
     end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
 
     # Replaces special characters in a string so that it may be used as part of a 'pretty' URL.
     #
@@ -328,8 +265,6 @@ module ActiveSupport
         gsub(/^#{re_sep}|#{re_sep}$/i, ''). # Remove leading/trailing separator.
         downcase
     end
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
 
     # Create the name of a table like Rails does for models to table names. This method
     # uses the +pluralize+ method on the last word in the string.
@@ -341,7 +276,6 @@ module ActiveSupport
     def tableize(class_name)
       pluralize(underscore(class_name))
     end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
 
     # Create a class name from a plural table name like Rails does for table names to models.
     # Note that this returns a string and not a Class. (To convert to an actual class
@@ -357,39 +291,19 @@ module ActiveSupport
       # strip out any leading schema name
       camelize(singularize(table_name.to_s.sub(/.*\./, '')))
     end
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
     # Creates a foreign key name from a class name.
     # +separate_class_name_and_id_with_underscore+ sets whether
     # the method should put '_' between the name and 'id'.
-=======
-    # Create a class name from a plural table name like Rails does for table names to models.
-    # Note that this returns a string and not a Class. (To convert to an actual class
-    # follow +classify+ with +constantize+.)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
     #
     # Examples:
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
     #   "Message".foreign_key        # => "message_id"
     #   "Message".foreign_key(false) # => "messageid"
     #   "Admin::Post".foreign_key    # => "post_id"
     def foreign_key(class_name, separate_class_name_and_id_with_underscore = true)
       underscore(demodulize(class_name)) + (separate_class_name_and_id_with_underscore ? "_id" : "id")
-=======
-    #   "egg_and_hams".classify # => "EggAndHam"
-    #   "posts".classify        # => "Post"
-    #
-    # Singular names are not handled correctly:
-    #   "business".classify     # => "Busines"
-    def classify(table_name)
-      # strip out any leading schema name
-      camelize(singularize(table_name.to_s.sub(/.*\./, '')))
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
     # Ruby 1.9 introduces an inherit argument for Module#const_get and
     # #const_defined? and changes their default behavior.
     if Module.method(:const_get).arity == 1
@@ -413,67 +327,24 @@ module ActiveSupport
       def constantize(camel_cased_word)
         names = camel_cased_word.split('::')
         names.shift if names.empty? || names.first.empty?
-=======
-    # Creates a foreign key name from a class name.
-    # +separate_class_name_and_id_with_underscore+ sets whether
-    # the method should put '_' between the name and 'id'.
-    #
-    # Examples:
-    #   "Message".foreign_key        # => "message_id"
-    #   "Message".foreign_key(false) # => "messageid"
-    #   "Admin::Post".foreign_key    # => "post_id"
-    def foreign_key(class_name, separate_class_name_and_id_with_underscore = true)
-      underscore(demodulize(class_name)) + (separate_class_name_and_id_with_underscore ? "_id" : "id")
-    end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
         constant = Object
         names.each do |name|
           constant = constant.const_defined?(name) ? constant.const_get(name) : constant.const_missing(name)
         end
         constant
-=======
-    # Tries to find a constant with the name specified in the argument string:
-    #
-    #   "Module".constantize     # => Module
-    #   "Test::Unit".constantize # => Test::Unit
-    #
-    # The name is assumed to be the one of a top-level constant, no matter whether
-    # it starts with "::" or not. No lexical context is taken into account:
-    #
-    #   C = 'outside'
-    #   module M
-    #     C = 'inside'
-    #     C               # => 'inside'
-    #     "C".constantize # => 'outside', same as ::C
-    #   end
-    #
-    # NameError is raised when the name is not in CamelCase or the constant is
-    # unknown.
-    def constantize(camel_cased_word)
-      unless /\A(?:::)?([A-Z]\w*(?:::[A-Z]\w*)*)\z/ =~ camel_cased_word
-        raise NameError, "#{camel_cased_word.inspect} is not a valid constant name!"
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
     else
       def constantize(camel_cased_word) #:nodoc:
         names = camel_cased_word.split('::')
         names.shift if names.empty? || names.first.empty?
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
         constant = Object
         names.each do |name|
           constant = constant.const_get(name, false) || constant.const_missing(name)
         end
         constant
       end
-=======
-      Object.module_eval("::#{$1}", __FILE__, __LINE__)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb
     end
 
     # Turns a number into an ordinal string used to denote the position in an
@@ -504,8 +375,4 @@ require 'active_support/inflections'
 require 'active_support/core_ext/string/inflections'
 unless String.included_modules.include?(ActiveSupport::CoreExtensions::String::Inflections)
   String.send :include, ActiveSupport::CoreExtensions::String::Inflections
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/inflector.rb
 end
-=======
-end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/inflector.rb

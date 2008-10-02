@@ -14,7 +14,6 @@ module ActiveRecord
           end
         end
 
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/associations/has_many_association.rb
         # Returns the number of records in this collection.
         #
         # If the association has a counter cache it gets that value. Otherwise
@@ -28,17 +27,6 @@ module ActiveRecord
         #
         # If the collection is empty the target is set to an empty array and
         # the loaded flag is set to true as well.
-=======
-      protected
-        def owner_quoted_id
-          if @reflection.options[:primary_key]
-            quote_value(@owner.send(@reflection.options[:primary_key]))
-          else
-            @owner.quoted_id
-          end
-        end
-
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/associations/has_many_association.rb
         def count_records
           count = if has_cached_counter?
             @owner.send(:read_attribute, cached_counter_attribute_name)

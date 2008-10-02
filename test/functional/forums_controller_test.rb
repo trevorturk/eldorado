@@ -68,7 +68,7 @@ class ForumsControllerTest < ActionController::TestCase
   
   def test_should_update_forum_if_admin
     login_as :Administrator
-    put :update, :id => 1, :forum => { :id => 1, :name => 'update works!' }
+    put :update, :id => 1, :forum => { :name => 'update works!' }
     forums(:one).reload
     assert_redirected_to forum_path(forums(:one))
     assert_equal forums(:one).name, 'update works!'
@@ -80,7 +80,7 @@ class ForumsControllerTest < ActionController::TestCase
     assert_equal forums(:one).name, 'test forum'
     assert_redirected_to root_path
     login_as :trevor
-    put :update, :id => 1, :forum => { :id => 1, :name => 'update works!' }
+    put :update, :id => 1, :forum => { :name => 'update works!' }
     forums(:one).reload
     assert_equal forums(:one).name, 'test forum'
     assert_redirected_to root_path

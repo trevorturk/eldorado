@@ -36,15 +36,11 @@ module Test
       #     post :delete, :id => ...
       #   end
       def assert_difference(expressions, difference = 1, message = nil, &block)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/core_ext/test/unit/assertions.rb
         expression_evaluations = Array(expressions).map do |expression|
           lambda do
             eval(expression, block.__send__(:binding))
           end
         end
-=======
-        expression_evaluations = Array(expressions).collect{ |expression| lambda { eval(expression, block.send!(:binding)) } }
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/core_ext/test/unit/assertions.rb
 
         original_values = expression_evaluations.inject([]) { |memo, expression| memo << expression.call }
         yield

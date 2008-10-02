@@ -187,25 +187,14 @@ module ActionController
       private
         def validate_route_conditions(conditions)
           if method = conditions[:method]
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/routing/builder.rb
             [method].flatten.each do |m|
               if m == :head
                 raise ArgumentError, "HTTP method HEAD is invalid in route conditions. Rails processes HEAD requests the same as GETs, returning just the response headers"
               end
-=======
-            if method == :head
-              raise ArgumentError, "HTTP method HEAD is invalid in route conditions. Rails processes HEAD requests the same as GETs, returning just the response headers"
-            end
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/routing/builder.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/routing/builder.rb
               unless HTTP_METHODS.include?(m.to_sym)
                 raise ArgumentError, "Invalid HTTP method specified in route conditions: #{conditions.inspect}"
               end
-=======
-            unless HTTP_METHODS.include?(method.to_sym)
-              raise ArgumentError, "Invalid HTTP method specified in route conditions: #{conditions.inspect}"
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/routing/builder.rb
             end
           end
         end

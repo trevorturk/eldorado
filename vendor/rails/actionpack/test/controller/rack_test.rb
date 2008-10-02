@@ -64,101 +64,61 @@ end
 
 class RackRequestTest < BaseRackTest
   def test_proxy_request
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal 'glu.ttono.us', @request.host_with_port(true)
-=======
-    assert_equal 'glu.ttono.us', @request.host_with_port
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_http_host
     @env.delete "HTTP_X_FORWARDED_HOST"
     @env['HTTP_HOST'] = "rubyonrails.org:8080"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "rubyonrails.org", @request.host(true)
     assert_equal "rubyonrails.org:8080", @request.host_with_port(true)
-=======
-    assert_equal "rubyonrails.org:8080", @request.host_with_port
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
 
     @env['HTTP_X_FORWARDED_HOST'] = "www.firsthost.org, www.secondhost.org"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "www.secondhost.org", @request.host(true)
-=======
-    assert_equal "www.secondhost.org", @request.host
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_http_host_with_default_port_overrides_server_port
     @env.delete "HTTP_X_FORWARDED_HOST"
     @env['HTTP_HOST'] = "rubyonrails.org"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "rubyonrails.org", @request.host_with_port(true)
-=======
-    assert_equal "rubyonrails.org", @request.host_with_port
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_host_with_port_defaults_to_server_name_if_no_host_headers
     @env.delete "HTTP_X_FORWARDED_HOST"
     @env.delete "HTTP_HOST"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "glu.ttono.us:8007", @request.host_with_port(true)
-=======
-    assert_equal "glu.ttono.us:8007", @request.host_with_port
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_host_with_port_falls_back_to_server_addr_if_necessary
     @env.delete "HTTP_X_FORWARDED_HOST"
     @env.delete "HTTP_HOST"
     @env.delete "SERVER_NAME"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "207.7.108.53", @request.host(true)
     assert_equal 8007, @request.port(true)
     assert_equal "207.7.108.53:8007", @request.host_with_port(true)
-=======
-    assert_equal "207.7.108.53:8007", @request.host_with_port
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_host_with_port_if_http_standard_port_is_specified
     @env['HTTP_X_FORWARDED_HOST'] = "glu.ttono.us:80"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "glu.ttono.us", @request.host_with_port(true)
-=======
-    assert_equal "glu.ttono.us", @request.host_with_port
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_host_with_port_if_https_standard_port_is_specified
     @env['HTTP_X_FORWARDED_PROTO'] = "https"
     @env['HTTP_X_FORWARDED_HOST'] = "glu.ttono.us:443"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "glu.ttono.us", @request.host_with_port(true)
-=======
-    assert_equal "glu.ttono.us", @request.host_with_port
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_host_if_ipv6_reference
     @env.delete "HTTP_X_FORWARDED_HOST"
     @env['HTTP_HOST'] = "[2001:1234:5678:9abc:def0::dead:beef]"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "[2001:1234:5678:9abc:def0::dead:beef]", @request.host(true)
-=======
-    assert_equal "[2001:1234:5678:9abc:def0::dead:beef]", @request.host
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_host_if_ipv6_reference_with_port
     @env.delete "HTTP_X_FORWARDED_HOST"
     @env['HTTP_HOST'] = "[2001:1234:5678:9abc:def0::dead:beef]:8008"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal "[2001:1234:5678:9abc:def0::dead:beef]", @request.host(true)
-=======
-    assert_equal "[2001:1234:5678:9abc:def0::dead:beef]", @request.host
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_cgi_environment_variables
@@ -276,14 +236,10 @@ class RackResponseTest < BaseRackTest
 
   def test_simple_output
     @response.body = "Hello, World!"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     @response.prepare!
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
 
     status, headers, body = @response.out(@output)
     assert_equal "200 OK", status
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal({
       "Content-Type" => "text/html; charset=utf-8",
       "Cache-Control" => "private, max-age=0, must-revalidate",
@@ -291,9 +247,6 @@ class RackResponseTest < BaseRackTest
       "Set-Cookie" => [],
       "Content-Length" => "13"
     }, headers)
-=======
-    assert_equal({"Content-Type" => "text/html", "Cache-Control" => "no-cache", "Set-Cookie" => []}, headers)
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
 
     parts = []
     body.each { |part| parts << part }
@@ -304,18 +257,11 @@ class RackResponseTest < BaseRackTest
     @response.body = Proc.new do |response, output|
       5.times { |n| output.write(n) }
     end
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     @response.prepare!
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
 
     status, headers, body = @response.out(@output)
     assert_equal "200 OK", status
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     assert_equal({"Content-Type" => "text/html; charset=utf-8", "Cache-Control" => "no-cache", "Set-Cookie" => []}, headers)
-=======
-    assert_equal({"Content-Type" => "text/html", "Cache-Control" => "no-cache", "Set-Cookie" => []}, headers)
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
 
     parts = []
     body.each { |part| parts << part }
@@ -327,25 +273,16 @@ class RackResponseTest < BaseRackTest
     @request.cgi.send :instance_variable_set, '@output_cookies', [cookie]
 
     @response.body = "Hello, World!"
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     @response.prepare!
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
 
     status, headers, body = @response.out(@output)
     assert_equal "200 OK", status
     assert_equal({
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
       "Content-Type" => "text/html; charset=utf-8",
       "Cache-Control" => "private, max-age=0, must-revalidate",
       "ETag" => '"65a8e27d8879283831b664bd8b7f0ad4"',
       "Set-Cookie" => ["name=Josh; path="],
       "Content-Length" => "13"
-=======
-      "Content-Type" => "text/html",
-      "Cache-Control" => "no-cache",
-      "Set-Cookie" => ["name=Josh; path="]
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
     }, headers)
 
     parts = []
@@ -359,32 +296,18 @@ class RackResponseHeadersTest < BaseRackTest
     super
     @response = ActionController::RackResponse.new(@request)
     @output = StringIO.new('')
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     @response.headers['Status'] = "200 OK"
-=======
-    @response.headers['Status'] = 200
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
   end
 
   def test_content_type
     [204, 304].each do |c|
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
       @response.headers['Status'] = c.to_s
       assert !response_headers.has_key?("Content-Type"), "#{c} should not have Content-Type header"
-=======
-      @response.headers['Status'] = c
-      assert !response_headers.has_key?("Content-Type")
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
     end
 
     [200, 302, 404, 500].each do |c|
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
       @response.headers['Status'] = c.to_s
       assert response_headers.has_key?("Content-Type"), "#{c} did not have Content-Type header"
-=======
-      @response.headers['Status'] = c
-      assert response_headers.has_key?("Content-Type")
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
     end
   end
 
@@ -393,15 +316,8 @@ class RackResponseHeadersTest < BaseRackTest
   end
 
   private
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/rack_test.rb
     def response_headers
       @response.prepare!
       @response.out(@output)[1]
     end
-=======
-
-  def response_headers
-    @response.out(@output)[1]
-  end
->>>>>>> i18n:vendor/rails/actionpack/test/controller/rack_test.rb
 end

@@ -351,22 +351,11 @@ module ActionView
           disable_with = "this.value='#{disable_with}'"
           disable_with << ";#{options.delete('onclick')}" if options['onclick']
           
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/form_tag_helper.rb
           options["onclick"]  = "if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }"
           options["onclick"] << "else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }"
           options["onclick"] << "this.setAttribute('originalValue', this.value);this.disabled = true;#{disable_with};"
           options["onclick"] << "result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());"
           options["onclick"] << "if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;"
-=======
-          options["onclick"] = [
-            "this.setAttribute('originalValue', this.value)",
-            "this.disabled=true",
-            disable_with,
-            "result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit())",
-            "if (result == false) { this.value = this.getAttribute('originalValue'); this.disabled = false }",
-            "return result;",
-          ].join(";")
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/form_tag_helper.rb
         end
 
         if confirm = options.delete("confirm")
@@ -414,6 +403,7 @@ module ActionView
       # Creates a field set for grouping HTML form elements.
       #
       # <tt>legend</tt> will become the fieldset's title (optional as per W3C).
+      # <tt>options</tt> accept the same values as tag.
       #
       # === Examples
       #   <% field_set_tag do %>
@@ -425,9 +415,14 @@ module ActionView
       #     <p><%= text_field_tag 'name' %></p>
       #   <% end %>
       #   # => <fieldset><legend>Your details</legend><p><input id="name" name="name" type="text" /></p></fieldset>
-      def field_set_tag(legend = nil, &block)
+      #
+      #   <% field_set_tag nil, :class => 'format' do %>
+      #     <p><%= text_field_tag 'name' %></p>
+      #   <% end %>
+      #   # => <fieldset class="format"><p><input id="name" name="name" type="text" /></p></fieldset>
+      def field_set_tag(legend = nil, options = nil, &block)
         content = capture(&block)
-        concat(tag(:fieldset, {}, true))
+        concat(tag(:fieldset, options, true))
         concat(content_tag(:legend, legend)) unless legend.blank?
         concat(content)
         concat("</fieldset>")

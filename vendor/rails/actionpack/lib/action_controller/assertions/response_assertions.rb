@@ -87,19 +87,11 @@ module ActionController
       #
       def assert_template(expected = nil, message=nil)
         clean_backtrace do
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/assertions/response_assertions.rb
           rendered = @response.rendered_template.to_s
-=======
-          rendered = @response.rendered_template
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/assertions/response_assertions.rb
           msg = build_message(message, "expecting <?> but rendering with <?>", expected, rendered)
           assert_block(msg) do
             if expected.nil?
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/assertions/response_assertions.rb
               @response.rendered_template.blank?
-=======
-              @response.rendered_template.nil?
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/assertions/response_assertions.rb
             else
               rendered.to_s.match(expected)
             end

@@ -19,13 +19,10 @@ class ViewRenderTest < Test::Unit::TestCase
     assert_equal "Hello world!", @view.render("test/hello_world")
   end
 
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
   def test_render_file_at_top_level
     assert_equal 'Elastica', @view.render('/shared')
   end
 
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
   def test_render_file_with_full_path
     template_path = File.join(File.dirname(__FILE__), '../fixtures/test/hello_world.erb')
     assert_equal "Hello world!", @view.render(:file => template_path)
@@ -54,7 +51,6 @@ class ViewRenderTest < Test::Unit::TestCase
     assert_equal "only partial", @view.render(:partial => "test/partial_only")
   end
 
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
   def test_render_partial_with_format
     assert_equal 'partial html', @view.render(:partial => 'test/partial')
   end
@@ -73,10 +69,7 @@ class ViewRenderTest < Test::Unit::TestCase
     assert_equal "5", @view.render(:partial => "test/counter", :locals => { :counter_counter => 5 })
   end
 
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
   def test_render_partial_with_errors
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
     @view.render(:partial => "test/raise")
     flunk "Render did not raise TemplateError"
   rescue ActionView::TemplateError => e
@@ -94,42 +87,22 @@ class ViewRenderTest < Test::Unit::TestCase
     assert_equal "Trace of template inclusion: #{File.expand_path("#{FIXTURE_LOAD_PATH}/test/sub_template_raise.html.erb")}", e.sub_template_message
     assert_equal "1", e.line_number
     assert_equal File.expand_path("#{FIXTURE_LOAD_PATH}/test/_raise.html.erb"), e.file_name
-=======
-    assert_raise(ActionView::TemplateError) { @view.render(:partial => "test/raise") }
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
   end
 
   def test_render_partial_collection
     assert_equal "Hello: davidHello: mary", @view.render(:partial => "test/customer", :collection => [ Customer.new("david"), Customer.new("mary") ])
   end
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
 
-=======
-  
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
   def test_render_partial_collection_as
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
     assert_equal "david david davidmary mary mary",
-=======
-    assert_equal "david david davidmary mary mary", 
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
       @view.render(:partial => "test/customer_with_var", :collection => [ Customer.new("david"), Customer.new("mary") ], :as => :customer)
   end
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
 
-=======
-  
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
   def test_render_partial_collection_without_as
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
     assert_equal "local_inspector,local_inspector_counter,object",
-=======
-    assert_equal "local_inspector,local_inspector_counter,object", 
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
       @view.render(:partial => "test/local_inspector", :collection => [ Customer.new("mary") ])
   end
 
-<<<<<<< HEAD:vendor/rails/actionpack/test/template/render_test.rb
   def test_render_partial_with_empty_collection_should_return_nil
     assert_nil @view.render(:partial => "test/customer", :collection => [])
   end
@@ -142,8 +115,6 @@ class ViewRenderTest < Test::Unit::TestCase
     assert_nil @view.render(:partial => [])
   end
 
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/template/render_test.rb
   # TODO: The reason for this test is unclear, improve documentation
   def test_render_partial_and_fallback_to_layout
     assert_equal "Before (Josh)\n\nAfter", @view.render(:partial => "test/layout_for_partial", :locals => { :name => "Josh" })

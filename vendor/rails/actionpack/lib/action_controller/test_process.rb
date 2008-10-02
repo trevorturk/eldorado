@@ -218,11 +218,7 @@ module ActionController #:nodoc:
     # Returns the template of the file which was used to
     # render this response (or nil)
     def rendered_template
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/test_process.rb
       template.send(:_first_render)
-=======
-      template._first_render
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/test_process.rb
     end
 
     # A shortcut to the flash. Returns an empty hash if no session flash exists.
@@ -414,7 +410,6 @@ module ActionController #:nodoc:
     end
     alias xhr :xml_http_request
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/test_process.rb
     def assigns(key = nil)
       if key.nil?
         @response.template.assigns
@@ -422,15 +417,6 @@ module ActionController #:nodoc:
         @response.template.assigns[key.to_s]
       end
     end
-=======
-    def assigns(key = nil) 
-      if key.nil? 
-        @response.template.assigns 
-      else 
-        @response.template.assigns[key.to_s] 
-      end 
-    end 
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/test_process.rb
 
     def session
       @response.session

@@ -15,15 +15,7 @@
 
 <% @real_exception = @exception
    @exception = @exception.original_exception || @exception %>
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/templates/rescues/template_error.erb
 <%= render(:file => @rescues_path + "/_trace.erb") %>
-=======
-<%= render(:file => @rescues_path + "/_trace.erb", :use_full_path => false) %>
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/templates/rescues/template_error.erb
 <% @exception = @real_exception %>
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/templates/rescues/template_error.erb
 <%= render(:file => @rescues_path + "/_request_and_response.erb") %>
-=======
-<%= render(:file => @rescues_path + "/_request_and_response.erb", :use_full_path => false) %>
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/templates/rescues/template_error.erb

@@ -141,29 +141,16 @@ module ActionView
     extend ActiveSupport::Memoizable
 
     private
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
       def render_partial(options = {}) #:nodoc:
         local_assigns = options[:locals] || {}
-=======
-      def render_partial(partial_path, object_assigns = nil, local_assigns = {}) #:nodoc:
-        local_assigns ||= {}
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
         case partial_path = options[:partial]
-=======
-        case partial_path
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
         when String, Symbol, NilClass
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
           if options.has_key?(:collection)
             render_partial_collection(options)
           else
             _pick_partial_template(partial_path).render_partial(self, options[:object], local_assigns)
           end
-=======
-          pick_template(find_partial_path(partial_path)).render_partial(self, object_assigns, local_assigns)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
         when ActionView::Helpers::FormBuilder
           builder_partial_path = partial_path.class.to_s.demodulize.underscore.sub(/_builder$/, '')
           local_assigns.merge!(builder_partial_path.to_sym => partial_path)
@@ -180,38 +167,19 @@ module ActionView
         end
       end
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
       def render_partial_collection(options = {}) #:nodoc:
         return nil if options[:collection].blank?
-=======
-      def render_partial_collection(partial_path, collection, partial_spacer_template = nil, local_assigns = {}, as = nil) #:nodoc:
-        return " " if collection.empty?
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
         partial = options[:partial]
         spacer = options[:spacer_template] ? render(:partial => options[:spacer_template]) : ''
         local_assigns = options[:locals] ? options[:locals].clone : {}
         as = options[:as]
-=======
-        local_assigns = local_assigns ? local_assigns.clone : {}
-        spacer = partial_spacer_template ? render(:partial => partial_spacer_template) : ''
-        _paths = {}
-        _templates = {}
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
 
         index = 0
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
         options[:collection].map do |object|
           _partial_path ||= partial ||
             ActionController::RecordIdentifier.partial_path(object, controller.class.controller_path)
           template = _pick_partial_template(_partial_path)
-=======
-        collection.map do |object|
-          _partial_path ||= partial_path || ActionController::RecordIdentifier.partial_path(object, controller.class.controller_path)
-          path = _paths[_partial_path] ||= find_partial_path(_partial_path)
-          template = _templates[path] ||= pick_template(path)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
           local_assigns[template.counter_name] = index
           result = template.render_partial(self, object, local_assigns, as)
           index += 1
@@ -219,33 +187,16 @@ module ActionView
         end.join(spacer)
       end
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
       def _pick_partial_template(partial_path) #:nodoc:
-=======
-      def find_partial_path(partial_path)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
         if partial_path.include?('/')
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
           path = File.join(File.dirname(partial_path), "_#{File.basename(partial_path)}")
         elsif controller
           path = "#{controller.class.controller_path}/_#{partial_path}"
-=======
-          "#{File.dirname(partial_path)}/_#{File.basename(partial_path)}"
-        elsif respond_to?(:controller)
-          "#{controller.class.controller_path}/_#{partial_path}"
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
         else
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
           path = "_#{partial_path}"
-=======
-          "_#{partial_path}"
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
         end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/partials.rb
 
         _pick_template(path)
-=======
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/partials.rb
       end
       memoize :_pick_partial_template
   end

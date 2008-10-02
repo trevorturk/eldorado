@@ -116,11 +116,7 @@ module ActionController #:nodoc:
     end
     
     def apply_redirect_to(redirect_to_option) # :nodoc:
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/verification.rb
       (redirect_to_option.is_a?(Symbol) && redirect_to_option != :back) ? self.__send__(redirect_to_option) : redirect_to_option
-=======
-      (redirect_to_option.is_a?(Symbol) && redirect_to_option != :back) ? self.send!(redirect_to_option) : redirect_to_option
->>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/verification.rb
     end
     
     def apply_remaining_actions(options) # :nodoc:

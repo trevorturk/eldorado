@@ -29,10 +29,6 @@ end
 # begin
 #   gem 'i18n', '~> 0.0.1'
 # rescue Gem::LoadError
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/vendor.rb
   $:.unshift "#{File.dirname(__FILE__)}/vendor/i18n-0.0.1"
-=======
-  $:.unshift "#{File.dirname(__FILE__)}/vendor/i18n-0.0.1/lib"
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/vendor.rb
   require 'i18n'
 # end

@@ -143,20 +143,12 @@ class LifecycleTest < ActiveRecord::TestCase
     assert_equal developer.name, multi_observer.record.name
   end
 
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/lifecycle_test.rb
   def test_after_find_can_be_observed_when_its_not_defined_on_the_model
-=======
-  def test_after_find_cannot_be_observed_when_its_not_defined_on_the_model
->>>>>>> i18n:vendor/rails/activerecord/test/cases/lifecycle_test.rb
     observer = MinimalisticObserver.instance
     assert_equal Minimalistic, MinimalisticObserver.observed_class
 
     minimalistic = Minimalistic.find(1)
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/lifecycle_test.rb
     assert_equal minimalistic, observer.minimalistic
-=======
-    assert_nil observer.minimalistic
->>>>>>> i18n:vendor/rails/activerecord/test/cases/lifecycle_test.rb
   end
 
   def test_after_find_can_be_observed_when_its_defined_on_the_model
@@ -167,7 +159,6 @@ class LifecycleTest < ActiveRecord::TestCase
     assert_equal topic, observer.topic
   end
 
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/lifecycle_test.rb
   def test_after_find_is_not_created_if_its_not_used
     # use a fresh class so an observer can't have defined an
     # after_find on it
@@ -196,8 +187,6 @@ class LifecycleTest < ActiveRecord::TestCase
     assert_equal original_method, model_class.instance_method(:after_find)
   end
 
-=======
->>>>>>> i18n:vendor/rails/activerecord/test/cases/lifecycle_test.rb
   def test_invalid_observer
     assert_raise(ArgumentError) { Topic.observers = Object.new; Topic.instantiate_observers }
   end

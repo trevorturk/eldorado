@@ -39,13 +39,10 @@ module ActiveSupport #:nodoc:
     mattr_accessor :explicitly_unloadable_constants
     self.explicitly_unloadable_constants = []
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     # The logger is used for generating information on the action run-time (including benchmarking) if available.
     # Can be set to nil for no logging. Compatible with both Ruby's own Logger and Log4r loggers.
     mattr_accessor :logger
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     # Set to true to enable logging of const_missing and file loads
     mattr_accessor :log_activity
     self.log_activity = false
@@ -58,42 +55,27 @@ module ActiveSupport #:nodoc:
     module ModuleConstMissing #:nodoc:
       def self.included(base) #:nodoc:
         base.class_eval do
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
           unless defined? const_missing_without_dependencies
             alias_method_chain :const_missing, :dependencies
           end
         end
       end
-=======
-          # Rename the original handler so we can chain it to the new one
-          alias_method :rails_original_const_missing, :const_missing
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def self.excluded(base) #:nodoc:
         base.class_eval do
           if defined? const_missing_without_dependencies
             undef_method :const_missing
             alias_method :const_missing, :const_missing_without_dependencies
             undef_method :const_missing_without_dependencies
-=======
-          # Use const_missing to autoload associations so we don't have to
-          # require_association when using single-table inheritance.
-          def const_missing(class_id)
-            ActiveSupport::Dependencies.load_missing_constant self, class_id
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
           end
         end
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
       # Use const_missing to autoload associations so we don't have to
       # require_association when using single-table inheritance.
       def const_missing_with_dependencies(class_id)
         ActiveSupport::Dependencies.load_missing_constant self, class_id
       end
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
       def unloadable(const_desc = self)
         super(const_desc)
@@ -125,7 +107,6 @@ module ActiveSupport #:nodoc:
 
     # Object includes this module
     module Loadable #:nodoc:
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def self.included(base) #:nodoc:
         base.class_eval do
           unless defined? load_without_new_constant_marking
@@ -142,90 +123,34 @@ module ActiveSupport #:nodoc:
             undef_method :load_without_new_constant_marking
           end
         end
-=======
-      def load(file, *extras) #:nodoc:
-        Dependencies.new_constants_in(Object) { super }
-      rescue Exception => exception  # errors from loading file
-        exception.blame_file! file
-        raise
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def require_or_load(file_name)
         Dependencies.require_or_load(file_name)
-=======
-      def require(file, *extras) #:nodoc:
-        Dependencies.new_constants_in(Object) { super }
-      rescue Exception => exception  # errors from required file
-        exception.blame_file! file
-        raise
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def require_dependency(file_name)
         Dependencies.depend_on(file_name)
-=======
-      # Mark the given constant as unloadable. Unloadable constants are removed each
-      # time dependencies are cleared.
-      #
-      # Note that marking a constant for unloading need only be done once. Setup
-      # or init scripts may list each unloadable constant that may need unloading;
-      # each constant will be removed for every subsequent clear, as opposed to for
-      # the first clear.
-      #
-      # The provided constant descriptor may be a (non-anonymous) module or class,
-      # or a qualified constant name as a string or symbol.
-      #
-      # Returns true if the constant was not previously marked for unloading, false
-      # otherwise.
-      def unloadable(const_desc)
-        Dependencies.mark_for_unload const_desc
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
-=======
-    end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def require_association(file_name)
         Dependencies.associate_with(file_name)
-=======
-    # Exception file-blaming
-    module Blamable #:nodoc:
-      def blame_file!(file)
-        (@blamed_files ||= []).unshift file
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def load_with_new_constant_marking(file, *extras) #:nodoc:
         Dependencies.new_constants_in(Object) { load_without_new_constant_marking(file, *extras) }
       rescue Exception => exception  # errors from loading file
         exception.blame_file! file
         raise
-=======
-      def blamed_files
-        @blamed_files ||= []
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def require(file, *extras) #:nodoc:
         Dependencies.new_constants_in(Object) { super }
       rescue Exception => exception  # errors from required file
         exception.blame_file! file
         raise
-=======
-      def describe_blame
-        return nil if blamed_files.empty?
-        "This error occurred while loading the following files:\n   #{blamed_files.join "\n   "}"
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       # Mark the given constant as unloadable. Unloadable constants are removed each
       # time dependencies are cleared.
       #
@@ -241,40 +166,15 @@ module ActiveSupport #:nodoc:
       # otherwise.
       def unloadable(const_desc)
         Dependencies.mark_for_unload const_desc
-=======
-      def copy_blame!(exc)
-        @blamed_files = exc.blamed_files.clone
-        self
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     # Exception file-blaming
     module Blamable #:nodoc:
       def blame_file!(file)
         (@blamed_files ||= []).unshift file
-=======
-    def inject!
-      Object.instance_eval do
-        define_method(:require_or_load)     { |file_name| Dependencies.require_or_load(file_name) } unless Object.respond_to?(:require_or_load)
-        define_method(:require_dependency)  { |file_name| Dependencies.depend_on(file_name) }       unless Object.respond_to?(:require_dependency)
-        define_method(:require_association) { |file_name| Dependencies.associate_with(file_name) }  unless Object.respond_to?(:require_association)
-
-        alias_method :load_without_new_constant_marking, :load
-        include Loadable
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
-=======
 
-      Module.instance_eval { include ModuleConstMissing }
-      Class.instance_eval { include ClassConstMissing }
-      Exception.instance_eval { include Blamable }
-    end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
-
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def blamed_files
         @blamed_files ||= []
       end
@@ -283,151 +183,58 @@ module ActiveSupport #:nodoc:
         return nil if blamed_files.empty?
         "This error occurred while loading the following files:\n   #{blamed_files.join "\n   "}"
       end
-=======
-    def load?
-      mechanism == :load
-    end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       def copy_blame!(exc)
         @blamed_files = exc.blamed_files.clone
         self
       end
-=======
-    def depend_on(file_name, swallow_load_errors = false)
-      path = search_for_file(file_name)
-      require_or_load(path || file_name)
-    rescue LoadError
-      raise unless swallow_load_errors
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def hook!
       Object.instance_eval { include Loadable }
       Module.instance_eval { include ModuleConstMissing }
       Class.instance_eval { include ClassConstMissing }
       Exception.instance_eval { include Blamable }
       true
-=======
-    def associate_with(file_name)
-      depend_on(file_name, true)
     end
 
-    def clear
-      log_call
-      loaded.clear
-      remove_unloadable_constants!
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
-    end
-
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def unhook!
       ModuleConstMissing.excluded(Module)
       Loadable.excluded(Object)
       true
     end
-=======
-    def require_or_load(file_name, const_path = nil)
-      log_call file_name, const_path
-      file_name = $1 if file_name =~ /^(.*)\.rb$/
-      expanded = File.expand_path(file_name)
-      return if loaded.include?(expanded)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def load?
       mechanism == :load
     end
-=======
-      # Record that we've seen this file *before* loading it to avoid an
-      # infinite loop with mutual dependencies.
-      loaded << expanded
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def depend_on(file_name, swallow_load_errors = false)
       path = search_for_file(file_name)
       require_or_load(path || file_name)
     rescue LoadError
       raise unless swallow_load_errors
     end
-=======
-      begin
-        if load?
-          log "loading #{file_name}"
 
-          # Enable warnings iff this file has not been loaded before and
-          # warnings_on_first_load is set.
-          load_args = ["#{file_name}.rb"]
-          load_args << const_path unless const_path.nil?
-
-          if !warnings_on_first_load or history.include?(expanded)
-            result = load_file(*load_args)
-          else
-            enable_warnings { result = load_file(*load_args) }
-          end
-        else
-          log "requiring #{file_name}"
-          result = require file_name
-        end
-      rescue Exception
-        loaded.delete expanded
-        raise
-      end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
-
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def associate_with(file_name)
       depend_on(file_name, true)
-=======
-      # Record history *after* loading so first load gets warnings.
-      history << expanded
-      return result
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def clear
       log_call
       loaded.clear
       remove_unloadable_constants!
     end
-=======
-    # Is the provided constant path defined?
-    def qualified_const_defined?(path)
-      raise NameError, "#{path.inspect} is not a valid constant name!" unless
-        /^(::)?([A-Z]\w*)(::[A-Z]\w*)*$/ =~ path
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def require_or_load(file_name, const_path = nil)
       log_call file_name, const_path
       file_name = $1 if file_name =~ /^(.*)\.rb$/
       expanded = File.expand_path(file_name)
       return if loaded.include?(expanded)
-=======
-      names = path.to_s.split('::')
-      names.shift if names.first.empty?
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       # Record that we've seen this file *before* loading it to avoid an
       # infinite loop with mutual dependencies.
       loaded << expanded
-=======
-      # We can't use defined? because it will invoke const_missing for the parent
-      # of the name we are checking.
-      names.inject(Object) do |mod, name|
-        return false unless uninherited_const_defined?(mod, name)
-        mod.const_get name
-      end
-      return true
-    end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       begin
         if load?
           log "loading #{file_name}"
@@ -449,50 +256,21 @@ module ActiveSupport #:nodoc:
       rescue Exception
         loaded.delete expanded
         raise
-=======
-    if Module.method(:const_defined?).arity == 1
-      # Does this module define this constant?
-      # Wrapper to accomodate changing Module#const_defined? in Ruby 1.9
-      def uninherited_const_defined?(mod, const)
-        mod.const_defined?(const)
       end
-    else
-      def uninherited_const_defined?(mod, const) #:nodoc:
-        mod.const_defined?(const, false)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
-      end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
       # Record history *after* loading so first load gets warnings.
       history << expanded
       return result
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     # Is the provided constant path defined?
     def qualified_const_defined?(path)
       raise NameError, "#{path.inspect} is not a valid constant name!" unless
         /^(::)?([A-Z]\w*)(::[A-Z]\w*)*$/ =~ path
-=======
-    # Given +path+, a filesystem path to a ruby file, return an array of constant
-    # paths which would cause Dependencies to attempt to load this file.
-    def loadable_constants_for_path(path, bases = load_paths)
-      path = $1 if path =~ /\A(.*)\.rb\Z/
-      expanded_path = File.expand_path(path)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       names = path.to_s.split('::')
       names.shift if names.first.empty?
-=======
-      bases.collect do |root|
-        expanded_root = File.expand_path(root)
-        next unless %r{\A#{Regexp.escape(expanded_root)}(/|\\)} =~ expanded_path
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       # We can't use defined? because it will invoke const_missing for the parent
       # of the name we are checking.
       names.inject(Object) do |mod, name|
@@ -500,21 +278,8 @@ module ActiveSupport #:nodoc:
         mod.const_get name
       end
       return true
-=======
-        nesting = expanded_path[(expanded_root.size)..-1]
-        nesting = nesting[1..-1] if nesting && nesting[0] == ?/
-        next if nesting.blank?
-
-        [
-          nesting.camelize,
-          # Special case: application.rb might define ApplicationControlller.
-          ('ApplicationController' if nesting == 'application')
-        ]
-      end.flatten.compact.uniq
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     if Module.method(:const_defined?).arity == 1
       # Does this module define this constant?
       # Wrapper to accomodate changing Module#const_defined? in Ruby 1.9
@@ -524,19 +289,9 @@ module ActiveSupport #:nodoc:
     else
       def uninherited_const_defined?(mod, const) #:nodoc:
         mod.const_defined?(const, false)
-=======
-    # Search for a file in load_paths matching the provided suffix.
-    def search_for_file(path_suffix)
-      path_suffix = path_suffix + '.rb' unless path_suffix.ends_with? '.rb'
-      load_paths.each do |root|
-        path = File.join(root, path_suffix)
-        return path if File.file? path
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
-      nil # Gee, I sure wish we had first_match ;-)
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     # Given +path+, a filesystem path to a ruby file, return an array of constant
     # paths which would cause Dependencies to attempt to load this file.
     def loadable_constants_for_path(path, bases = load_paths)
@@ -565,22 +320,10 @@ module ActiveSupport #:nodoc:
       load_paths.each do |root|
         path = File.join(root, path_suffix)
         return path if File.file? path
-=======
-    # Does the provided path_suffix correspond to an autoloadable module?
-    # Instead of returning a boolean, the autoload base for this module is returned.
-    def autoloadable_module?(path_suffix)
-      load_paths.each do |load_path|
-        return load_path if File.directory? File.join(load_path, path_suffix)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
       nil # Gee, I sure wish we had first_match ;-)
-=======
-      nil
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     # Does the provided path_suffix correspond to an autoloadable module?
     # Instead of returning a boolean, the autoload base for this module is returned.
     def autoloadable_module?(path_suffix)
@@ -588,19 +331,12 @@ module ActiveSupport #:nodoc:
         return load_path if File.directory? File.join(load_path, path_suffix)
       end
       nil
-=======
-    def load_once_path?(path)
-      load_once_paths.any? { |base| path.starts_with? base }
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
     def load_once_path?(path)
       load_once_paths.any? { |base| path.starts_with? base }
     end
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
     # Attempt to autoload the provided module name by searching for a directory
     # matching the expect path suffix. If found, the module is created and assigned
     # to +into+'s constants with the name +const_name+. Provided that the directory
@@ -661,21 +397,11 @@ module ActiveSupport #:nodoc:
 
       # If we have an anonymous module, all we can do is attempt to load from Object.
       from_mod = Object if from_mod.name.blank?
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
-=======
 
       unless qualified_const_defined?(from_mod.name) && from_mod.name.constantize.object_id == from_mod.object_id
         raise ArgumentError, "A copy of #{from_mod} has been removed from the module tree but is still active!"
       end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
-      unless qualified_const_defined?(from_mod.name) && from_mod.name.constantize.object_id == from_mod.object_id
-        raise ArgumentError, "A copy of #{from_mod} has been removed from the module tree but is still active!"
-      end
-
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
       raise ArgumentError, "#{from_mod} is not missing constant #{const_name}!" if uninherited_const_defined?(from_mod, const_name)
 
       qualified_name = qualified_name_for from_mod, const_name
@@ -862,11 +588,7 @@ module ActiveSupport #:nodoc:
 
     protected
       def log_call(*args)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
         if logger && log_activity
-=======
-        if defined?(RAILS_DEFAULT_LOGGER) && RAILS_DEFAULT_LOGGER && log_activity
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
           arg_str = args.collect { |arg| arg.inspect } * ', '
           /in `([a-z_\?\!]+)'/ =~ caller(1).first
           selector = $1 || '<unknown>'
@@ -875,20 +597,11 @@ module ActiveSupport #:nodoc:
       end
 
       def log(msg)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
         if logger && log_activity
           logger.debug "Dependencies: #{msg}"
-=======
-        if defined?(RAILS_DEFAULT_LOGGER) && RAILS_DEFAULT_LOGGER && log_activity
-          RAILS_DEFAULT_LOGGER.debug "Dependencies: #{msg}"
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb
         end
       end
   end
 end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/dependencies.rb
 ActiveSupport::Dependencies.hook!
-=======
-ActiveSupport::Dependencies.inject!
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/dependencies.rb

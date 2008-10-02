@@ -65,11 +65,7 @@ module ActionView
         I18n.with_options :locale => options[:locale], :scope => :'datetime.distance_in_words' do |locale|
           case distance_in_minutes
             when 0..1
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
               return distance_in_minutes == 0 ?
-=======
-              return distance_in_minutes == 0 ? 
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
                      locale.t(:less_than_x_minutes, :count => 1) :
                      locale.t(:x_minutes, :count => distance_in_minutes) unless include_seconds
 
@@ -93,7 +89,7 @@ module ActionView
             else                      locale.t :over_x_years,   :count => (distance_in_minutes / 525600).round
           end
         end
-      end      
+      end
 
       # Like distance_of_time_in_words, but where <tt>to_time</tt> is fixed to <tt>Time.now</tt>.
       #
@@ -183,15 +179,9 @@ module ActionView
         InstanceTag.new(object_name, method, self, options.delete(:object)).to_date_select_tag(options, html_options)
       end
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
       # Returns a set of select tags (one for hour, minute and optionally second) pre-selected for accessing a
       # specified time-based attribute (identified by +method+) on an object assigned to the template (identified by
       # +object+). You can include the seconds with <tt>:include_seconds</tt>.
-=======
-      # Returns a set of select tags (one for hour, minute and optionally second) pre-selected for accessing a specified
-      # time-based attribute (identified by +method+) on an object assigned to the template (identified by +object+).
-      # You can include the seconds with <tt>:include_seconds</tt>.
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
       #
       # This method will also generate 3 input hidden tags, for the actual year, month and day unless the option
       # <tt>:ignore_date</tt> is set to +true+.
@@ -322,13 +312,10 @@ module ActionView
       #   # Generates a date select that discards the type of the field and defaults to the date in
       #   # my_date (six days after today)
       #   select_date(my_date, :discard_type => true)
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
       #
       #   # Generates a date select that defaults to the date in my_date,
       #   # which has fields separated by '/'
       #   select_date(my_date, :date_separator => '/')
-=======
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
       #
       #   # Generates a date select that defaults to the datetime in my_date (six days after today)
       #   # prefixed with 'payday' rather than 'date'
@@ -489,42 +476,8 @@ module ActionView
       #   select_month(Date.today, :use_month_names => %w(Januar Februar Marts ...))
       #
       def select_month(date, options = {}, html_options = {})
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
         DateTimeSelector.new(date, options, html_options).select_month
       end
-=======
-        locale = options[:locale] 
-
-        val = date ? (date.kind_of?(Fixnum) ? date : date.month) : ''
-        if options[:use_hidden]
-          hidden_html(options[:field_name] || 'month', val, options)
-        else
-          month_options = []
-          month_names = options[:use_month_names] || begin
-            key = options[:use_short_month] ? :'date.abbr_month_names' : :'date.month_names'
-            I18n.translate key, :locale => locale
-          end
-          month_names.unshift(nil) if month_names.size < 13
-
-          1.upto(12) do |month_number|
-            month_name = if options[:use_month_numbers]
-              month_number
-            elsif options[:add_month_numbers]
-              month_number.to_s + ' - ' + month_names[month_number]
-            else
-              month_names[month_number]
-            end
-
-            month_options << ((val == month_number) ?
-              content_tag(:option, month_name, :value => month_number, :selected => "selected") :
-              content_tag(:option, month_name, :value => month_number)
-            )
-            month_options << "\n"
-          end
-          select_html(options[:field_name] || 'month', month_options.join, options, html_options)
-        end
-      end      
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
 
       # Returns a select tag with options for each of the five years on each side of the current, which is selected.
       # The five year radius can be changed using the <tt>:start_year</tt> and <tt>:end_year</tt> keys in the
@@ -550,36 +503,14 @@ module ActionView
       #   select_year(2006, :start_year => 2000, :end_year => 2010)
       #
       def select_year(date, options = {}, html_options = {})
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
         DateTimeSelector.new(date, options, html_options).select_year
       end
     end
-=======
-        if !date || date == 0
-          value = ''
-          middle_year = Date.today.year
-        elsif date.kind_of?(Fixnum)
-          value = middle_year = date
-        else
-          value = middle_year = date.year
-        end
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
     class DateTimeSelector #:nodoc:
       extend ActiveSupport::Memoizable
       include ActionView::Helpers::TagHelper
-=======
-        if options[:use_hidden]
-          hidden_html(options[:field_name] || 'year', value, options)
-        else
-          year_options = ''
-          start_year   = options[:start_year] || middle_year - 5
-          end_year     = options[:end_year]   || middle_year + 5
-          step_val     = start_year < end_year ? 1 : -1
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
       DEFAULT_PREFIX = 'date'.freeze unless const_defined?('DEFAULT_PREFIX')
       POSITION = {
         :year => 1, :month => 2, :day => 3, :hour => 4, :minute => 5, :second => 6
@@ -610,17 +541,7 @@ module ActionView
           # valid (otherwise it could be 31 and february wouldn't be a valid date)
           if @options[:discard_day] && !@options[:discard_month]
             @datetime = @datetime.change(:day => 1)
-=======
-          start_year.step(end_year, step_val) do |year|
-            if value == year
-              year_options << content_tag(:option, year, :value => year, :selected => "selected")
-            else
-              year_options << content_tag(:option, year, :value => year)
-            end
-            year_options << "\n"
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
           end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
 
           [:day, :month, :year].each { |o| order.unshift(o) unless order.include?(o) }
           order += [:hour, :minute, :second] unless @options[:discard_hour]
@@ -628,9 +549,6 @@ module ActionView
           build_selects_from_types(order)
         else
           "#{select_date}#{@options[:datetime_separator]}#{select_time}"
-=======
-          select_html(options[:field_name] || 'year', year_options, options, html_options)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
         end
       end
 
@@ -746,39 +664,10 @@ module ActionView
       end
 
       private
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
         %w( sec min hour day month year ).each do |method|
           define_method(method) do
             @datetime.kind_of?(Fixnum) ? @datetime : @datetime.send(method) if @datetime
-=======
-        def date_or_time_select(options, html_options = {})
-          locale = options[:locale]
-
-          defaults = { :discard_type => true }
-          options  = defaults.merge(options)
-          datetime = value(object)
-          datetime ||= default_time_from_options(options[:default]) unless options[:include_blank]
-    
-          position = { :year => 1, :month => 2, :day => 3, :hour => 4, :minute => 5, :second => 6 }
-
-          order = options[:order] ||= I18n.translate(:'date.order', :locale => locale)
-    
-          # Discard explicit and implicit by not being included in the :order
-          discard = {}
-          discard[:year]   = true if options[:discard_year] or !order.include?(:year)
-          discard[:month]  = true if options[:discard_month] or !order.include?(:month)
-          discard[:day]    = true if options[:discard_day] or discard[:month] or !order.include?(:day)
-          discard[:hour]   = true if options[:discard_hour]
-          discard[:minute] = true if options[:discard_minute] or discard[:hour]
-          discard[:second] = true unless options[:include_seconds] && !discard[:minute]
-    
-          # If the day is hidden and the month is visible, the day should be set to the 1st so all month choices are valid
-          # (otherwise it could be 31 and february wouldn't be a valid date)
-          if datetime && discard[:day] && !discard[:month]
-            datetime = datetime.change(:day => 1)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
           end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
         end
 
         # Returns translated month names, but also ensures that a custom month
@@ -834,22 +723,7 @@ module ActionView
             I18n.translate(:'date.order', :locale => @options[:locale]) || []
           end
         end
-=======
-    
-          # Maintain valid dates by including hidden fields for discarded elements
-          [:day, :month, :year].each { |o| order.unshift(o) unless order.include?(o) }
-    
-          # Ensure proper ordering of :hour, :minute and :second
-          [:hour, :minute, :second].each { |o| order.delete(o); order.push(o) }
-    
-          date_or_time_select = ''
-          order.reverse.each do |param|
-            # Send hidden fields for discarded elements once output has started
-            # This ensures AR can reconstruct valid dates using ParseDate
-            next if discard[param] && (date_or_time_select.empty? || options[:ignore_date])
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
         # Build full select tag from date type and options
         def build_options_and_select(type, selected, options = {})
           build_select(type, build_options(selected, options))
@@ -872,18 +746,7 @@ module ActionView
             tag_options = { :value => value }
             tag_options[:selected] = "selected" if selected == i
             select_options << content_tag(:option, value, tag_options)
-=======
-            date_or_time_select.insert(0, self.send("select_#{param}", datetime, options_with_prefix(position[param], options.merge(:use_hidden => discard[param])), html_options))
-            date_or_time_select.insert(0,
-              case param
-                when :hour then (discard[:year] && discard[:day] ? "" : " &mdash; ")
-                when :minute then " : "
-                when :second then options[:include_seconds] ? " : " : ""
-                else ""
-              end)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
           end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
           select_options.join("\n") + "\n"
         end
 
@@ -904,10 +767,6 @@ module ActionView
           select_html << select_options_as_html.to_s
 
           content_tag(:select, select_html, select_options) + "\n"
-=======
-    
-          date_or_time_select
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/date_helper.rb
         end
 
         # Builds hidden input tag for date part and value

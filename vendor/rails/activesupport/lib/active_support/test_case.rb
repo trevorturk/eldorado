@@ -12,7 +12,6 @@ module ActiveSupport
       test_name = "test_#{name.gsub(/\s+/,'_')}".to_sym
       defined = instance_method(test_name) rescue false
       raise "#{test_name} is already defined in #{self}" if defined
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/test_case.rb
       if block_given?
         define_method(test_name, &block)
       else
@@ -20,9 +19,6 @@ module ActiveSupport
           flunk "No implementation provided for #{name}"
         end
       end
-=======
-      define_method(test_name, &block)
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/test_case.rb
     end
   end
 end

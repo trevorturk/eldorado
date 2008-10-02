@@ -42,29 +42,17 @@ module ActiveSupport #:nodoc:
         # Splits or iterates over the array in +number+ of groups, padding any
         # remaining slots with +fill_with+ unless it is +false+.
         #
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/array/grouping.rb
         #   %w(1 2 3 4 5 6 7 8 9 10).in_groups(3) {|group| p group}
-=======
-        #   %w(1 2 3 4 5 6 7 8 9 10).in_groups(3) {|g| p g}
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/array/grouping.rb
         #   ["1", "2", "3", "4"]
         #   ["5", "6", "7", nil]
         #   ["8", "9", "10", nil]
         #
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/array/grouping.rb
         #   %w(1 2 3 4 5 6 7).in_groups(3, '&nbsp;') {|group| p group}
-=======
-        #   %w(1 2 3 4 5 6 7).in_groups(3, '&nbsp;') {|g| p g}
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/array/grouping.rb
         #   ["1", "2", "3"]
         #   ["4", "5", "&nbsp;"]
         #   ["6", "7", "&nbsp;"]
         #
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/array/grouping.rb
         #   %w(1 2 3 4 5 6 7).in_groups(3, false) {|group| p group}
-=======
-        #   %w(1 2 3 4 5 6 7).in_groups(3, false) {|g| p g}
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/array/grouping.rb
         #   ["1", "2", "3"]
         #   ["4", "5"]
         #   ["6", "7"]

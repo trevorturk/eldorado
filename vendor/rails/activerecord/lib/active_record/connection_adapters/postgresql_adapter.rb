@@ -335,13 +335,10 @@ module ActiveRecord
         postgresql_version >= 80200
       end
 
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb
       def supports_ddl_transactions?
         true
       end
 
-=======
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb
       # Returns the configured supported identifier length supported by PostgreSQL,
       # or report the default of 63 on PostgreSQL 7.x.
       def table_alias_length

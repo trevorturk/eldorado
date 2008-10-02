@@ -7,13 +7,7 @@ module ActionView
     attr_reader :original_exception
 
     def initialize(template, assigns, original_exception)
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/template_error.rb
       @template, @assigns, @original_exception = template, assigns.dup, original_exception
-=======
-      @base_path = template.base_path
-      @assigns, @source, @original_exception = assigns.dup, template.source, original_exception
-      @file_path = template.filename
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/template_error.rb
       @backtrace = compute_backtrace
     end
 

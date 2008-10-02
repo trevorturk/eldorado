@@ -54,11 +54,7 @@ class PostsControllerTest < ActionController::TestCase
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 30
     assert_equal topic.last_page, 1
-<<<<<<< HEAD:test/functional/posts_controller_test.rb
-    assert_redirected_to 'topics/1?page=1#p8'
-=======
     assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p' + Post.last.id.to_s
->>>>>>> i18n:test/functional/posts_controller_test.rb
     post :create, :post => { :topic_id => "1", :body => "this is a test!" }  
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 31
@@ -151,11 +147,7 @@ class PostsControllerTest < ActionController::TestCase
 
   def test_locate_action_should_work
     get :topic, :id => 1
-<<<<<<< HEAD:test/functional/posts_controller_test.rb
-    assert_redirected_to 'topics/1?page=1#p8'
-=======
     assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p1'
->>>>>>> i18n:test/functional/posts_controller_test.rb
   end
   
   def test_quote_action_should_work
@@ -193,7 +185,6 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal old_post_count+1, Post.count
   end
   
-<<<<<<< HEAD:test/functional/posts_controller_test.rb
   def test_should_work_when_quoting_a_post
     # quote an existing post
     # see new post template
@@ -207,12 +198,5 @@ class PostsControllerTest < ActionController::TestCase
     get :index, :user_id => users(:noposts).id
     assert_response :success
   end
-=======
-  # def test_should_work_when_quoting_a_post
-  #   quote an existing post
-  #   see new post template
-  #   post object should be a new post
-  #   body of new post should be body of quoted post
-  # end
->>>>>>> i18n:test/functional/posts_controller_test.rb
+
 end

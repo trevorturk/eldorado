@@ -109,13 +109,8 @@ module ActiveResource
   #
   # For obvious security reasons, it is probably best if such services are available
   # over HTTPS.
-<<<<<<< HEAD:vendor/rails/activeresource/lib/active_resource/base.rb
   #
   # Note: Some values cannot be provided in the URL passed to site.  e.g. email addresses
-=======
-  # 
-  # Note: Some values cannot be provided in the URL passed to site.  e.g. email addresses 
->>>>>>> i18n:vendor/rails/activeresource/lib/active_resource/base.rb
   # as usernames.  In those situations you should use the separate user and password option.
   # == Errors & Validation
   #
@@ -300,11 +295,7 @@ module ActiveResource
 
       # Returns the current format, default is ActiveResource::Formats::XmlFormat.
       def format
-<<<<<<< HEAD:vendor/rails/activeresource/lib/active_resource/base.rb
         read_inheritable_attribute(:format) || ActiveResource::Formats[:xml]
-=======
-        read_inheritable_attribute("format") || ActiveResource::Formats[:xml]
->>>>>>> i18n:vendor/rails/activeresource/lib/active_resource/base.rb
       end
 
       # Sets the number of seconds after which requests to the REST API should time out.

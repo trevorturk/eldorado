@@ -75,7 +75,7 @@ class CategoriesControllerTest < ActionController::TestCase
   
   def test_should_update_category_if_admin
     login_as :Administrator
-    put :update, :id => 1, :category => { :id => 1, :name => 'update works!' }
+    put :update, :id => 1, :category => { :name => 'update works!' }
     categories(:one).reload
     assert_redirected_to category_path(categories(:one))
     assert_equal categories(:one).name, 'update works!'

@@ -95,7 +95,6 @@ class InflectorTest < Test::Unit::TestCase
   def test_tableize
     ClassNameToTableName.each do |class_name, table_name|
       assert_equal(table_name, ActiveSupport::Inflector.tableize(class_name))
-<<<<<<< HEAD:vendor/rails/activesupport/test/inflector_test.rb
     end
   end
 
@@ -108,8 +107,6 @@ class InflectorTest < Test::Unit::TestCase
   def test_parameterize_with_custom_separator
     StringToParameterized.each do |some_string, parameterized_string|
       assert_equal(parameterized_string.gsub('-', '_'), ActiveSupport::Inflector.parameterize(some_string, '_'))
-=======
->>>>>>> i18n:vendor/rails/activesupport/test/inflector_test.rb
     end
   end
 

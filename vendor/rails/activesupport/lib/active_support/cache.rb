@@ -39,13 +39,6 @@ module ActiveSupport
     class Store
       cattr_accessor :logger
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/cache.rb
-=======
-      def threadsafe!
-        extend ThreadSafety
-      end
-
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/cache.rb
       def silence!
         @silence = true
         self
@@ -118,23 +111,6 @@ module ActiveSupport
           logger.debug("Cache #{operation}: #{key}#{options ? " (#{options.inspect})" : ""}") if logger && !@silence && !@logger_off
         end
     end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/cache.rb
-=======
-
-    module ThreadSafety #:nodoc:
-      def self.extended(object) #:nodoc:
-        object.instance_variable_set(:@mutex, Mutex.new)
-      end
-
-      %w(read write delete delete_matched exist? increment decrement).each do |method|
-        module_eval <<-EOS, __FILE__, __LINE__
-          def #{method}(*args)
-            @mutex.synchronize { super }
-          end
-        EOS
-      end
-    end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/cache.rb
   end
 end
 

@@ -1,6 +1,5 @@
 *Edge*
 
-<<<<<<< HEAD:vendor/rails/actionpack/CHANGELOG
 * Set HttpOnly for the cookie session store's cookie.  #1046 
 
 * Added FormTagHelper#image_submit_tag confirm option #784 [Alastair Brunton]
@@ -57,12 +56,9 @@
 
 * AbstractRequest.relative_url_root is no longer automatically configured by a HTTP header. It can now be set in your configuration environment with config.action_controller.relative_url_root [Josh Peek]
 
-=======
->>>>>>> i18n:vendor/rails/actionpack/CHANGELOG
 * Update Prototype to 1.6.0.2 #599 [Patrick Joyce]
 
 * Conditional GET utility methods.  [Jeremy Kemper]
-<<<<<<< HEAD:vendor/rails/actionpack/CHANGELOG
     response.last_modified = @post.updated_at
     response.etag = [:admin, @post, current_user]
 
@@ -71,10 +67,6 @@
     else
       # render ...
     end
-=======
-  * etag!([:admin, post, current_user]) sets the ETag response header and returns head(:not_modified) if it matches the If-None-Match request header.
-  * last_modified!(post.updated_at) sets Last-Modified and returns head(:not_modified) if it's no later than If-Modified-Since.
->>>>>>> i18n:vendor/rails/actionpack/CHANGELOG
 
 * All 2xx requests are considered successful [Josh Peek]
 

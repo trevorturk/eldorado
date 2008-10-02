@@ -17,28 +17,15 @@ module ActiveSupport
         else
           { :benchmark => false,
             :runs => 1,
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
             :min_percent => 0.01,
-=======
-            :min_percent => 0.02,
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
             :metrics => [:process_time, :memory, :objects],
             :formats => [:flat, :graph_html, :call_tree],
             :output => 'tmp/performance' }
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         end.freeze
-=======
-        end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
 
       def self.included(base)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         base.superclass_delegating_accessor :profile_options
         base.profile_options = DEFAULTS
-=======
-        base.class_inheritable_hash :profile_options
-        base.profile_options = DEFAULTS.dup
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
       end
 
       def full_test_name
@@ -52,21 +39,12 @@ module ActiveSupport
         @_result = result
 
         run_warmup
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         if profile_options && metrics = profile_options[:metrics]
           metrics.each do |metric_name|
             if klass = Metrics[metric_name.to_sym]
               run_profile(klass.new)
               result.add_run
             end
-=======
-        profile_options[:metrics].each do |metric_name|
-          if klass = Metrics[metric_name.to_sym]
-            run_profile(klass.new)
-            result.add_run
-          else
-            $stderr.puts '%20s: unsupported' % metric_name.to_s
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           end
         end
 
@@ -94,21 +72,13 @@ module ActiveSupport
 
       protected
         def run_warmup
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           GC.start
-=======
-          5.times { GC.start }
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
 
           time = Metrics::Time.new
           run_test(time, :benchmark)
           puts "%s (%s warmup)" % [full_test_name, time.format(time.total)]
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           GC.start
-=======
-          5.times { GC.start }
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         end
 
         def run_profile(metric)
@@ -194,20 +164,14 @@ module ActiveSupport
       end
 
       class Profiler < Performer
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         def initialize(*args)
           super
           @supported = @metric.measure_mode rescue false
         end
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         def run
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           return unless @supported
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           RubyProf.measure_mode = @metric.measure_mode
           RubyProf.start
           RubyProf.pause
@@ -216,7 +180,6 @@ module ActiveSupport
           @total = @data.threads.values.sum(0) { |method_infos| method_infos.sort.last.total_time }
         end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         def report
           if @supported
             super
@@ -225,14 +188,9 @@ module ActiveSupport
           end
         end
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         def record
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           return unless @supported
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           klasses = profile_options[:formats].map { |f| RubyProf.const_get("#{f.to_s.camelize}Printer") }.compact
 
           klasses.each do |klass|
@@ -261,12 +219,7 @@ module ActiveSupport
 
       module Metrics
         def self.[](name)
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           const_get(name.to_s.camelize)
-=======
-          klass = const_get(name.to_s.camelize)
-          klass if klass::Mode
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
         rescue NameError
           nil
         end
@@ -313,7 +266,6 @@ module ActiveSupport
               ensure
                 GC.disable_stats
               end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
             elsif defined?(GC::Profiler)
               def with_gc_stats
                 GC.start
@@ -324,8 +276,6 @@ module ActiveSupport
                 GC::Profiler.disable
                 GC.enable
               end
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
             else
               def with_gc_stats
                 yield
@@ -386,11 +336,7 @@ module ActiveSupport
               RubyProf.measure_memory / 1024.0
             end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           # Ruby 1.8 + railsbench patch
-=======
-          # Ruby 1.8 + adymo patch
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           elsif GC.respond_to?(:allocated_size)
             def measure
               GC.allocated_size / 1024.0
@@ -402,21 +348,17 @@ module ActiveSupport
               GC.heap_info['heap_current_memory'] / 1024.0
             end
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           # Ruby 1.9 with total_malloc_allocated_size patch
           elsif GC.respond_to?(:malloc_total_allocated_size)
             def measure
               GC.total_malloc_allocated_size / 1024.0
             end
 
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           # Ruby 1.9 unpatched
           elsif GC.respond_to?(:malloc_allocated_size)
             def measure
               GC.malloc_allocated_size / 1024.0
             end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
 
           # Ruby 1.9 + GC profiler patch
           elsif defined?(GC::Profiler)
@@ -427,8 +369,6 @@ module ActiveSupport
               GC.disable
               kb
             end
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           end
 
           def format(measurement)
@@ -443,16 +383,12 @@ module ActiveSupport
             def measure
               RubyProf.measure_allocations
             end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
 
           # Ruby 1.8 + railsbench patch
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           elsif ObjectSpace.respond_to?(:allocated_objects)
             def measure
               ObjectSpace.allocated_objects
             end
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/testing/performance.rb
 
           # Ruby 1.9 + GC profiler patch
           elsif defined?(GC::Profiler)
@@ -464,8 +400,6 @@ module ActiveSupport
               GC.disable
               count
             end
-=======
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/testing/performance.rb
           end
 
           def format(measurement)

@@ -69,29 +69,19 @@ module ActionView
       #  number_to_currency(1234567890.50, :unit => "&pound;", :separator => ",", :delimiter => "", :format => "%n %u")
       #  # => 1234567890,50 &pound;
       def number_to_currency(number, options = {})
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/number_helper.rb
         options.symbolize_keys!
 
         defaults  = I18n.translate(:'number.format', :locale => options[:locale], :raise => true) rescue {}
         currency  = I18n.translate(:'number.currency.format', :locale => options[:locale], :raise => true) rescue {}
         defaults  = defaults.merge(currency)
 
-=======
-        options  = options.symbolize_keys
-        defaults = I18n.translate(:'currency.format', :locale => options[:locale]) || {}
-                
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/number_helper.rb
         precision = options[:precision] || defaults[:precision]
         unit      = options[:unit]      || defaults[:unit]
         separator = options[:separator] || defaults[:separator]
         delimiter = options[:delimiter] || defaults[:delimiter]
         format    = options[:format]    || defaults[:format]
         separator = '' if precision == 0
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/number_helper.rb
 
-=======
-        
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/number_helper.rb
         begin
           format.gsub(/%n/, number_with_precision(number,
             :precision => precision,

@@ -558,11 +558,7 @@ module ActionView
                           [-\w]+                   # subdomain or domain
                           (?:\.[-\w]+)*            # remaining subdomains or domain
                           (?::\d+)?                # port
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/text_helper.rb
                           (?:/(?:[~\w\+@%=\(\)-]|(?:[,.;:'][^\s$]))*)* # path
-=======
-                          (?:/(?:(?:[~\w\+@%=\(\)-]|(?:[,.;:'][^\s$])))*)* # path
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/text_helper.rb
                           (?:\?[\w\+@%&=.;-]+)?     # query string
                           (?:\#[\w\-]*)?           # trailing anchor
                         )

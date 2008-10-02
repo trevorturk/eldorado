@@ -165,11 +165,7 @@ uses_mocha 'polymorphic URL helpers' do
     def test_nesting_with_array_containing_singleton_resource_and_format_option
       @tag = Tag.new
       @tag.save
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/polymorphic_routes_test.rb
       expects(:formatted_article_response_tag_url).with(@article, @tag, :pdf)
-=======
-      expects(:article_response_tag_url).with(@article, @tag, :pdf)
->>>>>>> i18n:vendor/rails/actionpack/test/controller/polymorphic_routes_test.rb
       polymorphic_url([@article, :response, @tag], :format => :pdf)
     end
 

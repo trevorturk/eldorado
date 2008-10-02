@@ -324,12 +324,6 @@ module ActionView
             value == selected
           end
         end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/form_options_helper.rb
-=======
-
-        # All the countries included in the country_options output.
-        COUNTRIES = ActiveSupport::Deprecation::DeprecatedConstantProxy.new 'COUNTRIES', 'ActionView::Helpers::FormCountryHelper::COUNTRIES'
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/form_options_helper.rb
     end
 
     class InstanceTag #:nodoc:

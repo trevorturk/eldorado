@@ -16,7 +16,7 @@
     <p class="label"><label for="user_signature">Signature</label></p>
     <p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
     <p class="label"><label for="user_time_zone">Timezone</label></p>
-    <p><%= f.time_zone_select :time_zone, TimeZone.us_zones %></p>
+    <p><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp; 
       <%= link_to 'Delete', confirm_delete_user_path %> &nbsp;

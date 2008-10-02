@@ -84,14 +84,11 @@ class RenderPartialWithRecordIdentificationTest < ActiveRecordTestCase
     get :render_with_record_collection
     assert_template 'developers/_developer'
     assert_equal 'DavidJamisfixture_3fixture_4fixture_5fixture_6fixture_7fixture_8fixture_9fixture_10Jamis', @response.body
-<<<<<<< HEAD:vendor/rails/actionpack/test/activerecord/render_partial_with_record_identification_test.rb
   end
 
   def test_render_with_record_collection_and_spacer_template
     get :render_with_record_collection_and_spacer_template
     assert_equal 'Active Recordonly partialActive Controller', @response.body
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/activerecord/render_partial_with_record_identification_test.rb
   end
 
   def test_rendering_partial_with_has_one_association

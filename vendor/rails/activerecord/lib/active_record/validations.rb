@@ -21,13 +21,8 @@ module ActiveRecord
     
     class << self
       def default_error_messages
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
         ActiveSupport::Deprecation.warn("ActiveRecord::Errors.default_error_messages has been deprecated. Please use I18n.translate('activerecord.errors.messages').")
         I18n.translate 'activerecord.errors.messages'
-=======
-        ActiveSupport::Deprecation.warn("ActiveRecord::Errors.default_error_messages has been deprecated. Please use I18n.translate('active_record.error_messages').")
-        I18n.translate 'active_record.error_messages'
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
       end
     end
 
@@ -46,36 +41,21 @@ module ActiveRecord
     # Adds an error message (+messsage+) to the +attribute+, which will be returned on a call to <tt>on(attribute)</tt>
     # for the same attribute and ensure that this error object returns false when asked if <tt>empty?</tt>. More than one
     # error can be added to the same +attribute+ in which case an array will be returned on a call to <tt>on(attribute)</tt>.
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
     # If no +messsage+ is supplied, :invalid is assumed.
     # If +message+ is a Symbol, it will be translated, using the appropriate scope (see translate_error).
     def add(attribute, message = nil, options = {})
       message ||= :invalid
       message = generate_message(attribute, message, options) if message.is_a?(Symbol)
-=======
-    # If no +msg+ is supplied, "invalid" is assumed.
-    def add(attribute, message = nil)
-      message ||= I18n.translate :"active_record.error_messages.invalid"
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
       @errors[attribute.to_s] ||= []
       @errors[attribute.to_s] << message
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
     end
-=======
-    end    
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
 
     # Will add an error message to each of the attributes in +attributes+ that is empty.
     def add_on_empty(attributes, custom_message = nil)
       for attr in [attributes].flatten
         value = @base.respond_to?(attr.to_s) ? @base.send(attr.to_s) : @base[attr.to_s]
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
         is_empty = value.respond_to?(:empty?) ? value.empty? : false
         add(attr, :empty, :default => custom_message) unless !value.nil? && !is_empty
-=======
-        is_empty = value.respond_to?("empty?") ? value.empty? : false        
-        add(attr, generate_message(attr, :empty, :default => custom_message)) unless !value.nil? && !is_empty
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
       end
     end
 
@@ -83,15 +63,10 @@ module ActiveRecord
     def add_on_blank(attributes, custom_message = nil)
       for attr in [attributes].flatten
         value = @base.respond_to?(attr.to_s) ? @base.send(attr.to_s) : @base[attr.to_s]
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
         add(attr, :blank, :default => custom_message) if value.blank?
-=======
-        add(attr, generate_message(attr, :blank, :default => custom_message)) if value.blank?
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
       end
     end
     
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
     # Translates an error message in it's default scope (<tt>activerecord.errrors.messages</tt>).
     # Error messages are first looked up in <tt>models.MODEL.attributes.ATTRIBUTE.MESSAGE</tt>, if it's not there, 
     # it's looked up in <tt>models.MODEL.MESSAGE</tt> and if that is not there it returns the translation of the 
@@ -111,14 +86,7 @@ module ActiveRecord
     # <li>any default you provided through the +options+ hash (in the activerecord.errors scope)</li>
     # </ol>
     def generate_message(attribute, message = :invalid, options = {})
-=======
-    def generate_message(attr, key, options = {})
-      msgs = base_classes(@base.class).map{|klass| :"custom.#{klass.name.underscore}.#{attr}.#{key}"} 
-      msgs << options[:default] if options[:default]
-      msgs << key
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
 
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
       message, options[:default] = options[:default], message if options[:default].is_a?(Symbol)
 
       defaults = @base.class.self_and_descendents_from_active_record.map do |klass| 
@@ -140,9 +108,6 @@ module ActiveRecord
       }.merge(options)
 
       I18n.translate(key, options)
-=======
-      I18n.t nil, options.merge(:default => msgs, :scope => [:active_record, :error_messages])
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
     end
 
     # Returns true if the specified +attribute+ has errors associated with it.
@@ -238,15 +203,9 @@ module ActiveRecord
           if attr == "base"
             full_messages << message
           else
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
             #key = :"activerecord.att.#{@base.class.name.underscore.to_sym}.#{attr}" 
             attr_name = @base.class.human_attribute_name(attr)
             full_messages << attr_name + ' ' + message
-=======
-            key = :"active_record.human_attribute_names.#{@base.class.name.underscore.to_sym}.#{attr}" 
-            attr_name = I18n.translate(key, :locale => options[:locale], :default => @base.class.human_attribute_name(attr))
-            full_messages << attr_name + " " + message
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
           end
         end
       end
@@ -297,19 +256,6 @@ module ActiveRecord
       end
     end
     
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
-=======
-    protected
-      
-      # TODO maybe this should be on ActiveRecord::Base, maybe #self_and_descendents_from_active_record
-      def base_classes(klass)
-        classes = [klass]
-        while klass != klass.base_class  
-          classes << klass = klass.superclass
-        end
-        classes
-      end
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
   end
 
 
@@ -424,37 +370,6 @@ module ActiveRecord
                                   :equal_to => '==', :less_than => '<', :less_than_or_equal_to => '<=',
                                   :odd => 'odd?', :even => 'even?' }.freeze
 
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
-=======
-      # Adds a validation method or block to the class. This is useful when
-      # overriding the +validate+ instance method becomes too unwieldy and
-      # you're looking for more descriptive declaration of your validations.
-      #
-      # This can be done with a symbol pointing to a method:
-      #
-      #   class Comment < ActiveRecord::Base
-      #     validate :must_be_friends
-      #
-      #     def must_be_friends
-      #       errors.add_to_base("Must be friends to leave a comment") unless commenter.friend_of?(commentee)
-      #     end
-      #   end
-      #
-      # Or with a block which is passed the current record to be validated:
-      #
-      #   class Comment < ActiveRecord::Base
-      #     validate do |comment|
-      #       comment.must_be_friends
-      #     end
-      #
-      #     def must_be_friends
-      #       errors.add_to_base("Must be friends to leave a comment") unless commenter.friend_of?(commentee)
-      #     end
-      #   end
-      #
-      # This usage applies to +validate_on_create+ and +validate_on_update+ as well.
-
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
       # Validates each attribute against a block.
       #
       #   class Person < ActiveRecord::Base
@@ -523,12 +438,7 @@ module ActiveRecord
 
         validates_each(attr_names, configuration) do |record, attr_name, value|
           unless record.send("#{attr_name}_confirmation").nil? or value == record.send("#{attr_name}_confirmation")
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
             record.errors.add(attr_name, :confirmation, :default => configuration[:message]) 
-=======
-            message = record.errors.generate_message(attr_name, :confirmation, :default => configuration[:message])
-            record.errors.add(attr_name, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
           end
         end
       end
@@ -570,12 +480,7 @@ module ActiveRecord
 
         validates_each(attr_names,configuration) do |record, attr_name, value|
           unless value == configuration[:accept]
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
             record.errors.add(attr_name, :accepted, :default => configuration[:message]) 
-=======
-            message = record.errors.generate_message(attr_name, :accepted, :default => configuration[:message])
-            record.errors.add(attr_name, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
           end
         end
       end
@@ -621,15 +526,9 @@ module ActiveRecord
       #     validates_length_of :fax, :in => 7..32, :allow_nil => true
       #     validates_length_of :phone, :in => 7..32, :allow_blank => true
       #     validates_length_of :user_name, :within => 6..20, :too_long => "pick a shorter name", :too_short => "pick a longer name"
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
       #     validates_length_of :fav_bra_size, :minimum => 1, :too_short => "please enter at least {{count}} character"
       #     validates_length_of :smurf_leader, :is => 4, :message => "papa is spelled with {{count}} characters... don't play me."
       #     validates_length_of :essay, :minimum => 100, :too_short => "Your essay must be at least {{count}} words."), :tokenizer => lambda {|str| str.scan(/\w+/) }
-=======
-      #     validates_length_of :fav_bra_size, :minimum => 1, :too_short => "please enter at least %d character"
-      #     validates_length_of :smurf_leader, :is => 4, :message => "papa is spelled with %d characters... don't play me."
-      #     validates_length_of :essay, :minimum => 100, :too_short => "Your essay must be at least %d words."), :tokenizer => lambda {|str| str.scan(/\w+/) }
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
       #   end
       #
       # Configuration options:
@@ -640,15 +539,9 @@ module ActiveRecord
       # * <tt>:in</tt> - A synonym(or alias) for <tt>:within</tt>.
       # * <tt>:allow_nil</tt> - Attribute may be +nil+; skip validation.
       # * <tt>:allow_blank</tt> - Attribute may be blank; skip validation.
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
       # * <tt>:too_long</tt> - The error message if the attribute goes over the maximum (default is: "is too long (maximum is {{count}} characters)").
       # * <tt>:too_short</tt> - The error message if the attribute goes under the minimum (default is: "is too short (min is {{count}} characters)").
       # * <tt>:wrong_length</tt> - The error message if using the <tt>:is</tt> method and the attribute is the wrong size (default is: "is the wrong length (should be {{count}} characters)").
-=======
-      # * <tt>:too_long</tt> - The error message if the attribute goes over the maximum (default is: "is too long (maximum is %d characters)").
-      # * <tt>:too_short</tt> - The error message if the attribute goes under the minimum (default is: "is too short (min is %d characters)").
-      # * <tt>:wrong_length</tt> - The error message if using the <tt>:is</tt> method and the attribute is the wrong size (default is: "is the wrong length (should be %d characters)").
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
       # * <tt>:message</tt> - The error message to use for a <tt>:minimum</tt>, <tt>:maximum</tt>, or <tt>:is</tt> violation.  An alias of the appropriate <tt>too_long</tt>/<tt>too_short</tt>/<tt>wrong_length</tt> message.
       # * <tt>:on</tt> - Specifies when this validation is active (default is <tt>:save</tt>, other options <tt>:create</tt>, <tt>:update</tt>).
       # * <tt>:if</tt> - Specifies a method, proc or string to call to determine if the validation should
@@ -689,19 +582,9 @@ module ActiveRecord
             validates_each(attrs, options) do |record, attr, value|
               value = options[:tokenizer].call(value) if value.kind_of?(String)
               if value.nil? or value.size < option_value.begin
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
                 record.errors.add(attr, :too_short, :default => options[:too_short], :count => option_value.begin)
-=======
-                message = record.errors.generate_message(attr, :too_short, :default => options[:too_short], :count => option_value.begin)                
-                record.errors.add(attr, message)
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
               elsif value.size > option_value.end
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
                 record.errors.add(attr, :too_long, :default => options[:too_long], :count => option_value.end)
-=======
-                message = record.errors.generate_message(attr, :too_long, :default => options[:too_long], :count => option_value.end)
-                record.errors.add(attr, message)
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
               end
             end
           when :is, :minimum, :maximum
@@ -716,12 +599,7 @@ module ActiveRecord
               unless !value.nil? and value.size.method(validity_checks[option])[option_value]
                 key = message_options[option]
                 custom_message = options[:message] || options[key]
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
                 record.errors.add(attr, key, :default => custom_message, :count => option_value) 
-=======
-                message = record.errors.generate_message(attr, key, :default => custom_message, :count => option_value)
-                record.errors.add(attr, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
               end
             end
         end
@@ -816,34 +694,9 @@ module ActiveRecord
             condition_params << record.send(:id)
           end
 
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
           finder_class.with_exclusive_scope do
             if finder_class.exists?([condition_sql, *condition_params])
               record.errors.add(attr_name, :taken, :default => configuration[:message], :value => value)
-=======
-          results = finder_class.with_exclusive_scope do
-            connection.select_all(
-              construct_finder_sql(
-                :select     => "#{connection.quote_column_name(attr_name)}",
-                :from       => "#{finder_class.quoted_table_name}",
-                :conditions => [condition_sql, *condition_params]
-              )
-            )
-          end
-
-          unless results.length.zero?
-            found = true
-
-            # As MySQL/Postgres don't have case sensitive SELECT queries, we try to find duplicate
-            # column in ruby when case sensitive option
-            if configuration[:case_sensitive] && finder_class.columns_hash[attr_name.to_s].text?
-              found = results.any? { |a| a[attr_name.to_s] == value.to_s }
-            end
-            
-            if found
-              message = record.errors.generate_message(attr_name, :taken, :default => configuration[:message])
-              record.errors.add(attr_name, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
             end
           end
         end
@@ -881,12 +734,7 @@ module ActiveRecord
 
         validates_each(attr_names, configuration) do |record, attr_name, value|
           unless value.to_s =~ configuration[:with]
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
             record.errors.add(attr_name, :invalid, :default => configuration[:message], :value => value) 
-=======
-            message = record.errors.generate_message(attr_name, :invalid, :default => configuration[:message], :value => value)
-            record.errors.add(attr_name, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
           end
         end
       end
@@ -920,12 +768,7 @@ module ActiveRecord
 
         validates_each(attr_names, configuration) do |record, attr_name, value|
           unless enum.include?(value)
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
             record.errors.add(attr_name, :inclusion, :default => configuration[:message], :value => value) 
-=======
-            message = record.errors.generate_message(attr_name, :inclusion, :default => configuration[:message], :value => value)
-            record.errors.add(attr_name, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
           end
         end
       end
@@ -959,12 +802,7 @@ module ActiveRecord
 
         validates_each(attr_names, configuration) do |record, attr_name, value|
           if enum.include?(value)
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
             record.errors.add(attr_name, :exclusion, :default => configuration[:message], :value => value) 
-=======
-            message = record.errors.generate_message(attr_name, :exclusion, :default => configuration[:message], :value => value)
-            record.errors.add(attr_name, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
           end
         end
       end
@@ -1006,12 +844,7 @@ module ActiveRecord
 
         validates_each(attr_names, configuration) do |record, attr_name, value|
           unless (value.is_a?(Array) ? value : [value]).inject(true) { |v, r| (r.nil? || r.valid?) && v }
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
             record.errors.add(attr_name, :invalid, :default => configuration[:message], :value => value)
-=======
-            message = record.errors.generate_message(attr_name, :invalid, :default => configuration[:message], :value => value)
-            record.errors.add(attr_name, message)
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
           end
         end
       end
@@ -1060,12 +893,7 @@ module ActiveRecord
 
           if configuration[:only_integer]
             unless raw_value.to_s =~ /\A[+-]?\d+\Z/
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
               record.errors.add(attr_name, :not_a_number, :value => raw_value, :default => configuration[:message])
-=======
-              message = record.errors.generate_message(attr_name, :not_a_number, :value => raw_value, :default => configuration[:message])
-              record.errors.add(attr_name, message)
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
               next
             end
             raw_value = raw_value.to_i
@@ -1073,12 +901,7 @@ module ActiveRecord
             begin
               raw_value = Kernel.Float(raw_value)
             rescue ArgumentError, TypeError
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
               record.errors.add(attr_name, :not_a_number, :value => raw_value, :default => configuration[:message])
-=======
-              message = record.errors.generate_message(attr_name, :not_a_number, :value => raw_value, :default => configuration[:message])
-              record.errors.add(attr_name, message)
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
               next
             end
           end
@@ -1087,20 +910,10 @@ module ActiveRecord
             case option
               when :odd, :even
                 unless raw_value.to_i.method(ALL_NUMERICALITY_CHECKS[option])[]
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
                   record.errors.add(attr_name, option, :value => raw_value, :default => configuration[:message]) 
-=======
-                  message = record.errors.generate_message(attr_name, option, :value => raw_value, :default => configuration[:message])
-                  record.errors.add(attr_name, message) 
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
                 end
               else
-<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/validations.rb
                 record.errors.add(attr_name, option, :default => configuration[:message], :value => raw_value, :count => configuration[option]) unless raw_value.method(ALL_NUMERICALITY_CHECKS[option])[configuration[option]]
-=======
-                message = record.errors.generate_message(attr_name, option, :default => configuration[:message], :value => raw_value, :count => configuration[option])
-                record.errors.add(attr_name, message) unless raw_value.method(ALL_NUMERICALITY_CHECKS[option])[configuration[option]]
->>>>>>> i18n:vendor/rails/activerecord/lib/active_record/validations.rb
             end
           end
         end

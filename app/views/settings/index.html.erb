@@ -24,7 +24,7 @@
         <span class="detail">Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)</span>
       </p>
       <p class="label"><label for="setting_time_zone">Default Timezone</label></p>
-      <p><%= f.time_zone_select :time_zone, TimeZone.us_zones %></p>
+      <p><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></p>
       <p>
         <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp; 
         <%= link_to('Cancel', root_path) %> &nbsp;

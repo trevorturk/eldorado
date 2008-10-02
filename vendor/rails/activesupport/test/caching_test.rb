@@ -71,82 +71,33 @@ uses_mocha 'high-level cache store tests' do
   end
 end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
 class FileStoreTest < Test::Unit::TestCase
-=======
-class ThreadSafetyCacheStoreTest < Test::Unit::TestCase
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   def setup
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
     @cache = ActiveSupport::Cache.lookup_store(:file_store, Dir.pwd)
-=======
-    @cache = ActiveSupport::Cache.lookup_store(:memory_store).threadsafe!
-    @cache.write('foo', 'bar')
-
-    # No way to have mocha proxy to the original method
-    @mutex = @cache.instance_variable_get(:@mutex)
-    @mutex.instance_eval %(
-      def calls; @calls; end
-      def synchronize
-        @calls ||= 0
-        @calls += 1
-        yield
-      end
-    )
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   def test_should_read_and_write_strings
     @cache.write('foo', 'bar')
-=======
-  def test_read_is_synchronized
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
     assert_equal 'bar', @cache.read('foo')
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   ensure
     File.delete("foo.cache")
-=======
-    assert_equal 1, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   def test_should_read_and_write_hash
     @cache.write('foo', {:a => "b"})
     assert_equal({:a => "b"}, @cache.read('foo'))
   ensure
     File.delete("foo.cache")
-=======
-  def test_write_is_synchronized
-    @cache.write('foo', 'baz')
-    assert_equal 'baz', @cache.read('foo')
-    assert_equal 2, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   def test_should_read_and_write_nil
     @cache.write('foo', nil)
-=======
-  def test_delete_is_synchronized
-    assert_equal 'bar', @cache.read('foo')
-    @cache.delete('foo')
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
     assert_equal nil, @cache.read('foo')
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   ensure
     File.delete("foo.cache")
-=======
-    assert_equal 3, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
 end
-=======
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
 class MemoryStoreTest < Test::Unit::TestCase
   def setup
     @cache = ActiveSupport::Cache.lookup_store(:memory_store)
@@ -154,64 +105,25 @@ class MemoryStoreTest < Test::Unit::TestCase
 
   def test_should_read_and_write
     @cache.write('foo', 'bar')
-=======
-  def test_delete_matched_is_synchronized
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
     assert_equal 'bar', @cache.read('foo')
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
-=======
-    @cache.delete_matched(/foo/)
-    assert_equal nil, @cache.read('foo')
-    assert_equal 3, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   def test_fetch_without_cache_miss
     @cache.write('foo', 'bar')
-=======
-  def test_fetch_is_synchronized
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
     assert_equal 'bar', @cache.fetch('foo') { 'baz' }
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
-=======
-    assert_equal 'fu', @cache.fetch('bar') { 'fu' }
-    assert_equal 3, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   def test_fetch_with_cache_miss
     assert_equal 'baz', @cache.fetch('foo') { 'baz' }
-=======
-  def test_exist_is_synchronized
-    assert @cache.exist?('foo')
-    assert !@cache.exist?('bar')
-    assert_equal 2, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   def test_fetch_with_forced_cache_miss
     @cache.fetch('foo', :force => true) { 'bar' }
-=======
-  def test_increment_is_synchronized
-    @cache.write('foo_count', 1)
-    assert_equal 2, @cache.increment('foo_count')
-    assert_equal 4, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 
-<<<<<<< HEAD:vendor/rails/activesupport/test/caching_test.rb
   def test_store_objects_should_be_immutable
     @cache.write('foo', 'bar')
     assert_raise(ActiveSupport::FrozenObjectError) { @cache.read('foo').gsub!(/.*/, 'baz') }
     assert_equal 'bar', @cache.read('foo')
-=======
-  def test_decrement_is_synchronized
-    @cache.write('foo_count', 1)
-    assert_equal 0, @cache.decrement('foo_count')
-    assert_equal 4, @mutex.calls
->>>>>>> i18n:vendor/rails/activesupport/test/caching_test.rb
   end
 end

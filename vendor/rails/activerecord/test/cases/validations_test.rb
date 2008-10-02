@@ -882,11 +882,7 @@ class ValidationsTest < ActiveRecord::TestCase
 
   def test_validates_length_with_globally_modified_error_message
     ActiveSupport::Deprecation.silence do
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/validations_test.rb
       ActiveRecord::Errors.default_error_messages[:too_short] = 'tu est trops petit hombre {{count}}'
-=======
-      ActiveRecord::Errors.default_error_messages[:too_short] = 'tu est trops petit hombre %d'
->>>>>>> i18n:vendor/rails/activerecord/test/cases/validations_test.rb
     end
     Topic.validates_length_of :title, :minimum => 10
     t = Topic.create(:title => 'too short')
@@ -1094,11 +1090,7 @@ class ValidationsTest < ActiveRecord::TestCase
   end
 
   def test_validates_length_of_with_block
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/validations_test.rb
     Topic.validates_length_of :content, :minimum => 5, :too_short=>"Your essay must be at least {{count}} words.",
-=======
-    Topic.validates_length_of :content, :minimum => 5, :too_short=>"Your essay must be at least %d words.", 
->>>>>>> i18n:vendor/rails/activerecord/test/cases/validations_test.rb
                                         :tokenizer => lambda {|str| str.scan(/\w+/) }
     t = Topic.create!(:content => "this content should be long enough")
     assert t.valid?
@@ -1447,13 +1439,8 @@ class ValidatesNumericalityTest < ActiveRecord::TestCase
   def test_validates_numericality_of_with_nil_allowed
     Topic.validates_numericality_of :approved, :allow_nil => true
 
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/validations_test.rb
     invalid!(JUNK)
     valid!(NIL + BLANK + FLOATS + INTEGERS + BIGDECIMAL + INFINITY)
-=======
-    invalid!(BLANK + JUNK)
-    valid!(NIL + FLOATS + INTEGERS + BIGDECIMAL + INFINITY)
->>>>>>> i18n:vendor/rails/activerecord/test/cases/validations_test.rb
   end
 
   def test_validates_numericality_of_with_integer_only
@@ -1466,13 +1453,8 @@ class ValidatesNumericalityTest < ActiveRecord::TestCase
   def test_validates_numericality_of_with_integer_only_and_nil_allowed
     Topic.validates_numericality_of :approved, :only_integer => true, :allow_nil => true
 
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/validations_test.rb
     invalid!(JUNK + FLOATS + BIGDECIMAL + INFINITY)
     valid!(NIL + BLANK + INTEGERS)
-=======
-    invalid!(BLANK + JUNK + FLOATS + BIGDECIMAL + INFINITY)
-    valid!(NIL + INTEGERS)
->>>>>>> i18n:vendor/rails/activerecord/test/cases/validations_test.rb
   end
 
   def test_validates_numericality_with_greater_than

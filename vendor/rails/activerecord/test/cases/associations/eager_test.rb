@@ -21,11 +21,7 @@ class EagerAssociationTest < ActiveRecord::TestCase
   fixtures :posts, :comments, :authors, :categories, :categories_posts,
             :companies, :accounts, :tags, :taggings, :people, :readers,
             :owners, :pets, :author_favorites, :jobs, :references, :subscribers, :subscriptions, :books,
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/associations/eager_test.rb
             :developers, :projects, :developers_projects
-=======
-            :developers, :projects
->>>>>>> i18n:vendor/rails/activerecord/test/cases/associations/eager_test.rb
 
   def test_loading_with_one_association
     posts = Post.find(:all, :include => :comments)
@@ -118,6 +114,13 @@ class EagerAssociationTest < ActiveRecord::TestCase
   def test_loading_from_an_association
     posts = authors(:david).posts.find(:all, :include => :comments, :order => "posts.id")
     assert_equal 2, posts.first.comments.size
+  end
+
+  def test_loading_from_an_association_that_has_a_hash_of_conditions
+    assert_nothing_raised do
+      Author.find(:all, :include => :hello_posts_with_hash_conditions)
+    end
+    assert !Author.find(authors(:david).id, :include => :hello_posts_with_hash_conditions).hello_posts.empty?
   end
 
   def test_loading_with_no_associations

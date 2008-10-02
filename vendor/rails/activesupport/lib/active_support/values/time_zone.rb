@@ -124,11 +124,7 @@ module ActiveSupport
         "Kathmandu"                    => "Asia/Katmandu",
         "Astana"                       => "Asia/Dhaka",
         "Dhaka"                        => "Asia/Dhaka",
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/values/time_zone.rb
         "Sri Jayawardenepura"          => "Asia/Colombo",
-=======
-        "Sri Jayawardenepura"          => "Asia/Dhaka",
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support/values/time_zone.rb
         "Almaty"                       => "Asia/Almaty",
         "Novosibirsk"                  => "Asia/Novosibirsk",
         "Rangoon"                      => "Asia/Rangoon",

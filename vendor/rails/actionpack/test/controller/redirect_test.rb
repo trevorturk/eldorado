@@ -162,15 +162,12 @@ class RedirectTest < Test::Unit::TestCase
     assert_equal "http://www.example.com/coming/from", redirect_to_url
   end
 
-<<<<<<< HEAD:vendor/rails/actionpack/test/controller/redirect_test.rb
   def test_simple_redirect_using_options
     get :host_redirect
     assert_response :redirect
     assert_redirected_to :action => "other_host", :only_path => false, :host => 'other.test.host'
   end
 
-=======
->>>>>>> i18n:vendor/rails/actionpack/test/controller/redirect_test.rb
   def test_module_redirect
     get :module_redirect
     assert_response :redirect

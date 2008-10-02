@@ -54,15 +54,9 @@ require 'active_support/base64'
 
 require 'active_support/time_with_zone'
 
-<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support.rb
 require 'active_support/secure_random'
 
 I18n.load_path << File.dirname(__FILE__) + '/active_support/locale/en-US.yml'
-=======
-I18n.backend.populate do
-  require 'active_support/locale/en-US.rb'
-end
->>>>>>> i18n:vendor/rails/activesupport/lib/active_support.rb
 
 Inflector = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('Inflector', 'ActiveSupport::Inflector')
 Dependencies = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('Dependencies', 'ActiveSupport::Dependencies')

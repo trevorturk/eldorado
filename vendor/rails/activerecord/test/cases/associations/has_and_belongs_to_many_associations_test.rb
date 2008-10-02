@@ -731,7 +731,6 @@ class HasAndBelongsToManyAssociationsTest < ActiveRecord::TestCase
     # due to Unknown column 'authors.id'
     assert Category.find(1).posts_with_authors_sorted_by_author_id.find_by_title('Welcome to the weblog')
   end
-<<<<<<< HEAD:vendor/rails/activerecord/test/cases/associations/has_and_belongs_to_many_associations_test.rb
 
   def test_counting_on_habtm_association_and_not_array
     david = Developer.find(1)
@@ -748,6 +747,4 @@ class HasAndBelongsToManyAssociationsTest < ActiveRecord::TestCase
       end
     end
   end
-=======
->>>>>>> i18n:vendor/rails/activerecord/test/cases/associations/has_and_belongs_to_many_associations_test.rb
 end

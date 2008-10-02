@@ -104,11 +104,7 @@ module ActionView
       ASSETS_DIR      = defined?(Rails.public_path) ? Rails.public_path : "public"
       JAVASCRIPTS_DIR = "#{ASSETS_DIR}/javascripts"
       STYLESHEETS_DIR = "#{ASSETS_DIR}/stylesheets"
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
       JAVASCRIPT_DEFAULT_SOURCES = ['prototype', 'effects', 'dragdrop', 'controls'].freeze unless const_defined?(:JAVASCRIPT_DEFAULT_SOURCES)
-=======
-      JAVASCRIPT_DEFAULT_SOURCES = ['prototype', 'effects', 'dragdrop', 'controls'].map(&:to_s).freeze unless const_defined?(:JAVASCRIPT_DEFAULT_SOURCES)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
       # Returns a link tag that browsers and news readers can use to auto-detect
       # an RSS or ATOM feed. The +type+ can either be <tt>:rss</tt> (default) or
@@ -253,26 +249,16 @@ module ActionView
           joined_javascript_name = (cache == true ? "all" : cache) + ".js"
           joined_javascript_path = File.join(JAVASCRIPTS_DIR, joined_javascript_name)
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           unless File.exists?(joined_javascript_path)
             JavaScriptSources.create(self, @controller, sources, recursive).write_asset_file_contents(joined_javascript_path)
           end
-=======
-          write_asset_file_contents(joined_javascript_path, compute_javascript_paths(sources, recursive)) unless File.exists?(joined_javascript_path)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           javascript_src_tag(joined_javascript_name, options)
         else
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           JavaScriptSources.create(self, @controller, sources, recursive).expand_sources.collect { |source|
             javascript_src_tag(source, options)
           }.join("\n")
-=======
-          expand_javascript_sources(sources, recursive).collect { |source| javascript_src_tag(source, options) }.join("\n")
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
         end
       end
-
-      @@javascript_expansions = { :defaults => JAVASCRIPT_DEFAULT_SOURCES.dup }
 
       # Register one or more javascript files to be included when <tt>symbol</tt>
       # is passed to <tt>javascript_include_tag</tt>. This method is typically intended
@@ -288,8 +274,6 @@ module ActionView
       def self.register_javascript_expansion(expansions)
         JavaScriptSources.expansions.merge!(expansions)
       end
-
-      @@stylesheet_expansions = {}
 
       # Register one or more stylesheet files to be included when <tt>symbol</tt>
       # is passed to <tt>stylesheet_link_tag</tt>. This method is typically intended
@@ -405,22 +389,14 @@ module ActionView
           joined_stylesheet_name = (cache == true ? "all" : cache) + ".css"
           joined_stylesheet_path = File.join(STYLESHEETS_DIR, joined_stylesheet_name)
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           unless File.exists?(joined_stylesheet_path)
             StylesheetSources.create(self, @controller, sources, recursive).write_asset_file_contents(joined_stylesheet_path)
           end
-=======
-          write_asset_file_contents(joined_stylesheet_path, compute_stylesheet_paths(sources, recursive)) unless File.exists?(joined_stylesheet_path)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           stylesheet_tag(joined_stylesheet_name, options)
         else
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           StylesheetSources.create(self, @controller, sources, recursive).expand_sources.collect { |source|
             stylesheet_tag(source, options)
           }.join("\n")
-=======
-          expand_stylesheet_sources(sources, recursive).collect { |source| stylesheet_tag(source, options) }.join("\n")
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
         end
       end
 
@@ -491,7 +467,6 @@ module ActionView
       end
 
       private
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
         def javascript_src_tag(source, options)
           content_tag("script", "", { "type" => Mime::JS, "src" => path_to_javascript(source) }.merge(options))
         end
@@ -511,9 +486,6 @@ module ActionView
             nil
           end
         end
-=======
-        COMPUTED_PUBLIC_PATHS = ActiveSupport::Cache::MemoryStore.new.silence!.threadsafe!
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
         module JavaScriptAsset
           DIRECTORY = 'javascripts'.freeze
@@ -571,7 +543,6 @@ module ActionView
 
           ProtocolRegexp = %r{^[-a-z]+://}.freeze
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           def initialize(template, controller, source, include_host = true)
             # NOTE: The template arg is temporarily needed for a legacy plugin
             # hook that is expected to call rewrite_asset_path on the
@@ -595,11 +566,6 @@ module ActionView
           def contents
             File.read(asset_file_path)
           end
-=======
-          source = COMPUTED_PUBLIC_PATHS.fetch(cache_key) do
-            begin
-              source += ".#{ext}" if ext && File.extname(source).blank? || File.exist?(File.join(ASSETS_DIR, dir, "#{source}.#{ext}"))
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
           def mtime
             File.mtime(asset_file_path)
@@ -670,19 +636,9 @@ module ActionView
                 else
                   (host =~ /%d/) ? host % (source.hash % 4) : host
                 end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
-=======
-
-                rewrite_asset_path(source)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
               end
             end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
-=======
-          end
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
             # Use the RAILS_ASSET_ID environment variable or the source's
             # modification time as its cache-busting asset id.
             def rails_asset_id(source)
@@ -690,32 +646,14 @@ module ActionView
                 asset_id
               else
                 path = File.join(ASSETS_DIR, source)
-=======
-          if include_host && source !~ %r{^[-a-z]+://}
-            host = compute_asset_host(source)
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
                 if File.exist?(path)
                   File.mtime(path).to_i.to_s
                 else
                   ''
                 end
               end
-=======
-            if has_request && !host.blank? && host !~ %r{^[-a-z]+://}
-              host = "#{@controller.request.protocol}#{host}"
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
             end
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
-=======
-
-            "#{host}#{source}"
-          else
-            source
-          end
-        end
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
             # Break out the asset path rewrite in case plugins wish to put the asset id
             # someplace other than the query string.
@@ -749,29 +687,16 @@ module ActionView
         class AssetCollection
           extend ActiveSupport::Memoizable
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           Cache = {}
           CacheGuard = Mutex.new
-=======
-        def compute_javascript_paths(*args)
-          expand_javascript_sources(*args).collect { |source| compute_public_path(source, 'javascripts', 'js', false) }
-        end
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           def self.create(template, controller, sources, recursive)
             CacheGuard.synchronize do
               key = [self, sources, recursive]
               Cache[key] ||= new(template, controller, sources, recursive).freeze
             end
           end
-=======
-        def compute_stylesheet_paths(*args)
-          expand_stylesheet_sources(*args).collect { |source| compute_public_path(source, 'stylesheets', 'css', false) }
-        end
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           def initialize(template, controller, sources, recursive)
             # NOTE: The template arg is temporarily needed for a legacy plugin
             # hook. See NOTE under AssetTag#initialize for more details
@@ -779,37 +704,13 @@ module ActionView
             @controller = controller
             @sources = sources
             @recursive = recursive
-=======
-        def expand_javascript_sources(sources, recursive = false)
-          if sources.include?(:all)
-            all_javascript_files = collect_asset_files(JAVASCRIPTS_DIR, ('**' if recursive), '*.js')
-            @@all_javascript_sources ||= {}
-            @@all_javascript_sources[recursive] ||= ((determine_source(:defaults, @@javascript_expansions).dup & all_javascript_files) + all_javascript_files).uniq
-          else
-            expanded_sources = sources.collect do |source|
-              determine_source(source, @@javascript_expansions)
-            end.flatten
-            expanded_sources << "application" if sources.include?(:defaults) && File.exist?(File.join(JAVASCRIPTS_DIR, "application.js"))
-            expanded_sources
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           end
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           def write_asset_file_contents(joined_asset_path)
             FileUtils.mkdir_p(File.dirname(joined_asset_path))
             File.open(joined_asset_path, "w+") { |cache| cache.write(joined_contents) }
             mt = latest_mtime
             File.utime(mt, mt, joined_asset_path)
-=======
-        def expand_stylesheet_sources(sources, recursive)
-          if sources.first == :all
-            @@all_stylesheet_sources ||= {}
-            @@all_stylesheet_sources[recursive] ||= collect_asset_files(STYLESHEETS_DIR, ('**' if recursive), '*.css')
-          else
-            sources.collect do |source|
-              determine_source(source, @@stylesheet_expansions)
-            end.flatten
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           end
 
           private
@@ -886,24 +787,11 @@ module ActionView
             end
         end
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
         class StylesheetSources < AssetCollection
           include StylesheetAsset
-=======
-        def write_asset_file_contents(joined_asset_path, asset_paths)
-          FileUtils.mkdir_p(File.dirname(joined_asset_path))
-          File.open(joined_asset_path, "w+") { |cache| cache.write(join_asset_file_contents(asset_paths)) }
-        end
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           EXPANSIONS = {}
-=======
-        def collect_asset_files(*path)
-          dir = path.first
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
 
-<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
           def self.expansions
             EXPANSIONS
           end
@@ -917,11 +805,6 @@ module ActionView
             def tag_class
               StylesheetTag
             end
-=======
-          Dir[File.join(*path.compact)].collect do |file|
-            file[-(file.size - dir.size - 1)..-1].sub(/\.\w+$/, '')
-          end.sort
->>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/asset_tag_helper.rb
         end
     end
   end
