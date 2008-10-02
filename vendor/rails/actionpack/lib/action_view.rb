@@ -21,6 +21,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view.rb
 begin
   require 'active_support'
 rescue LoadError
@@ -34,7 +35,16 @@ end
 require 'action_view/template_handlers'
 require 'action_view/renderable'
 require 'action_view/renderable_partial'
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view.rb
+=======
+require 'action_view/template_handlers'
+require 'action_view/renderable'
+require 'action_view/renderable_partial'
+
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view.rb
 require 'action_view/template'
 require 'action_view/inline_template'
 require 'action_view/paths'
@@ -43,9 +53,15 @@ require 'action_view/base'
 require 'action_view/partials'
 require 'action_view/template_error'
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view.rb
 I18n.load_path << "#{File.dirname(__FILE__)}/action_view/locale/en-US.yml"
 
 require 'action_view/helpers'
+=======
+I18n.backend.populate do
+  require 'action_view/locale/en-US.rb'
+end
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view.rb
 
 ActionView::Base.class_eval do
   include ActionView::Partials

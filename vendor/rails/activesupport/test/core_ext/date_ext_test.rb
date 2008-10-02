@@ -198,6 +198,13 @@ class DateExtCalculationsTest < Test::Unit::TestCase
     assert_equal Time.local(2005,2,21,23,59,59), Date.new(2005,2,21).end_of_day
   end
 
+<<<<<<< HEAD:vendor/rails/activesupport/test/core_ext/date_ext_test.rb
+=======
+  def test_date_acts_like_date
+    assert Date.new.acts_like_date?
+  end
+
+>>>>>>> i18n:vendor/rails/activesupport/test/core_ext/date_ext_test.rb
   def test_xmlschema
     with_env_tz 'US/Eastern' do
       assert_match(/^1980-02-28T00:00:00-05:?00$/, Date.new(1980, 2, 28).xmlschema)
@@ -210,6 +217,7 @@ class DateExtCalculationsTest < Test::Unit::TestCase
     end
   end
 
+<<<<<<< HEAD:vendor/rails/activesupport/test/core_ext/date_ext_test.rb
   uses_mocha 'past?, today? and future?' do
     def test_today
       Date.stubs(:current).returns(Date.new(2000, 1, 1))
@@ -233,6 +241,8 @@ class DateExtCalculationsTest < Test::Unit::TestCase
     end
   end
 
+=======
+>>>>>>> i18n:vendor/rails/activesupport/test/core_ext/date_ext_test.rb
   uses_mocha 'TestDateCurrent' do
     def test_current_returns_date_today_when_zone_default_not_set
       with_env_tz 'US/Central' do
@@ -263,6 +273,7 @@ class DateExtCalculationsTest < Test::Unit::TestCase
     ensure
       old_tz ? ENV['TZ'] = old_tz : ENV.delete('TZ')
     end
+<<<<<<< HEAD:vendor/rails/activesupport/test/core_ext/date_ext_test.rb
 end
 
 class DateExtBehaviorTest < Test::Unit::TestCase
@@ -275,4 +286,6 @@ class DateExtBehaviorTest < Test::Unit::TestCase
       Date.today.freeze.inspect
     end
   end
+=======
+>>>>>>> i18n:vendor/rails/activesupport/test/core_ext/date_ext_test.rb
 end

@@ -175,7 +175,11 @@ module ActionView
         else
           objects = params.collect {|object_name| instance_variable_get("@#{object_name}") }.compact
         end
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
 
+=======
+        
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
         count  = objects.inject(0) {|sum, object| sum + object.errors.count }
         unless count.zero?
           html = {}
@@ -189,29 +193,57 @@ module ActionView
           end
           options[:object_name] ||= params.first
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
           I18n.with_options :locale => options[:locale], :scope => [:activerecord, :errors, :template] do |locale|
+=======
+          I18n.with_options :locale => options[:locale], :scope => [:active_record, :error] do |locale|
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
             header_message = if options.include?(:header_message)
               options[:header_message]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
             else
+=======
+            else 
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
               object_name = options[:object_name].to_s.gsub('_', ' ')
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
               object_name = I18n.t(object_name, :default => object_name, :scope => [:activerecord, :models], :count => 1)
               locale.t :header, :count => count, :model => object_name
+=======
+              object_name = I18n.t(object_name, :default => object_name)
+              locale.t :header_message, :count => count, :object_name => object_name
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
             end
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
             message = options.include?(:message) ? options[:message] : locale.t(:body)
+=======
+            message = options.include?(:message) ? options[:message] : locale.t(:message)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
             error_messages = objects.sum {|object| object.errors.full_messages.map {|msg| content_tag(:li, msg) } }.join
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
+=======
 
             contents = ''
             contents << content_tag(options[:header_tag] || :h2, header_message) unless header_message.blank?
             contents << content_tag(:p, message) unless message.blank?
             contents << content_tag(:ul, error_messages)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
+            contents = ''
+            contents << content_tag(options[:header_tag] || :h2, header_message) unless header_message.blank?
+            contents << content_tag(:p, message) unless message.blank?
+            contents << content_tag(:ul, error_messages)
+
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/helpers/active_record_helper.rb
             content_tag(:div, contents, html)
           end
         else
           ''
         end
       end
-
+      
       private
         def all_input_tags(record, record_name, options)
           input_block = options[:input_block] || default_input_block

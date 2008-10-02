@@ -6,7 +6,11 @@ module ActionView
       include Compilable
 
       def compile(template)
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/template_handlers/builder.rb
         "_set_controller_content_type(Mime::XML);" +
+=======
+        "set_controller_content_type(Mime::XML);" +
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/template_handlers/builder.rb
           "xml = ::Builder::XmlMarkup.new(:indent => 2);" +
           "self.output_buffer = xml.target!;" +
           template.source +

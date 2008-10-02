@@ -11,7 +11,10 @@ uses_mocha "Plugin Tests" do
       @gem_with_source  = Rails::GemDependency.new "hpricot", :source => "http://code.whytheluckystiff.net"
       @gem_with_version = Rails::GemDependency.new "hpricot", :version => "= 0.6"
       @gem_with_lib     = Rails::GemDependency.new "aws-s3", :lib => "aws/s3"
+<<<<<<< HEAD:vendor/rails/railties/test/gem_dependency_test.rb
       @gem_without_load  = Rails::GemDependency.new "hpricot", :lib => false
+=======
+>>>>>>> i18n:vendor/rails/railties/test/gem_dependency_test.rb
     end
 
     def test_configuration_adds_gem_dependency
@@ -37,7 +40,11 @@ uses_mocha "Plugin Tests" do
     end
 
     def test_gem_with_version_unpack_install_command
+<<<<<<< HEAD:vendor/rails/railties/test/gem_dependency_test.rb
       assert_equal ["unpack", "hpricot", "--version", '= 0.6'], @gem_with_version.unpack_command
+=======
+      assert_equal ["unpack", "hpricot", "--version", '"= 0.6"'], @gem_with_version.unpack_command
+>>>>>>> i18n:vendor/rails/railties/test/gem_dependency_test.rb
     end
 
     def test_gem_adds_load_paths

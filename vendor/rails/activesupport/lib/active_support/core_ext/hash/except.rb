@@ -10,7 +10,11 @@ module ActiveSupport #:nodoc:
       module Except
         # Returns a new hash without the given keys.
         def except(*keys)
+<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/hash/except.rb
           dup.except!(*keys)
+=======
+          clone.except!(*keys)
+>>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/hash/except.rb
         end
 
         # Replaces the hash without the given keys.

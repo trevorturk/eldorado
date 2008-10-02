@@ -109,17 +109,32 @@ module ActionController #:nodoc:
         update_options! options
       end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
       # override these to return true in appropriate subclass
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
       def before?
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
         false
+=======
+        self.class == BeforeFilter
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
       end
 
       def after?
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
         false
+=======
+        self.class == AfterFilter
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
       end
 
       def around?
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
         false
+=======
+        self.class == AroundFilter
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
       end
 
       # Make sets of strings from :only/:except options
@@ -171,10 +186,13 @@ module ActionController #:nodoc:
         :around
       end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
       def around?
         true
       end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
       def call(controller, &block)
         if should_run_callback?(controller)
           method = filter_responds_to_before_and_after? ? around_proc : self.method
@@ -199,8 +217,13 @@ module ActionController #:nodoc:
           Proc.new do |controller, action|
             method.before(controller)
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
             if controller.__send__(:performed?)
               controller.__send__(:halt_filter_chain, method, :rendered_or_redirected)
+=======
+            if controller.send!(:performed?)
+              controller.send!(:halt_filter_chain, method, :rendered_or_redirected)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
             else
               begin
                 action.call
@@ -217,14 +240,22 @@ module ActionController #:nodoc:
         :before
       end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
       def before?
         true
       end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
       def call(controller, &block)
         super
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
         if controller.__send__(:performed?)
           controller.__send__(:halt_filter_chain, method, :rendered_or_redirected)
+=======
+        if controller.send!(:performed?)
+          controller.send!(:halt_filter_chain, method, :rendered_or_redirected)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
         end
       end
     end
@@ -233,10 +264,13 @@ module ActionController #:nodoc:
       def type
         :after
       end
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/filters.rb
 
       def after?
         true
       end
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/filters.rb
     end
 
     # Filters enable controllers to run shared pre- and post-processing code for its actions. These filters can be used to do

@@ -131,10 +131,16 @@ class ComponentsTest < Test::Unit::TestCase
   end
 
   def test_component_redirect_redirects
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/components_test.rb
     assert_deprecated do
       get :calling_redirected
       assert_redirected_to :controller=>"callee", :action => "being_called"
     end
+=======
+    get :calling_redirected
+
+    assert_redirected_to :controller=>"callee", :action => "being_called"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/components_test.rb
   end
 
   def test_component_multiple_redirect_redirects

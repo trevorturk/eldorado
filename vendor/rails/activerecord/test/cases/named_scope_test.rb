@@ -196,6 +196,7 @@ class NamedScopeTest < ActiveRecord::TestCase
     end
   end
 
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/named_scope_test.rb
   def test_any_should_not_load_results
     topics = Topic.base
     assert_queries(2) do
@@ -219,6 +220,8 @@ class NamedScopeTest < ActiveRecord::TestCase
     assert_no_queries { assert topics.any? }
   end
 
+=======
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/named_scope_test.rb
   def test_should_build_with_proxy_options
     topic = Topic.approved.build({})
     assert topic.approved
@@ -244,6 +247,7 @@ class NamedScopeTest < ActiveRecord::TestCase
     assert topic.approved
     assert_equal 'lifo', topic.author_name
   end
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/named_scope_test.rb
 
   def test_find_all_should_behave_like_select
     assert_equal Topic.base.select(&:approved), Topic.base.find_all(&:approved)
@@ -277,4 +281,6 @@ class NamedScopeTest < ActiveRecord::TestCase
     post = Post.find(1)
     assert_equal post.comments.size, Post.scoped(:joins => join).scoped(:joins => join, :conditions => "posts.id = #{post.id}").size
   end
+=======
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/named_scope_test.rb
 end

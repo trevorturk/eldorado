@@ -1,5 +1,6 @@
 *Edge*
 
+<<<<<<< HEAD:vendor/rails/activerecord/CHANGELOG
 * Add Model#delete instance method, similar to Model.delete class method. #1086 [Hongli Lai]
 
 * MySQL: cope with quirky default values for not-null text columns.  #1043 [Frederick Cheung]
@@ -15,18 +16,55 @@
 * Changed benchmarks to be reported in milliseconds [DHH]
 
 * Connection pooling.  #936 [Nick Sieger]
-
-* Merge scoped :joins together instead of overwriting them. May expose scoping bugs in your code!  #501 [Andrew White]
-
-* before_save, before_validation and before_destroy callbacks that return false will now ROLLBACK the transaction.  Previously this would have been committed before the processing was aborted. #891 [Xavier Noria]
-
-* Transactional migrations for databases which support them.  #834 [divoxx, Adam Wiggins, Tarmo Tänav]
-
+=======
 * Set config.active_record.timestamped_migrations = false to have migrations with numeric prefix instead of UTC timestamp. #446. [Andrew Stone, Nik Wakelin]
+>>>>>>> i18n:vendor/rails/activerecord/CHANGELOG
 
+<<<<<<< HEAD:vendor/rails/activerecord/CHANGELOG
+* Merge scoped :joins together instead of overwriting them. May expose scoping bugs in your code!  #501 [Andrew White]
+=======
 * change_column_default preserves the not-null constraint.  #617 [Tarmo Tänav]
+>>>>>>> i18n:vendor/rails/activerecord/CHANGELOG
 
+<<<<<<< HEAD:vendor/rails/activerecord/CHANGELOG
+* before_save, before_validation and before_destroy callbacks that return false will now ROLLBACK the transaction.  Previously this would have been committed before the processing was aborted. #891 [Xavier Noria]
+=======
 * Fixed that create database statements would always include "DEFAULT NULL" (Nick Sieger) [#334]
+>>>>>>> i18n:vendor/rails/activerecord/CHANGELOG
+
+<<<<<<< HEAD:vendor/rails/activerecord/CHANGELOG
+* Transactional migrations for databases which support them.  #834 [divoxx, Adam Wiggins, Tarmo Tänav]
+=======
+* Add :accessible option to associations for allowing (opt-in) mass assignment. #474. [David Dollar] Example :
+>>>>>>> i18n:vendor/rails/activerecord/CHANGELOG
+
+<<<<<<< HEAD:vendor/rails/activerecord/CHANGELOG
+* Set config.active_record.timestamped_migrations = false to have migrations with numeric prefix instead of UTC timestamp. #446. [Andrew Stone, Nik Wakelin]
+=======
+  class Post < ActiveRecord::Base
+    belongs_to :author,   :accessible => true
+    has_many   :comments, :accessible => true
+  end
+>>>>>>> i18n:vendor/rails/activerecord/CHANGELOG
+
+<<<<<<< HEAD:vendor/rails/activerecord/CHANGELOG
+* change_column_default preserves the not-null constraint.  #617 [Tarmo Tänav]
+=======
+  post = Post.create({
+    :title    => 'Accessible Attributes',
+    :author   => { :name => 'David Dollar' },
+    :comments => [
+      { :body => 'First Post!' },
+      { :body => 'Nested Hashes are great!' }
+    ]
+  })
+>>>>>>> i18n:vendor/rails/activerecord/CHANGELOG
+
+<<<<<<< HEAD:vendor/rails/activerecord/CHANGELOG
+* Fixed that create database statements would always include "DEFAULT NULL" (Nick Sieger) [#334]
+=======
+  post.comments << { :body => 'Another Comment' }
+>>>>>>> i18n:vendor/rails/activerecord/CHANGELOG
 
 * Add :tokenizer option to validates_length_of to specify how to split up the attribute string. #507. [David Lowenfels] Example :
 

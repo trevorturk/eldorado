@@ -71,10 +71,20 @@ class SegmentTest < Test::Unit::TestCase
     assert_equal "Hello", eval(s.interpolation_statement([]))
     assert_equal "HelloHello", eval(s.interpolation_statement([s]))
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     s2 = ROUTING::StaticSegment.new("-")
+=======
+    s2 = ROUTING::StaticSegment.new
+    s2.value = "-"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     assert_equal "Hello-Hello", eval(s.interpolation_statement([s, s2]))
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     s3 = ROUTING::StaticSegment.new("World")
+=======
+    s3 = ROUTING::StaticSegment.new
+    s3.value = "World"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     assert_equal "Hello-World", eval(s3.interpolation_statement([s, s2]))
   end
 end
@@ -91,10 +101,20 @@ class StaticSegmentTest < Test::Unit::TestCase
   end
 
   def test_regexp_chunk_should_escape_specials
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     s = ROUTING::StaticSegment.new('Hello*World')
+=======
+    s = ROUTING::StaticSegment.new
+
+    s.value = 'Hello*World'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     assert_equal 'Hello\*World', s.regexp_chunk
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     s = ROUTING::StaticSegment.new('HelloWorld')
+=======
+    s.value = 'HelloWorld'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     assert_equal 'HelloWorld', s.regexp_chunk
   end
 
@@ -102,13 +122,21 @@ class StaticSegmentTest < Test::Unit::TestCase
     s = ROUTING::StaticSegment.new("/", :optional => true)
     assert_equal "/?", s.regexp_chunk
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     s = ROUTING::StaticSegment.new("hello", :optional => true)
+=======
+    s.value = "hello"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     assert_equal "(?:hello)?", s.regexp_chunk
   end
 end
 
 class DynamicSegmentTest < Test::Unit::TestCase
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
   def segment(options = {})
+=======
+  def segment
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     unless @segment
       @segment = ROUTING::DynamicSegment.new(:a, options)
     end
@@ -116,7 +144,12 @@ class DynamicSegmentTest < Test::Unit::TestCase
   end
 
   def test_extract_value
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     s = ROUTING::DynamicSegment.new(:a)
+=======
+    s = ROUTING::DynamicSegment.new
+    s.key = :a
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
     hash = {:a => '10', :b => '20'}
     assert_equal '10', eval(s.extract_value)
@@ -153,17 +186,30 @@ class DynamicSegmentTest < Test::Unit::TestCase
   end
 
   def test_regexp_value_check_rejects_no_match
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     segment = segment(:regexp => /\d+/)
+=======
+    segment.regexp = /\d+/
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
     a_value = "Hello20World"
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     assert !eval(segment.value_check)
+=======
+    assert ! eval(segment.value_check)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
     a_value = "20Hi"
     assert !eval(segment.value_check)
   end
 
   def test_regexp_value_check_accepts_match
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     segment = segment(:regexp => /\d+/)
+=======
+    segment.regexp = /\d+/
+
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     a_value = "30"
     assert eval(segment.value_check)
   end
@@ -181,7 +227,12 @@ class DynamicSegmentTest < Test::Unit::TestCase
   end
 
   def test_regexp_value_check_should_accept_match_with_default
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     segment = segment(:regexp => /\d+/, :default => '200')
+=======
+    segment.regexp = /\d+/
+    segment.default = '200'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
     a_value = '100'
     assert eval(segment.value_check)
@@ -546,7 +597,11 @@ class RouteBuilderTest < Test::Unit::TestCase
     action = segments[-4]
 
     assert_equal :action, action.key
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     segments[-4] = ROUTING::DynamicSegment.new(:action, :regexp => /show|in/)
+=======
+    action.regexp = /show|in/ # Use 'in' to check partial matches
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
     builder.assign_default_route_options(segments)
 
@@ -646,6 +701,7 @@ class RoutingTest < Test::Unit::TestCase
 
     ActionController::Routing.controller_paths = []
     assert_equal [], ActionController::Routing.possible_controllers
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
 
     ActionController::Routing.controller_paths = [
       root, root + '/app/controllers', root + '/vendor/plugins/bad_plugin/lib'
@@ -661,7 +717,10 @@ class RoutingTest < Test::Unit::TestCase
     ActionController::Routing::Routes.clear!
     ActionController::Routing::Routes.load_routes!
   end
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
   def test_with_controllers
     c = %w(admin/accounts admin/users account pages)
     ActionController::Routing.with_controllers c do
@@ -680,10 +739,85 @@ class RoutingTest < Test::Unit::TestCase
     paths = ActionController::Routing.normalize_paths(load_paths)
     assert_equal %w(vendor\\rails\\railties\\builtin\\rails_info vendor\\rails\\actionpack\\lib app\\controllers app\\helpers app\\models config .bar lib .), paths
   end
+=======
+    ActionController::Routing::Routes.load!
+    ActionController::Routing.controller_paths = [
+      root, root + '/app/controllers', root + '/vendor/plugins/bad_plugin/lib'
+    ]
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
   def test_routing_helper_module
     assert_kind_of Module, ActionController::Routing::Helpers
+=======
+    assert_equal ["admin/user", "plugin", "user"], ActionController::Routing.possible_controllers.sort
+  ensure
+    ActionController::Routing.controller_paths = true_controller_paths
+    ActionController::Routing.use_controllers! true_possible_controllers
+    Object.send(:remove_const, :RAILS_ROOT) rescue nil
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    h = ActionController::Routing::Helpers
+    c = Class.new
+    assert ! c.ancestors.include?(h)
+    ActionController::Routing::Routes.install_helpers c
+    assert c.ancestors.include?(h)
+=======
+    ActionController::Routing::Routes.clear!
+    ActionController::Routing::Routes.load_routes!
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+  end
+end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
+  class MockController
+    attr_accessor :routes
+=======
+  def test_with_controllers
+    c = %w(admin/accounts admin/users account pages)
+    ActionController::Routing.with_controllers c do
+      assert_equal c, ActionController::Routing.possible_controllers
+    end
+  end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def initialize(routes)
+      self.routes = routes
+    end
+=======
+  def test_normalize_unix_paths
+    load_paths = %w(. config/../app/controllers config/../app//helpers script/../config/../vendor/rails/actionpack/lib vendor/rails/railties/builtin/rails_info app/models lib script/../config/../foo/bar/../../app/models .foo/../.bar foo.bar/../config)
+    paths = ActionController::Routing.normalize_paths(load_paths)
+    assert_equal %w(vendor/rails/railties/builtin/rails_info vendor/rails/actionpack/lib app/controllers app/helpers app/models config .bar lib .), paths
+  end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def url_for(options)
+      only_path = options.delete(:only_path)
+=======
+  def test_normalize_windows_paths
+    load_paths = %w(. config\\..\\app\\controllers config\\..\\app\\\\helpers script\\..\\config\\..\\vendor\\rails\\actionpack\\lib vendor\\rails\\railties\\builtin\\rails_info app\\models lib script\\..\\config\\..\\foo\\bar\\..\\..\\app\\models .foo\\..\\.bar foo.bar\\..\\config)
+    paths = ActionController::Routing.normalize_paths(load_paths)
+    assert_equal %w(vendor\\rails\\railties\\builtin\\rails_info vendor\\rails\\actionpack\\lib app\\controllers app\\helpers app\\models config .bar lib .), paths
+  end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      port        = options.delete(:port) || 80
+      port_string = port == 80 ? '' : ":#{port}"
+=======
+  def test_routing_helper_module
+    assert_kind_of Module, ActionController::Routing::Helpers
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      host   = options.delete(:host) || "named.route.test"
+      anchor = "##{options.delete(:anchor)}" if options.key?(:anchor)
+=======
     h = ActionController::Routing::Helpers
     c = Class.new
     assert ! c.ancestors.include?(h)
@@ -691,37 +825,43 @@ class RoutingTest < Test::Unit::TestCase
     assert c.ancestors.include?(h)
   end
 end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      path = routes.generate(options)
+=======
 uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
   class MockController
     attr_accessor :routes
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      only_path ? "#{path}#{anchor}" : "http://#{host}#{port_string}#{path}#{anchor}"
+=======
     def initialize(routes)
       self.routes = routes
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
-    def url_for(options)
-      only_path = options.delete(:only_path)
-
-      port        = options.delete(:port) || 80
-      port_string = port == 80 ? '' : ":#{port}"
-
-      host   = options.delete(:host) || "named.route.test"
-      anchor = "##{options.delete(:anchor)}" if options.key?(:anchor)
-
-      path = routes.generate(options)
-
-      only_path ? "#{path}#{anchor}" : "http://#{host}#{port_string}#{path}#{anchor}"
-    end
-
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def request
       @request ||= MockRequest.new(:host => "named.route.test", :method => :get)
     end
   end
+=======
+    def url_for(options)
+      only_path = options.delete(:only_path)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
   class MockRequest
     attr_accessor :path, :path_parameters, :host, :subdomains, :domain, :method
+=======
+      port        = options.delete(:port) || 80
+      port_string = port == 80 ? '' : ":#{port}"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def initialize(values={})
       values.each { |key, value| send("#{key}=", value) }
       if values[:host]
@@ -729,16 +869,95 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
         self.subdomains = [subdomain]
       end
     end
+=======
+      host   = options.delete(:host) || "named.route.test"
+      anchor = "##{options.delete(:anchor)}" if options.key?(:anchor)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def protocol
       "http://"
     end
+=======
+      path = routes.generate(options)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def host_with_port
+      (subdomains * '.') + '.' +  domain
+=======
+      only_path ? "#{path}#{anchor}" : "http://#{host}#{port_string}#{path}#{anchor}"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+  end
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+  class LegacyRouteSetTests < Test::Unit::TestCase
+    attr_reader :rs
+=======
+    def request
+      @request ||= MockRequest.new(:host => "named.route.test", :method => :get)
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def setup
+      # These tests assume optimisation is on, so re-enable it.
+      ActionController::Base.optimise_named_routes = true
+=======
+    def relative_url_root=(value)
+      request.relative_url_root=value
+    end
+  end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      @rs = ::ActionController::Routing::RouteSet.new
+      @rs.draw {|m| m.connect ':controller/:action/:id' }
+=======
+  class MockRequest
+    attr_accessor :path, :path_parameters, :host, :subdomains, :domain,
+                  :method, :relative_url_root
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      ActionController::Routing.use_controllers! %w(content admin/user admin/news_feed)
+=======
+    def initialize(values={})
+      values.each { |key, value| send("#{key}=", value) }
+      if values[:host]
+        subdomain, self.domain = values[:host].split(/\./, 2)
+        self.subdomains = [subdomain]
+      end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_default_setup
+      assert_equal({:controller => "content", :action => 'index'}, rs.recognize_path("/content"))
+      assert_equal({:controller => "content", :action => 'list'}, rs.recognize_path("/content/list"))
+      assert_equal({:controller => "content", :action => 'show', :id => '10'}, rs.recognize_path("/content/show/10"))
+=======
+    def protocol
+      "http://"
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_equal({:controller => "admin/user", :action => 'show', :id => '10'}, rs.recognize_path("/admin/user/show/10"))
+=======
     def host_with_port
       (subdomains * '.') + '.' +  domain
     end
   end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_equal '/admin/user/show/10', rs.generate(:controller => 'admin/user', :action => 'show', :id => 10)
+=======
   class LegacyRouteSetTests < Test::Unit::TestCase
     attr_reader :rs
 
@@ -751,14 +970,31 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
 
       ActionController::Routing.use_controllers! %w(content admin/user admin/news_feed)
     end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_equal '/admin/user/show', rs.generate({:action => 'show'}, {:controller => 'admin/user', :action => 'list', :id => '10'})
+      assert_equal '/admin/user/list/10', rs.generate({}, {:controller => 'admin/user', :action => 'list', :id => '10'})
+=======
     def test_default_setup
       assert_equal({:controller => "content", :action => 'index'}, rs.recognize_path("/content"))
       assert_equal({:controller => "content", :action => 'list'}, rs.recognize_path("/content/list"))
       assert_equal({:controller => "content", :action => 'show', :id => '10'}, rs.recognize_path("/content/show/10"))
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_equal '/admin/stuff', rs.generate({:controller => 'stuff'}, {:controller => 'admin/user', :action => 'list', :id => '10'})
+      assert_equal '/stuff', rs.generate({:controller => '/stuff'}, {:controller => 'admin/user', :action => 'list', :id => '10'})
+    end
+=======
       assert_equal({:controller => "admin/user", :action => 'show', :id => '10'}, rs.recognize_path("/admin/user/show/10"))
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_ignores_leading_slash
+      @rs.draw {|m| m.connect '/:controller/:action/:id'}
+      test_default_setup
+=======
       assert_equal '/admin/user/show/10', rs.generate(:controller => 'admin/user', :action => 'show', :id => 10)
 
       assert_equal '/admin/user/show', rs.generate({:action => 'show'}, {:controller => 'admin/user', :action => 'list', :id => '10'})
@@ -766,13 +1002,10 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
 
       assert_equal '/admin/stuff', rs.generate({:controller => 'stuff'}, {:controller => 'admin/user', :action => 'list', :id => '10'})
       assert_equal '/stuff', rs.generate({:controller => '/stuff'}, {:controller => 'admin/user', :action => 'list', :id => '10'})
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
-    def test_ignores_leading_slash
-      @rs.draw {|m| m.connect '/:controller/:action/:id'}
-      test_default_setup
-    end
-
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_time_recognition
       # We create many routes to make situation more realistic
       @rs = ::ActionController::Routing::RouteSet.new
@@ -819,8 +1052,92 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
         puts "#{per_url * 1000} ms/url"
         puts "#{1 / per_url} url/s\n\n"
       end
+=======
+    def test_ignores_leading_slash
+      @rs.draw {|m| m.connect '/:controller/:action/:id'}
+      test_default_setup
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_time_generation
+      n = 5000
+=======
+    def test_time_recognition
+      # We create many routes to make situation more realistic
+      @rs = ::ActionController::Routing::RouteSet.new
+      @rs.draw { |map|
+        map.frontpage '', :controller => 'search', :action => 'new'
+        map.resources :videos do |video|
+          video.resources :comments
+          video.resource  :file,      :controller => 'video_file'
+          video.resource  :share,     :controller => 'video_shares'
+          video.resource  :abuse,     :controller => 'video_abuses'
+        end
+        map.resources :abuses, :controller => 'video_abuses'
+        map.resources :video_uploads
+        map.resources :video_visits
+
+        map.resources :users do |user|
+          user.resource  :settings
+          user.resources :videos
+        end
+        map.resources :channels do |channel|
+          channel.resources :videos, :controller => 'channel_videos'
+        end
+        map.resource  :session
+        map.resource  :lost_password
+        map.search    'search', :controller => 'search'
+        map.resources :pages
+        map.connect ':controller/:action/:id'
+      }
+      n = 1000
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      if RunTimeTests
+        GC.start
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+        pairs = [
+          [{:controller => 'content', :action => 'index'}, {:controller => 'content', :action => 'show'}],
+          [{:controller => 'content'}, {:controller => 'content', :action => 'index'}],
+          [{:controller => 'content', :action => 'list'}, {:controller => 'content', :action => 'index'}],
+          [{:controller => 'content', :action => 'show', :id => '10'}, {:controller => 'content', :action => 'list'}],
+          [{:controller => 'admin/user', :action => 'index'}, {:controller => 'admin/user', :action => 'show'}],
+          [{:controller => 'admin/user'}, {:controller => 'admin/user', :action => 'index'}],
+          [{:controller => 'admin/user', :action => 'list'}, {:controller => 'admin/user', :action => 'index'}],
+          [{:controller => 'admin/user', :action => 'show', :id => '10'}, {:controller => 'admin/user', :action => 'list'}],
+        ]
+        p = nil
+        gentime = Benchmark.realtime do
+=======
+        rectime = Benchmark.realtime do
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+          n.times do
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+          pairs.each {|(a, b)| rs.generate(a, b)}
+=======
+            rs.recognize_path("/videos/1234567", {:method => :get})
+            rs.recognize_path("/videos/1234567/abuse", {:method => :get})
+            rs.recognize_path("/users/1234567/settings", {:method => :get})
+            rs.recognize_path("/channels/1234567", {:method => :get})
+            rs.recognize_path("/session/new", {:method => :get})
+            rs.recognize_path("/admin/user/show/10", {:method => :get})
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+          end
+        end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+
+        puts "\n\nGeneration (RouteSet): (#{(n * 8)} urls)"
+        per_url = gentime / (n * 8)
+=======
+        puts "\n\nRecognition (#{rs.routes.size} routes):"
+        per_url = rectime / (n * 6)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+        puts "#{per_url * 1000} ms/url"
+        puts "#{1 / per_url} url/s\n\n"
+      end
+    end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
     def test_time_generation
       n = 5000
       if RunTimeTests
@@ -841,25 +1158,35 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
           pairs.each {|(a, b)| rs.generate(a, b)}
           end
         end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
-        puts "\n\nGeneration (RouteSet): (#{(n * 8)} urls)"
-        per_url = gentime / (n * 8)
-        puts "#{per_url * 1000} ms/url"
-        puts "#{1 / per_url} url/s\n\n"
-      end
-    end
-
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_route_with_colon_first
       rs.draw do |map|
         map.connect '/:controller/:action/:id', :action => 'index', :id => nil
         map.connect ':url', :controller => 'tiny_url', :action => 'translate'
+=======
+        puts "\n\nGeneration (RouteSet): (#{(n * 8)} urls)"
+        per_url = gentime / (n * 8)
+        puts "#{per_url * 1000} ms/url"
+        puts "#{1 / per_url} url/s\n\n"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_route_with_regexp_for_controller
+=======
+    def test_route_with_colon_first
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       rs.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
         map.connect ':controller/:admintoken/:action/:id', :controller => /admin\/.+/
         map.connect ':controller/:action/:id'
+=======
+        map.connect '/:controller/:action/:id', :action => 'index', :id => nil
+        map.connect ':url', :controller => 'tiny_url', :action => 'translate'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
       assert_equal({:controller => "admin/user", :admintoken => "foo", :action => "index"},
           rs.recognize_path("/admin/user/foo"))
@@ -868,6 +1195,57 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       assert_equal '/content/foo', rs.generate(:controller => "content", :action => "foo")
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_route_with_regexp_and_dot
+=======
+    def test_route_with_regexp_for_controller
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      rs.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+        map.connect ':controller/:action/:file',
+                          :controller => /admin|user/,
+                          :action => /upload|download/,
+                          :defaults => {:file => nil},
+                          :requirements => {:file => %r{[^/]+(\.[^/]+)?}}
+=======
+        map.connect ':controller/:admintoken/:action/:id', :controller => /admin\/.+/
+        map.connect ':controller/:action/:id'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      # Without a file extension
+      assert_equal '/user/download/file',
+        rs.generate(:controller => "user", :action => "download", :file => "file")
+      assert_equal(
+        {:controller => "user", :action => "download", :file => "file"},
+        rs.recognize_path("/user/download/file"))
+
+      # Now, let's try a file with an extension, really a dot (.)
+      assert_equal '/user/download/file.jpg',
+        rs.generate(
+          :controller => "user", :action => "download", :file => "file.jpg")
+      assert_equal(
+        {:controller => "user", :action => "download", :file => "file.jpg"},
+        rs.recognize_path("/user/download/file.jpg"))
+    end
+
+    def test_basic_named_route
+      rs.add_named_route :home, '', :controller => 'content', :action => 'list'
+      x = setup_for_named_route
+      assert_equal("http://named.route.test/",
+                   x.send(:home_url))
+=======
+      assert_equal({:controller => "admin/user", :admintoken => "foo", :action => "index"},
+          rs.recognize_path("/admin/user/foo"))
+      assert_equal({:controller => "content", :action => "foo"}, rs.recognize_path("/content/foo"))
+      assert_equal '/admin/user/foo', rs.generate(:controller => "admin/user", :admintoken => "foo", :action => "index")
+      assert_equal '/content/foo', rs.generate(:controller => "content", :action => "foo")
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_basic_named_route_with_relative_url_root
+=======
     def test_route_with_regexp_and_dot
       rs.draw do |map|
         map.connect ':controller/:action/:file',
@@ -893,25 +1271,32 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
     end
 
     def test_basic_named_route
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       rs.add_named_route :home, '', :controller => 'content', :action => 'list'
       x = setup_for_named_route
-      assert_equal("http://named.route.test/",
-                   x.send(:home_url))
-    end
-
-    def test_basic_named_route_with_relative_url_root
-      rs.add_named_route :home, '', :controller => 'content', :action => 'list'
-      x = setup_for_named_route
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       ActionController::Base.relative_url_root = "/foo"
       assert_equal("http://named.route.test/foo/",
+=======
+      assert_equal("http://named.route.test/",
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
                    x.send(:home_url))
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       assert_equal "/foo/", x.send(:home_path)
       ActionController::Base.relative_url_root = nil
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_named_route_with_option
       rs.add_named_route :page, 'page/:title', :controller => 'content', :action => 'show_page'
+=======
+    def test_basic_named_route_with_relative_url_root
+      rs.add_named_route :home, '', :controller => 'content', :action => 'list'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       x = setup_for_named_route
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       assert_equal("http://named.route.test/page/new%20stuff",
                    x.send(:page_url, :title => 'new stuff'))
     end
@@ -931,6 +1316,115 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
                    x.send(:users_url))
     end
 
+    def test_optimised_named_route_call_never_uses_url_for
+      rs.add_named_route :users, 'admin/user', :controller => '/admin/user', :action => 'index'
+      rs.add_named_route :user, 'admin/user/:id', :controller=>'/admin/user', :action=>'show'
+      x = setup_for_named_route
+      x.expects(:url_for).never
+      x.send(:users_url)
+      x.send(:users_path)
+      x.send(:user_url, 2, :foo=>"bar")
+      x.send(:user_path, 3, :bar=>"foo")
+    end
+
+    def test_optimised_named_route_with_host
+      rs.add_named_route :pages, 'pages', :controller => 'content', :action => 'show_page', :host => 'foo.com'
+      x = setup_for_named_route
+      x.expects(:url_for).with(:host => 'foo.com', :only_path => false, :controller => 'content', :action => 'show_page', :use_route => :pages).once
+      x.send(:pages_url)
+=======
+      x.relative_url_root="/foo"
+      assert_equal("http://named.route.test/foo/",
+                   x.send(:home_url))
+      assert_equal "/foo/", x.send(:home_path)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def setup_for_named_route
+      klass = Class.new(MockController)
+      rs.install_helpers(klass)
+      klass.new(rs)
+    end
+
+    def test_named_route_without_hash
+      rs.draw do |map|
+        map.normal ':controller/:action/:id'
+      end
+    end
+
+    def test_named_route_root
+      rs.draw do |map|
+        map.root :controller => "hello"
+      end
+=======
+    def test_named_route_with_option
+      rs.add_named_route :page, 'page/:title', :controller => 'content', :action => 'show_page'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      x = setup_for_named_route
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_equal("http://named.route.test/", x.send(:root_url))
+      assert_equal("/", x.send(:root_path))
+=======
+      assert_equal("http://named.route.test/page/new%20stuff",
+                   x.send(:page_url, :title => 'new stuff'))
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_named_route_with_regexps
+      rs.draw do |map|
+        map.article 'page/:year/:month/:day/:title', :controller => 'page', :action => 'show',
+          :year => /\d+/, :month => /\d+/, :day => /\d+/
+        map.connect ':controller/:action/:id'
+      end
+=======
+    def test_named_route_with_default
+      rs.add_named_route :page, 'page/:title', :controller => 'content', :action => 'show_page', :title => 'AboutPage'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      x = setup_for_named_route
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      # assert_equal(
+      #   {:controller => 'page', :action => 'show', :title => 'hi', :use_route => :article, :only_path => false},
+      #   x.send(:article_url, :title => 'hi')
+      # )
+      assert_equal(
+        "http://named.route.test/page/2005/6/10/hi",
+        x.send(:article_url, :title => 'hi', :day => 10, :year => 2005, :month => 6)
+      )
+    end
+=======
+      assert_equal("http://named.route.test/page/AboutRails",
+                   x.send(:page_url, :title => "AboutRails"))
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_changing_controller
+      assert_equal '/admin/stuff/show/10', rs.generate(
+        {:controller => 'stuff', :action => 'show', :id => 10},
+        {:controller => 'admin/user', :action => 'index'}
+      )
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_paths_escaped
+      rs.draw do |map|
+        map.path 'file/*path', :controller => 'content', :action => 'show_file'
+        map.connect ':controller/:action/:id'
+      end
+=======
+    def test_named_route_with_nested_controller
+      rs.add_named_route :users, 'admin/user', :controller => 'admin/user', :action => 'index'
+      x = setup_for_named_route
+      assert_equal("http://named.route.test/admin/user",
+                   x.send(:users_url))
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
     def test_optimised_named_route_call_never_uses_url_for
       rs.add_named_route :users, 'admin/user', :controller => '/admin/user', :action => 'index'
       rs.add_named_route :user, 'admin/user/:id', :controller=>'/admin/user', :action=>'show'
@@ -1000,10 +1494,13 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
         map.connect ':controller/:action/:id'
       end
 
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       # No + to space in URI escaping, only for query params.
       results = rs.recognize_path "/file/hello+world/how+are+you%3F"
       assert results, "Recognition should have succeeded"
       assert_equal ['hello+world', 'how+are+you?'], results[:path]
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
 
       # Use %20 for space instead.
       results = rs.recognize_path "/file/hello%20world/how%20are%20you%3F"
@@ -1092,6 +1589,1024 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
         map.connect '*path', :controller => 'content', :action => 'show_file'
       end
 
+      recall_path = ActionController::Routing::PathSegment::Result.new(%w(pages boo))
+      assert_equal '/pages/boo', rs.generate({}, :controller => 'content', :action => 'show_file', :path => recall_path)
+    end
+
+    def test_backwards
+      rs.draw do |map|
+        map.connect 'page/:id/:action', :controller => 'pages', :action => 'show'
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/page/20', rs.generate({:id => 20}, {:controller => 'pages', :action => 'show'})
+      assert_equal '/page/20', rs.generate(:controller => 'pages', :id => 20, :action => 'show')
+      assert_equal '/pages/boo', rs.generate(:controller => 'pages', :action => 'boo')
+    end
+
+    def test_route_with_fixnum_default
+      rs.draw do |map|
+        map.connect 'page/:id', :controller => 'content', :action => 'show_page', :id => 1
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/page', rs.generate(:controller => 'content', :action => 'show_page')
+      assert_equal '/page', rs.generate(:controller => 'content', :action => 'show_page', :id => 1)
+      assert_equal '/page', rs.generate(:controller => 'content', :action => 'show_page', :id => '1')
+      assert_equal '/page/10', rs.generate(:controller => 'content', :action => 'show_page', :id => 10)
+
+      assert_equal({:controller => "content", :action => 'show_page', :id => '1'}, rs.recognize_path("/page"))
+      assert_equal({:controller => "content", :action => 'show_page', :id => '1'}, rs.recognize_path("/page/1"))
+      assert_equal({:controller => "content", :action => 'show_page', :id => '10'}, rs.recognize_path("/page/10"))
+    end
+
+    # For newer revision
+    def test_route_with_text_default
+      rs.draw do |map|
+        map.connect 'page/:id', :controller => 'content', :action => 'show_page', :id => 1
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/page/foo', rs.generate(:controller => 'content', :action => 'show_page', :id => 'foo')
+      assert_equal({:controller => "content", :action => 'show_page', :id => 'foo'}, rs.recognize_path("/page/foo"))
+
+      token = "\321\202\320\265\320\272\321\201\321\202" # 'text' in russian
+      escaped_token = CGI::escape(token)
+
+      assert_equal '/page/' + escaped_token, rs.generate(:controller => 'content', :action => 'show_page', :id => token)
+      assert_equal({:controller => "content", :action => 'show_page', :id => token}, rs.recognize_path("/page/#{escaped_token}"))
+    end
+
+    def test_action_expiry
+      assert_equal '/content', rs.generate({:controller => 'content'}, {:controller => 'content', :action => 'show'})
+    end
+
+    def test_recognition_with_uppercase_controller_name
+      assert_equal({:controller => "content", :action => 'index'}, rs.recognize_path("/Content"))
+      assert_equal({:controller => "content", :action => 'list'}, rs.recognize_path("/ConTent/list"))
+      assert_equal({:controller => "content", :action => 'show', :id => '10'}, rs.recognize_path("/CONTENT/show/10"))
+
+      # these used to work, before the routes rewrite, but support for this was pulled in the new version...
+      #assert_equal({'controller' => "admin/news_feed", 'action' => 'index'}, rs.recognize_path("Admin/NewsFeed"))
+      #assert_equal({'controller' => "admin/news_feed", 'action' => 'index'}, rs.recognize_path("Admin/News_Feed"))
+    end
+
+    def test_requirement_should_prevent_optional_id
+      rs.draw do |map|
+        map.post 'post/:id', :controller=> 'post', :action=> 'show', :requirements => {:id => /\d+/}
+      end
+
+      assert_equal '/post/10', rs.generate(:controller => 'post', :action => 'show', :id => 10)
+
+      assert_raises ActionController::RoutingError do
+        rs.generate(:controller => 'post', :action => 'show')
+      end
+    end
+
+    def test_both_requirement_and_optional
+      rs.draw do |map|
+        map.blog('test/:year', :controller => 'post', :action => 'show',
+          :defaults => { :year => nil },
+          :requirements => { :year => /\d{4}/ }
+        )
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/test', rs.generate(:controller => 'post', :action => 'show')
+      assert_equal '/test', rs.generate(:controller => 'post', :action => 'show', :year => nil)
+
+      x = setup_for_named_route
+      assert_equal("http://named.route.test/test",
+                   x.send(:blog_url))
+    end
+
+    def test_set_to_nil_forgets
+      rs.draw do |map|
+        map.connect 'pages/:year/:month/:day', :controller => 'content', :action => 'list_pages', :month => nil, :day => nil
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/pages/2005',
+        rs.generate(:controller => 'content', :action => 'list_pages', :year => 2005)
+      assert_equal '/pages/2005/6',
+        rs.generate(:controller => 'content', :action => 'list_pages', :year => 2005, :month => 6)
+      assert_equal '/pages/2005/6/12',
+        rs.generate(:controller => 'content', :action => 'list_pages', :year => 2005, :month => 6, :day => 12)
+
+      assert_equal '/pages/2005/6/4',
+        rs.generate({:day => 4}, {:controller => 'content', :action => 'list_pages', :year => '2005', :month => '6', :day => '12'})
+
+      assert_equal '/pages/2005/6',
+        rs.generate({:day => nil}, {:controller => 'content', :action => 'list_pages', :year => '2005', :month => '6', :day => '12'})
+
+      assert_equal '/pages/2005',
+        rs.generate({:day => nil, :month => nil}, {:controller => 'content', :action => 'list_pages', :year => '2005', :month => '6', :day => '12'})
+    end
+
+    def test_url_with_no_action_specified
+      rs.draw do |map|
+        map.connect '', :controller => 'content'
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/', rs.generate(:controller => 'content', :action => 'index')
+      assert_equal '/', rs.generate(:controller => 'content')
+    end
+
+    def test_named_url_with_no_action_specified
+      rs.draw do |map|
+        map.home '', :controller => 'content'
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/', rs.generate(:controller => 'content', :action => 'index')
+      assert_equal '/', rs.generate(:controller => 'content')
+
+      x = setup_for_named_route
+      assert_equal("http://named.route.test/",
+                   x.send(:home_url))
+    end
+
+    def test_url_generated_when_forgetting_action
+      [{:controller => 'content', :action => 'index'}, {:controller => 'content'}].each do |hash|
+        rs.draw do |map|
+          map.home '', hash
+          map.connect ':controller/:action/:id'
+        end
+        assert_equal '/', rs.generate({:action => nil}, {:controller => 'content', :action => 'hello'})
+        assert_equal '/', rs.generate({:controller => 'content'})
+        assert_equal '/content/hi', rs.generate({:controller => 'content', :action => 'hi'})
+      end
+    end
+
+    def test_named_route_method
+      rs.draw do |map|
+        map.categories 'categories', :controller => 'content', :action => 'categories'
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/categories', rs.generate(:controller => 'content', :action => 'categories')
+      assert_equal '/content/hi', rs.generate({:controller => 'content', :action => 'hi'})
+    end
+
+    def test_named_routes_array
+      test_named_route_method
+      assert_equal [:categories], rs.named_routes.names
+    end
+
+    def test_nil_defaults
+      rs.draw do |map|
+        map.connect 'journal',
+          :controller => 'content',
+          :action => 'list_journal',
+          :date => nil, :user_id => nil
+        map.connect ':controller/:action/:id'
+      end
+
+      assert_equal '/journal', rs.generate(:controller => 'content', :action => 'list_journal', :date => nil, :user_id => nil)
+    end
+
+    def setup_request_method_routes_for(method)
+      @request = ActionController::TestRequest.new
+      @request.env["REQUEST_METHOD"] = method
+      @request.request_uri = "/match"
+
+      rs.draw do |r|
+        r.connect '/match', :controller => 'books', :action => 'get', :conditions => { :method => :get }
+        r.connect '/match', :controller => 'books', :action => 'post', :conditions => { :method => :post }
+        r.connect '/match', :controller => 'books', :action => 'put', :conditions => { :method => :put }
+        r.connect '/match', :controller => 'books', :action => 'delete', :conditions => { :method => :delete }
+      end
+    end
+
+    %w(GET POST PUT DELETE).each do |request_method|
+      define_method("test_request_method_recognized_with_#{request_method}") do
+        begin
+          Object.const_set(:BooksController, Class.new(ActionController::Base))
+
+          setup_request_method_routes_for(request_method)
+
+          assert_nothing_raised { rs.recognize(@request) }
+          assert_equal request_method.downcase, @request.path_parameters[:action]
+        ensure
+          Object.send(:remove_const, :BooksController) rescue nil
+        end
+      end
+    end
+
+    def test_subpath_recognized
+      Object.const_set(:SubpathBooksController, Class.new(ActionController::Base))
+
+      rs.draw do |r|
+        r.connect '/books/:id/edit', :controller => 'subpath_books', :action => 'edit'
+        r.connect '/items/:id/:action', :controller => 'subpath_books'
+        r.connect '/posts/new/:action', :controller => 'subpath_books'
+        r.connect '/posts/:id', :controller => 'subpath_books', :action => "show"
+      end
+
+      hash = rs.recognize_path "/books/17/edit"
+      assert_not_nil hash
+      assert_equal %w(subpath_books 17 edit), [hash[:controller], hash[:id], hash[:action]]
+
+      hash = rs.recognize_path "/items/3/complete"
+      assert_not_nil hash
+      assert_equal %w(subpath_books 3 complete), [hash[:controller], hash[:id], hash[:action]]
+
+      hash = rs.recognize_path "/posts/new/preview"
+      assert_not_nil hash
+      assert_equal %w(subpath_books preview), [hash[:controller], hash[:action]]
+
+      hash = rs.recognize_path "/posts/7"
+      assert_not_nil hash
+      assert_equal %w(subpath_books show 7), [hash[:controller], hash[:action], hash[:id]]
+    ensure
+      Object.send(:remove_const, :SubpathBooksController) rescue nil
+    end
+
+    def test_subpath_generated
+      Object.const_set(:SubpathBooksController, Class.new(ActionController::Base))
+
+      rs.draw do |r|
+        r.connect '/books/:id/edit', :controller => 'subpath_books', :action => 'edit'
+        r.connect '/items/:id/:action', :controller => 'subpath_books'
+        r.connect '/posts/new/:action', :controller => 'subpath_books'
+      end
+
+      assert_equal "/books/7/edit", rs.generate(:controller => "subpath_books", :id => 7, :action => "edit")
+      assert_equal "/items/15/complete", rs.generate(:controller => "subpath_books", :id => 15, :action => "complete")
+      assert_equal "/posts/new/preview", rs.generate(:controller => "subpath_books", :action => "preview")
+    ensure
+      Object.send(:remove_const, :SubpathBooksController) rescue nil
+    end
+
+    def test_failed_requirements_raises_exception_with_violated_requirements
+      rs.draw do |r|
+        r.foo_with_requirement 'foos/:id', :controller=>'foos', :requirements=>{:id=>/\d+/}
+      end
+
+      x = setup_for_named_route
+      assert_raises(ActionController::RoutingError) do
+        x.send(:foo_with_requirement_url, "I am Against the requirements")
+      end
+    end
+  end
+
+  class RouteTest < Test::Unit::TestCase
+    def setup
+      @route = ROUTING::Route.new
+    end
+
+    def slash_segment(is_optional = false)
+      returning ROUTING::DividerSegment.new('/') do |s|
+        s.is_optional = is_optional
+      end
+    end
+
+    def default_route
+      unless defined?(@default_route)
+        @default_route = ROUTING::Route.new
+
+        @default_route.segments << (s = ROUTING::StaticSegment.new)
+        s.value = '/'
+        s.raw = true
+
+        @default_route.segments << (s = ROUTING::DynamicSegment.new)
+        s.key = :controller
+
+        @default_route.segments << slash_segment(:optional)
+        @default_route.segments << (s = ROUTING::DynamicSegment.new)
+        s.key = :action
+        s.default = 'index'
+        s.is_optional = true
+
+        @default_route.segments << slash_segment(:optional)
+        @default_route.segments << (s = ROUTING::DynamicSegment.new)
+        s.key = :id
+        s.is_optional = true
+
+        @default_route.segments << slash_segment(:optional)
+      end
+      @default_route
+    end
+
+    def test_default_route_recognition
+      expected = {:controller => 'accounts', :action => 'show', :id => '10'}
+      assert_equal expected, default_route.recognize('/accounts/show/10')
+      assert_equal expected, default_route.recognize('/accounts/show/10/')
+
+      expected[:id] = 'jamis'
+      assert_equal expected, default_route.recognize('/accounts/show/jamis/')
+
+      expected.delete :id
+      assert_equal expected, default_route.recognize('/accounts/show')
+      assert_equal expected, default_route.recognize('/accounts/show/')
+
+      expected[:action] = 'index'
+      assert_equal expected, default_route.recognize('/accounts/')
+      assert_equal expected, default_route.recognize('/accounts')
+
+      assert_equal nil, default_route.recognize('/')
+      assert_equal nil, default_route.recognize('/accounts/how/goood/it/is/to/be/free')
+    end
+
+    def test_default_route_should_omit_default_action
+      o = {:controller => 'accounts', :action => 'index'}
+      assert_equal '/accounts', default_route.generate(o, o, {})
+    end
+
+    def test_default_route_should_include_default_action_when_id_present
+      o = {:controller => 'accounts', :action => 'index', :id => '20'}
+      assert_equal '/accounts/index/20', default_route.generate(o, o, {})
+    end
+
+    def test_default_route_should_work_with_action_but_no_id
+      o = {:controller => 'accounts', :action => 'list_all'}
+      assert_equal '/accounts/list_all', default_route.generate(o, o, {})
+    end
+
+    def test_default_route_should_uri_escape_pluses
+      expected = { :controller => 'accounts', :action => 'show', :id => 'hello world' }
+      assert_equal expected, default_route.recognize('/accounts/show/hello world')
+      assert_equal expected, default_route.recognize('/accounts/show/hello%20world')
+      assert_equal '/accounts/show/hello%20world', default_route.generate(expected, expected, {})
+
+      expected[:id] = 'hello+world'
+      assert_equal expected, default_route.recognize('/accounts/show/hello+world')
+      assert_equal expected, default_route.recognize('/accounts/show/hello%2Bworld')
+      assert_equal '/accounts/show/hello+world', default_route.generate(expected, expected, {})
+    end
+
+    def test_matches_controller_and_action
+      # requirement_for should only be called for the action and controller _once_
+      @route.expects(:requirement_for).with(:controller).times(1).returns('pages')
+      @route.expects(:requirement_for).with(:action).times(1).returns('show')
+
+      @route.requirements = {:controller => 'pages', :action => 'show'}
+      assert @route.matches_controller_and_action?('pages', 'show')
+      assert !@route.matches_controller_and_action?('not_pages', 'show')
+      assert !@route.matches_controller_and_action?('pages', 'not_show')
+    end
+
+    def test_parameter_shell
+      page_url = ROUTING::Route.new
+      page_url.requirements = {:controller => 'pages', :action => 'show', :id => /\d+/}
+      assert_equal({:controller => 'pages', :action => 'show'}, page_url.parameter_shell)
+    end
+
+    def test_defaults
+      route = ROUTING::RouteBuilder.new.build '/users/:id.:format', :controller => "users", :action => "show", :format => "html"
+      assert_equal(
+        { :controller => "users", :action => "show", :format => "html" },
+        route.defaults)
+    end
+
+    def test_builder_complains_without_controller
+      assert_raises(ArgumentError) do
+        ROUTING::RouteBuilder.new.build '/contact', :contoller => "contact", :action => "index"
+      end
+    end
+
+    def test_significant_keys_for_default_route
+      keys = default_route.significant_keys.sort_by {|k| k.to_s }
+      assert_equal [:action, :controller, :id], keys
+    end
+
+    def test_significant_keys
+      user_url = ROUTING::Route.new
+      user_url.segments << (s = ROUTING::StaticSegment.new)
+      s.value = '/'
+      s.raw = true
+
+      user_url.segments << (s = ROUTING::StaticSegment.new)
+      s.value = 'user'
+
+      user_url.segments << (s = ROUTING::StaticSegment.new)
+      s.value = '/'
+      s.raw = true
+      s.is_optional = true
+
+      user_url.segments << (s = ROUTING::DynamicSegment.new)
+      s.key = :user
+
+      user_url.segments << (s = ROUTING::StaticSegment.new)
+      s.value = '/'
+      s.raw = true
+      s.is_optional = true
+
+      user_url.requirements = {:controller => 'users', :action => 'show'}
+
+      keys = user_url.significant_keys.sort_by { |k| k.to_s }
+      assert_equal [:action, :controller, :user], keys
+    end
+
+    def test_build_empty_query_string
+      assert_equal '', @route.build_query_string({})
+    end
+
+    def test_build_query_string_with_nil_value
+      assert_equal '', @route.build_query_string({:x => nil})
+    end
+
+    def test_simple_build_query_string
+      assert_equal '?x=1&y=2', order_query_string(@route.build_query_string(:x => '1', :y => '2'))
+    end
+
+    def test_convert_ints_build_query_string
+      assert_equal '?x=1&y=2', order_query_string(@route.build_query_string(:x => 1, :y => 2))
+    end
+
+    def test_escape_spaces_build_query_string
+      assert_equal '?x=hello+world&y=goodbye+world', order_query_string(@route.build_query_string(:x => 'hello world', :y => 'goodbye world'))
+    end
+
+    def test_expand_array_build_query_string
+      assert_equal '?x%5B%5D=1&x%5B%5D=2', order_query_string(@route.build_query_string(:x => [1, 2]))
+    end
+
+    def test_escape_spaces_build_query_string_selected_keys
+      assert_equal '?x=hello+world', order_query_string(@route.build_query_string({:x => 'hello world', :y => 'goodbye world'}, [:x]))
+    end
+
+    private
+      def order_query_string(qs)
+        '?' + qs[1..-1].split('&').sort.join('&')
+      end
+  end
+
+  class RouteSetTest < Test::Unit::TestCase
+    def set
+      @set ||= ROUTING::RouteSet.new
+    end
+
+    def request
+      @request ||= MockRequest.new(:host => "named.routes.test", :method => :get)
+    end
+
+    def test_generate_extras
+      set.draw { |m| m.connect ':controller/:action/:id' }
+      path, extras = set.generate_extras(:controller => "foo", :action => "bar", :id => 15, :this => "hello", :that => "world")
+      assert_equal "/foo/bar/15", path
+      assert_equal %w(that this), extras.map(&:to_s).sort
+    end
+
+    def test_extra_keys
+      set.draw { |m| m.connect ':controller/:action/:id' }
+      extras = set.extra_keys(:controller => "foo", :action => "bar", :id => 15, :this => "hello", :that => "world")
+      assert_equal %w(that this), extras.map(&:to_s).sort
+    end
+
+    def test_generate_extras_not_first
+      set.draw do |map|
+        map.connect ':controller/:action/:id.:format'
+        map.connect ':controller/:action/:id'
+      end
+      path, extras = set.generate_extras(:controller => "foo", :action => "bar", :id => 15, :this => "hello", :that => "world")
+      assert_equal "/foo/bar/15", path
+      assert_equal %w(that this), extras.map(&:to_s).sort
+    end
+
+    def test_generate_not_first
+      set.draw do |map|
+        map.connect ':controller/:action/:id.:format'
+        map.connect ':controller/:action/:id'
+      end
+      assert_equal "/foo/bar/15?this=hello", set.generate(:controller => "foo", :action => "bar", :id => 15, :this => "hello")
+    end
+
+    def test_extra_keys_not_first
+      set.draw do |map|
+        map.connect ':controller/:action/:id.:format'
+        map.connect ':controller/:action/:id'
+      end
+      extras = set.extra_keys(:controller => "foo", :action => "bar", :id => 15, :this => "hello", :that => "world")
+      assert_equal %w(that this), extras.map(&:to_s).sort
+    end
+
+    def test_draw
+      assert_equal 0, set.routes.size
+      set.draw do |map|
+        map.connect '/hello/world', :controller => 'a', :action => 'b'
+      end
+      assert_equal 1, set.routes.size
+    end
+
+    def test_named_draw
+      assert_equal 0, set.routes.size
+      set.draw do |map|
+        map.hello '/hello/world', :controller => 'a', :action => 'b'
+      end
+      assert_equal 1, set.routes.size
+      assert_equal set.routes.first, set.named_routes[:hello]
+    end
+
+    def test_later_named_routes_take_precedence
+      set.draw do |map|
+        map.hello '/hello/world', :controller => 'a', :action => 'b'
+        map.hello '/hello', :controller => 'a', :action => 'b'
+      end
+      assert_equal set.routes.last, set.named_routes[:hello]
+    end
+
+    def setup_named_route_test
+      set.draw do |map|
+        map.show '/people/:id', :controller => 'people', :action => 'show'
+        map.index '/people', :controller => 'people', :action => 'index'
+        map.multi '/people/go/:foo/:bar/joe/:id', :controller => 'people', :action => 'multi'
+        map.users '/admin/users', :controller => 'admin/users', :action => 'index'
+      end
+
+      klass = Class.new(MockController)
+      set.install_helpers(klass)
+      klass.new(set)
+    end
+
+    def test_named_route_hash_access_method
+      controller = setup_named_route_test
+
+      assert_equal(
+        { :controller => 'people', :action => 'show', :id => 5, :use_route => :show, :only_path => false },
+        controller.send(:hash_for_show_url, :id => 5))
+
+      assert_equal(
+        { :controller => 'people', :action => 'index', :use_route => :index, :only_path => false },
+        controller.send(:hash_for_index_url))
+
+      assert_equal(
+        { :controller => 'people', :action => 'show', :id => 5, :use_route => :show, :only_path => true },
+        controller.send(:hash_for_show_path, :id => 5)
+      )
+    end
+
+    def test_named_route_url_method
+      controller = setup_named_route_test
+
+      assert_equal "http://named.route.test/people/5", controller.send(:show_url, :id => 5)
+      assert_equal "/people/5", controller.send(:show_path, :id => 5)
+
+      assert_equal "http://named.route.test/people", controller.send(:index_url)
+      assert_equal "/people", controller.send(:index_path)
+
+      assert_equal "http://named.route.test/admin/users", controller.send(:users_url)
+      assert_equal '/admin/users', controller.send(:users_path)
+      assert_equal '/admin/users', set.generate(controller.send(:hash_for_users_url), {:controller => 'users', :action => 'index'})
+    end
+
+    def test_named_route_url_method_with_anchor
+      controller = setup_named_route_test
+
+      assert_equal "http://named.route.test/people/5#location", controller.send(:show_url, :id => 5, :anchor => 'location')
+      assert_equal "/people/5#location", controller.send(:show_path, :id => 5, :anchor => 'location')
+
+      assert_equal "http://named.route.test/people#location", controller.send(:index_url, :anchor => 'location')
+      assert_equal "/people#location", controller.send(:index_path, :anchor => 'location')
+
+      assert_equal "http://named.route.test/admin/users#location", controller.send(:users_url, :anchor => 'location')
+      assert_equal '/admin/users#location', controller.send(:users_path, :anchor => 'location')
+
+      assert_equal "http://named.route.test/people/go/7/hello/joe/5#location",
+        controller.send(:multi_url, 7, "hello", 5, :anchor => 'location')
+
+      assert_equal "http://named.route.test/people/go/7/hello/joe/5?baz=bar#location",
+        controller.send(:multi_url, 7, "hello", 5, :baz => "bar", :anchor => 'location')
+
+      assert_equal "http://named.route.test/people?baz=bar#location",
+        controller.send(:index_url, :baz => "bar", :anchor => 'location')
+    end
+
+    def test_named_route_url_method_with_port
+      controller = setup_named_route_test
+      assert_equal "http://named.route.test:8080/people/5", controller.send(:show_url, 5, :port=>8080)
+    end
+
+    def test_named_route_url_method_with_host
+      controller = setup_named_route_test
+      assert_equal "http://some.example.com/people/5", controller.send(:show_url, 5, :host=>"some.example.com")
+    end
+
+    def test_named_route_url_method_with_ordered_parameters
+      controller = setup_named_route_test
+      assert_equal "http://named.route.test/people/go/7/hello/joe/5",
+        controller.send(:multi_url, 7, "hello", 5)
+    end
+
+    def test_named_route_url_method_with_ordered_parameters_and_hash
+      controller = setup_named_route_test
+      assert_equal "http://named.route.test/people/go/7/hello/joe/5?baz=bar",
+        controller.send(:multi_url, 7, "hello", 5, :baz => "bar")
+    end
+
+    def test_named_route_url_method_with_no_positional_arguments
+      controller = setup_named_route_test
+      assert_equal "http://named.route.test/people?baz=bar",
+        controller.send(:index_url, :baz => "bar")
+    end
+
+    def test_draw_default_route
+      ActionController::Routing.with_controllers(['users']) do
+        set.draw do |map|
+          map.connect '/:controller/:action/:id'
+        end
+
+        assert_equal 1, set.routes.size
+        route = set.routes.first
+
+        assert route.segments.last.optional?
+
+        assert_equal '/users/show/10', set.generate(:controller => 'users', :action => 'show', :id => 10)
+        assert_equal '/users/index/10', set.generate(:controller => 'users', :id => 10)
+
+        assert_equal({:controller => 'users', :action => 'index', :id => '10'}, set.recognize_path('/users/index/10'))
+        assert_equal({:controller => 'users', :action => 'index', :id => '10'}, set.recognize_path('/users/index/10/'))
+      end
+    end
+
+    def test_draw_default_route_with_default_controller
+      ActionController::Routing.with_controllers(['users']) do
+        set.draw do |map|
+          map.connect '/:controller/:action/:id', :controller => 'users'
+        end
+        assert_equal({:controller => 'users', :action => 'index'}, set.recognize_path('/'))
+      end
+    end
+
+    def test_route_with_parameter_shell
+      ActionController::Routing.with_controllers(['users', 'pages']) do
+        set.draw do |map|
+          map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /\d+/
+          map.connect '/:controller/:action/:id'
+        end
+
+        assert_equal({:controller => 'pages', :action => 'index'}, set.recognize_path('/pages'))
+        assert_equal({:controller => 'pages', :action => 'index'}, set.recognize_path('/pages/index'))
+        assert_equal({:controller => 'pages', :action => 'list'}, set.recognize_path('/pages/list'))
+
+        assert_equal({:controller => 'pages', :action => 'show', :id => '10'}, set.recognize_path('/pages/show/10'))
+        assert_equal({:controller => 'pages', :action => 'show', :id => '10'}, set.recognize_path('/page/10'))
+      end
+    end
+
+    def test_route_requirements_with_anchor_chars_are_invalid
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /^\d+/
+        end
+      end
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /\A\d+/
+        end
+      end
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /\d+$/
+        end
+      end
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /\d+\Z/
+        end
+      end
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /\d+\z/
+        end
+      end
+      assert_nothing_raised do
+        set.draw do |map|
+          map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /\d+/, :name => /^(david|jamis)/
+        end
+        assert_raises ActionController::RoutingError do
+          set.generate :controller => 'pages', :action => 'show', :id => 10
+        end
+      end
+    end
+
+    def test_route_requirements_with_invalid_http_method_is_invalid
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'valid/route', :controller => 'pages', :action => 'show', :conditions => {:method => :invalid}
+        end
+      end
+    end
+
+    def test_route_requirements_with_head_method_condition_is_invalid
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'valid/route', :controller => 'pages', :action => 'show', :conditions => {:method => :head}
+        end
+      end
+    end
+
+    def test_non_path_route_requirements_match_all
+      set.draw do |map|
+        map.connect 'page/37s', :controller => 'pages', :action => 'show', :name => /(jamis|david)/
+      end
+      assert_equal '/page/37s', set.generate(:controller => 'pages', :action => 'show', :name => 'jamis')
+      assert_raises ActionController::RoutingError do
+        set.generate(:controller => 'pages', :action => 'show', :name => 'not_jamis')
+      end
+      assert_raises ActionController::RoutingError do
+        set.generate(:controller => 'pages', :action => 'show', :name => 'nor_jamis_and_david')
+      end
+    end
+
+    def test_recognize_with_encoded_id_and_regex
+      set.draw do |map|
+        map.connect 'page/:id', :controller => 'pages', :action => 'show', :id => /[a-zA-Z0-9\+]+/
+      end
+
+      assert_equal({:controller => 'pages', :action => 'show', :id => '10'}, set.recognize_path('/page/10'))
+      assert_equal({:controller => 'pages', :action => 'show', :id => 'hello+world'}, set.recognize_path('/page/hello+world'))
+    end
+
+    def test_recognize_with_conditions
+      Object.const_set(:PeopleController, Class.new)
+
+      set.draw do |map|
+        map.with_options(:controller => "people") do |people|
+          people.people  "/people",     :action => "index",   :conditions => { :method => :get }
+          people.connect "/people",     :action => "create",  :conditions => { :method => :post }
+          people.person  "/people/:id", :action => "show",    :conditions => { :method => :get }
+          people.connect "/people/:id", :action => "update",  :conditions => { :method => :put }
+          people.connect "/people/:id", :action => "destroy", :conditions => { :method => :delete }
+        end
+      end
+
+      request.path = "/people"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("index", request.path_parameters[:action])
+
+      request.method = :post
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("create", request.path_parameters[:action])
+
+      request.method = :put
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("update", request.path_parameters[:action])
+
+      begin
+        request.method = :bacon
+        set.recognize(request)
+        flunk 'Should have raised NotImplemented'
+      rescue ActionController::NotImplemented => e
+        assert_equal [:get, :post, :put, :delete], e.allowed_methods
+      end
+
+      request.path = "/people/5"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("show", request.path_parameters[:action])
+      assert_equal("5", request.path_parameters[:id])
+
+      request.method = :put
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("update", request.path_parameters[:action])
+      assert_equal("5", request.path_parameters[:id])
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      # Use %20 for space instead.
+      results = rs.recognize_path "/file/hello%20world/how%20are%20you%3F"
+      assert results, "Recognition should have succeeded"
+      assert_equal ['hello world', 'how are you?'], results[:path]
+=======
+      request.method = :delete
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("destroy", request.path_parameters[:action])
+      assert_equal("5", request.path_parameters[:id])
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      results = rs.recognize_path "/file"
+      assert results, "Recognition should have succeeded"
+      assert_equal [], results[:path]
+=======
+      begin
+        request.method = :post
+        set.recognize(request)
+        flunk 'Should have raised MethodNotAllowed'
+      rescue ActionController::MethodNotAllowed => e
+        assert_equal [:get, :put, :delete], e.allowed_methods
+      end
+
+    ensure
+      Object.send(:remove_const, :PeopleController)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_paths_slashes_unescaped_with_ordered_parameters
+      rs.add_named_route :path, '/file/*path', :controller => 'content'
+=======
+    def test_recognize_with_alias_in_conditions
+      Object.const_set(:PeopleController, Class.new)
+
+      set.draw do |map|
+        map.people "/people", :controller => 'people', :action => "index",
+          :conditions => { :method => :get }
+        map.root   :people
+      end
+
+      request.path = "/people"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("people", request.path_parameters[:controller])
+      assert_equal("index", request.path_parameters[:action])
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      # No / to %2F in URI, only for query params.
+      x = setup_for_named_route
+      assert_equal("/file/hello/world", x.send(:path_path, 'hello/world'))
+=======
+      request.path = "/"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("people", request.path_parameters[:controller])
+      assert_equal("index", request.path_parameters[:action])
+    ensure
+      Object.send(:remove_const, :PeopleController)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_non_controllers_cannot_be_matched
+      rs.draw do |map|
+        map.connect ':controller/:action/:id'
+=======
+    def test_typo_recognition
+      Object.const_set(:ArticlesController, Class.new)
+
+      set.draw do |map|
+        map.connect 'articles/:year/:month/:day/:title',
+               :controller => 'articles', :action => 'permalink',
+               :year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_raises(ActionController::RoutingError) { rs.recognize_path("/not_a/show/10") }
+=======
+
+      request.path = "/articles/2005/11/05/a-very-interesting-article"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("permalink", request.path_parameters[:action])
+      assert_equal("2005", request.path_parameters[:year])
+      assert_equal("11", request.path_parameters[:month])
+      assert_equal("05", request.path_parameters[:day])
+      assert_equal("a-very-interesting-article", request.path_parameters[:title])
+
+    ensure
+      Object.send(:remove_const, :ArticlesController)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_paths_do_not_accept_defaults
+      assert_raises(ActionController::RoutingError) do
+        rs.draw do |map|
+          map.path 'file/*path', :controller => 'content', :action => 'show_file', :path => %w(fake default)
+          map.connect ':controller/:action/:id'
+        end
+=======
+    def test_routing_traversal_does_not_load_extra_classes
+      assert !Object.const_defined?("Profiler__"), "Profiler should not be loaded"
+      set.draw do |map|
+        map.connect '/profile', :controller => 'profile'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
+
+      request.path = '/profile'
+
+      set.recognize(request) rescue nil
+
+      assert !Object.const_defined?("Profiler__"), "Profiler should not be loaded"
+    end
+
+    def test_recognize_with_conditions_and_format
+      Object.const_set(:PeopleController, Class.new)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      rs.draw do |map|
+        map.path 'file/*path', :controller => 'content', :action => 'show_file', :path => []
+        map.connect ':controller/:action/:id'
+=======
+      set.draw do |map|
+        map.with_options(:controller => "people") do |people|
+          people.person  "/people/:id", :action => "show",    :conditions => { :method => :get }
+          people.connect "/people/:id", :action => "update",  :conditions => { :method => :put }
+          people.connect "/people/:id.:_format", :action => "show", :conditions => { :method => :get }
+        end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+
+      request.path = "/people/5"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("show", request.path_parameters[:action])
+      assert_equal("5", request.path_parameters[:id])
+
+      request.method = :put
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("update", request.path_parameters[:action])
+
+      request.path = "/people/5.png"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("show", request.path_parameters[:action])
+      assert_equal("5", request.path_parameters[:id])
+      assert_equal("png", request.path_parameters[:_format])
+    ensure
+      Object.send(:remove_const, :PeopleController)
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_should_list_options_diff_when_routing_requirements_dont_match
+      rs.draw do |map|
+        map.post 'post/:id', :controller=> 'post', :action=> 'show', :requirements => {:id => /\d+/}
+      end
+      exception = assert_raise(ActionController::RoutingError) { rs.generate(:controller => 'post', :action => 'show', :bad_param => "foo", :use_route => "post") }
+      assert_match /^post_url failed to generate/, exception.message
+      from_match = exception.message.match(/from \{[^\}]+\}/).to_s
+      assert_match /:bad_param=>"foo"/,   from_match
+      assert_match /:action=>"show"/,     from_match
+      assert_match /:controller=>"post"/, from_match
+
+      expected_match = exception.message.match(/expected: \{[^\}]+\}/).to_s
+      assert_no_match /:bad_param=>"foo"/,   expected_match
+      assert_match    /:action=>"show"/,     expected_match
+      assert_match    /:controller=>"post"/, expected_match
+
+      diff_match = exception.message.match(/diff: \{[^\}]+\}/).to_s
+      assert_match    /:bad_param=>"foo"/,   diff_match
+      assert_no_match /:action=>"show"/,     diff_match
+      assert_no_match /:controller=>"post"/, diff_match
+    end
+
+    # this specifies the case where your formerly would get a very confusing error message with an empty diff
+    def test_should_have_better_error_message_when_options_diff_is_empty
+      rs.draw do |map|
+        map.content '/content/:query', :controller => 'content', :action => 'show'
+=======
+    def test_generate_with_default_action
+      set.draw do |map|
+        map.connect "/people", :controller => "people"
+        map.connect "/people/list", :controller => "people", :action => "list"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      exception = assert_raise(ActionController::RoutingError) { rs.generate(:controller => 'content', :action => 'show', :use_route => "content") }
+      assert_match %r[:action=>"show"], exception.message
+      assert_match %r[:controller=>"content"], exception.message
+      assert_match %r[you may have ambiguous routes, or you may need to supply additional parameters for this route], exception.message
+      assert_match %r[content_url has the following required parameters: \["content", :query\] - are they all satisfied?], exception.message
+=======
+      url = set.generate(:controller => "people", :action => "list")
+      assert_equal "/people/list", url
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_dynamic_path_allowed
+      rs.draw do |map|
+        map.connect '*path', :controller => 'content', :action => 'show_file'
+      end
+=======
+    def test_root_map
+      Object.const_set(:PeopleController, Class.new)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_equal '/pages/boo', rs.generate(:controller => 'content', :action => 'show_file', :path => %w(pages boo))
+=======
+      set.draw { |map| map.root :controller => "people" }
+
+      request.path = ""
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("people", request.path_parameters[:controller])
+      assert_equal("index", request.path_parameters[:action])
+    ensure
+      Object.send(:remove_const, :PeopleController)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_dynamic_recall_paths_allowed
+      rs.draw do |map|
+        map.connect '*path', :controller => 'content', :action => 'show_file'
+      end
+=======
+    def test_namespace
+      Object.const_set(:Api, Module.new { |m| m.const_set(:ProductsController, Class.new) })
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       recall_path = ActionController::Routing::PathSegment::Result.new(%w(pages boo))
       assert_equal '/pages/boo', rs.generate({}, :controller => 'content', :action => 'show_file', :path => recall_path)
     end
@@ -1585,7 +3100,10 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
     end
 
     def test_generate_extras_not_first
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       set.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
         map.connect ':controller/:action/:id.:format'
         map.connect ':controller/:action/:id'
       end
@@ -1930,7 +3448,10 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       assert_nothing_raised { set.recognize(request) }
       assert_equal("people", request.path_parameters[:controller])
       assert_equal("index", request.path_parameters[:action])
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       request.path = "/"
       request.method = :get
       assert_nothing_raised { set.recognize(request) }
@@ -1942,104 +3463,22 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
 
     def test_typo_recognition
       Object.const_set(:ArticlesController, Class.new)
+=======
+        map.namespace 'api' do |api|
+          api.route 'inventory', :controller => "products", :action => 'inventory'
+        end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       set.draw do |map|
         map.connect 'articles/:year/:month/:day/:title',
                :controller => 'articles', :action => 'permalink',
                :year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
-
-      request.path = "/articles/2005/11/05/a-very-interesting-article"
-      request.method = :get
-      assert_nothing_raised { set.recognize(request) }
-      assert_equal("permalink", request.path_parameters[:action])
-      assert_equal("2005", request.path_parameters[:year])
-      assert_equal("11", request.path_parameters[:month])
-      assert_equal("05", request.path_parameters[:day])
-      assert_equal("a-very-interesting-article", request.path_parameters[:title])
-
-    ensure
-      Object.send(:remove_const, :ArticlesController)
-    end
-
-    def test_routing_traversal_does_not_load_extra_classes
-      assert !Object.const_defined?("Profiler__"), "Profiler should not be loaded"
-      set.draw do |map|
-        map.connect '/profile', :controller => 'profile'
-      end
-
-      request.path = '/profile'
-
-      set.recognize(request) rescue nil
-
-      assert !Object.const_defined?("Profiler__"), "Profiler should not be loaded"
-    end
-
-    def test_recognize_with_conditions_and_format
-      Object.const_set(:PeopleController, Class.new)
-
-      set.draw do |map|
-        map.with_options(:controller => "people") do |people|
-          people.person  "/people/:id", :action => "show",    :conditions => { :method => :get }
-          people.connect "/people/:id", :action => "update",  :conditions => { :method => :put }
-          people.connect "/people/:id.:_format", :action => "show", :conditions => { :method => :get }
-        end
-      end
-
-      request.path = "/people/5"
-      request.method = :get
-      assert_nothing_raised { set.recognize(request) }
-      assert_equal("show", request.path_parameters[:action])
-      assert_equal("5", request.path_parameters[:id])
-
-      request.method = :put
-      assert_nothing_raised { set.recognize(request) }
-      assert_equal("update", request.path_parameters[:action])
-
-      request.path = "/people/5.png"
-      request.method = :get
-      assert_nothing_raised { set.recognize(request) }
-      assert_equal("show", request.path_parameters[:action])
-      assert_equal("5", request.path_parameters[:id])
-      assert_equal("png", request.path_parameters[:_format])
-    ensure
-      Object.send(:remove_const, :PeopleController)
-    end
-
-    def test_generate_with_default_action
-      set.draw do |map|
-        map.connect "/people", :controller => "people"
-        map.connect "/people/list", :controller => "people", :action => "list"
-      end
-
-      url = set.generate(:controller => "people", :action => "list")
-      assert_equal "/people/list", url
-    end
-
-    def test_root_map
-      Object.const_set(:PeopleController, Class.new)
-
-      set.draw { |map| map.root :controller => "people" }
-
-      request.path = ""
-      request.method = :get
-      assert_nothing_raised { set.recognize(request) }
-      assert_equal("people", request.path_parameters[:controller])
-      assert_equal("index", request.path_parameters[:action])
-    ensure
-      Object.send(:remove_const, :PeopleController)
-    end
-
-    def test_namespace
-      Object.const_set(:Api, Module.new { |m| m.const_set(:ProductsController, Class.new) })
-
-      set.draw do |map|
-
-        map.namespace 'api' do |api|
-          api.route 'inventory', :controller => "products", :action => 'inventory'
-        end
-
-      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
 
       request.path = "/api/inventory"
       request.method = :get
@@ -2049,17 +3488,44 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
     ensure
       Object.send(:remove_const, :Api)
     end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.path = "/articles/2005/11/05/a-very-interesting-article"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("permalink", request.path_parameters[:action])
+      assert_equal("2005", request.path_parameters[:year])
+      assert_equal("11", request.path_parameters[:month])
+      assert_equal("05", request.path_parameters[:day])
+      assert_equal("a-very-interesting-article", request.path_parameters[:title])
+=======
     def test_namespaced_root_map
       Object.const_set(:Api, Module.new { |m| m.const_set(:ProductsController, Class.new) })
 
       set.draw do |map|
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    ensure
+      Object.send(:remove_const, :ArticlesController)
+    end
+=======
         map.namespace 'api' do |api|
           api.root :controller => "products"
         end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_routing_traversal_does_not_load_extra_classes
+      assert !Object.const_defined?("Profiler__"), "Profiler should not be loaded"
+      set.draw do |map|
+        map.connect '/profile', :controller => 'profile'
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
 
       request.path = "/api"
       request.method = :get
@@ -2069,10 +3535,18 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
     ensure
       Object.send(:remove_const, :Api)
     end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.path = '/profile'
+=======
     def test_namespace_with_path_prefix
       Object.const_set(:Api, Module.new { |m| m.const_set(:ProductsController, Class.new) })
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.recognize(request) rescue nil
+=======
       set.draw do |map|
 
         map.namespace 'api', :path_prefix => 'prefix' do |api|
@@ -2080,7 +3554,11 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
         end
 
       end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert !Object.const_defined?("Profiler__"), "Profiler should not be loaded"
+=======
       request.path = "/prefix/inventory"
       request.method = :get
       assert_nothing_raised { set.recognize(request) }
@@ -2088,13 +3566,361 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       assert_equal("inventory", request.path_parameters[:action])
     ensure
       Object.send(:remove_const, :Api)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_recognize_with_conditions_and_format
+      Object.const_set(:PeopleController, Class.new)
+=======
     def test_generate_finds_best_fit
       set.draw do |map|
         map.connect "/people", :controller => "people", :action => "index"
         map.connect "/ws/people", :controller => "people", :action => "index", :ws => true
       end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.draw do |map|
+        map.with_options(:controller => "people") do |people|
+          people.person  "/people/:id", :action => "show",    :conditions => { :method => :get }
+          people.connect "/people/:id", :action => "update",  :conditions => { :method => :put }
+          people.connect "/people/:id.:_format", :action => "show", :conditions => { :method => :get }
+        end
+      end
+=======
+      url = set.generate(:controller => "people", :action => "index", :ws => true)
+      assert_equal "/ws/people", url
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.path = "/people/5"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("show", request.path_parameters[:action])
+      assert_equal("5", request.path_parameters[:id])
+=======
+    def test_generate_changes_controller_module
+      set.draw { |map| map.connect ':controller/:action/:id' }
+      current = { :controller => "bling/bloop", :action => "bap", :id => 9 }
+      url = set.generate({:controller => "foo/bar", :action => "baz", :id => 7}, current)
+      assert_equal "/foo/bar/baz/7", url
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.method = :put
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("update", request.path_parameters[:action])
+=======
+    def test_id_is_not_impossibly_sticky
+      set.draw do |map|
+        map.connect 'foo/:number', :controller => "people", :action => "index"
+        map.connect ':controller/:action/:id'
+      end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.path = "/people/5.png"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("show", request.path_parameters[:action])
+      assert_equal("5", request.path_parameters[:id])
+      assert_equal("png", request.path_parameters[:_format])
+    ensure
+      Object.send(:remove_const, :PeopleController)
+=======
+      url = set.generate({:controller => "people", :action => "index", :number => 3},
+        {:controller => "people", :action => "index", :id => "21"})
+      assert_equal "/foo/3", url
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_generate_with_default_action
+=======
+    def test_id_is_sticky_when_it_ought_to_be
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+        map.connect "/people", :controller => "people"
+        map.connect "/people/list", :controller => "people", :action => "list"
+=======
+        map.connect ':controller/:id/:action'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      url = set.generate(:controller => "people", :action => "list")
+      assert_equal "/people/list", url
+=======
+      url = set.generate({:action => "destroy"}, {:controller => "people", :action => "show", :id => "7"})
+      assert_equal "/people/7/destroy", url
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_root_map
+      Object.const_set(:PeopleController, Class.new)
+=======
+    def test_use_static_path_when_possible
+      set.draw do |map|
+        map.connect 'about', :controller => "welcome", :action => "about"
+        map.connect ':controller/:action/:id'
+      end
+
+      url = set.generate({:controller => "welcome", :action => "about"},
+        {:controller => "welcome", :action => "get", :id => "7"})
+      assert_equal "/about", url
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.draw { |map| map.root :controller => "people" }
+=======
+    def test_generate
+      set.draw { |map| map.connect ':controller/:action/:id' }
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.path = ""
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("people", request.path_parameters[:controller])
+      assert_equal("index", request.path_parameters[:action])
+    ensure
+      Object.send(:remove_const, :PeopleController)
+=======
+      args = { :controller => "foo", :action => "bar", :id => "7", :x => "y" }
+      assert_equal "/foo/bar/7?x=y", set.generate(args)
+      assert_equal ["/foo/bar/7", [:x]], set.generate_extras(args)
+      assert_equal [:x], set.extra_keys(args)
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_namespace
+      Object.const_set(:Api, Module.new { |m| m.const_set(:ProductsController, Class.new) })
+=======
+    def test_named_routes_are_never_relative_to_modules
+      set.draw do |map|
+        map.connect "/connection/manage/:action", :controller => 'connection/manage'
+        map.connect "/connection/connection", :controller => "connection/connection"
+        map.family_connection "/connection", :controller => "connection"
+      end
+
+      url = set.generate({:controller => "connection"}, {:controller => 'connection/manage'})
+      assert_equal "/connection/connection", url
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
+      url = set.generate({:use_route => :family_connection, :controller => "connection"}, {:controller => 'connection/manage'})
+      assert_equal "/connection", url
+    end
+
+    def test_action_left_off_when_id_is_recalled
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
+        map.connect ':controller/:action/:id'
+      end
+      assert_equal '/post', set.generate(
+        {:controller => 'post', :action => 'index'},
+        {:controller => 'post', :action => 'show', :id => '10'}
+      )
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+        map.namespace 'api' do |api|
+          api.route 'inventory', :controller => "products", :action => 'inventory'
+        end
+
+=======
+    def test_query_params_will_be_shown_when_recalled
+      set.draw do |map|
+        map.connect 'show_post/:parameter', :controller => 'post', :action => 'show'
+        map.connect ':controller/:action/:id'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
+      assert_equal '/post/edit?parameter=1', set.generate(
+        {:action => 'edit', :parameter => 1},
+        {:controller => 'post', :action => 'show', :parameter => 1}
+      )
+    end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.path = "/api/inventory"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("api/products", request.path_parameters[:controller])
+      assert_equal("inventory", request.path_parameters[:action])
+    ensure
+      Object.send(:remove_const, :Api)
+=======
+    def test_expiry_determination_should_consider_values_with_to_param
+      set.draw { |map| map.connect 'projects/:project_id/:controller/:action' }
+      assert_equal '/projects/1/post/show', set.generate(
+        {:action => 'show', :project_id => 1},
+        {:controller => 'post', :action => 'show', :project_id => '1'})
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_namespaced_root_map
+      Object.const_set(:Api, Module.new { |m| m.const_set(:ProductsController, Class.new) })
+
+=======
+    def test_generate_all
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+
+        map.namespace 'api' do |api|
+          api.root :controller => "products"
+        end
+
+=======
+        map.connect 'show_post/:id', :controller => 'post', :action => 'show'
+        map.connect ':controller/:action/:id'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+
+      request.path = "/api"
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+      assert_equal("api/products", request.path_parameters[:controller])
+      assert_equal("index", request.path_parameters[:action])
+    ensure
+      Object.send(:remove_const, :Api)
+=======
+      all = set.generate(
+        {:action => 'show', :id => 10, :generate_all => true},
+        {:controller => 'post', :action => 'show'}
+      )
+      assert_equal 2, all.length
+      assert_equal '/show_post/10', all.first
+      assert_equal '/post/show/10', all.last
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_namespace_with_path_prefix
+      Object.const_set(:Api, Module.new { |m| m.const_set(:ProductsController, Class.new) })
+
+=======
+    def test_named_route_in_nested_resource
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+
+        map.namespace 'api', :path_prefix => 'prefix' do |api|
+          api.route 'inventory', :controller => "products", :action => 'inventory'
+=======
+        map.resources :projects do |project|
+          project.milestones 'milestones', :controller => 'milestones', :action => 'index'
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+        end
+
+      end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.path = "/prefix/inventory"
+=======
+      request.path = "/projects/1/milestones"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      request.method = :get
+      assert_nothing_raised { set.recognize(request) }
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+      assert_equal("api/products", request.path_parameters[:controller])
+      assert_equal("inventory", request.path_parameters[:action])
+    ensure
+      Object.send(:remove_const, :Api)
+=======
+      assert_equal("milestones", request.path_parameters[:controller])
+      assert_equal("index", request.path_parameters[:action])
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+    end
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+    def test_generate_finds_best_fit
+=======
+    def test_setting_root_in_namespace_using_symbol
+      assert_nothing_raised do
+        set.draw do |map|
+          map.namespace :admin do |admin|
+            admin.root :controller => 'home'
+          end
+        end
+      end
+    end
+
+    def test_setting_root_in_namespace_using_string
+      assert_nothing_raised do
+        set.draw do |map|
+          map.namespace 'admin' do |admin|
+            admin.root :controller => 'home'
+          end
+        end
+      end
+    end
+
+    def test_route_requirements_with_unsupported_regexp_options_must_error
+      assert_raises ArgumentError do
+        set.draw do |map|
+          map.connect 'page/:name', :controller => 'pages',
+            :action => 'show',
+            :requirements => {:name => /(david|jamis)/m}
+        end
+      end
+    end
+
+    def test_route_requirements_with_supported_options_must_not_error
+      assert_nothing_raised do
+        set.draw do |map|
+          map.connect 'page/:name', :controller => 'pages',
+            :action => 'show',
+            :requirements => {:name => /(david|jamis)/i}
+        end
+      end
+      assert_nothing_raised do
+        set.draw do |map|
+          map.connect 'page/:name', :controller => 'pages',
+            :action => 'show',
+            :requirements => {:name => / # Desperately overcommented regexp
+                                        ( #Either
+                                         david #The Creator
+                                        | #Or
+                                          jamis #The Deployer
+                                        )/x}
+        end
+      end
+    end
+
+    def test_route_requirement_recognize_with_ignore_case
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      set.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+        map.connect "/people", :controller => "people", :action => "index"
+        map.connect "/ws/people", :controller => "people", :action => "index", :ws => true
+=======
+        map.connect 'page/:name', :controller => 'pages',
+          :action => 'show',
+          :requirements => {:name => /(david|jamis)/i}
+      end
+      assert_equal({:controller => 'pages', :action => 'show', :name => 'jamis'}, set.recognize_path('/page/jamis'))
+      assert_raises ActionController::RoutingError do
+        set.recognize_path('/page/davidjamis')
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
 
       url = set.generate(:controller => "people", :action => "index", :ws => true)
       assert_equal "/ws/people", url
@@ -2105,23 +3931,45 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       current = { :controller => "bling/bloop", :action => "bap", :id => 9 }
       url = set.generate({:controller => "foo/bar", :action => "baz", :id => 7}, current)
       assert_equal "/foo/bar/baz/7", url
+=======
+      assert_equal({:controller => 'pages', :action => 'show', :name => 'DAVID'}, set.recognize_path('/page/DAVID'))
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_id_is_not_impossibly_sticky
+=======
+    def test_route_requirement_generate_with_ignore_case
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       set.draw do |map|
         map.connect 'foo/:number', :controller => "people", :action => "index"
         map.connect ':controller/:action/:id'
       end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
 
       url = set.generate({:controller => "people", :action => "index", :number => 3},
         {:controller => "people", :action => "index", :id => "21"})
       assert_equal "/foo/3", url
+=======
+      url = set.generate({:controller => 'pages', :action => 'show', :name => 'david'})
+      assert_equal "/page/david", url
+      assert_raises ActionController::RoutingError do
+        url = set.generate({:controller => 'pages', :action => 'show', :name => 'davidjamis'})
+      end
+      url = set.generate({:controller => 'pages', :action => 'show', :name => 'JAMIS'})
+      assert_equal "/page/JAMIS", url
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_id_is_sticky_when_it_ought_to_be
+=======
+    def test_route_requirement_recognize_with_extended_syntax
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       set.draw do |map|
         map.connect ':controller/:id/:action'
       end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
 
       url = set.generate({:action => "destroy"}, {:controller => "people", :action => "show", :id => "7"})
       assert_equal "/people/7/destroy", url
@@ -2131,7 +3979,17 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       set.draw do |map|
         map.connect 'about', :controller => "welcome", :action => "about"
         map.connect ':controller/:action/:id'
+=======
+      assert_equal({:controller => 'pages', :action => 'show', :name => 'jamis'}, set.recognize_path('/page/jamis'))
+      assert_equal({:controller => 'pages', :action => 'show', :name => 'david'}, set.recognize_path('/page/david'))
+      assert_raises ActionController::RoutingError do
+        set.recognize_path('/page/david #The Creator')
       end
+      assert_raises ActionController::RoutingError do
+        set.recognize_path('/page/David')
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
+      end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
 
       url = set.generate({:controller => "welcome", :action => "about"},
         {:controller => "welcome", :action => "get", :id => "7"})
@@ -2145,14 +4003,32 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       assert_equal "/foo/bar/7?x=y", set.generate(args)
       assert_equal ["/foo/bar/7", [:x]], set.generate_extras(args)
       assert_equal [:x], set.extra_keys(args)
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_named_routes_are_never_relative_to_modules
+=======
+    def test_route_requirement_generate_with_extended_syntax
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       set.draw do |map|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
         map.connect "/connection/manage/:action", :controller => 'connection/manage'
         map.connect "/connection/connection", :controller => "connection/connection"
         map.family_connection "/connection", :controller => "connection"
+=======
+        map.connect 'page/:name', :controller => 'pages',
+          :action => 'show',
+          :requirements => {:name => / # Desperately overcommented regexp
+                                      ( #Either
+                                       david #The Creator
+                                      | #Or
+                                        jamis #The Deployer
+                                      )/x}
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
 
       url = set.generate({:controller => "connection"}, {:controller => 'connection/manage'})
       assert_equal "/connection/connection", url
@@ -2164,7 +4040,14 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
     def test_action_left_off_when_id_is_recalled
       set.draw do |map|
         map.connect ':controller/:action/:id'
+=======
+      url = set.generate({:controller => 'pages', :action => 'show', :name => 'david'})
+      assert_equal "/page/david", url
+      assert_raises ActionController::RoutingError do
+        url = set.generate({:controller => 'pages', :action => 'show', :name => 'davidjamis'})
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       assert_equal '/post', set.generate(
         {:controller => 'post', :action => 'index'},
         {:controller => 'post', :action => 'show', :id => '10'}
@@ -2175,13 +4058,21 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       set.draw do |map|
         map.connect 'show_post/:parameter', :controller => 'post', :action => 'show'
         map.connect ':controller/:action/:id'
+=======
+      assert_raises ActionController::RoutingError do
+        url = set.generate({:controller => 'pages', :action => 'show', :name => 'JAMIS'})
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
       assert_equal '/post/edit?parameter=1', set.generate(
         {:action => 'edit', :parameter => 1},
         {:controller => 'post', :action => 'show', :parameter => 1}
       )
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_expiry_determination_should_consider_values_with_to_param
       set.draw { |map| map.connect 'projects/:project_id/:controller/:action' }
       assert_equal '/projects/1/post/show', set.generate(
@@ -2270,9 +4161,13 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
     end
 
     def test_route_requirement_recognize_with_ignore_case
+=======
+    def test_route_requirement_generate_with_xi_modifiers
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       set.draw do |map|
         map.connect 'page/:name', :controller => 'pages',
           :action => 'show',
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
           :requirements => {:name => /(david|jamis)/i}
       end
       assert_equal({:controller => 'pages', :action => 'show', :name => 'jamis'}, set.recognize_path('/page/jamis'))
@@ -2292,12 +4187,24 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       assert_equal "/page/david", url
       assert_raises ActionController::RoutingError do
         url = set.generate({:controller => 'pages', :action => 'show', :name => 'davidjamis'})
+=======
+          :requirements => {:name => / # Desperately overcommented regexp
+                                      ( #Either
+                                       david #The Creator
+                                      | #Or
+                                        jamis #The Deployer
+                                      )/xi}
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
       url = set.generate({:controller => 'pages', :action => 'show', :name => 'JAMIS'})
       assert_equal "/page/JAMIS", url
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_route_requirement_recognize_with_extended_syntax
+=======
+    def test_route_requirement_recognize_with_xi_modifiers
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       set.draw do |map|
         map.connect 'page/:name', :controller => 'pages',
           :action => 'show',
@@ -2306,6 +4213,7 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
                                        david #The Creator
                                       | #Or
                                         jamis #The Deployer
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
                                       )/x}
       end
       assert_equal({:controller => 'pages', :action => 'show', :name => 'jamis'}, set.recognize_path('/page/jamis'))
@@ -2336,9 +4244,17 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
       end
       assert_raises ActionController::RoutingError do
         url = set.generate({:controller => 'pages', :action => 'show', :name => 'JAMIS'})
+=======
+                                      )/xi}
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
       end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
+=======
+      assert_equal({:controller => 'pages', :action => 'show', :name => 'JAMIS'}, set.recognize_path('/page/JAMIS'))
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/routing_test.rb
     def test_route_requirement_generate_with_xi_modifiers
       set.draw do |map|
         map.connect 'page/:name', :controller => 'pages',
@@ -2369,6 +4285,8 @@ uses_mocha 'LegacyRouteSet, Route, RouteSet and RouteLoading' do
     end
   end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/routing_test.rb
   class RouteLoadingTest < Test::Unit::TestCase
     def setup
       routes.instance_variable_set '@routes_last_modified', nil

@@ -46,12 +46,15 @@ class HasManyAssociationsTest < ActiveRecord::TestCase
 
   def test_counting_with_column_name_and_hash
     assert_equal 2, Firm.find(:first).plain_clients.count(:name)
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/associations/has_many_associations_test.rb
   end
 
   def test_counting_with_association_limit
     firm = companies(:first_firm)
     assert_equal firm.limited_clients.length, firm.limited_clients.size
     assert_equal firm.limited_clients.length, firm.limited_clients.count
+=======
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/associations/has_many_associations_test.rb
   end
 
   def test_finding
@@ -408,6 +411,7 @@ class HasManyAssociationsTest < ActiveRecord::TestCase
     assert_equal 3, company.clients_of_firm.size
   end
 
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/associations/has_many_associations_test.rb
   def test_collection_size_twice_for_regressions
     post = posts(:thinking)
     assert_equal 0, post.readers.size
@@ -420,6 +424,8 @@ class HasManyAssociationsTest < ActiveRecord::TestCase
     assert_equal size1, size2
   end
 
+=======
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/associations/has_many_associations_test.rb
   def test_build_many
     company = companies(:first_firm)
     new_clients = assert_no_queries { company.clients_of_firm.build([{"name" => "Another Client"}, {"name" => "Another Client II"}]) }

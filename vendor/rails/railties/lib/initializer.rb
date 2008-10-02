@@ -49,7 +49,10 @@ module Rails
     end
 
     def env
+<<<<<<< HEAD:vendor/rails/railties/lib/initializer.rb
       require 'active_support/string_inquirer'
+=======
+>>>>>>> i18n:vendor/rails/railties/lib/initializer.rb
       ActiveSupport::StringInquirer.new(RAILS_ENV)
     end
 
@@ -173,6 +176,7 @@ module Rails
       # Observers are loaded after plugins in case Observers or observed models are modified by plugins.
       load_observers
 
+<<<<<<< HEAD:vendor/rails/railties/lib/initializer.rb
       # Load view path cache
       load_view_paths
 
@@ -182,6 +186,8 @@ module Rails
       # Disable dependency loading during request cycle
       disable_dependency_loading
 
+=======
+>>>>>>> i18n:vendor/rails/railties/lib/initializer.rb
       # Flag initialized
       Rails.initialized = true
     end
@@ -439,8 +445,12 @@ Run `rake gems:install` to install the missing gems.
         framework.to_s.camelize.constantize.const_get("Base").logger ||= Rails.logger
       end
 
+<<<<<<< HEAD:vendor/rails/railties/lib/initializer.rb
       ActiveSupport::Dependencies.logger ||= Rails.logger
       Rails.cache.logger ||= Rails.logger
+=======
+      RAILS_CACHE.logger ||= RAILS_DEFAULT_LOGGER
+>>>>>>> i18n:vendor/rails/railties/lib/initializer.rb
     end
 
     # Sets +ActionController::Base#view_paths+ and +ActionMailer::Base#template_root+
@@ -448,11 +458,19 @@ Run `rake gems:install` to install the missing gems.
     # paths have already been set, it is not changed, otherwise it is
     # set to use Configuration#view_path.
     def initialize_framework_views
+<<<<<<< HEAD:vendor/rails/railties/lib/initializer.rb
       if configuration.frameworks.include?(:action_view)
         view_path = ActionView::PathSet::Path.new(configuration.view_path, false)
         ActionMailer::Base.template_root ||= view_path if configuration.frameworks.include?(:action_mailer)
         ActionController::Base.view_paths = view_path if configuration.frameworks.include?(:action_controller) && ActionController::Base.view_paths.empty?
       end
+=======
+      ActionView::PathSet::Path.eager_load_templates! if configuration.cache_classes
+      view_path = ActionView::PathSet::Path.new(configuration.view_path)
+
+      ActionMailer::Base.template_root ||= view_path if configuration.frameworks.include?(:action_mailer)
+      ActionController::Base.view_paths = view_path if configuration.frameworks.include?(:action_controller) && ActionController::Base.view_paths.empty?
+>>>>>>> i18n:vendor/rails/railties/lib/initializer.rb
     end
 
     # If Action Controller is not one of the loaded frameworks (Configuration#frameworks)
@@ -539,12 +557,15 @@ Run `rake gems:install` to install the missing gems.
       Dispatcher.define_dispatcher_callbacks(configuration.cache_classes)
       Dispatcher.new(Rails.logger).send :run_callbacks, :prepare_dispatch
     end
+<<<<<<< HEAD:vendor/rails/railties/lib/initializer.rb
 
     def disable_dependency_loading
       if configuration.cache_classes && !configuration.dependency_loading
         ActiveSupport::Dependencies.unhook!
       end
     end
+=======
+>>>>>>> i18n:vendor/rails/railties/lib/initializer.rb
   end
 
   # The Configuration class holds all the parameters for the Initializer and

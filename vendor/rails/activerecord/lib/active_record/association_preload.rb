@@ -222,6 +222,7 @@ module ActiveRecord
 
           table_name = klass.quoted_table_name
           primary_key = klass.primary_key
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/association_preload.rb
           column_type = klass.columns.detect{|c| c.name == primary_key}.type
           ids = id_map.keys.uniq.map do |id|
             if column_type == :integer
@@ -233,7 +234,23 @@ module ActiveRecord
             end
           end
           conditions = "#{table_name}.#{connection.quote_column_name(primary_key)} #{in_or_equals_for_ids(ids)}"
+=======
+          conditions = "#{table_name}.#{connection.quote_column_name(primary_key)} IN (?)"
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/association_preload.rb
           conditions << append_conditions(options, preload_options)
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/association_preload.rb
+=======
+          column_type = klass.columns.detect{|c| c.name == primary_key}.type
+          ids = id_map.keys.uniq.map do |id|
+            if column_type == :integer
+              id.to_i
+            elsif column_type == :float
+              id.to_f
+            else
+              id
+            end
+          end
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/association_preload.rb
           associated_records = klass.find(:all, :conditions => [conditions, ids],
                                           :include => options[:include],
                                           :select => options[:select],
@@ -248,7 +265,11 @@ module ActiveRecord
         table_name = reflection.klass.quoted_table_name
 
         if interface = reflection.options[:as]
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/association_preload.rb
           conditions = "#{reflection.klass.quoted_table_name}.#{connection.quote_column_name "#{interface}_id"} #{in_or_equals_for_ids(ids)} and #{reflection.klass.quoted_table_name}.#{connection.quote_column_name "#{interface}_type"} = '#{self.base_class.sti_name}'"
+=======
+          conditions = "#{reflection.klass.quoted_table_name}.#{connection.quote_column_name "#{interface}_id"} IN (?) and #{reflection.klass.quoted_table_name}.#{connection.quote_column_name "#{interface}_type"} = '#{self.base_class.sti_name}'"
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/association_preload.rb
         else
           foreign_key = reflection.primary_key_name
           conditions = "#{reflection.klass.quoted_table_name}.#{foreign_key} #{in_or_equals_for_ids(ids)}"

@@ -230,7 +230,11 @@ class FormTagHelperTest < ActionView::TestCase
 
   def test_submit_tag_with_no_onclick_options
     assert_dom_equal(
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/form_tag_helper_test.rb
       %(<input name='commit' type='submit' value='Save' onclick="if (window.hiddenCommit) { window.hiddenCommit.setAttribute('value', this.value); }else { hiddenCommit = this.cloneNode(false);hiddenCommit.setAttribute('type', 'hidden');this.form.appendChild(hiddenCommit); }this.setAttribute('originalValue', this.value);this.disabled = true;this.value='Saving...';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue');this.disabled = false; }return result;" />),
+=======
+      %(<input name='commit' type='submit' value='Save' onclick="this.setAttribute('originalValue', this.value);this.disabled=true;this.value='Saving...';result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue'); this.disabled = false };return result;" />),
+>>>>>>> i18n:vendor/rails/actionpack/test/template/form_tag_helper_test.rb
       submit_tag("Save", :disable_with => "Saving...")
     )
   end
@@ -241,6 +245,7 @@ class FormTagHelperTest < ActionView::TestCase
       submit_tag("Save", :confirm => "Are you sure?")
     )
   end
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/form_tag_helper_test.rb
   
   def test_image_submit_tag_with_confirmation
     assert_dom_equal(
@@ -248,6 +253,8 @@ class FormTagHelperTest < ActionView::TestCase
       image_submit_tag("save.gif", :confirm => "Are you sure?")
     )
   end
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/template/form_tag_helper_test.rb
 
   def test_pass
     assert_equal 1, 1

@@ -19,11 +19,14 @@ class ContentTypeController < ActionController::Base
     render :text => "hello world!"
   end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/content_type_test.rb
   def render_nil_charset_from_body
     response.charset = nil
     render :text => "hello world!"
   end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/content_type_test.rb
   def render_default_for_rhtml
   end
 
@@ -131,6 +134,7 @@ class ContentTypeTest < Test::Unit::TestCase
     get :render_change_for_rxml
     assert_equal Mime::HTML, @response.content_type
     assert_equal "utf-8", @response.charset
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/content_type_test.rb
   end
 end
 
@@ -144,7 +148,25 @@ class AcceptBasedContentTypeTest < ActionController::TestCase
 
   def teardown
     ActionController::Base.use_accept_header = false
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/content_type_test.rb
   end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/content_type_test.rb
+=======
+end
+
+class AcceptBasedContentTypeTest < ActionController::TestCase
+
+  tests ContentTypeController
+
+  def setup
+    ActionController::Base.use_accept_header = true
+  end
+
+  def teardown
+    ActionController::Base.use_accept_header = false
+  end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/content_type_test.rb
 
 
   def test_render_default_content_types_for_respond_to

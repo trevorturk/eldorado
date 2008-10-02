@@ -253,6 +253,7 @@ class IntegrationProcessTest < ActionController::IntegrationTest
     session :off
 
     def get
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
       respond_to do |format|
         format.html { render :text => "OK", :status => 200 }
         format.js { render :text => "JS OK", :status => 200 }
@@ -261,12 +262,26 @@ class IntegrationProcessTest < ActionController::IntegrationTest
 
     def get_with_params
       render :text => "foo: #{params[:foo]}", :status => 200
+=======
+      render :text => "OK", :status => 200
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
     end
 
     def post
       render :text => "Created", :status => 201
     end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
+=======
 
+    def cookie_monster
+      cookies["cookie_1"] = nil
+      cookies["cookie_3"] = "chocolate"
+      render :text => "Gone", :status => 410
+    end
+  end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
+
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
     def cookie_monster
       cookies["cookie_1"] = nil
       cookies["cookie_3"] = "chocolate"
@@ -278,6 +293,8 @@ class IntegrationProcessTest < ActionController::IntegrationTest
     end
   end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
   def test_get
     with_test_route_set do
       get '/get'
@@ -285,9 +302,12 @@ class IntegrationProcessTest < ActionController::IntegrationTest
       assert_equal "OK", status_message
       assert_equal "200 OK", response.headers["Status"]
       assert_equal ["200 OK"], headers["status"]
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_response 200
       assert_response :success
       assert_response :ok
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_equal [], response.headers["cookie"]
       assert_equal [], headers["cookie"]
       assert_equal({}, cookies)
@@ -304,9 +324,12 @@ class IntegrationProcessTest < ActionController::IntegrationTest
       assert_equal "Created", status_message
       assert_equal "201 Created", response.headers["Status"]
       assert_equal ["201 Created"], headers["status"]
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_response 201
       assert_response :success
       assert_response :created
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_equal [], response.headers["cookie"]
       assert_equal [], headers["cookie"]
       assert_equal({}, cookies)
@@ -325,20 +348,29 @@ class IntegrationProcessTest < ActionController::IntegrationTest
       assert_equal "Gone", status_message
       assert_equal "410 Gone", response.headers["Status"]
       assert_equal ["410 Gone"], headers["status"]
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_response 410
       assert_response :gone
       assert_equal ["cookie_1=; path=/", "cookie_3=chocolate; path=/"], response.headers["Set-Cookie"]
+=======
+      assert_equal nil, response.headers["Set-Cookie"]
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_equal ["cookie_1=; path=/", "cookie_3=chocolate; path=/"], headers['set-cookie']
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_equal [
         CGI::Cookie::new("name" => "cookie_1", "value" => ""),
         CGI::Cookie::new("name" => "cookie_3", "value" => "chocolate")
       ], response.headers["cookie"]
+=======
+      assert_equal [[], ["chocolate"]], response.headers["cookie"]
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
       assert_equal [], headers["cookie"]
       assert_equal({"cookie_1"=>"", "cookie_2"=>"oatmeal", "cookie_3"=>"chocolate"}, cookies)
       assert_equal "Gone", response.body
     end
   end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
   def test_redirect
     with_test_route_set do
       get '/redirect'
@@ -397,12 +429,20 @@ class IntegrationProcessTest < ActionController::IntegrationTest
     end
   end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
   private
     def with_test_route_set
       with_routing do |set|
         set.draw do |map|
           map.with_options :controller => "IntegrationProcessTest::Integration" do |c|
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/integration_test.rb
             c.connect "/:action"
+=======
+            c.connect '/get', :action => "get"
+            c.connect '/post', :action => "post"
+            c.connect '/cookie_monster', :action => "cookie_monster"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/integration_test.rb
           end
         end
         yield

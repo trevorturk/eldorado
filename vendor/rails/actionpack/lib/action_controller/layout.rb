@@ -235,6 +235,30 @@ module ActionController #:nodoc:
       end
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/layout.rb
+=======
+    protected
+      def render_with_a_layout(options = nil, extra_options = {}, &block) #:nodoc:
+        template_with_options = options.is_a?(Hash)
+
+        if (layout = pick_layout(template_with_options, options)) && apply_layout?(template_with_options, options)
+          options = options.merge :layout => false if template_with_options
+          logger.info("Rendering template within #{layout}") if logger
+
+          content_for_layout = render_with_no_layout(options, extra_options, &block)
+          erase_render_results
+          add_variables_to_assigns
+          @template.instance_variable_set("@content_for_layout", content_for_layout)
+          response.layout = layout
+          status = template_with_options ? options[:status] : nil
+          render_for_text(@template.render(layout), status)
+        else
+          render_with_no_layout(options, extra_options, &block)
+        end
+      end
+
+
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/layout.rb
     private
       def candidate_for_layout?(options)
         options.values_at(:text, :xml, :json, :file, :inline, :partial, :nothing, :update).compact.empty? &&
@@ -272,6 +296,7 @@ module ActionController #:nodoc:
       end
 
       def layout_directory?(layout_name)
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/layout.rb
         @template.__send__(:_pick_template, "#{File.join('layouts', layout_name)}.#{@template.template_format}") ? true : false
       rescue ActionView::MissingTemplate
         false
@@ -279,6 +304,9 @@ module ActionController #:nodoc:
 
       def default_template_format
         response.template.template_format
+=======
+        @template.file_exists?("#{File.join('layouts', layout_name)}.#{@template.template_format}")
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/layout.rb
       end
   end
 end

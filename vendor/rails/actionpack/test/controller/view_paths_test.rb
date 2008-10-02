@@ -54,7 +54,14 @@ class ViewLoadPathsTest < Test::Unit::TestCase
     assert_equal [FIXTURE_LOAD_PATH, 'foo', 'bar', 'baz'], @controller.view_paths
 
     @controller.append_view_path(FIXTURE_LOAD_PATH)
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/view_paths_test.rb
     assert_equal [FIXTURE_LOAD_PATH, 'foo', 'bar', 'baz', FIXTURE_LOAD_PATH], @controller.view_paths
+=======
+    assert_equal ['foo', 'bar', 'baz', FIXTURE_LOAD_PATH], @controller.view_paths
+
+    @controller.append_view_path([FIXTURE_LOAD_PATH])
+    assert_equal ['foo', 'bar', 'baz', FIXTURE_LOAD_PATH], @controller.view_paths
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/view_paths_test.rb
   end
 
   def test_controller_prepends_view_path_correctly
@@ -65,7 +72,14 @@ class ViewLoadPathsTest < Test::Unit::TestCase
     assert_equal ['foo', 'bar', 'baz', FIXTURE_LOAD_PATH], @controller.view_paths
 
     @controller.prepend_view_path(FIXTURE_LOAD_PATH)
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/view_paths_test.rb
     assert_equal [FIXTURE_LOAD_PATH, 'foo', 'bar', 'baz', FIXTURE_LOAD_PATH], @controller.view_paths
+=======
+    assert_equal [FIXTURE_LOAD_PATH, 'foo', 'bar', 'baz'], @controller.view_paths
+
+    @controller.prepend_view_path([FIXTURE_LOAD_PATH])
+    assert_equal [FIXTURE_LOAD_PATH, 'foo', 'bar', 'baz'], @controller.view_paths
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/view_paths_test.rb
   end
 
   def test_template_appends_view_path_correctly

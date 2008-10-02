@@ -37,7 +37,11 @@ module ActiveRecord
       $queries_executed = []
       yield
     ensure
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/test_case.rb
       assert_equal num, $queries_executed.size, "#{$queries_executed.size} instead of #{num} queries were executed.#{$queries_executed.size == 0 ? '' : "\nQueries:\n#{$queries_executed.join("\n")}"}"
+=======
+      assert_equal num, $queries_executed.size, "#{$queries_executed.size} instead of #{num} queries were executed."
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/test_case.rb
     end
 
     def assert_no_queries(&block)

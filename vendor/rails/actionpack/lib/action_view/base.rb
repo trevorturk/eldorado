@@ -162,6 +162,10 @@ module ActionView #:nodoc:
 
     attr_accessor :base_path, :assigns, :template_extension
     attr_accessor :controller
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
+=======
+    attr_accessor :_first_render, :_last_render
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
 
     attr_writer :template_format
 
@@ -169,7 +173,10 @@ module ActionView #:nodoc:
 
     class << self
       delegate :erb_trim_mode=, :to => 'ActionView::TemplateHandlers::ERB'
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
       delegate :logger, :to => 'ActionController::Base'
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
     end
 
     def self.cache_template_loading=(*args)
@@ -182,6 +189,7 @@ module ActionView #:nodoc:
       ActiveSupport::Deprecation.warn(
         "config.action_view.cache_template_extensions option has been" +
         "deprecated and has no effect. Please remove it from your config files.", caller)
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
     end
 
     # Templates that are exempt from layouts
@@ -193,6 +201,8 @@ module ActionView #:nodoc:
         extension.is_a?(Regexp) ? extension : /\.#{Regexp.escape(extension.to_s)}$/
       end
       @@exempt_from_layout.merge(regexps)
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
     end
 
     # Specify whether RJS responses should be wrapped in a try/catch block
@@ -214,6 +224,7 @@ module ActionView #:nodoc:
     end
     include CompiledTemplates
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
     def self.process_view_paths(value)
       ActionView::PathSet.new(Array(value))
     end
@@ -228,14 +239,32 @@ module ActionView #:nodoc:
       def include(*args)
         super(*args)
         @receiver.extend(*args)
+=======
+    def self.helper_modules #:nodoc:
+      helpers = []
+      Dir.entries(File.expand_path("#{File.dirname(__FILE__)}/helpers")).sort.each do |file|
+        next unless file =~ /^([a-z][a-z_]*_helper).rb$/
+        require "action_view/helpers/#{$1}"
+        helper_module_name = $1.camelize
+        if Helpers.const_defined?(helper_module_name)
+          helpers << Helpers.const_get(helper_module_name)
+        end
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
       end
+    end
+
+    def self.process_view_paths(value)
+      ActionView::PathSet.new(Array(value))
     end
 
     def initialize(view_paths = [], assigns_for_first_render = {}, controller = nil)#:nodoc:
       @assigns = assigns_for_first_render
       @assigns_added = nil
       @controller = controller
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
       @helpers = ProxyModule.new(self)
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
       self.view_paths = view_paths
     end
 
@@ -251,44 +280,175 @@ module ActionView #:nodoc:
       local_assigns ||= {}
 
       if options.is_a?(String)
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
         render(:file => options, :locals => local_assigns)
+=======
+        render_file(options, nil, local_assigns)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
       elsif options == :update
         update_page(&block)
       elsif options.is_a?(Hash)
         options = options.reverse_merge(:locals => {})
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
         if options[:layout]
           _render_with_layout(options, local_assigns, &block)
+=======
+
+        if partial_layout = options.delete(:layout)
+          if block_given?
+            wrap_content_for_layout capture(&block) do
+              concat(render(options.merge(:partial => partial_layout)))
+            end
+          else
+            wrap_content_for_layout render(options) do
+              render(options.merge(:partial => partial_layout))
+            end
+          end
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
         elsif options[:file]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
           if options[:use_full_path]
             ActiveSupport::Deprecation.warn("use_full_path option has been deprecated and has no affect.", caller)
           end
 
           _pick_template(options[:file]).render_template(self, options[:locals])
+=======
+          render_file(options[:file], nil, options[:locals])
+        elsif options[:partial] && options[:collection]
+          render_partial_collection(options[:partial], options[:collection], options[:spacer_template], options[:locals], options[:as])
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
         elsif options[:partial]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
           render_partial(options)
+=======
+          render_partial(options[:partial], options[:object], options[:locals])
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
         elsif options[:inline]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
           InlineTemplate.new(options[:inline], options[:type]).render(self, options[:locals])
         elsif options[:text]
           options[:text]
+=======
+          render_inline(options[:inline], options[:locals], options[:type])
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
         end
       end
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
+=======
+    # Returns true is the file may be rendered implicitly.
+    def file_public?(template_path)#:nodoc:
+      template_path.split('/').last[0,1] != '_'
+    end
+
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
     # The format to be used when choosing between multiple templates with
     # the same name but differing formats.  See +Request#template_format+
     # for more details.
     def template_format
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
       if defined? @template_format
         @template_format
       elsif controller && controller.respond_to?(:request)
+=======
+      return @template_format if @template_format
+
+      if controller && controller.respond_to?(:request)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
         @template_format = controller.request.template_format
       else
         @template_format = :html
       end
     end
 
+    def file_exists?(template_path)
+      pick_template(template_path) ? true : false
+    rescue MissingTemplate
+      false
+    end
+
+    # Gets the extension for an existing template with the given template_path.
+    # Returns the format with the extension if that template exists.
+    #
+    #   pick_template('users/show')
+    #   # => 'users/show.html.erb'
+    #
+    #   pick_template('users/legacy')
+    #   # => 'users/legacy.rhtml'
+    #
+    def pick_template(template_path)
+      path = template_path.sub(/^\//, '')
+      if m = path.match(/(.*)\.(\w+)$/)
+        template_file_name, template_file_extension = m[1], m[2]
+      else
+        template_file_name = path
+      end
+
+      # OPTIMIZE: Checks to lookup template in view path
+      if template = self.view_paths["#{template_file_name}.#{template_format}"]
+        template
+      elsif template = self.view_paths[template_file_name]
+        template
+      elsif _first_render && template = self.view_paths["#{template_file_name}.#{_first_render.format_and_extension}"]
+        template
+      elsif template_format == :js && template = self.view_paths["#{template_file_name}.html"]
+        @template_format = :html
+        template
+      else
+        template = Template.new(template_path, view_paths)
+
+        if self.class.warn_cache_misses && logger = ActionController::Base.logger
+          logger.debug "[PERFORMANCE] Rendering a template that was " +
+            "not found in view path. Templates outside the view path are " +
+            "not cached and result in expensive disk operations. Move this " + 
+            "file into #{view_paths.join(':')} or add the folder to your " + 
+            "view path list"
+        end
+
+        template
+      end
+    end
+
     private
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
       attr_accessor :_first_render, :_last_render
+=======
+      # Renders the template present at <tt>template_path</tt>. The hash in <tt>local_assigns</tt>
+      # is made available as local variables.
+      def render_file(template_path, use_full_path = nil, local_assigns = {}) #:nodoc:
+        unless use_full_path == nil
+          ActiveSupport::Deprecation.warn("use_full_path option has been deprecated and has no affect.", caller)
+        end
+
+        if defined?(ActionMailer) && defined?(ActionMailer::Base) && controller.is_a?(ActionMailer::Base) && !template_path.include?("/")
+          raise ActionViewError, <<-END_ERROR
+  Due to changes in ActionMailer, you need to provide the mailer_name along with the template name.
+
+    render "user_mailer/signup"
+    render :file => "user_mailer/signup"
+
+  If you are rendering a subtemplate, you must now use controller-like partial syntax:
+
+    render :partial => 'signup' # no mailer_name necessary
+          END_ERROR
+        end
+
+        template = pick_template(template_path)
+        template.render_template(self, local_assigns)
+      end
+
+      def render_inline(text, local_assigns = {}, type = nil)
+        InlineTemplate.new(text, type).render(self, local_assigns)
+      end
+
+      def wrap_content_for_layout(content)
+        original_content_for_layout, @content_for_layout = @content_for_layout, content
+        yield
+      ensure
+        @content_for_layout = original_content_for_layout
+      end
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
 
       # Evaluate the local assigns and pushes them to the view.
       def _evaluate_assigns_and_ivars #:nodoc:
@@ -311,6 +471,7 @@ module ActionView #:nodoc:
         end
       end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
       def _pick_template(template_path)
         return template_path if template_path.respond_to?(:render)
 
@@ -343,8 +504,14 @@ module ActionView #:nodoc:
           end
 
           template
+=======
+      def set_controller_content_type(content_type)
+        if controller.respond_to?(:response)
+          controller.response.content_type ||= content_type
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
         end
       end
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
       memoize :_pick_template
 
       def _exempt_from_layout?(template_path) #:nodoc:
@@ -368,7 +535,10 @@ module ActionView #:nodoc:
           begin
             original_content_for_layout = @content_for_layout if defined?(@content_for_layout)
             @content_for_layout = render(options)
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_view/base.rb
             if (options[:inline] || options[:file] || options[:text])
               @cached_content_for_layout = @content_for_layout
               render(:file => partial_layout, :locals => local_assigns)
@@ -378,6 +548,11 @@ module ActionView #:nodoc:
           ensure
             @content_for_layout = original_content_for_layout
           end
+=======
+      def execute(method, local_assigns = {})
+        send(method, local_assigns) do |*names|
+          instance_variable_get "@content_for_#{names.first || 'layout'}"
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_view/base.rb
         end
       end
   end

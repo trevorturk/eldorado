@@ -90,7 +90,11 @@ module ActionController #:nodoc:
             set_content_type!(controller, cache_path.extension)
             options = { :text => cache }
             options.merge!(:layout => true) if cache_layout?
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/caching/actions.rb
             controller.__send__(:render, options)
+=======
+            controller.send!(:render, options)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/caching/actions.rb
             false
           else
             controller.action_cache_path = cache_path
@@ -121,7 +125,11 @@ module ActionController #:nodoc:
           end
 
           def content_for_layout(controller)
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/caching/actions.rb
             controller.response.layout && controller.response.template.instance_variable_get('@cached_content_for_layout')
+=======
+            controller.response.layout && controller.response.template.instance_variable_get('@content_for_layout')
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/caching/actions.rb
           end
       end
 

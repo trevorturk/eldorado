@@ -179,7 +179,13 @@ module ActionController #:nodoc:
       def rescue_action_locally(exception)
         @template.instance_variable_set("@exception", exception)
         @template.instance_variable_set("@rescues_path", File.dirname(rescues_path("stub")))
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/rescue.rb
         @template.instance_variable_set("@contents", @template.render(:file => template_path_for_local_rescue(exception)))
+=======
+        @template.send!(:assign_variables_from_controller)
+
+        @template.instance_variable_set("@contents", @template.render(:file => template_path_for_local_rescue(exception), :use_full_path => false))
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/rescue.rb
 
         response.content_type = Mime::HTML
         render_for_file(rescues_path("layout"), response_code_for_rescue(exception))

@@ -1,8 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class MessagesControllerTest < ActionController::TestCase
-
-  fixtures :all
 
   def setup
     @controller = MessagesController.new
@@ -111,14 +109,25 @@ class MessagesControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  def test_refresh_messages_path_should_work
+  def test_refresh_messages_path_should_work_when_logged_in
+    login_as :trevor
     get :refresh
     assert_response :success
   end
   
-  def test_refresh_chatters_path_should_work
+  def test_refresh_messages_path_should_work_when_not_logged_in
+    get :refresh
+    assert_response :success
+  end
+  
+  def test_refresh_chatters_path_should_work_when_logged_in
+    login_as :trevor
     get :refresh_chatters
     assert_response :success
   end
   
+  def test_refresh_chatters_path_should_work_when_not_logged_in
+    get :refresh_chatters
+    assert_response :success
+  end
 end

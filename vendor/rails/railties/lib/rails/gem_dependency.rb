@@ -120,9 +120,13 @@ module Rails
 
       def unpack_command
         cmd = %w(unpack) << @name
+<<<<<<< HEAD:vendor/rails/railties/lib/rails/gem_dependency.rb
         # We don't quote this requirement as it's run through GemRunner instead
         # of shelling out to gem
         cmd << "--version" << @requirement.to_s if @requirement
+=======
+        cmd << "--version" << %("#{@requirement.to_s}") if @requirement
+>>>>>>> i18n:vendor/rails/railties/lib/rails/gem_dependency.rb
         cmd
       end
   end

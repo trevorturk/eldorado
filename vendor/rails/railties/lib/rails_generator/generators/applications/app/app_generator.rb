@@ -45,6 +45,7 @@ class AppGenerator < Rails::Generator::Base
       # Root
       m.file "fresh_rakefile", "Rakefile"
       m.file "README",         "README"
+      m.file "config.ru",      "config.ru"
 
       # Application
       m.template "helpers/application.rb",        "app/controllers/application.rb", :assigns => { :app_name => @app_name, :app_secret => md5.hexdigest }

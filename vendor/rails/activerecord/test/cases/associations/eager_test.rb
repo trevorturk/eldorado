@@ -21,7 +21,11 @@ class EagerAssociationTest < ActiveRecord::TestCase
   fixtures :posts, :comments, :authors, :categories, :categories_posts,
             :companies, :accounts, :tags, :taggings, :people, :readers,
             :owners, :pets, :author_favorites, :jobs, :references, :subscribers, :subscriptions, :books,
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/associations/eager_test.rb
             :developers, :projects, :developers_projects
+=======
+            :developers, :projects
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/associations/eager_test.rb
 
   def test_loading_with_one_association
     posts = Post.find(:all, :include => :comments)

@@ -77,5 +77,12 @@ require 'active_record/connection_adapters/abstract_adapter'
 
 require 'active_record/schema_dumper'
 
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record.rb
 require 'active_record/i18n_interpolation_deprecation'
 I18n.load_path << File.dirname(__FILE__) + '/active_record/locale/en-US.yml'
+=======
+I18n.backend.populate do
+  require 'active_record/locale/en-US.rb'
+end
+
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record.rb

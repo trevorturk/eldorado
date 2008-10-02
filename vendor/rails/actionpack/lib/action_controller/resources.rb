@@ -83,10 +83,13 @@ module ActionController
         new_action   = self.options[:path_names][:new] if self.options[:path_names]
         new_action ||= Base.resources_path_names[:new]
         @new_path  ||= "#{path}/#{new_action}"
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/resources.rb
       end
 
       def shallow_path_prefix
         @shallow_path_prefix ||= "#{path_prefix unless @options[:shallow]}"
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/resources.rb
       end
 
       def member_path
@@ -317,13 +320,21 @@ module ActionController
     #     map.resources :tags, :path_prefix => '/books/:book_id', :name_prefix => 'book_'
     #     map.resources :tags, :path_prefix => '/toys/:toy_id',   :name_prefix => 'toy_'
     #
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/resources.rb
     # You may also use <tt>:name_prefix</tt> to override the generic named routes in a nested \resource:
+=======
+    # You may also use <tt>:name_prefix</tt> to override the generic named routes in a nested resource:
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/resources.rb
     #
     #   map.resources :articles do |article|
     #     article.resources :comments, :name_prefix => nil
     #   end
     #
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/resources.rb
     # This will yield named \resources like so:
+=======
+    # This will yield named resources like so:
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/resources.rb
     #
     #   comments_url(@article)
     #   comment_url(@article, @comment)

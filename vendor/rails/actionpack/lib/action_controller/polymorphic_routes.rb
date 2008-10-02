@@ -149,7 +149,11 @@ module ActionController
             if parent.is_a?(Symbol) || parent.is_a?(String)
               string << "#{parent}_"
             else
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/polymorphic_routes.rb
               string << "#{RecordIdentifier.__send__("singular_class_name", parent)}_"
+=======
+              string << "#{RecordIdentifier.send!("singular_class_name", parent)}_"
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/polymorphic_routes.rb
             end
           end
         end
@@ -157,7 +161,11 @@ module ActionController
         if record.is_a?(Symbol) || record.is_a?(String)
           route << "#{record}_"
         else
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/polymorphic_routes.rb
           route << "#{RecordIdentifier.__send__("#{inflection}_class_name", record)}_"
+=======
+          route << "#{RecordIdentifier.send!("#{inflection}_class_name", record)}_"
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/polymorphic_routes.rb
         end
 
         action_prefix(options) + namespace + route + routing_type(options).to_s

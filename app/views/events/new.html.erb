@@ -3,9 +3,15 @@
 <% form_for @event do |f| %>
   <div class="box" id="box-events-new">
     <span class="top">New Event</span>
-    <div class="calendar_select"><%= f.calendar_date_select :date, :embedded => true %></div>
+    <div class="calendar_select"><%#= f.calendar_date_select :date, :embedded => true %></div>
     <p class="label"><label for="event_title">Title</label></p>
+<<<<<<< HEAD:app/views/events/new.html.erb
     <p><%= f.text_field :title, :class => 'text-field' %></p>
+=======
+    <p><%= f.text_field :title, :style => 'width:66%;' %></p>
+    <p class="label"><label for="event_date">Date</label></p>
+    <p><%= f.datetime_select :date %></p>
+>>>>>>> i18n:app/views/events/new.html.erb
     <p class="label"><label for="event_description">Description</label></p>
     <p><%= f.text_area :description, :rows => '10', :class => 'text-field' %></p>
     <%= f.check_box(:reminder) %><label for="event_reminder"> Reminder <span class="detail">(Show a reminder 6 hours before and 2 hours after this event.)</span></label>

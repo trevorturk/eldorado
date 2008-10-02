@@ -15,12 +15,18 @@ module ActionController
     end
   end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/test_case.rb
   # Superclass for ActionController functional tests. Functional tests allow you to
   # test a single controller action per test method. This should not be confused with
   # integration tests (see ActionController::IntegrationTest), which are more like
   # "stories" that can involve multiple controllers and mutliple actions (i.e. multiple
   # different HTTP requests).
+=======
+  # Superclass for Action Controller functional tests. Infers the controller under test from the test class name,
+  # and creates @controller, @request, @response instance variables.
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/test_case.rb
   #
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/test_case.rb
   # == Basic example
   #
   # Functional tests are written as follows:
@@ -42,9 +48,15 @@ module ActionController
   #
   #       # Assert that the controller really put the book in the database.
   #       assert_not_nil Book.find_by_title("Love Hina")
+=======
+  #   class WidgetsControllerTest < ActionController::TestCase
+  #     def test_index
+  #       get :index
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/test_case.rb
   #     end
   #   end
   #
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/test_case.rb
   # == Special instance variables
   #
   # ActionController::TestCase will also automatically provide the following instance
@@ -64,12 +76,26 @@ module ActionController
   #
   # (Earlier versions of Rails required each functional test to subclass
   # Test::Unit::TestCase and define @controller, @request, @response in +setup+.)
+=======
+  # * @controller - WidgetController.new
+  # * @request    - ActionController::TestRequest.new
+  # * @response   - ActionController::TestResponse.new
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/test_case.rb
   #
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/test_case.rb
   # == Controller is automatically inferred
+=======
+  # (Earlier versions of Rails required each functional test to subclass Test::Unit::TestCase and define
+  # @controller, @request, @response in +setup+.)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/test_case.rb
   #
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/test_case.rb
   # ActionController::TestCase will automatically infer the controller under test
   # from the test class name. If the controller cannot be inferred from the test
   # class name, you can explicity set it with +tests+.
+=======
+  # If the controller cannot be inferred from the test class name, you can explicity set it with +tests+.
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/test_case.rb
   #
   #   class SpecialEdgeCaseWidgetsControllerTest < ActionController::TestCase
   #     tests WidgetController

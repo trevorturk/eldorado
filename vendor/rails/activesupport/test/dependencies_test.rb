@@ -761,6 +761,7 @@ class DependenciesTest < Test::Unit::TestCase
     end
   ensure
     ActiveSupport::Dependencies.load_once_paths = []
+<<<<<<< HEAD:vendor/rails/activesupport/test/dependencies_test.rb
   end
 
   def test_hook_called_multiple_times
@@ -773,5 +774,7 @@ class DependenciesTest < Test::Unit::TestCase
     assert !Module.new.respond_to?(:load_without_new_constant_marking)
   ensure
     ActiveSupport::Dependencies.hook!
+=======
+>>>>>>> i18n:vendor/rails/activesupport/test/dependencies_test.rb
   end
 end

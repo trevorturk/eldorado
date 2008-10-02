@@ -38,8 +38,12 @@ class AssetTagHelperTest < ActionView::TestCase
     @controller.request = @request
 
     ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/asset_tag_helper_test.rb
     AssetTag::Cache.clear
     AssetCollection::Cache.clear
+=======
+    COMPUTED_PUBLIC_PATHS.clear
+>>>>>>> i18n:vendor/rails/actionpack/test/template/asset_tag_helper_test.rb
   end
 
   def teardown
@@ -161,7 +165,12 @@ class AssetTagHelperTest < ActionView::TestCase
     JavascriptIncludeToTag.each { |method, tag| assert_dom_equal(tag, eval(method)) }
   end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/asset_tag_helper_test.rb
   def test_javascript_include_tag_with_given_asset_id
+=======
+    COMPUTED_PUBLIC_PATHS.clear
+
+>>>>>>> i18n:vendor/rails/actionpack/test/template/asset_tag_helper_test.rb
     ENV["RAILS_ASSET_ID"] = "1"
     assert_dom_equal(%(<script src="/javascripts/prototype.js?1" type="text/javascript"></script>\n<script src="/javascripts/effects.js?1" type="text/javascript"></script>\n<script src="/javascripts/dragdrop.js?1" type="text/javascript"></script>\n<script src="/javascripts/controls.js?1" type="text/javascript"></script>\n<script src="/javascripts/application.js?1" type="text/javascript"></script>), javascript_include_tag(:defaults))
   end
@@ -349,7 +358,11 @@ class AssetTagHelperTest < ActionView::TestCase
   ensure
     FileUtils.rm_f(File.join(ActionView::Helpers::AssetTagHelper::JAVASCRIPTS_DIR, 'cache', 'money.js'))
   end
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/asset_tag_helper_test.rb
 
+=======
+  
+>>>>>>> i18n:vendor/rails/actionpack/test/template/asset_tag_helper_test.rb
   def test_caching_javascript_include_tag_with_all_and_recursive_puts_defaults_at_the_start_of_the_file
     ENV["RAILS_ASSET_ID"] = ""
     ActionController::Base.asset_host = 'http://a0.example.com'

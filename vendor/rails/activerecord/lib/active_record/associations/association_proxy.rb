@@ -256,6 +256,10 @@ module ActiveRecord
         def owner_quoted_id
           @owner.quoted_id
         end
+
+        def owner_quoted_id
+          @owner.quoted_id
+        end
     end
   end
 end

@@ -66,8 +66,12 @@ module ActionController
     end
 
     # Provides access to the request's HTTP headers, for example:
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
     #
     #   request.headers["Content-Type"] # => "text/plain"
+=======
+    #  request.headers["Content-Type"] # => "text/plain"
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
     def headers
       ActionController::Http::Headers.new(@env)
     end
@@ -90,8 +94,15 @@ module ActionController
 
     # Returns the accepted MIME type for the request.
     def accepts
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
       header = @env['HTTP_ACCEPT'].to_s.strip
+=======
+      @accepts ||=
+        begin
+          header = @env['HTTP_ACCEPT'].to_s.strip
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
       if header.empty?
         [content_type, Mime::ALL].compact
       else
@@ -104,9 +115,18 @@ module ActionController
       if since = env['HTTP_IF_MODIFIED_SINCE']
         Time.rfc2822(since) rescue nil
       end
+=======
+          if header.empty?
+            [content_type, Mime::ALL].compact
+          else
+            Mime::Type.parse(header)
+          end
+        end
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
     end
     memoize :if_modified_since
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
     def if_none_match
       env['HTTP_IF_NONE_MATCH']
     end
@@ -126,12 +146,19 @@ module ActionController
     end
 
     # Returns the Mime type for the \format used in the request.
+=======
+    # Returns the Mime type for the format used in the request.
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
     #
     #   GET /posts/5.xml   | request.format => Mime::XML
     #   GET /posts/5.xhtml | request.format => Mime::HTML
     #   GET /posts/5       | request.format => Mime::HTML or MIME::JS, or request.accepts.first depending on the value of <tt>ActionController::Base.use_accept_header</tt>
     def format
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
       @format ||=
+=======
+      @format ||= begin
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
         if parameters[:format]
           Mime::Type.lookup_by_extension(parameters[:format])
         elsif ActionController::Base.use_accept_header
@@ -141,6 +168,10 @@ module ActionController
         else
           Mime::Type.lookup_by_extension("html")
         end
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
+=======
+      end
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
     end
 
 
@@ -161,7 +192,11 @@ module ActionController
     end
 
     # Returns a symbolized version of the <tt>:format</tt> parameter of the request.
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
     # If no \format is given it returns <tt>:js</tt>for Ajax requests and <tt>:html</tt>
+=======
+    # If no format is given it returns <tt>:js</tt>for AJAX requests and <tt>:html</tt>
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
     # otherwise.
     def template_format
       parameter_format = parameters[:format]
@@ -205,6 +240,8 @@ module ActionController
         not_trusted_addrs = remote_addr_list.reject {|addr| addr =~ TRUSTED_PROXIES}
         return not_trusted_addrs.first unless not_trusted_addrs.empty?
       end
+      remote_ips = @env['HTTP_X_FORWARDED_FOR'] && @env['HTTP_X_FORWARDED_FOR'].split(',')
+
       remote_ips = @env['HTTP_X_FORWARDED_FOR'] && @env['HTTP_X_FORWARDED_FOR'].split(',')
 
       if @env.include? 'HTTP_CLIENT_IP'
@@ -320,7 +357,11 @@ EOM
       parts[0..-(tld_length+2)]
     end
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
     # Returns the query string, accounting for server idiosyncrasies.
+=======
+    # Return the query string, accounting for server idiosyncrasies.
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
     def query_string
       if uri = @env['REQUEST_URI']
         uri.split('?', 2)[1] || ''
@@ -330,7 +371,11 @@ EOM
     end
     memoize :query_string
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/request.rb
     # Returns the request URI, accounting for server idiosyncrasies.
+=======
+    # Return the request URI, accounting for server idiosyncrasies.
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/request.rb
     # WEBrick includes the full URL. IIS leaves REQUEST_URI blank.
     def request_uri
       if uri = @env['REQUEST_URI']

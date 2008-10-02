@@ -7,6 +7,7 @@ require 'active_support/core_ext/module/introspection'
 require 'active_support/core_ext/module/loading'
 require 'active_support/core_ext/module/aliasing'
 require 'active_support/core_ext/module/model_naming'
+<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/module.rb
 require 'active_support/core_ext/module/synchronization'
 
 module ActiveSupport
@@ -17,7 +18,13 @@ module ActiveSupport
     end
   end
 end
+=======
+>>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/module.rb
 
 class Module
+<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/module.rb
   include ActiveSupport::CoreExtensions::Module
+=======
+  include ActiveSupport::CoreExt::Module::ModelNaming
+>>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/module.rb
 end

@@ -546,11 +546,17 @@ module ActiveRecord
           end
 
           @connection.real_connect(*@connection_options)
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/connection_adapters/mysql_adapter.rb
           configure_connection
         end
+=======
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/connection_adapters/mysql_adapter.rb
 
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/connection_adapters/mysql_adapter.rb
         def configure_connection
           encoding = @config[:encoding]
+=======
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/connection_adapters/mysql_adapter.rb
           execute("SET NAMES '#{encoding}'") if encoding
 
           # By default, MySQL 'where id is null' selects the last inserted id.

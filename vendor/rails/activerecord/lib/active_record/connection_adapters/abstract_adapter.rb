@@ -147,7 +147,11 @@ module ActiveRecord
         @open_transactions -= 1
       end
 
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb
       def log_info(sql, name, seconds)
+=======
+      def log_info(sql, name, runtime)
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb
         if @logger && @logger.debug?
           name = "#{name.nil? ? "SQL" : name} (#{sprintf("%.1f", seconds * 1000)}ms)"
           @logger.debug(format_log_entry(name, sql.squeeze(' ')))

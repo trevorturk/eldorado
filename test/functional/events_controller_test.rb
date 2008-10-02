@@ -1,11 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'events_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class EventsController; def rescue_action(e) raise e end; end
-
-class EventsControllerTest < Test::Unit::TestCase
-  fixtures :all
+class EventsControllerTest < ActionController::TestCase
 
   def setup
     @controller = EventsController.new
@@ -19,8 +14,8 @@ class EventsControllerTest < Test::Unit::TestCase
     assert assigns(:events)
   end
 
-  def test_should_get_new
-  end
+  # def test_should_get_new
+  # end
   
   def test_should_create_event
     login_as :trevor
@@ -99,10 +94,9 @@ class EventsControllerTest < Test::Unit::TestCase
     assert_redirected_to login_path
   end
   
-  def test_should_create_event_with_correct_time_for_user_time_zone
-  end
+  # def test_should_create_event_with_correct_time_for_user_time_zone
+  # end
   
-  def test_should_show_reminder_on_correct_date_for_current_user
-  end
-  
+  # def test_should_show_reminder_on_correct_date_for_current_user
+  # end
 end

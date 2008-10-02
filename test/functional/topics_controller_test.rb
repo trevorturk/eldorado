@@ -1,11 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'topics_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class TopicsController; def rescue_action(e) raise e end; end
-
-class TopicsControllerTest < Test::Unit::TestCase
-  fixtures :all
+class TopicsControllerTest < ActionController::TestCase
 
   def setup
     @controller = TopicsController.new
@@ -164,12 +159,7 @@ class TopicsControllerTest < Test::Unit::TestCase
     get :unknown_request, :path => "viewtopic.php", :id => "1"
     assert_redirected_to topic_path(:id => "1")
   end
-  
-  def test_should_redirect_to_topic_with_empty_viewtopic_php_style_url
-    get :unknown_request, :path => "viewtopic.php"
-    assert_redirected_to root_path
-  end
-  
+    
   def test_should_redirect_to_forum_with_viewforum_php_style_url
     get :unknown_request, :path => "viewforum.php", :id => "1"
     assert_redirected_to forum_path(:id => "1")
@@ -180,36 +170,76 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_redirected_to root_path
   end
   
-  def test_should_redirect_to_topic_with_viewtopic_php_style_url_second_version
-  end
+  # def test_should_redirect_to_topic_with_viewtopic_php_style_url_second_version
+  # end
   
-  def test_should_redirect_to_root_path_if_viewtopic_id_not_found
-    # get :unknown_request, :path => "viewtopic.php", :id => "23823"
-    # assert_redirected_to topic_path(:id => "23823")
-    # assert_redirected_to root_path
-  end
+  # def test_should_redirect_to_root_path_if_viewtopic_id_not_found
+  #   get :unknown_request, :path => "viewtopic.php", :id => "23823"
+  #   assert_redirected_to topic_path(:id => "23823")
+  #   assert_redirected_to root_path
+  # end
     
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   def test_should_set_last_post_info_in_forum_and_topic_on_new_topic
   end
+=======
+  # def test_should_set_last_post_info_in_forum_and_topic_on_new_topic
+  # end
+>>>>>>> i18n:test/functional/topics_controller_test.rb
   
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   def test_should_set_last_post_info_in_forum_and_topic_on_new_post_in_existing_topic
   end
+=======
+  # def test_should_set_last_post_info_in_forum_and_topic_on_new_post_in_existing_topic
+  # end
+>>>>>>> i18n:test/functional/topics_controller_test.rb
   
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   def test_should_set_last_post_info_in_forum_and_topic_if_most_recent_post_is_deleted
   end
+=======
+  # def test_should_set_last_post_info_in_forum_and_topic_if_most_recent_post_is_deleted
+  # end
+>>>>>>> i18n:test/functional/topics_controller_test.rb
   
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   def test_should_show_topic_as_new
   end
+=======
+  # def test_should_show_topic_as_new
+  # end
+>>>>>>> i18n:test/functional/topics_controller_test.rb
   
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   def test_should_not_show_topic_as_new
   end
+=======
+  # def test_should_not_show_topic_as_new
+  # end
+>>>>>>> i18n:test/functional/topics_controller_test.rb
   
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   def test_should_redirect_to_newest_post_with_show_new_action
     login_as :post_test
     get :show_new, :id => 1
     # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one2).id.to_s)
   end
+=======
+  # def test_should_redirect_to_newest_post_with_show_new_action
+  #   login_as :post_test
+  #   get :show_new, :id => 1
+  #   assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one2).id.to_s)
+  # end
+  # 
+  # def test_should_redirect_to_last_post_if_no_new_posts_with_show_new_action
+  #   login_as :trevor
+  #   get :show_new, :id => 1
+  #   assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s) 
+  # end
+>>>>>>> i18n:test/functional/topics_controller_test.rb
   
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   def test_should_redirect_to_last_post_if_no_new_posts_with_show_new_action
     login_as :trevor
     get :show_new, :id => 1
@@ -223,6 +253,21 @@ class TopicsControllerTest < Test::Unit::TestCase
     # get :show_new, :id => 1
     # assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s)
   end
+=======
+  # def test_should_redirect_to_top_of_page_for_topic_with_no_anchor_if_first_post_in_thread
+  #   login_as :trevor
+  #   get :show_new, :id => 2
+  #   assert_redirected_to topic_path(:id => "2") 
+  # end
+    
+  # def test_should_redirect_to_same_path_when_logging_in_with_cookie
+  #   log in
+  #   delete cookie
+  #   use show_new action, which should use the cookie to log in and redirect to the requested url
+  #   get :show_new, :id => 1
+  #   assert_redirected_to topic_path(:id => "1", :anchor => 'p' + posts(:one3).id.to_s)
+  # end
+>>>>>>> i18n:test/functional/topics_controller_test.rb
 
   def test_should_allow_post_if_logged_in
     login_as :trevor
@@ -258,18 +303,12 @@ class TopicsControllerTest < Test::Unit::TestCase
     assert_select "span#reply"
   end
   
-  def test_should_error_on_topic_create_if_attr_accessible_is_not_set_right_in_post_model
-  end
+  # def test_should_error_on_topic_create_if_attr_accessible_is_not_set_right_in_post_model
+  # end
   
-  def test_should_error_on_topic_create_if_attr_accessor_is_not_set_right_in_post_model
-  end
-  
-  def test_should_be_ok_with_bogus_params_page_value
-    get :show, :id => 1, :page => 'sdlkfjsdfs'
-    assert_redirected_to root_path
-    assert_equal "Sorry, the page number you requested was not valid.", flash[:notice]
-  end
-  
+  # def test_should_error_on_topic_create_if_attr_accessor_is_not_set_right_in_post_model
+  # end
+    
   def test_should_redirect_to_first_page_if_page_is_too_many
     get :show, :id => 1, :page => '2'
     assert_redirected_to topic_path(:id => 1)
@@ -340,6 +379,7 @@ class TopicsControllerTest < Test::Unit::TestCase
     put :update, :id => 1, :topic => { :sticky => true }
     assert_equal false, topics(:Testing).sticky
   end
+<<<<<<< HEAD:test/functional/topics_controller_test.rb
   
   def test_should_add_to_the_views_count_of_a_topic_on_topic_show
     login_as :trevor
@@ -369,3 +409,6 @@ class TopicsControllerTest < Test::Unit::TestCase
   end
   
 end
+=======
+end
+>>>>>>> i18n:test/functional/topics_controller_test.rb

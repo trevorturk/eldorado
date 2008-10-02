@@ -1,11 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'headers_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class HeadersController; def rescue_action(e) raise e end; end
-
-class HeadersControllerTest < Test::Unit::TestCase
-  fixtures :all
+class HeadersControllerTest < ActionController::TestCase
 
   def setup
     @controller = HeadersController.new
@@ -24,16 +19,16 @@ class HeadersControllerTest < Test::Unit::TestCase
     assert_response :success
   end
   
-  def test_should_create_header
-    # login_as :Administrator
-    # old_count = Header.count
-    # put :create, :header => {:description => "test"}
-    # assert_equal old_count+1, Header.count
-    # assert_redirected_to topic_path(assigns(:header))
-  end
+  # def test_should_create_header
+  #   login_as :Administrator
+  #   old_count = Header.count
+  #   put :create, :header => {:description => "test"}
+  #   assert_equal old_count+1, Header.count
+  #   assert_redirected_to topic_path(assigns(:header))
+  # end
   
-  def test_should_not_create_header_without_file
-  end
+  # def test_should_not_create_header_without_file
+  # end
 
   def test_should_show_header
     get :show, :id => 1
@@ -131,5 +126,4 @@ class HeadersControllerTest < Test::Unit::TestCase
     post :vote_down, :id => 1
     assert_redirected_to login_path
   end
-  
 end

@@ -533,7 +533,11 @@ class MimeControllerLayoutsTest < Test::Unit::TestCase
     get :index
     assert_equal 'Super Firefox', @response.body
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/mime_responds_test.rb
     @request.accept = "text/iphone"
+=======
+    @request.env["HTTP_ACCEPT"] = "text/iphone"
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/mime_responds_test.rb
     get :index
     assert_equal '<html><div id="super_iphone">Super iPhone</div></html>', @response.body
   end

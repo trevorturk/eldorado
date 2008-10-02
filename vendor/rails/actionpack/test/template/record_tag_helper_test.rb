@@ -32,6 +32,7 @@ class RecordTagHelperTest < ActionView::TestCase
     expected = %(<tr class="post bar" id="post_45" style='background-color: #f0f0f0'></tr>)
     actual = content_tag_for(:tr, @post, {:class => "bar", :style => "background-color: #f0f0f0"}) { }
     assert_dom_equal expected, actual
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/record_tag_helper_test.rb
   end
 
   def test_block_not_in_erb_multiple_calls
@@ -40,6 +41,8 @@ class RecordTagHelperTest < ActionView::TestCase
     assert_dom_equal expected, actual
     actual = div_for(@post, :class => "bar") { @post.body }
     assert_dom_equal expected, actual
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/template/record_tag_helper_test.rb
   end
 
   def test_block_works_with_content_tag_for_in_erb

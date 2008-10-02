@@ -161,13 +161,17 @@ module ActiveSupport
           target.__send__(called, *args, &block)
         end
     end
+<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/deprecation.rb
 
     class DeprecatedObjectProxy < DeprecationProxy
       def initialize(object, message)
         @object = object
         @message = message
       end
+=======
+>>>>>>> i18n:vendor/rails/activesupport/lib/active_support/deprecation.rb
 
+<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/deprecation.rb
       private
         def target
           @object
@@ -178,6 +182,8 @@ module ActiveSupport
         end
     end
 
+=======
+>>>>>>> i18n:vendor/rails/activesupport/lib/active_support/deprecation.rb
     # Stand-in for <tt>@request</tt>, <tt>@attributes</tt>, <tt>@params</tt>, etc.
     # which emits deprecation warnings on any method call (except +inspect+).
     class DeprecatedInstanceVariableProxy < DeprecationProxy #:nodoc:
@@ -201,10 +207,13 @@ module ActiveSupport
         @new_const = new_const
       end
 
+<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/deprecation.rb
       def class
         target.class
       end
 
+=======
+>>>>>>> i18n:vendor/rails/activesupport/lib/active_support/deprecation.rb
       private
         def target
           @new_const.to_s.constantize

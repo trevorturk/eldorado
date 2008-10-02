@@ -1213,6 +1213,7 @@ class DateHelperTest < ActionView::TestCase
     assert_dom_equal expected, output_buffer
   end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/date_helper_test.rb
   def test_date_select_with_separator
     @post = Post.new
     @post.written_on = Date.new(2004, 6, 15)
@@ -1237,6 +1238,8 @@ class DateHelperTest < ActionView::TestCase
     assert_dom_equal expected, date_select("post", "written_on", { :date_separator => " / " })
   end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/template/date_helper_test.rb
   def test_time_select
     @post = Post.new
     @post.written_on = Time.local(2004, 6, 15, 15, 16, 35)
@@ -1261,11 +1264,19 @@ class DateHelperTest < ActionView::TestCase
     @post.written_on = Time.local(2004, 6, 15, 15, 16, 35)
 
     expected = %(<select id="post_written_on_4i" name="post[written_on(4i)]">\n)
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/date_helper_test.rb
     0.upto(23) { |i| expected << %(<option value="#{sprintf("%02d", i)}"#{' selected="selected"' if i == 15}>#{sprintf("%02d", i)}</option>\n) }
+=======
+    0.upto(23) { |i| expected << %(<option value="#{leading_zero_on_single_digits(i)}"#{' selected="selected"' if i == 15}>#{leading_zero_on_single_digits(i)}</option>\n) }
+>>>>>>> i18n:vendor/rails/actionpack/test/template/date_helper_test.rb
     expected << "</select>\n"
     expected << " : "
     expected << %(<select id="post_written_on_5i" name="post[written_on(5i)]">\n)
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/date_helper_test.rb
     0.upto(59) { |i| expected << %(<option value="#{sprintf("%02d", i)}"#{' selected="selected"' if i == 16}>#{sprintf("%02d", i)}</option>\n) }
+=======
+    0.upto(59) { |i| expected << %(<option value="#{leading_zero_on_single_digits(i)}"#{' selected="selected"' if i == 16}>#{leading_zero_on_single_digits(i)}</option>\n) }
+>>>>>>> i18n:vendor/rails/actionpack/test/template/date_helper_test.rb
     expected << "</select>\n"
 
     assert_dom_equal expected, time_select("post", "written_on", :ignore_date => true)
@@ -1326,16 +1337,25 @@ class DateHelperTest < ActionView::TestCase
     expected << %{<input type="hidden" id="post_written_on_3i" name="post[written_on(3i)]" value="15" />\n}
 
     expected << %(<select id="post_written_on_4i" name="post[written_on(4i)]" class="selector">\n)
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/date_helper_test.rb
     0.upto(23) { |i| expected << %(<option value="#{sprintf("%02d", i)}"#{' selected="selected"' if i == 15}>#{sprintf("%02d", i)}</option>\n) }
+=======
+    0.upto(23) { |i| expected << %(<option value="#{leading_zero_on_single_digits(i)}"#{' selected="selected"' if i == 15}>#{leading_zero_on_single_digits(i)}</option>\n) }
+>>>>>>> i18n:vendor/rails/actionpack/test/template/date_helper_test.rb
     expected << "</select>\n"
     expected << " : "
     expected << %(<select id="post_written_on_5i" name="post[written_on(5i)]" class="selector">\n)
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/date_helper_test.rb
     0.upto(59) { |i| expected << %(<option value="#{sprintf("%02d", i)}"#{' selected="selected"' if i == 16}>#{sprintf("%02d", i)}</option>\n) }
+=======
+    0.upto(59) { |i| expected << %(<option value="#{leading_zero_on_single_digits(i)}"#{' selected="selected"' if i == 16}>#{leading_zero_on_single_digits(i)}</option>\n) }
+>>>>>>> i18n:vendor/rails/actionpack/test/template/date_helper_test.rb
     expected << "</select>\n"
 
     assert_dom_equal expected, output_buffer
   end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/date_helper_test.rb
   def test_time_select_with_separator
     @post = Post.new
     @post.written_on = Time.local(2004, 6, 15, 15, 16, 35)
@@ -1363,6 +1383,8 @@ class DateHelperTest < ActionView::TestCase
     assert_dom_equal expected, time_select("post", "written_on", { :time_separator => " - ", :include_seconds => true })
   end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/template/date_helper_test.rb
   def test_datetime_select
     @post = Post.new
     @post.updated_at = Time.local(2004, 6, 15, 16, 35)
@@ -1443,6 +1465,7 @@ class DateHelperTest < ActionView::TestCase
     expected << " : <select id='post_updated_at_5i' name='post[updated_at(5i)]' class='selector'>\n<option value='00'>00</option>\n<option value='01'>01</option>\n<option value='02'>02</option>\n<option value='03'>03</option>\n<option value='04'>04</option>\n<option value='05'>05</option>\n<option value='06'>06</option>\n<option value='07'>07</option>\n<option value='08'>08</option>\n<option value='09'>09</option>\n<option value='10'>10</option>\n<option value='11'>11</option>\n<option value='12'>12</option>\n<option value='13'>13</option>\n<option value='14'>14</option>\n<option value='15'>15</option>\n<option value='16'>16</option>\n<option value='17'>17</option>\n<option value='18'>18</option>\n<option value='19'>19</option>\n<option value='20'>20</option>\n<option value='21'>21</option>\n<option value='22'>22</option>\n<option value='23'>23</option>\n<option value='24'>24</option>\n<option value='25'>25</option>\n<option value='26'>26</option>\n<option value='27'>27</option>\n<option value='28'>28</option>\n<option value='29'>29</option>\n<option value='30'>30</option>\n<option value='31'>31</option>\n<option value='32'>32</option>\n<option value='33'>33</option>\n<option value='34'>34</option>\n<option selected='selected' value='35'>35</option>\n<option value='36'>36</option>\n<option value='37'>37</option>\n<option value='38'>38</option>\n<option value='39'>39</option>\n<option value='40'>40</option>\n<option value='41'>41</option>\n<option value='42'>42</option>\n<option value='43'>43</option>\n<option value='44'>44</option>\n<option value='45'>45</option>\n<option value='46'>46</option>\n<option value='47'>47</option>\n<option value='48'>48</option>\n<option value='49'>49</option>\n<option value='50'>50</option>\n<option value='51'>51</option>\n<option value='52'>52</option>\n<option value='53'>53</option>\n<option value='54'>54</option>\n<option value='55'>55</option>\n<option value='56'>56</option>\n<option value='57'>57</option>\n<option value='58'>58</option>\n<option value='59'>59</option>\n</select>\n"
 
     assert_dom_equal expected, output_buffer
+<<<<<<< HEAD:vendor/rails/actionpack/test/template/date_helper_test.rb
   end
 
   def test_datetime_select_with_separators
@@ -1484,6 +1507,8 @@ class DateHelperTest < ActionView::TestCase
     expected << "</select>\n"
 
     assert_dom_equal expected, datetime_select("post", "updated_at", { :date_separator => " / ", :datetime_separator => " , ", :time_separator => " - ", :include_seconds => true })
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/template/date_helper_test.rb
   end
 
   def test_date_select_with_zero_value_and_no_start_year

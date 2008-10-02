@@ -193,7 +193,11 @@ class InheritanceTest < ActiveRecord::TestCase
 
   def test_eager_load_belongs_to_primary_key_quoting
     con = Account.connection
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/inheritance_test.rb
     assert_sql(/\(#{con.quote_table_name('companies')}.#{con.quote_column_name('id')} = 1\)/) do
+=======
+    assert_sql(/\(#{con.quote_table_name('companies')}.#{con.quote_column_name('id')} IN \(1\)\)/) do
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/inheritance_test.rb
       Account.find(1, :include => :firm)
     end
   end

@@ -431,7 +431,12 @@ module ActionMailer #:nodoc:
       end
 
       def template_root=(root)
+<<<<<<< HEAD:vendor/rails/actionmailer/lib/action_mailer/base.rb
         self.view_paths = ActionView::Base.process_view_paths(root)
+=======
+        root = ActionView::PathSet::Path.new(root) if root.is_a?(String)
+        write_inheritable_attribute(:template_root, root)
+>>>>>>> i18n:vendor/rails/actionmailer/lib/action_mailer/base.rb
       end
 
       private
@@ -582,7 +587,11 @@ module ActionMailer #:nodoc:
       end
 
       def initialize_template_class(assigns)
+<<<<<<< HEAD:vendor/rails/actionmailer/lib/action_mailer/base.rb
         ActionView::Base.new(view_paths, assigns, self)
+=======
+        ActionView::Base.new(template_root, assigns, self)
+>>>>>>> i18n:vendor/rails/actionmailer/lib/action_mailer/base.rb
       end
 
       def sort_parts(parts, order = [])

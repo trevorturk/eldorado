@@ -1,11 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'posts_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class PostsController; def rescue_action(e) raise e end; end
-
-class PostsControllerTest < Test::Unit::TestCase
-  fixtures :all
+class PostsControllerTest < ActionController::TestCase
   
   def setup
     @controller = PostsController.new
@@ -41,12 +36,12 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal old_post_count, Post.count
   end
   
-  def test_posts_cannot_be_made_with_bogus_topic_id
-    # login_as :trevor
-    # old_post_count = Post.count
-    # post :create, :post => { :topic_id => "13249002923" }
-    # assert_equal old_post_count, Post.count
-  end
+  # def test_posts_cannot_be_made_with_bogus_topic_id
+  #   login_as :trevor
+  #   old_post_count = Post.count
+  #   post :create, :post => { :topic_id => "13249002923" }
+  #   assert_equal old_post_count, Post.count
+  # end
   
   def test_post_create_redirects_to_correct_page
     login_as :trevor
@@ -59,18 +54,22 @@ class PostsControllerTest < Test::Unit::TestCase
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 30
     assert_equal topic.last_page, 1
+<<<<<<< HEAD:test/functional/posts_controller_test.rb
     assert_redirected_to 'topics/1?page=1#p8'
+=======
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p' + Post.last.id.to_s
+>>>>>>> i18n:test/functional/posts_controller_test.rb
     post :create, :post => { :topic_id => "1", :body => "this is a test!" }  
     topic = Topic.find_by_id('1')
     assert_equal topic.posts_count, 31
     assert_equal topic.last_page, 2
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '2'
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '2', :anchor => 'p' + Post.last.id.to_s
   end
 
   def test_post_update_redirects_to_correct_page
     login_as :trevor
     post :create, :post => { :topic_id => "1", :body => "this is a test" }  
-    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1'
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p' + Post.last.id.to_s
   end
 
   def test_post_edit_works_if_creator
@@ -152,7 +151,11 @@ class PostsControllerTest < Test::Unit::TestCase
 
   def test_locate_action_should_work
     get :topic, :id => 1
+<<<<<<< HEAD:test/functional/posts_controller_test.rb
     assert_redirected_to 'topics/1?page=1#p8'
+=======
+    assert_redirected_to :controller => 'topics', :action => 'show', :id => '1', :page => '1', :anchor => 'p1'
+>>>>>>> i18n:test/functional/posts_controller_test.rb
   end
   
   def test_quote_action_should_work
@@ -190,6 +193,7 @@ class PostsControllerTest < Test::Unit::TestCase
     assert_equal old_post_count+1, Post.count
   end
   
+<<<<<<< HEAD:test/functional/posts_controller_test.rb
   def test_should_work_when_quoting_a_post
     # quote an existing post
     # see new post template
@@ -203,4 +207,12 @@ class PostsControllerTest < Test::Unit::TestCase
     get :index, :user_id => users(:noposts).id
     assert_response :success
   end
+=======
+  # def test_should_work_when_quoting_a_post
+  #   quote an existing post
+  #   see new post template
+  #   post object should be a new post
+  #   body of new post should be body of quoted post
+  # end
+>>>>>>> i18n:test/functional/posts_controller_test.rb
 end

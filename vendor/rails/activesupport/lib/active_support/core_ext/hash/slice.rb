@@ -18,7 +18,11 @@ module ActiveSupport #:nodoc:
         # Returns a new hash with only the given keys.
         def slice(*keys)
           keys = keys.map! { |key| convert_key(key) } if respond_to?(:convert_key)
+<<<<<<< HEAD:vendor/rails/activesupport/lib/active_support/core_ext/hash/slice.rb
           hash = self.class.new
+=======
+          hash = {}
+>>>>>>> i18n:vendor/rails/activesupport/lib/active_support/core_ext/hash/slice.rb
           keys.each { |k| hash[k] = self[k] if has_key?(k) }
           hash
         end

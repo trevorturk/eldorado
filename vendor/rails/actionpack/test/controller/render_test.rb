@@ -8,6 +8,7 @@ module Fun
   end
 end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
 class MockLogger
   attr_reader :logged
 
@@ -20,6 +21,8 @@ class MockLogger
   end
 end
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
 class TestController < ActionController::Base
   class LabellingFormBuilder < ActionView::Helpers::FormBuilder
   end
@@ -30,6 +33,7 @@ class TestController < ActionController::Base
   end
 
   def conditional_hello
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
     response.last_modified = Time.now.utc.beginning_of_day
     response.etag = [:foo, 123]
 
@@ -38,6 +42,11 @@ class TestController < ActionController::Base
     else
       render :action => 'hello_world'
     end
+=======
+    etag! [:foo, 123]
+    last_modified! Time.now.utc.beginning_of_day
+    render :action => 'hello_world' unless performed?
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
   end
 
   def render_hello_world
@@ -493,6 +502,7 @@ class TestController < ActionController::Base
         page.replace :foo, :partial => 'partial'
       end
     end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
   end
 
   def partial_only_with_layout
@@ -562,6 +572,8 @@ class TestController < ActionController::Base
 
   def partial_collection_shorthand_with_different_types_of_records_with_counter
     partial_collection_shorthand_with_different_types_of_records
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
   end
 
   def missing_partial
@@ -893,6 +905,81 @@ class RenderTest < Test::Unit::TestCase
   def test_should_render_formatted_template
     get :formatted_html_erb
     assert_equal 'formatted html erb', @response.body
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
+=======
+  end
+
+  def test_should_render_formatted_xml_erb_template
+    get :formatted_xml_erb, :format => :xml
+    assert_equal '<test>passed formatted xml erb</test>', @response.body
+  end
+
+  def test_should_render_formatted_html_erb_template
+    get :formatted_xml_erb
+    assert_equal '<test>passed formatted html erb</test>', @response.body
+  end
+
+  def test_should_render_formatted_html_erb_template_with_faulty_accepts_header
+    @request.env["HTTP_ACCEPT"] = "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, appliction/x-shockwave-flash, */*"
+    get :formatted_xml_erb
+    assert_equal '<test>passed formatted html erb</test>', @response.body
+  end
+
+  def test_should_render_html_formatted_partial
+    get :partial
+    assert_equal 'partial html', @response.body
+  end
+
+  def test_should_render_html_partial_with_dot
+    get :partial_dot_html
+    assert_equal 'partial html', @response.body
+  end
+
+  def test_should_render_html_formatted_partial_with_rjs
+    xhr :get, :partial_as_rjs
+    assert_equal %(Element.replace("foo", "partial html");), @response.body
+  end
+
+  def test_should_render_html_formatted_partial_with_rjs_and_js_format
+    xhr :get, :respond_to_partial_as_rjs
+    assert_equal %(Element.replace("foo", "partial html");), @response.body
+  end
+
+  def test_should_render_js_partial
+    xhr :get, :partial, :format => 'js'
+    assert_equal 'partial js', @response.body
+  end
+
+  def test_should_render_with_alternate_default_render
+    xhr :get, :render_alternate_default
+    assert_equal %(Element.replace("foo", "partial html");), @response.body
+  end
+
+  def test_should_render_xml_but_keep_custom_content_type
+    get :render_xml_with_custom_content_type
+    assert_equal "application/atomsvc+xml", @response.content_type
+  end
+
+  def test_should_use_implicit_content_type
+    get :implicit_content_type, :format => 'atom'
+    assert_equal Mime::ATOM, @response.content_type
+  end
+end
+
+class EtagRenderTest < Test::Unit::TestCase
+  def setup
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    @controller = TestController.new
+
+    @request.host = "www.nextangle.com"
+  end
+
+  def test_render_200_should_set_etag
+    get :render_hello_world_from_variable
+    assert_equal etag_for("hello david"), @response.headers['ETag']
+    assert_equal "private, max-age=0, must-revalidate", @response.headers['Cache-Control']
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
   end
 
   def test_should_render_formatted_xml_erb_template
@@ -936,6 +1023,7 @@ class RenderTest < Test::Unit::TestCase
     assert_equal %!Element.remove("person");\nnew Effect.Highlight(\"project-4\",{});!, @response.body
   end
 
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
   def test_layout_test_with_different_layout
     get :layout_test_with_different_layout
     assert_equal "<html>Hello world!</html>", @response.body
@@ -1087,7 +1175,13 @@ class RenderTest < Test::Unit::TestCase
       get :head_with_symbolic_status, :status => status.to_s
       assert_equal code, @response.response_code
       assert_response status
+=======
+  protected
+    def etag_for(text)
+      %("#{Digest::MD5.hexdigest(text)}")
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
     end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
   end
 
   def test_head_with_integer_status
@@ -1166,27 +1260,34 @@ class RenderTest < Test::Unit::TestCase
     get :partial_dot_html
     assert_equal 'partial html', @response.body
   end
+=======
+end
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
 
-  def test_should_render_html_formatted_partial_with_rjs
-    xhr :get, :partial_as_rjs
-    assert_equal %(Element.replace("foo", "partial html");), @response.body
+class LastModifiedRenderTest < Test::Unit::TestCase
+  def setup
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    @controller = TestController.new
+
+    @request.host = "www.nextangle.com"
+    @last_modified = Time.now.utc.beginning_of_day.httpdate
   end
 
-  def test_should_render_html_formatted_partial_with_rjs_and_js_format
-    xhr :get, :respond_to_partial_as_rjs
-    assert_equal %(Element.replace("foo", "partial html");), @response.body
+  def test_responds_with_last_modified
+    get :conditional_hello
+    assert_equal @last_modified, @response.headers['Last-Modified']
   end
 
-  def test_should_render_js_partial
-    xhr :get, :partial, :format => 'js'
-    assert_equal 'partial js', @response.body
+  def test_request_not_modified
+    @request.headers["HTTP_IF_MODIFIED_SINCE"] = @last_modified
+    get :conditional_hello
+    assert_equal "304 Not Modified", @response.headers['Status']
+    assert @response.body.blank?, @response.body
+    assert_equal @last_modified, @response.headers['Last-Modified']
   end
 
-  def test_should_render_with_alternate_default_render
-    xhr :get, :render_alternate_default
-    assert_equal %(Element.replace("foo", "partial html");), @response.body
-  end
-
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
   def test_partial_only_with_layout
     get :partial_only_with_layout
     assert_equal "<html>only partial</html>", @response.body
@@ -1364,12 +1465,23 @@ class EtagRenderTest < Test::Unit::TestCase
     get :builder_layout_test
     assert_equal "<wrapper>\n<html>\n  <p>Hello </p>\n<p>This is grand!</p>\n</html>\n</wrapper>\n", @response.body
     assert_equal etag_for("<wrapper>\n<html>\n  <p>Hello </p>\n<p>This is grand!</p>\n</html>\n</wrapper>\n"), @response.headers['ETag']
+=======
+  def test_request_modified
+    @request.headers["HTTP_IF_MODIFIED_SINCE"] = 'Thu, 16 Jul 2008 00:00:00 GMT'
+    get :conditional_hello
+    assert_equal "200 OK", @response.headers['Status']
+    assert !@response.body.blank?
+    assert_equal @last_modified, @response.headers['Last-Modified']
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
   end
+<<<<<<< HEAD:vendor/rails/actionpack/test/controller/render_test.rb
 
   protected
     def etag_for(text)
       %("#{Digest::MD5.hexdigest(text)}")
     end
+=======
+>>>>>>> i18n:vendor/rails/actionpack/test/controller/render_test.rb
 end
 
 class LastModifiedRenderTest < Test::Unit::TestCase

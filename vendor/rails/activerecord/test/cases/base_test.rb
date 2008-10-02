@@ -76,7 +76,11 @@ class TopicWithProtectedContentAndAccessibleAuthorName < ActiveRecord::Base
 end
 
 class BasicsTest < ActiveRecord::TestCase
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/base_test.rb
   fixtures :topics, :companies, :developers, :projects, :computers, :accounts, :minimalistics, 'warehouse-things', :authors, :categorizations, :categories, :posts
+=======
+  fixtures :topics, :companies, :developers, :projects, :computers, :accounts, :minimalistics, 'warehouse-things', :authors, :categorizations
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/base_test.rb
 
   def test_table_exists
     assert !NonExistentTable.table_exists?
@@ -628,7 +632,11 @@ class BasicsTest < ActiveRecord::TestCase
   end
 
   def test_update_counter
+<<<<<<< HEAD:vendor/rails/activerecord/test/cases/base_test.rb
     category = categories(:general)
+=======
+    category = Category.first
+>>>>>>> i18n:vendor/rails/activerecord/test/cases/base_test.rb
     assert_nil category.categorizations_count
     assert_equal 2, category.categorizations.count
 

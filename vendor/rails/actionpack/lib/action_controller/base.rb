@@ -284,6 +284,7 @@ module ActionController #:nodoc:
     @@debug_routes = true
     cattr_accessor :debug_routes
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
     # Indicates whether to allow concurrent action processing. Your
     # controller actions and any other code they call must also behave well
     # when called from concurrent threads. Turned off by default.
@@ -292,6 +293,8 @@ module ActionController #:nodoc:
 
     @@guard = Monitor.new
 
+=======
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
     # Modern REST web services often need to submit complex data to the web application.
     # The <tt>@@param_parsers</tt> hash lets you register handlers which will process the HTTP body and add parameters to the
     # <tt>params</tt> hash. These handlers are invoked for POST and PUT requests.
@@ -422,7 +425,15 @@ module ActionController #:nodoc:
       # By default, all methods defined in ActionController::Base and included modules are hidden.
       # More methods can be hidden using <tt>hide_actions</tt>.
       def hidden_actions
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
         read_inheritable_attribute(:hidden_actions) || write_inheritable_attribute(:hidden_actions, [])
+=======
+        unless read_inheritable_attribute(:hidden_actions)
+          write_inheritable_attribute(:hidden_actions, ActionController::Base.public_instance_methods.map { |m| m.to_s })
+        end
+
+        read_inheritable_attribute(:hidden_actions)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
       end
 
       # Hide each of the given methods from being callable as actions.
@@ -453,7 +464,11 @@ module ActionController #:nodoc:
       #   ArticleController.prepend_view_path(["views/default", "views/custom"])
       #
       def prepend_view_path(path)
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
         @view_paths = superclass.view_paths.dup if !defined?(@view_paths) || @view_paths.nil?
+=======
+        @view_paths = superclass.view_paths.dup if @view_paths.nil?
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
         @view_paths.unshift(*path)
       end
 
@@ -533,6 +548,7 @@ module ActionController #:nodoc:
 
         log_processing
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
         if @@allow_concurrency
           send(method, *arguments)
         else
@@ -540,6 +556,11 @@ module ActionController #:nodoc:
         end
 
         send_response
+=======
+        assign_default_content_type_and_charset
+        response.prepare! unless component_request?
+        response
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
       ensure
         process_cleanup
       end
@@ -882,16 +903,38 @@ module ActionController #:nodoc:
 
         else
           if file = options[:file]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
             render_for_file(file, options[:status], layout, options[:locals] || {})
+=======
+            render_for_file(file, options[:status], nil, options[:locals] || {})
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
 
           elsif template = options[:template]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
             render_for_file(template, options[:status], layout, options[:locals] || {})
+=======
+            render_for_file(template, options[:status], true, options[:locals] || {})
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
 
           elsif inline = options[:inline]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
             render_for_text(@template.render(options.merge(:layout => layout)), options[:status])
+=======
+            add_variables_to_assigns
+            render_for_text(@template.render(options), options[:status])
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
 
           elsif action_name = options[:action]
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
             render_for_file(default_template_name(action_name.to_s), options[:status], layout)
+=======
+            template = default_template_name(action_name.to_s)
+            if options[:layout] && !template_exempt_from_layout?(template)
+              render_with_a_layout(:file => template, :status => options[:status], :layout => true)
+            else
+              render_with_no_layout(:file => template, :status => options[:status])
+            end
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
 
           elsif xml = options[:xml]
             response.content_type ||= Mime::XML
@@ -903,12 +946,31 @@ module ActionController #:nodoc:
             response.content_type ||= Mime::JSON
             render_for_text(json, options[:status])
 
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
           elsif options[:partial]
             options[:partial] = default_template_name if options[:partial] == true
             if layout
               render_for_text(@template.render(:text => @template.render(options), :layout => layout), options[:status])
+=======
+          elsif partial = options[:partial]
+            partial = default_template_name if partial == true
+            add_variables_to_assigns
+
+            if collection = options[:collection]
+              render_for_text(
+                @template.send!(:render_partial_collection, partial, collection,
+                options[:spacer_template], options[:locals], options[:as]), options[:status]
+              )
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
             else
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
               render_for_text(@template.render(options), options[:status])
+=======
+              render_for_text(
+                @template.send!(:render_partial, partial,
+                options[:object], options[:locals]), options[:status]
+              )
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
             end
 
           elsif options[:update]
@@ -1117,9 +1179,18 @@ module ActionController #:nodoc:
 
 
     private
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
       def render_for_file(template_path, status = nil, layout = nil, locals = {}) #:nodoc:
+=======
+      def render_for_file(template_path, status = nil, use_full_path = nil, locals = {}) #:nodoc:
+        add_variables_to_assigns
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
         logger.info("Rendering #{template_path}" + (status ? " (#{status})" : '')) if logger
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
         render_for_text @template.render(:file => template_path, :locals => locals, :layout => layout), status
+=======
+        render_for_text(@template.render(:file => template_path, :locals => locals), status)
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
       end
 
       def render_for_text(text = nil, status = nil, append_response = false) #:nodoc:
@@ -1206,6 +1277,7 @@ module ActionController #:nodoc:
       end
 
       def self.action_methods
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
         @action_methods ||=
           # All public instance methods of this class, including ancestors
           public_instance_methods(true).map { |m| m.to_s }.to_set -
@@ -1215,6 +1287,20 @@ module ActionController #:nodoc:
           public_instance_methods(false).map { |m| m.to_s } -
           # And always exclude explicitly hidden actions
           hidden_actions
+=======
+        @action_methods ||= Set.new(public_instance_methods.map { |m| m.to_s }) - hidden_actions
+      end
+
+      def add_variables_to_assigns
+        unless @variables_added
+          add_instance_variables_to_assigns
+          @variables_added = true
+        end
+      end
+
+      def forget_variables_added_to_assigns
+        @variables_added = nil
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
       end
 
       def reset_variables_added_to_assigns
@@ -1236,9 +1322,22 @@ module ActionController #:nodoc:
       end
 
       def template_exists?(template_name = default_template_name)
+<<<<<<< HEAD:vendor/rails/actionpack/lib/action_controller/base.rb
         @template.send(:_pick_template, template_name) ? true : false
       rescue ActionView::MissingTemplate
         false
+=======
+        @template.file_exists?(template_name)
+      end
+
+      def template_public?(template_name = default_template_name)
+        @template.file_public?(template_name)
+      end
+
+      def template_exempt_from_layout?(template_name = default_template_name)
+        template_name = @template.pick_template(template_name).to_s if @template
+        @@exempt_from_layout.any? { |ext| template_name =~ ext }
+>>>>>>> i18n:vendor/rails/actionpack/lib/action_controller/base.rb
       end
 
       def default_template_name(action_name = self.action_name)

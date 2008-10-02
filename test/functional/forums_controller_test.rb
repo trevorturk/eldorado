@@ -1,11 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'forums_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class ForumsController; def rescue_action(e) raise e end; end
-
-class ForumsControllerTest < Test::Unit::TestCase
-  fixtures :all
+class ForumsControllerTest < ActionController::TestCase
 
   def setup
     @controller = ForumsController.new
@@ -136,5 +131,4 @@ class ForumsControllerTest < Test::Unit::TestCase
     assert_equal old_forum_count, Forum.count
     assert_redirected_to root_path
   end
-    
 end

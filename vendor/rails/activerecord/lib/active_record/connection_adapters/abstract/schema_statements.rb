@@ -384,8 +384,17 @@ module ActiveRecord
       def add_column_options!(sql, options) #:nodoc:
         sql << " DEFAULT #{quote(options[:default], options[:column])}" if options_include_default?(options)
         # must explicitly check for :null to allow change_column to work on migrations
+<<<<<<< HEAD:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb
         if options[:null] == false
           sql << " NOT NULL"
+=======
+        if options.has_key? :null
+          if options[:null] == false
+            sql << " NOT NULL"
+          else
+            sql << " NULL"
+          end
+>>>>>>> i18n:vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb
         end
       end
 
