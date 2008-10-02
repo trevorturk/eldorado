@@ -57,6 +57,11 @@ class TopicsController < ApplicationController
     redirect_to "/topics/#{@topic.id}?page=#{@post.page}#p#{@post.id.to_s}"
   end
   
+  def mark_all_viewed
+    current_user.update_attribute(:all_viewed_at, Time.now)
+    redirect_to forum_root_path
+  end
+  
   def clean_params
     params[:topic][:sticky] = false unless admin?
   end

@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :settings
   map.resources :subscriptions
   map.resources :themes, :member => {:select => :post, :deselect => :post}
-  map.resources :topics, :member => {:show_new => :get}
+  map.resources :topics, :member => {:show_new => :get}, :collection => {:mark_all_viewed => :get}
   map.resources :uploads
   map.resources :users, :member => {:admin => :post, :ban => :get, :remove_ban => :post, :confirm_delete => :get}, 
                         :has_many => [:articles, :posts]

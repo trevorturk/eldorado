@@ -372,4 +372,11 @@ class TopicsControllerTest < ActionController::TestCase
     assert old_updated_at < v.updated_at
   end
   
+  def test_should_mark_all_topics_as_viewed_for_current_user
+    login_as :trevor
+    get :mark_all_viewed
+    users(:trevor).reload
+    assert users(:trevor).all_viewed_at.between?(Time.now-1.minute, Time.now+1.minute)
+  end
+  
 end
