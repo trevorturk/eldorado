@@ -325,6 +325,7 @@ class UsersControllerTest < ActionController::TestCase
   def test_that_user_gets_default_time_values
     post :create, :user => {:login => 'user1', :email => 'test1@test.com', :password => 'abc', :password_confirmation => 'abc'}
     assert_not_nil User.find_by_login('user1').online_at
+    assert_not_nil User.find_by_login('user1').all_viewed_at
   end
   
   def test_that_user_gets_default_time_zone_values

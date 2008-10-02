@@ -33,6 +33,7 @@ Guest:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  all_viewed_at: <%= 5.hours.ago.to_s :db %>
   time_zone: 'UTC'
 Administrator:
   id: 2
@@ -44,6 +45,7 @@ Administrator:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  all_viewed_at: <%= 5.hours.ago.to_s :db %>
   bio: 'admin'
   auth_token: 153c53039f6e8e8ca832d1512702f412298ec3a9
   auth_token_exp: <%= (Time.now.utc - 1.week).to_s :db %> # expired
@@ -57,6 +59,7 @@ Timothy:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  all_viewed_at: <%= 5.hours.ago.to_s :db %>
   auth_token: 244cd62e5130681b86c01f8de9e9762d9a3f3645
   auth_token_exp: <%= (Time.now.utc + 1.week).to_s :db %> # not expired
   time_zone: 'UTC'
@@ -69,6 +72,7 @@ trevor:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  all_viewed_at: <%= 5.hours.ago.to_s :db %>
   bio: 'my bio'
   avatar: 4.gif
   time_zone: 'UTC'
@@ -81,6 +85,7 @@ banned:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 5.hours.ago.to_s :db %>
+  all_viewed_at: <%= 5.hours.ago.to_s :db %>
   time_zone: 'UTC'
   ban_message: 'get banned!'
   banned_until: <%= (Time.now.utc + 5.days).to_s :db %>
@@ -93,6 +98,7 @@ post_test:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 2.weeks.ago.to_s :db %>
+  all_viewed_at: <%= 5.hours.ago.to_s :db %>
   time_zone: 'UTC'
 noposts:
   id: 7
@@ -103,4 +109,5 @@ noposts:
   created_at: <%= 5.days.ago.to_s :db %>
   profile_updated_at: <%= 5.hours.ago.to_s :db %>
   online_at: <%= 2.weeks.ago.to_s :db %>
+  all_viewed_at: <%= 5.hours.ago.to_s :db %>
   time_zone: 'UTC'

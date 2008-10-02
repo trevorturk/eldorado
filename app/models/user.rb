@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   end
     
   def set_defaults
-    self.profile_updated_at = Time.now.utc
+    self.profile_updated_at = self.all_viewed_at = Time.now.utc
     self.time_zone = Setting.find(:first).time_zone
   end
   

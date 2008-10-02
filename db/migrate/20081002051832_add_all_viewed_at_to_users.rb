@@ -1,7 +1,9 @@
 class AddAllViewedAtToUsers < ActiveRecord::Migration
   def self.up
     add_column :users, :all_viewed_at, :datetime
-    User.update_all(:all_viewed_at => Time.now)
+    User.all.each do |u|
+      u.update_attribute(:all_viewed_at, u.online_at)
+    end
   end
 
   def self.down
