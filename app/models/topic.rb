@@ -21,8 +21,8 @@ class Topic < ActiveRecord::Base
     Forum.update_all(['topics_count = ?, posts_count = ?', forum.topics_count+1, forum.posts_count+self.posts.count], ['id = ?', forum.id])
   end
   
-  def self.get(page = 1, limit = 30, conditions = nil)
-    paginate(:page => page, :include => [:user, :forum, :last_poster, :viewings], :limit => limit, :conditions => conditions, :order => 'topics.last_post_at desc')    
+  def self.get(page = 1, per_page = 30, conditions = nil)
+    paginate(:page => page, :include => [:user, :forum, :last_poster, :viewings], :per_page => per_page, :conditions => conditions, :order => 'topics.last_post_at desc')    
   end
   
   def viewed_by(user)
