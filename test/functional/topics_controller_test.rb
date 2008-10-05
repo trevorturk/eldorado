@@ -380,6 +380,7 @@ class TopicsControllerTest < ActionController::TestCase
   end
   
   # def test_show_new
+  # TODO - changed this order and whatnot, also should refactor
   #   # (1) no new posts since user marked all as viewed; view last post
   #   # (2) user never viewed topic before; view first post
   #   # (3) user has viewed topic but there are no newer posts; view last post

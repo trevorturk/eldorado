@@ -57,8 +57,8 @@ class TopicsController < ApplicationController
       viewing = Viewing.first(:conditions => ['user_id = ? and topic_id = ?', current_user.id, @topic.id])
       if current_user.all_viewed_at > @topic.updated_at # (1) no new posts since user marked all as viewed; view last post
         post = last_post
-      elsif viewing.nil? # (2) user never viewed topic before; view first post
-        post = @topic.posts.first
+      elsif viewing.nil? # (2) user never viewed topic before; view first since all viewed at
+        post = @topic.posts.first(:conditions => ["created_at >= ?", current_user.all_viewed_at])
       elsif viewing.updated_at > @topic.updated_at # (3) user has viewed topic but there are no newer posts; view last post
         post = last_post
       else # (4) user viewed topic and there are newer posts; view post >= last view of topic
