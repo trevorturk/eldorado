@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id], :include => :forums)
     @forums = @category.forums
-    @topics = Topic.paginate(:page => params[:page], :include => [:user, :forum, :last_poster, :viewings], :order => 'topics.last_post_at desc', :conditions => ["forum_id in (?)", @forums.collect(&:id)])
+    @topics = Topic.get(params[:page], 30, ["forum_id in (?)", @forums.collect(&:id)])
     render :template => 'topics/index'
   end
   

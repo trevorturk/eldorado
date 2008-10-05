@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   before_filter :clean_params, :only => [:create, :update]
   
   def index
-    @topics = Topic.paginate(:page => params[:page], :include => [:user, :last_poster, :viewings], :order => 'last_post_at desc')
+    @topics = Topic.get(params[:page])
   end
   
   def show
