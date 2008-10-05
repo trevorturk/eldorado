@@ -1,6 +1,6 @@
 class Topic < ActiveRecord::Base
     
-  has_many :posts, :order => 'posts.created_at', :dependent => :destroy
+  has_many :posts, :order => 'posts.created_at asc', :dependent => :destroy
   has_many :viewings, :dependent => :destroy, :order => 'updated_at desc'
   belongs_to :user
   belongs_to :forum, :counter_cache => true
