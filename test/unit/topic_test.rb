@@ -16,4 +16,9 @@ class TopicTest < Test::Unit::TestCase
     t = Topic.find(1)
     assert_equal t.to_s, 'Testing'
   end
+  
+  # def test_topics_are_marked_as_new_when_they_should_be
+  #   # is_new? helper
+  # end
+  
 end
