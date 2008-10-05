@@ -72,6 +72,7 @@ class TopicsController < ApplicationController
   
   def mark_all_viewed
     current_user.update_attribute(:all_viewed_at, Time.now)
+    flash[:notice] = "All topics marked as read"
     redirect_to forum_root_path
   end
   
