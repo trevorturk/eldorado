@@ -379,4 +379,12 @@ class TopicsControllerTest < ActionController::TestCase
     assert users(:trevor).all_viewed_at.between?(Time.now-1.minute, Time.now+1.minute)
   end
   
+  # def test_show_new
+  #   # (1) user never viewed topic before; view first post
+  #   # (2) no new posts since user marked all as viewed; view last post
+  #   # (3) user has viewed topic but there are no newer posts; view last post
+  #   # (4) user viewed topic and there are newer posts; view post >= last view of topic
+  #   # (0) not logged in; view last post
+  # end
+  
 end

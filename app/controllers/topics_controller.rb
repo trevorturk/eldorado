@@ -52,9 +52,22 @@ class TopicsController < ApplicationController
   
   def show_new
     @topic = Topic.find(params[:id])
-    @post = @topic.posts.first(:conditions => ["created_at >= ?", session[:online_at]]) if logged_in?
-    @post = @topic.posts.last if @post.nil?
-    redirect_to "/topics/#{@topic.id}?page=#{@post.page}#p#{@post.id.to_s}"
+    last_post = @topic.posts.last
+    if logged_in?
+      viewing = Viewing.first(:conditions => ['user_id = ? and topic_id = ?', current_user.id, @topic.id])
+      if viewing.nil? # (1) user never viewed topic before; view first post
+        post = @topic.posts.first
+      elsif current_user.all_viewed_at > @topic.updated_at # (2) no new posts since user marked all as viewed; view last post
+        post = last_post
+      elsif viewing.updated_at > @topic.updated_at # (3) user has viewed topic but there are no newer posts; view last post
+        post = last_post
+      elsif # (4) user viewed topic and there are newer posts; view post >= last view of topic
+        post = @topic.posts.first(:conditions => ["created_at >= ?", viewing.updated_at])
+      end
+    else
+      post = last_post # (0) not logged in; view last post
+    end
+    redirect_to "/topics/#{@topic.id}?page=#{post.page}#p#{post.id}"
   end
   
   def mark_all_viewed
