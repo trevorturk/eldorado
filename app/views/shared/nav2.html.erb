@@ -86,11 +86,11 @@
 
 <% if current_controller == 'forums' and current_action == 'index' %>
   <div class="info-right info-space">
-    <%= link_to('Mark All Viewed', mark_all_viewed_topics_path) if logged_in? %> &nbsp; 
+    <%= link_to('Mark All Viewed', mark_all_viewed_topics_path) if logged_in? %>
     <% if admin? %>
-      <%= link_to('New Category', new_category_path) %>
+      &nbsp; <%= link_to('New Category', new_category_path) %>
       <% unless Category.count == 0 %>
-        &nbsp; <%= link_to('New Forum', new_forum_path) %>
+      &nbsp; <%= link_to('New Forum', new_forum_path) %>
       <% end %>
     <% end %>
   </div>
