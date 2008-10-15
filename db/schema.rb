@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081002051832) do
+ActiveRecord::Schema.define(:version => 20081015052225) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -212,5 +212,7 @@ ActiveRecord::Schema.define(:version => 20081002051832) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "viewings", ["topic_id"], :name => "index_viewings_on_topic_id"
 
 end
