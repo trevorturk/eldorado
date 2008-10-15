@@ -84,7 +84,7 @@ module ActionController
     module RaiseActionExceptions
       attr_accessor :exception
 
-      def rescue_action(e)
+      def rescue_action_without_handler(e)
         self.exception = e
         
         if request.remote_addr == "0.0.0.0"
@@ -134,6 +134,9 @@ module ActionController
       @controller = self.class.controller_class.new
       @controller.request = @request = TestRequest.new
       @response = TestResponse.new
+
+      @controller.params = {}
+      @controller.send(:initialize_current_url)
     end
     
     # Cause the action to be rescued according to the regular rules for rescue_action when the visitor is not local

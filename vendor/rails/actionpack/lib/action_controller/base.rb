@@ -252,7 +252,7 @@ module ActionController #:nodoc:
   #
   #   def do_something
   #     redirect_to(:action => "elsewhere") and return if monkeys.nil?
-  #     render :action => "overthere" # won't be called unless monkeys is nil
+  #     render :action => "overthere" # won't be called if monkeys is nil
   #   end
   #
   class Base
@@ -289,8 +289,6 @@ module ActionController #:nodoc:
     # when called from concurrent threads. Turned off by default.
     @@allow_concurrency = false
     cattr_accessor :allow_concurrency
-
-    @@guard = Monitor.new
 
     # Modern REST web services often need to submit complex data to the web application.
     # The <tt>@@param_parsers</tt> hash lets you register handlers which will process the HTTP body and add parameters to the
@@ -532,12 +530,7 @@ module ActionController #:nodoc:
         assign_names
 
         log_processing
-
-        if @@allow_concurrency
-          send(method, *arguments)
-        else
-          @@guard.synchronize { send(method, *arguments) }
-        end
+        send(method, *arguments)
 
         send_response
       ensure
@@ -549,8 +542,8 @@ module ActionController #:nodoc:
         response
       end
 
-      # Returns a URL that has been rewritten according to the options hash and the defined Routes.
-      # (For doing a complete redirect, use redirect_to).
+      # Returns a URL that has been rewritten according to the options hash and the defined routes.
+      # (For doing a complete redirect, use +redirect_to+).
       #
       # <tt>url_for</tt> is used to:
       #
@@ -590,7 +583,15 @@ module ActionController #:nodoc:
       # missing values in the current request's parameters. Routes attempts to guess when a value should and should not be
       # taken from the defaults. There are a few simple rules on how this is performed:
       #
-      # * If the controller name begins with a slash, no defaults are used: <tt>url_for :controller => '/home'</tt>
+      # * If the controller name begins with a slash no defaults are used:
+      #
+      #     url_for :controller => '/home'
+      #
+      #   In particular, a leading slash ensures no namespace is assumed. Thus,
+      #   while <tt>url_for :controller => 'users'</tt> may resolve to
+      #   <tt>Admin::UsersController</tt> if the current controller lives under
+      #   that module, <tt>url_for :controller => '/users'</tt> ensures you link
+      #   to <tt>::UsersController</tt> no matter what.
       # * If the controller changes, the action will default to index unless provided
       #
       # The final rule is applied while the URL is being generated and is best illustrated by an example. Let us consider the
@@ -968,7 +969,9 @@ module ActionController #:nodoc:
       # If-Modified-Since request header is <= last modified.
       def last_modified!(utc_time)
         response.last_modified= utc_time
-        head(:not_modified) if response.last_modified == request.if_modified_since
+        if request.if_modified_since && request.if_modified_since <= utc_time
+          head(:not_modified)
+        end
       end
 
       # Sets the ETag response header. Returns 304 Not Modified if the
