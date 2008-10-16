@@ -19,6 +19,8 @@ module BBCodeizer
       :bold                  => [ /\[b\](.+?)\[\/b\]/im, '<strong>\1</strong>' ],
       :italic                => [ /\[i\](.+?)\[\/i\]/im, '<em>\1</em>' ],
       :underline             => [ /\[u\](.+?)\[\/u\]/im, '<u>\1</u>' ],
+      :del                   => [ /\[del\](.+?)\[\/del\]/im, '<del>\1</del>' ],
+      :strike                => [ /\[strike\](.+?)\[\/strike\]/im, '<del>\1</del>' ],
       :email_with_name       => [ /\[email=(.+?)\](.+?)\[\/email\]/i, '<a href="mailto:\1">\2</a>' ],
       :email_sans_name       => [ /\[email\](.+?)\[\/email\]/i, '<a href="mailto:\1">\1</a>' ],
       :url_with_title        => [ /\[url=(.+?)\](.+?)\[\/url\]/i, '<a href="\1">\2</a>' ],
@@ -50,9 +52,9 @@ module BBCodeizer
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
     # These names correspond to either names above or methods in this module.
                 # The ':literal' tag MUST be first for it to work correctly
-    TagList = [ :literal, :bold, :italic, :underline, :email_with_name, :email_sans_name, 
-                :url_with_title, :url_sans_title, :image, :size, :color, :code, 
-                :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :hide, :mp3, 
+    TagList = [ :literal, :bold, :italic, :underline, :del, :strike, :email_with_name, 
+                :email_sans_name, :url_with_title, :url_sans_title, :image, :size, :color, 
+                :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :hide, :mp3, 
                 :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor, 
                 :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :funnyordie, 
                 :atomfilms, :vimeo, :li, :list ]
