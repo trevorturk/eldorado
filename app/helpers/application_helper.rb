@@ -67,11 +67,10 @@ module ApplicationHelper
     return false unless logged_in?
     if item.is_a?(Topic)
       viewing = item.viewings.select {|v| v.user_id == current_user.id}.first
-      return true if (viewing.nil? || viewing.updated_at < item.updated_at) && current_user.all_viewed_at < item.updated_at
+      (viewing.nil? || viewing.updated_at < item.updated_at) && current_user.all_viewed_at < item.updated_at
     else
-      return true if session[:online_at] < item.updated_at
+      session[:online_at] < item.updated_at
     end
-    return false
   end
   
   def icon_for(item)
