@@ -137,7 +137,8 @@ h3 {
 }
 
 .nav-stats p.nav-left {
-	width: 80%;
+	width: 70%;
+	border: 1px solid green;
 }
 
 .box {
