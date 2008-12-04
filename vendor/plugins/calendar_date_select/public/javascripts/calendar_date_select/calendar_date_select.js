@@ -1,4 +1,4 @@
-// CalendarDateSelect version 1.10.11 - a prototype based date picker
+// CalendarDateSelect version 1.13 - a prototype based date picker
 // Questions, comments, bugs? - see the project page: http://code.google.com/p/calendardateselect
 if (typeof Prototype == 'undefined') alert("CalendarDateSelect Error: Prototype could not be found. Please make sure that your application's layout includes prototype.js (.g. <%= javascript_include_tag :defaults %>) *before* it includes calendar_date_select.js (.g. <%= calendar_date_select_includes %>).");
 if (Prototype.Version < "1.6") alert("Prototype 1.6.0 is required.  If using earlier version of prototype, please use calendar_date_select version 1.8.3");
@@ -15,9 +15,8 @@ Element.addMethods({
 Element.buildAndAppend = function(type, options, style)
 {
   var e = $(document.createElement(type));
-  $H(options).each(function(pair) { eval("e." + pair.key + " = pair.value" ); });
-  if (style) 
-    $H(style).each(function(pair) { eval("e.style." + pair.key + " = pair.value" ); });
+  $H(options).each(function(pair) { e[pair.key] = pair.value });
+  if (style) e.setStyle(style);
   return e;
 };
 nil = null;
@@ -106,9 +105,9 @@ CalendarDateSelect.prototype = {
   },
   positionCalendarDiv: function() {
     var above = false;
-    var c_pos = this.calendar_div.viewportOffset(), c_left = c_pos[0], c_top = c_pos[1], c_dim = this.calendar_div.getDimensions(), c_height = c_dim.height, c_width = c_dim.width; 
+    var c_pos = this.calendar_div.cumulativeOffset(), c_left = c_pos[0], c_top = c_pos[1], c_dim = this.calendar_div.getDimensions(), c_height = c_dim.height, c_width = c_dim.width; 
     var w_top = window.f_scrollTop(), w_height = window.f_height();
-    var e_dim = $(this.options.get("popup_by")).viewportOffset(), e_top = e_dim[1], e_left = e_dim[0], e_height = $(this.options.get("popup_by")).getDimensions().height, e_bottom = e_top + e_height;
+    var e_dim = $(this.options.get("popup_by")).cumulativeOffset(), e_top = e_dim[1], e_left = e_dim[0], e_height = $(this.options.get("popup_by")).getDimensions().height, e_bottom = e_top + e_height;
     
     if ( (( e_bottom + c_height ) > (w_top + w_height)) && ( e_bottom - c_height > w_top )) above = true;
     var left_px = e_left.toString() + "px", top_px = (above ? (e_top - c_height ) : ( e_top + e_height )).toString() + "px";
@@ -225,7 +224,7 @@ CalendarDateSelect.prototype = {
           onclick: function() {this.today(false); return false;}.bindAsEventListener(this)
         });
       
-      if (this.options.get("time")=="mixed") buttons_div.build("span", {innerHTML: " | ", className:"button_seperator"})
+      if (this.options.get("time")=="mixed") buttons_div.build("span", {innerHTML: "&#160;|&#160;", className:"button_seperator"})
       
       if (this.options.get("time")) b = buttons_div.build("a", {
         innerHTML: _translations["Now"],
@@ -233,13 +232,13 @@ CalendarDateSelect.prototype = {
         onclick: function() {this.today(true); return false}.bindAsEventListener(this)
       });
       
-      if (!this.options.get("embedded"))
+      if (!this.options.get("embedded") && !this.closeOnClick())
       {
-        buttons_div.build("span", {innerHTML: "&#160;"});
+        buttons_div.build("span", {innerHTML: "&#160;|&#160;", className:"button_seperator"})
         buttons_div.build("a", { innerHTML: _translations["OK"], href: "#", onclick: function() {this.close(); return false;}.bindAsEventListener(this) });
       }
       if (this.options.get('clear_button')) {
-        buttons_div.build("span", {innerHTML: "&#160;"});
+        buttons_div.build("span", {innerHTML: "&#160;|&#160;", className:"button_seperator"})
         buttons_div.build("a", { innerHTML: _translations["Clear"], href: "#", onclick: function() {this.clearDate(); if (!this.options.get("embedded")) this.close(); return false;}.bindAsEventListener(this) });
       }
     }
@@ -345,9 +344,11 @@ CalendarDateSelect.prototype = {
   updateFooter:function(text) { if (!text) text = this.dateString(); this.footer_div.purgeChildren(); this.footer_div.build("span", {innerHTML: text }); },
   clearDate:function() {
     if ((this.target_element.disabled || this.target_element.readOnly) && this.options.get("popup") != "force") return false;
+    var last_value = this.target_element.value;
     this.target_element.value = "";
     this.clearSelectedClass();
     this.updateFooter('&#160;');
+    if (last_value!=this.target_element.value) this.callback("onchange");
   },
   updateSelectedDate:function(partsOrElement, via_click) {
     var parts = $H(partsOrElement);
@@ -429,7 +430,7 @@ CalendarDateSelect.prototype = {
     Event.stopObserving(document, "keypress", this.keyPress_handler);
     this.calendar_div.remove(); this.closed = true;
     if (this.iframe) this.iframe.remove();
-    if (this.target_element.type!="hidden") this.target_element.focus();
+    if (this.target_element.type != "hidden" && ! this.target_element.disabled) this.target_element.focus();
     this.callback("after_close");
   },
   closeIfClickedOut: function(e) {

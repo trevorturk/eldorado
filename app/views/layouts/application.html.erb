@@ -6,7 +6,7 @@
 	<meta name="generator" content="http://almosteffortless.com/eldorado/" />
   <meta name="description" content="<%= page_title -%>" />
   <title><%= page_title -%></title>
-  <%= render 'shared/rss' unless @settings.private? %>
+  <%= render :file => 'shared/rss' unless @settings.private? %>
   <%= javascript_include_tag "prototype", "audio_player", "calendar_date_select", "prototip", :cache => true %>
   <%= favicon_tag %>
   <%= header_css %>
@@ -14,20 +14,20 @@
 </head>
 <body>
   <div class="wrapper">
-    <%= render 'shared/reminders' unless locked_out? -%>
+    <%= render :file => 'shared/reminders' unless locked_out? -%>
     <div class="header">
       <h1><%= link_to h(@settings.title), root_path -%></h1>
       <div class="tagline"><%=h @settings.tagline -%></div>
-      <%= render 'shared/tabs' unless locked_out? -%>
+      <%= render :file => 'shared/tabs' unless locked_out? -%>
     </div>
     <div class="content">
-      <%= render 'shared/nav' %>
+      <%= render :file => 'shared/nav' %>
       <div class="announcement"><%= @settings.announcement if current_controller == 'home' -%></div>
       <%= render :partial => 'search/form.html.erb' if current_controller == 'search' -%>
-      <%= render 'shared/flash' -%>
+      <%= render :file => 'shared/flash' -%>
       <%= yield %>
-      <%= render 'shared/nav2' -%>
-      <%= render 'shared/stats' unless locked_out? -%>
+      <%= render :file => 'shared/nav2' -%>
+      <%= render :file => 'shared/stats' unless locked_out? -%>
     </div>
     <div class="footer"><%= @settings.footer -%></div>
   </div>

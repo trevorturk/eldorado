@@ -38,7 +38,7 @@
 <% end %>
 
 <% @posts.each_with_index do |post, index| index+=1 %>
-  <%= render 'posts/show', { :post => post, :index => index } %>
+  <%= render :file => 'posts/show', :locals => { :post => post, :index => index } %>
 <% end %>
 
 <% unless %w(search).include?(current_controller) %>
@@ -56,7 +56,7 @@
 
 <% unless %w(posts search users).include?(current_controller) %>
   <% if logged_in? && (!@topic.locked || can_edit?(@topic)) %>
-    <%= render 'posts/new' %>
+    <%= render :file => 'posts/new' %>
   <% end %>
   <% if @topic.locked && !can_edit?(@topic) %>
     <div class="nav nav-footer">

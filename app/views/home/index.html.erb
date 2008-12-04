@@ -8,15 +8,15 @@
       </span>
     </div>
   <% end %>
-  <%= render 'topics/index' %>
+  <%= render :file => 'topics/index' %>
 </div>
 
 <div class="home-right">
   <%= render :partial => 'events/mini.html.erb' %>
-  <%= render 'uploads/index' %>
-  <%= render 'headers/list' %>
-  <%= render 'users/index' %>
-  <%= render 'avatars/list' %>
+  <%= render :file => 'uploads/index' %>
+  <%= render :file => 'headers/list' %>
+  <%= render :file => 'users/index' %>
+  <%= render :file => 'avatars/list' %>
 </div>
 
 <div class="clear"> </div>
