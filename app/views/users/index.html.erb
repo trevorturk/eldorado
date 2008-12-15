@@ -8,6 +8,11 @@
     <span class="detail"><%= link_to 'Avatars', avatars_path %> &nbsp; <%= link_to 'Ranks', ranks_path %></span>
   </div>
   <div class="clear"> </div>
+  
+  <% if logged_in? %>
+    <%= render :file => 'users/show', :locals => {:user => current_user } %>
+  <% end %>
+  
 <% end %>
 
 <% unless @users.blank? %>
