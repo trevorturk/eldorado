@@ -1,0 +1,24 @@
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  timeout: 5000
+  session_key: eldorado_development
+  secret: YrDOFOmYJyFg2tTZykCbZjWYQUbKBt
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  timeout: 5000
+  session_key: eldorado_test
+  secret: Pl8qJNFc8mo1yt1xtHOmfUGHOPEutu
+
+# This "session_key" can be any string, and should be unique to your installation (e.g. mysite_session)
+# This "secret" must be a random string, at least 30 characters long, and kept secret for security
+production:
+  adapter: mysql
+  database: eldorado_production
+  username: root
+  password: 
+  host: localhost
+  session_key: 
+  secret: 
