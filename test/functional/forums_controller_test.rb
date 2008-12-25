@@ -103,7 +103,7 @@ class ForumsControllerTest < ActionController::TestCase
     login_as :Administrator
     delete :destroy, :id => forums(:deleteme).id
     assert_equal old_forum_count, Forum.count
-    assert_redirected_to confirm_delete_forum_path(:id => forums(:deleteme).id)
+    assert_redirected_to confirm_delete_forum_path(:id => forums(:deleteme).to_param)
   end
   
   def test_should_not_get_delete_confirmation_screen_if_not_authorized_or_not_logged_in

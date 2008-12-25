@@ -112,7 +112,7 @@ class CategoriesControllerTest < ActionController::TestCase
     login_as :Administrator
     delete :destroy, :id => categories(:deleteme).id
     assert_equal old_category_count, Category.count
-    assert_redirected_to confirm_delete_category_path(:id => categories(:deleteme).id)
+    assert_redirected_to confirm_delete_category_path(:id => categories(:deleteme).to_param)
   end
   
   def test_should_not_get_delete_confirmation_screen_if_not_authorized_or_not_logged_in

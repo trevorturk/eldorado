@@ -1,0 +1,14 @@
+<h1><%= @post.created_at.strftime("%H:%M %M/%D/%Y") %></h1>
+<h2>There's a new post in <%= link_to @topic.to_s, topic_url(@topic) %>:</h2>
+<hr/>
+
+<p>
+  <%=h @post %>
+</p>
+
+<%= link_to "view", post_url(@post) %>
+
+
+
+
+

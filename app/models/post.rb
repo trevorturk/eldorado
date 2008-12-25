@@ -6,10 +6,11 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :user_id, :body
   
-  attr_accessor :title, :forum_id, :locked, :sticky
+  attr_accessor :title, :forum_id, :locked, :sticky, :subscribe
   
   def after_create
     topic.update_cached_fields
+    Notifier.deliver_notification topic, self unless topic.subscribers.count == 0
     Forum.increment_counter("posts_count", topic.forum_id)
   end
 
