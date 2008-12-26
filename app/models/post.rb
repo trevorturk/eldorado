@@ -10,8 +10,8 @@ class Post < ActiveRecord::Base
   
   def after_create
     topic.update_cached_fields
-    Notifier.deliver_notification topic, self unless topic.subscribers.count == 0
     Forum.increment_counter("posts_count", topic.forum_id)
+    Notifier.deliver_subscription topic, self unless topic.subscribers.count == 0
   end
 
   def after_destroy
@@ -32,4 +32,5 @@ class Post < ActiveRecord::Base
   def to_s
     body
   end
+  
 end

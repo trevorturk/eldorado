@@ -7,7 +7,4 @@
   <li id="tab-forum" class="tab <%= tab('forums') %>"><%= link_to('Forum', forum_root_path) %></li>
   <li id="tab-headers" class="tab <%= tab('headers') %>"><%= link_to('Headers', headers_path) %></li>
   <li id="tab-users" class="tab <%= tab('users') %>"><%= link_to('Users', users_path) %></li>
-  <% if logged_in? %>
-    <li id="tab-subscriptions" class="tab <%= tab('subscriptions') %>"><%= link_to('Subscriptions', subscriptions_path) %></li>
-  <% end %>
 </ul>

@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
 
-  before_filter :check_logged_in
+  before_filter :require_login
 
   def index
     @subscriptions = current_user.subscriptions
@@ -16,9 +16,4 @@ class SubscriptionsController < ApplicationController
     redirect_to subscriptions_path
   end
   
-  private
-    def check_logged_in
-      redirect_to root_path unless logged_in?
-    end
-
 end

@@ -1,22 +1,24 @@
-<p>
-  <span class="title">Your subscriptions</span>
-</p>
-
-<table>
-  <tr>
-    <th>Topic</th>
-  </tr>
+<div class="info-left">
+  <span class="title">Subscriptions</span>
+</div>
+<div class="clear"> </div>
   
-<% for subscription in @subscriptions %>
-  <tr>
-    <td>
-      <%= link_to subscription.topic, subscription.topic %>
-    </td>
-    <td>
-      <%= link_to 'remove', subscription_path(subscription), :confirm => 'Are you sure?', :method => :delete %> 
-    </td>
-  </tr>
+<% if @subscriptions.blank? %>
+  <p>You have no subscriptions.</p>
+<% else %>
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th class="tcl" colspan="2">Topics</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for subscription in @subscriptions %>
+        <tr>
+          <td class="tcl"><%= link_to subscription.topic, subscription.topic %></td>
+          <td class="tcr"><%= link_to '(x)', subscription_path(subscription), :confirm => 'Are you sure?', :method => :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
-</table>
-
-<br />

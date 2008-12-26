@@ -86,7 +86,10 @@
 
 <% if current_controller == 'forums' and current_action == 'index' %>
   <div class="info-right info-space">
-    <%= link_to('Mark All Viewed', mark_all_viewed_topics_path) if logged_in? %>
+    <% if logged_in? %>
+      <%= link_to('Manage Subscriptions', subscriptions_path) %> &nbsp; 
+      <%= link_to('Mark All Viewed', mark_all_viewed_topics_path) %>
+    <% end %>
     <% if admin? %>
       &nbsp; <%= link_to('New Category', new_category_path) %>
       <% unless Category.count == 0 %>
@@ -221,8 +224,14 @@
     <%= link_to @topic.forum.name, @topic.forum %>
   </div>
   <div class="info-right">
+    <% if logged_in? %>
+      <input type="checkbox" id="topic_subscribe" 
+        onchange="new Ajax.Request('<%= toggle_subscriptions_path %>',{method:'get',parameters:{id:<%= @topic.id %>}})" 
+        <%= "checked" if current_user.subscriptions.include?(@topic) %>>
+      <label for="topic_subscribe"> Subscribe</label>
+    <% end %>
     <% if can_edit?(@topic) %>
-      <%= link_to 'Edit Topic', edit_topic_path %>
+      &nbsp; <%= link_to 'Edit Topic', edit_topic_path %>
     <% end %>    
   </div>
 <% end %>

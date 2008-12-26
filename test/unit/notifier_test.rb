@@ -25,15 +25,16 @@ class NotifierTest < ActionMailer::TestCase
     assert_equal @expected.encoded, Notifier.create_personal_message(@expected.date).encoded
   end
 
-  test "notification" do
+  test "subscription" do
     topic = topics(:Testing)
     post = topic.posts.first
     
     @expected.subject = "New post in #{topic}"
-    @expected.body    = read_fixture('notification')
+    @expected.body    = read_fixture('subscription')
     @expected.date    = Time.now
+    
+    assert_equal @expected.body, Notifier.create_subscription(topic, post).body
 
-    assert_equal @expected.encoded, Notifier.create_notification(topic, post).encoded
   end
 
 end

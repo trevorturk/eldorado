@@ -37,20 +37,6 @@
   <div class="clear"> </div>
 <% end %>
 
-<% if %w(topics).include?(current_controller) %>
-<div class="info-left">
-  <% if logged_in? %>
-    <input type="checkbox" 
-      onchange="new Ajax.Request('<%= toggle_subscriptions_path %>',{method:'get',parameters:{id:<%= @topic.id %>}})" 
-      <%= "checked" if current_user.subscriptions.include?(@topic) %>>
-    <span class="detail">Subscribe to receive email notifications?</span>
-  <% end %>
-</div>
-<div class="info-right">
-</div>
-<div class="clear"> </div>
-<% end %>
-
 <% @posts.each_with_index do |post, index| index+=1 %>
   <%= render :file => 'posts/show', :locals => { :post => post, :index => index } %>
 <% end %>

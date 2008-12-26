@@ -10,12 +10,12 @@
          <%= f.check_box(:sticky) %><label for="topic_sticky"> Sticky</label>
        <% end %>
     </p>
-    <p>
-      <%= f.check_box :subscribe %><label for="subscribe"> Receive email notifications on replies?</label>
-    </p>
     <%= render :partial => 'forums/select' %>
     <p class="label"><label for="topic_body">Body</label></p>
     <p><%= f.text_area :body, :rows => '8', :class => 'text-field' %></p>
+    <p>
+      <%= f.check_box :subscribe %><label for="topic_subscribe"> Subscribe (Email updates)</label>
+    </p>
     <p>
       <%= submit_tag "Post Topic", :disable_with => "Post Topic" %>&nbsp;
       <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %> &nbsp; 

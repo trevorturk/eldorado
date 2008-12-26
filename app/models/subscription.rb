@@ -1,4 +1,5 @@
 class Subscription < ActiveRecord::Base
+  
   belongs_to :topic
   belongs_to :user
   
@@ -7,4 +8,5 @@ class Subscription < ActiveRecord::Base
   def to_s
     id.to_s
   end
+  
 end
