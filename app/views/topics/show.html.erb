@@ -27,7 +27,7 @@
 
 <% if %w(users).include?(current_controller) %>
   <div class="info-left">
-    <span class="title"><%=h @user.to_s %></span>
+    <span class="title"><%=h @user %></span>
     <span class="detail">&nbsp;|&nbsp; <%= @user.posts.size %> Posts</span>
   </div>
   <div class="info-right">

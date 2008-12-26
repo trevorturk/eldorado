@@ -149,7 +149,7 @@
     <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
     <%= link_to @post.topic.forum.category.name, @post.topic.forum.category %> &raquo; 
     <%= link_to @post.topic.forum.name, @topic.forum %> &raquo;
-    <%= link_to @post.topic.to_s, @post.topic %>
+    <%= link_to @post.topic, @post.topic %>
   </div>
 <% end %>
 
@@ -159,7 +159,7 @@
     <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
     <%= link_to @post.topic.forum.category.name, @post.topic.forum.category %> &raquo; 
     <%= link_to @post.topic.forum.name, @topic.forum %> &raquo;
-    <%= link_to @post.topic.to_s, @post.topic %>
+    <%= link_to @post.topic, @post.topic %>
   </div>
 <% end %>
 

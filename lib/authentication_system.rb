@@ -64,7 +64,7 @@ module AuthenticationSystem
   
   def can_edit
     redirect_to root_path and return false unless logged_in?
-    klass = current_controller.singularize.classify.constantize
+    klass = current_controller.camelize.singularize.constantize
     @item = klass.find(params[:id])
     if current_controller == "users"
       redirect_to root_path and return false unless admin? || (current_user == @item)

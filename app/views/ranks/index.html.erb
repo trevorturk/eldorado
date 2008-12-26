@@ -19,7 +19,7 @@
     <tbody>
       <% for rank in @ranks %>
         <tr>
-          <td class="tcl"><%= rank.to_s %></td>
+          <td class="tcl"><%= rank %></td>
           <td class="tcl"><%= rank.min_posts %></td>
           <% if admin? %>
             <td class="tcr">
