@@ -5,7 +5,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|  
   require 'open-uri'
   require 'yaml'
-  
+    
   config.time_zone = 'UTC'
   config.active_record.partial_updates = true
   # config.gem 'fiveruns_tuneup'
@@ -17,3 +17,19 @@ Rails::Initializer.run do |config|
     :secret      => db[RAILS_ENV]['secret']
   }
 end
+
+# setup smtp mailer
+require 'tlsmail'
+smtp = YAML.load_file('config/smtp.yml')
+Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+ActionMailer::Base.default_url_options[:host] = smtp[RAILS_ENV]['domain']
+ActionMailer::Base.smtp_settings = {
+  :address => smtp[RAILS_ENV]['address'],
+  :port => smtp[RAILS_ENV]['port'],
+  :domain => smtp[RAILS_ENV]['domain'],
+  :authentication => :plain,
+  :user_name => smtp[RAILS_ENV]['user_name'],
+  :password => smtp[RAILS_ENV]['password']
+}
+
+MAILER = smtp[RAILS_ENV]['mailer']

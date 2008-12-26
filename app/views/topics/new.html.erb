@@ -10,6 +10,9 @@
          <%= f.check_box(:sticky) %><label for="topic_sticky"> Sticky</label>
        <% end %>
     </p>
+    <p>
+      <%= f.check_box :subscribe %><label for="subscribe"> Receive email notifications on replies?</label>
+    </p>
     <%= render :partial => 'forums/select' %>
     <p class="label"><label for="topic_body">Body</label></p>
     <p><%= f.text_area :body, :rows => '8', :class => 'text-field' %></p>

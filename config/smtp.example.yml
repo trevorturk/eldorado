@@ -1,0 +1,23 @@
+development:
+  address: smtp.gmail.com
+  port: 587
+  domain: domain.com
+  user_name: user@domain.com
+  password: password
+  mailer: info@domain.com
+  
+test:
+  address: smtp.gmail.com
+  port: 587
+  domain: domain.com
+  user_name: user@domain.com
+  password: password
+  mailer: info@domain.com
+    
+production:
+  address: smtp.gmail.com
+  port: 587
+  domain: domain.com
+  user_name: user@domain.com
+  password: password
+  mailer: info@domain.com

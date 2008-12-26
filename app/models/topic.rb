@@ -1,6 +1,8 @@
 class Topic < ActiveRecord::Base
     
   has_many :posts, :order => 'posts.created_at asc', :dependent => :destroy
+  has_many :subscriptions, :dependent => :destroy
+  has_many :subscribers, :through => :subscriptions, :source => 'user'
   has_many :viewings, :dependent => :destroy, :order => 'updated_at desc'
   belongs_to :user
   belongs_to :forum, :counter_cache => true
@@ -9,7 +11,11 @@ class Topic < ActiveRecord::Base
   
   validates_presence_of :user_id, :title, :forum_id
     
-  attr_accessor :body
+  attr_accessor :body, :subscribe
+  
+  def after_create
+    subscriptions.create :user_id => user.id if subscribe
+  end
     
   def before_update
     @old_forum = Topic.find(id).forum
@@ -54,6 +60,10 @@ class Topic < ActiveRecord::Base
   
   def to_s
     title
+  end
+  
+  def to_param
+    "#{id}-#{title.gsub(/\W/,'-')}"
   end
   
 end

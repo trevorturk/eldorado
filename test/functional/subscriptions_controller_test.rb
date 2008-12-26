@@ -9,21 +9,24 @@ class SubscriptionsControllerTest < ActionController::TestCase
   end
 
   def test_should_get_index
-  end
-
-  def test_should_get_new
-  end
-  
-  def test_should_create_subscription
-  end
-
-  def test_should_show_subscription
-  end
-
-  def test_should_get_edit
+    login_as :trevor
+    get :index
+    assert_response :success
   end
   
-  def test_should_update_subscription
+  def test_should_toggle_subscription
+    login_as :trevor
+    
+    topic, user = topics(:Testing), users(:trevor)
+    
+    get :toggle, :id => topic.to_param
+    assert_response :success
+    assert user.subscriptions.include?(topic)
+    
+    get :toggle, :id => topic.to_param
+    assert_response :success
+    
+    assert !user.subscriptions.include?(topic)
   end
   
   def test_should_destroy_subscription

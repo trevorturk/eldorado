@@ -14,6 +14,20 @@ class User < ActiveRecord::Base
   has_many :viewings, :dependent => :destroy, :order => 'updated_at desc'
   has_many :uploads, :dependent => :destroy, :order => 'created_at desc'
   has_one :current_avatar, :class_name => 'Avatar', :foreign_key => 'current_user_id', :dependent => :nullify
+
+  has_many :subscriptions, :dependent => :destroy do
+    def toggle(topic_id)
+      if include?(topic_id)
+        find_by_topic_id(topic_id.to_i).destroy
+      else
+        create :topic_id => topic_id 
+      end
+    end
+    
+    def include?(topic_or_id)
+      exists? :topic_id => topic_or_id.is_a?(Topic) ? topic_or_id.id : topic_or_id.to_i
+    end
+  end
   
   validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false

@@ -53,6 +53,12 @@ class TopicsControllerTest < ActionController::TestCase
     assert_redirected_to topic_path(assigns(:topic))
   end
   
+  def test_should_subscribe_to_topic_on_create
+    login_as :trevor
+    post :create, :topic => { :title => "subscribe test", :body => "test", :forum_id => "1", :subscribe => "1" }  
+    assert users(:trevor).subscriptions.include?(assigns(:topic))
+  end
+  
   def test_must_be_logged_in_to_post_topic
     old_count = Topic.count
     post :create, :topic => { :title => "test", :body => "this is a test" }  
@@ -276,7 +282,7 @@ class TopicsControllerTest < ActionController::TestCase
     
   def test_should_redirect_to_first_page_if_page_is_too_many
     get :show, :id => 1, :page => '2'
-    assert_redirected_to topic_path(:id => 1)
+    assert_redirected_to topic_path(:id => topics(:Testing).to_param)
   end
   
   def test_should_not_show_topic_if_private_site_and_not_logged_in
