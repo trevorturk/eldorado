@@ -1,5 +1,7 @@
 class Setting < ActiveRecord::Base
   
+  attr_accessible :title, :tagline, :announcement, :footer, :theme, :favicon, :time_zone, :private, :login_message, :admin_only_create
+    
   validates_presence_of :time_zone
     
   TITLE = 'El Dorado'

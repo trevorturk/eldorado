@@ -1,7 +1,10 @@
 class Topic < ActiveRecord::Base
+    
+  attr_accessible :title, :locked, :sticky, :forum_id, :body, :subscribe
+  attr_accessor :body, :subscribe
   
-  belongs_to :user
   belongs_to :forum, :counter_cache => true
+  belongs_to :user
   belongs_to :last_post, :foreign_key => "last_post_id", :class_name => "Post"
   belongs_to :last_poster, :foreign_key => "last_post_by", :class_name => "User"
   has_many :posts, :order => 'posts.created_at asc', :dependent => :destroy
@@ -10,9 +13,7 @@ class Topic < ActiveRecord::Base
   has_many :viewings, :dependent => :destroy, :order => 'updated_at desc'
   
   validates_presence_of :user_id, :title, :forum_id    
-  
-  attr_accessor :body, :subscribe
-  
+    
   def after_create
     subscriptions.create :user_id => user.id if subscribe
   end

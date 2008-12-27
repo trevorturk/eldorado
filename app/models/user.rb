@@ -2,6 +2,32 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
+  # create_table "users", :force => true do |t|
+  #   t.string   "login"
+  #   t.string   "email"
+  #   t.string   "password_hash"
+  #   t.datetime "created_at"
+  #   t.boolean  "admin",              :default => false
+  #   t.integer  "posts_count",        :default => 0
+  #   t.string   "signature"
+  #   t.text     "bio"
+  #   t.datetime "profile_updated_at"
+  #   t.datetime "online_at"
+  #   t.string   "avatar"
+  #   t.string   "auth_token"
+  #   t.datetime "auth_token_exp"
+  #   t.string   "time_zone"
+  #   t.string   "ban_message"
+  #   t.datetime "banned_until"
+  #   t.datetime "chatting_at"
+  #   t.boolean  "logged_out",         :default => false
+  #   t.integer  "articles_count",     :default => 0
+  #   t.datetime "all_viewed_at"
+  # end
+  
+  attr_accessible :login, :email, :password, :password_confirmation, :avatar, :signature, :bio, :time_zone
+  attr_reader :password
+  
   has_many :articles, :dependent => :destroy, :order => 'created_at desc'
   has_many :avatars, :dependent => :destroy, :order => 'created_at desc'
   has_many :comments, :dependent => :destroy, :order => 'created_at desc'
@@ -37,11 +63,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :on => :update, :allow_blank => true
   
   before_create :set_defaults
-      
-  attr_reader :password
-  
-  attr_protected :id, :created_at, :admin, :posts_count
-  
+    
   named_scope :blog_authors, :conditions => 'articles_count > 0', :order => 'articles_count desc'
   named_scope :chatting, lambda {|*args| {:conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc'}}
   named_scope :online, lambda {|*args| {:conditions => ['logged_out = ? and (online_at > ? or chatting_at > ?)', false, Time.now.utc-5.minutes, Time.now.utc-30.seconds], :order => 'login asc'}}

@@ -98,17 +98,6 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
   
-  def test_should_not_update_user_id_or_created_at
-    login_as :Administrator
-    put :update, :id => articles(:one).id, :article => { :title => 'test!', :user_id => '1', :created_at => Time.now }
-    assert_redirected_to article_path(assigns(:article))
-    created_at = articles(:one).created_at
-    articles(:one).reload
-    assert_equal 'test!', articles(:one).title
-    assert_equal 4, articles(:one).user_id
-    assert_equal created_at, articles(:one).created_at
-  end
-
   def test_should_destroy_article_if_admin
     login_as :Administrator
     assert_difference('Article.count', -1) do

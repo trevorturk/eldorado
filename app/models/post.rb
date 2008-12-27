@@ -1,13 +1,14 @@
 class Post < ActiveRecord::Base
+    
+  attr_accessible :topic_id, :body, :title, :forum_id, :locked, :sticky, :subscribe
+  attr_accessor :title, :forum_id, :locked, :sticky, :subscribe
   
-  belongs_to :user,  :counter_cache => true
   belongs_to :topic, :counter_cache => true
+  belongs_to :user,  :counter_cache => true
   belongs_to :editor, :foreign_key => "updated_by", :class_name => "User"
   
   validates_presence_of :user_id, :body
-  
-  attr_accessor :title, :forum_id, :locked, :sticky, :subscribe
-  
+    
   def after_create
     topic.update_cached_fields
     Forum.increment_counter("posts_count", topic.forum_id)
