@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
     :secret      => db[RAILS_ENV]['secret']
   }
   
-  MAILER = db[RAILS_ENV]['mailer']
-  DOMAIN = db[RAILS_ENV]['domain']
+  MAILER = db[RAILS_ENV]['mailer'] || 'noreply@example.com'
+  DOMAIN = db[RAILS_ENV]['domain'] || 'example.com'
   
 end
