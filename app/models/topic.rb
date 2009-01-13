@@ -15,7 +15,7 @@ class Topic < ActiveRecord::Base
   validates_presence_of :user_id, :title, :forum_id    
     
   def after_create
-    subscriptions.create :user_id => user.id if subscribe
+    subscriptions.create :user_id => user.id if subscribe.to_i == 1
   end
       
   def before_update

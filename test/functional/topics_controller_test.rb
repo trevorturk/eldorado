@@ -53,10 +53,22 @@ class TopicsControllerTest < ActionController::TestCase
     assert_redirected_to topic_path(assigns(:topic))
   end
   
-  def test_should_subscribe_to_topic_on_create
+  def test_should_subscribe_to_topic_on_create_if_selected
     login_as :trevor
     post :create, :topic => { :title => "subscribe test", :body => "test", :forum_id => "1", :subscribe => "1" }  
     assert users(:trevor).subscriptions.include?(assigns(:topic))
+  end
+  
+  def test_should_not_subscribe_to_topic_on_create_if_not_selected
+    login_as :trevor
+    post :create, :topic => { :title => "subscribe test", :body => "test", :forum_id => "1" }  
+    assert !users(:trevor).subscriptions.include?(assigns(:topic))
+  end
+  
+  def test_should_not_subscribe_to_topic_on_create_if_not_true
+    login_as :trevor
+    post :create, :topic => { :title => "subscribe test", :body => "test", :forum_id => "1", :subscribe => "0" }  
+    assert !users(:trevor).subscriptions.include?(assigns(:topic))
   end
   
   def test_must_be_logged_in_to_post_topic
