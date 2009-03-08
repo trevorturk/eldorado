@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NotifierTest < ActionMailer::TestCase
+class MailerTest < ActionMailer::TestCase
   
   test "subscription" do
     topic = topics(:Testing)
@@ -9,7 +9,7 @@ class NotifierTest < ActionMailer::TestCase
     @expected.subject = "New post in #{topic}"
     @expected.body    = read_fixture('subscription')
     @expected.date    = Time.now.utc
-    assert_equal @expected.body, Notifier.create_subscription(subscribers, topic, post).body
+    assert_equal @expected.body, Mailer.create_subscription(subscribers, topic, post).body
   end
   
 end

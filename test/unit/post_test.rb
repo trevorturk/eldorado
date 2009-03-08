@@ -18,7 +18,7 @@ class PostTest < Test::Unit::TestCase
     t = topics(:Testing)
     p = t.posts.new(:body => 'post') {|p| p.user = users(:Guest)}
     assert_equal t.subscribers, [users(:Guest), users(:Administrator)]
-    Notifier.expects(:deliver_subscription).with([users(:Administrator)], t, p)
+    Mailer.expects(:deliver_subscription).with([users(:Administrator)], t, p)
     p.save!
   end
   

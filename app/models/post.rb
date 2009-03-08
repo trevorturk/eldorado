@@ -26,7 +26,7 @@ class Post < ActiveRecord::Base
   
   def deliver_subscription
     subscribers = topic.subscribers.delete_if {|sub| sub == self.user} # don't include this post's creator
-    Notifier.deliver_subscription(subscribers, topic, self) unless subscribers.blank?
+    Mailer.deliver_subscription(subscribers, topic, self) unless subscribers.blank?
   end
   
   def self.get(page = 1)
