@@ -2,8 +2,8 @@
   <div class="info-left">
     <span class="title"><%=h @topic.title %></span>
     <span class="detail">
-      &laquo; <%= link_to @topic.forum.name, @topic.forum %>
-      &laquo; <%= link_to @topic.forum.category.name, @topic.forum.category %>
+      &laquo; <%= link_to h(@topic.forum), @topic.forum %>
+      &laquo; <%= link_to h(@topic.forum.category), @topic.forum.category %>
     </span>
   </div>
   <div class="info-right">

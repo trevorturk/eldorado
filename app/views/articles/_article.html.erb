@@ -1,6 +1,6 @@
 <div class="info-left">
   <div class="title article-title">
-    <%= link_to h(article.title), article %>
+    <%= link_to h(article), article %>
   </div>
   <div class="detail">
     <%= time_ago_or_time_stamp(article.created_at, Time.now.utc, true, true) %> by 

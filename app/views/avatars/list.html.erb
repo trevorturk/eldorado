@@ -10,7 +10,7 @@
         <tr>
           <td class="tci"><%= icon_for(avatar) %></td>
           <td class="tcl">
-            <%= link_to truncate(avatar.filename), avatar.public_filename %> by <%=h avatar.user.login %>
+            <%= link_to truncate(h(avatar)), avatar.public_filename %> by <%=h avatar.user.login %>
           </td>
         </tr>
       <% end %>

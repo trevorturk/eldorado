@@ -7,7 +7,7 @@
   <div class="info-left">
     <span class="title"><%=h @forum.name %></span>
     <span class="detail">
-      &laquo; <%= link_to h(@forum.category.name), @forum.category %>
+      &laquo; <%= link_to h(@forum.category), @forum.category %>
     </span>
     <span class="detail">&nbsp;| &nbsp;<%=h @forum.description %></span>
   </div>
@@ -35,11 +35,11 @@
           <td class="tci"><%= icon_for(topic) %></td>
           <td class="tcl">
             <span class="topic-status"><%= 'Sticky' if topic.sticky? %> <%= 'Locked' if topic.locked? %></span>
-            <%= link_to h(topic.title), topic %> by <%=h topic.user.login %>
+            <%= link_to h(topic), topic %> by <%=h topic.user.login %>
           </td>
           <% if %w(categories topics).include?(current_controller) %>
             <td class="tcl">
-              <%= link_to h(topic.forum.name), topic.forum %>
+              <%= link_to h(topic.forum), topic.forum %>
             </td>
           <% end %>
           <td class="tcm"><%= number_with_delimiter(topic.replies) %></td>

@@ -15,7 +15,7 @@
     <table cellspacing="0" class="forums-index">
       <thead>
         <tr>
-          <th colspan="5"><%= link_to h(category.name), category %></th>
+          <th colspan="5"><%= link_to h(category), category %></th>
         </tr>
         <tr class="forums-list">
           <th class="tcl" colspan="2">Forums</th>
@@ -35,7 +35,7 @@
               <% end %>
             </td>
             <td class="tcl">
-              <span class="forum-name"><%= link_to h(forum.name), forum %></span>
+              <span class="forum-name"><%= link_to h(forum), forum %></span>
               <br /><%=h forum.description %>
             </td>
             <td class="tcm"><%= number_with_delimiter(forum.topics_count) %></td>

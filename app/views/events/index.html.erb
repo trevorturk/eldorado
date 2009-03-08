@@ -32,9 +32,9 @@
         <tr>
           <td class="tci"><%= icon_for(event) %></td>
           <td class="tcl">
-            <%= link_to h(event.title), event %> by <%=h event.user.login %>
+            <%= link_to h(event), event %> by <%=h event.user %>
           </td>
-          <td class="tcr"><%=  time_stamp(event.date) %></td>
+          <td class="tcr"><%= time_stamp(event.date) %></td>
         </tr>
       <% end %>
     </tbody>

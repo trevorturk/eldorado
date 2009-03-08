@@ -1,7 +1,7 @@
 <div id="primary">
   <% if @parent_user %>    
     <div class="info-left">
-      <span class="title">Articles by <%= link_to @parent_user, user_articles_path(@parent_user) %></span>
+      <span class="title">Articles by <%= link_to h(@parent_user), user_articles_path(@parent_user) %></span>
     </div>
     <div class="clear"> </div>
   <% end %>

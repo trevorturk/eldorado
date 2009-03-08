@@ -32,7 +32,7 @@
 <% if current_controller == 'categories' and current_action == 'show' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> &raquo; <%= h@category.name %>
+    <%= link_to 'Forum', forum_root_path %> &raquo; <%=h @category.name %>
   </div>
   <div class="info-right">
     <% if admin? %>
@@ -61,7 +61,7 @@
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Events', events_path %> &raquo; 
-    <%= link_to h(@event.title), @event %> &raquo; Editing Event
+    <%= link_to h(@event), @event %> &raquo; Editing Event
   </div>
 <% end %>
 
@@ -103,7 +103,7 @@
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Forum', forum_root_path %> &raquo; 
-    <%= link_to @forum.category.name, @forum.category %> &raquo; <%= @forum.name %>
+    <%= link_to h(@forum.category), @forum.category %> &raquo; <%= h(@forum.name) %>
   </div>
   <div class="info-right">
     <% if admin? %>
@@ -130,7 +130,7 @@
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Headers', headers_path %> &raquo; 
-    <%= link_to @header.filename, @header %> &raquo; Editing Header
+    <%= link_to h(@header), @header %> &raquo; Editing Header
   </div>
 <% end %>
 
@@ -150,9 +150,9 @@
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
-    <%= link_to @post.topic.forum.category.name, @post.topic.forum.category %> &raquo; 
-    <%= link_to @post.topic.forum.name, @topic.forum %> &raquo;
-    <%= link_to @post.topic, @post.topic %>
+    <%= link_to h(@post.topic.forum.category), @post.topic.forum.category %> &raquo; 
+    <%= link_to h(@post.topic.forum), @topic.forum %> &raquo;
+    <%= link_to h(@post.topic), @post.topic %>
   </div>
 <% end %>
 
@@ -160,9 +160,9 @@
   <div class="info-left" style="margin-top:5px;">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
-    <%= link_to @post.topic.forum.category.name, @post.topic.forum.category %> &raquo; 
-    <%= link_to @post.topic.forum.name, @topic.forum %> &raquo;
-    <%= link_to @post.topic, @post.topic %>
+    <%= link_to h(@post.topic.forum.category), @post.topic.forum.category %> &raquo; 
+    <%= link_to h(@post.topic.forum), @topic.forum %> &raquo;
+    <%= link_to h(@post.topic), @post.topic %>
   </div>
 <% end %>
 
@@ -212,7 +212,7 @@
 <% if current_controller == 'topics' and current_action == 'edit' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to @topic.title, @topic %> &raquo; Editing Topic
+    <%= link_to h(@topic), @topic %> &raquo; Editing Topic
   </div>
 <% end %>
 
@@ -220,8 +220,8 @@
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
-    <%= link_to @topic.forum.category.name, @topic.forum.category %> &raquo; 
-    <%= link_to @topic.forum.name, @topic.forum %>
+    <%= link_to h(@topic.forum.category), @topic.forum.category %> &raquo; 
+    <%= link_to h(@topic.forum), @topic.forum %>
   </div>
   <div class="info-right">
     <% if logged_in? %>
@@ -259,7 +259,7 @@
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Users', users_path %> &raquo; 
-    <%= link_to h(@user.login), @user %> &raquo; Editing Profile
+    <%= link_to h(@user), @user %> &raquo; Editing Profile
   </div>
 <% end %>
 

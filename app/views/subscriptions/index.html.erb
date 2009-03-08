@@ -15,7 +15,7 @@
     <tbody>
       <% for subscription in @subscriptions %>
         <tr>
-          <td class="tcl"><%= link_to subscription.topic, subscription.topic %></td>
+          <td class="tcl"><%= link_to h(subscription.topic), subscription.topic %></td>
           <td class="tcr"><%= link_to '(x)', subscription_path(subscription), :confirm => 'Are you sure?', :method => :delete %></td>
         </tr>
       <% end %>

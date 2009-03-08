@@ -16,9 +16,9 @@
   <ul class="archives">
   <% for article in @articles %>
     <li>
-      <span class="title"><%= link_to article, article %></span>&nbsp;
+      <span class="title"><%= link_to h(article), article %></span>&nbsp;
       <span class="detail"><%= time_ago_or_time_stamp(article.created_at) %> 
-      by <%= link_to h(article.user.login), user_articles_path(article.user) %></span>
+      by <%= link_to h(article.user), user_articles_path(article.user) %></span>
     </li>
   <% end unless @articles.empty? %>
   <% if current_controller == 'search' %>

@@ -5,7 +5,7 @@
       <th><%= time_ago_or_time_stamp(post.created_at, Time.now.utc, true, true) %></th>
       <th class="thr">
         <% if %w(search posts users).include?(current_controller) %>
-          <%= link_to post.topic.title + ' &raquo;', topic_post_path(post) %>
+          <%= link_to h(post.topic) + ' &raquo;', topic_post_path(post) %>
         <% else %>
           <%= "#" + (index + @padding).to_s %>
         <% end %>
@@ -16,7 +16,7 @@
     <tr>
       <td class="profile">
         <dl>
-          <dt><%= link_to h(post.user.login), post.user %></dt>
+          <dt><%= link_to h(post.user), post.user %></dt>
           <dd class="rank"><%= rank_for(post.user) %></dd>
           <dd class="avatar">
             <%= link_to avatar_for(post.user), post.user unless post.user.avatar.nil? %>
