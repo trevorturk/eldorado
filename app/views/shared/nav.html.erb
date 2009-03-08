@@ -29,11 +29,11 @@
         <% end %>
       <% end %>
       &nbsp; <%= link_to 'Search', search_path(:type => current_controller) %>
-      <% if current_controller == 'home' %>
-        &nbsp; <%= link_to 'Help', help_path %>
-      <% end %>
       <% if admin? && current_controller == 'home' %>
         &nbsp; <%= link_to 'Admin', admin_path %>
+      <% end %>
+      <% if current_controller == 'home' %>
+        &nbsp; <%= link_to 'Help', help_path %>
       <% end %>
       &nbsp; <%= link_to 'Logout', logout_path %>
     <% end %>
