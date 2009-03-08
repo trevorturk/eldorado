@@ -23,10 +23,10 @@ class Notifier < ActionMailer::Base
     sent_on       sent_at
   end
 
-  def subscription(topic, post)
+  def subscription(subscribers, topic, post)
     subject       "New post in #{topic}"
     recipients    MAILER
-    bcc           topic.subscribers.map(&:email).join(', ')
+    bcc           subscribers.map(&:email).join(', ')
     from          MAILER
     sent_on       Time.now.utc
     body          :topic => topic, :post => post
