@@ -8,7 +8,8 @@ class SubscriptionsController < ApplicationController
 
   def toggle
     current_user.subscriptions.toggle params[:id]
-    render :nothing => true
+    text = current_user.subscriptions.include?(params[:id]) ? 'Unsubscribe' : 'Subscribe'
+    render :text => text
   end
   
   def destroy

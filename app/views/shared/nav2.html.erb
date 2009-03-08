@@ -225,10 +225,12 @@
   </div>
   <div class="info-right">
     <% if logged_in? %>
-      <input type="checkbox" id="topic_subscribe" 
-        onchange="new Ajax.Request('<%= toggle_subscriptions_path %>',{method:'get',parameters:{id:<%= @topic.id %>}})" 
-        <%= "checked" if current_user.subscriptions.include?(@topic) %>>
-      <label for="topic_subscribe"> Subscribe</label>
+      <% link_text = current_user.subscriptions.include?(@topic) ? 'Unsubscribe' : 'Subscribe' %>
+      <%= 
+        link_to_remote "<span id='toggle_subscription_text'>#{link_text}</span>", 
+        :url => { :controller => 'subscriptions', :action => 'toggle', :id => @topic.id },
+        :update => 'toggle_subscription_text'
+      %>
     <% end %>
     <% if can_edit?(@topic) %>
       &nbsp; <%= link_to 'Edit Topic', edit_topic_path %>
