@@ -1,6 +1,7 @@
 .DS_Store
 /log/*.log
 /tmp/**/*
+/tmp/restart.txt
 /config/database.yml
 /config/smtp.yml
 /config/amazon_s3.yml
