@@ -10,7 +10,7 @@
         <tr>
           <td class="tci"><%= icon_for(header) %></td>
           <td class="tcl">
-            <%= link_to truncate(h(header), :length => 28), header %> by <%=h header.user.login %>
+            <%= link_to truncate(h(header), :length => 28), header %> by <%=h header.user %>
           </td>
         </tr>
       <% end %>

@@ -26,7 +26,7 @@
       <p class="label"><label for="setting_time_zone">Default Timezone</label></p>
       <p><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></p>
       <p>
-        <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp; 
+        <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp; 
         <%= link_to 'Cancel', root_path %> &nbsp;
       </p>
     </div>

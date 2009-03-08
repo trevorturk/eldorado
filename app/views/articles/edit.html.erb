@@ -7,7 +7,7 @@
     <p class="label"><label for="article_body">Body</label></p>
     <p><%= f.text_area :body, :rows => '10', :class => 'text-field' %></p>
     <p>
-      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
+      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp;
       <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=520,width=820'] %> &nbsp;       
       <%= link_to 'Delete', article_path, :confirm => 'Are you sure?', :method => :delete %> &nbsp; 
       <%= link_to 'Cancel', blog_path %>

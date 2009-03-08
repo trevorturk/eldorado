@@ -3,7 +3,7 @@
   <div class="box" id="box-users-confirmation">
     <span class="top">Delete User</span>
       <p>Deleting a user destroys the user and all of the content they've created. This includes, but is not limited to, all of their forum posts, the forum topics they've created, and the replies of other users to the topics they've created.</p>
-      <p><label for="confirm">Check this box to confirm deleting the user <u><%= @user.login %></u></label>: <%= check_box_tag(:confirm) %></p>
+      <p><label for="confirm">Check this box to confirm deleting the user <u><%=h @user %></u></label>: <%= check_box_tag :confirm %></p>
       <p>
         <%= submit_tag "Delete User", :disable_with => "Delete User" %>&nbsp;
         <%= link_to 'Cancel', @user %>

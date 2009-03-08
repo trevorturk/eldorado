@@ -3,7 +3,7 @@
   <div class="box" id="box-categories-confirmation">
     <span class="top">Delete Category</span>
       <p>Deleting a category destroys all of the forums, topics, and posts it contains.</p>
-      <p><label for="confirm">Check this box to confirm deleting the category <u><%= h(@category) %></u></label>: <%= check_box_tag(:confirm) %></p>
+      <p><label for="confirm">Check this box to confirm deleting the category <u><%=h @category %></u></label>: <%= check_box_tag :confirm %></p>
       <p>
         <%= submit_tag "Delete Category", :disable_with => "Delete Category" %>&nbsp;
         <%= link_to 'Cancel', @category %>

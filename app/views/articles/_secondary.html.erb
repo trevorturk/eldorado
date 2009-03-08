@@ -13,7 +13,7 @@
   <div class="title"><%= link_to 'Recent Articles', blog_path %></div>
   <ul class="secondary-list">
     <% @recent_articles.each do |article| %>
-      <li><%= link_to h(article), article %> <span class="detail">by <%= article.user %></span></li>
+      <li><%= link_to h(article), article %> <span class="detail">by <%=h article.user %></span></li>
     <% end %>
     <li class="detail"><%= link_to 'Blog Archives &raquo;', blog_archives_path, :class => 'text' %></li>
   </ul>

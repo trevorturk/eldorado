@@ -15,7 +15,7 @@
     <p class="label"><label for="forum_position">Position</label></p>
     <p><%= f.text_field :position, :style => 'width:5%;' %></p>
     <p>
-      <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
+      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp;
       <%= link_to 'Delete', confirm_delete_forum_path %> &nbsp; 
       <%= link_to 'Cancel', @forum %>
     </p>
