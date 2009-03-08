@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+    <head>
+        <meta name="generator" content="HTML Tidy, see www.w3.org">
+
+        <title>Advanced BBcode help</title>
+    </head>
+
+    <body>
+        <h1>Advanced BBcode documentation</h1>
+
+        <p><em>If you're lookin for basic BBcode tags, try <a href=
+        "bbcode1.html">here</a>.</em></p>
+
+        <p>The more advanced BBcode tags available on this forum
+        all involve embedding various types of media from various
+        web resources directly into a post. Each type of media's
+        tag has a very similar format with slightly different
+        details.</p>
+
+        <p>In general, the media tags work like this:
+        [example]...[/example]. The details for what replaces the
+        "..." in each tag can be found below as examples. Usually,
+        the "..." will be replaced by a URI pointing to the media
+        in question.</p>
+
+        <p>Due to the vastly differing nature of those URIs and the
+        inherent unstable availabilty of the resources they point
+        to on the Web, the rest of this document will display
+        example URIs and how they should appear in their tags, but
+        will <u>not</u> display the resulting embedded media.</p>
+
+        <h2>Music</h2>
+
+        <h3>MP3 files: [mp3]...[/mp3]</h3>
+
+        <p>Example:</p>
+<pre>
+[mp3]http://www.example.com/files/example.mp3[/mp3]
+</pre>
+        &nbsp;<br>
+        &nbsp;<br>
+         
+
+        <h2>Videos</h2>
+
+        <h3><a href="http://www.atomfilms.com">Atom Films</a>
+        Videos: [atomfilms]...[/atomfilms]</h3>
+
+        <p>Example:</p>
+<pre>
+[atomfilms]http://www.atomfilms.com/film/example-video.jsp?channelKeyword=channel_example_videos[/atomfilms]
+</pre>
+
+		<p>Notes:</p>
+		<p>You can simply cut-n-paste the URL for the video (on Atom Films' website)
+		that you want to embed directly from your browser's address
+		bar into the [atomfilms] tags.</p>
+		
+        &nbsp;<br>
+
+        <h3><a href="http://www.collegehumor.com">College Humor</a>
+        Videos: [collegehumor]...[/collegehumor]</h3>
+
+        <p>Example:</p>
+<pre>
+[collegehumor]http://www.collegehumor.com/video:XXXXXXX[/collegehumor]
+</pre>
+
+		<p>Notes:</p>
+		<p>You can simply cut-n-paste the URL for the video (on College Humor's
+		website) that you want to embed directly from your browser's address
+		bar into the [collegehumor] tags.  In the example, the 'X's would be
+		replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.comedycentral.com">Comedy
+        Central</a> Videos:
+        [commedycentral]...[/commedycentral]</h3>
+
+        <p>Example:</p>
+<pre>
+[commedycentral]http://www.comedycentral.com/motherload/index.jhtml?ml_video=XXXXX&title=example[/commedycentral]
+</pre>
+
+		<p>Notes:</p>
+		<p>A small modification needs to be made to the URL you cut-n-paste
+		from the Comedy Central website to make this tag work.  As an example,
+		here is a (contrived) URL that might be found on the site:</p>
+<pre>
+http://www.comedycentral.com/videos/index.jhtml?videoId=XXXXX&title=example
+</pre>
+
+		<p>That URL would need to be changed to read:</p>
+<pre>
+http://www.comedycentral.com/motherload/index.jhtml?ml_video=XXXXX&title=example
+</pre>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3>Flash Videos: [flash]...[/flash]</h3>
+
+        <p>Example:</p>
+<pre>
+[flash]http://www.example.com/flash/example.swf[/flash]
+</pre>
+        &nbsp;<br>
+
+        <h3><a href="http://www.flickr.com">Flickr</a> Videos:
+        [flickr]...[/flickr]</h3>
+
+        <p>Example:</p>
+<pre>
+[flickr]http://www.flickr.com/photos/example/XXXXXXXXXX/[/flickr]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.funnyordie.com">Funny or Die</a>
+        Videos: [funnyordie]...[/funnyordie]</h3>
+
+        <p>Example:</p>
+<pre>
+[funnyordie]http://www.funnyordie.com/videos/AXAXXXXAXA[/funnyordie]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.  Similarly, the 'A's would be replaced with letters.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.gametrailers.com">Gametrailers</a>
+        Videos: [gametrailers]...[/gametrailers]</h3>
+
+        <p>Example:</p>
+<pre>
+[gametrailers]http://www.gametrailers.com/player/XXXXX.html[/gametrailers]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://video.google.com">Google Video</a>
+        Videos: [googlevid]...[/googlevid]</h3>
+
+        <p>Example:</p>
+<pre>
+[googlevid]http://video.google.com/videoplay?docid=-XXXXXXXXXXXXXXXXXXX[/googlevid]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.metacafe.com">MetaCafe</a> Videos:
+        [metacafe]...[/metacafe]</h3>
+
+        <p>Example:</p>
+<pre>
+[metacafe]http://www.metacafe.com/watch/XXXXXXX/example/[/metacafe]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://vids.myspace.com">MySpace TV</a>
+        Videos: [myspacetv]...[/myspacetv]</h3>
+
+        <p>Example:</p>
+<pre>
+[myspacetv]http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=XXXXXXX[/myspacetv]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.revver.com">Revver</a> Videos:
+        [revver]...[/revver]</h3>
+
+        <p>Example:</p>
+<pre>
+[revver]http://www.revver.com/watch/XXXXX/example/[/revver]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.slideshare.net">Slideshare</a>
+        Slideshows: [slideshare]...[/slideshare]</h3>
+
+        <p>Example:</p>
+<pre>
+[slideshare id=XXXXXX&doc=example-XXXXXXXXXXXXXXXX-X&w=XXX]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The [slideshare] tag is different than most of the other tags
+		in that no closing tag is used.  When you are viewing the slideshow
+		you want to embed in your browser, to the far right of the slideshow 
+		you will find a text box labeled: "Embed (Wordpress)".  Cut-n-paste 
+		the details in that text box directly and exactly into your post.</p>
+		
+        &nbsp;<br>
+
+        <h3><a href="http://www.superdeluxe.com">Super Deluxe</a>
+        Videos: [superdeluxe]...[/superdeluxe]</h3>
+
+        <p>Example:</p>
+<pre>
+[superdeluxe]http://www.superdeluxe.com/sd/contentDetail.do?id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX[/superdeluxe]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers and/or letters.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.vimeo.com">Vimeo</a> Videos:
+        [vimeo]...[/vimeo]</h3>
+
+        <p>Example:</p>
+<pre>
+[vimeo]http://www.vimeo.com/XXXXX[/vimeo]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://video.yahoo.com">Yahoo Video</a>
+        Videos: [yahoovid]...[/yahoovid]</h3>
+
+        <p>Example:</p>
+<pre>
+[yahoovid]http://video.yahoo.com/watch/XXXXXXX/XXXXXXX[/yahoovid]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers.</p>
+
+        &nbsp;<br>
+
+        <h3><a href="http://www.youtube.com">YouTube</a> Videos:
+        [youtube]...[/youtube]</h3>
+
+        <p>Example:</p>
+<pre>
+[youtube]http://www.youtube.com/watch?v=XXXXXXXXXXX&feature=XXXXX[/youtube]
+</pre>
+
+		<p>Notes:</p>
+
+		<p>The URL can be found in the address bar of your browser while you are
+		viewing the video you want to embed.  Also, the 'X's in the example above
+		would be replaced with numbers and/or letters.</p>
+
+		<p><em>Return to basic BBcode tags <a href=
+        "bbcode1.html">here</a>.</em></p>
+		
+    </body>
+</html>
+

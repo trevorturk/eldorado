@@ -37,6 +37,11 @@ class HomeControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  def test_should_get_help
+    get :help
+    assert_response :success
+  end
+  
   # def test_should_not_update_session_online_at
   #   # if current_user HAS been active in the last 10 minutes
   # end

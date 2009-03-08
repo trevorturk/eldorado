@@ -33,8 +33,10 @@ ActionController::Routing::Routes.draw do |map|
   map.chat 'chat', :controller => 'messages', :action => 'index'
   map.files 'files', :controller => 'uploads', :action => 'index'
   map.forum_root 'forum', :controller => 'forums', :action => 'index'
+  map.help 'help', :controller => 'home', :action => 'help'
   
   map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil
   
   map.catch_all '*path', :controller => 'topics', :action => 'unknown_request'
+  
 end

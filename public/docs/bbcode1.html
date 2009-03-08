@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+    <head>
+        <meta name="generator" content="HTML Tidy, see www.w3.org">
+<script type="text/Javascript">
+            function togglehidden (hiddenname) {
+                var whichpost = document.getElementById(hiddenname);
+                if (whichpost.className=="showstuff") { whichpost.className="hidestuff"; } else { whichpost.className="showstuff"; }
+            }
+        
+</script>
+<style type="text/css">
+            .hidestuff {display:none}
+        
+</style>
+
+        <title>Basic BBcode help</title>
+    </head>
+
+    <body>
+        <h1>Basic BBcode documentation</h1>
+
+        <p><em>If you're lookin for advanced BBcode tags, try <a
+        href="bbcode2.html">here</a>.</em></p>
+
+        <p>BBcode refers to Bulletin Board code. Like HTML, it is a
+        markup language used to format text for view on the World
+        Wide Web. Specifically, it is designed to be used by forum
+        posters to format their posts. This documentation page will
+        identify which BBcode tags can be used on this forum.</p>
+
+        <h2>Bold text: [b]...[/b]<br>
+         Underlined text: [u]...[/u]<br>
+         Italic text: [i]...[/i]<br>
+        </h2>
+
+        <p>By using the above tags, you can apply simple styles to
+        any text.</p>
+
+        <p>For example:</p>
+<pre>
+[b]This text is bold[/b]
+[u]This text is underlined[/u]
+[i]This text is italic[/i]
+[b][i]This text[/i] is [u]mixed[/u][/b]
+</pre>
+
+        <p>The above will display as:</p>
+
+        <p><b>This text is bold</b><br>
+         <i>This text is italic</i><br>
+         <u>This text is underlined</u><br>
+         <b><i>This text</i> is <u>mixed</u></b><br>
+        </p>
+
+        <h2>Font color: [color=...]...[/color]</h2>
+
+        <p>The [color=...] tag can be used to apply a color to some
+        text. The color must be a valid HTML color code (e.g.
+        "blue", "red", "#ff0000", "#888", etc.). Refer to <a href=
+        "http://www.w3schools.com/HTML/html_colornames.asp">this
+        page</a> for other, valid HTML color codes.</p>
+
+        <p>Examples:</p>
+<pre>
+The following text is colored [color=red]red[/color], [color=#eeaa00]yellow[/color] and [color=#30f]blue[/color]!    
+</pre>
+
+        <p>This will be displayed as:</p>
+
+        <p>The following text is colored <span style=
+        "color: red">red</span>, <span style=
+        "color: #eeaa00">yellow</span> and <span style=
+        "color: #30F">blue</span>!</p>
+
+        <h2>Font size: [size=...]...[/size]</h2>
+
+        <p>The [size=...] tag is used to resize the font of a piece
+        of text. The size must be a valid CSS size indication (e.g.
+        "12px", "small", "larger", etc.). Refer to <a href=
+        "http://www.w3.org/TR/2004/CR-CSS21-20040225/fonts.html#font-size-props">
+        this page</a> to read about valid CSS size properties.</p>
+
+        <p>Examples:</p>
+<pre>
+[size=x-small]It[/size][size=small]looks[/size][size=medium]like[/size][size=large]I'm[/size][size=x-large]growing![/size]
+</pre>
+
+        <p>This will be displayed as:</p>
+
+        <p><span style="font-size: x-small">It</span> <span style=
+        "font-size: small">looks</span> <span style=
+        "font-size: medium">like</span> <span style=
+        "font-size: large">I'm</span> <span style=
+        "font-size: x-large">growing!</span></p>
+
+        <h2>Link an image from the web: [img]...[/img]<br>
+         Link to a website: [url]...[/url] or
+        [url=...]...[/url]<br>
+         Link to an email address: [email]...[/email] or
+        [email=...]...[/url]<br>
+        </h2>
+
+        <p>These tags are all used to link to web resources.</p>
+
+        <p>Examples:</p>
+<pre>
+[img]http://http://www.w3schools.com/tags/angry.gif[/img]
+[url]http://www.example.com[/url]
+[url=http://www.example.com]Visit Example.com![/url]
+[email]example-user@example.com[/email]
+[email=example-user@example.com]example-user's email[/email]
+</pre>
+
+        <p>These will be displayed as:</p>
+
+        <p><img alt="" src=
+        "http://almosteffortless.com/files/el-d-200.jpg" border=
+        "0"><br>
+         <a href="http://www.example.com">www.example.com</a><br>
+         <a href="http://www.example.com">Visit
+        Example.com!</a><br>
+         <a href=
+        "mailto:example-user@example.com">example-user@example.com</a><br>
+
+         <a href="mailto:example-user@example.com">Link to
+        example-users's email</a><br>
+        </p>
+
+        <h2>Monospaced, formatted code: [code]...[/code]</h2>
+
+        <p>Frequently you will have programming code, ASCII art,
+        etc. which you want to display in your post. For those
+        situations, you can use the [code] tags.</p>
+
+        <p>For example:</p>
+<pre>
+[code]
+                                      __          
+  ____ ___  ________    _____ ______ |  |   ____  
+_/ __ \\  \/  /\__  \  /     \\____ \|  | _/ __ \ 
+\  ___/ \    /  / __ \|  Y Y  \  |_\ \  |_\  ___/ 
+ \___  /__/\_ \(____  /__|_|  /   __/|____/\___ \
+     \/      \/     \/      \/|__|             \/ 
+[/code]
+</pre>
+
+        <p>Without the [code] tags around it, this would look
+        totally scrambled, like:</p>
+        __ <br>
+         ____ ___ ________ _____ ______ | | ____ <br>
+         _/ __ \\ \/ /\__ \ / \\____ \| | _/ __ \<br>
+         \ ___/ \ / / __ \| Y Y \ |_\ \ |_\ ___/<br>
+         \___ /__/\_ \(____ /__|_| / __/|____/\___ \<br>
+         \/ \/ \/ \/|__| \/<br>
+         <br>
+         
+
+        <p>But with the [code] tags around it, it looks like:</p>
+<pre>
+                                      __          
+  ____ ___  ________    _____ ______ |  |   ____  
+_/ __ \\  \/  /\__  \  /     \\____ \|  | _/ __ \ 
+\  ___/ \    /  / __ \|  Y Y  \  |_\ \  |_\  ___/ 
+ \___  /__/\_ \(____  /__|_|  /   __/|____/\___ \
+     \/      \/     \/      \/|__|             \/
+</pre>
+
+        <h2>Quoted text: [quote]...[/quote] or
+        [quote=...]...[/quote]</h2>
+
+        <p>When you need to quote something or someone in your
+        post, you can use the [quote] tags. If you want to include
+        the name of the person you are quoting, you can use the
+        [quote=...] tag.</p>
+
+        <p>Examples:</p>
+<pre>
+[quote]El Dorado is the best![/quote]
+
+[quote=William Shakespeare]
+To be or not to be, --that is the question:--
+Whether 'tis nobler in the mind to suffer
+The slings and arrows of outrageous fortune
+Or to take arms against a sea of troubles,
+And by opposing end them?
+[/quote]
+</pre>
+
+        <p>These will be displayed as:</p>
+
+        <blockquote>
+            El Dorado is the best!
+        </blockquote>
+
+        <blockquote>
+            <p><cite>William Shakespeare wrote:</cite></p>
+            To be or not to be, --that is the question:--<br>
+             Whether 'tis nobler in the mind to suffer<br>
+             The slings and arrows of outrageous fortune<br>
+             Or to take arms against a sea of troubles,<br>
+             And by opposing end them?<br>
+        </blockquote>
+
+        <h2>NSFW (Not Safe For Work) Content: [nsfw]...[/nsfw]<br>
+         Spoiler Content: [spoiler]...[/spoiler]<br>
+         Content to be Hidden: [hide=...]...[/hide]<br>
+        </h2>
+
+        <p>These tags are used when you want your post to initially
+        hide specific content, be it text or other embedded media.
+        Sometimes this is due to the graphic nature of this
+        content, or sometimes you just don't want the reader to see
+        it initially.</p>
+
+        <p>Examples:</p>
+<pre>
+[nsfw]This could be deemed unsafe for co-workers to oversee![/nsfw]
+[spoiler]The spoiler tag works great as a way to give away the end of movies[/spoiler]
+[hide=The answer]...or, you can make your own "hide-it" link[/hide]
+</pre>
+
+        <p>This will be displayed as:</p>
+
+        <p><a href=
+        "javascript:togglehidden('example-nsfw')">NSFW</a></p>
+
+        <div class="hidestuff" id="example-nsfw">
+            This could be deemed unsafe for co-workers to oversee!
+        </div>
+
+        <p><a href=
+        "javascript:togglehidden('example-spoiler')">SPOILER</a></p>
+
+        <div class="hidestuff" id="example-spoiler">
+            The spoiler tag works great as a way to give away the
+            end of movies
+        </div>
+
+        <p><a href="javascript:togglehidden('example-hide')">The
+        answer</a></p>
+
+        <div class="hidestuff" id="example-hide">
+            ...or, you can make your own "hide-it" link
+        </div>
+		
+		<p><em>Continue to the advanced BBcode tags <a
+        href="bbcode2.html">here</a>.</em></p>
+    </body>
+</html>
+
