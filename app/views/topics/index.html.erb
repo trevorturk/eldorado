@@ -1,11 +1,11 @@
 <% if current_controller == 'categories' %>
   <div class="info-left">
-    <span class="title"><%=h @category.name %></span>
-    <span class="detail"> &laquo; <%= @forums.map { |f| link_to "#{h f.name}", f } * ", " %></span>
+    <span class="title"><%=h @category %></span>
+    <span class="detail"> &laquo; <%= @forums.map { |forum| link_to "#{h(forum)}", forum } * ", " %></span>
   </div>
 <% elsif current_controller == 'forums' %>
   <div class="info-left">
-    <span class="title"><%=h @forum.name %></span>
+    <span class="title"><%=h @forum %></span>
     <span class="detail">
       &laquo; <%= link_to h(@forum.category), @forum.category %>
     </span>
@@ -35,7 +35,7 @@
           <td class="tci"><%= icon_for(topic) %></td>
           <td class="tcl">
             <span class="topic-status"><%= 'Sticky' if topic.sticky? %> <%= 'Locked' if topic.locked? %></span>
-            <%= link_to h(topic), topic %> by <%=h topic.user.login %>
+            <%= link_to h(topic), topic %> by <%=h topic.user %>
           </td>
           <% if %w(categories topics).include?(current_controller) %>
             <td class="tcl">
@@ -48,7 +48,7 @@
           <% end %>
           <td class="tcr">
             <%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
-            by <%=h topic.last_poster.login %>
+            by <%=h topic.last_poster %>
           </td>
         </tr>
       <% end %>

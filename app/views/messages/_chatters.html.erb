@@ -1,1 +1,3 @@
-<%= '&laquo; ' unless @chatters.blank? %><%= @chatters.map { |u| link_to "#{h u.login}", u } * ", " unless @chatters.blank? %>
+<% unless @chatters.blank? %>
+  <%= '&laquo; ' %><%= @chatters.map { |user| link_to "#{h(user)}", user } * ", " %>
+<% end %>

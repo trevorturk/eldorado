@@ -6,8 +6,8 @@
       <%= f.text_area :body, :value => @body, :rows => '8', :class => 'text-field' %>
       <p>
         <%= submit_tag "Post Reply", :disable_with => "Post Reply" %>&nbsp; 
-        <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> &nbsp; 
-        <%= link_to('Cancel', topic_post_path(params[:id])) if current_action == 'quote' %>
+        <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1'] %> &nbsp; 
+        <%= link_to 'Cancel', topic_post_path(params[:id]) if current_action == 'quote' %>
       </p>
     </div>
 <% end %>

@@ -21,7 +21,7 @@
               <%= link_to_function '(&raquo;)', "$('mp3-#{upload.public_filename}').toggle()" if upload.is_mp3? %>
             <% end %>
             
-            by <%=h upload.user.login %>
+            by <%=h upload.user %>
             
             <% unless current_controller == 'home' %>
               <%= link_to '(x)', upload, :confirm => 'Are you sure?', :method => :delete if can_edit?(upload) %>

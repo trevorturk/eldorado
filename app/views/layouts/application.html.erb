@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="generator" content="http://almosteffortless.com/eldorado/" />
   <meta name="description" content="<%=h page_title -%>" />
-  <title><%= page_title -%></title>
+  <title><%=h page_title -%></title>
   <%= render :file => 'shared/rss' unless @settings.private? %>
   <%= javascript_include_tag "prototype", "audio_player", "calendar_date_select", "prototip", :cache => true %>
   <%= favicon_tag %>

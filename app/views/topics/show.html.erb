@@ -1,6 +1,6 @@
 <% unless %w(posts search users).include?(current_controller) %>
   <div class="info-left">
-    <span class="title"><%=h @topic.title %></span>
+    <span class="title"><%=h @topic %></span>
     <span class="detail">
       &laquo; <%= link_to h(@topic.forum), @topic.forum %>
       &laquo; <%= link_to h(@topic.forum.category), @topic.forum.category %>

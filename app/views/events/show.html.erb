@@ -1,5 +1,5 @@
 <div class="info-left">
-  <span class="title"><%=h @event.title %></span>
+  <span class="title"><%=h @event %></span>
   <span class="detail">
     by <%= link_to h(@event.user), @event.user %>
     <%= @event.reminder? ? '&nbsp;|&nbsp; Reminder' : '' %>

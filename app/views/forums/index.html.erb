@@ -47,7 +47,7 @@
                 <% else %>
                   <%= time_ago_or_time_stamp(forum.last_topic.last_post_at) %>
                 <% end %>
-                <br /> by <%=h forum.last_topic.last_poster.login %>
+                <br /> by <%=h forum.last_topic.last_poster %>
               <% end %>
             </td>
           </tr>

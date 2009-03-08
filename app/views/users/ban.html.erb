@@ -3,7 +3,7 @@
   <div class="box" id="box-users-ban">
     <span class="top">Ban User</span>
     <p class="label"><label for="user_login">Username</label></p>
-    <p><%= @user %></p>
+    <p><%=h @user %></p>
     <p class="label"><label for="user_ban_message">Message</label></p>
     <p><%= f.text_field :ban_message, :style => "width:31%" %></p>
     <p class="label"><label for="user_banned_until">Ban Until</label></p>

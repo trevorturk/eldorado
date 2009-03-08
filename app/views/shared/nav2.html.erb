@@ -3,7 +3,7 @@
     <div class="clear"> </div>
     <div class="info-left">
       <%= link_to 'Home', root_path %> &raquo; 
-      <%= link_to 'Blog', blog_path %> &raquo; <%= @article %>
+      <%= link_to 'Blog', blog_path %> &raquo; <%= h(@article) %>
     </div>
     <div class="info-right">
       <%= link_to 'Edit Article', edit_article_path(@article) %>
@@ -32,7 +32,7 @@
 <% if current_controller == 'categories' and current_action == 'show' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> &raquo; <%=h @category.name %>
+    <%= link_to 'Forum', forum_root_path %> &raquo; <%=h @category %>
   </div>
   <div class="info-right">
     <% if admin? %>
@@ -75,7 +75,7 @@
 <% if current_controller == 'events' and current_action == 'show' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Events', events_path %> &raquo; <%=h @event.title %>
+    <%= link_to 'Events', events_path %> &raquo; <%=h @event %>
   </div>
   <div class="info-right">
     <% if can_edit?(@event) %>
@@ -103,7 +103,7 @@
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
     <%= link_to 'Forum', forum_root_path %> &raquo; 
-    <%= link_to h(@forum.category), @forum.category %> &raquo; <%= h(@forum.name) %>
+    <%= link_to h(@forum.category), @forum.category %> &raquo; <%=h @forum %>
   </div>
   <div class="info-right">
     <% if admin? %>
@@ -137,7 +137,7 @@
 <% if current_controller == 'headers' and current_action == 'show' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Headers', headers_path %> &raquo; <%= @header.filename %>
+    <%= link_to 'Headers', headers_path %> &raquo; <%=h @header %>
   </div>
   <div class="info-right">
     <% if can_edit?(@header) %>
@@ -266,7 +266,7 @@
 <% if current_controller == 'users' and current_action == 'show' %>
   <div class="info-left">
     <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Users', users_path %> &raquo; <%=h @user.login %>
+    <%= link_to 'Users', users_path %> &raquo; <%=h @user %>
   </div>
   <div class="info-right">
     <% if can_edit?(@user) && @user.avatar %>
