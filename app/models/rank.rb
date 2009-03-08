@@ -10,4 +10,8 @@ class Rank < ActiveRecord::Base
     title
   end
   
+  def to_param
+    "#{id}-#{to_s.parameterize}"
+  end
+  
 end

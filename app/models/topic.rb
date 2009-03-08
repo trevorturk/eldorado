@@ -64,7 +64,7 @@ class Topic < ActiveRecord::Base
   end
   
   def to_param
-    "#{id}-#{title.gsub(/\W/,'-')}"
+    "#{id}-#{to_s.parameterize}"
   end
   
 end

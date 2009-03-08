@@ -19,7 +19,7 @@ class Forum < ActiveRecord::Base
   end
   
   def to_param
-    "#{id}-#{name.gsub(/\W/,'-')}"
+    "#{id}-#{to_s.parameterize}"
   end
   
 end

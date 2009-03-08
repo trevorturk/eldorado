@@ -11,4 +11,8 @@ class Theme < ActiveRecord::Base
     filename
   end
   
+  def to_param
+    "#{id}-#{to_s.parameterize}"
+  end
+  
 end
