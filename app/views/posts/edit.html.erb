@@ -5,7 +5,7 @@
     <p><%= f.text_area :body, :rows => '10', :class => 'text-field' %></p>
     <p>
       <%= submit_tag "Save Changes", :disable_with => "Save Changes" %>&nbsp;
-      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> &nbsp;
+      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1'] %> &nbsp;
       <% if @topic.posts_count > 1 %>
         <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> &nbsp;
       <% end %>

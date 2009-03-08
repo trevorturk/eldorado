@@ -7,15 +7,15 @@
       <%= f.text_area :body, :value => @body, :rows => '5', :class => 'text-field' %>
       <p>
         <%= submit_tag "Post Comment", :disable_with => "Post Comment" %>&nbsp; 
-        <%= link_to('Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1']) %> 
+        <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1'] %> 
       </p>
     </div>
   <% end %>
 <% else %>
   <div class="nav nav-spacer">
     <p class="nav-left">
-      <%= link_to('Login', login_path) %> or 
-      <%= link_to('Register', register_path) %> to post a comment
+      <%= link_to 'Login', login_path %> or 
+      <%= link_to 'Register', register_path %> to post a comment
     </p>
   </div>
   <div class="clear"> </div>

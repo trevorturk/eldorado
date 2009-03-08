@@ -5,9 +5,9 @@
     <p class="label"><label for="topic_title">Title</label></p>
     <p>
       <%= f.text_field :title, :class => 'text-field' %> &nbsp; 
-      <%= f.check_box(:locked) %><label for="topic_locked"> Locked</label> &nbsp; 
+      <%= f.check_box :locked %><label for="topic_locked"> Locked</label> &nbsp; 
       <% if admin? %>
-        <%= f.check_box(:sticky) %><label for="topic_sticky"> Sticky</label>
+        <%= f.check_box :sticky %><label for="topic_sticky"> Sticky</label>
       <% end %>
     </p>
     <%= render :partial => 'forums/select' %>

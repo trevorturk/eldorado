@@ -7,7 +7,7 @@
     <p><%= f.text_field :title, :class => 'text-field' %>
        &nbsp; <%= f.check_box :locked %><label for="topic_locked"> Locked</label> &nbsp; 
        <% if admin? %>
-         <%= f.check_box(:sticky) %><label for="topic_sticky"> Sticky</label>
+         <%= f.check_box :sticky %><label for="topic_sticky"> Sticky</label>
        <% end %>
     </p>
     <%= render :partial => 'forums/select' %>
@@ -18,7 +18,7 @@
     </p>
     <p>
       <%= submit_tag "Post Topic", :disable_with => "Post Topic" %>&nbsp;
-      <%= link_to('Upload a New File', new_upload_path, :popup => ['height=520,width=820']) %> &nbsp; 
+      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
       <% if current_action != 'new' %>
         <%= link_to_function 'Cancel', "$('action').toggle()" %>
       <% else %>
