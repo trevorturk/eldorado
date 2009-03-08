@@ -9,6 +9,7 @@ Rails::Initializer.run do |config|
     
   config.time_zone = 'UTC'
   config.active_record.partial_updates = true
+  config.frameworks -= [ :active_resource ]
   # config.gem 'fiveruns_tuneup'
   
   # The session_key and secret (for verifying session data integrity) are set in config/database.yml
