@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_filter :can_edit, :only => [:edit, :update, :destroy]
   
   def index
-    @comments = Comment.get(params[:page])
+    @comments = Comment.paginate(:page => params[:page], :order => 'created_at desc', :include => [:resource, :user])
   end
   
   def show

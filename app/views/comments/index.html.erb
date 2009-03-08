@@ -8,6 +8,13 @@
 
 <div class="comment-list">
   <% @comments.each do |comment| %>
-    <%= render :partial => 'comments/comment', :object => comment %>
+    <div class="comment" id="c<%= comment.id %>">
+      <span class="comment-user"><%= link_to h(comment.user), comment.user %></span> 
+      <span class="detail">
+        &laquo; <%= link_to comment.resource, comment.resource %>&nbsp; 
+        <%= link_to time_ago_or_time_stamp(comment.created_at, Time.now.utc, true, true), comment, :class => 'text' %>
+      </span>
+      <div class="comment-body"><%=bb comment.body %></div>
+    </div>
   <% end %>
 </div>
