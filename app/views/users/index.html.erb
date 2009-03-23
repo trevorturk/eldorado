@@ -1,6 +1,6 @@
 <% if current_controller == 'users' %>
   <div class="info-left">
-    <span class="title">Users</span>
+    <span class="title"><%=t :users %></span>
     <span class="detail">&nbsp;|&nbsp;<%= pluralize(number_with_delimiter(@users_count) || 0, 'Users') %></span>
   </div>  
   <div class="info-right">

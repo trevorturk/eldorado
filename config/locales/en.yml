@@ -1,0 +1,6 @@
+en:
+  el_dorado: El Dorado
+  tagline: A full-stack community web application written in Ruby/Rails
+  powered_by: Powered by
+  login_message: You are not logged in
+  users: Users

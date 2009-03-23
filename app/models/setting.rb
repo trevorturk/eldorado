@@ -4,18 +4,18 @@ class Setting < ActiveRecord::Base
     
   validates_presence_of :time_zone
     
-  TITLE = 'El Dorado'
-  TAGLINE = 'A full-stack community web application written in Ruby/Rails'
-  FOOTER = '<p style="text-align:right;margin:0;">Powered by <a href="http://almosteffortless.com/eldorado/">El Dorado</a></p>'
-  LOGIN_MESSAGE = 'You are not logged in'
-  TIME_ZONE = 'UTC'
-  
   def theme
     read_attribute(:theme) # TODO not sure why this is needed, but tests are failing without it
   end
   
   def self.defaults
-    Setting.new(:title => TITLE, :tagline => TAGLINE, :footer => FOOTER, :login_message => LOGIN_MESSAGE, :time_zone => TIME_ZONE).save
+    Setting.new(
+      :title => I18n.translate(:el_dorado),
+      :tagline => I18n.translate(:tagline),
+      :footer => "<p style=\"text-align:right;margin:0;\">#{I18n.translate(:powered_by)} <a href=\"http://almosteffortless.com/eldorado/\">#{I18n.translate(:el_dorado)}</a></p>",
+      :login_message => I18n.translate(:login_message),
+      :time_zone => 'UTC'
+    ).save
   end
   
   def to_s

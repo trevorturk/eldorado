@@ -4,8 +4,9 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|  
   require 'open-uri'
   require 'yaml'
-    
+  
   config.time_zone = 'UTC'
+  config.i18n.default_locale = :en
   config.active_record.partial_updates = true
   config.frameworks -= [ :active_resource ]
   # config.gem 'fiveruns_tuneup'
