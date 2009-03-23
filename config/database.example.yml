@@ -5,7 +5,7 @@ development:
   domain: example.com
   mailer: Example <noreply@example.com>
   session_key: eldorado_development
-  secret: YrDOFOmYJyFg2tTZykCbZjWYQUbKBt
+  session_secret: YrDOFOmYJyFg2tTZykCbZjWYQUbKBt
 
 test:
   adapter: sqlite3
@@ -14,14 +14,14 @@ test:
   domain: example.com
   mailer: Example <noreply@example.com>
   session_key: eldorado_test
-  secret: Pl8qJNFc8mo1yt1xtHOmfUGHOPEutu
+  session_secret: Pl8qJNFc8mo1yt1xtHOmfUGHOPEutu
 
 production:
-  adapter: mysql
-  database: eldorado_production
-  username: root
+  adapter: 
+  database: 
+  username: 
   password: 
-  host: localhost
+  host: 
   domain: 
   mailer: 
   session_key: 

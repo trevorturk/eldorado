@@ -9,11 +9,7 @@ class Forum < ActiveRecord::Base
   
   validates_presence_of :name, :category_id
   validates_uniqueness_of :name, :case_sensitive => false
-  
-  def updated_at
-    last_post_at
-  end
-  
+    
   def to_s
     name
   end

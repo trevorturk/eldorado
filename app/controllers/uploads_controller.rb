@@ -7,7 +7,6 @@ class UploadsController < ApplicationController
   rescue_from Errno::ENOENT, :with => :url_upload_not_found
   rescue_from Errno::ETIMEDOUT, :with => :url_upload_not_found
   rescue_from OpenURI::HTTPError, :with => :url_upload_not_found
-  rescue_from Timeout::Error, :with => :url_upload_not_found
   
   def index
     @uploads = Upload.paginate(:page => params[:page], :order => 'updated_at desc')

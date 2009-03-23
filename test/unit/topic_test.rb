@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class TopicTest < Test::Unit::TestCase
+class TopicTest < ActiveSupport::TestCase
   fixtures :all
   
   def test_should_get_all_topics

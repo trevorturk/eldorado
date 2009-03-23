@@ -196,8 +196,7 @@ class UsersControllerTest < ActionController::TestCase
   def test_good_login_sets_auth_token
     post :login, :user => {:login => 'trevor', :password => 'test'}
     users(:trevor).reload
-    assert cookies['auth_token']
-    assert_equal("#{users(:trevor).auth_token}", cookies['auth_token'].first)
+    assert_not_nil cookies['auth_token']
     assert_not_nil users(:trevor).auth_token
     assert_not_nil users(:trevor).auth_token_exp
   end

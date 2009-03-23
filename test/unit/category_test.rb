@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class CategoryTest < Test::Unit::TestCase
+class CategoryTest < ActiveSupport::TestCase
   fixtures :all
   
   def test_to_s

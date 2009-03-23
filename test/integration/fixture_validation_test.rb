@@ -11,7 +11,7 @@ class FixtureValidationTest < ActionController::IntegrationTest
         if !fixture.valid?
           puts; puts "WARNING: Invalid fixture: #{fixture.inspect}"
         end
-        assert_valid fixture
+        assert fixture.valid?
       end
     end
   end

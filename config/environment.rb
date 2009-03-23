@@ -1,9 +1,7 @@
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
-
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|  
-
   require 'open-uri'
   require 'yaml'
     
@@ -13,13 +11,13 @@ Rails::Initializer.run do |config|
   # config.gem 'fiveruns_tuneup'
   
   # The session_key and secret (for verifying session data integrity) are set in config/database.yml
-  db = YAML.load_file('config/database.yml')
+  CONFIG = YAML.load_file('config/database.yml')[RAILS_ENV]
   config.action_controller.session = {
-    :session_key => db[RAILS_ENV]['session_key'],
-    :secret      => db[RAILS_ENV]['secret']
+    :key => CONFIG['session_key'],
+    :secret => CONFIG['session_secret'] || CONFIG['secret'] # TODO deprecate 'secret'
   }
   
-  MAILER = db[RAILS_ENV]['mailer'] || 'noreply@example.com'
-  DOMAIN = db[RAILS_ENV]['domain'] || 'example.com'
+  MAILER = CONFIG['mailer'] || 'noreply@example.com' # TODO require in config
+  DOMAIN = CONFIG['domain'] || 'example.com' # TODO require in config
   
 end
