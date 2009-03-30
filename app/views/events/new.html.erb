@@ -2,22 +2,22 @@
 <% @event = Event.new unless @event %>
 <% form_for @event do |f| %>
   <div class="box" id="box-events-new">
-    <span class="top">New Event</span>
+    <span class="top"><%=t :new_event %></span>
     <div class="calendar_select"><%= f.calendar_date_select :date, :embedded => true %></div>
-    <p class="label"><label for="event_title">Title</label></p>
+    <p class="label"><label for="event_title"><%=t :title %></label></p>
     <p><%= f.text_field :title, :class => 'text-field' %></p>
     <!-- <p class="label"><label for="event_date">Date</label></p>
     <p><%#= f.datetime_select :date %></p> -->
-    <p class="label"><label for="event_description">Description</label></p>
+    <p class="label"><label for="event_description"><%=t :description %></label></p>
     <p><%= f.text_area :description, :rows => '10', :class => 'text-field' %></p>
-    <%= f.check_box :reminder %><label for="event_reminder"> Reminder <span class="detail">(Show a reminder 6 hours before and 2 hours after this event.)</span></label>
+    <%= f.check_box :reminder %><label for="event_reminder"> <%=t :reminder %> <span class="detail">(<%=t :reminder_info, :scope => :messages %>)</span></label>
     <p>
-      <%= submit_tag "Add Event", :disable_with => "Add Event" %>&nbsp;
-      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
+      <%= submit_tag I18n.t(:add_event), :disable_with => I18n.t(:add_event) %>&nbsp;
+      <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
       <% if current_action != 'new' %>
-        <%= link_to_function 'Cancel', "$('action').toggle()" %>
+        <%= link_to_function I18n.t(:cancel), "$('action').toggle()" %>
       <% else %>
-        <%= link_to 'Cancel', events_path %>
+        <%= link_to I18n.t(:cancel), events_path %>
       <% end %>
     </p>
   <% end %>

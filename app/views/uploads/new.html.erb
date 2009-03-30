@@ -2,19 +2,19 @@
 <% @upload = Upload.new unless @upload %>
 <% form_for @upload, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-uploads-new">
-    <span class="top">New File</span>
+    <span class="top"><%=t :new_file %></span>
     <p id="file_upload"><%= f.file_field :uploaded_data %></p>
     <p id="url_upload" style="display:none;">
       <%= f.text_field :url, :class => 'text-field' %>&nbsp; 
-      <%= link_to_function '(x)', "$('file_upload').toggle();$('upload_url').clear();$('url_upload').toggle()" %>
+      <%= link_to_function '('+I18n.t(:x)+')', "$('file_upload').toggle();$('upload_url').clear();$('url_upload').toggle()" %>
     </p>
     <p>
-      <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp; 
+      <%= submit_tag I18n.t(:upload), :disable_with => I18n.t(:upload) %>&nbsp; 
       <% if current_action != 'new' %>
-        <%= link_to_function 'Cancel', "$('action').toggle()" %>
+        <%= link_to_function I18n.t(:cancel), "$('action').toggle()" %>
       <% else %>
-        <%= link_to_function 'Upload via URL', "$('file_upload').toggle();$('url_upload').toggle();$('upload_url').clear();$('upload_url').focus()" %> &nbsp; 
-        <%= link_to 'Cancel', files_path %>
+        <%= link_to_function I18n.t(:upload_via_url), "$('file_upload').toggle();$('url_upload').toggle();$('upload_url').clear();$('upload_url').focus()" %> &nbsp; 
+        <%= link_to I18n.t(:cancel), files_path %>
       <% end %>
     </p>
   </div>

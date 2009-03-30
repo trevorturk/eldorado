@@ -1,2 +1,2 @@
-<%= auto_discovery_link_tag :rss, articles_url(:format => 'rss'), :title => 'Blog' %>
-<%= auto_discovery_link_tag :rss, topics_url(:format => 'rss'), :title => 'Forum' %>
+<%= auto_discovery_link_tag :rss, articles_url(:format => 'rss'), :title => I18n.t(:blog) %>
+<%= auto_discovery_link_tag :rss, topics_url(:format => 'rss'), :title => I18n.t(:forum) %>

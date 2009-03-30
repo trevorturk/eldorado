@@ -10,10 +10,10 @@ class Setting < ActiveRecord::Base
   
   def self.defaults
     Setting.new(
-      :title => I18n.translate(:el_dorado),
-      :tagline => I18n.translate(:tagline),
+      :title => I18n.translate(:title, :scope => :default_settings ),
+      :tagline => I18n.translate(:tagline, :scope => :default_settings),
       :footer => "<p style=\"text-align:right;margin:0;\">#{I18n.translate(:powered_by)} <a href=\"http://almosteffortless.com/eldorado/\">#{I18n.translate(:el_dorado)}</a></p>",
-      :login_message => I18n.translate(:login_message),
+      :login_message => I18n.translate(:login_message, :scope => :default_settings),
       :time_zone => 'UTC'
     ).save
   end

@@ -1,6 +1,6 @@
 <div class="info-left">
   <div class="title">
-    <%= link_to pluralize(@article.comments_count, 'Comment'), comments_path %>
+    <%= link_to t_no_of( :no_of_comments, @article.comments_count ), comments_path %>
   </div>
 </div>
 <div class="clear"> </div>

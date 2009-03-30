@@ -1,13 +1,13 @@
 <% if current_controller == 'users' %>
   <div class="info-left">
     <span class="title"><%=t :users %></span>
-    <span class="detail">&nbsp;|&nbsp;<%= pluralize(number_with_delimiter(@users_count) || 0, 'Users') %></span>
+    <span class="detail">&nbsp;|&nbsp;<%=t_no_of :no_of_users, (@users_count || 0) %></span>
   </div>  
   <div class="info-right">
     <span class="title">&nbsp;</span>
     <span class="detail">
-      <%= link_to 'Avatars', avatars_path %> &nbsp; 
-      <%= link_to 'Ranks', ranks_path %>
+      <%= link_to I18n.t(:avatars), avatars_path %> &nbsp; 
+      <%= link_to I18n.t(:ranks), ranks_path %>
     </span>
   </div>
   <div class="clear"> </div>
@@ -22,12 +22,12 @@
   <table cellspacing="0">
     <thead>
       <tr>
-        <th class="tcl" colspan="2"><%= link_to 'Users', users_path %></th>
+        <th class="tcl" colspan="2"><%= link_to I18n.t(:users), users_path %></th>
         <% unless current_controller == 'home' %>
-          <th class="tcl">Profile Updated</th>
-          <th class="tcl">Last Visit</th>
-          <th class="tcm">Posts</th>
-          <th class="tcr">Registered</th>
+          <th class="tcl"><%=t :profile_updated %></th>
+          <th class="tcl"><%=t :last_visit %></th>
+          <th class="tcm"><%=t :posts %></th>
+          <th class="tcr"><%=t :registered %></th>
         <% end %>
       </tr>
     </thead>
@@ -40,7 +40,7 @@
             <td class="tcl"><%= time_ago_or_time_stamp(user.profile_updated_at) %></td>
             <td class="tcl"><%= time_ago_or_time_stamp(user.online_at) %></td>
             <td class="tcm"><%= number_with_delimiter(user.posts_count) %></td>
-            <td class="tcr"><%= user.created_at.strftime("%b %d, %Y") %></td>
+            <td class="tcr"><%= I18n.l(user.created_at, :format => :ed_date) %></td>
           <% end %>
         </tr>
       <% end %>

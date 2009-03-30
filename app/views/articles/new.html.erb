@@ -2,15 +2,15 @@
 <% @article = Article.new unless @article %>
 <% form_for @article do |f| %>
   <div class="box" id="box-articles-new">
-    <span class="top">New Article</span>
-    <p class="label"><label for="article_title">Title</label></p>
+    <span class="top"><%=t :new_article %></span>
+    <p class="label"><label for="article_title"><%=t :title %></label></p>
     <p><%= f.text_field :title, :class => 'text-field' %></p>
-    <p class="label"><label for="article_body">Body</label></p>
+    <p class="label"><label for="article_body"><%=t :body %></label></p>
     <p><%= f.text_area :body, :rows => '10', :class => 'text-field' %></p>
     <p>
-      <%= submit_tag "Post Article", :disable_with => "Post Article" %>&nbsp;
-      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
-      <%= link_to 'Cancel', blog_path %>
+      <%= submit_tag I18n.t(:post_article), :disable_with => I18n.t(:post_article) %>&nbsp;
+      <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
+      <%= link_to I18n.t(:cancel), blog_path %>
     </p>
   <% end %>
   <div class="clear"> </div>

@@ -1,10 +1,10 @@
 <% @user ||= user %>
 <div class="box" id="box-users-show">
-  <span class="top">Profile</span>
+  <span class="top"><%=t :profile %></span>
   <span class="profile-avatar"><%= avatar_for(@user) %></span>
   <div style="margin-top:10px;">
     <span class="profile-title"><%=h @user %></span>&nbsp;
-    <span class="profile-rank"><%=h rank_for(@user) %> &mdash; <%= link_to number_with_delimiter(@user.posts_count) + ' posts', user_posts_path(@user) %></span>
+    <span class="profile-rank"><%=h rank_for(@user) %> &mdash; <%= link_to t_no_of( :no_of_posts, @user.posts_count ), user_posts_path(@user) %></span>
   </div>
   
   <div class="profile-bio">
@@ -16,9 +16,9 @@
   <% end %>  
   
   <p style="margin-top:20px">
-    <b>Registered</b>: <%= time_ago_or_time_stamp(@user.created_at) %> &nbsp;
-    <b>Last Visit</b>: <%= time_ago_or_time_stamp(@user.online_at) %> &nbsp;
-    <b>Profile Updated</b>: <%= time_ago_or_time_stamp(@user.profile_updated_at) %>
+    <b><%=t :registered %></b>: <%= time_ago_or_time_stamp(@user.created_at) %> &nbsp;
+    <b><%=t :last_visit %></b>: <%= time_ago_or_time_stamp(@user.online_at) %> &nbsp;
+    <b><%=t :profile_updated %></b>: <%= time_ago_or_time_stamp(@user.profile_updated_at) %>
   </p>
   <div class="clear"> </div>  
 </div>

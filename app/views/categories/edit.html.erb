@@ -1,15 +1,15 @@
 <%= error_messages_for :category %>
 <div class="box" id="box-categories-edit">
   <% form_for @category do |f| %>
-    <span class="top">Edit Category</span>
-    <p class="label"><label for="category_name">Name</label></p>
+    <span class="top"><%=t :edit_category %></span>
+    <p class="label"><label for="category_name"><%=t :name %></label></p>
     <p><%= f.text_field :name, :class => 'text-field' %></p>
-    <p class="label"><label for="category_position">Position</label></p>
+    <p class="label"><label for="category_position"><%=t :position %></label></p>
     <p><%= f.text_field :position, :style => 'width:5%;' %></p>
     <p>
-      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp;
-      <%= link_to 'Delete', confirm_delete_category_path %> &nbsp; 
-      <%= link_to 'Cancel', @category %>
+      <%= submit_tag I18n.t(:save_changes), :disable_with => I18n.t(:save_changes) %>&nbsp;
+      <%= link_to I18n.t(:delete), confirm_delete_category_path %> &nbsp; 
+      <%= link_to I18n.t(:cancel), @category %>
     </p>
   <% end %>
 </div>

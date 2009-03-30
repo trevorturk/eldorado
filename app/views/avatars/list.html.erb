@@ -2,7 +2,7 @@
   <table cellspacing="0">
     <thead>
       <tr>
-        <th class="tcl" colspan="2"><%= link_to 'Avatars', avatars_path %></th>
+        <th class="tcl" colspan="2"><%= link_to I18n.t(:avatars), avatars_path %></th>
       </tr>
     </thead>
     <tbody>
@@ -10,7 +10,7 @@
         <tr>
           <td class="tci"><%= icon_for(avatar) %></td>
           <td class="tcl">
-            <%= link_to truncate(h(avatar)), avatar.public_filename %> by <%=h avatar.user %>
+            <%= link_to truncate(h(avatar)), avatar.public_filename %> <%=t :by %> <%=h avatar.user %>
           </td>
         </tr>
       <% end %>

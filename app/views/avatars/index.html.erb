@@ -2,15 +2,15 @@
   <% for avatar in @avatars %>
     <div class="avatar">
       <%= image_tag(avatar.public_filename) %>
-      <br />by <%= link_to h(avatar.user), avatar.user %>
+      <br /><%=t :by %> <%= link_to h(avatar.user), avatar.user %>
       <% if can_edit?(avatar) %>
-        <%= link_to '(x)', avatar_path(avatar), :confirm => 'Are you sure?', :method => :delete %>
+        <%= link_to '('+I18n.t(:x)+')', avatar_path(avatar), :confirm => I18n.t(:are_you_sure), :method => :delete %>
       <% end %>
       <% if !avatar.current_user_id.blank? %>
-        <br />used by <%= link_to h(avatar.current_avatar_user), user_path(avatar.current_avatar_user.id) %>
+        <br /><%=t :used_by %> <%= link_to h(avatar.current_avatar_user), user_path(avatar.current_avatar_user.id) %>
       <% else %>
         <% if logged_in? %>
-          <br /><%= link_to '(select)', select_avatar_path(avatar), :method => :post %>
+          <br /><%= link_to '('+I18n.t(:select)+')', select_avatar_path(avatar), :method => :post %>
         <% end %>
       <% end %>
     </div>

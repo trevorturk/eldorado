@@ -1,20 +1,20 @@
 <%= error_messages_for :event %>
 <% form_for @event do |f| %>
   <div class="box" id="box-events-edit">
-    <span class="top">Edit Event</span>
+    <span class="top"><%=t :edit_event %></span>
     <p class="calendar_select"><%= f.calendar_date_select :date, :embedded => true %></p>
-    <p class="label"><label for="event_title">Title</label></p>
+    <p class="label"><label for="event_title"><%=t :title %></label></p>
     <p><%= f.text_field :title, :class => 'text-field' %></p>
     <!-- <p class="label"><label for="event_date">Date</label></p>
     <p><%#= f.datetime_select :date %></p> -->
-    <p class="label"><label for="event_description">Description</label></p>
+    <p class="label"><label for="event_description"><%=t :description %></label></p>
     <p><%= f.text_area :description, :rows => '10', :class => 'text-field' %></p>
-    <%= f.check_box :reminder %><label for="event_reminder"> Reminder <span class="detail">(Show a reminder 6 hours before and 2 hours after this event.)</span></label>
+    <%= f.check_box :reminder %><label for="event_reminder"> <%=t :reminder %> <span class="detail">(<%=t :reminder_info, :scope => :messages %>)</span></label>
     <p>
-      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp;
-      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
-      <%= link_to 'Delete', @event, :confirm => 'Are you sure?', :method => :delete %> &nbsp; 
-      <%= link_to 'Cancel', @event %>
+      <%= submit_tag I18n.t(:save_changes), :disable_with => I18n.t(:save_changes) %>&nbsp;
+      <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
+      <%= link_to I18n.t(:delete), @event, :confirm => I18n.t(:are_you_sure), :method => :delete %> &nbsp; 
+      <%= link_to I18n.t(:cancel), @event %>
     </p>
   </div>
 <% end %>

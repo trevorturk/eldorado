@@ -1,20 +1,20 @@
 <%= error_messages_for :topic %>  
 <% form_for @topic do |f| %>
   <div class="box" id="box-topics-edit">
-    <span class="top">Edit Topic</span>
-    <p class="label"><label for="topic_title">Title</label></p>
+    <span class="top"><%=t :edit_topic %></span>
+    <p class="label"><label for="topic_title"><%=t :title %></label></p>
     <p>
       <%= f.text_field :title, :class => 'text-field' %> &nbsp; 
-      <%= f.check_box :locked %><label for="topic_locked"> Locked</label> &nbsp; 
+      <%= f.check_box :locked %><label for="topic_locked"> <%=t :locked %></label> &nbsp; 
       <% if admin? %>
-        <%= f.check_box :sticky %><label for="topic_sticky"> Sticky</label>
+        <%= f.check_box :sticky %><label for="topic_sticky"> <%=t :sticky %></label>
       <% end %>
     </p>
     <%= render :partial => 'forums/select' %>
     <p>
-      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp;
-      <%= link_to 'Delete', topic_path, :confirm => 'Are you sure?', :method => :delete %> &nbsp;
-      <%= link_to 'Cancel', topics_path %>
+      <%= submit_tag I18n.t(:save_changes), :disable_with => I18n.t(:save_changes) %>&nbsp;
+      <%= link_to I18n.t(:delete), topic_path, :confirm => I18n.t(:are_you_sure), :method => :delete %> &nbsp;
+      <%= link_to I18n.t(:cancel), topics_path %>
     </p>
   </div>
 <% end %>

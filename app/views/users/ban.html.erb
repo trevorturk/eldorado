@@ -1,21 +1,21 @@
 <%= error_messages_for :user %>
 <% form_for @user do |f| -%>
   <div class="box" id="box-users-ban">
-    <span class="top">Ban User</span>
-    <p class="label"><label for="user_login">Username</label></p>
+    <span class="top"><%=t :ban_user %></span>
+    <p class="label"><label for="user_login"><%=t :username %></label></p>
     <p><%=h @user %></p>
-    <p class="label"><label for="user_ban_message">Message</label></p>
+    <p class="label"><label for="user_ban_message"><%=t :message %></label></p>
     <p><%= f.text_field :ban_message, :style => "width:31%" %></p>
-    <p class="label"><label for="user_banned_until">Ban Until</label></p>
+    <p class="label"><label for="user_banned_until"><%=t :ban_until %></label></p>
     <p><%= f.datetime_select :banned_until %></p>
     <p>
       <% if @user.banned? %>
-        <%= submit_tag "Edit Ban", :disable_with => "Edit Ban" %>&nbsp; 
-        <%= link_to 'Remove Ban', remove_ban_user_path(@user), :method => :post %> &nbsp;
+        <%= submit_tag I18n.t(:edit_ban), :disable_with => I18n.t(:edit_ban) %>&nbsp; 
+        <%= link_to I18n.t(:remove_ban), remove_ban_user_path(@user), :method => :post %> &nbsp;
       <% else %>
-        <%= submit_tag "Ban User", :disable_with => "Ban User" %>&nbsp; 
+        <%= submit_tag I18n.t(:ban_user), :disable_with => I18n.t(:ban_user) %>&nbsp; 
       <% end %>
-      <%= link_to 'Cancel', @user %>
+      <%= link_to I18n.t(:cancel), @user %>
     </p>
   </div>
 <% end %>

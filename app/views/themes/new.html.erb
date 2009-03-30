@@ -2,16 +2,16 @@
 <% @theme = Theme.new unless @theme %>
 <% form_for @theme, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-themes-new">
-    <span class="top">New Theme</span>
+    <span class="top"><%=t :new_theme %></span>
     <p><%= f.file_field :uploaded_data %></p>
-    <p>Themes must be smaller than 50k.</p>
+    <p><%=t :themes_info %></p>
     <p>
-      <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp; 
+      <%= submit_tag I18n.t(:upload), :disable_with => I18n.t(:upload) %>&nbsp; 
       <% if current_action != 'new' %>
-        <%= link_to_function 'Cancel', "$('action').toggle()" %> &nbsp;
+        <%= link_to_function I18n.t(:cancel), "$('action').toggle()" %> &nbsp;
       <% else %>
-        <%= link_to 'Cancel', themes_path %>
+        <%= link_to I18n.t(:cancel), themes_path %>
       <% end %>
     </p>
   </div>
-<% end %>
+<% end %>                                                                                              

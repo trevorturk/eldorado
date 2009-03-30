@@ -1,21 +1,21 @@
 <%= render :file => 'shared/admin' %>
 
 <div class="box" id="box-themes-index">
-  <span class="top">Themes</span>
+  <span class="top"><%=t :themes %></span>
   <% if @themes.empty? %>
-    <p><%= link_to 'Upload a New Theme &raquo;', new_theme_path %></p>
+    <p><%= link_to I18n.t(:upload_a_new_theme)+' &raquo;', new_theme_path %></p>
   <% else %>
     <% for theme in @themes %>
       <p>
-        <%= link_to h(theme), theme.public_filename %> by 
+        <%= link_to h(theme), theme.public_filename %> <%=t :by %> 
         <%= link_to h(theme.user), theme.user %> 
         <% if @current_theme == theme %>
-          <%= link_to '(deselect)', deselect_theme_path(theme), :method => :post %>
+          <%= link_to '('+I18n.t(:deselect)+')', deselect_theme_path(theme), :method => :post %>
         <% else %>
-          <%= link_to '(select)', select_theme_path(theme), :method => :post %>
+          <%= link_to '('+I18n.t(:select)+')', select_theme_path(theme), :method => :post %>
         <% end %>
         <% if can_edit?(theme) %>
-          <%= link_to '(x)', theme, :confirm => 'Are you sure?', :method => :delete %>
+          <%= link_to '('+I18n.t(:x)+')', theme, :confirm => I18n.t(:are_you_sure), :method => :delete %>
         <% end %>
       </p>
     <% end %>

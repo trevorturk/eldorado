@@ -9,8 +9,8 @@
     <% @message = Message.new unless @message %>
     <% remote_form_for @message, :loading => "$('message_body').clear();" do |f| -%>
       <%= f.text_field :body, :value => '', :style => "width:70%;" %>&nbsp; 
-      <%= submit_tag "Post" %>&nbsp; 
-      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1'] %>
+      <%= submit_tag I18n.t(:submit) %>&nbsp; 
+      <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=530,width=820,status=1'] %>
     <% end %>
   </div>
   <div class="clear"> </div>

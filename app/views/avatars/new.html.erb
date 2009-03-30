@@ -2,14 +2,14 @@
 <% @avatar = Avatar.new unless @avatar %>
 <% form_for @avatar, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-avatars-new">
-    <span class="top">New Avatar</span>
+    <span class="top"><%=t :new_avatar %></span>
     <p><%= f.file_field :uploaded_data %></p>
     <p>
-      <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp;
+      <%= submit_tag I18n.t(:upload), :disable_with => I18n.t(:upload) %>&nbsp;
       <% if current_action != 'new' %>
-        <%= link_to_function 'Cancel', "$('action').toggle()" %>
+        <%= link_to_function I18n.t(:cancel), "$('action').toggle()" %>
       <% else %>
-        <%= link_to 'Cancel', avatars_path %>
+        <%= link_to I18n.t(:cancel), avatars_path %>
       <% end %>
     </p>
   </div>

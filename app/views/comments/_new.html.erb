@@ -6,16 +6,16 @@
       <%= f.hidden_field :resource_type, :value => @article.class %>
       <%= f.text_area :body, :value => @body, :rows => '5', :class => 'text-field' %>
       <p>
-        <%= submit_tag "Post Comment", :disable_with => "Post Comment" %>&nbsp; 
-        <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1'] %> 
+        <%= submit_tag I18n.t(:post_comment), :disable_with => I18n.t(:post_comment) %>&nbsp; 
+        <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=530,width=820,status=1'] %> 
       </p>
     </div>
   <% end %>
 <% else %>
   <div class="nav nav-spacer">
     <p class="nav-left">
-      <%= link_to 'Login', login_path %> or 
-      <%= link_to 'Register', register_path %> to post a comment
+      <%= link_to I18n.t(:login), login_path %> <%=t :or %> 
+      <%= link_to I18n.t(:register), register_path %> <%=t :to_post_a_comment %>
     </p>
   </div>
   <div class="clear"> </div>
