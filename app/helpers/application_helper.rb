@@ -129,7 +129,4 @@ module ApplicationHelper
     I18n.l(time, :format => ( short ? :ed_timestamp_short : :ed_timestamp ) ) 
   end
   
-  
-  
-  
 end

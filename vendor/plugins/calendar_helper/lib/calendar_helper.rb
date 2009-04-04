@@ -91,7 +91,9 @@ module CalendarHelper
     first_weekday = first_day_of_week(options[:first_day_of_week])
     last_weekday = last_day_of_week(options[:first_day_of_week])
     
-    day_names = Date::DAYNAMES.dup
+    #day_names = Date::DAYNAMES.dup
+    day_names = I18n.translate('date.abbr_day_names')
+    
     first_weekday.times do
       day_names.push(day_names.shift)
     end
