@@ -35,7 +35,7 @@
           <td class="tci"><%= icon_for(topic) %></td>
           <td class="tcl">
             <span class="topic-status"><%= 'Sticky' if topic.sticky? %> <%= 'Locked' if topic.locked? %></span>
-            <%= link_to h(topic), topic %> by <%=h topic.user %>
+            <%= link_to h(topic.to_s), topic %> by <%=h topic.user %>
           </td>
           <% if %w(categories topics).include?(current_controller) %>
             <td class="tcl">
