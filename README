@@ -5,23 +5,45 @@ event calendar, group chat, file sharing, random headers, avatars, themes, and p
 
 http://almosteffortless.com/eldorado
 
+
 == Installation
 
-Requirements: The ability to run a Ruby on Rails application (http://rubyonrails.org/)
+# El Dorado requires Ruby on Rails (http://guides.rubyonrails.org/getting_started.html)
 
-1) Copy config/database.example.yml to config/database.yml
-2) Create your database ("rake db:create")
-3) Load the database schema ("rake db:schema:load")
-4) Start your web server ("script/server")
+git clone git://github.com/trevorturk/el-dorado.git eldorado
+cd eldorado
+cp config/database.example.yml config/database.yml
+cp config/config.example.yml config/config.yml
+rake db:create
+rake db:schema:load
+script/server
+# http://localhost:3000/
+
+
+== Deployment on Heroku
+
+# Follow the local installation instructions above, then...
+
+sudo gem install heroku --no-ri --no-rdoc
+heroku create
+# Set the variables for your production environment in config/config.yml
+rake heroku:config
+git push heroku master
+heroku rake db:schema:load
+heroku open
+# Note that uploads and email don't work (yet...)
+# Read more about Heroku here: http://heroku.com/
+
 
 == Upgrading
 
-Note: Back up your database and files before performing an upgrade.
+# Back up your database and files before performing an upgrade
 
 1) Consider using Capistrano and skipping steps 2 and 3 (see config/deploy.example.rb)
 2) Download the latest El Dorado release from http://almosteffortless.com/eldorado
 3) Replace the files in your installation except for avatars/files/headers/themes in public/
 4) Migrate to the latest database schema ("rake db:migrate" or "cap deploy:migrations")
+
 
 == Thanks
 
