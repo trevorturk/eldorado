@@ -1,0 +1,15 @@
+development:
+  session_key: eldorado_development
+  session_secret: ESl6X3oKM1i1RRrD2QLwUUzz9jr1zxNO
+  domain: http://example.com
+
+test:
+  session_key: eldorado_test
+  session_secret: vrwPpJTvwnMVLP1wTSgqigSl7PMI7QcE
+  domain: http://example.com
+  
+production:
+  session_key: # any string identifying your app
+  session_secret: # at least 32 char random string and should be unique to your installation and kept secret
+  domain: # http://example.com
+  mailer: # noreply@example.com

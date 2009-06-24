@@ -1,10 +1,12 @@
 .DS_Store
-/log/*.log
 /tmp/**/*
+/log/*
+*.log
 /tmp/restart.txt
+/config/amazon_s3.yml
+/config/config.yml
 /config/database.yml
 /config/smtp.yml
-/config/amazon_s3.yml
 /config/deploy.rb
 /db/*.sqlite3
 /public/avatars/*

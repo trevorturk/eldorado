@@ -9,16 +9,12 @@ Rails::Initializer.run do |config|
   config.i18n.default_locale = :en
   config.active_record.partial_updates = true
   config.frameworks -= [ :active_resource ]
-  # config.gem 'fiveruns_tuneup'
   
-  # The session_key and secret (for verifying session data integrity) are set in config/database.yml
-  CONFIG = YAML.load_file('config/database.yml')[RAILS_ENV]
+  CONFIG = (YAML.load_file('config/config.yml')[RAILS_ENV] rescue {}).merge(ENV) # support yaml and heroku config
+  
   config.action_controller.session = {
     :key => CONFIG['session_key'],
-    :secret => CONFIG['session_secret'] || CONFIG['secret'] # TODO deprecate 'secret'
+    :secret => CONFIG['session_secret']
   }
-  
-  MAILER = CONFIG['mailer'] || 'noreply@example.com' # TODO require in config
-  DOMAIN = CONFIG['domain'] || 'example.com' # TODO require in config
-  
+    
 end

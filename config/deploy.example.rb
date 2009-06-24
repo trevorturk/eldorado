@@ -13,7 +13,7 @@ role :web, "000.00.00.000"
 role :db,  "000.00.00.000", :primary => true
 
 before  'deploy:update_code', 'deploy:web:disable'
-after   'deploy:update_code', 'deploy:config_database'
+after   'deploy:update_code', 'deploy:upload_config_files'
 after   'deploy:update_code', 'deploy:create_symlinks'
 after   'deploy:restart', 'deploy:cleanup'
 after   'deploy:restart', 'deploy:web:enable'
@@ -22,10 +22,12 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
-  task :config_database do
+  task :upload_config_files do
+    put(File.read('config/config.yml'), "#{release_path}/config/config.yml", :mode => 0444)
     put(File.read('config/database.yml'), "#{release_path}/config/database.yml", :mode => 0444)
-    # For security consider uploading a production-only database.yml to your server and using this instead:
-    # run "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    # For security consider uploading a production-only configs to your server and using this instead:
+    # run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
+    # run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
   task :create_symlinks do
     require 'yaml'
