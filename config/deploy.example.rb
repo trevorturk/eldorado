@@ -1,6 +1,6 @@
 load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 
-set :repository, 'git://github.com/trevorturk/el-dorado.git'
+set :repository, 'git://github.com/trevorturk/eldorado.git'
 set :scm, :git
 set :deploy_via, :copy
 set :git_shallow_clone, 1

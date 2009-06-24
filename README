@@ -16,7 +16,7 @@ Git:   http://book.git-scm.com/2_installing_git.html
 
 # If you don't have Git, you can download El Dorado here: http://almosteffortless.com/eldorado
 
-git clone git://github.com/trevorturk/el-dorado.git eldorado
+git clone git://github.com/trevorturk/eldorado.git eldorado
 cd eldorado
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
