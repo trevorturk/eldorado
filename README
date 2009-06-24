@@ -6,9 +6,15 @@ event calendar, group chat, file sharing, random headers, avatars, themes, and p
 http://almosteffortless.com/eldorado
 
 
+== Requirements 
+
+Rails: http://guides.rubyonrails.org/getting_started.html
+Git:   http://book.git-scm.com/2_installing_git.html
+
+
 == Installation
 
-# El Dorado requires Ruby on Rails (http://guides.rubyonrails.org/getting_started.html)
+# If you don't have Git, you can download El Dorado here: http://almosteffortless.com/eldorado
 
 git clone git://github.com/trevorturk/el-dorado.git eldorado
 cd eldorado

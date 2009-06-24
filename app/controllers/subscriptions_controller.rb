@@ -13,7 +13,8 @@ class SubscriptionsController < ApplicationController
   end
   
   def destroy
-    current_user.subscriptions.destroy params[:id]
+    subscription = current_user.subscriptions.find(params[:id])
+    subscription.destroy
     redirect_to subscriptions_path
   end
   
