@@ -11,6 +11,7 @@ Rails::Initializer.run do |config|
   config.frameworks -= [ :active_resource ]
   
   config.gem 'mislav-will_paginate', :version => '2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
+  config.gem 'thoughtbot-paperclip', :version => '2.2.9.2', :lib => 'paperclip', :source => 'http://gems.github.com'
   
   CONFIG = (YAML.load_file('config/config.yml')[RAILS_ENV] rescue {}).merge(ENV) # support yaml and heroku config
   
@@ -20,3 +21,4 @@ Rails::Initializer.run do |config|
   }
     
 end
+  
