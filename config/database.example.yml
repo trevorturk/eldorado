@@ -1,8 +1,16 @@
 development:
+# sqlite3
   adapter: sqlite3
   database: db/development.sqlite3
   timeout: 5000
+# mysql
   # adapter: mysql
+  # database: eldorado_development
+  # username: 
+  # password: 
+  # host: localhost
+# postgresql
+  # adapter: postgresql
   # database: eldorado_development
   # username: 
   # password: 
