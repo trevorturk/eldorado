@@ -1,3 +1,4 @@
+require 'will_paginate/core_ext'
 require 'action_controller'
 require 'action_controller/test_process'
 
@@ -17,6 +18,13 @@ end
 ActionController::Base.perform_caching = false
 
 class WillPaginate::ViewTestCase < Test::Unit::TestCase
+  if defined?(ActionController::TestCase::Assertions)
+    include ActionController::TestCase::Assertions
+  end
+  if defined?(ActiveSupport::Testing::Deprecation)
+    include ActiveSupport::Testing::Deprecation
+  end
+
   def setup
     super
     @controller  = DummyController.new

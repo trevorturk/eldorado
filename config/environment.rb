@@ -10,6 +10,8 @@ Rails::Initializer.run do |config|
   config.active_record.partial_updates = true
   config.frameworks -= [ :active_resource ]
   
+  config.gem 'mislav-will_paginate', :version => '2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
+  
   CONFIG = (YAML.load_file('config/config.yml')[RAILS_ENV] rescue {}).merge(ENV) # support yaml and heroku config
   
   config.action_controller.session = {

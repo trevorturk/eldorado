@@ -192,13 +192,15 @@ class ViewTest < WillPaginate::ViewTestCase
       @html_result
   end
 
-  def test_page_entries_info_with_longer_class_name
-    @template = '<%= page_entries_info collection %>'
-    collection = ('a'..'z').to_a.paginate
-    collection.first.stubs(:class).returns(mock('class', :name => 'ProjectType'))
+  uses_mocha 'class name' do
+    def test_page_entries_info_with_longer_class_name
+      @template = '<%= page_entries_info collection %>'
+      collection = ('a'..'z').to_a.paginate
+      collection.first.stubs(:class).returns(mock('class', :name => 'ProjectType'))
     
-    paginate collection
-    assert @html_result.index('project types'), "expected <#{@html_result.inspect}> to mention 'project types'"
+      paginate collection
+      assert @html_result.index('project types'), "expected <#{@html_result.inspect}> to mention 'project types'"
+    end
   end
 
   def test_page_entries_info_with_single_page_collection
@@ -274,6 +276,14 @@ class ViewTest < WillPaginate::ViewTestCase
         validate_page_numbers [1,1,3,3], elements, :developers_page
       end
     end    
+  end
+
+  def test_will_paginate_with_atmark_url
+    @request.symbolized_path_parameters[:action] = "@tag"
+    renderer = WillPaginate::LinkRenderer.new
+    
+    paginate({ :page => 1 }, :renderer=>renderer)
+    assert_links_match %r[/foo/@tag\?page=\d]
   end
   
   def test_complex_custom_page_param
