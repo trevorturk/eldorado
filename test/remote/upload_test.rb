@@ -3,8 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class PhotoTest < ActiveSupport::TestCase
 
   # ===
-  # NOTE: These are real remote requests - see test/unit/ for stubbed out ones.
-  # Run these tests with "rake test:remote" - they won't be run with autotest. 
+  # NOTE these are real remote requests that can be run with "rake test:remote" - they won't be run with autotest
   # ===
     
   test "should create an upload via (real) url" do
