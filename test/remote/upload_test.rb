@@ -20,5 +20,5 @@ class PhotoTest < ActiveSupport::TestCase
       assert u.errors.on(:attachment_file_name)
     end
   end
-    
+  
 end

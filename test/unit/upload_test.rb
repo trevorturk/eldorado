@@ -44,8 +44,8 @@ class UploadTest < ActiveSupport::TestCase
   end
   
   test "should create an upload via (stubbed out) url" do
-    Upload.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/files/rails.png"))
-    u = Upload.create!(:attachment_url => 'rails.png') { |u| u.user = User.make }
+    Upload.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/rails.png"))
+    u = Upload.create!(:attachment => nil, :attachment_url => 'rails.png') { |u| u.user = User.make }
     assert_equal 'rails.png', u.attachment_remote_url # check for correct original attachment_url value
     assert_equal 'image/png', u.attachment_content_type # check for correct type
     assert_equal 1787, u.attachment_file_size # check for correct file size
@@ -54,7 +54,7 @@ class UploadTest < ActiveSupport::TestCase
   test "should require upload provided via (stubbed out) url to be valid" do
     Upload.any_instance.expects(:do_download_remote_file).returns(nil)
     assert_no_difference 'Upload.count' do
-      u = Upload.create(:attachment_url => 'invalid') { |u| u.user = User.make }
+      u = Upload.create(:attachment => nil, :attachment_url => 'invalid') { |u| u.user = User.make }
       assert u.errors.on(:attachment_file_name)
     end
   end

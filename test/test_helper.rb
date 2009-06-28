@@ -10,6 +10,13 @@ class ActiveSupport::TestCase
 
   setup { Sham.reset }
   
+  def login!(options = {})
+    user = User.make(options)
+    @request.session[:user_id] = user.id
+    user
+  end
+  
+  # TODO remove when all moved over to machinist
   def login_as(user)
     @request.session[:user_id] = user ? users(user).id : nil
     @request.session[:online_at] = Time.now.utc

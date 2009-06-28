@@ -2,82 +2,120 @@ require 'test_helper'
 
 class UploadsControllerTest < ActionController::TestCase
 
-  def setup
-    @controller = UploadsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-
-  def test_should_get_index
+  test "index if not logged in" do
     get :index
     assert_response :success
-    assert assigns(:uploads)
   end
   
-  def test_should_get_index_if_logged_in
+  test "index if logged in" do
     login_as :trevor
     get :index
     assert_response :success
-    assert assigns(:uploads)
   end
 
-  # def test_should_get_new
-  # end
-  
-  # def test_should_create_upload
-  # end
-
-  def test_should_not_bomb_on_empty_create_upload
-    login_as :trevor
-    post :create
+  test "should get new if logged in" do
+    login!
+    get :new
     assert_response :success
   end
-
-  def test_should_show_upload
-    get :show, :id => 1
-    assert_response :redirect
-  end
-
-  def test_should_get_edit
-    get :edit, :id => 1
-    assert_response :redirect
+  
+  test "new requires login" do
+    login!
+    get :new
+    assert_response :success
   end
   
-  def test_should_update_upload
-    put :update, :id => 1, :upload => { }
-    assert_response :redirect
-  end
-  
-  def test_should_destroy_upload
-    login_as :trevor
-    old_count = Upload.count
-    delete :destroy, :id => 1
-    assert_equal old_count-1, Upload.count
+  test "should create upload if logged in" do
+    login!
+    assert_difference 'Upload.count' do
+      post :create, :upload => { :attachment => fixture_file_upload('files/rails.png', 'image/png') }
+    end
     assert_redirected_to files_path
   end
   
-  def test_should_not_destroy_upload_if_not_authorized
-    login_as :Timothy
-    old_count = Upload.count
-    delete :destroy, :id => 1
-    assert_equal old_count, Upload.count
+  test "should not create upload if not logged in" do
+    assert_no_difference 'Upload.count' do
+      post :create, :upload => { :attachment => fixture_file_upload("files/rails.png", 'image/png') }
+    end
+    assert_redirected_to login_path
+  end
+  
+  test "should create upload via (stubbed out) url" do
+    Upload.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/rails.png"))
+    login!
+    assert_difference 'Upload.count' do
+      post :create, :upload => { :attachment_url => 'rails.png' }
+    end
+    assert_redirected_to files_path
+  end
+  
+  test "should not bomb on upload via bogus (stubbed out) url" do
+    Upload.any_instance.expects(:do_download_remote_file).returns(nil)
+    login!
+    assert_no_difference 'Upload.count' do
+      post :create, :upload => { :attachment_url => 'invalid' }
+    end
+    assert_response :success
+  end
+  
+  test "show redirects to index if logged in" do
+    login!
+    get :show, :id => Upload.make.id
     assert_redirected_to root_path
   end
   
-  # def test_should_accept_upload_via_url
-  #   login_as :trevor
-  #   old_count = Upload.count
-  #   post :create, :upload_url => '/images/rails.png'
-  #   assert_equal old_count + 1, Upload.count
-  #   assert_redirected_to files_path
-  # end
-  
-  def test_should_not_bomb_on_bogus_url_upload
-    login_as :trevor
-    old_count = Upload.count
-    assert_nothing_raised do 
-      post :create, :upload => { :url => 'asdfsdfds' }
-    end
-    assert_equal old_count, Upload.count
+  test "show redirects to index if not logged in" do
+    get :show, :id => Upload.make.id
+    assert_redirected_to root_path
   end
+  
+  test "edit redirects to index if logged in" do
+    login!
+    get :edit, :id => Upload.make.id
+    assert_redirected_to root_path
+  end
+  
+  test "edit redirects to index if not logged in" do
+    get :edit, :id => Upload.make.id
+    assert_redirected_to root_path
+  end
+  
+  test "update redirects to index if logged in" do
+    login!
+    put :update, :id => Upload.make.id
+    assert_redirected_to root_path
+  end
+  
+  test "update redirects to index if not logged in" do
+    put :update, :id => Upload.make.id
+    assert_redirected_to root_path
+  end
+  
+  test "should destroy upload if creator" do
+    user = login!
+    upload = Upload.make(:user => user)
+    assert_difference 'Upload.count', -1 do
+      delete :destroy, :id => upload.id
+    end
+    assert_redirected_to files_path
+  end
+  
+  test "should destroy upload if admin" do
+    login!(:admin => true)
+    upload = Upload.make
+    assert_difference 'Upload.count', -1 do
+      delete :destroy, :id => upload.id
+    end
+    assert_redirected_to files_path
+  end
+  
+  test "should not destroy upload if not creator or admin" do  
+    login!
+    upload = Upload.make
+    assert_no_difference 'Upload.count' do
+      delete :destroy, :id => upload.id
+    end
+    assert_redirected_to root_path
+  end
+    
 end

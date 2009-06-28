@@ -15,4 +15,6 @@ User.blueprint do
   login { Sham.login }
   email { Sham.email }
   password 'test'
+  time_zone 'UTC'
+  online_at { Time.now } # TODO remove when we're doing something better than do_login
 end

@@ -3,6 +3,11 @@ require File.dirname(__FILE__) + '/../test_helper'
 class UserTest < ActiveSupport::TestCase
   fixtures :all
   
+  test "make creates valid record" do
+    u = User.make
+    assert u.valid?
+  end
+  
   def test_require_login_email_and_password
     u = User.create
     assert ! u.valid?
