@@ -1,14 +1,7 @@
 require 'test_helper'
-require 'open-uri'
 
 class UploadTest < ActiveSupport::TestCase
-  
-  setup do
-    Upload.any_instance.stubs(:save_attached_files).returns(true)
-    Upload.any_instance.stubs(:delete_attached_files).returns(true)
-    Paperclip::Attachment.any_instance.stubs(:post_process).returns(true)
-  end
-  
+    
   test "make makes a valid record" do
     u = Upload.make
     assert u.valid?
@@ -52,11 +45,10 @@ class UploadTest < ActiveSupport::TestCase
   
   test "should create an upload via (stubbed out) url" do
     Upload.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/files/rails.png"))
-    u = Upload.create(:attachment_url => 'rails.png') { |u| u.user = User.make }
-    assert u.id
-    assert u.attachment_remote_url == 'rails.png' # check for correct original attachment_url value
-    assert u.attachment_content_type == 'image/png' # check for correct type
-    assert u.attachment_file_size == 1787 # check for correct file size
+    u = Upload.create!(:attachment_url => 'rails.png') { |u| u.user = User.make }
+    assert_equal 'rails.png', u.attachment_remote_url # check for correct original attachment_url value
+    assert_equal 'image/png', u.attachment_content_type # check for correct type
+    assert_equal 1787, u.attachment_file_size # check for correct file size
   end
   
   test "should require upload provided via (stubbed out) url to be valid" do
