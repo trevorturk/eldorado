@@ -3,9 +3,9 @@
 <% form_for @upload, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-uploads-new">
     <span class="top">New File</span>
-    <p id="file_upload"><%= f.file_field :uploaded_data %></p>
+    <p id="file_upload"><%= f.file_field :attachment %></p>
     <p id="url_upload" style="display:none;">
-      <%= f.text_field :url, :class => 'text-field' %>&nbsp; 
+      <%= f.text_field :attachment_url, :class => 'text-field' %>&nbsp; 
       <%= link_to_function '(x)', "$('file_upload').toggle();$('upload_url').clear();$('url_upload').toggle()" %>
     </p>
     <p>
@@ -13,7 +13,7 @@
       <% if current_action != 'new' %>
         <%= link_to_function 'Cancel', "$('action').toggle()" %>
       <% else %>
-        <%= link_to_function 'Upload via URL', "$('file_upload').toggle();$('url_upload').toggle();$('upload_url').clear();$('upload_url').focus()" %> &nbsp; 
+        <%= link_to_function 'Upload via URL', "$('file_upload').toggle();$('url_upload').toggle();$('upload_attachment_url').clear();$('upload_attachment_url').focus()" %> &nbsp; 
         <%= link_to 'Cancel', files_path %>
       <% end %>
     </p>

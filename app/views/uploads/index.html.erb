@@ -15,10 +15,10 @@
         <tr>
           <td class="tci"><%= icon_for(upload) %></td>
           <td class="tcl">
-            <%= link_to truncate(h(upload), :length => 25), upload.public_filename %>
+            <%= link_to truncate(h(upload), :length => 25), upload.attachment.url %>
             
             <% unless current_controller == 'home' %>
-              <%= link_to_function '(&raquo;)', "$('mp3-#{upload.public_filename}').toggle()" if upload.is_mp3? %>
+              <%= link_to_function '(&raquo;)', "$('mp3-#{upload.attachment.url}').toggle()" if upload.is_mp3? %>
             <% end %>
             
             by <%=h upload.user %>
@@ -29,16 +29,16 @@
             
             <% unless current_controller == 'home' %>
               <% if upload.is_mp3? %>
-                <div id="<%= "mp3-#{upload.public_filename}" %>" style="display:none;">
-                  <%= bb("[mp3]#{root_url.chop + upload.public_filename}[/mp3]") %>
+                <div id="<%= "mp3-#{upload.attachment.url}" %>" style="display:none;">
+                  <%= bb("[mp3]#{root_url.chop + upload.attachment.url}[/mp3]") %>
                 </div>
               <% end %>
             <% end %>
             
           </td>
           <% unless current_controller == 'home' %>
-            <td class="tcl"><%= upload.content_type %></td>
-            <td class="tcm"><%= number_to_human_size(upload.size) %></td>
+            <td class="tcl"><%= upload.attachment_content_type %></td>
+            <td class="tcm"><%= number_to_human_size(upload.attachment_file_size) %></td>
             <td class="tcr"><%= time_ago_or_time_stamp(upload.created_at) %></td>
           <% end %>
         </tr>

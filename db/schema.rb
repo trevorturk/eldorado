@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081015052225) do
+ActiveRecord::Schema.define(:version => 20090627234146) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -32,6 +32,10 @@ ActiveRecord::Schema.define(:version => 20081015052225) do
     t.integer  "current_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.string   "attachment_remote_url"
   end
 
   create_table "categories", :force => true do |t|
@@ -46,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20081015052225) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "config", :force => true do |t|
+    t.integer "associated_id"
+    t.string  "associated_type"
+    t.string  "namespace"
+    t.string  "key",             :limit => 40, :null => false
+    t.string  "value"
   end
 
   create_table "events", :force => true do |t|
@@ -81,7 +93,11 @@ ActiveRecord::Schema.define(:version => 20081015052225) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes",        :default => 0
+    t.integer  "votes",                   :default => 0
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.string   "attachment_remote_url"
   end
 
   create_table "logged_exceptions", :force => true do |t|
@@ -112,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20081015052225) do
     t.integer  "updated_by"
   end
 
-  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
   add_index "posts", ["topic_id", "created_at"], :name => "index_posts_on_topic_id_and_created_at"
+  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id"
 
   create_table "ranks", :force => true do |t|
     t.string  "title"
@@ -149,6 +165,10 @@ ActiveRecord::Schema.define(:version => 20081015052225) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.string   "attachment_remote_url"
   end
 
   create_table "topics", :force => true do |t|
@@ -179,6 +199,10 @@ ActiveRecord::Schema.define(:version => 20081015052225) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.string   "attachment_remote_url"
   end
 
   create_table "users", :force => true do |t|

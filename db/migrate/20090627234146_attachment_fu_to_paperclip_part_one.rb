@@ -1,0 +1,33 @@
+class AttachmentFuToPaperclipPartOne < ActiveRecord::Migration
+  def self.up
+    [:avatars, :uploads, :headers, :themes].each do |table|
+      add_column table, :attachment_file_name, :string
+      add_column table, :attachment_content_type, :string
+      add_column table, :attachment_file_size, :integer
+      add_column table, :attachment_remote_url, :string
+    end
+    Migrator.attachment_fu_to_paperclip
+  end
+
+  def self.down
+    [:avatars, :uploads, :headers, :themes].each do |table|
+      remove_column table, :attachment_file_name
+      remove_column table, :attachment_content_type
+      remove_column table, :attachment_file_size
+      remove_column table, :attachment_remote_url
+    end
+  end
+end
+
+# create_table "uploads", :force => true do |t|
+#   t.integer  "parent_id"
+#   t.string   "content_type"
+#   t.string   "filename"
+#   t.string   "thumbnail"
+#   t.integer  "size"
+#   t.integer  "width"
+#   t.integer  "height"
+#   t.integer  "user_id"
+#   t.datetime "created_at"
+#   t.datetime "updated_at"
+# end
