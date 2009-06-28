@@ -1,11 +1,14 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 require 'test_help'
 
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
   fixtures :all
+
+  setup { Sham.reset }
   
   def login_as(user)
     @request.session[:user_id] = user ? users(user).id : nil
