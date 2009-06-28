@@ -3,7 +3,7 @@ class Setting < ActiveRecord::Base
   attr_accessible :title, :tagline, :announcement, :footer, :theme, :favicon, :time_zone, :private, :login_message, :admin_only_create
     
   validates_presence_of :time_zone
-    
+      
   def theme
     read_attribute(:theme) # TODO not sure why this is needed, but tests are failing without it
   end
@@ -19,7 +19,7 @@ class Setting < ActiveRecord::Base
   end
   
   def self.current_theme
-    Theme.find_by_attachment_file_name(Setting.first.theme)
+    Theme.find_by_attachment_file_name(Setting.first.theme) # TODO refactor to use has_one :current_theme etc
   end
   
   def to_s

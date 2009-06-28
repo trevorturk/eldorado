@@ -8,7 +8,7 @@ class Theme < ActiveRecord::Base
   
   validates_attachment_size :attachment, :less_than => 50.kilobytes
   
-  validates_attachment_content_type :attachment, :content_type => ['text/css']
+  validates_attachment_content_type :attachment, :content_type => /css/
   
   after_destroy :deselect
   

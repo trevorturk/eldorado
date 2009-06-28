@@ -47,6 +47,14 @@ class ThemesControllerTest < ActionController::TestCase
     end
     assert_redirected_to root_path
   end
+  
+  test "should not create theme if not a css file" do
+    login!(:admin => true)
+    assert_no_difference 'Theme.count' do
+      post :create, :theme => { :attachment => fixture_file_upload('files/rails.png', 'image/png') }
+    end
+    assert_response :success # TODO figure out how to test with unit tests instead
+  end
       
   test "show/edit/update redirect to root if not logged in, if logged in, and if admin" do
     get :show, :id => Theme.make.id

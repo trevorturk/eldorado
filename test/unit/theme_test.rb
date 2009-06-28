@@ -22,15 +22,7 @@ class ThemeTest < ActiveSupport::TestCase
     r2 = Theme.create { |r| r.attachment_file_name = r1.attachment_file_name }
     assert r2.errors.on(:attachment_file_name)
   end
-  
-  test "validates that attachment is a css file" do
-    r = Theme.make
-    r.update_attribute(:attachment_content_type, 'not/css')
-    r.reload
-    assert !r.valid?
-    assert r.errors.on(:attachment_content_type)
-  end
-  
+    
   test "belongs_to user" do
     u = User.make
     r = Theme.make(:user => u)
