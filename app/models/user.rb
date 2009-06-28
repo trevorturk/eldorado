@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  validates_presence_of     :login, :email, :password_hash, :time_zone
+  validates_presence_of     :login, :email, :password_hash
   validates_uniqueness_of   :login, :case_sensitive => false
   validates_length_of       :login, :maximum => 25
   validates_format_of       :email, :on => :create, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
