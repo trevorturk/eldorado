@@ -1,18 +1,23 @@
 class Theme < ActiveRecord::Base
   
-  attr_protected :id, :parent_id, :content_type, :filename, :thumbnail, :size, :width, :height, :user_id, :created_at, :updated_at
+  include PaperclipSupport
   
   belongs_to :user
   
-  has_attachment :storage => :file_system, :partition => false, :max_size => 50.kilobytes
-  include AttachmentFuExtensions
-    
-  def to_s
-    filename
+  has_attached_file :attachment, :url => "/themes/:filename", :storage => :filesystem
+  
+  validates_attachment_size :attachment, :less_than => 50.kilobytes
+  
+  validates_attachment_content_type :attachment, :content_type => ['text/css']
+  
+  after_destroy :deselect
+  
+  def select
+    Setting.first.update_attribute(:theme, self.attachment_file_name)
   end
   
-  def to_param
-    "#{id}-#{to_s.parameterize}"
+  def deselect
+    Setting.first.update_attribute(:theme, nil)
   end
   
 end

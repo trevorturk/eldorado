@@ -58,62 +58,62 @@ class UploadsControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test "show redirects to index if logged in" do
+  test "show redirects to root if logged in" do
     login!
     get :show, :id => Upload.make.id
     assert_redirected_to root_path
   end
   
-  test "show redirects to index if not logged in" do
+  test "show redirects to root if not logged in" do
     get :show, :id => Upload.make.id
     assert_redirected_to root_path
   end
   
-  test "edit redirects to index if logged in" do
+  test "edit redirects to root if logged in" do
     login!
     get :edit, :id => Upload.make.id
     assert_redirected_to root_path
   end
   
-  test "edit redirects to index if not logged in" do
+  test "edit redirects to root if not logged in" do
     get :edit, :id => Upload.make.id
     assert_redirected_to root_path
   end
   
-  test "update redirects to index if logged in" do
+  test "update redirects to root if logged in" do
     login!
     put :update, :id => Upload.make.id
     assert_redirected_to root_path
   end
   
-  test "update redirects to index if not logged in" do
+  test "update redirects to root if not logged in" do
     put :update, :id => Upload.make.id
     assert_redirected_to root_path
   end
   
   test "should destroy upload if creator" do
-    user = login!
-    upload = Upload.make(:user => user)
+    u = login!
+    r = Upload.make(:user => u)
     assert_difference 'Upload.count', -1 do
-      delete :destroy, :id => upload.id
+      delete :destroy, :id => r.id
     end
     assert_redirected_to files_path
   end
   
   test "should destroy upload if admin" do
     login!(:admin => true)
-    upload = Upload.make
+    r = Upload.make
     assert_difference 'Upload.count', -1 do
-      delete :destroy, :id => upload.id
+      delete :destroy, :id => r.id
     end
     assert_redirected_to files_path
   end
   
   test "should not destroy upload if not creator or admin" do  
     login!
-    upload = Upload.make
+    r = Upload.make
     assert_no_difference 'Upload.count' do
-      delete :destroy, :id => upload.id
+      delete :destroy, :id => r.id
     end
     assert_redirected_to root_path
   end

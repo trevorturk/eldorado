@@ -3,8 +3,8 @@
 <% form_for @theme, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-themes-new">
     <span class="top">New Theme</span>
-    <p><%= f.file_field :uploaded_data %></p>
-    <p>Themes must be smaller than 50k.</p>
+    <p><%= f.file_field :attachment %></p>
+    <p>Themes must be CSS files smaller than 50k.</p>
     <p>
       <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp; 
       <% if current_action != 'new' %>

@@ -18,6 +18,10 @@ class Setting < ActiveRecord::Base
     ).save
   end
   
+  def self.current_theme
+    Theme.find_by_attachment_file_name(Setting.first.theme)
+  end
+  
   def to_s
     title
   end

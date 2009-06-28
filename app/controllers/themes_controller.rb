@@ -5,7 +5,7 @@ class ThemesController < ApplicationController
   
   def index
     @themes = Theme.paginate(:page => params[:page])
-    @current_theme = Theme.find_by_filename(@settings.theme) unless @settings.theme.blank?
+    @current_theme = Setting.current_theme
   end
 
   def new
@@ -22,19 +22,21 @@ class ThemesController < ApplicationController
 
   def destroy
     @theme = Theme.find(params[:id])
-    @settings.update_attributes(:theme => nil) if @settings.theme == @theme.filename
+    @settings.update_attributes(:theme => nil) if @settings.theme == @theme.attachment_file_name
     @theme.destroy
     redirect_to themes_path
   end
   
   def select
     @theme = Theme.find(params[:id])
-    @settings.update_attributes(:theme => @theme.filename)
+    @theme.select
     redirect_to themes_path
   end
   
   def deselect
-    @settings.update_attributes(:theme => nil)
+    @theme = Theme.find(params[:id])
+    @theme.deselect
     redirect_to themes_path
   end
+  
 end

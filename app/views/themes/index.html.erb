@@ -7,7 +7,7 @@
   <% else %>
     <% for theme in @themes %>
       <p>
-        <%= link_to h(theme), theme.public_filename %> by 
+        <%= link_to h(theme), theme.attachment.url %> by 
         <%= link_to h(theme.user), theme.user %> 
         <% if @current_theme == theme %>
           <%= link_to '(deselect)', deselect_theme_path(theme), :method => :post %>
