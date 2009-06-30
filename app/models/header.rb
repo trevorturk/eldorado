@@ -2,6 +2,8 @@ class Header < ActiveRecord::Base
     
   include PaperclipSupport
   
+  attr_accessible :description
+  
   belongs_to :user
   
   has_attached_file :attachment, :url => "/headers/:filename", :storage => :filesystem

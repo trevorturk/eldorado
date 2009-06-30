@@ -51,9 +51,5 @@ class HeaderTest < ActiveSupport::TestCase
     r.reload
     assert_equal 0, r.votes
   end
-    
-  test "validates that file is an image" do
-    flunk # might need to test in functional tests...?
-  end
-    
+      
 end
