@@ -271,24 +271,24 @@
     <%= link_to 'Users', users_path %> &raquo; <%=h @user %>
   </div>
   <div class="info-right">
-    <% if can_edit?(@user) && @user.avatar %>
-      <%= link_to 'Change Avatar', avatars_path %> 
-      <%= link_to '(x)', deselect_avatar_path, :method => :post %>
-    <% elsif can_edit?(@user) && @user.avatar.nil? %>
-      <%= link_to 'Get an Avatar', avatars_path %>
-    <% end %>
     <% if admin? %>
       <% if @user.banned? %>
-      &nbsp; <%= link_to 'Edit Ban', ban_user_path(@user) %>
+      <%= link_to 'Edit Ban', ban_user_path(@user) %>
       <%= link_to '(x)', remove_ban_user_path(@user), :method => :post %>
       <% else %>
-      &nbsp; <%= link_to 'Ban User', ban_user_path(@user) %>
+      <%= link_to 'Ban User', ban_user_path(@user) %>
       <% end %>
       <% if @user.admin? %>
         &nbsp; <%= link_to 'Revoke Admin', admin_user_path(@user), :confirm => 'Are you sure?', :method => :post %>
       <% else %>
         &nbsp; <%= link_to 'Make Admin', admin_user_path(@user), :confirm => 'Are you sure?', :method => :post %>
       <% end %>
+    <% end %>
+    <% if can_edit?(@user) && @user.avatar %>
+      &nbsp; <%= link_to 'Avatars', avatars_path %> 
+      <%= link_to '(x)', deselect_avatar_path(@user.current_avatar), :method => :post %>
+    <% elsif can_edit?(@user) && @user.avatar.nil? %>
+      &nbsp; <%= link_to 'Avatars', avatars_path %>
     <% end %>
     <% if can_edit?(@user) %>
       &nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
