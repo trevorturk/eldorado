@@ -29,17 +29,27 @@ class AvatarTest < ActiveSupport::TestCase
     assert r.user, u
   end
   
-  test "belongs_to current_avatar_user" do
-    flunk
-  end
-  
   test "validates presence of user_id" do
     r = Avatar.create { |r| r.user = nil }
     assert r.errors.on(:user_id)
   end
   
+  test "belongs_to current_avatar_user" do
+    u = User.make
+    r = Avatar.make
+    u.select_avatar(r)
+    r.reload
+    assert_equal u, r.current_avatar_user
+  end
+    
   test "should nullify current_avatar_user after destroy" do
-    flunk
+    u = User.make
+    r = Avatar.make
+    u.select_avatar(r)
+    assert_equal u, r.current_avatar_user
+    u.destroy
+    r.reload
+    assert_nil r.current_avatar_user
   end
   
 end

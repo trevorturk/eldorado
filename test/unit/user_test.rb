@@ -29,12 +29,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal true, authors.include?(users(:trevor))
   end
   
-  test "avatar.current_user_avatar, user.current_avatar, and destroying user frees up avatar" do
+  test "avatar.current_user_avatar; user.current_avatar; destroying user nullifies avatar.current_avatar_user" do
     u = User.make
     a = Avatar.make
     assert_nil a.current_avatar_user
     assert_nil u.current_avatar
-    a.update_attribute(:current_user_id, u.id)
+    u.select_avatar(a)
     a.reload
     u.reload
     assert_equal a, u.current_avatar
@@ -42,6 +42,39 @@ class UserTest < ActiveSupport::TestCase
     u.destroy
     a.reload
     assert_nil a.current_avatar_user
+  end
+  
+  test "user.select_avatar(avatar) selects given avatar, deselects old avatar if exists" do
+    u = User.make
+    old_avatar = Avatar.make
+    new_avatar = Avatar.make
+    u.select_avatar(old_avatar)
+    u.reload
+    old_avatar.reload
+    assert_equal u, old_avatar.current_avatar_user
+    assert_equal old_avatar, u.current_avatar
+    u.select_avatar(new_avatar)
+    u.reload
+    old_avatar.reload
+    new_avatar.reload
+    assert_equal u, new_avatar.current_avatar_user
+    assert_equal new_avatar, u.current_avatar
+    assert_nil old_avatar.current_avatar_user
+  end
+  
+  test "user.clear_avatar clears user's current avatar" do
+    u = User.make
+    a = Avatar.make
+    u.select_avatar(a)
+    u.reload
+    a.reload
+    assert_equal u, a.current_avatar_user
+    assert_equal a, u.current_avatar
+    u.clear_avatar
+    u.reload
+    a.reload
+    assert_nil a.current_avatar_user
+    assert_nil u.current_avatar
   end
   
   test "to_s returns login" do

@@ -28,20 +28,25 @@ class AvatarsController < ApplicationController
   
   def select
     @avatar = Avatar.find(params[:id])
-    redirect_to avatars_path and return false unless @avatar.current_user_id.blank?
-    @old_avatar = Avatar.find_by_current_user_id(current_user.id)
-    @old_avatar.update_attributes(:current_user_id => nil) if @old_avatar
-    @avatar.update_attributes(:current_user_id => current_user.id)
-    current_user.update_attributes(:avatar => @avatar.attachment.url)
-    redirect_to current_user
+    if @avatar.current_avatar_user
+      flash[:notice] = "This avatar is already in use"
+      redirect_to avatars_path 
+    else
+      current_user.select_avatar(@avatar)
+      flash[:notice] = "Avatar selected"
+      redirect_to avatars_path
+    end
   end
-  
+    
   def deselect
     @avatar = Avatar.find(params[:id])
-    redirect_to avatars_path and return false unless @avatar.current_user_id
-    @avatar = Avatar.find_by_current_user_id(current_user.id)
-    @avatar.update_attributes(:current_user_id => nil)
-    current_user.update_attributes(:avatar => nil)
-    redirect_to current_user
+    if @avatar.current_avatar_user == current_user
+      current_user.clear_avatar
+      flash[:notice] = "Avatar cleared"
+    else
+      flash[:notice] = "This avatar is already in use"
+    end
+    redirect_to avatars_path
   end
+  
 end

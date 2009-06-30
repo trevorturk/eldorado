@@ -44,36 +44,45 @@ class AvatarsControllerTest < ActionController::TestCase
     assert_response :success # TODO figure out how to test with unit tests instead
   end
   
-  # def test_should_clear_user_using_avatar_if_avatar_destroyed
-  #   login_as :Administrator
-  #   assert_equal avatars(:test).current_user_id, users(:trevor).id
-  #   delete :destroy, :id => avatars(:test)
-  #   users(:trevor).reload
-  #   assert_nil users(:trevor).avatar
-  # end
-  #   
-  # # def test_should_select_avatar
-  # #   login_as :Timothy
-  # #   post :select, :id => avatars(:calvin).id
-  # #   users(:Timothy).reload
-  # #   assert_equal users(:Timothy).avatar, avatars(:calvin).attachment.url
-  # #   avatars(:calvin).reload
-  # #   assert_equal users(:Timothy).id, avatars(:calvin).current_user_id
-  # # end
-  # 
-  # # def test_should_deselect_avatar
-  # #   login_as :Timothy
-  # #   post :select, :id => avatars(:calvin).id
-  # #   users(:Timothy).reload
-  # #   assert_equal users(:Timothy).avatar, avatars(:calvin).attachment.url
-  # #   post :deselect, :id => avatars(:calvin).id
-  # #   users(:Timothy).reload
-  # #   assert_nil users(:Timothy).avatar
-  # #   avatars(:calvin).reload
-  # #   assert_nil avatars(:calvin).current_user_id
-  # # end
-  # 
-  # # def test_should_not_deselect_avatar_if_not_current_avatar_user
-  # # end
+  test "should select avatar and deselect old avatar" do
+    flunk
+  end
   
+  test "should not select/deselect if not logged in" do
+    flunk
+  end
+  
+  test "should not select avatar if already selected by a different user" do
+    flunk
+  end
+    
+  # def test_should_select_avatar
+  #   login_as :Timothy
+  #   post :select, :id => avatars(:calvin).id
+  #   users(:Timothy).reload
+  #   assert_equal users(:Timothy).avatar, avatars(:calvin).attachment.url
+  #   avatars(:calvin).reload
+  #   assert_equal users(:Timothy).id, avatars(:calvin).current_user_id
+  # end
+  
+  test "should deselect avatar" do
+    flunk
+  end
+  
+  test "should not deselect avatar if selected by a different user" do
+    flunk
+  end
+  
+  # def test_should_deselect_avatar
+  #   login_as :Timothy
+  #   post :select, :id => avatars(:calvin).id
+  #   users(:Timothy).reload
+  #   assert_equal users(:Timothy).avatar, avatars(:calvin).attachment.url
+  #   post :deselect, :id => avatars(:calvin).id
+  #   users(:Timothy).reload
+  #   assert_nil users(:Timothy).avatar
+  #   avatars(:calvin).reload
+  #   assert_nil avatars(:calvin).current_user_id
+  # end
+    
 end

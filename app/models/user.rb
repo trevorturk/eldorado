@@ -62,6 +62,22 @@ class User < ActiveRecord::Base
     self.save
   end
   
+  def select_avatar(new_avatar)
+    if !new_avatar.current_avatar_user
+      self.clear_avatar
+      self.update_attribute(:avatar, new_avatar.attachment.url)
+      new_avatar.update_attribute(:current_user_id, self.id)
+    end
+  end
+    
+  def clear_avatar
+    current_avatar = Avatar.find_by_current_user_id(self.id)
+    if current_avatar
+      self.update_attribute(:avatar, nil)
+      current_avatar.update_attribute(:current_user_id, nil)
+    end
+  end
+  
   def password=(value)
     return if value.blank?
     write_attribute :password_hash, User.encrypt(value)
