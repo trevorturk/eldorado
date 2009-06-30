@@ -17,9 +17,8 @@ class HeadersControllerTest < ActionController::TestCase
   end
   
   test "should not get new if not logged in" do
-    login!
     get :new
-    assert_response :success
+    assert_redirected_to login_path
   end
   
   test "should create header if logged in" do
@@ -127,11 +126,11 @@ class HeadersControllerTest < ActionController::TestCase
     r.reload
     assert_equal 21, r.votes
   end
-
+  
   test "should not create header if not an image" do
     login!
     assert_no_difference 'Header.count' do
-      post :create, :theme => { :attachment => fixture_file_upload('files/header.jpg', 'image/jpg') }
+      post :create, :header => { :attachment => fixture_file_upload('files/test.css', 'text/css') }
     end
     assert_response :success # TODO figure out how to test with unit tests instead
   end

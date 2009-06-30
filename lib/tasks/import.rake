@@ -272,7 +272,7 @@ namespace :import do
       @item.created_at = File.mtime(item)
       @item.updated_at = File.mtime(item)
       @item.save!
-      User.update_all ['avatar = ?', @item.public_filename], ['id = ?', @item.user_id]
+      User.update_all ['avatar = ?', @item.attachment.url], ['id = ?', @item.user_id]
       puts "Importing avatar: #{@item.id}"
     end
     # remove guest user's avatar

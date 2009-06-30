@@ -32,7 +32,7 @@ class AvatarsController < ApplicationController
     @old_avatar = Avatar.find_by_current_user_id(current_user.id)
     @old_avatar.update_attributes(:current_user_id => nil) if @old_avatar
     @avatar.update_attributes(:current_user_id => current_user.id)
-    current_user.update_attributes(:avatar => @avatar.public_filename)
+    current_user.update_attributes(:avatar => @avatar.attachment.url)
     redirect_to current_user
   end
   

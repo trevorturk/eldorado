@@ -296,6 +296,7 @@ class UsersControllerTest < ActionController::TestCase
   end
   
   def test_that_deleting_user_cleans_up_in_use_avatar
+    flunk
     # log in as admin, delete guest account using the "test" avatar, check that test avatar has no current_user_id
     login_as :Administrator
     old_count = User.count

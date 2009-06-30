@@ -9,7 +9,7 @@ class Header < ActiveRecord::Base
   has_attached_file :attachment, :url => "/headers/:filename", :storage => :filesystem
   
   validates_attachment_size :attachment, :less_than => 500.kilobytes
-  # validates_attachment_content_type :attachment, :content_type => /image/
+  validates_attachment_content_type :attachment, :content_type => /image/
   
   def self.random
     ids = connection.select_all("SELECT id FROM headers where votes >= 0")

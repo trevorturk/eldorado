@@ -1,7 +1,7 @@
 <div class="avatar-list">
   <% for avatar in @avatars %>
     <div class="avatar">
-      <%= image_tag(avatar.public_filename) %>
+      <%= image_tag(avatar.attachment.url) %>
       <br />by <%= link_to h(avatar.user), avatar.user %>
       <% if can_edit?(avatar) %>
         <%= link_to '(x)', avatar_path(avatar), :confirm => 'Are you sure?', :method => :delete %>
