@@ -3,7 +3,7 @@
 <% form_for @header, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-headers-new">
     <span class="top">New Header</span>
-    <p><%= f.file_field :uploaded_data %></p>
+    <p><%= f.file_field :attachment %></p>
     <p>Headers should be sized 760x200px.</p>
     <p class="label"><label for="header_description">Description (optional)</label></p>
     <p><%= f.text_area :description, :rows => '4', :class => 'text-field' %></p>

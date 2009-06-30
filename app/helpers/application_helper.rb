@@ -15,7 +15,7 @@ module ApplicationHelper
       @header = Header.random
     end
     if @header
-      return '<style type="text/css">.header { background: url("' + @header.public_filename + '"); }</style>'
+      return '<style type="text/css">.header { background: url("' + @header.attachment.url + '"); }</style>'
     else
       return '<style type="text/css">.header { background: url("/images/eldorado.jpg"); }</style>'
     end

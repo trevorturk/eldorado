@@ -1,11 +1,13 @@
 class Header < ActiveRecord::Base
-  
-  attr_protected :id, :parent_id, :content_type, :filename, :thumbnail, :size, :width, :height, :user_id, :created_at, :updated_at
+    
+  include PaperclipSupport
   
   belongs_to :user
   
-  has_attachment :storage => :file_system, :partition => false, :content_type => :image, :max_size => 500.kilobytes
-  include AttachmentFuExtensions
+  has_attached_file :attachment, :url => "/headers/:filename", :storage => :filesystem
+  
+  validates_attachment_size :attachment, :less_than => 500.kilobytes
+  # validates_attachment_content_type :attachment, :content_type => /image/
   
   def self.random
     ids = connection.select_all("SELECT id FROM headers where votes >= 0")
@@ -14,20 +16,12 @@ class Header < ActiveRecord::Base
     
   def vote_up
     self.votes = self.votes + 1
-    self.save!
+    self.save(false)
   end
 
   def vote_down
     self.votes = self.votes - 1
-    self.save!
-  end
-  
-  def to_s
-    filename
-  end
-  
-  def to_param
-    "#{id}-#{to_s.parameterize}"
+    self.save(false)
   end
   
 end

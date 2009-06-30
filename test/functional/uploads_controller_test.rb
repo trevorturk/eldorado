@@ -2,27 +2,23 @@ require 'test_helper'
 
 class UploadsControllerTest < ActionController::TestCase
 
-  test "index if not logged in" do
+  test "should get index (if not logged in or not)" do
+    get :index
+    assert_response :success
+    login!
     get :index
     assert_response :success
   end
   
-  test "index if logged in" do
-    login_as :trevor
-    get :index
-    assert_response :success
-  end
-
   test "should get new if logged in" do
     login!
     get :new
     assert_response :success
   end
   
-  test "new requires login" do
-    login!
+  test "should not get new if not logged in" do
     get :new
-    assert_response :success
+    assert_redirected_to login_path
   end
   
   test "should create upload if logged in" do
