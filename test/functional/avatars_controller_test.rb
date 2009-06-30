@@ -44,45 +44,68 @@ class AvatarsControllerTest < ActionController::TestCase
     assert_response :success # TODO figure out how to test with unit tests instead
   end
   
-  test "should select avatar and deselect old avatar" do
-    flunk
-  end
-  
   test "should not select/deselect if not logged in" do
-    flunk
+    post :select, :id => Avatar.make.id
+    assert_redirected_to login_path
+    post :deselect, :id => Avatar.make.id
+    assert_redirected_to login_path
   end
   
-  test "should not select avatar if already selected by a different user" do
-    flunk
+  test "should select avatar" do
+    u = login!
+    a = Avatar.make
+    post :select, :id => a.id
+    u.reload
+    a.reload
+    assert_equal u, a.current_avatar_user
+    assert_equal a, u.current_avatar
+    assert_redirected_to avatars_path
+    assert_equal "Avatar selected", flash[:notice]
+  end
+      
+  test "should not select avatar if already in use" do
+    new_user = login!
+    old_user = User.make
+    a = Avatar.make
+    old_user.select_avatar(a)
+    post :select, :id => a.id
+    new_user.reload
+    old_user.reload
+    a.reload
+    assert_nil new_user.current_avatar
+    assert_equal old_user, a.current_avatar_user
+    assert_equal a, old_user.current_avatar
+    assert_redirected_to avatars_path
+    assert_equal "This avatar is already in use", flash[:notice]
   end
     
-  # def test_should_select_avatar
-  #   login_as :Timothy
-  #   post :select, :id => avatars(:calvin).id
-  #   users(:Timothy).reload
-  #   assert_equal users(:Timothy).avatar, avatars(:calvin).attachment.url
-  #   avatars(:calvin).reload
-  #   assert_equal users(:Timothy).id, avatars(:calvin).current_user_id
-  # end
-  
-  test "should deselect avatar" do
-    flunk
+  test "should clear avatar" do
+    u = login!
+    a = Avatar.make
+    u.select_avatar(a)
+    post :deselect, :id => a.id
+    u.reload
+    a.reload
+    assert_nil u.current_avatar
+    assert_nil a.current_avatar_user
+    assert_redirected_to avatars_path
+    assert_equal "Avatar cleared", flash[:notice]
   end
   
-  test "should not deselect avatar if selected by a different user" do
-    flunk
+  test "should not clear avatar if in use by a different user" do
+    new_user = login!
+    old_user = User.make
+    a = Avatar.make
+    old_user.select_avatar(a)
+    post :deselect, :id => a.id
+    new_user.reload
+    old_user.reload
+    a.reload
+    assert_nil new_user.current_avatar
+    assert_equal old_user, a.current_avatar_user
+    assert_equal a, old_user.current_avatar
+    assert_redirected_to avatars_path
+    assert_equal "This avatar is already in use", flash[:notice]
   end
   
-  # def test_should_deselect_avatar
-  #   login_as :Timothy
-  #   post :select, :id => avatars(:calvin).id
-  #   users(:Timothy).reload
-  #   assert_equal users(:Timothy).avatar, avatars(:calvin).attachment.url
-  #   post :deselect, :id => avatars(:calvin).id
-  #   users(:Timothy).reload
-  #   assert_nil users(:Timothy).avatar
-  #   avatars(:calvin).reload
-  #   assert_nil avatars(:calvin).current_user_id
-  # end
-    
 end

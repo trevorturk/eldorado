@@ -28,23 +28,8 @@ class UserTest < ActiveSupport::TestCase
     authors = User.blog_authors
     assert_equal true, authors.include?(users(:trevor))
   end
-  
-  test "avatar.current_user_avatar; user.current_avatar; destroying user nullifies avatar.current_avatar_user" do
-    u = User.make
-    a = Avatar.make
-    assert_nil a.current_avatar_user
-    assert_nil u.current_avatar
-    u.select_avatar(a)
-    a.reload
-    u.reload
-    assert_equal a, u.current_avatar
-    assert_equal u, a.current_avatar_user
-    u.destroy
-    a.reload
-    assert_nil a.current_avatar_user
-  end
-  
-  test "user.select_avatar(avatar) selects given avatar, deselects old avatar if exists" do
+    
+  test "should select avatar and clear old avatar if exists" do
     u = User.make
     old_avatar = Avatar.make
     new_avatar = Avatar.make
@@ -62,7 +47,21 @@ class UserTest < ActiveSupport::TestCase
     assert_nil old_avatar.current_avatar_user
   end
   
-  test "user.clear_avatar clears user's current avatar" do
+  test "should not select avatar if already in use" do
+    u1 = User.make
+    a1 = Avatar.make
+    u1.select_avatar(a1)
+    u2 = User.make
+    u2.select_avatar(a1)
+    u1.reload
+    u2.reload
+    a1.reload
+    assert_nil u2.current_avatar
+    assert_equal u1, a1.current_avatar_user
+    assert_equal a1, u1.current_avatar
+  end
+  
+  test "should clear user's current avatar" do
     u = User.make
     a = Avatar.make
     u.select_avatar(a)
@@ -75,6 +74,21 @@ class UserTest < ActiveSupport::TestCase
     a.reload
     assert_nil a.current_avatar_user
     assert_nil u.current_avatar
+  end
+    
+  test "should nullify current_avatar_user attribute of avatar if user is destroyed" do
+    u = User.make
+    a = Avatar.make
+    assert_nil a.current_avatar_user
+    assert_nil u.current_avatar
+    u.select_avatar(a)
+    a.reload
+    u.reload
+    assert_equal a, u.current_avatar
+    assert_equal u, a.current_avatar_user
+    u.destroy
+    a.reload
+    assert_nil a.current_avatar_user
   end
   
   test "to_s returns login" do

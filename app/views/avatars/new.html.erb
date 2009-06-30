@@ -3,7 +3,7 @@
 <% form_for @avatar, :html => { :multipart => true } do |f| -%>
   <div class="box" id="box-avatars-new">
     <span class="top">New Avatar</span>
-    <p><%= f.file_field :uploaded_data %></p>
+    <p><%= f.file_field :attachment %></p>
     <p>
       <%= submit_tag "Upload", :disable_with => "Upload" %>&nbsp;
       <% if current_action != 'new' %>

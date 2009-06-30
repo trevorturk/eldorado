@@ -42,14 +42,15 @@ class AvatarTest < ActiveSupport::TestCase
     assert_equal u, r.current_avatar_user
   end
     
-  test "should nullify current_avatar_user after destroy" do
+  test "should nullify avatar attribute and current_avatar relationship of user after avatar is destroyed" do
     u = User.make
-    r = Avatar.make
-    u.select_avatar(r)
-    assert_equal u, r.current_avatar_user
-    u.destroy
-    r.reload
-    assert_nil r.current_avatar_user
+    a = Avatar.make
+    u.select_avatar(a)
+    assert_equal u, a.current_avatar_user
+    a.destroy
+    u.reload
+    assert_nil u.avatar
+    assert_nil u.current_avatar
   end
   
 end
