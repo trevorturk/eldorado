@@ -12,7 +12,7 @@ class ThemeTest < ActiveSupport::TestCase
     assert_equal r.attachment_file_name, r.to_s
   end
   
-  test "to_param" do
+  test "to_param returns id-to_s" do
     r = Theme.make
     assert_equal "#{r.id}-#{r.to_s.parameterize}", r.to_param
   end

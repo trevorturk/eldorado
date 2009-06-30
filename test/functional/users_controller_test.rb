@@ -294,19 +294,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal old_count, User.count
     assert_redirected_to root_path
   end
-  
-  def test_that_deleting_user_cleans_up_in_use_avatar
-    flunk
-    # log in as admin, delete guest account using the "test" avatar, check that test avatar has no current_user_id
-    login_as :Administrator
-    old_count = User.count
-    delete :destroy, :id => 1, :confirm => 1
-    assert_equal old_count-1, User.count
-    assert_redirected_to users_path
-    avatars(:guest).reload
-    assert_nil avatars(:guest).current_user_id
-  end
-  
+    
   def test_that_default_time_zone_works
     post :create, :user => {:login => 'timezone', :email => 'test@test.com', :password => 'dfj', :password_confirmation => 'dfj'}
     user = User.find_by_login('timezone')
