@@ -1,13 +1,7 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  
-  def setup
-    @controller = PostsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-  
+    
   def test_index_should_work
     get :index
     assert_response :success

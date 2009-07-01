@@ -2,12 +2,6 @@ require 'test_helper'
 
 class SettingsControllerTest < ActionController::TestCase
 
-  def setup
-    @controller = SettingsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-
   def test_should_not_get_index_if_not_authorized
     get :index 
     assert_redirected_to root_path

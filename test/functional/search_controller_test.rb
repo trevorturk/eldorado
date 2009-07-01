@@ -9,6 +9,7 @@ class SearchControllerTest < ActionController::TestCase
   end
   
   def test_should_accept_searches
+    # TODO add Model.make for all types being searched
     login_as :trevor
     get :index, :type => 'articles', :query => 'test'
     assert_response :success

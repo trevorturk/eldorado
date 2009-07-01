@@ -2,12 +2,6 @@ require 'test_helper'
 
 class SubscriptionsControllerTest < ActionController::TestCase
 
-  def setup
-    @controller = SubscriptionsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-
   def test_should_get_index
     login_as :trevor
     get :index

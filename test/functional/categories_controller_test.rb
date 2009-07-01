@@ -2,12 +2,6 @@ require 'test_helper'
 
 class CategoriesControllerTest < ActionController::TestCase
 
-  def setup
-    @controller = CategoriesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-
   def test_should_not_get_index
     get :index
     assert_redirected_to forum_root_path

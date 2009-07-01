@@ -2,12 +2,6 @@ require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
   
-  def setup
-    @controller = HomeController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-
   def test_should_get_index
     get :index
     assert_response :success
