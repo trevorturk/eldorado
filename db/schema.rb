@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090627234146) do
+ActiveRecord::Schema.define(:version => 20090701005540) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -21,13 +21,6 @@ ActiveRecord::Schema.define(:version => 20090627234146) do
   end
 
   create_table "avatars", :force => true do |t|
-    t.integer  "parent_id"
-    t.string   "content_type"
-    t.string   "filename"
-    t.string   "thumbnail"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
     t.integer  "user_id"
     t.integer  "current_user_id"
     t.datetime "created_at"
@@ -82,13 +75,6 @@ ActiveRecord::Schema.define(:version => 20090627234146) do
   end
 
   create_table "headers", :force => true do |t|
-    t.integer  "parent_id"
-    t.string   "content_type"
-    t.string   "filename"
-    t.string   "thumbnail"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
     t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -155,13 +141,6 @@ ActiveRecord::Schema.define(:version => 20090627234146) do
   end
 
   create_table "themes", :force => true do |t|
-    t.integer  "parent_id"
-    t.string   "content_type"
-    t.string   "filename"
-    t.string   "thumbnail"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -189,13 +168,6 @@ ActiveRecord::Schema.define(:version => 20090627234146) do
   add_index "topics", ["forum_id", "sticky", "last_post_at"], :name => "index_topics_on_sticky_and_last_post_at"
 
   create_table "uploads", :force => true do |t|
-    t.integer  "parent_id"
-    t.string   "content_type"
-    t.string   "filename"
-    t.string   "thumbnail"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
