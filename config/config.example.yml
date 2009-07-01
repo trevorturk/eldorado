@@ -13,3 +13,6 @@ production:
   session_secret: # at least 32 char random string and should be unique to your installation and kept secret
   domain: # http://example.com
   mailer: # noreply@example.com
+  s3_access_id: # s3 is generall optional, but required for heroku
+  s3_secret_key: # see https://s3.amazonaws.com/ to sign up for an account
+  s3_bucket_name: # ...

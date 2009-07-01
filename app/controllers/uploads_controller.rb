@@ -18,7 +18,11 @@ class UploadsController < ApplicationController
   def create
     @upload = current_user.uploads.new(params[:upload])
     if @upload.save
-      flash[:notice] = "#{root_url.chop + @upload.attachment.url.split('?').first}"
+      if CONFIG['s3']
+        flash[:notice] = "#{@upload.attachment.url.split('?').first}"
+      else
+        flash[:notice] = "#{root_url.chop + @upload.attachment.url.split('?').first}"
+      end
       redirect_to files_path
     else
       render :action => "new"

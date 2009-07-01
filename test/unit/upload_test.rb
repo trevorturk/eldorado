@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UploadTest < ActiveSupport::TestCase
-    
+  
   test "make makes a valid record" do
     r = Upload.make
     assert r.valid?
