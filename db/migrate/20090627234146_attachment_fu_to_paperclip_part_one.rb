@@ -18,16 +18,3 @@ class AttachmentFuToPaperclipPartOne < ActiveRecord::Migration
     end
   end
 end
-
-# create_table "uploads", :force => true do |t|
-#   t.integer  "parent_id"
-#   t.string   "content_type"
-#   t.string   "filename"
-#   t.string   "thumbnail"
-#   t.integer  "size"
-#   t.integer  "width"
-#   t.integer  "height"
-#   t.integer  "user_id"
-#   t.datetime "created_at"
-#   t.datetime "updated_at"
-# end
