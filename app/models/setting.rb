@@ -19,7 +19,8 @@ class Setting < ActiveRecord::Base
   end
   
   def self.current_theme
-    Theme.find_by_attachment_file_name(Setting.first.theme) # TODO refactor to use has_one :current_theme etc
+    current_url = Setting.first.theme
+    Theme.all.detect {|t| t.attachment.url == current_url }
   end
   
   def to_s

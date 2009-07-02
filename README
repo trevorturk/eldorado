@@ -33,11 +33,12 @@ script/server
 sudo gem install heroku --no-ri --no-rdoc
 heroku create
 # Set the variables for your production environment in config/config.yml
+rake s3:create
 rake heroku:config
 git push heroku master
 heroku rake db:schema:load
 heroku open
-# Note that uploads and email don't work (yet...)
+# Note that email won't work (yet...)
 # Read more about Heroku here: http://heroku.com/
 
 

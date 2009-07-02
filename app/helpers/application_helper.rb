@@ -22,7 +22,7 @@ module ApplicationHelper
     
   def theme_css
     return '<style type="text/css">@import "/stylesheets/application.css";</style>' if @settings.theme.blank? 
-    return '<style type="text/css">@import "/themes/' + @settings.theme + '";</style>'
+    return "<style type=\"text/css\">@import #{@settings.theme};</style>"
   end
 
   def page_title
