@@ -13,6 +13,12 @@ production:
   session_secret: # at least 32 char random string and should be unique to your installation and kept secret
   domain: # http://example.com
   mailer: # noreply@example.com
-  s3_access_id: # s3 is generally optional, but required for heroku
+  s3_access_id: # s3 is optional, but required for heroku (http://docs.heroku.com/constraints#read-only-filesystem)
   s3_secret_key: # see the Amazon S3 site to sign up: https://s3.amazonaws.com/
   s3_bucket_name: # provide a unique bucket name and run "rake s3:create" to create it automatically
+  smtp_address: # smtp.gmail.com # smtp is optional, but required for heroku (http://support.heroku.com/forums/43117/entries/32352)
+  smtp_port: # 587
+  smtp_domain: # example.com # omit this if using a regular gmail account
+  smtp_user_name: # example@example.com
+  smtp_password: # password
+  smtp_authentication: # :plain
