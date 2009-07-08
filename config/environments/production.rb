@@ -23,5 +23,6 @@ if CONFIG['smtp_address']
     :user_name => CONFIG['smtp_user_name'],
     :password => CONFIG['smtp_password'],
     :authentication => CONFIG['smtp_authentication']
+    :enable_starttls_auto => CONFIG['smtp_enable_starttls_auto']
   }
 end

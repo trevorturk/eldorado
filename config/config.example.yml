@@ -22,3 +22,4 @@ production:
   smtp_user_name: # example@example.com
   smtp_password: # password
   smtp_authentication: # :plain
+  smtp_enable_starttls_auto: # true
