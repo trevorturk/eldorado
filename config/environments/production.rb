@@ -16,7 +16,7 @@ end
 
 if CONFIG['smtp_address']
   config.action_mailer.delivery_method = :smtp
-  ActionMailer::Base.server_settings = {
+  ActionMailer::Base.smtp_settings = {
     :address => CONFIG['smtp_address'],
     :port => CONFIG['smtp_port'], 
     :domain => CONFIG['smtp_domain'],
