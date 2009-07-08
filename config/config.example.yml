@@ -18,7 +18,7 @@ production:
   s3_bucket_name: # provide a unique bucket name and run "rake s3:create" to create it automatically
   smtp_address: # smtp.gmail.com # smtp is optional, but required for heroku (http://support.heroku.com/forums/43117/entries/32352)
   smtp_port: # 587
-  smtp_domain: # example.com # omit this if using a regular gmail account
+  smtp_domain: # example.com # omit if using a regular gmail account
   smtp_user_name: # example@example.com
   smtp_password: # password
   smtp_authentication: # plain

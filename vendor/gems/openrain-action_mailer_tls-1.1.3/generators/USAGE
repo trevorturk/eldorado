@@ -1,0 +1,16 @@
+Description:
+    The action_mailer_tls generator adds smtp-tls support to your Rails projects.
+ 
+    The generator takes no arguments and only needs to be run once. It will create
+    a Rails initializer for Gmail, and a sample YAML configuration file.
+    
+    Modify the contents of the configuration file with your Gmail username and 
+    password
+ 
+Example:
+    ./script/generate action_mailer_tls
+ 
+    This will create the following files:
+        Initializer:  config/initializers/smtp_gmail.rb
+        Config:       config/smtp_gmail.yml.sample
+
