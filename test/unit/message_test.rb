@@ -5,7 +5,7 @@ class MessageTest < ActiveSupport::TestCase
   
   def test_to_s
     m = Message.find(:first)
-    assert_equal m.to_s, 'first message'
+    assert_equal m.to_s, m.body
   end
   
 end

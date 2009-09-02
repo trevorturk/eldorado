@@ -7,6 +7,6 @@ class ArticleTest < ActiveSupport::TestCase
   
   def test_to_s
     t = Article.first
-    assert_equal t.to_s, 'Testing'
+    assert_equal t.to_s, t.title
   end
 end
