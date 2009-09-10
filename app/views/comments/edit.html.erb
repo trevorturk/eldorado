@@ -1,13 +1,13 @@
 <%= error_messages_for :comment %>
 <% form_for @comment do |f| %>
   <div class="box" id="box-comments-edit">
-    <span class="top">Edit Comment</span>
-    <p class="label"><label for="comment_body">Body</label></p>
+    <span class="top"><%=t :edit_comment %></span>
+    <p class="label"><label for="comment_body"><%=t :body %></label></p>
     <p><%= f.text_area :body, :rows => '5', :class => 'text-field' %></p>
     <p>
-      <%= submit_tag "Edit Comment", :disable_with => "Edit Comment" %>&nbsp;
-      <%= link_to 'Cancel', @comment.resource %> &nbsp; 
-      <%= link_to 'Delete', @comment, :confirm => 'Are you sure?', :method => :delete %>
+      <%= submit_tag I18n.t(:edit_comment), :disable_with => I18n.t(:edit_comment) %>&nbsp;
+      <%= link_to I18n.t(:cancel), @comment.resource %> &nbsp; 
+      <%= link_to I18n.t(:delete), @comment, :confirm => I18n.t(:are_you_sure), :method => :delete %>
     </p>
   <% end %>
   <div class="clear"> </div>

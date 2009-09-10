@@ -1,18 +1,18 @@
 <%= error_messages_for :post %>
 <% form_for @post do |f| %>
   <div class="box" id="box-posts-edit">
-    <span class="top">Edit Post</span>
+    <span class="top"><%=t :edit_post %></span>
     <p><%= f.text_area :body, :rows => '10', :class => 'text-field' %></p>
     <p>
-      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp;
-      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1'] %> &nbsp;
+      <%= submit_tag I18n.t(:save_changes), :disable_with => I18n.t(:save_changes) %>&nbsp;
+      <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=530,width=820,status=1'] %> &nbsp;
       <% if @topic.posts_count > 1 %>
-        <%= link_to 'Delete', post_path, :confirm => 'Are you sure?', :method => :delete %> &nbsp;
+        <%= link_to I18n.t(:delete), post_path, :confirm => I18n.t(:are_you_sure), :method => :delete %> &nbsp;
       <% end %>
       <% if can_edit?(@post.topic) %>
-        <%= link_to 'Edit Topic', edit_topic_path(@post.topic) %> &nbsp; 
+        <%= link_to I18n.t(:edit_topic), edit_topic_path(@post.topic) %> &nbsp; 
       <% end %>
-      <%= link_to 'Cancel', topic_post_path(@post) %>
+      <%= link_to I18n.t(:cancel), topic_post_path(@post) %>
     </p>
   </div>
 <% end %>

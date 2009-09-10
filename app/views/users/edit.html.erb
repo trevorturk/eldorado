@@ -1,26 +1,26 @@
 <%= error_messages_for :user %>
 <% form_for @user do |f| -%>
   <div class="box" id="box-users-edit">
-    <span class="top">Edit User</span>
-    <p class="label"><label for="user_username">Username</label></p>
+    <span class="top"><%=t :edit_user %></span>
+    <p class="label"><label for="user_username"><%=t :username %></label></p>
     <p><%= f.text_field :login, :style => "width:31%" %></p>
-    <p class="label"><label for="user_email">Email</label></p>
+    <p class="label"><label for="user_email"><%=t :email %></label></p>
     <p><%= f.text_field :email, :style => "width:31%" %></p>
-    <p class="label"><label for="user_password">Password (twice)</label></p>
+    <p class="label"><label for="user_password"><%=t :password_twice %></label></p>
     <p>
       <%= f.password_field :password, :style => "width:15%" %> &nbsp;
       <%= f.password_field :password_confirmation, :style => "width:15%" %>
     </p>
-    <p class="label"><label for="user_bio">Bio</label></p>
+    <p class="label"><label for="user_bio"><%=t :bio %></label></p>
     <p><%= f.text_area :bio, :rows => "3", :style => "width:50%;" %></p>
-    <p class="label"><label for="user_signature">Signature</label></p>
+    <p class="label"><label for="user_signature"><%=t :signature %></label></p>
     <p><%= f.text_area :signature, :rows => "2", :style => "width:50%;" %></p>
-    <p class="label"><label for="user_time_zone">Timezone</label></p>
+    <p class="label"><label for="user_time_zone"><%=t :timezone %></label></p>
     <p><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></p>
     <p>
-      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp; 
-      <%= link_to 'Delete', confirm_delete_user_path %> &nbsp;
-      <%= link_to 'Cancel', @user %>
+      <%= submit_tag I18n.t(:save_changes), :disable_with => I18n.t(:save_changes) %>&nbsp; 
+      <%= link_to I18n.t(:delete), confirm_delete_user_path %> &nbsp;
+      <%= link_to I18n.t(:cancel), @user %>
     </p>
   </div>
 <% end %>

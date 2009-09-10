@@ -1,10 +1,10 @@
 <div class="info-left">
-  <span class="title">Subscriptions</span>
+  <span class="title"><%=t :subscriptions %></span>
 </div>
 <div class="clear"> </div>
   
 <% if @subscriptions.blank? %>
-  <p>You have no subscriptions.</p>
+  <p><%=t :no_scubscriptions_info, :scope => :messages %></p>
 <% else %>
   <table cellspacing="0">
     <thead>
@@ -16,7 +16,7 @@
       <% for subscription in @subscriptions %>
         <tr>
           <td class="tcl"><%= link_to h(subscription.topic), subscription.topic %></td>
-          <td class="tcr"><%= link_to '(x)', subscription_path(subscription), :confirm => 'Are you sure?', :method => :delete %></td>
+          <td class="tcr"><%= link_to '('+I18n.t(:x)+')', subscription_path(subscription), :confirm => I18n.t(:are_you_sure), :method => :delete %></td>
         </tr>
       <% end %>
     </tbody>

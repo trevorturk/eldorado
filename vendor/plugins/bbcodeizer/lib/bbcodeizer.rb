@@ -49,7 +49,23 @@ module BBCodeizer
       :atomfilms             => [ /\[atomfilms\](.+?)atomfilms.com\/film\/(.+?)\[\/atomfilms\]/i, '<embed src="http://www.atomfilms.com:80/a/autoplayer/shareEmbed.swf?keyword=\2" width="426" height="350"></embed>' ],
       :current               => [ /\[current\](.+?)current.com\/items\/(.+?)\/(.+?)\[\/current\]/i, '<object width="400" height="400"><param name="movie" value="http://current.com/e/\2/en_US"></param><param name="wmode" value="transparent"></param><param name="allowfullscreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://current.com/e/\2/en_US" type="application/x-shockwave-flash"  width="400" height="400" wmode="transparent" allowfullscreen="true" allowscriptaccess="always"></embed></object>' ],
       :vimeo                 => [ /\[vimeo\](.+?)vimeo.com\/(.+?)\[\/vimeo\]/i, '<object type="application/x-shockwave-flash" width="400" height="300" data="http://www.vimeo.com/moogaloop.swf?clip_id=\2&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=">	<param name="quality" value="best" />	<param name="allowfullscreen" value="true" />	<param name="scale" value="showAll" />	<param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=\2&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=" /></object>' ],
-      :grooveshark           => [ /\[grooveshark\](.+?)\[\/grooveshark\]/i, '<object width="250" height="40"> <param name="movie" value="http://listen.grooveshark.com/songWidget.swf"></param> <param name="wmode" value="window"></param> <param name="allowScriptAccess" value="always"></param> <param name="flashvars" value="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0"></param> <embed src="http://listen.grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0" allowScriptAccess="always" wmode="window"></embed></object>']
+      :grooveshark           => [ /\[grooveshark\](.+?)\[\/grooveshark\]/i, '<object width="250" height="40"> <param name="movie" value="http://listen.grooveshark.com/songWidget.swf"></param> <param name="wmode" value="window"></param> <param name="allowScriptAccess" value="always"></param> <param name="flashvars" value="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0"></param> <embed src="http://listen.grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0" allowScriptAccess="always" wmode="window"></embed></object>'],
+      :smiley_biggrin        => [ /\:\-?D/,      '<img title=":D" src="/images/emoticons/icon_biggrin.gif" alt="biggrin"/>'],
+      :smiley_smile          => [ /\:\-?\)/,     '<img title=":)" src="/images/emoticons/icon_smile.gif" alt="smile" />'],
+      :smiley_wink           => [ /\;\-?\)/,     '<img title=";)" src="/images/emoticons/icon_wink.gif" alt="wink" />'],
+      :smiley_sad            => [ /\:\-?\(/,     '<img title=":(" src="/images/emoticons/icon_sad.gif" alt="sad" />'],
+      :smiley_surprised      => [ /\:\-?O/,      '<img title=":O" src="/images/emoticons/icon_surprised.gif" alt="surprised" />'],
+      :smiley_cool           => [ /8\-?\)/,      '<img title="8)" src="/images/emoticons/icon_cool.gif" alt="cool" />'],
+      :smiley_confused       => [ /\:\-?\?/,     '<img title=":?" src="/images/emoticons/icon_confused.gif" alt="confused" />'],
+      :smiley_cry            => [ /\:\'\-?\(/,   '<img title=":`(" src="/images/emoticons/icon_cry.gif" alt="cry" />'],
+      :smiley_eek            => [ /\:shock\:/,   '<img title=":shock:" src="/images/emoticons/icon_eek.gif" alt="eek" />'],
+      :smiley_evil           => [ /\:evil\:/,    '<img title=":evil:" src="/images/emoticons/icon_evil.gif" alt="evil" />'],
+      :smiley_lol            => [ /\:lol\:/,     '<img title=":lol:" src="/images/emoticons/icon_lol.gif" alt="lol" />'],
+      :smiley_mad            => [ /\:\-?X/,      '<img title=":X" src="/images/emoticons/icon_mad.gif" alt="mad" />'],
+      :smiley_razz           => [ /\:\-?P/,      '<img title=":P" src="/images/emoticons/icon_razz.gif" alt="razz" />'],
+      :smiley_redface        => [ /\:oops\:/,    '<img title=":oops:" src="/images/emoticons/icon_redface.gif" alt="redface" />'],
+      :smiley_rolleyes       => [ /\^\^/,        '<img title="^^" src="/images/emoticons/icon_rolleyes.gif" alt="rolleyes" />'],
+      :smiley_twisted        => [ /\:twisted\:/, '<img title=":twisted:" src="/images/emoticons/icon_twisted.gif" alt="twisted" />']
     }
         
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
@@ -60,7 +76,10 @@ module BBCodeizer
                 :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :hide, :mp3, 
                 :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor, :hulu, 
                 :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :funnyordie, 
-                :atomfilms, :vimeo, :li, :list, :current, :grooveshark ]
+                :atomfilms, :vimeo, :li, :list, :current, :grooveshark, :smiley_biggrin, :smiley_smile,     
+                :smiley_wink ,:smiley_sad ,:smiley_surprised ,:smiley_cool, :smiley_confused,  
+                :smiley_cry ,:smiley_eek ,:smiley_evil ,:smiley_lol ,:smiley_mad ,:smiley_razz,      
+                :smiley_redface, :smiley_rolleyes ,:smiley_twisted   ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)

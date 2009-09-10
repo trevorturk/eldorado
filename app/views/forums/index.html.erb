@@ -1,13 +1,13 @@
 <div class="info-left">
-  <span class="title">Forum</span>
+  <span class="title"><%=t :forum %></span>
   <span class="detail">&nbsp;|&nbsp;
-    <%= pluralize(number_with_delimiter(@posts_count) || 0, 'Post') %> in 
-    <%= pluralize(number_with_delimiter(@topics_count) || 0, 'Topic') %>
+    <%= t_no_of :no_of_posts, (@posts_count || 0) %> in 
+    <%= t_no_of :no_of_topics, (@topics_count || 0) %>
   </span>
 </div>
 <div class="info-right">
   <span class="title">&nbsp;</span>
-  <span class="detail">View All <%= link_to 'Posts', posts_path %> or <%= link_to 'Topics &raquo;', topics_path %></span>
+  <span class="detail"><%=t :view_all %> <%= link_to I18n.t(:posts), posts_path %> <%=t :or %> <%= link_to I18n.t(:topics)+' &raquo;', topics_path %></span>
 </div>
 <div class="clear"> </div>
 
@@ -18,10 +18,10 @@
           <th colspan="5"><%= link_to h(category), category %></th>
         </tr>
         <tr class="forums-list">
-          <th class="tcl" colspan="2">Forums</th>
-          <th class="tcm">Topics</th>
-          <th class="tcm">Posts</th>
-          <th class="tcr">Activity</th>
+          <th class="tcl" colspan="2"><%=t :forums %></th>
+          <th class="tcm"><%=t :topics %></th>
+          <th class="tcm"><%=t :posts %></th>
+          <th class="tcr"><%=t :activity %></th>
         </tr>
       </thead>
       <tbody>
@@ -47,7 +47,7 @@
                 <% else %>
                   <%= time_ago_or_time_stamp(forum.last_topic.last_post_at) %>
                 <% end %>
-                <br /> by <%=h forum.last_topic.last_poster %>
+                <br /> <%=t :by %> <%=h forum.last_topic.last_poster %>
               <% end %>
             </td>
           </tr>

@@ -1,13 +1,13 @@
 <% @post = Post.new unless @post %>
 <% form_for @post do |f| -%>
   <div class="box" id="box-posts-new">
-    <span id="reply" class="top">Post a Reply</span><br />
+    <span id="reply" class="top"><%=t :post_a_reply %></span><br />
       <%= f.hidden_field :topic_id, :value => @topic.id %>
       <%= f.text_area :body, :value => @body, :rows => '8', :class => 'text-field' %>
       <p>
-        <%= submit_tag "Post Reply", :disable_with => "Post Reply" %>&nbsp; 
-        <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=530,width=820,status=1'] %> &nbsp; 
-        <%= link_to 'Cancel', topic_post_path(params[:id]) if current_action == 'quote' %>
+        <%= submit_tag I18n.t(:post_reply), :disable_with => I18n.t(:post_reply) %>&nbsp; 
+        <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=530,width=820,status=1'] %> &nbsp; 
+        <%= link_to I18n.t(:cancel), topic_post_path(params[:id]) if current_action == 'quote' %>
       </p>
     </div>
 <% end %>

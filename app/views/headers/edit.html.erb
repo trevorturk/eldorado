@@ -8,13 +8,13 @@
 
 <% form_for @header do |f| -%>
   <div class="box" id="box-headers-edit">
-    <span class="top">Edit Header</span>
-    <p class="label"><label for="header_description">Description</label></p>
+    <span class="top"><%=t :edit_header %></span>
+    <p class="label"><label for="header_description"><%=t :description %></label></p>
     <p><%= f.text_area :description, :rows => '4', :class => 'text-field' %></p>
     <p>
-      <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp;
-      <%= link_to 'Delete', @header, :confirm => 'Are you sure?', :method => :delete %> &nbsp;
-      <%= link_to 'Cancel', @header %>
+      <%= submit_tag I18n.t(:save_changes), :disable_with => I18n.t(:save_changes) %>&nbsp;
+      <%= link_to I18n.t(:delete), @header, :confirm => I18n.t(:are_you_sure), :method => :delete %> &nbsp;
+      <%= link_to I18n.t(:cancel), @header %>
     </p>
   </div>
 <% end %>

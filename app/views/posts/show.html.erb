@@ -21,11 +21,11 @@
           <dd class="avatar">
             <%= link_to avatar_for(post.user), post.user unless post.user.avatar.nil? %>
           </dd>
-          <dd>Registered: <%= post.user.created_at.strftime("%b, %Y") %></dd>
+          <dd><%=t :registered %>: <%= I18n.l(post.user.created_at, :format => :ed_month) %></dd>
           <% unless post.user.is_online? %>
-            <dd>Last visit: <%= time_ago_or_time_stamp(post.user.online_at) %></dd>
+            <dd><%=t :last_visit %>: <%= time_ago_or_time_stamp(post.user.online_at) %></dd>
           <% end %>
-          <dd>Posts: <%= post.user.posts_count %></dd>
+          <dd><%=t :posts %>: <%= post.user.posts_count %></dd>
         </dl>
       </td>
       <td class="body">
@@ -33,8 +33,8 @@
           <%= bb(post.body) %>
           <% if (post.updated_at > post.created_at + 5.minutes) %>
             <p class="edited">
-              Last edited <%= time_ago_or_time_stamp(post.updated_at, Time.now.utc, true, true) %>
-              <%= 'by ' + h(post.editor) if post.editor %>
+              <%=t :last_edited %>: <%= time_ago_or_time_stamp(post.updated_at, Time.now.utc, true, true) %>
+              <%= I18n.t(:by) + ' ' + h(post.editor) if post.editor %>
             </p>
           <% end %>
           <% if !post.user.signature.blank? %>
@@ -49,31 +49,31 @@
     <tr>
       <td>
         <% if post.user.is_online? %>
-          <b>Online</b>
+          <b><%=t :online %></b>
         <% else %>
-          Offline
+          <%=t :offline %>
         <% end %>
       </td>
       <td class="body links">
         <span id ="post-link-<%= post.id %>">
-          <%= link_to_function 'Link', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
+          <%= link_to_function I18n.t(:link), "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
         </span>
         <span id="post-links-<%= post.id %>" style="display:none;">
-          <%= link_to 'Post', post %>
-          &nbsp; <%= link_to 'Topic', topic_post_path(post) %>
-          &nbsp; <%= link_to_function '(x)', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
+          <%= link_to I18n.t(:post), post %>
+          &nbsp; <%= link_to I18n.t(:topic), topic_post_path(post) %>
+          &nbsp; <%= link_to_function '('+I18n.t(:x)+')', "$('post-link-#{post.id}').toggle();$('post-links-#{post.id}').toggle();" %>
         </span>   
         <% if %w(posts search users).include?(current_controller) %>
           <% if logged_in? && !post.topic.locked %>
-            &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
+            &nbsp; <%= link_to I18n.t(:quote), quote_post_path(post) %>
           <% end %>
         <% else %>
           <% if logged_in? && !@topic.locked %>
-            &nbsp; <%= link_to 'Quote', quote_post_path(post) %>
+            &nbsp; <%= link_to I18n.t(:quote), quote_post_path(post) %>
           <% end %>
         <% end %>
         <% if can_edit?(post) %>
-          &nbsp; <%= link_to 'Edit', edit_post_path(post) %>
+          &nbsp; <%= link_to I18n.t(:edit), edit_post_path(post) %>
         <% end %>
       </td>
     </tr>

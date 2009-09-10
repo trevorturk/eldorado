@@ -1,23 +1,23 @@
 <% form_tag search_path, :method => 'get', :id => 'search' do %>
   <div id="search" class="box" id="box-search-form" <%= 'style="display:none;"' unless current_controller == 'search' %>>
-    <span class="top">Search</span>
+    <span class="top"><%=t :search %></span>
     <p>
       <select id="type" name="type" onchange="javascript:$('query').focus();">
-        <option<%= ' selected="selected"' if params[:type] == 'articles' || current_controller == 'articles' %> value='articles'>Articles</option>
-        <option<%= ' selected="selected"' if params[:type] == 'avatars' || current_controller == 'avatars' %> value='avatars'>Avatars</option>
-        <option<%= ' selected="selected"' if params[:type] == 'messages' || current_controller == 'messages' %> value='messages'>Chat</option>
-        <option<%= ' selected="selected"' if params[:type] == 'events' || current_controller == 'events' %> value='events'>Events</option>
-        <option<%= ' selected="selected"' if %w(uploads files).include?(params[:type]) || current_controller == 'uploads' %> value='files'>Files</option>
-        <option<%= ' selected="selected"' if params[:type] == 'headers' || current_controller == 'headers' %> value='headers'>Headers</option>
-        <option<%= ' selected="selected"' if params[:type] == 'posts' || current_controller == 'posts' %> value='posts'>Posts</option>
-        <option<%= ' selected="selected"' if %w(home categories forums topics).include?(params[:type]) || params[:type].blank? %> value='topics'>Topics</option>
-        <option<%= ' selected="selected"' if params[:type] == 'users' || current_controller == 'users' %> value='users'>Users</option>
+        <option<%= ' selected="selected"' if params[:type] == 'articles' || current_controller == 'articles' %> value='articles'><%=t :articles %></option>
+        <option<%= ' selected="selected"' if params[:type] == 'avatars' || current_controller == 'avatars' %> value='avatars'><%=t :avatars %></option>
+        <option<%= ' selected="selected"' if params[:type] == 'messages' || current_controller == 'messages' %> value='messages'><%=t :chat %></option>
+        <option<%= ' selected="selected"' if params[:type] == 'events' || current_controller == 'events' %> value='events'><%=t :events %></option>
+        <option<%= ' selected="selected"' if %w(uploads files).include?(params[:type]) || current_controller == 'uploads' %> value='files'><%=t :files %></option>
+        <option<%= ' selected="selected"' if params[:type] == 'headers' || current_controller == 'headers' %> value='headers'><%=t :headers %></option>
+        <option<%= ' selected="selected"' if params[:type] == 'posts' || current_controller == 'posts' %> value='posts'><%=t :posts %></option>
+        <option<%= ' selected="selected"' if %w(home categories forums topics).include?(params[:type]) || params[:type].blank? %> value='topics'><%=t :topics %></option>
+        <option<%= ' selected="selected"' if params[:type] == 'users' || current_controller == 'users' %> value='users'><%=t :users %></option>
       </select> &nbsp;
       <%= text_field_tag :query, params[:query], :id => :query, :style => "width:33%" %>
     </p>
     <p>
-      <%= submit_tag "Search", :disable_with => "Search" %>&nbsp;
-      <%= link_to 'Cancel', root_path %>
+      <%= submit_tag I18n.t(:search), :disable_with => I18n.t(:search) %>&nbsp;
+      <%= link_to I18n.t(:cancel), root_path %>
     </p>
   </div>
 <% end %>
