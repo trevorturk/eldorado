@@ -23,6 +23,14 @@ class UserTest < ActiveSupport::TestCase
     assert u.valid?
   end
   
+  def test_that_first_user_created_becomes_admin_and_others_dont
+    User.delete_all
+    u1 = User.make
+    u2 = User.make
+    assert_equal true, u1.admin?
+    assert_equal false, u2.admin?
+  end
+  
   def test_blog_authors
     users(:trevor).articles.create(:title => 'test', :body => 'test')
     authors = User.blog_authors

@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.admin = true if User.count == 0
     render :action => :new and return false unless @user.save
     if logged_in?
       redirect_to users_path and return true

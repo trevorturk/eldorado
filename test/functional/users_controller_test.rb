@@ -295,15 +295,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal user.time_zone, 'US/Central'
   end
   
-  def test_that_first_user_created_becomes_admin_and_others_dont
-    User.delete_all
-    post :create, :user => {:login => 'user1', :email => 'test1@test.com', :password => 'abc', :password_confirmation => 'abc'}
-    post :create, :user => {:login => 'user2', :email => 'test2@test.com', :password => 'abc', :password_confirmation => 'abc'}
-    assert_equal User.count, 2
-    assert_equal User.find_by_login('user1').admin, true
-    assert_equal User.find_by_login('user2').admin, false
-  end
-  
   def test_that_user_gets_default_time_values
     post :create, :user => {:login => 'user1', :email => 'test1@test.com', :password => 'abc', :password_confirmation => 'abc'}
     assert_not_nil User.find_by_login('user1').online_at

@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :on => :update, :allow_blank => true
   
   before_create :set_defaults
+  before_create :make_admin_if_first_user
     
   named_scope :blog_authors, :conditions => 'articles_count > 0', :order => 'articles_count desc'
   named_scope :chatting, lambda {|*args| {:conditions => ['chatting_at > ?', Time.now.utc-30.seconds], :order => 'login asc'}}
@@ -95,6 +96,10 @@ class User < ActiveRecord::Base
   def set_defaults
     self.profile_updated_at = self.all_viewed_at = Time.now.utc
     self.time_zone = Setting.find(:first).time_zone
+  end
+  
+  def make_admin_if_first_user
+    self.admin = true if User.count == 0
   end
   
   def to_s
