@@ -24,7 +24,11 @@ production:
   # The bucket name can be any unique string, and once set here it can be created by running "rake s3:create" 
   s3_access_id: 
   s3_secret_key: 
-  s3_bucket_name: 
+  s3_bucket_name:
+    
+  # AMAZON CLOUDFRONT (optional)
+  # You can sign up for CloudFront (http://aws.amazon.com/cloudfront) and provide the CNAME here
+  s3_host_alias: # assets.example.com
   
   # EMAIL SETTINGS (optional, required for Heroku)
   # More info from Heroku: http://support.heroku.com/forums/43117/entries/32352
