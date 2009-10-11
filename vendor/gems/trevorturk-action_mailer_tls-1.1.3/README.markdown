@@ -27,7 +27,7 @@ To (optionally) vendor this gem:
 
 To install the plugin (the old way):
 
-  1. `./script/plugin install git://github.com/openrain/action_mailer_tls.git -r 'tag v1.0.0'`
+  1. `./script/plugin install git://github.com/openrain/action_mailer_tls.git -r '1.0.0'`
   2. Copy vendor/plugins/action_mailer_tls/sample/smtp_gmail.rb to config/
   3. Copy vendor/plugins/action_mailer_tls/sample/mailer.yml.sample to config/
   4. Update the configuration file with your settings
@@ -67,12 +67,10 @@ SMTP TLS and Rails 2.2.1 ships with an option to enable it if you're running Rub
       :address => "smtp.gmail.com",
       :port => 587,
       :authentication => :plain,
-      :enable_starttls_auto => true,
-      :user_name => "noreply@gmail_or_your_google_domain.com",
-      :password => "chucknorris"
+      :enable_starttls_auto => true
+      :user_name: your_username@gmail.com
+      :password: h@ckme
     }
-
-
 
 For more information on this feature, check out the [commit log](http://github.com/rails/rails/commit/732c724df61bc8b780dc42817625b25a321908e4)
 
