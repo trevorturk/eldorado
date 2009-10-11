@@ -20,23 +20,25 @@
 <% end %>
 
 <% if current_controller == 'search' %>
-  <table cellspacing="0">
-    <thead>
-      <tr>
-        <th class="tcl" colspan="2">Events</th>
-        <th class="tcr">Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for event in @events %>
+  <% if !@events.blank? %>
+    <table cellspacing="0">
+      <thead>
         <tr>
-          <td class="tci"><%= icon_for(event) %></td>
-          <td class="tcl">
-            <%= link_to h(event), event %> by <%=h event.user %>
-          </td>
-          <td class="tcr"><%= time_stamp(event.date) %></td>
+          <th class="tcl" colspan="2">Events</th>
+          <th class="tcr">Date</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% for event in @events %>
+          <tr>
+            <td class="tci"><%= icon_for(event) %></td>
+            <td class="tcl">
+              <%= link_to h(event), event %> by <%=h event.user %>
+            </td>
+            <td class="tcr"><%= time_stamp(event.date) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
