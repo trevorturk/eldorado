@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   filter_parameter_logging 'password'
   
-  include AuthenticationSystem, ExceptionHandler, ExceptionLoggable
+  include AuthenticationSystem, ExceptionHandler
   
   before_filter :get_settings, :auth_token_login, :check_bans, :check_privacy, :check_admin_only_create, :set_timezone, :update_online_at, :get_layout_vars
   helper_method :current_action, :current_controller, :current_user, :logged_in?, :logged_out?, :is_online?, :admin?, :can_edit?, :locked_out?

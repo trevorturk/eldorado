@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090702030411) do
+ActiveRecord::Schema.define(:version => 20091011171508) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -84,17 +84,6 @@ ActiveRecord::Schema.define(:version => 20090702030411) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.string   "attachment_remote_url"
-  end
-
-  create_table "logged_exceptions", :force => true do |t|
-    t.string   "exception_class"
-    t.string   "controller_name"
-    t.string   "action_name"
-    t.text     "message"
-    t.text     "backtrace"
-    t.text     "environment"
-    t.text     "request"
-    t.datetime "created_at"
   end
 
   create_table "messages", :force => true do |t|

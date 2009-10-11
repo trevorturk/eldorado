@@ -40,3 +40,6 @@ production:
   smtp_authentication: # plain
   smtp_enable_starttls_auto: # true
   smtp_domain: # example.com # omit if using a normal Gmail account
+
+  # HOPTOAD (optional)
+  hoptoad_key: # Sign up at http://hoptoadapp.com and provide your API key to recieve exception notification emails
