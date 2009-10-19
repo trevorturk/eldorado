@@ -1,0 +1,305 @@
+da:
+  el_dorado: El Dorado
+  
+  default_settings:  #keys are also used as labels
+    title: El Dorado
+    tagline: A full-stack community web application written in Ruby/Rails
+    login_message: Du er ikke logget ind
+    
+  powered_by: Powered by
+  login: Log ind
+  logged_in_as: Logget ind som
+  last_visit: Sidste besøg
+  logout: Log ud
+  home: Forside
+  blog: Blog
+  articles: Artikler
+  comments: Kommentarer
+  chat: Chat
+  events: Kalender
+  files: Filer
+  forum: Forum
+  forums: Forums
+  category: Kategori
+  topic: Emne
+  topics: Emner
+  posts: Indlæg
+  post: Indlæg
+  headers: Bannere
+  users: Brugere
+  profile: Brugerprofil
+  avatars: Avatarer
+  ranks: Ranks (XXX)
+  rank: rank (XXX)
+  themes: Temaer
+  theme: Tema
+  authors: Forfattere
+  author: Forfatter
+  settings: Indstillinger
+  search: Søg
+  quote: Quote (XXX)
+  link: Link
+  help: Hjælp
+  activity: Aktivitet
+  administration: Administration
+  admin: Admin
+  subscriptions: Abbonementer
+  no_of_users: 
+    zero: 'Ingen brugere'
+    one: '1 bruger' 
+    other: "{{print_count}} brugere"
+  no_of_topics:
+    zero: 'Ingen emner'
+    one: '1 emne'
+    other: "{{print_count}} emner" 
+  no_of_posts:
+    zero: 'Ingen indlæg'
+    one: '1 indlæg'
+    other: "{{print_count}} indlæg" 
+  no_of_comments:
+    zero: 'Ingen kommentarer'
+    one: '1 kommentar'
+    other: "{{print_count}} kommentarer" 
+  by: af
+  or: eller
+  recent_articles: Seneste artikler
+  new_article: Ny artikel
+  edit_article: Rediger artikel
+  post_article: Send artikel
+  no_articles_found: Ingen artikler fundet
+  post_a_new_article: Skriv en ny artikel
+  blog_archives: Blog arkiv
+  looking_for_something: Leder du efter noget?
+  visit_blog_archives: Besøg blog arkivet
+  post_comment: Skriv kommentar
+  to_post_a_comment: for at skrive en kommentar
+  edit_comment: Rediger kommentar
+  search_results: Søgeresultater
+  submit: Send
+  save_changes: Gem ændringer
+  new_file: Ny fil
+  upload_a_new_file: Upload en ny fil
+  upload_via_url: Upload via URL
+  type: Type
+  size: Størrelse
+  uploaded: Uploadet
+  edit: Rediger
+  delete: Slet
+  x: X
+  cancel: Annuller
+  select: vælg
+  deselect: fravælg
+  upload: Upload
+  register: Opret bruger
+  registered: Registreret
+  are_you_sure: Er du sikker?
+  name: Navn
+  description: Beskrivelse
+  position: Position (xxx)
+  title: Titel
+  body: Indhold
+  new_category: Ny kategori
+  add_category: Tilføj kategori
+  edit_category: Rediger kategori
+  delete_category: Slet kategori
+  prev: Forrige
+  next: Næste
+  today: I dag
+  reminder: Påmindelse
+  _date: Dato
+  new_event: Ny begivenhed
+  add_event: Tilføj begivenhed
+  edit_event: Rediger begivenhed
+  editing_event: Redigerer begivenhed
+  add_a_new_event: Tilføj en ny begivenhed
+  select_a_forum: Vælg et forum
+  new_forum: Nyt forum
+  create_a_new_forum: Opret et nyt forum
+  add_forum: Tilføj forum
+  edit_forum: Rediger forum
+  delete_forum: Slet forum
+  new_topic: Nyt emne
+  edit_topic: Rediger emne
+  post_topic: Skriv emne (xxx)
+  editing_topic: Redigerer emne
+  start_a_new_topic: Opret et nyt emne
+  all_topics: Alle emner
+  view_all: Vis alle
+  sticky: Sticky (xxx)
+  locked: Låst
+  edit_header: Rediger banner
+  editing_header: Redigerer banner
+  new_header: Nyt banner
+  upload_a_new_header: Upload et nyt banner
+  optional: Valgfrit
+  more_messages: Flere beskeder
+  edit_post: Rediger indlæg
+  edit_topic: Rediger emne
+  post_a_reply: Skriv et svar
+  post_reply: Skriv svar
+  replies: Svar
+  to_post_a_reply: for at skrive et svar
+  views: Visninger
+  last_visit: Seneste besøg
+  last_edited: Senest redigeret
+  new_user: Opret bruger
+  edit_user: Rediger bruger
+  delete_user: Slet bruger
+  online: Online
+  offline: Offline
+  newest_user: Nyeste bruger
+  register_a_new_user: Opret en ny bruger
+  username: Brugernavn
+  email: Email
+  password: Password
+  password_twice: Password (igen)
+  bio: Bio (xxx)
+  signature: Signatur
+  timezone: Tidszone
+  edit_profile: Rediger profil
+  editing_profile: Redigerer profile
+  profile_updated: Profil opdateret 
+  new_avatar: Ny avatar
+  change_avatar: Skift avatar
+  get_an_avatar: Få en avatar
+  used_by: brugt af
+  upload_a_new_avatar: Upload en ny avatar
+  edit_rank: Rediger rang
+  new_rank: Ny rang
+  add_rank: Tilføj rang
+  add_a_new_rank: Tilføj en ny rang
+  minimum_posts: Minimum Posts (xxx)
+  edit_ban: Rediger blokering
+  remove_ban: Fjern blokering
+  ban_user: Bloker bruger
+  message: Besked
+  ban_until: Bloker indtil
+  revoke_admin: Fjern administrator-rettigheder
+  make_admin: Giv administrator-rettigheder
+  rank_administrator: Administrator
+  rank_banned: Blokeret
+  rank_member: Medlem
+  tagline: Tagline (xxx)
+  login_message: Loginbesked
+  announcement: Meddelelse
+  footer: Fodnote
+  favicon: Favoritikon (xxx)
+  admin_only_create_actions: Admin-Only Create Actions (xxx)
+  private: Privat
+  default_timezone: Standard tidszone
+  new_theme: Nyt tema
+  upload_a_new_theme: Upload et nyt tema
+  subscribe: Abboner
+  unsubscribe: Ophæv annomement
+  manage_subscriptions: Administrer abbonementer
+  mark_all_viewed: Marker alle som læst
+  page: Side
+  of: af
+  previous_page: Forrige side
+  next_page: Næste side
+  
+  messages:
+    delete_category_warning: Sletning af en kategori medfører sletning af alle fora, emner og indlæg den indeholder.
+    delete_forum_warning: Sletning af et forum sletter all fora, emner og indlæg det indeholder.
+    delete_user_warning: Sletning af en bruger medfører sletning af alt, hvad brugeren har oprettet, bl.a. forumindlæg, emner og andre brugeres svar på disse emner. 
+    confirm_delete_category: Bekræft sletning af kategorien her (xxx)
+    confirm_delete_forum: Bekræft sletning af forumet her (xxx)
+    confirm_delete_user: Bekræft sletning af brugeren her (xxx)
+    reminder_info: Vis en påmindelse 6 timer før og 2 timer efter denne begivenhed.
+    admin_only_create_actions_info: For eksempel vil "articles" begrænse oprettelsen af artikler til administratorer. 
+    private_info: Kræv login for all handlinger, inklusive oprettelse af nye brugere (uploadede filer vil stadig være offentligt tilgængelige).
+    no_scubscriptions_info: Du har ingen nye abbonementer. 
+    themes_info: Temaer må ikke fylde 50k eller derover
+    subscribe_info: Email opdateringer
+    locked_info: Dette emne er låst
+    headers_info: Størrelsen på bannere skal være 760x200 pixels.
+    
+  mailer:
+    new_message_posted: En ny besked er sendt til
+    manage_your_subscriptions: Administrer dine abbonementer her
+    
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%d-%m-%Y"
+      short: "%d/%b"
+      long: "%d/%B, %Y"
+      ed_month: "%B %Y"
+      ed_date: "%d/%b, %Y"
+      
+    day_names: [Søndag, Mandag, Tirsdag, Onsdag, Torsdag, Fredag, Lørdag]
+    abbr_day_names: [Søn, Man, Tir, Ons, Tor, Fre, Lør]
+      
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, Januar, Februar, Marts, April, Maj, Juni, Juli, August, September, Oktober, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, Maj, Jun, Jul, Aug, Sep, Okt, Nov, Dec]
+    # Used in date_select and datime_select.
+    order: [ :year, :month, :day ]
+ 
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+      ed_date_only: "%a, %d %b %Y"
+      ed_timestamp_short: "%I:%M%P, %d %b"
+      ed_timestamp: "%a, %d %b %Y, %I:%M%P"
+      ed_month: "%B %Y"
+      ed_date: "%b %d, %Y"
+    am: "am"
+    pm: "pm"
+    
+  datetime:
+    distance_in_words:
+      x_seconds_ago: 
+        zero: 'under 1 sekund siden'
+        one: '1 sekund siden'
+        other: '{{count}} sekunder siden'
+      x_minutes_ago:
+        zero: 'under 1 minut siden'
+        one: '1 minut siden'
+        other: '{{count}} minutter siden'
+      x_hours_ago:
+        zero: 'mindre end 1 time siden'
+        one: '1 time siden'
+        other: '{{count}} timer siden'
+      x_days_ago:
+        zero: 'under 1 dag siden'
+        one: '1 dag siden'
+        other: '{{count}} dage siden'
+  
+  number:
+    format:
+      precision: 3
+      separator: '.'
+      delimiter: ','
+    currency:
+      format:
+        unit: 'DKK'
+        precision: 2
+        format: '%u %n'
+        
+  # Used in number_to_human_size()
+  human:
+    format:
+      # These three are to override number.format and are optional
+      # separator:
+      delimiter: ""
+      precision: 1
+    # Rails <= v2.2.2
+    # storage_units: [Bytes, KB, MB, GB, TB]
+    # Rails >= v2.3
+    storage_units:
+      format: "%n %u"
+      units:
+        byte:
+          one: "Byte"
+          other: "Bytes"
+        kb: "KB"
+        mb: "MB"
+        gb: "GB"
+        tb: "TB"        
+
+  invalid_user_password_combo: "Ugyldigt brugernavn eller password"
