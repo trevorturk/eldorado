@@ -49,9 +49,9 @@ module BBCodeizer
       :atomfilms             => [ /\[atomfilms\](.+?)atomfilms.com\/film\/(.+?)\[\/atomfilms\]/i, '<embed src="http://www.atomfilms.com:80/a/autoplayer/shareEmbed.swf?keyword=\2" width="426" height="350"></embed>' ],
       :current               => [ /\[current\](.+?)current.com\/items\/(.+?)\/(.+?)\[\/current\]/i, '<object width="400" height="400"><param name="movie" value="http://current.com/e/\2/en_US"></param><param name="wmode" value="transparent"></param><param name="allowfullscreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://current.com/e/\2/en_US" type="application/x-shockwave-flash"  width="400" height="400" wmode="transparent" allowfullscreen="true" allowscriptaccess="always"></embed></object>' ],
       :vimeo                 => [ /\[vimeo\](.+?)vimeo.com\/(.+?)\[\/vimeo\]/i, '<object type="application/x-shockwave-flash" width="400" height="300" data="http://www.vimeo.com/moogaloop.swf?clip_id=\2&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=">	<param name="quality" value="best" />	<param name="allowfullscreen" value="true" />	<param name="scale" value="showAll" />	<param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=\2&amp;server=www.vimeo.com&amp;fullscreen=1&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=" /></object>' ],
-      :grooveshark           => [ /\[grooveshark\](.+?)\[\/grooveshark\]/i, '<object width="250" height="40"> <param name="movie" value="http://listen.grooveshark.com/songWidget.swf"></param> <param name="wmode" value="window"></param> <param name="allowScriptAccess" value="always"></param> <param name="flashvars" value="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0"></param> <embed src="http://listen.grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0" allowScriptAccess="always" wmode="window"></embed></object>']
-      , :sup                   => [ /\[sup\](.+?)\[\/sup\]/im, '<sup>\1</sup>' ]
-      , :sub                   => [ /\[sub\](.+?)\[\/sub\]/im, '<sub>\1</sub>' ]
+      :grooveshark           => [ /\[grooveshark\](.+?)\[\/grooveshark\]/i, '<object width="250" height="40"> <param name="movie" value="http://listen.grooveshark.com/songWidget.swf"></param> <param name="wmode" value="window"></param> <param name="allowScriptAccess" value="always"></param> <param name="flashvars" value="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0"></param> <embed src="http://listen.grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&widgetID=\1&style=grass&p=0" allowScriptAccess="always" wmode="window"></embed></object>'],
+      :sup                   => [ /\[sup\](.+?)\[\/sup\]/im, '<sup>\1</sup>' ],
+      :sub                   => [ /\[sub\](.+?)\[\/sub\]/im, '<sub>\1</sub>' ]
     }
         
     # Tags in this list are invoked. To deactivate a particular tag, call BBCodeizer.deactivate.
@@ -62,9 +62,7 @@ module BBCodeizer
                 :code, :quote, :youtube, :googlevid, :flash, :spoiler, :nsfw, :hide, :mp3, 
                 :superdeluxe, :comedycentral, :revver, :myspacetv, :collegehumor, :hulu, 
                 :metacafe, :yahoovid, :flickr, :gametrailers, :slideshare, :funnyordie, 
-                :atomfilms, :vimeo, :li, :list, :current, :grooveshark
-                , :sub , :sup
-              ]
+                :atomfilms, :vimeo, :li, :list, :current, :grooveshark, :sub, :sup ]
 
     # Parses all bbcode in +text+ and returns a new HTML-formatted string.
     def bbcodeize(text)
