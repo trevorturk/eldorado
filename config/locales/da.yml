@@ -140,7 +140,7 @@ da:
   replies: Svar
   to_post_a_reply: for at skrive et svar
   views: Visninger
-  last_visit: Seneste besøg
+  last_visit: Seneste login
   last_edited: Senest redigeret
   new_user: Opret bruger
   edit_user: Rediger bruger
@@ -179,7 +179,7 @@ da:
   rank_administrator: Administrator
   rank_banned: Blokeret
   rank_member: Medlem
-  tagline: Tagline (xxx)
+  tagline: Tagline
   login_message: Loginbesked
   announcement: Meddelelse
   footer: Fodnote
@@ -303,3 +303,23 @@ da:
         tb: "TB"        
 
   invalid_user_password_combo: "Ugyldigt brugernavn eller password"
+
+
+  activerecord:
+    attributes:
+      topic:
+        forum_id: Forum
+        title: Titel
+        posts: Indhold
+    errors:
+      template:
+        header: Fejl
+      models:
+        topic:
+          attributes:
+            forum_id: 
+              blank: skal vælges
+            title:
+              blank: skal udfyldes
+            posts:
+              invalid: skal udfyldes
