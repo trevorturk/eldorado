@@ -37,7 +37,7 @@ da:
   author: Forfatter
   settings: Indstillinger
   search: Søg
-  quote: Quote (XXX)
+  quote: Citér
   link: Link
   help: Hjælp
   activity: Aktivitet
@@ -69,7 +69,7 @@ da:
   no_articles_found: Ingen artikler fundet
   post_a_new_article: Skriv en ny artikel
   blog_archives: Blog arkiv
-  looking_for_something: Leder du efter noget?
+  looking_for_something: Leder du efter noget bestemt?
   visit_blog_archives: Besøg blog arkivet
   post_comment: Skriv kommentar
   to_post_a_comment: for at skrive en kommentar
@@ -78,7 +78,7 @@ da:
   submit: Send
   save_changes: Gem ændringer
   new_file: Ny fil
-  upload_a_new_file: Upload en ny fil
+  upload_a_new_file: Upload en fil
   upload_via_url: Upload via URL
   type: Type
   size: Størrelse
@@ -95,7 +95,7 @@ da:
   are_you_sure: Er du sikker?
   name: Navn
   description: Beskrivelse
-  position: Position (xxx)
+  position: Position
   title: Titel
   body: Indhold
   new_category: Ny kategori

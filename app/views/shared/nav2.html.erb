@@ -37,7 +37,7 @@
   <div class="info-right">
     <% if admin? %>
       <%= link_to I18n.t(:new_forum), new_forum_path(:category_id => @category.id) %> &nbsp;
-      <%= link_to 'Edit Category', edit_category_path(@category) %>
+      <%= link_to I18n.t(:edit_category), edit_category_path(@category) %>
     <% end %>
     <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
