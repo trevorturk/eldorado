@@ -186,6 +186,7 @@ en:
   favicon: Favicon
   admin_only_create_actions: Admin-Only Create Actions
   private: Private
+  clickable_header: Clickable header
   default_timezone: Default Timezone
   new_theme: New Theme
   upload_a_new_theme: Upload a New Theme
@@ -209,6 +210,7 @@ en:
     reminder_info: Show a reminder 6 hours before and 2 hours after this event.
     admin_only_create_actions_info: For example, "articles" would restrict creating new blog articles to admins only.
     private_info: Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)
+    clickable_header_info: If selected, the title and tagline are not shown. Instead, the header itself is a link to the site root. 
     no_subscriptions_info: You have no subscriptions.
     subscribe_info: Email updates
     locked_info: This Topic is Locked

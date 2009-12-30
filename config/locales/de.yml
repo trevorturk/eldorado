@@ -210,6 +210,7 @@ de:
     reminder_info: Zeigt eine Erinnerung 6 Stunden vor und 2 Stunden nach dem Event.
     admin_only_create_actions_info: '"articles" zum Beispiel würde die Erstellung neuer Blog-Artikel auf Administratoren beschränken.'
     private_info: Erfordert eine Anmeldung für alle Aktionen einschließlich der Erstellung neuer Benutzer. (Hochgeladene Dateien sind öffentlich erreichbar, wenn man die URL kennt)
+    clickable_header_info:
     no_subscriptions_info: Sie haben keine E-Mail-Abonnements.
     themes_info: Themen müssen kleiner als 50k sein.
     subscribe_info: E-Mail Aktualisierungupdates

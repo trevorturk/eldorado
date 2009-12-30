@@ -23,6 +23,9 @@
       <p><%= f.check_box :private %> <label for="setting_private"><%=t :private %></label>&nbsp; 
         <span class="detail"><%=t :private_info, :scope => :messages %></span>
       </p>
+      <p><%= f.check_box :clickable_header %> <label for="setting_clickable_header"><%=t :clickable_header %></label>&nbsp; 
+        <span class="detail"><%=t :clickable_header_info, :scope => :messages %></span>
+      </p>
       <p class="label"><label for="setting_time_zone"><%=t :default_timezone %></label></p>
       <p><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></p>
       <p>

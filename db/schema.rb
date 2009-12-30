@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091011171508) do
+ActiveRecord::Schema.define(:version => 20091230090216) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20091011171508) do
     t.boolean "private",           :default => false
     t.string  "login_message"
     t.string  "admin_only_create", :default => "",    :null => false
+    t.boolean "clickable_header",  :default => false
   end
 
   create_table "subscriptions", :force => true do |t|

@@ -7,16 +7,21 @@ module ApplicationHelper
     
   protected
   
-  def header_css
+  def header_image_path
     if current_controller == 'headers' && %w(edit show).include?(current_action)
       @header = Header.find(params[:id])
     else
       @header = Header.random
     end
-    if @header
-      return '<style type="text/css">.header { background: url("' + @header.attachment.url + '"); }</style>'
+
+    @header and @header.attachment.url or "/images/eldorado.jpg"
+  end
+  
+  def header_css
+    if @settings.clickable_header
+      return ""
     else
-      return '<style type="text/css">.header { background: url("/images/eldorado.jpg"); }</style>'
+      return "<style type=\"text/css\">.header { background: url('#{header_image_path}'); }</style>"
     end
   end
     

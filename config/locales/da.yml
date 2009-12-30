@@ -186,6 +186,7 @@ da:
   favicon: Favoritikon (xxx)
   admin_only_create_actions: Admin-Only Create Actions (xxx)
   private: Privat
+  clickable_header: Klikbart banner
   default_timezone: Standard tidszone
   new_theme: Nyt tema
   upload_a_new_theme: Upload et nyt tema
@@ -209,7 +210,8 @@ da:
     reminder_info: Vis en påmindelse 6 timer før og 2 timer efter denne begivenhed.
     admin_only_create_actions_info: For eksempel vil "articles" begrænse oprettelsen af artikler til administratorer. 
     private_info: Kræv login for all handlinger, inklusive oprettelse af nye brugere (uploadede filer vil stadig være offentligt tilgængelige).
-    no_subscriptions_info: Du har ingen nye abonnementer. 
+    clickable_header_info: Skjul titel og tagline, men lad selve banneret være et link til forsiden. 
+    no_subscriptions_info: Du har ingen nye abonnementer.
     subscribe_info: Email opdateringer
     locked_info: Dette emne er låst
     headers_info: Størrelsen på bannere skal være 760x200 pixels.

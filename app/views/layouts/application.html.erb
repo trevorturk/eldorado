@@ -16,8 +16,12 @@
   <div class="wrapper">
     <%= render :file => 'shared/reminders' unless locked_out? -%>
     <div class="header">
-      <h1><%= link_to h(@settings.title), root_path -%></h1>
-      <div class="tagline"><%=h @settings.tagline -%></div>
+      <% if @settings.clickable_header %>
+        <a href="<%= root_path %>"><img src="<%= header_image_path %>"/></a>
+      <% else %>
+        <h1><%= link_to h(@settings.title), root_path -%></h1>
+        <div class="tagline"><%=h @settings.tagline -%></div>
+      <% end %>
       <%= render :file => 'shared/tabs' unless locked_out? -%>
     </div>
     <div class="content">
