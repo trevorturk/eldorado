@@ -1,40 +1,34 @@
 --- !ruby/object:Gem::Specification 
-name: openrain-action_mailer_tls
+name: ambethia-smtp-tls
 version: !ruby/object:Gem::Version 
-  version: 1.1.3
+  version: 1.1.2
 platform: ruby
 authors: 
-- Marc Chung
+- Unknown
+- Jason L Perry
+- Elliot Cable
 autorequire: 
 bindir: bin
 cert_chain: []
 
-date: 2009-02-11 00:00:00 -06:00
+date: 2009-04-02 00:00:00 -05:00
 default_executable: 
 dependencies: []
 
-description: Conveniently send emails through Google's Hosted App service
-email: marc.chung@openrain.com
+description: A gem package for the SMTP TLS code that's been floating around for years
+email: jasper@ambethia.com
 executables: []
 
 extensions: []
 
-extra_rdoc_files: []
-
+extra_rdoc_files: 
+- README.rdoc
 files: 
-- History.txt
-- README.markdown
+- README.rdoc
 - VERSION.yml
-- generators/USAGE
-- generators/action_mailer_tls_generator.rb
-- generators/templates
-- generators/templates/config
-- generators/templates/config/initializers
-- generators/templates/config/initializers/smtp_gmail.rb
-- generators/templates/config/smtp_gmail.yml.sample
-- lib/smtp_tls.rb
+- lib/smtp-tls.rb
 has_rdoc: true
-homepage: http://github.com/openrain/action_mailer_tls
+homepage: http://github.com/ambethia/smtp-tls
 licenses: []
 
 post_install_message: 
@@ -61,6 +55,6 @@ rubyforge_project:
 rubygems_version: 1.3.5
 signing_key: 
 specification_version: 2
-summary: Send Email via Gmail
+summary: SMTP TLS (SSL) extension for Net::SMTP
 test_files: []
 

@@ -1,9 +1,0 @@
-== 1.1.3 / 2009-02-11
-    * Updated LICENSE and NOTICE to Apache 2.0
-
-== 1.1.0 / 2009-02-10
-    * Converted plugin into a Rubygem with a Rails generator.
-    * Updated README with installation details.
- 
-== 1.0.0 / 2009-02-09
-  * Tagging original SVN migration.
