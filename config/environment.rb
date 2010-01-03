@@ -11,7 +11,7 @@ Rails::Initializer.run do |config|
   config.frameworks -= [ :active_resource ]
   
   config.gem 'mislav-will_paginate', :version => '2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
-  config.gem 'ambethia-smtp-tls', :version => '1.1.2', :lib => "smtp_tls", :source => 'http://gems.github.com'
+  config.gem 'ambethia-smtp-tls', :version => '1.1.2', :lib => "smtp-tls", :source => 'http://gems.github.com'
   config.gem 'searchlogic', :version => '2.3.5'
   config.gem 'thoughtbot-paperclip', :version => '2.2.9.2', :lib => 'paperclip', :source => 'http://gems.github.com'
   config.gem 'right_aws', :version => '1.9.0' # TODO change to aws-s3 when paperclip does; right_aws 1.10.0 acts funny
