@@ -1,7 +1,6 @@
 module PaperclipSupport
   def self.included(klass)
     klass.class_eval do
-      
       require 'open-uri'
       
       attr_accessible :attachment, :attachment_url
@@ -38,7 +37,6 @@ module PaperclipSupport
         io.original_filename.blank? ? nil : io
       rescue # catch url errors with validations instead of exceptions (Errno::ENOENT, OpenURI::HTTPError, etc...)
       end
-      
     end
   end
 end

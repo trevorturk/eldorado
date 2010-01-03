@@ -1,22 +1,14 @@
 RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
-Rails::Initializer.run do |config|  
-  require 'open-uri'
+Rails::Initializer.run do |config|
   require 'yaml'
   
   config.time_zone = 'UTC'
   config.i18n.default_locale = :en
   config.active_record.partial_updates = true
   config.frameworks -= [ :active_resource ]
-  
-  config.gem 'mislav-will_paginate', :version => '2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
-  config.gem 'ambethia-smtp-tls', :version => '1.1.2', :lib => "smtp-tls", :source => 'http://gems.github.com'
-  config.gem 'searchlogic', :version => '2.3.5'
-  config.gem 'thoughtbot-paperclip', :version => '2.2.9.2', :lib => 'paperclip', :source => 'http://gems.github.com'
-  config.gem 'right_aws', :version => '1.9.0' # TODO change to aws-s3 when paperclip does; right_aws 1.10.0 acts funny
-  config.gem 'right_http_connection', :version => '1.2.4'
-  
+    
   # support yaml and heroku config
   CONFIG = (YAML.load_file('config/config.yml')[RAILS_ENV] rescue {}).merge(ENV)
   

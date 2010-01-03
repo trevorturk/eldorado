@@ -13,3 +13,6 @@
 /public/files/*
 /public/headers/*
 /public/themes/*
+bin/*
+vendor/bundler_gems/*
+!vendor/bundler_gems/cache/

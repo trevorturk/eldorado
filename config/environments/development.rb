@@ -1,3 +1,4 @@
+Bundler.require_env RAILS_ENV
 config.cache_classes = false
 config.whiny_nils = true
 config.action_controller.consider_all_requests_local = true
