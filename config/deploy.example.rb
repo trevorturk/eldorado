@@ -15,6 +15,7 @@ role :db,  "000.00.00.000", :primary => true
 before  'deploy:update_code', 'deploy:web:disable'
 after   'deploy:update_code', 'deploy:upload_config_files'
 after   'deploy:update_code', 'deploy:create_symlinks'
+after   'deploy:update_code', 'deploy:bundler'
 after   'deploy:restart', 'deploy:cleanup'
 after   'deploy:restart', 'deploy:web:enable'
 
@@ -28,6 +29,9 @@ namespace :deploy do
     # For security consider uploading a production-only configs to your server and using this instead:
     # run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
     # run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+  task :bundler do
+    run "cd #{release_path} && gem bundle"
   end
   task :create_symlinks do
     require 'yaml'
