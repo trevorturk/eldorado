@@ -4,11 +4,11 @@
 </div>
 
 <div class="home-right">
+  <%= render :file => 'articles/list' if enabled?('blog') %>
   <%= render :partial => 'events/mini' if enabled?('events') %>
   <%= render :file => 'uploads/index' if enabled?('files') %>
   <%= render :file => 'headers/list' if enabled?('headers') %>
   <%= render :file => 'users/index' if enabled?('users') %>
-  <%= render :file => 'avatars/list' if enabled?('avatars') %>
 </div>
 
 <div class="clear"> </div>

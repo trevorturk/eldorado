@@ -1,0 +1,19 @@
+<% if !@articles.empty? %>
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th class="tcl"><%= link_to I18n.t(:blog), articles_path %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for article in @articles.first(5) %>
+        <tr>
+          <td class="tcl">
+            <%= link_to h(article), article %> <%= t :by %>
+            <%= link_to h(article.user), user_articles_path(article.user) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

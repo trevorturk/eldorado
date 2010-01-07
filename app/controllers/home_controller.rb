@@ -10,6 +10,8 @@ class HomeController < ApplicationController
     @topics = Topic.get(1, 20)
     @uploads = Upload.find(:all, :limit => 5, :include => :user, :order => 'uploads.updated_at desc')
     @users = User.find(:all, :limit => 3, :order => 'profile_updated_at desc')
+
+    @articles = Article.get
   end
   
   def help
