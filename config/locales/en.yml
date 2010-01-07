@@ -62,7 +62,7 @@ en:
     other: "{{print_count}} Comments" 
   by: by
   or: or
-  recent_articles: Recent Articles
+  recent_articles: Recent Blog Articles
   new_article: New Article
   edit_article: Edit Article
   post_article: Post Article
@@ -197,6 +197,7 @@ en:
   of: of
   previous_page: Previous Page
   next_page: Next Page
+  themes_info: Themes must be smaller than 50k.
   
   messages:
     delete_category_warning: Deleting a category destroys all of the forums, topics, and posts it contains.
@@ -209,7 +210,6 @@ en:
     admin_only_create_actions_info: For example, "articles" would restrict creating new blog articles to admins only.
     private_info: Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)
     no_scubscriptions_info: You have no subscriptions.
-    themes_info: Themes must be smaller than 50k.
     subscribe_info: Email updates
     locked_info: This Topic is Locked
     headers_info: Headers should be sized 760x200px.

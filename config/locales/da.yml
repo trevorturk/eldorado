@@ -62,7 +62,7 @@ da:
     other: "{{print_count}} kommentarer" 
   by: af
   or: eller
-  recent_articles: Seneste artikler
+  recent_articles: Seneste artikler på bloggen
   new_article: Ny artikel
   edit_article: Rediger artikel
   post_article: Opret
@@ -197,19 +197,19 @@ da:
   of: af
   previous_page: Forrige side
   next_page: Næste side
+  themes_info: Temaer må højst fylde 50k
   
   messages:
     delete_category_warning: Sletning af en kategori medfører sletning af alle fora, emner og indlæg den indeholder.
     delete_forum_warning: Sletning af et forum sletter all fora, emner og indlæg det indeholder.
     delete_user_warning: Sletning af en bruger medfører sletning af alt, hvad brugeren har oprettet, bl.a. forumindlæg, emner og andre brugeres svar på disse emner. 
-    confirm_delete_category: Bekræft sletning af kategorien her (xxx)
-    confirm_delete_forum: Bekræft sletning af forumet her (xxx)
-    confirm_delete_user: Bekræft sletning af brugeren her (xxx)
+    confirm_delete_category: Bekræft sletning af kategorien 
+    confirm_delete_forum: Bekræft sletning af forumet 
+    confirm_delete_user: Bekræft sletning af brugeren 
     reminder_info: Vis en påmindelse 6 timer før og 2 timer efter denne begivenhed.
     admin_only_create_actions_info: For eksempel vil "articles" begrænse oprettelsen af artikler til administratorer. 
     private_info: Kræv login for all handlinger, inklusive oprettelse af nye brugere (uploadede filer vil stadig være offentligt tilgængelige).
     no_scubscriptions_info: Du har ingen nye abonnementer. 
-    themes_info: Temaer må ikke fylde 50k eller derover
     subscribe_info: Email opdateringer
     locked_info: Dette emne er låst
     headers_info: Størrelsen på bannere skal være 760x200 pixels.
@@ -244,8 +244,8 @@ da:
       short: "%d %b %H:%M"
       long: "%B %d, %Y %H:%M"
       ed_date_only: "%a, %d %b %Y"
-      ed_timestamp_short: "%I:%M%P, %d %b"
-      ed_timestamp: "%a, %d %b %Y, %I:%M%P"
+      ed_timestamp_short: "%H:%M, %d %b"
+      ed_timestamp: "%a, %d %b %Y, %H:%M"
       ed_month: "%B %Y"
       ed_date: "%b %d, %Y"
     am: "am"
@@ -271,8 +271,19 @@ da:
         other: '{{count}} dage siden'
   
   number:
+    human:
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"        
     format:
-      precision: 3
+      precision: 2
       separator: '.'
       delimiter: ','
     currency:
