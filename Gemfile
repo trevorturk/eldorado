@@ -10,7 +10,7 @@ gem "right_aws", "1.9.0"
 gem "right_http_connection", "1.2.4"
 gem "searchlogic", "2.3.9"
 gem "will_paginate", "2.3.11"
-gem "ambethia-smtp-tls", "1.1.2"
+gem "ambethia-smtp-tls", "1.1.2", :require_as => "smtp-tls"
 
 only :test do
   gem "faker", "0.3.1"
