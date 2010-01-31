@@ -1,10 +1,11 @@
 <ul class="tabs">
+  <% # The home tab should always be visible %>
   <li id="tab-home" class="tab <%= tab('home') %>"><%= link_to I18n.t(:home), root_path %></li>
-  <li id="tab-blog" class="tab <%= tab('articles') %>"><%= link_to I18n.t(:blog), blog_path %></li>
-  <li id="tab-chat" class="tab <%= tab('messages') %>"><%= link_to I18n.t(:chat), chat_path %></li>
-  <li id="tab-events" class="tab <%= tab('events') %>"><%= link_to I18n.t(:events), events_path %></li>
-  <li id="tab-files" class="tab <%= tab('uploads') %>"><%= link_to I18n.t(:files), files_path %></li>
-  <li id="tab-forum" class="tab <%= tab('forums') %>"><%= link_to I18n.t(:forum), forum_root_path %></li>
-  <li id="tab-headers" class="tab <%= tab('headers') %>"><%= link_to I18n.t(:headers), headers_path %></li>
-  <li id="tab-users" class="tab <%= tab('users') %>"><%= link_to I18n.t(:users), users_path %></li>
+  <% if not disabled_feature? "blog" %><li id="tab-blog" class="tab <%= tab('articles') %>"><%= link_to I18n.t(:blog), blog_path %></li><% end %>
+  <% if not disabled_feature? "chat" %><li id="tab-chat" class="tab <%= tab('messages') %>"><%= link_to I18n.t(:chat), chat_path %></li><% end %>
+  <% if not disabled_feature? "events" %><li id="tab-events" class="tab <%= tab('events') %>"><%= link_to I18n.t(:events), events_path %></li><% end %>
+  <% if not disabled_feature? "uploads" %><li id="tab-files" class="tab <%= tab('uploads') %>"><%= link_to I18n.t(:files), files_path %></li><% end %>
+  <% if not disabled_feature? "forum" %><li id="tab-forum" class="tab <%= tab('forums') %>"><%= link_to I18n.t(:forum), forum_root_path %></li><% end %>
+  <% if not disabled_feature? "headers" %><li id="tab-headers" class="tab <%= tab('headers') %>"><%= link_to I18n.t(:headers), headers_path %></li><% end %>
+  <% if not disabled_feature? "users" %><li id="tab-users" class="tab <%= tab('users') %>"><%= link_to I18n.t(:users), users_path %></li><% end %>
 </ul>

@@ -132,5 +132,13 @@ module ApplicationHelper
   def time_stamp(time, short = false)
     I18n.l(time, :format => ( short ? :ed_timestamp_short : :ed_timestamp ) ) 
   end
+
+  def disabled_feature?(f)
+    # Admins can see all features
+    return false if (current_user != 0 and current_user.admin)
+
+    disabled_features = (CONFIG["disabled_features"] or "").split(",").map { |x| x.strip }
+    disabled_features.include?(f)
+  end
   
 end

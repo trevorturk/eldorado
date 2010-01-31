@@ -12,10 +12,10 @@
 </div>
 
 <div class="home-right">
-  <%= render :partial => 'events/mini.html.erb' %>
+  <%= render :partial => 'events/mini.html.erb' if not disabled_feature?("events")%>
   <%= render :file => 'uploads/index' %>
   <%= render :file => 'headers/list' %>
-  <%= render :file => 'users/index' %>
+  <%= render :file => 'users/index' if not disabled_feature?("users") %>
   <%= render :file => 'avatars/list' %>
 </div>
 

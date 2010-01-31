@@ -46,3 +46,6 @@ production:
 
   # LOCALE (optional)
   locale: # Choose a locale from config/locales, en is the default
+
+  # DISABLE TABS (optional)
+  disable_tabs: # list tabs that want to hide from users (e.g. "blog events headers")
