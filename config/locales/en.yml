@@ -162,7 +162,7 @@ en:
   new_avatar: New Avatar
   change_avatar: Change Avatar
   get_an_avatar: Get an Avatar
-  used_by: benutzt von
+  used_by: used by
   upload_a_new_avatar: Upload a New Avatar
   edit_rank: Edit Rank
   new_rank: New Rank
@@ -302,3 +302,4 @@ en:
         gb: "GB"
         tb: "TB"        
 
+  invalid_user_password_combo: "Invalid user/password combination"

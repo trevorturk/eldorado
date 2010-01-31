@@ -22,7 +22,7 @@
         <% elsif current_controller == 'themes' %><%= link_to I18n.t(:upload_a_new_theme), new_theme_path %>
         <% elsif current_controller == 'topics' %>
           <% if @topic && @topic.forum %><%= link_to I18n.t(:start_a_new_topic), new_topic_path(:forum_id => @topic.forum.id) %>
-          <% else %><%= link_to 'Start a New Topic', new_topic_path %>
+          <% else %><%= link_to I18n.t(:start_a_new_topic), new_topic_path %>
           <% end %>
         <% elsif current_controller == 'uploads' %><%= link_to I18n.t(:upload_a_new_file), new_upload_path %>
         <% elsif current_controller == 'users' %><%= link_to I18n.t(:register_a_new_user), new_user_path %>

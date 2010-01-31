@@ -304,3 +304,4 @@ de:
           gb: "GB"
           tb: "TB"        
         
+  invalid_user_password_combo: "Ungültige Benutzer / Passwort-Kombination (xxx machine-translated)"

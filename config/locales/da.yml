@@ -43,7 +43,7 @@ da:
   activity: Aktivitet
   administration: Administration
   admin: Admin
-  subscriptions: Abbonementer
+  subscriptions: Abonnementer
   no_of_users: 
     zero: 'Ingen brugere'
     one: '1 bruger' 
@@ -65,7 +65,7 @@ da:
   recent_articles: Seneste artikler
   new_article: Ny artikel
   edit_article: Rediger artikel
-  post_article: Send artikel
+  post_article: Opret
   no_articles_found: Ingen artikler fundet
   post_a_new_article: Skriv en ny artikel
   blog_archives: Blog arkiv
@@ -120,12 +120,12 @@ da:
   delete_forum: Slet forum
   new_topic: Nyt emne
   edit_topic: Rediger emne
-  post_topic: Skriv emne (xxx)
+  post_topic: Opret
   editing_topic: Redigerer emne
   start_a_new_topic: Opret et nyt emne
   all_topics: Alle emner
   view_all: Vis alle
-  sticky: Sticky (xxx)
+  sticky: Sticky (altid øverst)
   locked: Låst
   edit_header: Rediger banner
   editing_header: Redigerer banner
@@ -189,9 +189,9 @@ da:
   default_timezone: Standard tidszone
   new_theme: Nyt tema
   upload_a_new_theme: Upload et nyt tema
-  subscribe: Abboner
-  unsubscribe: Ophæv annomement
-  manage_subscriptions: Administrer abbonementer
+  subscribe: Abonner
+  unsubscribe: Ophæv abonnement
+  manage_subscriptions: Administrer abonnementer
   mark_all_viewed: Marker alle som læst
   page: Side
   of: af
@@ -208,7 +208,7 @@ da:
     reminder_info: Vis en påmindelse 6 timer før og 2 timer efter denne begivenhed.
     admin_only_create_actions_info: For eksempel vil "articles" begrænse oprettelsen af artikler til administratorer. 
     private_info: Kræv login for all handlinger, inklusive oprettelse af nye brugere (uploadede filer vil stadig være offentligt tilgængelige).
-    no_scubscriptions_info: Du har ingen nye abbonementer. 
+    no_scubscriptions_info: Du har ingen nye abonnementer. 
     themes_info: Temaer må ikke fylde 50k eller derover
     subscribe_info: Email opdateringer
     locked_info: Dette emne er låst
@@ -216,7 +216,7 @@ da:
     
   mailer:
     new_message_posted: En ny besked er sendt til
-    manage_your_subscriptions: Administrer dine abbonementer her
+    manage_your_subscriptions: Administrer dine abonnementer her
     
   date:
     formats:

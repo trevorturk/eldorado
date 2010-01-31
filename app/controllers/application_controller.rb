@@ -58,10 +58,6 @@ class ApplicationController < ActionController::Base
     if params[:locale]
       # The user has explicitly requested a locale.
       I18n.locale = params[:locale]
-    else
-      # We use the browser's locale settings.
-      I18n.locale = request.preferred_language_from I18n.available_locales
     end
   end
-
 end
