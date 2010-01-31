@@ -2,11 +2,11 @@
   <table cellspacing="0">
     <thead>
       <tr>
-        <th class="tcl" colspan="2"><%= link_to 'Files', files_path %></th>
+        <th class="tcl" colspan="2"><%= link_to I18n.t(:files), files_path %></th>
         <% unless current_controller == 'home' %>
-          <th class="tcl">Type</th>
-          <th class="tcm">Size</th>
-          <th class="tcr">Uploaded</th>
+          <th class="tcl"><%=t :type %></th>
+          <th class="tcm"><%=t :size %></th>
+          <th class="tcr"><%=t :uploaded %></th>
         <% end %>
       </tr>
     </thead>
@@ -21,10 +21,10 @@
               <%= link_to_function '(&raquo;)', "$('mp3-#{upload.attachment.url}').toggle()" if upload.is_mp3? %>
             <% end %>
             
-            by <%=h upload.user %>
+            <%=t :by %> <%=h upload.user %>
             
             <% unless current_controller == 'home' %>
-              <%= link_to '(x)', upload, :confirm => 'Are you sure?', :method => :delete if can_edit?(upload) %>
+              <%= link_to '('+I18n.t(:x)+')', upload, :confirm => I18n.t(:are_you_sure), :method => :delete if can_edit?(upload) %>
             <% end %>
             
             <% unless current_controller == 'home' %>

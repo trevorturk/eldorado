@@ -64,6 +64,8 @@ class UsersController < ApplicationController
   
   def ban
     @user = User.find(params[:id])
+    #@user.banned_until = Time.now.utc + 3.month if  @user.banned_until == nil   # default: ban for three month
+    @user.banned_until = Time.utc(2099,12,31,23,59,59) if  @user.banned_until == nil # default: ban 'forever'
   end
   
   def remove_ban

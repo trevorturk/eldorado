@@ -2,32 +2,32 @@
 
 <% form_for @settings do |f| -%>
   <div class="box" id="box-settings-index">
-    <span class="top">Settings</span>
-      <p class="label"><label for="setting_title">Title</label></p>
+    <span class="top"><%=t :settings %></span>
+      <p class="label"><label for="setting_title"><%=t :title %></label></p>
       <p><%= f.text_field :title, :class => 'text-field' %></p>
-      <p class="label"><label for="setting_tagline">Tagline</label></p>
+      <p class="label"><label for="setting_tagline"><%=t :tagline %></label></p>
       <p><%= f.text_field :tagline, :class => 'text-field' %></p>
-      <p class="label"><label for="setting_login_message">Login Message</label></p>
+      <p class="label"><label for="setting_login_message"><%=t :login_message %></label></p>
       <p><%= f.text_field :login_message, :class => 'text-field' %></p>
-      <p class="label"><label for="setting_announcement">Announcement</label></p>
+      <p class="label"><label for="setting_announcement"><%=t :announcement %></label></p>
       <p><%= f.text_area :announcement, :rows => '3', :class => 'text-field' %></p>
-      <p class="label"><label for="setting_footer">Footer</label></p>
+      <p class="label"><label for="setting_footer"><%=t :footer %></label></p>
       <p><%= f.text_area :footer, :rows => '3', :class => 'text-field' %></p>
-      <p class="label"><label for="setting_favicon">Favicon</label></p>
+      <p class="label"><label for="setting_favicon"><%=t :favicon %></label></p>
       <p><%= f.text_field :favicon, :class => 'text-field' %></p>
       <p class="label">
-        <label for="setting_admin_only_create">Admin-Only Create Actions</label>&nbsp;
-        <span class="detail">For example, "articles" would restrict creating new blog articles to admins only.</span>
+        <label for="setting_admin_only_create"><%=t :admin_only_create_actions %></label>&nbsp;
+        <span class="detail"><%=t :admin_only_create_actions_info, :scope => :messages %></span>
       </p>
       <p><%= f.text_field :admin_only_create, :class => 'text-field' %></p>
-      <p><%= f.check_box :private %> <label for="setting_private">Private</label>&nbsp; 
-        <span class="detail">Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)</span>
+      <p><%= f.check_box :private %> <label for="setting_private"><%=t :private %></label>&nbsp; 
+        <span class="detail"><%=t :private_info, :scope => :messages %></span>
       </p>
-      <p class="label"><label for="setting_time_zone">Default Timezone</label></p>
+      <p class="label"><label for="setting_time_zone"><%=t :default_timezone %></label></p>
       <p><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></p>
       <p>
-        <%= submit_tag 'Save Changes', :disable_with => 'Save Changes' %>&nbsp; 
-        <%= link_to 'Cancel', root_path %> &nbsp;
+        <%= submit_tag I18n.t(:save_changes), :disable_with => I18n.t(:save_changes) %>&nbsp; 
+        <%= link_to I18n.t(:cancel), root_path %> &nbsp;
       </p>
     </div>
 <% end %>

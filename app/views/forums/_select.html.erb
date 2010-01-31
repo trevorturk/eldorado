@@ -1,7 +1,7 @@
-<p class="label"><label for="topic_forum">Forum</label></p>
+<p class="label"><label for="topic_forum"><%=t :forum %></label></p>
 <p>
   <select id="topic_forum_id" name="topic[forum_id]">
-    <option disabled="disabled" value="">Select a Forum</option>
+    <option disabled="disabled" value=""><%=t :select_a_forum %></option>
     <% @forum_id = @topic.forum_id unless @topic.forum_id.blank?; @forum_id ||= params[:forum_id].to_i %>
     <% for category in Category.find(:all, :order => 'categories.position') %>
       <option disabled="disabled" value=""><%= h(category) %></option>

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   include AuthenticationSystem, ExceptionHandler
   
-  before_filter :get_settings, :auth_token_login, :check_bans, :check_privacy, :check_admin_only_create, :set_timezone, :update_online_at, :get_layout_vars
+  before_filter :get_settings, :auth_token_login, :check_bans, :check_privacy, :check_admin_only_create, :set_timezone, :update_online_at, :get_layout_vars, :set_locale 
   helper_method :current_action, :current_controller, :current_user, :logged_in?, :logged_out?, :is_online?, :admin?, :can_edit?, :locked_out?
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
@@ -52,4 +52,16 @@ class ApplicationController < ActionController::Base
     @parent_user = User.find(params[:user_id]) if params[:user_id]
     @parent = @parent_user ? @parent_user.send(current_controller) : current_controller.singularize.classify.constantize
   end
+  
+  def set_locale
+    # if this is nil then I18n.default_locale will be used
+    if params[:locale]
+      # The user has explicitly requested a locale.
+      I18n.locale = params[:locale]
+    else
+      # We use the browser's locale settings.
+      I18n.locale = request.preferred_language_from I18n.available_locales
+    end
+  end
+
 end

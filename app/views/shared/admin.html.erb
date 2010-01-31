@@ -1,9 +1,9 @@
 <div class="info-left">
-  <span class="title">Administration</span>
+  <span class="title"><%=t :administration %></span>
   <span class="detail">
     &nbsp;| &nbsp;
-    <%= link_to 'Settings', settings_path %> &nbsp; 
-    <%= link_to 'Themes', themes_path %>
+    <%= link_to I18n.t(:settings), settings_path %> &nbsp; 
+    <%= link_to I18n.t(:themes), themes_path %>
   </span>
 </div>
 <div class="clear"> </div>

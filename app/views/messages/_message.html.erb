@@ -3,6 +3,6 @@
   <td class="tcl"><%= bb(message.body) %></td>
   <td class="tcr">
     <%= link_to time_stamp(message.created_at, true), message %> 
-    <%= link_to '(x)', message, :method => :delete, :confirm => 'Are you sure?' if can_edit?(message) %>
+    <%= link_to '('+I18n.t(:x)+')', message, :method => :delete, :confirm => I18n.t(:are_you_sure) if can_edit?(message) %>
   </td>
 </tr>

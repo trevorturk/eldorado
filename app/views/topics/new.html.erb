@@ -2,24 +2,28 @@
 <% @topic = Topic.new unless @topic %>
 <% form_for @topic do |f| %>
   <div class="box" id="box-new-new">
-    <span class="top">New Topic</span>
-    <p class="label"><label for="topic_title">Title</label></p>
+    <span class="top"><%=t :new_topic %></span>
+    <p class="label"><label for="topic_title"><%=t :title %></label></p>
     <p><%= f.text_field :title, :class => 'text-field' %>
-       &nbsp; <%= f.check_box :locked %><label for="topic_locked"> Locked</label> &nbsp; 
+       &nbsp; <%= f.check_box :locked %><label for="topic_locked"> <%=t :locked %></label> &nbsp; 
        <% if admin? %>
-         <%= f.check_box :sticky %><label for="topic_sticky"> Sticky</label>
+         <%= f.check_box :sticky %><label for="topic_sticky"> <%=t :sticky %></label>
        <% end %>
     </p>
     <%= render :partial => 'forums/select' %>
-    <p class="label"><label for="topic_body">Body</label></p>
+    <p class="label"><label for="topic_body"><%=t :body %></label></p>
     <p><%= f.text_area :body, :rows => '8', :class => 'text-field' %></p>
     <p>
-      <%= f.check_box :subscribe %><label for="topic_subscribe"> Subscribe (Email updates)</label>
+      <%= f.check_box :subscribe %><label for="topic_subscribe"><%=t :subscribe %> (<%=t :subscribe_info, :scope => :messages %>)</label>
     </p>
     <p>
-      <%= submit_tag "Post Topic", :disable_with => "Post Topic" %>&nbsp;
-      <%= link_to 'Upload a New File', new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
-      <%= link_to 'Cancel', forum_root_path %>
+      <%= submit_tag I18n.t(:post_topic), :disable_with => I18n.t(:post_topic) %>&nbsp;
+      <%= link_to I18n.t(:upload_a_new_file), new_upload_path, :popup => ['height=520,width=820'] %> &nbsp; 
+      <% if current_action != 'new' %>
+        <%= link_to_function I18n.t(:cancel), "$('action').toggle()" %>
+      <% else %>
+        <%= link_to I18n.t(:cancel), forum_root_path %>
+      <% end %>
     </p>
   </div>
 <% end %>

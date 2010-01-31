@@ -8,19 +8,19 @@
   </div>
   <div class="info-right">
     <span class="title">&nbsp;</span>
-    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
+    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %></span>
   </div>
   <div class="clear"> </div>
 <% end %>
 
 <% if %w(posts).include?(current_controller) %>
   <div class="info-left">
-    <span class="title"><%= number_with_delimiter(@posts.total_entries) %> Posts</span>
+    <span class="title"><%= t_no_of :no_of_posts, @posts.total_entries %></span>
     <span class="detail"></span>
   </div>
   <div class="info-right">
     <span class="title">&nbsp;</span>
-    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
+    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %></span>
   </div>
   <div class="clear"> </div>
 <% end %>
@@ -28,11 +28,11 @@
 <% if %w(users).include?(current_controller) %>
   <div class="info-left">
     <span class="title"><%=h @user %></span>
-    <span class="detail">&nbsp;|&nbsp; <%= @user.posts.size %> Posts</span>
+    <span class="detail">&nbsp;|&nbsp; <%= @user.posts.size %> I18n.t(:posts)</span>
   </div>
   <div class="info-right">
     <span class="title">&nbsp;</span>
-    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %></span>
+    <span class="detail"><%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %></span>
   </div>
   <div class="clear"> </div>
 <% end %>
@@ -60,14 +60,14 @@
   <% end %>
   <% if @topic.locked && !can_edit?(@topic) %>
     <div class="nav nav-footer">
-      <p class="nav-right">This Topic is Locked</p>
+      <p class="nav-right"><%=t :locked_info, :scope => :messages %></p>
     </div>
   <% end %>
   <% if !logged_in? %>
     <div class="nav nav-footer">
       <p class="nav-right">
-        <%= link_to 'Login', login_path %> or 
-        <%= link_to 'Register', register_path %> to post a reply
+        <%= link_to I18n.t(:login), login_path %> <%=t :or %> 
+        <%= link_to I18n.t(:register), register_path %> <%=t :to_post_a_reply %>
       </p>
     </div>
   <% end %>

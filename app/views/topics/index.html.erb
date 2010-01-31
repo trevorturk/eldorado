@@ -18,15 +18,15 @@
   <table cellspacing="0" class="topics-index">
     <thead>
       <tr>
-        <th class="tcl" colspan="2"><%= link_to 'Topics', topics_path %></th>
+        <th class="tcl" colspan="2"><%= link_to I18n.t(:topics), topics_path %></th>
         <% if %w(categories topics).include?(current_controller) %>
-          <th class="tcl tcf">Forum</th>
+          <th class="tcl tcf"><%=t :forum %></th>
         <% end %>
-        <th class="tcm">Replies</th>
+        <th class="tcm"><%=t :replies %></th>
         <% unless current_controller == 'home' %>
-          <th class="tcm">Views</th>
+          <th class="tcm"><%=t :views %></th>
         <% end %>
-        <th class="tcr"><%= link_to 'Activity', posts_path %></th>
+        <th class="tcr"><%= link_to I18n.t(:activity), posts_path %></th>
       </tr>
     </thead>
     <tbody>
@@ -34,8 +34,8 @@
         <tr>
           <td class="tci"><%= icon_for(topic) %></td>
           <td class="tcl">
-            <span class="topic-status"><%= 'Sticky' if topic.sticky? %> <%= 'Locked' if topic.locked? %></span>
-            <%= link_to h(topic), topic %> by <%=h topic.user %>
+            <span class="topic-status"><%= I18n.t(:sticky) if topic.sticky? %> <%= I18n.t(:locked) if topic.locked? %></span>
+            <%= link_to h(topic), topic %> <%=t :by %> <%=h topic.user %>
           </td>
           <% if %w(categories topics).include?(current_controller) %>
             <td class="tcl">
@@ -48,7 +48,7 @@
           <% end %>
           <td class="tcr">
             <%= link_to time_ago_or_time_stamp(topic.last_post_at), show_new_topic_path(topic) %> 
-            by <%=h topic.last_poster %>
+            <%=t :by %> <%=h topic.last_poster %>
           </td>
         </tr>
       <% end %>
@@ -59,15 +59,15 @@
     <div class="nav nav-footer">
       <p class="nav-left">
         <% if @category.forums.blank? %>
-          <%= link_to 'Create a New Forum &raquo;', new_forum_path(:category_id => @category.id) %>
+          <%= link_to I18n.t(:create_a_new_forum)+' &raquo;', new_forum_path(:category_id => @category.id) %>
         <% else %>
-          <%= link_to 'Start a New Topic &raquo;', new_topic_path %>
+          <%= link_to I18n.t(:start_a_new_topic)+' &raquo;', new_topic_path %>
         <% end %>
       </p>
     </div>
   <% elsif current_controller == 'forums' %>
     <div class="nav nav-footer">
-      <p class="nav-left"><%= link_to 'Start a New Topic &raquo;', new_topic_path(:forum_id => @forum.id) %></p>
+      <p class="nav-left"><%= link_to I18n.t(:start_a_new_topic)+' &raquo;', new_topic_path(:forum_id => @forum.id) %></p>
     </div>
   <% end %>
 <% end %>
