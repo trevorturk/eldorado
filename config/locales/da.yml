@@ -209,7 +209,7 @@ da:
     reminder_info: Vis en påmindelse 6 timer før og 2 timer efter denne begivenhed.
     admin_only_create_actions_info: For eksempel vil "articles" begrænse oprettelsen af artikler til administratorer. 
     private_info: Kræv login for all handlinger, inklusive oprettelse af nye brugere (uploadede filer vil stadig være offentligt tilgængelige).
-    no_scubscriptions_info: Du har ingen nye abonnementer. 
+    no_subscriptions_info: Du har ingen nye abonnementer. 
     subscribe_info: Email opdateringer
     locked_info: Dette emne er låst
     headers_info: Størrelsen på bannere skal være 760x200 pixels.

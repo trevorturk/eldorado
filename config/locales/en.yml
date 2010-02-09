@@ -1,11 +1,11 @@
 en:
   el_dorado: El Dorado
-  
+
   default_settings:  #keys are also used as labels
     title: El Dorado
     tagline: A full-stack community web application written in Ruby/Rails
     login_message: You are not logged in
-    
+
   powered_by: Powered by
   login: Login
   logged_in_as: Logged in as
@@ -44,22 +44,22 @@ en:
   administration: Administration
   admin: Admin
   subscriptions: Subscriptions
-  no_of_users: 
+  no_of_users:
     zero: 'No Users'
-    one: '1 User' 
+    one: '1 User'
     other: "{{print_count}} Users"
   no_of_topics:
     zero: 'No Topics'
     one: '1 Topic'
-    other: "{{print_count}} Topics" 
+    other: "{{print_count}} Topics"
   no_of_posts:
     zero: 'No Posts'
     one: '1 Post'
-    other: "{{print_count}} Posts" 
+    other: "{{print_count}} Posts"
   no_of_comments:
     zero: 'No Comments'
     one: '1 Comment'
-    other: "{{print_count}} Comments" 
+    other: "{{print_count}} Comments"
   by: by
   or: or
   recent_articles: Recent Blog Articles
@@ -85,7 +85,7 @@ en:
   uploaded: Uploaded
   edit: Edit
   delete: Delete
-  x: X
+  x: x
   cancel: Cancel
   select: select
   deselect: deselect
@@ -189,8 +189,8 @@ en:
   default_timezone: Default Timezone
   new_theme: New Theme
   upload_a_new_theme: Upload a New Theme
-  subscribe: Subscribe 
-  unsubscribe: Unsubscribe 
+  subscribe: Subscribe
+  unsubscribe: Unsubscribe
   manage_subscriptions: Manage Subscriptions
   mark_all_viewed: Mark All Viewed
   page: Page
@@ -198,7 +198,7 @@ en:
   previous_page: Previous Page
   next_page: Next Page
   themes_info: Themes must be smaller than 50k.
-  
+
   messages:
     delete_category_warning: Deleting a category destroys all of the forums, topics, and posts it contains.
     delete_forum_warning: Deleting a forum destroys all of the forums, topics, and posts it contains.
@@ -209,15 +209,15 @@ en:
     reminder_info: Show a reminder 6 hours before and 2 hours after this event.
     admin_only_create_actions_info: For example, "articles" would restrict creating new blog articles to admins only.
     private_info: Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)
-    no_scubscriptions_info: You have no subscriptions.
+    no_subscriptions_info: You have no subscriptions.
     subscribe_info: Email updates
     locked_info: This Topic is Locked
     headers_info: Headers should be sized 760x200px.
-    
+
   mailer:
     new_message_posted: A new message has been posted to
     manage_your_subscriptions: Manage your subscriptions here
-    
+
   date:
     formats:
       # Use the strftime parameters for formats.
@@ -228,16 +228,16 @@ en:
       long: "%B %d, %Y"
       ed_month: "%B %Y"
       ed_date: "%b %d, %Y"
-      
+
     day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
     abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
-      
+
     # Don't forget the nil at the beginning; there's no such thing as a 0th month
     month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
     abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
     # Used in date_select and datime_select.
     order: [ :year, :month, :day ]
- 
+
   time:
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
@@ -250,10 +250,10 @@ en:
       ed_date: "%b %d, %Y"
     am: "am"
     pm: "pm"
-    
+
   datetime:
     distance_in_words:
-      x_seconds_ago: 
+      x_seconds_ago:
         zero: 'less than 1 second ago'
         one: '1 second ago'
         other: '{{count}} seconds ago'
@@ -269,7 +269,7 @@ en:
         zero: 'less than 1 day ago'
         one: '1 day ago'
         other: '{{count}} days ago'
-  
+
   number:
     format:
       precision: 3
@@ -280,7 +280,7 @@ en:
         unit: '$'
         precision: 2
         format: '%u %n'
-        
+
   # Used in number_to_human_size()
   human:
     format:
@@ -300,6 +300,6 @@ en:
         kb: "KB"
         mb: "MB"
         gb: "GB"
-        tb: "TB"        
+        tb: "TB"
 
   invalid_user_password_combo: "Invalid user/password combination"
