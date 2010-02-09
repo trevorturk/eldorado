@@ -1,24 +1,16 @@
 == Welcome to El Dorado
 
-El Dorado is a full-stack community web application written in Ruby/Rails. It features a forum, 
+El Dorado is a full-stack community web application written in Ruby/Rails. It features a forum,
 event calendar, group chat, file sharing, random headers, avatars, themes, and privacy settings.
-
 http://almosteffortless.com/eldorado
-
-
-== Requirements 
-
-Rails: http://guides.rubyonrails.org/getting_started.html
-Git: http://book.git-scm.com/2_installing_git.html
 
 
 == Installation
 
-# If you don't have git, you can download El Dorado here: http://almosteffortless.com/eldorado
-
+# Requires Ruby >= 1.8.7
 git clone git://github.com/trevorturk/eldorado.git
 cd eldorado
-sudo gem install bundler
+sudo gem install bundler --version='0.8.0' # until heroku supports 0.9.x
 gem bundle
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
@@ -28,9 +20,7 @@ script/server
 # http://localhost:3000/
 
 
-== Deployment on Heroku
-
-# Follow the local installation instructions above, then...
+== Deployment
 
 sudo gem install heroku
 heroku create
@@ -43,27 +33,11 @@ heroku open
 # Read more about Heroku here: http://heroku.com/
 
 
-== More Deployment Strategies
-
-http://almosteffortless.com/2009/06/24/install-ruby-enterprise-phusion-passenger-and-el-dorado-on-debian-lenny/
-
-
 == Upgrading
 
-# Always back up your database and files before performing an upgrade
-# Consider using Git and Capistrano to make upgrades easier (see config/deploy.example.rb)
-# Download El Dorado from http://almosteffortless.com/eldorado or http://github.com/trevorturk/eldorado/
-# Replace the files in your installation except for uploaded files, avatars, etc in public/
-# Note that the git url was been changed on 6/24/09 to git://github.com/trevorturk/eldorado.git
-# Review possible config changes in config/config.example.yml (required as of 6/24/09)
-# Migrate to the latest database schema ("rake db:migrate" or "cap deploy:migrations")
-
-
-== Upgrading on Heroku
-
-# From your local eldorado directory...
-
+heroku db:pull sqlite://db/backup.sqlite3
 git pull
+gem bundle
 # Review possible config changes in config/config.example.yml
 rake heroku:config
 git push heroku master
@@ -73,14 +47,14 @@ heroku open
 
 == Thanks
 
-NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et al. (Ruby), 
-DHH et al. (Rails), Rick Olson and Josh Goebel (Beast), Rickard Andersson et al. (PunBB), 
+NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et al. (Ruby),
+DHH et al. (Rails), Rick Olson and Josh Goebel (Beast), Rickard Andersson et al. (PunBB),
 Matt Mullenweg et al. (WordPress), Michael Heilemann et al. (k2), Josh Peek, and Wilhelm Chung.
 
 
 == MIT License
 
-Copyright (c) 2006-2009 Trevor Turk
+Copyright (c) 2006... Trevor Turk
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
