@@ -7,7 +7,7 @@
     <p class="label"><label for="user_ban_message"><%=t :message %></label></p>
     <p><%= f.text_field :ban_message, :style => "width:31%" %></p>
     <p class="label"><label for="user_banned_until"><%=t :ban_until %></label></p>
-    <p><%= f.datetime_select :banned_until, :end_year => 2099 %></p>
+    <p><%= f.datetime_select :banned_until %></p>
     <p>
       <% if @user.banned? %>
         <%= submit_tag I18n.t(:edit_ban), :disable_with => I18n.t(:edit_ban) %>&nbsp; 

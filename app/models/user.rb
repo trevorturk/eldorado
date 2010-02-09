@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
     
-  attr_accessible :login, :email, :password, :password_confirmation, :avatar, :signature, :bio, :time_zone, :ban_message, :banned_until
+  attr_accessible :login, :email, :password, :password_confirmation, :avatar, :signature, :bio, :time_zone
   attr_reader :password
   
   has_many :articles, :dependent => :destroy, :order => 'created_at desc'
