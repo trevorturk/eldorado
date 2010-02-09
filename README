@@ -45,11 +45,34 @@ heroku rake db:migrate
 heroku open
 
 
+== Changes
+
+HEAD
+- Localization (da, de, en)
+
+0.9.2
+- Stable version with Rails 2.3.5 and blog, chat, events, files, forum, headers
+
+
+== Contributors
+
+git log | grep Author | sort | uniq
+
+Elk
+Jacob Tjoernholm
+Manfred Usselmann
+Nick Merwin
+Trevor Turk
+iamwil
+irkenInvader
+mrgone220
+
+
 == Thanks
 
-NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell, Matz et al. (Ruby),
-DHH et al. (Rails), Rick Olson and Josh Goebel (Beast), Rickard Andersson et al. (PunBB),
-Matt Mullenweg et al. (WordPress), Michael Heilemann et al. (k2), Josh Peek, and Wilhelm Chung.
+NewAthens.org, Matt Brent, Artie Jordan, Max Mearsheimer, Timothy O'Connell,
+Rick Olson and Josh Goebel (Beast), Rickard Andersson (PunBB),
+Michael Heilemann (K2), Josh Peek, and Wilhelm Chung.
 
 
 == MIT License
