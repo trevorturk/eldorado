@@ -7,33 +7,33 @@ test:
   session_key: eldorado_test
   session_secret: vrwPpJTvwnMVLP1wTSgqigSl7PMI7QcE
   domain: http://example.com
-  
+
 production:
   # SESSION SETTINGS (required)
   # More info: http://guides.rubyonrails.org/security.html#session-storage
   session_key: # a unique string that identifies your app
   session_secret: # a random string, at least 32 characters long, that should be unique to your installation and kept secret
-  
+
   # APPLICATION SETTINGS (required)
   domain: # http://example.com # the url for your application
   mailer: # noreply@example.com # the from address for subscription emails (users can subscribe to forum threads)
-  
-  # AMAZON S3 (optional, required for Heroku)  
+
+  # AMAZON S3 (optional, required for Heroku)
   # More info from Heroku: http://docs.heroku.com/constraints#read-only-filesystem
   # Visit the Amazon S3 site to sign up for an access_id and secret_key: https://s3.amazonaws.com/
-  # The bucket name can be any unique string, and once set here it can be created by running "rake s3:create" 
+  # The bucket name can be any unique string, and once set here it can be created by running "rake s3:create"
   s3_access_id: 
   s3_secret_key: 
-  s3_bucket_name:
-    
+  s3_bucket_name: 
+
   # AMAZON CLOUDFRONT (optional)
   # You can sign up for CloudFront (http://aws.amazon.com/cloudfront) and provide the CNAME here
   s3_host_alias: # assets.example.com
-  
+
   # EMAIL SETTINGS (optional, required for Heroku)
   # More info from Heroku: http://support.heroku.com/forums/43117/entries/32352
   # These example settings would use a normal Gmail account, but other options are available...
-  smtp_address: # smtp.gmail.com 
+  smtp_address: # smtp.gmail.com
   smtp_port: # 587
   smtp_user_name: # example@gmail.com
   smtp_password: # password
@@ -43,3 +43,6 @@ production:
 
   # HOPTOAD (optional)
   hoptoad_key: # Sign up at http://hoptoadapp.com and provide your API key to recieve exception notification emails
+
+  # LOCALE (optional)
+  locale: # Choose a locale from config/locales, en is the default
