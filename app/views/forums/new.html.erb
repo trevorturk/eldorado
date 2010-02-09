@@ -2,23 +2,23 @@
 <div class="box" id="box-categories-new">
   <% @forum = Forum.new unless @forum %>
   <% form_for @forum do |f| %>
-    <span class="top">New Forum</span>
-    <p class="label"><label for="forum_name">Name</label></p>
+    <span class="top"><%=t :new_forum %></span>
+    <p class="label"><label for="forum_name"><%=t :name %></label></p>
     <p><%= f.text_field :name, :class => 'text-field' %></p>
-    <p class="label"><label for="forum_description">Description</label></p>
+    <p class="label"><label for="forum_description"><%=t :description %></label></p>
     <p><%= f.text_field :description, :class => 'text-field' %></p>
-    <p class="label"><label for="forum_category">Category</label></p>
+    <p class="label"><label for="forum_category"><%=t :category %></label></p>
     <p>
       <%= 
         @all_categories = Category.find(:all, :order => "name") 
         f.collection_select(:category_id, @all_categories, :id, :name)       
       %>
     </p>
-    <p class="label"><label for="forum_position">Position</label></p>
+    <p class="label"><label for="forum_position"><%=t :position %></label></p>
     <p><%= f.text_field :position, :style => 'width:5%;' %></p>
     <p>
-      <%= submit_tag "Add Forum", :disable_with => "Add Forum" %>&nbsp;
-      <%= link_to 'Cancel', forum_root_path %>
+      <%= submit_tag I18n.t(:add_forum), :disable_with => I18n.t(:add_forum) %>&nbsp;
+      <%= link_to I18n.t(:cancel), forum_root_path %>
     </p>
   <% end %>
 </div>

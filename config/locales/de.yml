@@ -1,0 +1,307 @@
+de:
+  el_dorado: El Dorado
+  
+  default_settings:  #keys are also used as labels
+    title: El Dorado
+    tagline: A full-stack community web application written in Ruby/Rails
+    login_message: Zugang nur für registrierte Benutzer, bitte melden Sie an.
+    
+  powered_by: Powered by
+  login: Anmelden
+  logged_in_as: Angemeldet als
+  last_visit: Letzter Besuch
+  logout: Abmelden
+  home: Start
+  blog: Blog
+  articles: Artikel
+  comments: Kommentare
+  chat: Chat
+  events: Events
+  files: Dateien
+  forum: Forum
+  forums: Foren
+  category: Kategorie
+  topic: Thema
+  topics: Themen
+  posts: Beiträge
+  post: Beitrag
+  headers: Titelbilder
+  users: Benutzer
+  profile: Profile
+  avatars: Avatare
+  ranks: Rangstufen
+  rank: Rang
+  themes: Themen
+  theme: Thema
+  authors: Autoren
+  author: Autor
+  settings: Einstellungen
+  search: Suche
+  quote: Zitat
+  link: Link
+  help: Hilfe
+  activity: Aktivität
+  administration: Administration
+  admin: Admin
+  subscriptions: Abonnements
+  no_of_users: 
+    zero: 'Keine Benutzer'
+    one: '1 Benutzer' 
+    other: "{{print_count}} Benutzer"
+  no_of_topics:
+    zero: 'Keine Themen'
+    one: '1 Thema'
+    other: "{{print_count}} Themen" 
+  no_of_posts:
+    zero: 'Keine Beiträge'
+    one: '1 Beitrag'
+    other: "{{print_count}} Beiträge" 
+  no_of_comments:
+    zero: 'Keine Kommentare'
+    one: '1 Kommentar'
+    other: "{{print_count}} Kommentare" 
+  by: von
+  or: oder
+  recent_articles: Jüngste Artikel
+  new_article: Neuer Artikel
+  edit_article: Artikel bearbeiten 
+  post_article: Artikel veröffentlichen
+  no_articles_found: Keineo Artikel gefunden
+  post_a_new_article: Neuen Artikel veröffentlichen
+  blog_archives: Blog-Archiv
+  looking_for_something: Auf der Suche?
+  visit_blog_archives: Geh zum Blog-Archiv
+  post_comment: Kommentar veröffentlichen
+  to_post_a_comment: um einen Kommentar zu veröffentlichen
+  edit_comment: Kommentar bearbeiten
+  search_results: Suchergebnisse
+  submit: Senden
+  save_changes: Änderungen speichern
+  new_file: Neue Datei
+  upload_a_new_file: Datei hochladen
+  upload_via_url: Per URL hochladen
+  type: Typ
+  size: Größe
+  uploaded: Hochgeladen
+  edit: Bearbeiten
+  delete: Löschen
+  x: X
+  cancel: Abbrechen
+  select: Auswählen
+  deselect: Abwählen
+  upload: Hochladen
+  register: Registrieren
+  registered: Registriert
+  are_you_sure: Sind Sie sicher?
+  name: Name
+  description: Beschreibung
+  position: Position
+  title: Titel
+  body: Artikeltext
+  new_category: Neue Kategorie
+  add_category: Kategorie hinzufügen
+  edit_category: Kategorie bearbeiten
+  delete_category: Kategorie löschen
+  prev: zurück
+  next: vor
+  today: heute
+  reminder: Erinnerung
+  _date: Datum
+  
+  
+  new_event: Neuer Event
+  add_event: Event hinzufügen
+  edit_event: Event bearbeiten
+  editing_event: Event bearbeiten
+  add_a_new_event: Neuen Event hinzufügen
+  select_a_forum: Forum auswählen
+  new_forum: Neues Forum
+  create_a_new_forum: Neues Forum erstellen
+  add_forum: Forum hinzufügen
+  edit_forum: Forum bearbeiten
+  delete_forum: Forum löschen
+  new_topic: Neues Thema
+  edit_topic: Thema bearbeiten
+  post_topic: Thema veröffentlichen
+  editing_topic: Thema bearbeiten
+  start_a_new_topic: Neues Thema beginnen
+  all_topics: Alle Themen
+  view_all: Zeige alle
+  sticky: Fixiert
+  locked: Gesperrt
+  edit_header: Titelbild bearbeiten
+  editing_header: Titelbild bearbeiten
+  new_header: Neues Titelbild
+  upload_a_new_header: Neues Titelbild hochladen
+  optional: Optional
+  more_messages: Mehr Nachrichten
+  edit_post: Beitrag bearbeiten
+  edit_topic: Thema bearbeiten
+  post_a_reply: Eine Antwort veröffentlichen
+  post_reply: Antwort veröffentlichen
+  replies: Antworten
+  to_post_a_reply: um zu antworten
+  views: Ansichten
+  last_visit: Zuletzt besucht
+  last_edited: Zuletzt bearbeitet
+  new_user: Neuer Benutzer
+  edit_user: Benutzer bearbeiten
+  delete_user: Benutzer löschen
+  online: Online
+  offline: Offline
+  newest_user: Neuester Benutzer
+  register_a_new_user: Neuen Benutzer registrieren
+  username: Benutzername
+  email: E-Mail
+  password: Kennwort
+  password_twice: Kennwort (zweimal)
+  bio: Bio
+  signature: Signatur
+  timezone: Zeitzone
+  edit_profile: Profil bearbeiten
+  editing_profile: Profil bearbeiten
+  profile_updated: Profil aktualisiert
+  new_avatar: Neuer Avatar
+  change_avatar: Avatar ändern
+  get_an_avatar: Avatar zuordnen
+  used_by: benutzt von
+  upload_a_new_avatar: Neuen Avatar hochladen
+  edit_rank: Rang bearbeiten
+  new_rank: Neuer Rang
+  add_rank: Rang hinzufügen
+  add_a_new_rank: Neuen Rang hinzufügen
+  minimum_posts: Mindestanzahl Beiträge
+  edit_ban: Sperre bearbeiten
+  remove_ban: Sperre entfernen
+  ban_user: Benutzer sperren
+  message: Nachricht
+  ban_until: Sperre bis
+  revoke_admin: Admin-Rechte entziehen
+  make_admin: Admin-Rechte gewähren
+  rank_administrator: Administrator
+  rank_banned: Gesperrt
+  rank_member: Mitglied
+  tagline: Slogan
+  login_message: Anmeldenachricht
+  announcement: Bekanntmachung
+  footer: Fußzeile
+  favicon: Favicon
+  admin_only_create_actions: Auf Admin beschränkte Aktionen
+  private: Privat
+  default_timezone: Standard-Zeitzone
+  new_theme: Neues Thema
+  upload_a_new_theme: Ein neues Thema hochladen
+  subscribe: Abonnieren 
+  unsubscribe: Abbestellen
+  manage_subscriptions: Abonnements verwalten
+  mark_all_viewed: Alle als gelesen kennzeichnen
+  page: Seite
+  of: von
+  previous_page: Vorherige Seite
+  next_page: Nächste Seite
+  
+  messages:
+    delete_category_warning: Das Löschen einer Kategorie löscht unwiderruflich alle zugehörigen Foren, Themen und Beiträge
+    delete_forum_warning: Das Löschen eines Forums löscht unwiderruflich das Forum und alle zugehörigen Themen und Beiträge
+    delete_user_warning: Das Löschen eines Benutzers löscht unwiderruflich den Benutzer und alle von ihm erstellten Inhalte. Dies beinhaltet u.a. alle seine Forenbeiträge, alle von ihm angelegten Forenthemen und alle Antworten anderer Benutzer auf die von ihm angelegten Themen.
+    confirm_delete_category: Zur Bestätigung der Löschung der Kategorie den Kontrollkasten markieren
+    confirm_delete_forum: Zur Bestätigung der Löschung des Forums den Kontrollkasten markieren
+    confirm_delete_user: Zur Bestätigung der Löschung des Benutzers den Kontrollkasten markieren
+    reminder_info: Zeigt eine Erinnerung 6 Stunden vor und 2 Stunden nach dem Event.
+    admin_only_create_actions_info: '"articles" zum Beispiel würde die Erstellung neuer Blog-Artikel auf Administratoren beschränken.'
+    private_info: Erfordert eine Anmeldung für alle Aktionen einschließlich der Erstellung neuer Benutzer. (Hochgeladene Dateien sind öffentlich erreichbar, wenn man die URL kennt)
+    no_scubscriptions_info: Sie haben keine E-Mail-Abonnements.
+    themes_info: Themen müssen kleiner als 50k sein.
+    subscribe_info: E-Mail Aktualisierungupdates
+    locked_info: Dieses Thema ist gesperrt
+    headers_info: Titelbilder sollten eine Größe von 760x200 Pixeln haben.
+    
+  mailer:
+    new_message_posted: Eine neue Nachricht wurde veröffentlicht in 
+    manage_your_subscriptions: Hier Abonnements verwalten
+    
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+      ed_month: "%B %Y"
+      ed_date: "%d. %b. %Y"
+
+    day_names: [Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag]
+    abbr_day_names: [So, Mo, Di, Mi, Do, Fr, Sa]
+      
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, Januar, Februar, M&auml;rz, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+    abbr_month_names: [~, Jan, Feb, M&auml;r, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez]
+    # Used in date_select and datime_select.
+    order: [ :year, :month, :day ]
+ 
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+      ed_date_only: "%a, %d. %b. %Y"
+      ed_timestamp_short: "%H:%M, %d. %b"
+      ed_timestamp: "%a, %d. %b %Y, %H:%M"
+      ed_month: "%B %Y"
+      ed_date: "%d. %b. %Y"
+    am: "am"
+    pm: "pm"
+    
+  datetime:
+    distance_in_words:
+      x_seconds_ago: 
+        zero: 'vor weniger als 1 Sekunde'
+        one: 'vor 1 Sekunde'
+        other: 'vor {{count}} Sekunden'
+      x_minutes_ago:
+        zero: 'vor wenige als 1 Minute'
+        one: 'vor 1 Minute'
+        other: 'vor {{count}} Minuten'
+      x_hours_ago:
+        zero: 'vor weniger als 1 Stunde'
+        one: 'vor 1 Stunde'
+        other: 'vor {{count}} Stunden'
+      x_days_ago:
+        zero: 'vor weniger als 1 Tag'
+        one: 'vor 1 Tag'
+        other: 'vor {{count}} Tagen'
+  
+  number:
+    format:
+      precision: 3
+      separator: '.'
+      delimiter: ','
+    currency:
+      format:
+        unit: '€'
+        precision: 2
+        format: '%n %u'
+        
+    # Used in number_to_human_size()
+    human:
+      format:
+        # These three are to override number.format and are optional
+        # separator:
+        delimiter: ""
+        precision: 1
+      # Rails <= v2.2.2
+      # storage_units: [Bytes, KB, MB, GB, TB]
+      # Rails >= v2.3
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"        
+        
+  invalid_user_password_combo: "Ungültige Benutzer / Passwort-Kombination (xxx machine-translated)"

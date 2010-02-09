@@ -2,50 +2,50 @@
   <% if can_edit?(@article) %>
     <div class="clear"> </div>
     <div class="info-left">
-      <%= link_to 'Home', root_path %> &raquo; 
-      <%= link_to 'Blog', blog_path %> &raquo; <%= h(@article) %>
+      <%= link_to I18n.t(:home), root_path %> &raquo; 
+      <%= link_to I18n.t(:blog), blog_path %> &raquo; <%= h(@article) %>
     </div>
     <div class="info-right">
-      <%= link_to 'Edit Article', edit_article_path(@article) %>
+      <%= link_to I18n.t(:edit_article), edit_article_path(@article) %>
     </div>
   <% end %>
 <% end %>
 
 <% if current_controller == 'avatars' and current_action == 'index' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Users', users_path %> &raquo; Avatars
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:users), users_path %> &raquo; <%=t :avatars %>
   </div>
   <div class="info-right">
-    <%= will_paginate @avatars, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @avatars, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'avatars' and current_action == 'new' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Users', users_path %> &raquo; 
-    <%= link_to 'Avatars', avatars_path %> &raquo; New Avatar
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:users), users_path %> &raquo; 
+    <%= link_to I18n.t(:avatars), avatars_path %> &raquo; <%=t :new_avatar %>
   </div>
 <% end %>
 
 <% if current_controller == 'categories' and current_action == 'show' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> &raquo; <%=h @category %>
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:forum), forum_root_path %> &raquo; <%=h @category %>
   </div>
   <div class="info-right">
     <% if admin? %>
-      <%= link_to 'New Forum', new_forum_path(:category_id => @category.id) %> &nbsp;
-      <%= link_to 'Edit Category', edit_category_path(@category) %>
+      <%= link_to I18n.t(:new_forum), new_forum_path(:category_id => @category.id) %> &nbsp;
+      <%= link_to I18n.t(:edit_category), edit_category_path(@category) %>
     <% end %>
-    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'comments' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
@@ -59,27 +59,27 @@
 
 <% if current_controller == 'events' and current_action == 'edit' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Events', events_path %> &raquo; 
-    <%= link_to h(@event), @event %> &raquo; Editing Event
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:events), events_path %> &raquo; 
+    <%= link_to h(@event), @event %> &raquo; <%=t :editing_event %>
   </div>
 <% end %>
 
 <% if current_controller == 'events' and current_action == 'new' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Events', events_path %> &raquo; New Event
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:events), events_path %> &raquo; <%=t :new_event %>
   </div>
 <% end %>
 
 <% if current_controller == 'events' and current_action == 'show' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Events', events_path %> &raquo; <%=h @event %>
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:events), events_path %> &raquo; <%=h @event %>
   </div>
   <div class="info-right">
     <% if can_edit?(@event) %>
-      <%= link_to 'Edit Event', edit_event_path %>
+      <%= link_to I18n.t(:edit_event), edit_event_path %>
     <% end %>
   </div>
 <% end %>
@@ -87,13 +87,13 @@
 <% if current_controller == 'forums' and current_action == 'index' %>
   <div class="info-right info-space">
     <% if logged_in? %>
-      <%= link_to 'Manage Subscriptions', subscriptions_path %> &nbsp; 
-      <%= link_to 'Mark All Viewed', mark_all_viewed_topics_path %>
+      <%= link_to I18n.t(:manage_subscriptions), subscriptions_path %> &nbsp; 
+      <%= link_to I18n.t(:mark_all_viewed), mark_all_viewed_topics_path %>
     <% end %>
     <% if admin? %>
-      &nbsp; <%= link_to 'New Category', new_category_path %>
+      &nbsp; <%= link_to I18n.t(:new_category), new_category_path %>
       <% unless Category.count == 0 %>
-      &nbsp; <%= link_to 'New Forum', new_forum_path %>
+      &nbsp; <%= link_to I18n.t(:new_forum), new_forum_path %>
       <% end %>
     <% end %>
   </div>
@@ -101,55 +101,55 @@
 
 <% if current_controller == 'forums' and current_action == 'show' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> &raquo; 
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:forum), forum_root_path %> &raquo; 
     <%= link_to h(@forum.category), @forum.category %> &raquo; <%=h @forum %>
   </div>
   <div class="info-right">
     <% if admin? %>
-      <%= link_to 'Edit Forum', edit_forum_path(@forum) %>
+      <%= link_to I18n.t(:edit_forum), edit_forum_path(@forum) %>
     <% end %>
-    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'headers' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @headers, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @headers, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'headers' and current_action == 'new' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Headers', headers_path %> &raquo; New Header
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:headers), headers_path %> &raquo; <%=t :new_header %>
   </div>
 <% end %>
 
 <% if current_controller == 'headers' and current_action == 'edit' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Headers', headers_path %> &raquo; 
-    <%= link_to h(@header), @header %> &raquo; Editing Header
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:headers), headers_path %> &raquo; 
+    <%= link_to h(@header), @header %> &raquo; <%=t :editing_header %>
   </div>
 <% end %>
 
 <% if current_controller == 'headers' and current_action == 'show' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Headers', headers_path %> &raquo; <%=h @header %>
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:headers), headers_path %> &raquo; <%=h @header %>
   </div>
   <div class="info-right">
     <% if can_edit?(@header) %>
-      <%= link_to 'Edit Header', edit_header_path %>
+      <%= link_to I18n.t(:edit_header), edit_header_path %>
     <% end %>
   </div>
 <% end %>
 
 <% if current_controller == 'posts' and current_action == 'edit' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:forum), forum_root_path %> <%= link_to I18n.t(:topics), topics_path %> &raquo; 
     <%= link_to h(@post.topic.forum.category), @post.topic.forum.category %> &raquo; 
     <%= link_to h(@post.topic.forum), @topic.forum %> &raquo;
     <%= link_to h(@post.topic), @post.topic %>
@@ -158,8 +158,8 @@
 
 <% if current_controller == 'posts' and current_action == 'show' %>
   <div class="info-left" style="margin-top:5px;">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:forum), forum_root_path %> <%= link_to I18n.t(:topics), topics_path %> &raquo; 
     <%= link_to h(@post.topic.forum.category), @post.topic.forum.category %> &raquo; 
     <%= link_to h(@post.topic.forum), @topic.forum %> &raquo;
     <%= link_to h(@post.topic), @post.topic %>
@@ -168,64 +168,64 @@
 
 <% if current_controller == 'search' %>
   <div class="info-right" style="margin-top:5px;">
-    <%= will_paginate @events, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @events.blank? %>
-    <%= will_paginate @headers, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @headers.blank? %>
-    <%= will_paginate @messages, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @messages.blank? %>
-    <%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @posts.blank? %>
-    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @topics.blank? %>
-    <%= will_paginate @uploads, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @uploads.blank? %>
-    <%= will_paginate @users, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' unless @users.blank? %>
+    <%= will_paginate @events, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) unless @events.blank? %>
+    <%= will_paginate @headers, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) unless @headers.blank? %>
+    <%= will_paginate @messages, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) unless @messages.blank? %>
+    <%= will_paginate @posts, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) unless @posts.blank? %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) unless @topics.blank? %>
+    <%= will_paginate @uploads, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) unless @uploads.blank? %>
+    <%= will_paginate @users, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) unless @users.blank? %>
   </div>
 <% end %>
 
 <% if current_controller == 'themes' and current_action == 'new' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Users', users_path %> &raquo; 
-    <%= link_to 'Themes', themes_path %> &raquo; New Theme
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:users), users_path %> &raquo; 
+    <%= link_to I18n.t(:themes), themes_path %> &raquo; <%=t :new_theme %>
   </div>
 <% end %>
 
 <% if current_controller == 'themes' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @themes, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @themes, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'topics' and current_action == 'index' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> &raquo; All Topics
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:forum), forum_root_path %> &raquo; <%=t :all_topics %>
   </div>
   <div class="info-right">
-    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @topics, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'topics' and current_action == 'new' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> &raquo; New Topic
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:forum), forum_root_path %> &raquo; <%=t :new_topic %>
   </div>
 <% end %>
 
 <% if current_controller == 'topics' and current_action == 'edit' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to h(@topic), @topic %> &raquo; Editing Topic
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to h(@topic), @topic %> &raquo; <%=t :editing_topic %>
   </div>
 <% end %>
 
 <% if current_controller == 'topics' and current_action == 'show' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Forum', forum_root_path %> <%= link_to 'Topics', topics_path %> &raquo; 
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:forum), forum_root_path %> <%= link_to I18n.t(:topics), topics_path %> &raquo; 
     <%= link_to h(@topic.forum.category), @topic.forum.category %> &raquo; 
     <%= link_to h(@topic.forum), @topic.forum %>
   </div>
   <div class="info-right">
     <% if logged_in? %>
-      <% link_text = current_user.subscriptions.include?(@topic) ? 'Unsubscribe' : 'Subscribe' %>
+      <% link_text = current_user.subscriptions.include?(@topic) ? I18n.t(:unsubscribe) : I18n.t(:subscribe) %>
       <%= 
         link_to_remote "<span id='toggle_subscription_text'>#{link_text}</span>", 
         :url => { :controller => 'subscriptions', :action => 'toggle', :id => @topic.id },
@@ -233,65 +233,65 @@
       %>
     <% end %>
     <% if can_edit?(@topic) %>
-      &nbsp; <%= link_to 'Edit Topic', edit_topic_path %>
+      &nbsp; <%= link_to I18n.t(:edit_topic), edit_topic_path %>
     <% end %>    
   </div>
 <% end %>
 
 <% if current_controller == 'uploads' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @uploads, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @uploads, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'uploads' and current_action == 'new' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Files', files_path %> &raquo; New File
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:files), files_path %> &raquo; <%=t :new_file %>
   </div>
 <% end %>
 
 <% if current_controller == 'users' and current_action == 'index' %>
   <div class="info-right">
-    <%= will_paginate @users, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>
+    <%= will_paginate @users, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; '+I18n.t(:prev) %>
   </div>
 <% end %>
 
 <% if current_controller == 'users' and current_action == 'edit' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Users', users_path %> &raquo; 
-    <%= link_to h(@user), @user %> &raquo; Editing Profile
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:users), users_path %> &raquo; 
+    <%= link_to h(@user), @user %> &raquo; <%=t :editing_profile %>
   </div>
 <% end %>
 
 <% if current_controller == 'users' and current_action == 'show' %>
   <div class="info-left">
-    <%= link_to 'Home', root_path %> &raquo; 
-    <%= link_to 'Users', users_path %> &raquo; <%=h @user %>
+    <%= link_to I18n.t(:home), root_path %> &raquo; 
+    <%= link_to I18n.t(:users), users_path %> &raquo; <%=h @user %>
   </div>
   <div class="info-right">
+    <% if can_edit?(@user) && @user.avatar %>
+      <%= link_to I18n.t(:change_avatar), avatars_path %> 
+      <%= link_to '('+I18n.t(:x)+')', deselect_avatar_path, :method => :post %>
+    <% elsif can_edit?(@user) && @user.avatar.nil? %>
+      <%= link_to I18n.t(:get_an_avatar), avatars_path %>
+    <% end %>                                            
     <% if admin? %>
       <% if @user.banned? %>
-      <%= link_to 'Edit Ban', ban_user_path(@user) %>
-      <%= link_to '(x)', remove_ban_user_path(@user), :method => :post %>
+      &nbsp; <%= link_to I18n.t(:edit_ban), ban_user_path(@user) %>
+      <%= link_to '('+I18n.t(:x)+')', remove_ban_user_path(@user), :method => :post %>
       <% else %>
-      <%= link_to 'Ban User', ban_user_path(@user) %>
+      &nbsp; <%= link_to I18n.t(:ban_user), ban_user_path(@user) %>
       <% end %>
       <% if @user.admin? %>
-        &nbsp; <%= link_to 'Revoke Admin', admin_user_path(@user), :confirm => 'Are you sure?', :method => :post %>
+        &nbsp; <%= link_to I18n.t(:revoke_admin), admin_user_path(@user), :confirm => I18n.t(:are_you_sure), :method => :post %>
       <% else %>
-        &nbsp; <%= link_to 'Make Admin', admin_user_path(@user), :confirm => 'Are you sure?', :method => :post %>
+        &nbsp; <%= link_to I18n.t(:make_admin), admin_user_path(@user), :confirm => I18n.t(:are_you_sure), :method => :post %>
       <% end %>
     <% end %>
-    <% if can_edit?(@user) && @user.avatar %>
-      &nbsp; <%= link_to 'Avatars', avatars_path %> 
-      <%= link_to '(x)', deselect_avatar_path(@user.current_avatar), :method => :post %>
-    <% elsif can_edit?(@user) && @user.avatar.nil? %>
-      &nbsp; <%= link_to 'Avatars', avatars_path %>
-    <% end %>
     <% if can_edit?(@user) %>
-      &nbsp; <%= link_to 'Edit Profile', edit_user_path(@user) %>
+      &nbsp; <%= link_to I18n.t(:edit_profile), edit_user_path(@user) %>
     <% end %>
   </div>
 <% end %>

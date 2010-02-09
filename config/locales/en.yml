@@ -1,6 +1,305 @@
 en:
   el_dorado: El Dorado
-  tagline: A full-stack community web application written in Ruby/Rails
+  
+  default_settings:  #keys are also used as labels
+    title: El Dorado
+    tagline: A full-stack community web application written in Ruby/Rails
+    login_message: You are not logged in
+    
   powered_by: Powered by
-  login_message: You are not logged in
+  login: Login
+  logged_in_as: Logged in as
+  last_visit: Last Visit
+  logout: Logout
+  home: Home
+  blog: Blog
+  articles: Articles
+  comments: Comments
+  chat: Chat
+  events: Events
+  files: Files
+  forum: Forum
+  forums: Forums
+  category: Category
+  topic: Topic
+  topics: Topics
+  posts: Posts
+  post: Post
+  headers: Headers
   users: Users
+  profile: Profile
+  avatars: Avatars
+  ranks: Ranks
+  rank: rank
+  themes: Themes
+  theme: Theme
+  authors: Authors
+  author: Author
+  settings: Settings
+  search: Search
+  quote: Quote
+  link: Link
+  help: Help
+  activity: Activity
+  administration: Administration
+  admin: Admin
+  subscriptions: Subscriptions
+  no_of_users: 
+    zero: 'No Users'
+    one: '1 User' 
+    other: "{{print_count}} Users"
+  no_of_topics:
+    zero: 'No Topics'
+    one: '1 Topic'
+    other: "{{print_count}} Topics" 
+  no_of_posts:
+    zero: 'No Posts'
+    one: '1 Post'
+    other: "{{print_count}} Posts" 
+  no_of_comments:
+    zero: 'No Comments'
+    one: '1 Comment'
+    other: "{{print_count}} Comments" 
+  by: by
+  or: or
+  recent_articles: Recent Blog Articles
+  new_article: New Article
+  edit_article: Edit Article
+  post_article: Post Article
+  no_articles_found: No Articles Found
+  post_a_new_article: Post a New Article
+  blog_archives: Blog Archives
+  looking_for_something: Looking for something?
+  visit_blog_archives: Visit the Blog Archives
+  post_comment: Post Comment
+  to_post_a_comment: to post a comment
+  edit_comment: Edit Comment
+  search_results: Search Results
+  submit: Submit
+  save_changes: Save Changes
+  new_file: New File
+  upload_a_new_file: Upload a New File
+  upload_via_url: Upload via URL
+  type: Type
+  size: Size
+  uploaded: Uploaded
+  edit: Edit
+  delete: Delete
+  x: X
+  cancel: Cancel
+  select: select
+  deselect: deselect
+  upload: Upload
+  register: Register
+  registered: Registered
+  are_you_sure: Are you sure?
+  name: Name
+  description: Description
+  position: Position
+  title: Title
+  body: Body
+  new_category: New Category
+  add_category: Add Category
+  edit_category: Edit Category
+  delete_category: Delete Category
+  prev: Prev
+  next: Next
+  today: Today
+  reminder: Reminder
+  _date: Date
+  new_event: New Event
+  add_event: Add Event
+  edit_event: Edit Event
+  editing_event: Editing Event
+  add_a_new_event: Add a New Event
+  select_a_forum: Select a Forum
+  new_forum: New Forum
+  create_a_new_forum: Create a New Forum
+  add_forum: Add Forum
+  edit_forum: Edit Forum
+  delete_forum: Delete Forum
+  new_topic: New Topic
+  edit_topic: Edit Topic
+  post_topic: Post Topic
+  editing_topic: Editing Topic
+  start_a_new_topic: Start a New Topic
+  all_topics: All Topics
+  view_all: View All
+  sticky: Sticky
+  locked: Locked
+  edit_header: Edit Header
+  editing_header: Editing Header
+  new_header: New Header
+  upload_a_new_header: Upload a New Header
+  optional: optional
+  more_messages: More Messages
+  edit_post: Edit Post
+  edit_topic: Edit Topic
+  post_a_reply: Post a Reply
+  post_reply: Post Reply
+  replies: Replies
+  to_post_a_reply: to post a reply
+  views: Views
+  last_visit: Last visit
+  last_edited: Last edited
+  new_user: New User
+  edit_user: Edit User
+  delete_user: Delete User
+  online: Online
+  offline: Offline
+  newest_user: Newest User
+  register_a_new_user: Register a New User
+  username: Username
+  email: Email
+  password: Password
+  password_twice: Password (twice)
+  bio: Bio
+  signature: Signature
+  timezone: Timezone
+  edit_profile: Edit Profile
+  editing_profile: Editing Profile
+  profile_updated: Profile Updated
+  new_avatar: New Avatar
+  change_avatar: Change Avatar
+  get_an_avatar: Get an Avatar
+  used_by: used by
+  upload_a_new_avatar: Upload a New Avatar
+  edit_rank: Edit Rank
+  new_rank: New Rank
+  add_rank: Add Rank
+  add_a_new_rank: Add a New Rank
+  minimum_posts: Minimum Posts
+  edit_ban: Edit Ban
+  remove_ban: Remove Ban
+  ban_user: Ban User
+  message: Message
+  ban_until: Ban Until
+  revoke_admin: Revoke Admin
+  make_admin: Make Admin
+  rank_administrator: Administrator
+  rank_banned: Banned
+  rank_member: Member
+  tagline: Tagline
+  login_message: Login Message
+  announcement: Announcement
+  footer: Footer
+  favicon: Favicon
+  admin_only_create_actions: Admin-Only Create Actions
+  private: Private
+  default_timezone: Default Timezone
+  new_theme: New Theme
+  upload_a_new_theme: Upload a New Theme
+  subscribe: Subscribe 
+  unsubscribe: Unsubscribe 
+  manage_subscriptions: Manage Subscriptions
+  mark_all_viewed: Mark All Viewed
+  page: Page
+  of: of
+  previous_page: Previous Page
+  next_page: Next Page
+  themes_info: Themes must be smaller than 50k.
+  
+  messages:
+    delete_category_warning: Deleting a category destroys all of the forums, topics, and posts it contains.
+    delete_forum_warning: Deleting a forum destroys all of the forums, topics, and posts it contains.
+    delete_user_warning: Deleting a user destroys the user and all of the content they've created. This includes, but is not limited to, all of their forum posts, the forum topics they've created, and the replies of other users to the topics they've created.
+    confirm_delete_category: Check this box to confirm deleting the category
+    confirm_delete_forum: Check this box to confirm deleting the forum
+    confirm_delete_user: Check this box to confirm deleting the user
+    reminder_info: Show a reminder 6 hours before and 2 hours after this event.
+    admin_only_create_actions_info: For example, "articles" would restrict creating new blog articles to admins only.
+    private_info: Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)
+    no_scubscriptions_info: You have no subscriptions.
+    subscribe_info: Email updates
+    locked_info: This Topic is Locked
+    headers_info: Headers should be sized 760x200px.
+    
+  mailer:
+    new_message_posted: A new message has been posted to
+    manage_your_subscriptions: Manage your subscriptions here
+    
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+      ed_month: "%B %Y"
+      ed_date: "%b %d, %Y"
+      
+    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+      
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    # Used in date_select and datime_select.
+    order: [ :year, :month, :day ]
+ 
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+      ed_date_only: "%a, %d %b %Y"
+      ed_timestamp_short: "%I:%M%P, %d %b"
+      ed_timestamp: "%a, %d %b %Y, %I:%M%P"
+      ed_month: "%B %Y"
+      ed_date: "%b %d, %Y"
+    am: "am"
+    pm: "pm"
+    
+  datetime:
+    distance_in_words:
+      x_seconds_ago: 
+        zero: 'less than 1 second ago'
+        one: '1 second ago'
+        other: '{{count}} seconds ago'
+      x_minutes_ago:
+        zero: 'less than 1 minute ago'
+        one: '1 minute ago'
+        other: '{{count}} minutes ago'
+      x_hours_ago:
+        zero: 'less than 1 hour ago'
+        one: '1 hour ago'
+        other: '{{count}} hours ago'
+      x_days_ago:
+        zero: 'less than 1 day ago'
+        one: '1 day ago'
+        other: '{{count}} days ago'
+  
+  number:
+    format:
+      precision: 3
+      separator: ','
+      delimiter: '.'
+    currency:
+      format:
+        unit: '$'
+        precision: 2
+        format: '%u %n'
+        
+  # Used in number_to_human_size()
+  human:
+    format:
+      # These three are to override number.format and are optional
+      # separator:
+      delimiter: ""
+      precision: 1
+    # Rails <= v2.2.2
+    # storage_units: [Bytes, KB, MB, GB, TB]
+    # Rails >= v2.3
+    storage_units:
+      format: "%n %u"
+      units:
+        byte:
+          one: "Byte"
+          other: "Bytes"
+        kb: "KB"
+        mb: "MB"
+        gb: "GB"
+        tb: "TB"        
+
+  invalid_user_password_combo: "Invalid user/password combination"

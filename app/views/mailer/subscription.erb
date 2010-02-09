@@ -1,5 +1,5 @@
-A new message has been posted to <%=h @topic %>:
+<%=t :new_message_posted, :scope => :mailer %> <%=h @topic %>:
 
   <%= topic_post_url(@post) %>
 
-Manage your subscriptions here: <%= subscriptions_url %>
+<%=t :manage_your_subscriptions, :scope => :mailer %>: <%= subscriptions_url %>

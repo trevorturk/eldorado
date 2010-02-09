@@ -1,12 +1,12 @@
 <%= error_messages_for :category %>
 <% form_tag category_path(@category), :method => :delete do %>
   <div class="box" id="box-categories-confirmation">
-    <span class="top">Delete Category</span>
-      <p>Deleting a category destroys all of the forums, topics, and posts it contains.</p>
-      <p><label for="confirm">Check this box to confirm deleting the category <u><%=h @category %></u></label>: <%= check_box_tag :confirm %></p>
+    <span class="top"><%=t :delete_category %></span>
+      <p><%=t :delete_category_warning, :scope => :messages %></p>
+      <p><label for="confirm"><%=t :confirm_delete_category, :scope => :messages %> <u><%=h @category %></u></label>: <%= check_box_tag :confirm %></p>
       <p>
-        <%= submit_tag "Delete Category", :disable_with => "Delete Category" %>&nbsp;
-        <%= link_to 'Cancel', @category %>
+        <%= submit_tag I18n.t(:delete_category), :disable_with => I18n.t(:delete_category) %>&nbsp;
+        <%= link_to I18n.t(:cancel), @category %>
       </p>
   </div>
 <% end %>

@@ -1,7 +1,7 @@
 <div id="primary">
   <% if @parent_user %>    
     <div class="info-left">
-      <span class="title">Articles by <%= link_to h(@parent_user), user_articles_path(@parent_user) %></span>
+      <span class="title"><%=t :articles %> <%=t :by %> <%= link_to h(@parent_user), user_articles_path(@parent_user) %></span>
     </div>
     <div class="clear"> </div>
   <% end %>
@@ -10,18 +10,18 @@
       <%= render :partial => 'articles/article', :object => article %>
       <div class="comments-link detail">
         <% if can_edit?(article) %>
-          <%= link_to 'Edit', edit_article_path(article), :class => 'text' %> &nbsp;|&nbsp; 
+          <%= link_to I18n.t(:edit), edit_article_path(article), :class => 'text' %> &nbsp;|&nbsp; 
         <% end %>
-        <%= link_to pluralize(article.comments_count, 'Comments'), article_path(article, :anchor => 'comments'), :class => 'text' %>
+        <%= link_to t_no_of(:no_of_comments, (article.comments_count || 0)), article_path(article, :anchor => 'comments'), :class => 'text' %>
       </div>
     <% end %>
     <div class="info-left">
-      <span class="title">Looking for something?</span>&nbsp;
-      <span class="detail"><%= link_to 'Visit the Blog Archives &raquo;', blog_archives_path %></span>
+      <span class="title"><%=t :looking_for_something %></span>&nbsp;
+      <span class="detail"><%= link_to  I18n.t(:visit_blog_archives)+' &raquo;', blog_archives_path %></span>
     </div>
   <% else %>
     <div class="info-left">
-      <div class="title article-title">No Articles Found</div>
+      <div class="title article-title"><%=t :no_articles_found %></div>
     </div>
     <div class="clear"> </div>
   <% end %>

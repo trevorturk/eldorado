@@ -1,8 +1,8 @@
 <div class="nav">
   <p class="nav-left">
     <% if logged_in? %>
-      Logged in as <b><%= link_to h(current_user), current_user %></b> | 
-      Last visit <%= time_ago_or_time_stamp(session[:online_at]) %>
+      <%=t :logged_in_as %> <b><%= link_to h(current_user), current_user %></b> | 
+      <%=t :last_visit %> <%= time_ago_or_time_stamp(session[:online_at]) %>
     <% else %>
       <%= @settings.login_message %>
     <% end %>
@@ -10,37 +10,37 @@
   <p class="nav-right">
     <% if logged_in? %>
       <% unless @settings.admin_only_create.include?(current_controller) && !admin? %>
-        <% if current_controller == 'home' %><%= link_to 'Start a New Topic', new_topic_path %>
-        <% elsif current_controller == 'articles' %><%= link_to 'Post a New Article', new_article_path %>
-        <% elsif current_controller == 'avatars' %><%= link_to 'Upload a New Avatar', new_avatar_path %>
-        <% elsif current_controller == 'categories' %><%= link_to 'Start a New Topic', new_topic_path %>
-        <% elsif current_controller == 'events' %><%= link_to 'Add a New Event', new_event_path %>
-        <% elsif current_controller == 'forums' %><%= link_to 'Start a New Topic', new_topic_path(:forum_id => params[:id]) %>
-        <% elsif current_controller == 'headers' %><%= link_to 'Upload a New Header', new_header_path %>
-        <% elsif current_controller == 'posts' %><%= link_to 'Start a New Topic', new_topic_path %>
-        <% elsif current_controller == 'ranks' %><%= link_to 'Add a New Rank', new_rank_path if admin? %>
-        <% elsif current_controller == 'themes' %><%= link_to 'Upload a New Theme', new_theme_path %>
+        <% if current_controller == 'home' %><%= link_to I18n.t(:start_a_new_topic), new_topic_path %>
+        <% elsif current_controller == 'articles' %><%= link_to I18n.t(:post_a_new_article), new_article_path %>
+        <% elsif current_controller == 'avatars' %><%= link_to I18n.t(:upload_a_new_avatar), new_avatar_path %>
+        <% elsif current_controller == 'categories' %><%= link_to I18n.t(:start_a_new_topic), new_topic_path %>
+        <% elsif current_controller == 'events' %><%= link_to I18n.t(:add_a_new_event), new_event_path %>
+        <% elsif current_controller == 'forums' %><%= link_to I18n.t(:start_a_new_topic), new_topic_path(:forum_id => params[:id]) %>
+        <% elsif current_controller == 'headers' %><%= link_to I18n.t(:upload_a_new_header), new_header_path %>
+        <% elsif current_controller == 'posts' %><%= link_to I18n.t(:start_a_new_topic), new_topic_path %>
+        <% elsif current_controller == 'ranks' %><%= link_to I18n.t(:add_a_new_rank), new_rank_path if admin? %>
+        <% elsif current_controller == 'themes' %><%= link_to I18n.t(:upload_a_new_theme), new_theme_path %>
         <% elsif current_controller == 'topics' %>
-          <% if @topic && @topic.forum %><%= link_to 'Start a New Topic', new_topic_path(:forum_id => @topic.forum.id) %>
-          <% else %><%= link_to 'Start a New Topic', new_topic_path %>
+          <% if @topic && @topic.forum %><%= link_to I18n.t(:start_a_new_topic), new_topic_path(:forum_id => @topic.forum.id) %>
+          <% else %><%= link_to I18n.t(:start_a_new_topic), new_topic_path %>
           <% end %>
-        <% elsif current_controller == 'uploads' %><%= link_to 'Upload a New File', new_upload_path %>
-        <% elsif current_controller == 'users' %><%= link_to 'Register a New User', new_user_path %>
+        <% elsif current_controller == 'uploads' %><%= link_to I18n.t(:upload_a_new_file), new_upload_path %>
+        <% elsif current_controller == 'users' %><%= link_to I18n.t(:register_a_new_user), new_user_path %>
         <% end %>
       <% end %>
-      &nbsp; <%= link_to 'Search', search_path(:type => current_controller) %>
+      &nbsp; <%= link_to I18n.t(:search), search_path(:type => current_controller) %>
       <% if admin? && current_controller == 'home' %>
-        &nbsp; <%= link_to 'Admin', admin_path %>
+        &nbsp; <%= link_to I18n.t(:admin), admin_path %>
       <% end %>
       <% if current_controller == 'home' %>
-        &nbsp; <%= link_to 'Help', help_path %>
+        &nbsp; <%= link_to I18n.t(:help), help_path %>
       <% end %>
-      &nbsp; <%= link_to 'Logout', logout_path %>
+      &nbsp; <%= link_to I18n.t(:logout), logout_path %>
     <% end %>
     <% if !logged_in? && !locked_out? %>
-      &nbsp; <%= link_to 'Search', search_path(:type => current_controller) %> &nbsp; 
-      <%= link_to 'Register', register_path %> &nbsp;
-      <%= link_to 'Login', login_path %> 
+      &nbsp; <%= link_to I18n.t(:search), search_path(:type => current_controller) %> &nbsp; 
+      <%= link_to I18n.t(:register), register_path %> &nbsp;
+      <%= link_to I18n.t(:login), login_path %> 
     <% end %>
   </p>
 </div>

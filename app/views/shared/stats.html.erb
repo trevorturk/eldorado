@@ -1,12 +1,12 @@
 <div class="nav-stats">
   <p class="nav-left">
     <% unless @users_online.blank? %>
-      Online: <%= @users_online.map { |user| link_to "#{h(user)}", user } * ", " %>
+      <%=t :online %>: <%= @users_online.map { |user| link_to "#{h(user)}", user } * ", " %>
     <% end %>
   </p>
   <p class="nav-right">
     <% unless @users_newest.blank? %>
-      Newest User: <%= link_to h(@users_newest), @users_newest %>
+      <%=t :newest_user %>: <%= link_to h(@users_newest), @users_newest %>
     <% end %>
   </p>
   <div class="clear"> </div>

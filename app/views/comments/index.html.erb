@@ -1,5 +1,5 @@
 <div class="info-left">
-  <span class="title"><%= number_with_delimiter(@comments.total_entries) %> Comments</span>
+  <span class="title"><%=t_no_of :no_of_comments, @comments.total_entries %></span>
 </div>
 <div class="info-right detail">
   <%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => '&laquo; Prev' %>

@@ -79,7 +79,7 @@ class UsersController < ApplicationController
       if @user
         do_login(@user)
       else
-        flash[:notice] = "Invalid user/password combination"
+        flash[:notice] = I18n.t(:invalid_user_password_combo)
         render :action => :login and return false
       end
     end

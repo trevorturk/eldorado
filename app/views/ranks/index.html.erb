@@ -2,15 +2,15 @@
 
 <% if @ranks.empty? && admin? %>
   <div class="nav nav-footer">
-    <p class="nav-left"><%= link_to 'Add a New Rank &raquo;', new_rank_path %></p>
+    <p class="nav-left"><%= link_to I18n.t(:add_a_new_rank)+' &raquo;', new_rank_path %></p>
   </div>
 <% end %>
 <% unless @ranks.empty? %>
   <table cellspacing="0">
     <thead>
       <tr>
-        <th class="tcl">Rank</th>
-        <th class="tcl">Minimum Posts</th>
+        <th class="tcl"><%=t :rank %></th>
+        <th class="tcl"><%=t :minimum_posts %></th>
         <% if admin? %>
           <th class="tcr"></th>
         <% end %>
@@ -23,8 +23,8 @@
           <td class="tcl"><%= rank.min_posts %></td>
           <% if admin? %>
             <td class="tcr">
-              <%= link_to 'Edit', edit_rank_path(rank) if admin? %>&nbsp; 
-              <%= link_to '(x)', rank, :confirm => 'Are you sure?', :method => :delete %>
+              <%= link_to I18n.t(:edit), edit_rank_path(rank) if admin? %>&nbsp; 
+              <%= link_to '('+I18n.t(:x)+')', rank, :confirm => I18n.t(:are_you_sure), :method => :delete %>
             </td>
           <% end %>
         </tr>

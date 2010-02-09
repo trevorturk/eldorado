@@ -1,5 +1,5 @@
 <%= 
-calendar({:year => @date.year, :month => @date.month}) do |d|
+  calendar({:year => @date.year, :month => @date.month}) do |d|
   cell_text = "#{d.mday}" 
   cell_attrs = { :class => 'day ' }
   todays_events = @events.reject { |e| e.date.to_date != d }

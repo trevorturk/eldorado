@@ -4,7 +4,7 @@
     calendar({:year => @date.year, :month => @date.month}) do |d|
       cell_text = "#{d.mday}" 
       if (d.to_date == Time.now.utc.to_date)
-        cell_text = "<b>Today #{d.mday}</b>" 
+        cell_text = "<b>#{I18n.t(:today)} #{d.mday}</b>" 
       end
       cell_attrs = {:class => 'day'}
       @events.each do |e|
@@ -24,8 +24,8 @@
     <table cellspacing="0">
       <thead>
         <tr>
-          <th class="tcl" colspan="2">Events</th>
-          <th class="tcr">Date</th>
+          <th class="tcl" colspan="2"><%=t :events %></th>
+          <th class="tcr"><%=t :_date %></th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +33,7 @@
           <tr>
             <td class="tci"><%= icon_for(event) %></td>
             <td class="tcl">
-              <%= link_to h(event), event %> by <%=h event.user %>
+              <%= link_to h(event), event %> <%=t :by %> <%=h event.user %>
             </td>
             <td class="tcr"><%= time_stamp(event.date) %></td>
           </tr>
