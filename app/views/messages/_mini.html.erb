@@ -1,0 +1,9 @@
+<% unless @chatters.empty? || @message.nil? %>
+  <div class="info-left">
+    <span class="title"><%= link_to I18n.t(:chat), chat_path %></span>
+    <span class="detail">
+      <%= render :partial => 'messages/chatters' %>
+      &nbsp;|&nbsp; <%= link_to "Last active #{time_ago_or_time_stamp(@message.created_at)}", chat_path, :class => 'text' if @message %>
+    </span>
+  </div>
+<% end %>

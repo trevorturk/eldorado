@@ -1,22 +1,14 @@
 <div class="home-left">
-  <% unless @chatters.empty? || @message.nil? %>
-    <div class="info-left">
-      <span class="title"><%= link_to I18n.t(:chat), chat_path %></span>
-      <span class="detail">
-        <%= render :partial => 'messages/chatters' %>
-        &nbsp;|&nbsp; <%= link_to "Last active #{time_ago_or_time_stamp(@message.created_at)}", chat_path, :class => 'text' if @message %>
-      </span>
-    </div>
-  <% end %>
-  <%= render :file => 'topics/index' %>
+  <%= render :partial => 'messages/mini' if enabled?('forum') %>
+  <%= render :file => 'topics/index' if enabled?('forum') %>
 </div>
 
 <div class="home-right">
-  <%= render :partial => 'events/mini.html.erb' if not disabled_feature?("events")%>
-  <%= render :file => 'uploads/index' %>
-  <%= render :file => 'headers/list' %>
-  <%= render :file => 'users/index' if not disabled_feature?("users") %>
-  <%= render :file => 'avatars/list' %>
+  <%= render :partial => 'events/mini' if enabled?('events') %>
+  <%= render :file => 'uploads/index' if enabled?('files') %>
+  <%= render :file => 'headers/list' if enabled?('headers') %>
+  <%= render :file => 'users/index' if enabled?('users') %>
+  <%= render :file => 'avatars/list' if enabled?('avatars') %>
 </div>
 
 <div class="clear"> </div>

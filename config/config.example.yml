@@ -22,9 +22,9 @@ production:
   # More info from Heroku: http://docs.heroku.com/constraints#read-only-filesystem
   # Visit the Amazon S3 site to sign up for an access_id and secret_key: https://s3.amazonaws.com/
   # The bucket name can be any unique string, and once set here it can be created by running "rake s3:create"
-  s3_access_id: 
-  s3_secret_key: 
-  s3_bucket_name: 
+  s3_access_id:
+  s3_secret_key:
+  s3_bucket_name:
 
   # AMAZON CLOUDFRONT (optional)
   # You can sign up for CloudFront (http://aws.amazon.com/cloudfront) and provide the CNAME here
@@ -48,4 +48,4 @@ production:
   locale: # Choose a locale from config/locales, en is the default
 
   # DISABLE TABS (optional)
-  disable_tabs: # list tabs that want to hide from users (e.g. "blog events headers")
+  disabled_tabs: # list tabs that want to hide from users (e.g. "blog events headers")

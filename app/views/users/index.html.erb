@@ -1,21 +1,21 @@
 <% if current_controller == 'users' %>
   <div class="info-left">
     <span class="title"><%=t :users %></span>
-    <span class="detail">&nbsp;|&nbsp;<%=t_no_of :no_of_users, (@users_count || 0) %></span>
-  </div>  
+    <span class="detail">&nbsp;| &nbsp;<%=t_no_of :no_of_users, (@users_count || 0) %></span>
+  </div>
   <div class="info-right">
     <span class="title">&nbsp;</span>
     <span class="detail">
-      <%= link_to I18n.t(:avatars), avatars_path %> &nbsp; 
+      <%= link_to I18n.t(:avatars), avatars_path %> &nbsp;
       <%= link_to I18n.t(:ranks), ranks_path %>
     </span>
   </div>
   <div class="clear"> </div>
-  
+
   <% if logged_in? %>
     <%#= render :file => 'users/show', :locals => {:user => current_user } %>
   <% end %>
-  
+
 <% end %>
 
 <% unless @users.blank? %>
