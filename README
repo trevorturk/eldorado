@@ -50,7 +50,7 @@ heroku open
 HEAD
 - Localization (da, de, en)
 
-0.9.2
+1.0
 - Stable version with Rails 2.3.5 and blog, chat, events, files, forum, headers
 
 
