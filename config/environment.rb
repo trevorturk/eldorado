@@ -19,9 +19,15 @@ Rails::Initializer.run do |config|
     :key => CONFIG['session_key'],
     :secret => CONFIG['session_secret']
   }
+
   
 end
 
 HoptoadNotifier.configure do |config|
   config.api_key = CONFIG['hoptoad_key']
 end if CONFIG['hoptoad_key']
+
+# By default, BBCodeizer uses PRE tags to enclose code. We need CODE
+# tags inside those for Highlight.js to work.
+BBCodeizer.replace_using(:start_code, "<pre><code>")
+BBCodeizer.replace_using(:end_code, "</code></pre>")
