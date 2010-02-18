@@ -1,750 +1,170 @@
+/* reset */
 * { margin: 0; padding: 0; }
 h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin: 1em 0; }
 fieldset { padding: .5em; }
 li { margin: 0; padding: 0; list-style-type: none; }
 a img { border: 0; }
 
-body {
-  background: #ededed;
-  color: #333;
-  font-family: verdana, sans-serif;
-  font-size: 11px;
-}
-
-.wrapper {
-  width: 760px;
-  margin: 20px auto;
-  padding: 10px;
-  border: 1px solid #bbb;
-  background: #fff;
-}
-  
-.header {
-	position: relative;
-  height: 200px;
-  background-color: #333;
-}
-
-.content {
-  clear: both;
-}
-
-.footer {
-  font-size: 10px;
-  margin-top: 10px;
-  padding: 0px 5px;
-  color: #999;
-}
-
-a:link, a:visited {
-  color: #638137;
-  text-decoration: none;
-}
-
-a:active, a:hover {
-  text-decoration: underline;
-	color: #8EB653;
-}
-
-h1 { 
-  font-family: 'Trebuchet MS', Verdana, Sans-Serif;
-  font-size: 30px;
-  font-weight: bold;
-  letter-spacing: -1px;
-  margin: 0;
-  padding: 83px 0 0 40px;
-}
-
-h1, h1 a:link, h1 a:visited, h1 a:hover, h1 a:active {
-  text-decoration: none;
-  color: #fff;
-}
-
-h1 a:hover, h1 a:active {
-  text-decoration: underline;
-}
-
-h3 {
-  font-size: 14px;
-  font-weight: normal;
-}
-  
-.tagline {
-  font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
-  font-size: 10px;
-  color: #fff;
-  padding: 0 40px;
-}
-
-.tabs {
-	position: absolute;
-	margin: -18px 0 0 14px;
-	padding: 0;
-	bottom: 0;
-	font-size: 10px;
-	}
-
-.tabs li {
-	display: inline;
-	margin: 0px 2px;
-	}
-
-.tabs, .tabs li a {
-	padding: 6px 12px 6px;
-	}
-
-.tabs li a {
-	color: white;
-	text-decoration: none;
-	}
-
-.tabs li a:hover {
-	background: #333;
-	color: #eee;
-	}
-
-.tabs li.current_tab a, .tabs li.current_tab a:hover {
-	color: #333;
-	background: white;
-	}
-
-.nav {
-  margin: 10px 0;
-  height: 26px;
-  border: 1px solid #ccc;
-  background: #f1f1f1;
-}
-
-.nav-left {
-  float: left;
-  margin: 6px 0 0 5px;
-}
-
-.nav-right {
-  float: right;
-  margin: 6px 5px 0 0;
-}
-
-.nav-footer {
-  margin: 0 0 10px 0;
-}
-
-.nav-stats {
-	color: #999;
-	padding: 0 1px 7px 1px;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
-.nav-stats p.nav-left {
-	width: 70%;
-}
-
-.box {
-  border: 1px solid #35604d;
-  padding: 0 10px;
-  margin-bottom: 10px;
-  background: #f1f1f1;
-}
-
-.box .top {
-  display: block;
-  background: #35604d;
-  color: #fff;
-  padding: 4px 5px;
-  margin: 0 -10px;
-}
-
-.box .label {
-  margin-bottom: -10px;
-}
-
-.box label {
-  font-weight: bold;
-}
-
-.box .small {
-  margin: 0 0 10px 0;
-}
-
-.box-comment {
-	margin-left: 6px;
-}
-
-.text-field {
-	width: 66%;
-}
-
-table {
-  width: 100%;
-  border: 1px solid #35604d;
-  margin-bottom: 10px;
-}
-
-thead th {
-  background: #35604d;
-  color: #fff;
-  text-align: left;
-  font-weight: normal;
-  padding: 4px 5px;
-}
-
-thead th a:link, thead th a:visited {
-  color: #fff;
-}
-
-thead .tcm {
-  text-align: center;
-}
-
-tbody {
-  background: #f1f1f1;
-}
-
-tbody td {
-  padding: 5px;
-  vertical-align: top;
-  border-top: 1px solid #cedeb9;
-  border-right: 1px solid #cedeb9;
-}
-
-tbody .tci {
-  width: 10px !important;
-  border-right: 0;
-}
-
-tbody .tcm {
-  text-align: center;
-  background: #dedfdf;
-}
-
-.forums-index .tcm {
-	vertical-align: middle;
-}
-
-tbody .tcr {
-  border-right: 0;
-}
-
-tbody .tds {
-  border: 0;
-  padding: 10px;
-}
-
-.thread {
-  margin-bottom: 5px;
-}
-
-.thread td {
-  border: 0;
-}
-
-.thread .profile {
-  width: 24%;
-}
-
-.thread .body {
-  width: 76%;
-	max-width: 560px;
-  line-height: 1.4em;
-  background: #dedfdf;
-}
-
-.thread .body p {
-  margin-top: 0;
-}
-
-.thread .body pre {
-	margin-top: -10px;
-}
-
-.post-body {
-  overflow: auto;
-}
-
-.post-body ul {
-  margin: 10px !important;
-  padding: 6px;
-}
-
-.post-body li {
-  list-style-type: disc;
-}
-
-.thread dl {
-  margin: 0;
-}
-
-.thread dt, .comment-user {
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: -1px;
-}
-
-.thread dd.rank {
-  font-weight: bold;
-}
-
-.thread dd.avatar {
-  margin: 8px 0 4px 0;
-}
-
-.thread .thr {
-  text-align: right;
-}
-
-.thread .links {
-  text-align: right;
-  color: #ccc;
-}
-
-.forums-index {
-  margin-bottom: 5px;
-}
-
-.forums-index .tcl {
-  width: 58%;
-}
-
-.forums-index .tcm {
-  width: 8%;
-}
-
-.forums-index .tcr {
-  width: 34%;
-  vertical-align: middle;
-}
-
-.forums-list th {
-  background: #d1d1d1;
-  color: #333;
-}
-
-.forums-admin ul ul {
-	margin-left: 15px;
-}
-
-.forums-admin ul ul li {
-	margin-bottom: 5px;
-}
-
-.forum-name {
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.topic-status {
-	font-size: 9px;
-}
-
-.topics-index .tcm {
-  width: 7%;
-}
-
-.topics-index .tcr {
-  width: 27%;
-}
-
-.topics-index .tcf {
-	width: 14%;
-}
-
-#primary {
-	float: left;
-	width: 550px;
-	margin: 6px 10px 0 0;
-}
-
-#secondary {
-	float: left;
-	width: 180px;
-	margin-top: 12px;
-	padding: 0 10px;
-}
-
-.article-body {
-	margin: 6px 6px 40px 6px;
-}
-
-#comments {
-	margin: 6px 0 26px 0;
-}
-
-.article-body p, .comment-body p {
-	line-height: 1.4em;
-	margin-top: 0;
-}
-
-.comment {
-	margin: 0 0 25px 6px;
-}
-
-.comment-body {
-	margin-top: 4px;
-}
-
-.secondary-list {
-	margin: 5px 10px;
-	padding-bottom: 20px;
-}
-
-.secondary-list li {
-	margin-bottom: 6px;
-}
-
-.messages-index {
-	border: 0;
-}
-
-.messages-index p {
-	margin: 0;
-}
-
-.messages-index .tcu {
-	width: 20%;
-	text-align: right;
-	font-weight: bold;
-	padding-right: 8px;
-}
-
-.messages-index .tcl {
-	width: 60%;
-	max-width: 477px;
-	overflow: auto;
-	border-right: 0;
-	background: #dedfdf;
-}
-
-.messages-index .tcr {
-	width: 20%;
-	text-align: right;
-	border-left: 0;
-	color: #999;
-}
-
-.messages-index .tcr a {
-	color: #999;
-}
-
-.info-left {
-  float: left;
-  margin: 0 0 10px 0;
-  padding-left: 5px;
-  border-left: 1px solid #f1f1f1;
-}
-
-.info-center {
-	float: left;
-	margin: 0 8px 10px 8px;
-	text-align: center;
-}
-
-.info-right {
-  float: right;
-	text-align: right;
-  margin: 0 0 10px 0;
-  padding-right: 5px;
-  border-right: 1px solid #f1f1f1;
-}
-
-.info-width {
-	width: 32%;
-}
-
-.info-space {
-	margin-top: 5px;
-}
-
-.info-footer {
-	margin-bottom: 10px;
-}
-
-.title {
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: -1px;
-}
-
-.title a {
-	color: #333;
-}
-
-.article-title {
-	font-size: 18px;
-	font-weight: normal;
-	padding-bottom: 3px;
-}
-
-.comments-link {
-	float: right;
-	margin-top: -20px;
-}
-
-.archives li {
-	margin: 7px;
-}
-
-.detail, .detail a.text {
-  color: #999;
-  letter-spacing: -1px;
-	font-weight: normal;
-}
-
-#filters {
-  margin: 2px;
-  padding: 4px;
-  text-align: right;
-}
-
-blockquote {
-  background: #f1f1f1 !important;
-  border: 1px solid #f1f1f1;
-  border-color: #ACA899 #FFF #FFF #ACA899;
-  margin: 10px !important;
-  padding: 6px;
-}
-
-.article-body blockquote {
-	background: none !important;
-	border: none;
-  border-left: 1px solid #ccc;
-	padding: 10px;
-}
-
-cite {
-  font-weight: bold;
-  font-style: normal;
-}
-
-.clear {
-	clear: both;
-}
-
-.sig-hr {
-  margin-top: 20px;
-  width: 200px;
-  color: #ccc;
-}
-
-.edited {
-  margin-top: 15px !important;
-  font-style: italic;
-}
-
-.disabled {
-  color: #999;
-}
-
-.profile-avatar {
-  float: right;
-  margin: 10px 0;
-}
-
-.profile-title {
-  color: #333;
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: -1px;
-}
-
-.profile-rank {
-  color: #999;
-}
-
-.profile-info {
-  margin-top: 20px;
-}
-
-.profile-bio {
-  width: 500px;
-}
-
-.avatar-list {
-  text-align: center;
-}
-
-.avatar-list .avatar {
-  float: left;
-  margin: 18px;
-}
-
-.avatar-show {
-  text-align: center;
-}
-
-.chk {
-  float: left;
-  margin: 0 6px 10px 0;
-}
-
-.inline {
-  float: right;
-  width: 32%;
-  height: 130px;
-  border: 1px solid #ccc;
-}
-
-.thread dd.avatar img, .profile-avatar img, .avatar-list .avatar img {
-	max-width: 150px;
-}
-
-.home-left {
-	float: left;
-	width: 68%;
-}
-
-.home-right {
-	float: right;
-	width: 30%;
-}
-
-.home-left .topics-index .tcr {
-  width: 40%;
-}
-
-.home-right .calendar-nav {
-	display: none;
-}
-
-.home-right .specialDay {
-  background: #d1d1d1;
-}
-
-.home-right .specialDay a:link, .home-right .specialDay a:visited {
-  color: #333;
-}
-
-.today {
-  font-weight: bold;
-}
-
-.dayName th {
-  background: #d1d1d1;
-  color: #333;
-  width: 14%;
-}
-
-.otherMonth {
-  color: #ccc;
-}
-
-.day, .otherMonth, .specialDay, .todayDay {
-  text-align: right;
-}
-
-.specialDay p {
-  margin: 2px 0 4px 0;
-  text-align: left;
-}
-
-.reminders {
-  background: #35604d;
-  color: #fff;
-  text-align: center;
-  padding: 4px;
-  margin-bottom: 10px;
-}
-
-.reminders a {
-  color: #fff;
-}
-
-.wrapper-footer {
-  text-align: center;
-  color: #999;
-}
-
-.icon {
-  margin: 0 -3px 0 2px;
-  border-width: 6px;
-  border-style: solid;
-  border-color: #E6E6E6 #DEDEDE #DADADA #E2E2E2;
-}
-
-.inew {
-  border-color: #8BB453 #7A9E48 #709142 #799C47;
-}
-
-.pagination {
-  display: inline;
-}
-
-.prototip { 
-	position: absolute; 
-}
-
-.tooltip { 
-	position: relative; 
-	color: #fff; 
-	background-color: #35604d;
-	padding: 4px 5px;
-}
-
-.center {
-	text-align: center;
-}
-
-.post-body img { max-width: 100%; }
-.post-body blockquote img { max-width: 532px; }
-.post-body blockquote blockquote img { max-width: 498px; }
-.post-body blockquote blockquote blockquote img { max-width: 464px; }
-.post-body blockquote blockquote blockquote blockquote img { max-width: 430px; }
-.messages-index img { max-width: 477px; }
-.messages-index blockquote img { max-width: 445px; }
-.messages-index blockquote blockquote img { max-width: 412px; }
-.messages-index blockquote blockquote blockquote img { max-width: 380px; }
-
-.at_sign { display: none; }
-.calendar_select { width: 220px; float: right; text-align: center; margin: 2px; padding: 0; }
-.calendar_date_select .cds_header, .calendar_date_select .cds_footer { padding: 8px; }
-.calendar_date_select td:hover { background-color: #D1D1D1; }
-.calendar_date_select td.selected { background-color: #D1D1D1; }
-.calendar_date_select td div.other { color: #999; }
-.calendar_date_select td.today { font-weight: bold; }
-.calendar_date_select .cds_header a.prev { float: left; padding: 4px 7px; margin: 0px 2px; }
-.calendar_date_select .cds_header a.next { float: right; padding: 4px 7px; margin: 0px 2px; }
-.calendar_date_select .cds_header a.close { float: right; display: none; }
-.calendar_date_select .cds_header a.prev:hover, .calendar_date_select .cds_header a.next:hover { background: #35604d; color: #fff; text-decoration: none; }
-
-#notice, #error {
-  border: 1px solid #999;
-  background: #eee;
-  margin-bottom: 10px;
-}
-
-#notice {
-  background-color: #FBFBB1;
-  text-align: center;
-  padding: 5px 0;
-}
-
-#errorExplanation {
-  border: 1px solid #333;
-  background-color: #f1f1f1;
-  margin-bottom: 10px;
-}
-
-#errorExplanation h2 {
-  padding: 4px 5px;
-  margin: 0;
-  border-bottom: 1px solid #333;
-  font-size: 11px;
-  background-color: #FBFBB1;
-}
-
-#errorExplanation p {
-  display: none;
-}
-
-#errorExplanation ul {
-  padding: 6px 10px;
-  margin: 0;
-}
-
-#errorExplanation ul li {
-  padding: 2px 0;
-}
-
-.fieldWithErrors {
-	display: inline;
-}
+/* application */
+body{background:#ededed;color:#333;font-family:verdana, sans-serif;font-size:11px;}
+.wrapper{width:760px;border:1px solid #bbb;background:#fff;margin:20px auto;padding:10px;}
+.header{position:relative;height:200px;background-color:#333;}
+.footer{font-size:10px;margin-top:10px;color:#999;padding:0 5px;}
+a:link,a:visited{color:#638137;text-decoration:none;}
+a:active,a:hover{text-decoration:underline;color:#8EB653;}
+h1{font-family:'Trebuchet MS', Verdana, Sans-Serif;font-size:30px;font-weight:700;letter-spacing:-1px;margin:0;padding:83px 0 0 40px;}
+h1,h1 a:link,h1 a:visited,h1 a:hover,h1 a:active{text-decoration:none;color:#fff;}
+h1 a:hover,h1 a:active{text-decoration:underline;}
+h3{font-size:14px;font-weight:400;}
+.tagline{font-family:'Lucida Grande', Verdana, Arial, Sans-Serif;font-size:10px;color:#fff;padding:0 40px;}
+.tabs{position:absolute;bottom:0;font-size:10px;margin:-18px 0 0 14px;padding:0;}
+.tabs li{display:inline;margin:0 2px;}
+.tabs,.tabs li a{padding:6px 12px;}
+.tabs li a{color:#FFF;text-decoration:none;}
+.tabs li a:hover{background:#333;color:#eee;}
+.tabs li.current_tab a,.tabs li.current_tab a:hover{color:#333;background:#FFF;}
+.nav{height:26px;border:1px solid #ccc;background:#f1f1f1;margin:10px 0;}
+.nav-left{float:left;margin:6px 0 0 5px;}
+.nav-right{float:right;margin:6px 5px 0 0;}
+.nav-stats{color:#999;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding:0 1px 7px;}
+.nav-stats p.nav-left{width:70%;}
+.box{border:1px solid #35604d;margin-bottom:10px;background:#f1f1f1;padding:0 10px;}
+.box .top{display:block;background:#35604d;color:#fff;margin:0 -10px;padding:4px 5px;}
+.box .label{margin-bottom:-10px;}
+.box-comment{margin-left:6px;}
+.text-field{width:66%;}
+table{width:100%;border:1px solid #35604d;margin-bottom:10px;}
+thead th{background:#35604d;color:#fff;text-align:left;font-weight:400;padding:4px 5px;}
+tbody{background:#f1f1f1;}
+tbody td{vertical-align:top;border-top:1px solid #cedeb9;border-right:1px solid #cedeb9;padding:5px;}
+tbody .tci{width:10px !important;border-right:0;}
+tbody .tcm{text-align:center;background:#dedfdf;}
+.forums-index .tcm{vertical-align:middle;width:8%;}
+tbody .tcr{border-right:0;}
+tbody .tds{border:0;padding:10px;}
+.thread .profile{width:24%;}
+.thread .body{width:76%;max-width:560px;line-height:1.4em;background:#dedfdf;}
+.thread .body p{margin-top:0;}
+.thread .body pre{margin-top:-10px;}
+.post-body{overflow:auto;}
+.post-body ul{margin:10px !important;padding:6px;}
+.post-body li{list-style-type:disc;}
+.thread dd.avatar{margin:8px 0 4px;}
+.thread .links{text-align:right;color:#ccc;}
+.forums-index .tcl{width:58%;}
+.forums-index .tcr{width:34%;vertical-align:middle;}
+.forums-list th{background:#d1d1d1;color:#333;}
+.forums-admin ul ul{margin-left:15px;}
+.forum-name{font-weight:700;font-size:12px;}
+.topic-status{font-size:9px;}
+.topics-index .tcm{width:7%;}
+.topics-index .tcr{width:27%;}
+.topics-index .tcf{width:14%;}
+#primary{float:left;width:550px;margin:6px 10px 0 0;}
+#secondary{float:left;width:180px;margin-top:12px;padding:0 10px;}
+.article-body{margin:6px 6px 40px;}
+#comments{margin:6px 0 26px;}
+.article-body p,.comment-body p{line-height:1.4em;margin-top:0;}
+.comment{margin:0 0 25px 6px;}
+.comment-body{margin-top:4px;}
+.secondary-list{padding-bottom:20px;margin:5px 10px;}
+.secondary-list li{margin-bottom:6px;}
+.messages-index .tcu{width:20%;text-align:right;font-weight:700;padding-right:8px;}
+.messages-index .tcl{width:60%;max-width:477px;overflow:auto;border-right:0;background:#dedfdf;}
+.messages-index .tcr{width:20%;text-align:right;border-left:0;color:#999;}
+.info-left{float:left;padding-left:5px;border-left:1px solid #f1f1f1;margin:0 0 10px;}
+.info-center{float:left;text-align:center;margin:0 8px 10px;}
+.info-right{float:right;text-align:right;padding-right:5px;border-right:1px solid #f1f1f1;margin:0 0 10px;}
+.info-width{width:32%;}
+.info-space{margin-top:5px;}
+.info-footer{margin-bottom:10px;}
+.article-title{font-size:18px;font-weight:400;padding-bottom:3px;}
+.comments-link{float:right;margin-top:-20px;}
+.archives li{margin:7px;}
+.detail,.detail a.text{color:#999;letter-spacing:-1px;font-weight:400;}
+#filters{text-align:right;margin:2px;padding:4px;}
+blockquote{background:#f1f1f1 !important;border:1px solid #f1f1f1;border-color:#ACA899 #FFF #FFF #ACA899;margin:10px !important;padding:6px;}
+.article-body blockquote{background:none !important;border:none;border-left:1px solid #ccc;padding:10px;}
+cite{font-weight:700;font-style:normal;}
+.sig-hr{margin-top:20px;width:200px;color:#ccc;}
+.edited{margin-top:15px !important;font-style:italic;}
+.profile-avatar{float:right;margin:10px 0;}
+.profile-title{color:#333;font-size:20px;font-weight:700;letter-spacing:-1px;}
+.profile-info{margin-top:20px;}
+.profile-bio{width:500px;}
+.avatar-list .avatar{float:left;margin:18px;}
+.chk{float:left;margin:0 6px 10px 0;}
+.inline{float:right;width:32%;height:130px;border:1px solid #ccc;}
+.thread dd.avatar img,.profile-avatar img,.avatar-list .avatar img{max-width:150px;}
+.home-left{float:left;width:68%;}
+.home-right{float:right;width:30%;}
+.home-left .topics-index .tcr{width:40%;}
+.home-right .specialDay{background:#d1d1d1;}
+.dayName th{background:#d1d1d1;color:#333;width:14%;}
+.otherMonth{color:#ccc;}
+.specialDay p{text-align:left;margin:2px 0 4px;}
+.reminders{background:#35604d;color:#fff;text-align:center;margin-bottom:10px;padding:4px;}
+.wrapper-footer{text-align:center;color:#999;}
+.icon{border-color:#E6E6E6 #DEDEDE #DADADA #E2E2E2;border-style:solid;border-width:6px;margin:0 -3px 0 2px;}
+.inew{border-color:#8BB453 #7A9E48 #709142 #799C47;}
+.prototip{position:absolute;}
+.tooltip{position:relative;color:#fff;background-color:#35604d;padding:4px 5px;}
+.post-body img{max-width:100%;}
+.post-body blockquote img{max-width:532px;}
+.post-body blockquote blockquote img{max-width:498px;}
+.post-body blockquote blockquote blockquote img{max-width:464px;}
+.post-body blockquote blockquote blockquote blockquote img{max-width:430px;}
+.messages-index img{max-width:477px;}
+.messages-index blockquote img{max-width:445px;}
+.messages-index blockquote blockquote img{max-width:412px;}
+.messages-index blockquote blockquote blockquote img{max-width:380px;}
+.calendar_select{width:220px;float:right;text-align:center;margin:2px;padding:0;}
+.calendar_date_select .cds_header,.calendar_date_select .cds_footer{padding:8px;}
+.calendar_date_select .cds_header a.prev{float:left;margin:0 2px;padding:4px 7px;}
+.calendar_date_select .cds_header a.next{float:right;margin:0 2px;padding:4px 7px;}
+.calendar_date_select .cds_header a.close{float:right;display:none;}
+.calendar_date_select .cds_header a.prev:hover,.calendar_date_select .cds_header a.next:hover{background:#35604d;color:#fff;text-decoration:none;}
+#notice,#error{border:1px solid #999;background:#eee;margin-bottom:10px;}
+#notice{background-color:#FBFBB1;text-align:center;padding:5px 0;}
+#errorExplanation{border:1px solid #333;background-color:#f1f1f1;margin-bottom:10px;}
+#errorExplanation h2{border-bottom:1px solid #333;font-size:11px;background-color:#FBFBB1;margin:0;padding:4px 5px;}
+#errorExplanation ul{margin:0;padding:6px 10px;}
+#errorExplanation ul li{padding:2px 0;}
+.content,.clear{clear:both;}
+.nav-footer,.box .small{margin:0 0 10px;}
+.box label,.thread dd.rank,.today,.calendar_date_select td.today{font-weight:700;}
+thead th a:link,thead th a:visited,.reminders a{color:#fff;}
+thead .tcm,.avatar-list,.avatar-show,.center{text-align:center;}
+.thread,.forums-index,.forums-admin ul ul li{margin-bottom:5px;}
+.thread td,.messages-index{border:0;}
+.thread dl,.messages-index p{margin:0;}
+.thread dt,.comment-user,.title{font-size:12px;font-weight:700;letter-spacing:-1px;}
+.thread .thr,.day,.otherMonth,.specialDay,.todayDay{text-align:right;}
+.messages-index .tcr a,.disabled,.profile-rank,.calendar_date_select td div.other{color:#999;}
+.title a,.home-right .specialDay a:link,.home-right .specialDay a:visited{color:#333;}
+.home-right .calendar-nav,.at_sign,#errorExplanation p{display:none;}
+.pagination,.fieldWithErrors{display:inline;}
+.calendar_date_select td:hover,.calendar_date_select td.selected{background-color:#D1D1D1;}
+
+/*
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+http://softwaremaniacs.org/media/soft/highlight/styles/github.css
+*/
+pre code{display:block;color:#000;background:#f8f8ff;}
+pre .comment,pre .template_comment,pre .diff .header,pre .javadoc{color:#998;font-style:italic;}
+pre .keyword,pre .css .rule .keyword,pre .winutils,pre .javascript .title,pre .lisp .title,pre .subst{color:#000;font-weight:700;}
+pre .number,pre .hexcolor{color:#40a070;}
+pre .string,pre .attribute .value,pre .phpdoc{color:#d14;}
+pre .title,pre .id{color:#900;font-weight:700;}
+pre .javascript .title,pre .lisp .title,pre .subst{font-weight:400;}
+pre .tag,pre .css .keyword,pre .html .keyword,pre .tag .title,pre .django .tag .keyword{color:navy;font-weight:400;}
+pre .attribute,pre .variable,pre .instancevar,pre .lisp .body{color:teal;}
+pre .regexp{color:#009926;}
+pre .symbol,pre .lisp .keyword{color:#990073;}
+pre .builtin,pre .built_in,pre .lisp .title{color:#0086b3;}
+pre .preprocessor,pre .pi,pre .doctype,pre .shebang,pre .cdata{color:#999;font-weight:700;}
+pre .deletion{background:#fdd;}
+pre .addition{background:#dfd;}
+pre .diff .change{background:#0086b3;}
+pre .chunk{color:#aaa;}
+pre .class .title,pre .class{color:#458;font-weight:700;}
