@@ -10,8 +10,8 @@ http://almosteffortless.com/eldorado
 # Requires Ruby >= 1.8.7
 git clone git://github.com/trevorturk/eldorado.git
 cd eldorado
-sudo gem install bundler --version='0.8.0' # until heroku supports 0.9.x
-gem bundle
+sudo gem install bundler
+gem bundle vendor/bundler_gems
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
 rake db:create
