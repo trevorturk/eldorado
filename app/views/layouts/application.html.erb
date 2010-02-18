@@ -7,7 +7,7 @@
   <meta name="description" content="<%=h page_title -%>" />
   <title><%=h page_title -%></title>
   <%= render :file => 'shared/rss' unless @settings.private? %>
-  <%= javascript_include_tag "prototype", "audio_player", "calendar_date_select", "prototip", "highlight.pack", :cache => true %>
+  <%= javascript_include_tag "prototype", "audio_player", "calendar_date_select", "prototip", "highlight", :cache => true %>
   <%= favicon_tag %>
   <%= header_css %>
   <%= theme_css %>

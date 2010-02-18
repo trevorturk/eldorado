@@ -6,8 +6,8 @@ module BBCodeizer
     #:nodoc:
     Tags = {
       :literal               => [ /\[\[(.+?)\]\]/im, '&#91\1&#93' ],
-      :start_code            => [ /\[code\](\r\n?)?/i, '<pre>' ],
-      :end_code              => [ /(\r\n?)?\[\/code\]/i, '</pre>' ],
+      :start_code            => [ /\[code\](\r\n?)?/i, '<pre><code>' ],
+      :end_code              => [ /(\r\n?)?\[\/code\]/i, '</code></pre>' ],
       :start_list            => [ /\[list\](\r\n?)?/i, '<ul>' ],
       :start_li              => [ /\[li\](\r\n?)?/i, '<li>' ],
       :end_li                => [ /(\r\n?)?\[\/li\](\r\n?)?/i, '</li>' ],
