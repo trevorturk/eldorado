@@ -1,4 +1,3 @@
-Bundler.require_env RAILS_ENV
 config.cache_classes = true
 config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching = true
@@ -9,7 +8,7 @@ if CONFIG['smtp_address']
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address => CONFIG['smtp_address'],
-    :port => CONFIG['smtp_port'], 
+    :port => CONFIG['smtp_port'],
     :domain => CONFIG['smtp_domain'],
     :user_name => CONFIG['smtp_user_name'],
     :password => CONFIG['smtp_password'],

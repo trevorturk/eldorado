@@ -11,7 +11,7 @@ http://almosteffortless.com/eldorado
 git clone git://github.com/trevorturk/eldorado.git
 cd eldorado
 sudo gem install bundler
-gem bundle vendor/bundler_gems
+bundle install vendor/bundler_gems
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
 rake db:create
@@ -37,7 +37,7 @@ heroku open
 
 heroku db:pull sqlite://db/backup.sqlite3
 git pull
-gem bundle
+bundle install vendor/bundler_gems
 # Review possible config changes in config/config.example.yml
 rake heroku:config
 git push heroku master
