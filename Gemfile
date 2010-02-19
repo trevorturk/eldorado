@@ -11,11 +11,11 @@ gem "ambethia-smtp-tls", "1.1.2", :require => "smtp-tls"
 gem "hoptoad_notifier", "2.1.3"
 
 group :development do
-  gem "sqlite3-ruby", :require => "sqlite3"
+  gem "sqlite3-ruby", "1.2.5", :require => "sqlite3"
 end
 
 group :production do
-  gem "pg"
+  gem "pg", "0.8.0"
 end
 
 group :test do

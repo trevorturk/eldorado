@@ -11,7 +11,7 @@ http://almosteffortless.com/eldorado
 git clone git://github.com/trevorturk/eldorado.git
 cd eldorado
 sudo gem install bundler
-bundle install vendor/bundler_gems
+bundle install vendor/bundler_gems --without production
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
 rake db:create

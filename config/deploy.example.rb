@@ -31,7 +31,7 @@ namespace :deploy do
     # run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
   task :bundler do
-    run "cd #{release_path} && bundle install vendor/bundler_gems"
+    run "cd #{release_path} && bundle install vendor/bundler_gems --without development test"
   end
   task :create_symlinks do
     require 'yaml'
