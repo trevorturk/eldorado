@@ -1,4 +1,5 @@
 .DS_Store
+.bundle
 /tmp/**/*
 /log/*
 *.log
@@ -13,6 +14,3 @@
 /public/files/*
 /public/headers/*
 /public/themes/*
-bin/*
-vendor/bundler_gems/*
-.bundle
