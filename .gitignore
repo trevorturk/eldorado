@@ -1,5 +1,6 @@
 .DS_Store
 .bundle
+/vendor/bundler_gems
 /tmp/**/*
 /log/*
 *.log
