@@ -1,4 +1,4 @@
-source "http://gems.rubyforge.org"
+source "http://rubygems.org"
 source "http://gems.github.com" # for ambethia-smtp-tls
 
 gem "rails", "2.3.5", :require => nil
