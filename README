@@ -20,7 +20,7 @@ script/server
 # http://localhost:3000/
 
 
-== Deployment
+== Deployment on Heroku
 
 sudo gem install heroku
 heroku create
@@ -30,10 +30,9 @@ rake heroku:config
 git push heroku master
 heroku rake db:schema:load
 heroku open
-# Read more about Heroku here: http://heroku.com/
 
 
-== Upgrading
+== Upgrading on Heroku
 
 heroku db:pull sqlite://db/backup.sqlite3
 git pull
@@ -43,6 +42,18 @@ rake heroku:config
 git push heroku master
 heroku rake db:migrate
 heroku open
+
+
+== Deployment on Other Hosts
+
+Deployment is also straightforward on Slicehost, Engine Yard, Dreamhost, etc.
+See config/deploy.example.rb for an example Capistrano deployment script.
+Read the Slicehost Rails articles for help: http://articles.slicehost.com/rails
+
+
+== Are you using El Dorado? 
+
+Add your site here: http://wiki.github.com/trevorturk/eldorado/
 
 
 == Changes
