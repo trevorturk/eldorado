@@ -16,5 +16,5 @@ Rails::Initializer.run do |config|
   config.gem "searchlogic", :version => "2.3.9"
   config.gem "will_paginate", :version => "2.3.11"
   config.gem "ambethia-smtp-tls", :version => "1.1.2", :lib => "smtp-tls"
-  config.gem "hoptoad_notifier", :version => "2.1.3"
+  config.gem "hoptoad_notifier", :version => "2.2.2"
 end
