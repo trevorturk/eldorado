@@ -10,4 +10,11 @@ Rails::Initializer.run do |config|
   config.active_record.partial_updates = true
   config.frameworks -= [:active_resource]
   config.action_controller.session = {:key => CONFIG['session_key'], :secret => CONFIG['session_secret']}
+  config.gem "paperclip", :version => "2.3.0"
+  config.gem "right_aws", :version => "1.9.0"
+  config.gem "right_http_connection", :version => "1.2.4"
+  config.gem "searchlogic", :version => "2.3.9"
+  config.gem "will_paginate", :version => "2.3.11"
+  config.gem "ambethia-smtp-tls", :version => "1.1.2", :lib => "smtp-tls"
+  config.gem "hoptoad_notifier", :version => "2.1.3"
 end
