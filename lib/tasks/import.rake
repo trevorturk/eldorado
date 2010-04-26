@@ -61,7 +61,7 @@ namespace :import do
     end
     Time.zone = Time.zone.get(tz_to_timezone(tz))
     @item.announcement = ''
-    @item.footer = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://almosteffortless.com">&aelig;</a></p>'
+    @item.footer = '<p style="text-align:right;margin:0;">Powered by El Dorado | <a href="http://github.com/trevorturk/eldorado">&aelig;</a></p>'
     @item.save!
     #
     # USERS
