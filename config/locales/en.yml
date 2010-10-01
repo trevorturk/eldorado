@@ -47,19 +47,19 @@ en:
   no_of_users:
     zero: 'No Users'
     one: '1 User'
-    other: "{{print_count}} Users"
+    other: "%{print_count} Users"
   no_of_topics:
     zero: 'No Topics'
     one: '1 Topic'
-    other: "{{print_count}} Topics"
+    other: "%{print_count} Topics"
   no_of_posts:
     zero: 'No Posts'
     one: '1 Post'
-    other: "{{print_count}} Posts"
+    other: "%{print_count} Posts"
   no_of_comments:
     zero: 'No Comments'
     one: '1 Comment'
-    other: "{{print_count}} Comments"
+    other: "%{print_count} Comments"
   by: by
   or: or
   recent_articles: Recent Blog Articles
@@ -210,7 +210,7 @@ en:
     reminder_info: Show a reminder 6 hours before and 2 hours after this event.
     admin_only_create_actions_info: For example, "articles" would restrict creating new blog articles to admins only.
     private_info: Require login for all actions, including creating new users. (Uploaded files will still be publicly accessible.)
-    clickable_header_info: If selected, the title and tagline are not shown. Instead, the header itself is a link to the site root. 
+    clickable_header_info: If selected, the title and tagline are not shown. Instead, the header itself is a link to the site root.
     no_subscriptions_info: You have no subscriptions.
     subscribe_info: Email updates
     locked_info: This Topic is Locked
@@ -258,19 +258,19 @@ en:
       x_seconds_ago:
         zero: 'less than 1 second ago'
         one: '1 second ago'
-        other: '{{count}} seconds ago'
+        other: '%{count} seconds ago'
       x_minutes_ago:
         zero: 'less than 1 minute ago'
         one: '1 minute ago'
-        other: '{{count}} minutes ago'
+        other: '%{count} minutes ago'
       x_hours_ago:
         zero: 'less than 1 hour ago'
         one: '1 hour ago'
-        other: '{{count}} hours ago'
+        other: '%{count} hours ago'
       x_days_ago:
         zero: 'less than 1 day ago'
         one: '1 day ago'
-        other: '{{count}} days ago'
+        other: '%{count} days ago'
 
   number:
     format:

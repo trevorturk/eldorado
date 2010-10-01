@@ -23,6 +23,7 @@ Install
     cd eldorado
     cp config/database.example.yml config/database.yml
     cp config/config.example.yml config/config.yml
+    gem install rails -v=2.3.9
     rake gems:install
     rake db:create
     rake db:schema:load

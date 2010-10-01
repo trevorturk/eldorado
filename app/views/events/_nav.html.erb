@@ -6,7 +6,7 @@
   <% end %>
 </span>
 <span class="calendar-nav" style="float:right;">
-  <%= link_to '&laquo; '+I18n.t(:prev), events_path(:params => {:date => @date.last_month.strftime("%Y-%m") + '-01'}) %>&nbsp;
+  <%= link_to '&laquo; '+I18n.t(:prev), events_path(:params => {:date => @date.prev_month.strftime("%Y-%m") + '-01'}) %>&nbsp;
   <%= link_to I18n.t(:today), events_path %>&nbsp;
   <%= link_to I18n.t(:next)+' &raquo;', events_path(:params => {:date => @date.next_month.strftime("%Y-%m") + '-01'}) %>
 </span>

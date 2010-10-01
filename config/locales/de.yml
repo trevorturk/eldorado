@@ -47,19 +47,19 @@ de:
   no_of_users: 
     zero: 'Keine Benutzer'
     one: '1 Benutzer' 
-    other: "{{print_count}} Benutzer"
+    other: "%{print_count} Benutzer"
   no_of_topics:
     zero: 'Keine Themen'
     one: '1 Thema'
-    other: "{{print_count}} Themen" 
+    other: "%{print_count} Themen" 
   no_of_posts:
     zero: 'Keine Beiträge'
     one: '1 Beitrag'
-    other: "{{print_count}} Beiträge" 
+    other: "%{print_count} Beiträge" 
   no_of_comments:
     zero: 'Keine Kommentare'
     one: '1 Kommentar'
-    other: "{{print_count}} Kommentare" 
+    other: "%{print_count} Kommentare" 
   by: von
   or: oder
   recent_articles: Jüngste Artikel
@@ -259,19 +259,19 @@ de:
       x_seconds_ago: 
         zero: 'vor weniger als 1 Sekunde'
         one: 'vor 1 Sekunde'
-        other: 'vor {{count}} Sekunden'
+        other: 'vor %{count} Sekunden'
       x_minutes_ago:
         zero: 'vor wenige als 1 Minute'
         one: 'vor 1 Minute'
-        other: 'vor {{count}} Minuten'
+        other: 'vor %{count} Minuten'
       x_hours_ago:
         zero: 'vor weniger als 1 Stunde'
         one: 'vor 1 Stunde'
-        other: 'vor {{count}} Stunden'
+        other: 'vor %{count} Stunden'
       x_days_ago:
         zero: 'vor weniger als 1 Tag'
         one: 'vor 1 Tag'
-        other: 'vor {{count}} Tagen'
+        other: 'vor %{count} Tagen'
   
   number:
     format:

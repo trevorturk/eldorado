@@ -47,19 +47,19 @@ da:
   no_of_users: 
     zero: 'Ingen brugere'
     one: '1 bruger' 
-    other: "{{print_count}} brugere"
+    other: "%{print_count} brugere"
   no_of_topics:
     zero: 'Ingen emner'
     one: '1 emne'
-    other: "{{print_count}} emner" 
+    other: "%{print_count} emner" 
   no_of_posts:
     zero: 'Ingen indlæg'
     one: '1 indlæg'
-    other: "{{print_count}} indlæg" 
+    other: "%{print_count} indlæg" 
   no_of_comments:
     zero: 'Ingen kommentarer'
     one: '1 kommentar'
-    other: "{{print_count}} kommentarer" 
+    other: "%{print_count} kommentarer" 
   by: af
   or: eller
   recent_articles: Seneste artikler på bloggen
@@ -258,19 +258,19 @@ da:
       x_seconds_ago: 
         zero: 'under 1 sekund siden'
         one: '1 sekund siden'
-        other: '{{count}} sekunder siden'
+        other: '%{count} sekunder siden'
       x_minutes_ago:
         zero: 'under 1 minut siden'
         one: '1 minut siden'
-        other: '{{count}} minutter siden'
+        other: '%{count} minutter siden'
       x_hours_ago:
         zero: 'mindre end 1 time siden'
         one: '1 time siden'
-        other: '{{count}} timer siden'
+        other: '%{count} timer siden'
       x_days_ago:
         zero: 'under 1 dag siden'
         one: '1 dag siden'
-        other: '{{count}} dage siden'
+        other: '%{count} dage siden'
   
   number:
     human:
