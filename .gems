@@ -1,9 +1,9 @@
-rails --version="2.3.5"
+rails --version="2.3.9"
 paperclip --version="2.3.0"
 right_aws --version="1.9.0"
 right_http_connection --version="1.2.4"
 searchlogic --version="2.3.9"
-will_paginate --version="2.3.11"
+will_paginate --version="2.3.15"
 hoptoad_notifier --version="2.2.2"
 toadhopper --version "1.0.3"
 ambethia-smtp-tls --version "1.1.2" --source gems.github.com
