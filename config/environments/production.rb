@@ -6,7 +6,7 @@ config.action_mailer.raise_delivery_errors = true
 
 if CONFIG['smtp_address']
   config.action_mailer.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.smtp_settings = {
     :address => CONFIG['smtp_address'],
     :port => CONFIG['smtp_port'],
     :domain => CONFIG['smtp_domain'],
