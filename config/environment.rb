@@ -15,5 +15,5 @@ Rails::Initializer.run do |config|
   config.gem "right_http_connection", :version => "1.2.4"
   config.gem "searchlogic", :version => "2.3.9"
   config.gem "will_paginate", :version => "2.3.15"
-  config.gem "hoptoad_notifier", :version => "2.2.2"
+  config.gem "hoptoad_notifier", :version => "2.2.2" if CONFIG['hoptoad_key']
 end
